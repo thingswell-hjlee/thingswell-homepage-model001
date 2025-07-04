@@ -1,0 +1,141 @@
+/* Font Face Definitions */
+@font-face {
+  font-family: 'PyeojinGothic';
+  src: url('./assets/font/PyeojinGothic-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'PyeojinGothic';
+  src: url('./assets/font/PyeojinGothic-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'PyeojinGothic';
+  src: url('./assets/font/PyeojinGothic-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'PyeojinGothic';
+  src: url('./assets/font/PyeojinGothic-SemiBold.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'PyeojinGothic';
+  src: url('./assets/font/PyeojinGothic-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+
+
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.content-container {
+  position: relative;
+  display: block;
+  background-color: rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
+  text-align: center;
+  width: 100%;
+  max-width: 1200px;
+  box-sizing: border-box;
+  height: 100vh;
+}
+
+.main-image {
+  max-width: 1200px;
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+  opacity: 0.6;
+  display: block;
+}
+
+.overlay-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+}
+
+.menu-overlay {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.button {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.button-text {
+  font-family: 'PyeojinGothic';
+  font-weight: 400;
+  padding: 0 80px 0 80px;
+  background-color: transparent;
+  border: none;
+  background-color: #000;
+  cursor: pointer;
+  border-radius:30px;
+}
+
+.content-text {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  color: #E9E9E9;
+  font-weight: 700;
+  font-size: 30px;
+  font-family: 'PyeojinGothic';
+  text-align: left;
+}
+
+.content-text h1 {
+  margin: 0;
+  line-height: 1.2;
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
