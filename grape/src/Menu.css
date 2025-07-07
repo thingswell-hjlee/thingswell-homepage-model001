@@ -42,11 +42,11 @@
   border-radius: 30px 30px 0 0;
 }
 
-
 /* Start of Selection */
 .menu-container {
     opacity: 0.8;
     width: 1050px;
+    max-width: 95vw;
   border-radius: 30px;
   overflow: visible;
   background: #fff;
@@ -65,6 +65,7 @@
   display: flex;
   align-items: center;
   height: 100%;
+  position: relative;
 }
 
 .logo-image {
@@ -144,6 +145,17 @@ margin-top: 20px;
   outline: none;
 }
 
+/* 서브메뉴 인디케이터 */
+.submenu-indicator {
+  margin-left: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  transition: transform 0.2s ease;
+}
+
+.menu-button.active .submenu-indicator {
+  transform: rotate(180deg);
+}
 
 /* 호버 및 액티브(비활성화 제외) */
 .menu-button:hover:not(:disabled),
@@ -165,7 +177,6 @@ margin-top: 20px;
   opacity: 0.5;
   cursor: not-allowed;
 }
-
 
 /* Full Width Submenu */
 .full-width-submenu {
@@ -348,45 +359,276 @@ margin-top: 20px;
   background-color: #f5f5f7;
 }
 
-/* Responsive Design */
+/* 모바일 햄버거 메뉴 */
+.mobile-menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  margin-left: 15px;
+  outline: none;
+}
+
+.hamburger {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background-color: #000;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.hamburger::before,
+.hamburger::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 2px;
+  background-color: #000;
+  transition: all 0.3s ease;
+}
+
+.hamburger::before {
+  top: -6px;
+}
+
+.hamburger::after {
+  bottom: -6px;
+}
+
+.hamburger.open {
+  background-color: transparent;
+}
+
+.hamburger.open::before {
+  transform: rotate(45deg);
+  top: 0;
+}
+
+.hamburger.open::after {
+  transform: rotate(-45deg);
+  bottom: 0;
+}
+
+/* 반응형 디자인 - 태블릿 */
+@media (max-width: 1024px) {
+  .menu-container {
+    width: 95vw;
+    padding: 0 20px;
+    height: 60px;
+  }
+  
+  .menu-button {
+    font-size: 14px;
+    padding: 10px 6px;
+    margin: 0 5px;
+  }
+  
+  .submenu-button {
+    font-size: 12px;
+    padding: 10px 12px;
+  }
+  
+  .submenu-item {
+    min-width: 100px;
+    max-width: 150px;
+  }
+  
+  .logo-image {
+    height: 22px;
+  }
+}
+
+/* 반응형 디자인 - 모바일 */
 @media (max-width: 768px) {
-  .menu-horizontal .menu-list {
+  .menu-container {
+    width: 100vw;
+    padding: 0 15px;
+    height: auto;
+    min-height: 60px;
+    border-radius: 0;
     flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .menu-logo {
+    height: 50px;
+    justify-content: space-between;
+    margin-bottom: 0;
+    padding: 10px 0;
+  }
+  
+  .logo-image {
+    height: 20px;
+  }
+  
+  .mobile-menu-toggle {
+    display: block;
+  }
+  
+  .menu {
+    width: 100%;
+    display: none;
+  }
+  
+  .menu.mobile-visible {
+    display: block;
+  }
+  
+  .menu-list {
+    flex-direction: column;
+    margin-top: 0;
+    gap: 0;
   }
   
   .menu-horizontal .menu-item {
     border-right: none;
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 1px solid #f0f0f0;
   }
   
   .menu-horizontal .menu-item:last-child {
     border-bottom: none;
   }
   
+  .menu-button {
+    margin: 0;
+    padding: 15px 20px;
+    font-size: 16px;
+    justify-content: space-between;
+    text-align: left;
+    border-radius: 0;
+    width: 100%;
+  }
+  
+  .menu-button:hover:not(:disabled) {
+    background-color: #f5f5f7 !important;
+    color: #000 !important;
+  }
+  
   .full-width-submenu {
     position: static;
-    border: none;
+    width: 100%;
+    height: auto;
+    border-radius: 0;
     box-shadow: none;
-    background-color: #f5f5f7;
-    margin-top: 8px;
+    background-color: #f8f8f8;
+    margin-top: 0;
+    border-top: 1px solid #f0f0f0;
+    display: none;
+  }
+  
+  .full-width-submenu.mobile-submenu {
+    display: block;
   }
   
   .submenu-list {
     flex-direction: column;
+    gap: 0;
   }
   
   .submenu-item {
     max-width: none;
+    min-width: auto;
   }
   
   .submenu-button {
     border-right: none;
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 1px solid #f0f0f0;
     justify-content: flex-start;
     text-align: left;
+    padding: 12px 20px;
+    font-size: 14px;
   }
   
   .submenu-item:last-child .submenu-button {
     border-bottom: none;
+  }
+  
+  .submenu-button:hover {
+    background-color: #f0f0f0;
+  }
+}
+
+/* 반응형 디자인 - 작은 모바일 */
+@media (max-width: 480px) {
+  .menu-container {
+    padding: 0 10px;
+  }
+  
+  .menu-button {
+    padding: 12px 15px;
+    font-size: 15px;
+  }
+  
+  .submenu-button {
+    padding: 10px 15px;
+    font-size: 13px;
+  }
+  
+  .logo-image {
+    height: 18px;
+  }
+  
+  .hamburger {
+    width: 18px;
+  }
+  
+  .hamburger::before,
+  .hamburger::after {
+    width: 18px;
+  }
+}
+
+/* 반응형 디자인 - 매우 작은 화면 */
+@media (max-width: 360px) {
+  .menu-container {
+    padding: 0 8px;
+  }
+  
+  .menu-button {
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+  
+  .submenu-button {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+  
+  .logo-image {
+    height: 16px;
+  }
+  
+  .hamburger {
+    width: 16px;
+  }
+  
+  .hamburger::before,
+  .hamburger::after {
+    width: 16px;
+  }
+}
+
+/* 가로 모드 대응 */
+@media (max-height: 500px) and (orientation: landscape) {
+  .menu-container {
+    height: 50px;
+    padding: 0 15px;
+  }
+  
+  .menu-logo {
+    height: 40px;
+    margin-bottom: 5px;
+  }
+  
+  .menu-button {
+    padding: 8px 15px;
+    font-size: 14px;
+  }
+  
+  .submenu-button {
+    padding: 6px 15px;
+    font-size: 12px;
   }
 } 

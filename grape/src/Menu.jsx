@@ -33,54 +33,111 @@ const handleSubmenuClick = (submenuItem) => {
 
 const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
   const [openSubmenu, setOpenSubmenu] = useState(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const menuRef = useRef(null);
+
+  // 화면 크기 감지
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+    };
+  }, []);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
         setOpenSubmenu(null);
+        if (isMobile) {
+          setIsMobileMenuOpen(false);
+        }
       }
     };
 
     document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('touchstart', handleClickOutside);
+    
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('touchstart', handleClickOutside);
     };
-  }, []);
+  }, [isMobile]);
 
   const handleItemClick = (item, index) => {
     if (item.submenu && item.submenu.length > 0) {
-      setOpenSubmenu(openSubmenu === index ? null : index);
+      if (isMobile) {
+        // 모바일에서는 서브메뉴 토글
+        setOpenSubmenu(openSubmenu === index ? null : index);
+      } else {
+        // 데스크톱에서는 서브메뉴 표시
+        setOpenSubmenu(openSubmenu === index ? null : index);
+      }
     } else {
       handleMenuClick(item, index);
+      if (isMobile) {
+        setIsMobileMenuOpen(false);
+      }
     }
   };
+
   const handleSubmenuItemClick = (submenuItem) => {
     handleSubmenuClick(submenuItem);
     setOpenSubmenu(null);
+    if (isMobile) {
+      setIsMobileMenuOpen(false);
+    }
   };
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+    if (isMobileMenuOpen) {
+      setOpenSubmenu(null);
+    }
+  };
+
   return (
-    <div ref={menuRef} className={`menu-container menu-${orientation} menu-${theme} ${openSubmenu !== null ? 'open' : ''}`}>
+    <div ref={menuRef} className={`menu-container menu-${orientation} menu-${theme} ${openSubmenu !== null ? 'open' : ''} ${isMobileMenuOpen ? 'mobile-open' : ''}`}>
       <div className="menu-logo">
         <img src={logo} alt="로고" className="logo-image" />
+        {isMobile && (
+          <button 
+            className="mobile-menu-toggle"
+            onClick={toggleMobileMenu}
+            aria-label="메뉴 열기/닫기"
+          >
+            <span className={`hamburger ${isMobileMenuOpen ? 'open' : ''}`}></span>
+          </button>
+        )}
       </div>
-      <nav className={`menu menu-${orientation} menu-${theme}`}>
+      
+      <nav className={`menu menu-${orientation} menu-${theme} ${isMobileMenuOpen ? 'mobile-visible' : ''}`}>
         <ul className="menu-list">
           {defaultMenuItems.map((item, index) => (
             <li key={index} className="menu-item">
               <button
-                className={`menu-button ${item.submenu && item.submenu.length > 0 ? 'has-submenu' : ''}`}
+                className={`menu-button ${item.submenu && item.submenu.length > 0 ? 'has-submenu' : ''} ${openSubmenu === index ? 'active' : ''}`}
                 onClick={() => handleItemClick(item, index)}
                 disabled={item.disabled}
               >
                 <span className="menu-text">{item.label}</span>
+                {item.submenu && item.submenu.length > 0 && isMobile && (
+                  <span className="submenu-indicator">{openSubmenu === index ? '−' : '+'}</span>
+                )}
               </button>
             </li>
           ))}
         </ul>
       </nav>
+      
       {openSubmenu !== null && defaultMenuItems[openSubmenu] && defaultMenuItems[openSubmenu].submenu && (
-        <div className="full-width-submenu">
+        <div className={`full-width-submenu ${isMobile ? 'mobile-submenu' : ''}`}>
           <ul className="submenu-list">
             {defaultMenuItems[openSubmenu].submenu.map((submenuItem, subIndex) => (
               <li key={subIndex} className="submenu-item">
