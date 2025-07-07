@@ -53,6 +53,24 @@ body {
   box-sizing: border-box;
 }
 
+/* 새로운 앱 컨테이너 구조 */
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  flex: 1;
+  position: relative;
+}
+
+/* 푸터가 새로운 구조에서 올바르게 작동하도록 */
+.app-container .footer {
+  margin-top: auto;
+  width: 100%;
+}
+
 .content-container {
   position: relative;
   display: block;
@@ -60,7 +78,7 @@ body {
   margin: 0 auto;
   text-align: center;
   width: 100%;
-  max-width: 1200px;
+  max-width: 1600px;
   box-sizing: border-box;
   height: 100vh;
   overflow: hidden;
@@ -84,12 +102,14 @@ body {
   z-index: 10;
 }
 
-.menu-overlay {
-  position: absolute;
+.menu-overlay-subpage {
+  position: fixed;
   top: 20px;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 20;
+  z-index: 99999;
+  width: 100%;
+  max-width: 1600px;
 }
 
 .button {
@@ -200,7 +220,7 @@ body {
   }
   
   .button {
-    top: 45%;
+    top: 40%;
   }
   
   .button-text {
@@ -208,12 +228,11 @@ body {
     font-size: 12px;
   }
   
-  .menu-overlay {
+  .menu-overlay-subpage {
     top: 10px;
   }
 }
 
-/* 작은 모바일 반응형 (480px 이하) */
 @media screen and (max-width: 480px) {
   .content-text {
     font-size: 18px;
@@ -226,15 +245,14 @@ body {
   }
   
   .button {
-    top: 50%;
+    top: 45%;
   }
 }
 
-/* 가로 모드 (landscape) 대응 */
 @media screen and (max-height: 500px) and (orientation: landscape) {
   .content-text {
+    top: 15%;
     font-size: 16px;
-    top: 20%;
   }
   
   .button {
@@ -242,11 +260,11 @@ body {
   }
   
   .button-text {
-    padding: 0 30px 0 30px;
+    padding: 0 20px 0 20px;
     font-size: 10px;
   }
   
-  .menu-overlay {
+  .menu-overlay-subpage {
     top: 5px;
   }
 }

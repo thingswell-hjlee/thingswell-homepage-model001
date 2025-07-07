@@ -1,0 +1,284 @@
+/* Footer 스타일 */
+.footer {
+  background-color: #1a1a1a;
+  color: #ffffff;
+  padding: 60px 0 20px 0;
+  font-family: 'PyeojinGothic', sans-serif;
+  max-width: 1600px;
+  margin: 0 auto;
+  margin-top: auto;
+}
+
+.footer-container {
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
+
+/* Start of Selection */
+.footer-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 200px;
+  margin-bottom: 40px;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* End of Selection */
+
+.footer-section {
+  text-align: center;
+}
+
+.footer-description {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: #cccccc;
+  margin: 0;
+}
+
+.footer-subtitle {
+  font-size: 15px;
+  font-weight: 100;
+  color: #ffffff;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li {
+  margin-bottom: 8px;
+}
+
+.footer-links a {
+  color: #cccccc;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 400;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: #ffffff;
+}
+
+.footer-contact p {
+  margin: 0 0 8px 0;
+  font-size: 14px;
+  font-weight: 400;
+  color: #cccccc;
+  line-height: 1.6;
+}
+
+.footer-bottom {
+  margin-top: 40px;
+}
+
+.footer-divider {
+  height: 1px;
+  background-color: #333333;
+  margin-bottom: 20px;
+}
+
+.footer-bottom-content {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  white-space: nowrap;
+}   
+
+.footer-copyright {
+  font-size: 12px;
+  font-weight: 400;
+  color: #999999;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: flex-start;
+  white-space: nowrap;
+}
+
+.footer-copyright p {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 400;
+  color: #999999;
+  white-space: nowrap;
+}
+
+.footer-info{
+    display: flex;
+    gap: 40px;
+    margin-left: auto;
+    white-space: nowrap;
+}
+
+.logo {
+    height: 25px;
+    width: auto;
+    object-fit: contain;
+}
+
+.footer-social {
+  display: flex;
+  gap: 20px;
+  align-items: flex-end;
+  margin-left: auto;
+  white-space: nowrap;
+}
+
+.social-link {
+  color: #cccccc;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 400;
+  transition: color 0.3s ease;
+  white-space: nowrap;
+}
+
+.social-link:hover {
+  color: #ffffff;
+}
+
+/* 태블릿 반응형 (768px - 1024px) */
+@media screen and (max-width: 1024px) {
+  .footer {
+    padding: 50px 0 20px 0;
+  }
+  
+  .footer-content {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+  }
+  
+  .footer-description {
+    font-size: 13px;
+  }
+  
+  .footer-subtitle {
+    font-size: 15px;
+  }
+  
+  .footer-links a {
+    font-size: 13px;
+  }
+  
+  .footer-contact p {
+    font-size: 13px;
+  }
+  
+  .footer-copyright {
+    font-size: 11px;
+  }
+  
+  .footer-copyright p {
+    font-size: 11px;
+  }
+  
+  .social-link {
+    font-size: 11px;
+  }
+}
+
+/* 모바일 반응형 (768px 이하) */
+@media screen and (max-width: 768px) {
+  .footer {
+    padding: 40px 0 20px 0;
+  }
+  
+  
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    text-align: center;
+  }
+  
+  .footer-section {
+    text-align: center;
+  }
+  
+  .footer-description {
+    font-size: 12px;
+  }
+  
+  .footer-subtitle {
+    font-size: 14px;
+  }
+  
+  .footer-links a {
+    font-size: 12px;
+  }
+  
+  .footer-contact p {
+    font-size: 12px;
+  }
+  
+  .footer-copyright {
+    font-size: 10px;
+  }
+  
+  .footer-copyright p {
+    font-size: 10px;
+  }
+  
+  .social-link {
+    font-size: 10px;
+  }
+  
+  .footer-bottom-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 15px;
+  }
+  
+  .footer-social {
+    justify-content: center;
+  }
+}
+
+/* 작은 모바일 반응형 (480px 이하) */
+@media screen and (max-width: 480px) {
+  .footer {
+    padding: 30px 0 15px 0;
+  }
+  
+  .footer-content {
+    gap: 25px;
+  }
+  
+  .footer-description {
+    font-size: 11px;
+  }
+  
+  .footer-subtitle {
+    font-size: 13px;
+  }
+  
+  .footer-links a {
+    font-size: 11px;
+  }
+  
+  .footer-contact p {
+    font-size: 11px;
+  }
+  
+  .footer-copyright {
+    font-size: 9px;
+  }
+  
+  .footer-copyright p {
+    font-size: 9px;
+  }
+  
+  .social-link {
+    font-size: 9px;
+  }
+}
