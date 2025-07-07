@@ -39,8 +39,10 @@
 }
 
 .menu-container.open {
-  border-radius: 40px 40px 0 0;
+  border-radius: 30px 30px 0 0;
 }
+
+
 /* Start of Selection */
 .menu-container {
     opacity: 0.8;
@@ -124,7 +126,7 @@ margin-top: 20px;
 
 .menu-button {
     margin:0 10px;
-  background: none;
+  background-color: #fff;
   border: none;
   padding: 12px 8px;
   cursor: pointer;
@@ -135,7 +137,7 @@ margin-top: 20px;
   text-align: center;
   font-size: 15px;
   font-weight: 700;
-  color: #333;
+  color: #000;
   transition: all 0.2s ease;
   position: relative;
   white-space: nowrap;
@@ -143,25 +145,32 @@ margin-top: 20px;
 }
 
 .menu-button:hover:not(:disabled) {
-  background-color: #f5f5f7;
+  background-color: #000;
 }
 
 .menu-button:active:not(:disabled) {
-  background-color: #e0e0e0;
+  background-color: #000;
 }
 
-.menu-button:focus {
-  outline: none;
+/* 포커스 & 액티브 상태 통합 */
+.menu-button:focus,
+.menu-button:active {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  background-color: #000 !important;
+  color: #fff !important;
+  /* 모바일 터치 하이라이트 제거 */
+  -webkit-tap-highlight-color: transparent !important;
+  -webkit-focus-ring-color: transparent !important;
 }
 
+/* 비활성화 상태 */
 .menu-button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.menu-button.has-submenu {
-  font-weight: 600;
-}
 
 /* Full Width Submenu */
 .full-width-submenu {
@@ -170,7 +179,7 @@ margin-top: 20px;
   position: absolute;
   top: 100%;
   left: 0;
-  border-radius: 0 0 40px 40px !important;
+  border-radius: 0 0 30px 30px !important;
   box-shadow: none;
   background: #fff;
   border-left: none;
@@ -185,7 +194,7 @@ margin-top: 20px;
 .full-width-submenu.static-submenu {
   position: static;
   width: 100%;
-  border-radius: 0 0 40px 40px;
+  border-radius: 0 0 30px 30px;
   background: #fff;
   box-shadow: none;
   border: none;

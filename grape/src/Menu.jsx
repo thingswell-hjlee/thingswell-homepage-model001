@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './Menu.css';
 import logo from './assets/logo.png';
 
@@ -33,6 +33,21 @@ const handleSubmenuClick = (submenuItem) => {
 
 const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
   const [openSubmenu, setOpenSubmenu] = useState(null);
+  const menuRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setOpenSubmenu(null);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   const handleItemClick = (item, index) => {
     if (item.submenu && item.submenu.length > 0) {
       setOpenSubmenu(openSubmenu === index ? null : index);
@@ -45,7 +60,7 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
     setOpenSubmenu(null);
   };
   return (
-    <div className={`menu-container menu-${orientation} menu-${theme} ${openSubmenu !== null ? 'open' : ''}`}>
+    <div ref={menuRef} className={`menu-container menu-${orientation} menu-${theme} ${openSubmenu !== null ? 'open' : ''}`}>
       <div className="menu-logo">
         <img src={logo} alt="로고" className="logo-image" />
       </div>
