@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './menu.css';
+import './Menu.css';
 import logo from './assets/logo.png';
 
 const defaultMenuItems = [
