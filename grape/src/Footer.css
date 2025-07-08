@@ -14,21 +14,20 @@
   margin: 0 auto;
 }
 
-
-/* Start of Selection */
 .footer-content {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 200px;
+  gap: 80px;
   margin-bottom: 40px;
   margin-left: auto;
   margin-right: auto;
+  flex-wrap: wrap;
 }
-/* End of Selection */
 
 .footer-section {
   text-align: center;
+  min-width: 120px;
 }
 
 .footer-description {
@@ -43,6 +42,12 @@
   font-size: 15px;
   font-weight: 100;
   color: #ffffff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-subtitle:hover {
+  color: #cccccc;
 }
 
 .footer-links {
@@ -87,11 +92,10 @@
 
 .footer-bottom-content {
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
   gap: 20px;
-  white-space: nowrap;
 }   
 
 .footer-copyright {
@@ -103,22 +107,21 @@
   flex-direction: column;
   gap: 5px;
   align-items: flex-start;
-  white-space: nowrap;
+  flex: 1;
 }
 
 .footer-copyright p {
   margin: 0;
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 400;
   color: #999999;
-  white-space: nowrap;
+  line-height: 1.4;
 }
 
 .footer-info{
     display: flex;
     gap: 40px;
-    margin-left: auto;
-    white-space: nowrap;
+    flex-wrap: wrap;
 }
 
 .logo {
@@ -130,8 +133,7 @@
 .footer-social {
   display: flex;
   gap: 20px;
-  align-items: flex-end;
-  margin-left: auto;
+  align-items: center;
   white-space: nowrap;
 }
 
@@ -141,7 +143,6 @@
   font-size: 12px;
   font-weight: 400;
   transition: color 0.3s ease;
-  white-space: nowrap;
 }
 
 .social-link:hover {
@@ -155,8 +156,7 @@
   }
   
   .footer-content {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 30px;
+    gap: 60px;
   }
   
   .footer-description {
@@ -186,6 +186,10 @@
   .social-link {
     font-size: 11px;
   }
+  
+  .footer-info {
+    gap: 30px;
+  }
 }
 
 /* 모바일 반응형 (768px 이하) */
@@ -194,15 +198,14 @@
     padding: 40px 0 20px 0;
   }
   
-  
   .footer-content {
-    grid-template-columns: 1fr;
-    gap: 30px;
-    text-align: center;
+    gap: 40px;
+    justify-content: space-around;
   }
   
   .footer-section {
     text-align: center;
+    min-width: auto;
   }
   
   .footer-description {
@@ -242,6 +245,11 @@
   .footer-social {
     justify-content: center;
   }
+  
+  .footer-info {
+    justify-content: center;
+    gap: 20px;
+  }
 }
 
 /* 작은 모바일 반응형 (480px 이하) */
@@ -251,7 +259,7 @@
   }
   
   .footer-content {
-    gap: 25px;
+    gap: 30px;
   }
   
   .footer-description {
@@ -280,5 +288,11 @@
   
   .social-link {
     font-size: 9px;
+  }
+  
+  .footer-info {
+    gap: 15px;
+    flex-direction: column;
+    align-items: center;
   }
 }

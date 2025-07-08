@@ -4,11 +4,11 @@ import './Menu.css';
 import logo from './assets/logo.png';
 
 const defaultMenuItems = [
+  { label: '정부지원 사업안내', submenu: [ { label: '사업1', path: '/government' }, { label: '사업2', path: '/government-support/startup' }, { label: '사업3', path: '/government-support/tech' }, { label: '사업4', path: '/government-support/funding' } ] },
   { label: '솔루션', submenu: [ { label: '솔루션1', path: '/solutions' }, { label: '솔루션2', path: '/solutions/cloud' } ] },
   { label: '제품', submenu: [ { label: '제품1', path: '/products/software' }, { label: '제품2', path: '/products/hardware' }, { label: '제품3', path: '/products/services' }, { label: '제품4', path: '/products/new' } ] },
   { label: '적용분야', submenu: [ { label: '적용분야1', path: '/applications/manufacturing' }, { label: '적용분야2', path: '/applications/finance' }, { label: '적용분야3', path: '/applications/healthcare' }, { label: '적용분야4', path: '/applications/education' } ] },
   { label: '납품사례', submenu: [ { label: '사례1', path: '/cases/enterprise' }, { label: '사례2', path: '/cases/sme' }, { label: '사례3', path: '/cases/public' }, { label: '사례4', path: '/cases/overseas' } ] },
-  { label: '정부지원 사업안내', submenu: [ { label: '사업1', path: '/government' }, { label: '사업2', path: '/government-support/startup' }, { label: '사업3', path: '/government-support/tech' }, { label: '사업4', path: '/government-support/funding' } ] },
   { label: '고객지원', submenu: [ { label: '견적문의', path: '/support/contact' }, { label: '공지사항', path: '/support/download' } ] },
   { label: '회사소개', submenu: [ { label: '목표', path: '/about/overview' }, { label: '연혁', path: '/about/history' }, { label: '오시는 길', path: '/about/organization' } ] }
 ];

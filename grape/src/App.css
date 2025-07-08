@@ -269,3 +269,810 @@ body {
   }
 }
 
+/* 폼 스타일링 */
+.support-form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #333;
+  font-size: 14px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #e1e1e1;
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: 'PyeojinGothic', sans-serif;
+  transition: border-color 0.3s ease;
+  background-color: white;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.submit-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: 'PyeojinGothic', sans-serif;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.submit-btn:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.submit-btn:active {
+  transform: translateY(0);
+}
+
+/* 폼 반응형 스타일 */
+@media screen and (max-width: 768px) {
+  .support-form {
+    padding: 15px;
+    margin: 0 10px;
+  }
+  
+  .form-group input,
+  .form-group textarea {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+  
+  .submit-btn {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+}/* 폼 스타일링 */
+.support-form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #333;
+  font-size: 14px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #e1e1e1;
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: 'PyeojinGothic', sans-serif;
+  transition: border-color 0.3s ease;
+  background-color: white;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.submit-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: 'PyeojinGothic', sans-serif;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.submit-btn:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.submit-btn:active {
+  transform: translateY(0);
+}
+
+/* 폼 반응형 스타일 */
+@media screen and (max-width: 768px) {
+  .support-form {
+    padding: 15px;
+    margin: 0 10px;
+  }
+  
+  .form-group input,
+  .form-group textarea {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+  
+  .submit-btn {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.page-container {
+  min-height: 100vh;
+  max-width: 1500px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.page-content {
+    flex: 1;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.page-layout {
+    display: flex;
+    gap: 50px;
+    width: 100%;
+    box-sizing: border-box;
+    justify-content: flex-start;
+    align-items: left;
+}
+
+.sidebar {
+    width: 300px;
+    flex-shrink: 0;
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-content h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    color: #333;
+    font-family: 'PyeojinGothic', sans-serif;
+}
+
+.sidebar-content ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-content li {
+    padding: 0.8rem 0;
+    border-bottom: 1px solid #e9ecef;
+    color: #666;
+    font-family: 'PyeojinGothic', sans-serif;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.sidebar-content li:hover {
+    color: #333;
+}
+
+.sidebar-content li:last-child {
+    border-bottom: none;
+}
+
+.main-content {
+    flex: 1;
+    min-width: 0;
+    height: inherit;
+}
+
+.page-content h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  color: #333;
+  text-align: center;
+  font-family: 'PyeojinGothic', sans-serif;
+}
+
+.solutions-section {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+    width: 100%;
+}
+
+.solution-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1150px;
+  height: 600px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  padding: 2rem;
+}
+
+.solution-card-inner {
+  display: flex;
+  align-items: flex-start;
+  gap: 2.5rem;
+  width: 80%;
+  margin: 0 auto;
+}
+
+
+.solution-card-text {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.solution-card-subtitle {
+  font-size: 1.3rem;
+  color: #888;
+  margin-bottom: 0.2rem;
+  font-family: 'PyeojinGothic', sans-serif;
+}
+
+.solution-card-title {
+  font-size: 2.8rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  color: #222;
+  font-family: 'PyeojinGothic', sans-serif;
+}
+
+.solution-card-desc {
+  font-size: 1.4rem;
+  color: #444;
+  line-height: 1.5;
+  font-family: 'PyeojinGothic', sans-serif;
+  text-align: left;
+  word-break: keep-all;
+}
+
+.solution-card-image {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: 350px;
+}
+
+.solution-card-image img {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+/* 새로운 앱 컨테이너 구조 지원 */
+.app-container .page-content {
+  flex: 1;
+  padding-top: 80px; /* 메뉴 높이만큼 상단 여백 추가 */
+}
+
+/* 푸터가 새로운 구조에서 올바르게 작동하도록 */
+.app-container .footer {
+  margin-top: auto;
+  width: 100%;
+}
+
+/* 메뉴가 고정된 상태에서 콘텐츠가 가려지지 않도록 */
+.menu-overlay-subpage + .main-content .page-content {
+  padding-top: 150px;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 1024px) {
+  .page-content {
+    padding: 1.5rem;
+  }
+  
+  .page-content h1 {
+    font-size: 2.2rem;
+  }
+  
+  .solutions-grid {
+    gap: 1.5rem;
+    max-width: 700px;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-content {
+    padding: 1rem;
+    padding-top: 70px; /* 모바일에서 메뉴 높이 조정 */
+  }
+  
+  .page-layout {
+    gap: 0.5rem;
+  }
+  
+  .sidebar {
+    padding: 1rem;
+  }
+  
+  .page-content h1 {
+    font-size: 2rem;
+  }
+  
+  .solutions-grid {
+    gap: 1.5rem;
+    max-width: 600px;
+  }
+  
+  .solution-card {
+    padding: 1.5rem;
+    max-width: 100%;
+    min-height: 350px;
+  }
+  
+  /* 모바일에서 메뉴가 고정된 상태 */
+  .menu-overlay-subpage + .main-content .page-content {
+    padding-top: 80px;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-content {
+    padding: 0.8rem;
+    padding-top: 60px;
+  }
+  
+  .page-content h1 {
+    font-size: 1.8rem;
+  }
+  
+  .solution-card {
+    padding: 1.2rem;
+    max-width: 100%;
+    min-height: 300px;
+  }
+  
+  .solution-card h3 {
+    font-size: 1.3rem;
+  }
+  
+  .solution-card p {
+    font-size: 0.9rem;
+  }
+}
+
+
+
+.application-cards {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  margin: 3rem 0 2rem 0;
+}
+
+.application-card {
+  background: transparent;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 300px;
+}
+
+.application-card img {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  border-radius: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.application-card-label {
+  font-size: 1rem;
+  font-weight: 300;
+  color: #ccc;
+}
+
+.application-card-title {
+  font-size: 2rem;
+  font-weight: 500;
+  font-family: 'PyeojinGothic', sans-serif;
+}
+
+/* 적용 분야 섹션 배경 및 제목 스타일 예시 */
+.application-section {
+  background: #000;
+  padding: 3rem 0;
+}
+
+.application-title {
+  color: #fff;
+  font-size: 3rem;
+  margin-left: 2rem;
+  margin-bottom: 2rem;
+  font-family: 'PyeojinGothic', sans-serif;
+}
+
+.application-period-box {
+  background: #ededed;
+  border-radius: 32px;
+  padding: 2.5rem 2rem 2rem 2rem;
+  width: 90%;
+  margin: 0 auto 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.04);
+}
+
+.application-period-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 2.5rem;
+  color: #111;
+  font-family: 'PyeojinGothic', sans-serif;
+  text-align: left;
+}
+
+.application-period-cards {
+  display: flex;
+  gap: 4rem;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+  position: relative;
+}
+
+.application-period-title p {
+  margin: 0;
+  line-height: 1.1;
+  padding: 0;
+  font-size: 2.7rem;
+  font-weight: bold;
+  letter-spacing: -1px;
+  color: #111;
+  font-family: 'PyeojinGothic', sans-serif;
+}
+
+.application-period-card:not(:last-child)::after {
+    content: '';
+    display: block;
+    position: absolute;
+    right: -100px; /* 카드와 카드 사이 간격의 절반 */
+    top: 50%;
+    width: 100px;  /* 카드 사이 간격 */
+    height: 0;
+    border-top: 3px dashed #bbb;
+    transform: translateY(-50%);
+    z-index: 0;
+  }
+  .application-period-cards {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+.application-period-card {
+  background: #fff;
+  border-radius: 24px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+  padding: 1.5rem 2rem;
+  width: 220px;
+  min-height: 160px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-family: 'PyeojinGothic', sans-serif;
+  position: relative;
+  z-index: 1;
+}
+
+.application-period-date {
+  font-size: 1.1rem;
+  color: #444;
+  margin-bottom: 1rem;
+}
+
+.application-period-status {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #222;
+}
+
+.application-period-day,
+.application-period-time {
+  font-size: 1.1rem;
+  color: #666;
+}
+
+@media (max-width: 900px) {
+  .application-period-box {
+    width: 100%;
+    min-width: 0;
+    padding: 1.5rem 0.5rem;
+  }
+  .application-period-cards {
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+  }
+  .application-period-cards::before {
+    display: none;
+  }
+}
+
+.applicationdate-card {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+    height: 600px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    padding: 1rem;
+  }
+
+.application-period-flex {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 0;
+  padding-left: 0;
+}
+
+.application-period-header {
+padding: 0 2rem 2rem 2rem;
+  color: #000;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.application-period-header h1 {
+  font-size: 2.8rem;
+  margin-bottom: 0;
+  color: #000;
+  line-height: 1;
+}
+
+.application-period-header p {
+  margin: 0;
+  font-size: 1.4rem;
+  color: #000;
+  padding: 0;
+}
+
+.support-info-row {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  width: 100%;
+  box-sizing: border-box;
+  align-items: stretch; /* 추가 */
+  padding: 0 2rem 2rem 2rem;
+}
+
+.support-info-row-header {
+  align-self: flex-start;
+  margin: 0;
+  padding: 0;
+}
+
+.support-info-row-header h2 {
+  margin: 0;
+  padding: 0;
+  font-size: 2rem;
+  color: #000;
+  text-align: left;
+}
+
+.support-limit,
+.support-qualification {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.support-limit-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border-radius: 24px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+  border: none;
+  padding: 3rem;
+  width: 100%;
+  max-width: 320px;
+  min-height: 340px;
+  box-sizing: border-box;
+  position: relative;
+  transition: box-shadow 0.2s;
+}
+
+.support-limit-card:hover {
+  box-shadow: 0 8px 32px rgba(0,0,0,0.13);
+}
+
+.support-limit {
+  flex: 0 0 300px;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.support-qualification {
+    flex: 1 1 0;
+    min-width: 0;
+    box-sizing: border-box;
+    text-align: left;
+
+  }
+
+.support-limit h2,
+.support-qualification h2 {
+  font-size: 2rem;
+  color: #000;
+  text-align: left;
+  margin: 0;
+  padding: 0;
+  
+}
+
+.support-qualification p {
+  font-size: 1.1rem;
+  margin: 0;
+  line-height: 1.5;
+  color: #000;
+}
+.support-qualification-list {
+    color: #a70000;
+    text-align: left;
+    word-wrap: break-word;
+    margin-top: 1rem;
+}
+
+.support-limit-card {
+  max-width: 280px;
+  width: 100%;
+  /* 상단 여백 제거 */
+  padding-top: 0;
+  padding-bottom: 18px;
+  /* 기존 padding: 28px 0 18px 0; 등은 삭제 */
+}
+
+.support-limit-graph {
+  max-width: 100px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.support-limit-graph svg {
+  max-width: 100px;
+  width: 100%;
+  height: auto;
+}
+
+.support-limit-year {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #111;
+  margin-bottom: 10px;
+  text-align: center;
+  font-family: 'PyeojinGothic', sans-serif;
+}
+
+.support-limit-amount {
+  width: 100%;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: #222;
+  font-family: 'PyeojinGothic', sans-serif;
+  margin-top: 0.5rem;
+}
+
+.support-limit-desc {
+  margin-top: 1rem;
+  font-size: 1rem;
+  font-weight: 300;
+  color: #B48A2E;
+  text-align: center;
+  font-family: 'PyeojinGothic', sans-serif;
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 900px) {
+  .support-info-row {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .support-limit-card {
+    max-width: 100%;
+  }
+}
+
+
+.support-limit-list {
+    margin-top: 1rem;
+    color: #a70000;
+    text-align: left;
+    word-wrap: break-word;
+    line-height: 2;
+}
+
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
