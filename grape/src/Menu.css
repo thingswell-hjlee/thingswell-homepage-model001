@@ -142,7 +142,7 @@ margin-top: 20px;
   justify-content: center;
   width: 100%;
   text-align: center;
-  font-size: 15px;
+  font-size: clamp(13px, 2.8vw, 15px);
   font-weight: 700;
   color: #000;
   transition: all 0.2s ease;
@@ -155,7 +155,7 @@ margin-top: 20px;
 /* 서브메뉴 인디케이터 */
 .submenu-indicator {
   margin-left: 8px;
-  font-size: 18px;
+  font-size: clamp(16px, 3.2vw, 18px);
   font-weight: bold;
   transition: transform 0.2s ease;
 }
@@ -248,7 +248,7 @@ margin-top: 20px;
   justify-content: center;
   width: 100%;
   text-align: center;
-  font-size: 13px;
+  font-size: clamp(11px, 2.4vw, 13px);
   color: #333;
   transition: all 0.2s ease;
   border-right: 1px solid #f0f0f0;
@@ -429,13 +429,13 @@ margin-top: 20px;
   }
   
   .menu-button {
-    font-size: 14px;
+    font-size: clamp(12px, 2.6vw, 14px);
     padding: 10px 6px;
     margin: 0 5px;
   }
   
   .submenu-button {
-    font-size: 12px;
+    font-size: clamp(10px, 2.2vw, 12px);
     padding: 10px 12px;
   }
   
@@ -503,7 +503,7 @@ margin-top: 20px;
   .menu-button {
     margin: 0;
     padding: 15px 20px;
-    font-size: 16px;
+    font-size: clamp(14px, 3.2vw, 16px);
     justify-content: space-between;
     text-align: left;
     border-radius: 0;
@@ -547,7 +547,7 @@ margin-top: 20px;
     justify-content: flex-start;
     text-align: left;
     padding: 12px 20px;
-    font-size: 14px;
+    font-size: clamp(12px, 2.8vw, 14px);
   }
   
   .submenu-item:last-child .submenu-button {
@@ -567,12 +567,12 @@ margin-top: 20px;
   
   .menu-button {
     padding: 12px 15px;
-    font-size: 15px;
+    font-size: clamp(13px, 3vw, 15px);
   }
   
   .submenu-button {
     padding: 10px 15px;
-    font-size: 13px;
+    font-size: clamp(11px, 2.6vw, 13px);
   }
   
   .logo-image {
@@ -597,12 +597,12 @@ margin-top: 20px;
   
   .menu-button {
     padding: 10px 12px;
-    font-size: 14px;
+    font-size: clamp(12px, 2.8vw, 14px);
   }
   
   .submenu-button {
     padding: 8px 12px;
-    font-size: 12px;
+    font-size: clamp(10px, 2.4vw, 12px);
   }
   
   .logo-image {
@@ -633,11 +633,11 @@ margin-top: 20px;
   
   .menu-button {
     padding: 8px 15px;
-    font-size: 14px;
+    font-size: clamp(12px, 2.6vw, 14px);
   }
   
   .submenu-button {
     padding: 6px 15px;
-    font-size: 12px;
+    font-size: clamp(10px, 2.2vw, 12px);
   }
 } 

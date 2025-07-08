@@ -1,15 +1,16 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 
-const SolutionCard = ({ subtitle, title, description, image, imageAlt }) => {
+const SolutionCard = forwardRef((props, ref) => {
+  const { subtitle, title, description, image, imageAlt } = props;
   return (
-    <div className="solution-card">
+    <div ref={ref} className="solution-card">
       <div className="solution-card-inner">
+        <div className="solution-card-header">
+        </div>
         <div className="solution-card-text">
           <div className="solution-card-subtitle">{subtitle}</div>
           <div className="solution-card-title">{title}</div>
-          <div className="solution-card-desc">
-            {description}
-          </div>
+          <div className="solution-card-desc">{description}</div>
         </div>
         <div className="solution-card-image">
           <img src={image} alt={imageAlt} />
@@ -17,6 +18,6 @@ const SolutionCard = ({ subtitle, title, description, image, imageAlt }) => {
       </div>
     </div>
   );
-};
+});
 
 export default SolutionCard; 

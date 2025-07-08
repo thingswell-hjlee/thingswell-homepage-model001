@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 
-const SupportInfoCard = ({ title, subtitle, supportLimit, qualifications }) => {
+const SupportInfoCard = forwardRef((props, ref) => {
+  const { title, subtitle, supportLimit, qualifications } = props;
   return (
-    <div className="applicationdate-card">
+    <div ref={ref} className="applicationdate-card">
       <div className="application-period-flex">
         <div className="application-period-header">
           <h1>{title}</h1>
@@ -42,7 +43,7 @@ const SupportInfoCard = ({ title, subtitle, supportLimit, qualifications }) => {
             <p className="support-qualification-desc">
               {qualifications.description}
             </p>
-            <ul className="support-qualification-list">
+            <ul className="support-limit-list">
               {qualifications.items.map((item, index) => (
                 <li key={index}>
                   <span>{item.main}</span>
@@ -60,6 +61,6 @@ const SupportInfoCard = ({ title, subtitle, supportLimit, qualifications }) => {
       </div>
     </div>
   );
-};
+});
 
 export default SupportInfoCard; 
