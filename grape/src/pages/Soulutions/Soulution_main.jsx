@@ -11,47 +11,47 @@ const Soulution_main = () => {
   // 각 섹션별 ref 생성
   const solutionRef = useRef(null);
   
-  // 각 정부지원사업별 데이터 정의
+  // 각 솔루션별 데이터 정의
   const solutionDataArray = [
     {
-      subtitle: "Government Support Project 1",
-      title: "정부지원사업 1",
-      description: "첫 번째 정부지원사업에 대한 상세한 설명입니다. 이 사업은 기술‧재정적 능력이 취약한 산재보험가입 50인 미만 사업장을 대상으로 합니다.",
+      subtitle: "솔루션 1",
+      title: "솔루션 1",
+      description: "첫 번째 솔루션에 대한 상세한 설명입니다. 이 솔루션은 기술‧재정적 능력이 취약한 산재보험가입 50인 미만 사업장을 대상으로 합니다.",
       image: welding,
-      imageAlt: "정부지원사업 1",
+      imageAlt: "솔루션 1",
       link: "/government-support-1"
     },
     {
-      subtitle: "Government Support Project 2", 
-      title: "정부지원사업 2",
-      description: "두 번째 정부지원사업에 대한 상세한 설명입니다. 업종별 평균 매출액이 '소기업 규모 기준' 이하인 사업장을 대상으로 합니다.",
+      subtitle: "솔루션 2", 
+      title: "솔루션 2",
+      description: "두 번째 솔루션에 대한 상세한 설명입니다. 업종별 평균 매출액이 '소기업 규모 기준' 이하인 사업장을 대상으로 합니다.",
       image: construction,
-      imageAlt: "정부지원사업 2",
+      imageAlt: "솔루션 2",
       link: "/government-support-2"
     },
     {
-      subtitle: "Government Support Project 3",
-      title: "정부지원사업 3", 
-      description: "세 번째 정부지원사업에 대한 상세한 설명입니다. 공사금액 50억원 미만 건설현장을 대상으로 합니다.",
+      subtitle: "솔루션 3",
+      title: "솔루션 3", 
+      description: "세 번째 솔루션에 대한 상세한 설명입니다. 공사금액 50억원 미만 건설현장을 대상으로 합니다.",
       image: manufacturing,
-      imageAlt: "정부지원사업 3",
+      imageAlt: "솔루션 3",
       link: "/government-support-3"
     },
     {
-      subtitle: "Government Support Project 4",
-      title: "정부지원사업 4",
-      description: "네 번째 정부지원사업에 대한 상세한 설명입니다. 산업단지를 대상으로 유해·위험요인 개선을 위한 보조지원을 제공합니다.",
+      subtitle: "솔루션 4",
+      title: "솔루션 4",
+      description: "네 번째 솔루션에 대한 상세한 설명입니다. 산업단지를 대상으로 유해·위험요인 개선을 위한 보조지원을 제공합니다.",
       image: grinding,
-      imageAlt: "정부지원사업 4",
+      imageAlt: "솔루션 4",
       link: "/government-support-4"
     }
   ];
 
   const selectCardData = [
-    "정부지원사업 1",
-    "정부지원사업 2", 
-    "정부지원사업 3",
-    "정부지원사업 4",
+    "솔루션 1",
+    "솔루션 2", 
+    "솔루션 3",
+    "솔루션 4",
   ];
 
   const [selectedIdx, setSelectedIdx] = useState(0); // 기본값을 0으로 설정
