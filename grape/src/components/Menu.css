@@ -1,36 +1,36 @@
 /* Font Face Definitions */
 @font-face {
   font-family: 'PyeojinGothic';
-  src: url('./assets/font/PyeojinGothic-Light.woff') format('woff');
-  font-weight: 300;
+  src: url('../assets/font/PyeojinGothic-Light.woff') format('woff');
+  font-weight: var(--font-weight-light);
   font-style: normal;
 }
 
 @font-face {
   font-family: 'PyeojinGothic';
-  src: url('./assets/font/PyeojinGothic-Regular.woff') format('woff');
-  font-weight: 400;
+  src: url('../assets/font/PyeojinGothic-Regular.woff') format('woff');
+  font-weight: var(--font-weight-regular);
   font-style: normal;
 }
 
 @font-face {
   font-family: 'PyeojinGothic';
-  src: url('./assets/font/PyeojinGothic-Medium.woff') format('woff');
-  font-weight: 500;
+  src: url('../assets/font/PyeojinGothic-Medium.woff') format('woff');
+  font-weight: var(--font-weight-medium);
   font-style: normal;
 }
 
 @font-face {
   font-family: 'PyeojinGothic';
-  src: url('./assets/font/PyeojinGothic-SemiBold.woff') format('woff');
-  font-weight: 600;
+  src: url('../assets/font/PyeojinGothic-SemiBold.woff') format('woff');
+  font-weight: var(--font-weight-semibold);
   font-style: normal;
 }
 
 @font-face {
   font-family: 'PyeojinGothic';
-  src: url('./assets/font/PyeojinGothic-Bold.woff') format('woff');
-  font-weight: 700;
+  src: url('../assets/font/PyeojinGothic-Bold.woff') format('woff');
+  font-weight: var(--font-weight-bold);
   font-style: normal;
 }
 
@@ -61,19 +61,19 @@
     opacity: 1;
     width: 100%;
     max-width: 1500px;
-    border-radius: 30px;
+    border-radius: var(--menu-border-radius);
     overflow: visible;
-    background: #fff;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-    font-family: 'PyeojinGothic';
+    background: var(--color-surface);
+    box-shadow: var(--shadow-menu);
+    font-family: var(--font-family-primary);
     position: relative;
-    height: 70px;
+    height: var(--menu-height);
     margin: 20px auto 0 auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 40px;
-    z-index: 99999;
+    padding: var(--menu-padding);
+    z-index: var(--z-index-menu);
 }
 /* End of Selection */
 /* End of Selection */
@@ -93,7 +93,7 @@
 }
 
 .menu {
-  font-family: 'PyeojinGothic';
+  font-family: var(--font-family-primary);
 }
 
 .menu-list {
@@ -114,7 +114,7 @@ margin-top: 20px;
 }
 
 .menu-horizontal .menu-item {
-  border-right: 1px solid #fff;
+  border-right: var(--border-width-thin) solid var(--color-surface);
   position: relative;
 }
 
@@ -128,7 +128,7 @@ margin-top: 20px;
 }
 
 .menu-vertical .menu-item {
-  border-bottom: 1px solid #fff;
+  border-bottom: var(--border-width-thin) solid var(--color-surface);
   position: relative;
 }
 
@@ -150,15 +150,15 @@ margin-top: 20px;
 
 /* 메뉴 아이템에 서브메뉴가 있을 때 호버 효과 */
 .menu-item.has-submenu:hover .menu-button {
-  background-color: #000;
-  color: #fff;
+  background-color: var(--color-primary);
+  color: var(--color-text-white);
 }
 
 .menu-button {
-    margin:0 10px;
-  background-color: #fff;
+    margin: 0 var(--menu-item-gap);
+  background-color: var(--color-surface);
   border: none;
-  padding: 12px 8px;
+  padding: var(--menu-button-padding);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -166,33 +166,31 @@ margin-top: 20px;
   width: 100%;
   text-align: center;
   font-size: clamp(13px, 2.8vw, 15px);
-  font-weight: 700;
-  color: #000;
-  transition: all 0.2s ease;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  transition: all var(--transition-base);
   position: relative;
   white-space: nowrap;
   outline: none;
-  border-radius: 30px;
+  border-radius: var(--menu-button-border-radius);
 }
 
 /* 서브메뉴 인디케이터 */
 .submenu-indicator {
-  margin-left: 8px;
+  margin-left: var(--spacing-sm);
   font-size: clamp(16px, 3.2vw, 18px);
-  font-weight: bold;
-  transition: transform 0.2s ease;
+  font-weight: var(--font-weight-bold);
+  transition: transform var(--transition-base);
 }
 
 .menu-button.active .submenu-indicator {
   transform: rotate(180deg);
 }
 
-/* 호버 및 액티브(비활성화 제외) */
-.menu-button:hover:not(:disabled),
-.menu-button:active:not(:disabled),
-.menu-button:focus:not(:disabled) {
-  background-color: #000 !important; 
-  color: #fff !important;
+/* 호버 상태 - 연한 회색 배경 */
+.menu-button:hover:not(:disabled) {
+  background-color: #f0f0f0 !important; 
+  color: #333 !important;
   outline: none;
   box-shadow: none;
   border: none;
@@ -200,7 +198,19 @@ margin-top: 20px;
   -webkit-focus-ring-color: transparent;
 }
 
-/* 활성화된 메뉴 버튼 스타일 */
+/* 액티브/포커스 상태 - 중간 회색 배경 */
+.menu-button:active:not(:disabled),
+.menu-button:focus:not(:disabled) {
+  background-color: #e0e0e0 !important;
+  color: #222 !important;
+  outline: none;
+  box-shadow: none;
+  border: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-focus-ring-color: transparent;
+}
+
+/* 활성화된 메뉴 버튼 스타일 - 진한 검정 배경 */
 .menu-button.active {
   background-color: #000 !important;
   color: #fff !important;

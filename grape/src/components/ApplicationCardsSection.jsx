@@ -5,7 +5,7 @@ import './ApplicationCardsSection.css';
 const ApplicationCardsSection = forwardRef((props, ref) => {
   const { applicationCardsData } = props;
   return (
-    <div ref={ref} className="solution-card application-section-responsive" style={{background: '#000'}}>
+    <div ref={ref} className="application-card application-section-responsive">
       <div className="application-cards no-line responsive-cards">
         {applicationCardsData.map((card, index) => (
           <ApplicationCard key={index} {...card} />

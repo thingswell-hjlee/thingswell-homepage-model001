@@ -1,10 +1,10 @@
 
 .footer {
-    background-color: #1a1a1a;
-    color: #ffffff;
+    background-color: var(--color-background-dark);
+    color: var(--color-text-white);
     padding: 60px 0 20px 0;
-    font-family: 'PyeojinGothic', sans-serif;
-    max-width: 1600px;
+    font-family: var(--font-family-primary);
+    max-width: var(--container-max-width);
     margin: 0 auto;
     margin-top: auto;
   }
@@ -32,22 +32,22 @@
   
   .footer-description {
     font-size: clamp(12px, 2.5vw, 14px);
-    font-weight: 400;
+    font-weight: var(--font-weight-regular);
     line-height: 1.6;
-    color: #cccccc;
+    color: var(--color-text-muted);
     margin: 0;
   }
   
   .footer-subtitle {
     font-size: clamp(13px, 2.8vw, 15px);
-    font-weight: 100;
-    color: #ffffff;
+    font-weight: var(--font-weight-light);
+    color: var(--color-text-white);
     text-decoration: none;
-    transition: color 0.3s ease;
+    transition: color var(--transition-slow);
   }
   
   .footer-subtitle:hover {
-    color: #cccccc;
+    color: var(--color-text-muted);
   }
   
   .footer-links {
@@ -61,22 +61,22 @@
   }
   
   .footer-links a {
-    color: #cccccc;
+    color: var(--color-text-muted);
     text-decoration: none;
     font-size: clamp(12px, 2.5vw, 14px);
-    font-weight: 400;
-    transition: color 0.3s ease;
+    font-weight: var(--font-weight-regular);
+    transition: color var(--transition-slow);
   }
   
   .footer-links a:hover {
-    color: #ffffff;
+    color: var(--color-text-white);
   }
   
   .footer-contact p {
     margin: 0 0 8px 0;
     font-size: clamp(12px, 2.5vw, 14px);
-    font-weight: 400;
-    color: #cccccc;
+    font-weight: var(--font-weight-regular);
+    color: var(--color-text-muted);
     line-height: 1.6;
   }
   
@@ -85,8 +85,8 @@
   }
   
   .footer-divider {
-    height: 1px;
-    background-color: #333333;
+    height: var(--border-width-thin);
+    background-color: var(--color-secondary);
     margin-bottom: 20px;
   }
   
@@ -100,8 +100,8 @@
   
   .footer-copyright {
     font-size: clamp(10px, 2.2vw, 12px);
-    font-weight: 400;
-    color: #999999;
+    font-weight: var(--font-weight-regular);
+    color: var(--color-text-muted);
     margin: 0;
     display: flex;
     flex-direction: column;
@@ -113,8 +113,8 @@
   .footer-copyright p {
     margin: 0;
     font-size: clamp(8px, 1.8vw, 10px);
-    font-weight: 400;
-    color: #999999;
+    font-weight: var(--font-weight-regular);
+    color: var(--color-text-muted);
     line-height: 1.4;
   }
   
@@ -138,15 +138,15 @@
   }
   
   .social-link {
-    color: #cccccc;
+    color: var(--color-text-muted);
     text-decoration: none;
     font-size: clamp(10px, 2.2vw, 12px);
-    font-weight: 400;
-    transition: color 0.3s ease;
+    font-weight: var(--font-weight-regular);
+    transition: color var(--transition-slow);
   }
   
   .social-link:hover {
-    color: #ffffff;
+    color: var(--color-text-white);
   }
   
   /* 태블릿 반응형 (768px - 1024px) */

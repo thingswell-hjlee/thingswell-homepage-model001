@@ -9,6 +9,7 @@ import Government_support_3 from './pages/Goverment_support/Government_support_3
 import Government_support_4 from './pages/Goverment_support/Government_support_4.jsx'
 import Government_support_main from './pages/Goverment_support/Government_support_main.jsx'
 import Soulution_main from './pages/Soulutions/Soulution_main.jsx'
+import Soulution from './pages/Soulutions/Soulution.jsx'
 import logo from './assets/main_image.jpg';
 
 function HomePage() {
@@ -82,6 +83,7 @@ function App() {
           <Route path="/government-support-3" element={<Government_support_3 />} />
           <Route path="/government-support-4" element={<Government_support_4 />} />
           <Route path="/solutions" element={<Soulution_main />} />
+          <Route path="/solution" element={<Soulution />} />
         </Routes>
       </main>
       

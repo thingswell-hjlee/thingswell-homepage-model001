@@ -1,11 +1,14 @@
+/* Import CSS Variables */
+@import './styles/variables.css';
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  font-family: var(--font-family-primary);
+  line-height: var(--line-height-relaxed);
+  font-weight: var(--font-weight-regular);
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: var(--color-text-primary);
+  background-color: var(--color-background);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -14,12 +17,12 @@
 }
 
 a {
-  font-weight: 500;
-  color: #646cff;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-focus);
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+  color: var(--color-primary-light);
 }
 
 body {
@@ -31,38 +34,38 @@ body {
 }
 
 h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+  font-size: var(--font-size-5xl);
+  line-height: var(--line-height-tight);
 }
 
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
+  border-radius: var(--button-border-radius);
+  border: var(--border-width-thin) solid transparent;
+  padding: var(--button-padding);
+  font-size: var(--button-font-size);
+  font-weight: var(--button-font-weight);
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: var(--color-background-dark);
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: border-color var(--transition-base);
 }
 button:hover {
-  border-color: #646cff;
+  border-color: var(--color-focus);
 }
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  outline: var(--border-width-thick) auto -webkit-focus-ring-color;
 }
 
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    color: var(--color-text-primary);
+    background-color: var(--color-background);
   }
   a:hover {
-    color: #747bff;
+    color: var(--color-primary-light);
   }
   button {
-    background-color: #f9f9f9;
+    background-color: var(--color-surface-light);
   }
 }

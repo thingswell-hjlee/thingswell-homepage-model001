@@ -1,0 +1,217 @@
+/* CSS Variables System - Design Tokens */
+
+:root {
+  /* ===== COLORS ===== */
+  
+  /* Primary Colors */
+  --color-primary: #000000;
+  --color-primary-light: #333333;
+  --color-primary-dark: #000000;
+  
+  /* Secondary Colors */
+  --color-secondary: #333333;
+  --color-secondary-light: #666666;
+  --color-secondary-dark: #1a1a1a;
+  
+  /* Background Colors */
+  --color-background: #1a1a1a;
+  --color-background-light: #D9D9D9;
+  --color-background-dark: #1a1a1a;
+  --color-surface: #ffffff;
+  --color-surface-light: #f9f9f9;
+  --color-surface-dark: #e0e0e0;
+  
+  /* Text Colors */
+  --color-text-primary: #000000;
+  --color-text-secondary: #000000;
+  --color-text-muted: #000000;
+  --color-text-light: #E9E9E9;
+  --color-text-white: #ffffff;
+  
+  /* Overlay Colors */
+  --color-overlay: rgba(0, 0, 0, 0.7);
+  --color-overlay-light: rgba(0, 0, 0, 0.5);
+  --color-overlay-dark: rgba(0, 0, 0, 0.8);
+  
+  /* Interactive Colors */
+  --color-hover: #333333;
+  --color-active: #000000;
+  --color-focus: #646cff;
+  --color-disabled: #cccccc;
+  
+  /* ===== TYPOGRAPHY ===== */
+  
+  /* Font Family */
+  --font-family-primary: 'PyeojinGothic', sans-serif;
+  
+  /* Font Weights */
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  
+  /* Font Sizes */
+  --font-size-xs: 0.75rem;    /* 12px */
+  --font-size-sm: 0.875rem;   /* 14px */
+  --font-size-base: 1rem;     /* 16px */
+  --font-size-lg: 1.125rem;   /* 18px */
+  --font-size-xl: 1.25rem;    /* 20px */
+  --font-size-2xl: 1.5rem;    /* 24px */
+  --font-size-3xl: 1.875rem;  /* 30px */
+  --font-size-4xl: 2.25rem;   /* 36px */
+  --font-size-5xl: 3rem;      /* 48px */
+  
+  /* Line Heights */
+  --line-height-tight: 1.1;
+  --line-height-normal: 1.2;
+  --line-height-relaxed: 1.5;
+  --line-height-loose: 1.8;
+  
+  /* ===== SPACING ===== */
+  
+  --spacing-xs: 0.25rem;   /* 4px */
+  --spacing-sm: 0.5rem;    /* 8px */
+  --spacing-md: 1rem;      /* 16px */
+  --spacing-lg: 1.5rem;    /* 24px */
+  --spacing-xl: 2rem;      /* 32px */
+  --spacing-2xl: 3rem;     /* 48px */
+  --spacing-3xl: 4rem;     /* 64px */
+  --spacing-4xl: 6rem;     /* 96px */
+  
+  /* ===== BORDERS ===== */
+  
+  /* Border Radius */
+  --border-radius-sm: 4px;
+  --border-radius-md: 8px;
+  --border-radius-lg: 12px;
+  --border-radius-xl: 16px;
+  --border-radius-2xl: 20px;
+  --border-radius-3xl: 30px;
+  --border-radius-full: 9999px;
+  
+  /* Border Width */
+  --border-width-thin: 1px;
+  --border-width-normal: 2px;
+  --border-width-thick: 4px;
+  
+  /* Border Colors */
+  --border-color-light: #e0e0e0;
+  --border-color-normal: #cccccc;
+  --border-color-dark: #999999;
+  
+  /* ===== SHADOWS ===== */
+  
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  
+  /* Menu Specific Shadows */
+  --shadow-menu: 0 4px 20px rgba(0, 0, 0, 0.5);
+  
+  /* ===== TRANSITIONS ===== */
+  
+  --transition-fast: 0.15s ease;
+  --transition-base: 0.2s ease;
+  --transition-slow: 0.3s ease;
+  --transition-slower: 0.5s ease;
+  
+  /* ===== LAYOUT ===== */
+  
+  /* Container */
+  --container-max-width: 1600px;
+  --container-padding: 1rem;
+  
+  /* Z-Index Scale */
+  --z-index-dropdown: 1000;
+  --z-index-sticky: 1020;
+  --z-index-fixed: 1030;
+  --z-index-modal-backdrop: 1040;
+  --z-index-modal: 1050;
+  --z-index-popover: 1060;
+  --z-index-tooltip: 1070;
+  --z-index-menu: 99999;
+  
+  /* ===== BREAKPOINTS ===== */
+  
+  --breakpoint-sm: 480px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1200px;
+  --breakpoint-2xl: 1400px;
+  
+  /* ===== COMPONENT SPECIFIC ===== */
+  
+  /* Menu */
+  --menu-height: 70px;
+  --menu-border-radius: 30px;
+  --menu-padding: 0 40px;
+  --menu-item-gap: 10px;
+  --menu-button-padding: 12px 8px;
+  --menu-button-border-radius: 30px;
+  
+  /* Button */
+  --button-padding: 0.6em 1.2em;
+  --button-border-radius: 8px;
+  --button-font-size: 1em;
+  --button-font-weight: 500;
+  
+  /* Card */
+  --card-padding: 2em;
+  --card-border-radius: 8px;
+  --card-shadow: var(--shadow-md);
+  
+  /* ===== ANIMATIONS ===== */
+  
+  --animation-duration-fast: 0.15s;
+  --animation-duration-base: 0.2s;
+  --animation-duration-slow: 0.3s;
+  --animation-duration-slower: 0.5s;
+  
+  --animation-easing-ease: ease;
+  --animation-easing-ease-in: ease-in;
+  --animation-easing-ease-out: ease-out;
+  --animation-easing-ease-in-out: ease-in-out;
+}
+
+/* ===== DARK MODE SUPPORT ===== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-background: #242424;
+    --color-surface: #1a1a1a;
+    --color-text-primary: rgba(255, 255, 255, 0.87);
+    --color-text-secondary: rgba(255, 255, 255, 0.6);
+    --color-text-muted: rgba(255, 255, 255, 0.4);
+  }
+}
+
+/* ===== LIGHT MODE SUPPORT ===== */
+@media (prefers-color-scheme: light) {
+  :root {
+    --color-background: #ffffff;
+    --color-surface: #f9f9f9;
+    --color-text-primary: #213547;
+    --color-text-secondary: #000000;
+    --color-text-muted: #888888;
+  }
+}
+
+/* ===== RESPONSIVE FONT SIZES ===== */
+@media (max-width: 768px) {
+  :root {
+    --font-size-3xl: 1.5rem;  /* 24px */
+    --font-size-4xl: 2rem;    /* 32px */
+    --font-size-5xl: 2.5rem;  /* 40px */
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --font-size-2xl: 1.25rem; /* 20px */
+    --font-size-3xl: 1.375rem; /* 22px */
+    --font-size-4xl: 1.75rem;  /* 28px */
+    --font-size-5xl: 2.25rem;  /* 36px */
+  }
+} 

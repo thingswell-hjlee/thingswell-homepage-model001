@@ -19,7 +19,7 @@ const Soulution_main = () => {
       description: "첫 번째 솔루션에 대한 상세한 설명입니다. 이 솔루션은 기술‧재정적 능력이 취약한 산재보험가입 50인 미만 사업장을 대상으로 합니다.",
       image: welding,
       imageAlt: "솔루션 1",
-      link: "/government-support-1"
+      link: "/solution"
     },
     {
       subtitle: "솔루션 2", 

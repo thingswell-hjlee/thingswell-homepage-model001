@@ -2,35 +2,35 @@
 @font-face {
   font-family: 'PyeojinGothic';
   src: url('./assets/font/PyeojinGothic-Light.woff') format('woff');
-  font-weight: 300;
+  font-weight: var(--font-weight-light);
   font-style: normal;
 }
 
 @font-face {
   font-family: 'PyeojinGothic';
   src: url('./assets/font/PyeojinGothic-Regular.woff') format('woff');
-  font-weight: 400;
+  font-weight: var(--font-weight-regular);
   font-style: normal;
 }
 
 @font-face {
   font-family: 'PyeojinGothic';
   src: url('./assets/font/PyeojinGothic-Medium.woff') format('woff');
-  font-weight: 500;
+  font-weight: var(--font-weight-medium);
   font-style: normal;
 }
 
 @font-face {
   font-family: 'PyeojinGothic';
   src: url('./assets/font/PyeojinGothic-SemiBold.woff') format('woff');
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
   font-style: normal;
 }
 
 @font-face {
   font-family: 'PyeojinGothic';
   src: url('./assets/font/PyeojinGothic-Bold.woff') format('woff');
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
   font-style: normal;
 }
 
@@ -42,8 +42,8 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: 'PyeojinGothic', sans-serif;
-  background-color: #D9D9D9;
+  font-family: var(--font-family-primary);
+  background-color: var(--color-background-light);
   overflow-x: hidden; /* 가로 스크롤 방지 */
 }
 
@@ -53,7 +53,7 @@ body {
   padding: 0;
   text-align: center;
   box-sizing: border-box;
-  background-color: #1a1a1a;
+  background-color: var(--color-background-dark);
 }
 
 /* 새로운 앱 컨테이너 구조 */
@@ -68,16 +68,14 @@ body {
   position: relative;
 }
 
-`
-
 .content-container {
   position: relative;
   display: block;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: var(--color-overlay);
   margin: 0 auto;
   text-align: center;
   width: 100%;
-  max-width: 1600px;
+  max-width: var(--container-max-width);
   box-sizing: border-box;
   height: 100vh;
   overflow: hidden;
@@ -106,9 +104,9 @@ body {
   top: 20px;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 99999;
+  z-index: var(--z-index-menu);
   width: 100%;
-  max-width: 1600px;
+  max-width: var(--container-max-width);
 }
 
 .button {
@@ -119,21 +117,21 @@ body {
 }
 
 .button-text {
-  font-family: 'PyeojinGothic';
-  font-weight: 400;
+  font-family: var(--font-family-primary);
+  font-weight: var(--font-weight-regular);
   padding: 0 80px 0 80px;
   background-color: transparent;
   border: none;
-  background-color: #000;
+  background-color: var(--color-primary);
   cursor: pointer;
-  border-radius: 30px;
-  color: white;
-  font-size: 16px;
-  transition: all 0.3s ease;
+  border-radius: var(--menu-button-border-radius);
+  color: var(--color-text-white);
+  font-size: var(--font-size-base);
+  transition: all var(--transition-slow);
 }
 
 .button-text:hover {
-  background-color: #333;
+  background-color: var(--color-hover);
   transform: scale(1.05);
 }
 
@@ -143,16 +141,16 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 10;
-  color: #E9E9E9;
-  font-weight: 700;
-  font-size: 30px;
-  font-family: 'PyeojinGothic';
+  color: var(--color-text-light);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-3xl);
+  font-family: var(--font-family-primary);
   text-align: left;
 }
 
 .content-text h1 {
   margin: 0;
-  line-height: 1.2;
+  line-height: var(--line-height-normal);
 }
 
 @keyframes logo-spin {
@@ -171,11 +169,11 @@ body {
 }
 
 .card {
-  padding: 2em;
+  padding: var(--card-padding);
 }
 
 .read-the-docs {
-  color: #888;
+  color: var(--color-text-muted);
 }
 
 /* 대형 데스크톱 반응형 (1200px 이상) */

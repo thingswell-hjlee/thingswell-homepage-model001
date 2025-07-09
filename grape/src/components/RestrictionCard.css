@@ -23,55 +23,61 @@
 }
 
 .restriction-card-header {
-  padding: 2rem 2rem 2rem 2rem;
-  color: #000;
+  padding: var(--spacing-xl) var(--spacing-xl) var(--spacing-xl) var(--spacing-xl);
+  color: var(--color-text-primary);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 0.5rem;
+  gap: var(--spacing-sm);
 }
 
 .restriction-card-header h1 {
-  font-size: 2.8rem;
+  font-size: var(--font-size-4xl);
   margin-bottom: 0;
-  color: #000;
-  line-height: 1;
+  color: var(--color-text-primary);
+  line-height: var(--line-height-tight);
 }
 
 .restriction-card-header p {
   margin: 0;
-  font-size: 1.4rem;
-  color: #000;
+  font-size: var(--font-size-xl);
+  color: var(--color-text-primary);
   padding: 0;
 }
 
 .restriction-info-row {
   display: flex;
   flex-direction: row;
-  gap: 2rem;
+  gap: var(--spacing-xl);
   width: 100%;
   box-sizing: border-box;
   align-items: stretch;
-  padding: 0 2rem 2rem 2rem;
+  padding: 0 var(--spacing-xl) var(--spacing-xl) var(--spacing-xl);
 }
 
 .restriction-info-row-header {
   align-self: flex-start;
-  margin-bottom: 1rem;
+  margin-bottom: var(--spacing-md);
   padding: 0;
 }
 
 .restriction-info-row-header h2 {
   margin: 0;
   padding: 0;
-  font-size: 2rem;
-  color: #000;
+  font-size: var(--font-size-4xl);
+  color: var(--color-text-primary);
   text-align: left;
 }
 
 .restriction-qualification {
-  flex: 1 1 0;
-  min-width: 0;
+  font-family: var(--font-family-primary);
+  transition: border-color var(--transition-slow);
+  color: var(--color-text-primary);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
   box-sizing: border-box;
   text-align: left;
   word-wrap: break-word;
@@ -82,18 +88,18 @@
 }
 
 .restriction-qualification h2 {
-  font-size: clamp(1.4rem, 4vw, 2rem);
-  color: #000;
+  font-size: clamp(var(--font-size-xl), 4vw, var(--font-size-2xl));
+  color: var(--color-text-primary);
   text-align: left;
   margin: 0;
   padding: 0;
 }
 
 .restriction-qualification p {
-  font-size: clamp(0.9rem, 2.2vw, 1.1rem);
+  font-size: clamp(var(--font-size-sm), 2.2vw, var(--font-size-lg));
   margin: 0;
-  line-height: 1.5;
-  color: #000;
+  line-height: var(--line-height-relaxed);
+  color: var(--color-text-primary);
 }
 
 .restriction-limit-list {
@@ -103,12 +109,14 @@
 }
 
 .restriction-limit-list li {
-  background: #f8f9fa;
-  border-radius: 10px;
-  padding: 15px;
-  margin-bottom: 10px;
-  font-size: 14px;
-  line-height: 1.4;
+  background: var(--color-surface-light);
+  border-radius: var(--border-radius-md);
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-sm);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  text-align: left;
 }
 
 .restriction-limit-list li span {
@@ -116,9 +124,9 @@
 }
 
 .restriction-limit-list li .sub {
-  color: #666;
-  font-size: 12px;
-  margin-top: 5px;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
+  margin-top: var(--spacing-xs);
   display: inline-block;
 }
 

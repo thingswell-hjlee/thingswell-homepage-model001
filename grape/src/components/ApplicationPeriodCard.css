@@ -1,10 +1,10 @@
 .applicationdate-card {
   width: 100%;
-  padding: 20px;
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
+  padding: var(--spacing-lg);
+  background: var(--color-surface);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: var(--spacing-lg);
   height: 600px; /* 고정 높이 600px로 설정 */
   max-height: 600px; /* 최대 높이 600으로 설정 */
   overflow-y: auto; /* 내용이 넘칠 경우 세로 스크롤 추가 */
@@ -15,29 +15,29 @@
 .application-period-flex {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: var(--spacing-lg);
 }
 
 .application-period-header {
-  padding: 2rem 2rem 2rem 2rem;
-  color: #000;
+  padding: var(--spacing-xl) var(--spacing-xl) var(--spacing-sm) var(--spacing-xl);
+  color: var(--color-text-primary);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 0.5rem;
+  gap: var(--spacing-sm);
 }
 
 .application-period-header h1 {
-  font-size: 2.8rem;
+  font-size: var(--font-size-5xl);
   margin-bottom: 0;
-  color: #000;
-  line-height: 1;
+  color: var(--color-text-primary);
+  line-height: var(--line-height-tight);
 }
 
 .application-period-header p {
   margin: 0;
-  font-size: 1.4rem;
-  color: #000;
+  font-size: var(--font-size-3xl);
+  color: var(--color-text-primary);
   padding: 0;
 }
 
@@ -47,7 +47,7 @@
 }
 
 .application-period-box {
-  padding: 2rem 2rem 2rem 2rem;
+  padding: var(--spacing-sm) var(--spacing-xl) var(--spacing-sm) var(--spacing-xl);
   width: 100%;
   max-width: 1200px;
 }
@@ -56,37 +56,36 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
-  padding: 12px 16px;
-  background: #f8f9fa;
-  border-radius: 6px;
+  margin-bottom: var(--spacing-md);
+  background: var(--color-surface-light);
+  border-radius: var(--border-radius-md);
+  margin: 0;
 }
 
 .application-period-title p {
-  font-size: 2rem;
-  font-weight: 600;
-  color: #333;
-  margin: 0;
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
 }
 
 .application-period-cards {
   display: flex;
   flex-direction: row;
-  gap: 12px;
+  gap: var(--spacing-sm);
   justify-content: flex-start;
 }
 
 .application-period-card {
-  padding: 16px;
-  background: #fff;
-  border: 1px solid #e0e0e0;
-  border-radius: 6px;
+  padding: var(--spacing-md);
+  background: var(--color-surface);
+  border: var(--border-width-thin) solid var(--border-color-light);
+  border-radius: var(--border-radius-md);
   text-align: center;
-  transition: all 0.2s ease;
+  transition: all var(--transition-base);
 }
 
 .application-period-card:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-md);
   transform: translateY(-2px);
 }
 
@@ -95,45 +94,45 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 1.5rem;
+  gap: var(--spacing-lg);
 }
 
 .application-period-date {
-  font-size: 1.4rem;
-  font-weight: 300;
-  color: #333;
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-light);
+  color: var(--color-text-secondary);
 }
 
 .application-period-status {
-  font-size: 1.4rem;
-  color: #007bff;
-  font-weight: 300;
+  font-size: var(--font-size-2xl);
+  color: var(--color-focus);
+  font-weight: var(--font-weight-light);
 }
 
 .application-period-day {
-  font-size: 1.4rem;
-  color: #666;
-  font-weight: 300;
+  font-size: var(--font-size-2xl);
+  color: var(--color-text-muted);
+  font-weight: var(--font-weight-light);
 }
 
 .application-period-time {
-  font-size: 1.4rem;
-  color: #999;
-  font-weight: 300;
+  font-size: var(--font-size-2xl);
+  color: var(--color-text-muted);
+  font-weight: var(--font-weight-light);
 }
 
 /* 반응형 디자인 */
 @media (max-width: 1024px) {
   .application-period-header {
-    padding: 1.5rem 1.5rem 1.5rem 1.5rem;
+    padding: var(--spacing-lg) var(--spacing-lg) var(--spacing-lg) var(--spacing-lg);
   }
   
   .application-period-header h1 {
-    font-size: 2.4rem;
+    font-size: var(--font-size-4xl);
   }
   
   .application-period-header p {
-    font-size: 1.2rem;
+    font-size: var(--font-size-xl);
   }
 }
 
@@ -144,47 +143,47 @@
   
   .application-period-title {
     flex-direction: column;
-    gap: 8px;
+    gap: var(--spacing-sm);
     text-align: center;
   }
   
   .application-period-title p {
-    font-size: 16px;
+    font-size: var(--font-size-base);
   }
   
   .application-period-header h1 {
-    font-size: 2.2rem;
+    font-size: var(--font-size-4xl);
   }
   
   .application-period-header p {
-    font-size: 1.1rem;
+    font-size: var(--font-size-lg);
   }
 }
 
 @media (max-width: 480px) {
   .application-period-header {
-    padding: 1rem 1rem 1rem 1rem;
+    padding: var(--spacing-md) var(--spacing-md) var(--spacing-md) var(--spacing-md);
   }
   
   .application-period-header h1 {
-    font-size: 2rem;
+    font-size: var(--font-size-2xl);
   }
   
   .application-period-header p {
-    font-size: 1.2rem;
+    font-size: var(--font-size-xl);
   }
 }
 
 @media (max-width: 360px) {
   .application-period-header {
-    padding: 0.8rem 0.8rem 0.8rem 0.8rem;
+    padding: var(--spacing-sm) var(--spacing-sm) var(--spacing-sm) var(--spacing-sm);
   }
   
   .application-period-header h1 {
-    font-size: 1.8rem;
+    font-size: var(--font-size-xl);
   }
   
   .application-period-header p {
-    font-size: 1.1rem;
+    font-size: var(--font-size-lg);
   }
 } 
