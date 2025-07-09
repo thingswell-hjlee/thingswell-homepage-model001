@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import './Menu.css';
-import logo from './assets/logo.png';
+import logo from '../assets/logo.png';
 
 const defaultMenuItems = [
-  { label: '정부지원 사업안내', submenu: [ { label: '스마트 안전장비지원사업', path: '/government' }, { label: '사업2', path: '/government-support/startup' }, { label: '사업3', path: '/government-support/tech' }, { label: '사업4', path: '/government-support/funding' } ] },
+  { label: '정부지원 사업안내', submenu: [ { label: '스마트 안전장비지원사업', path: '/government-support-1' }, { label: '사업2', path: '/government-support-2' }, { label: '사업3', path: '/government-support-3' }, { label: '사업4', path: '/government-support-4' } ] },
   { label: '솔루션', submenu: [ { label: '솔루션1', path: '/solutions' }, { label: '솔루션2', path: '/solutions/cloud' } ] },
   { label: '제품', submenu: [ { label: '제품1', path: '/products/software' }, { label: '제품2', path: '/products/hardware' }, { label: '제품3', path: '/products/services' }, { label: '제품4', path: '/products/new' } ] },
   { label: '적용분야', submenu: [ { label: '적용분야1', path: '/applications/manufacturing' }, { label: '적용분야2', path: '/applications/finance' }, { label: '적용분야3', path: '/applications/healthcare' }, { label: '적용분야4', path: '/applications/education' } ] },
@@ -95,7 +95,7 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
           '제품': '/products',
           '적용분야': '/applications',
           '납품사례': '/cases',
-          '정부지원 사업안내': '/government-support',
+          '정부지원 사업안내': '/government-support-main',
           '고객지원': '/support',
           '회사소개': '/about'
         };

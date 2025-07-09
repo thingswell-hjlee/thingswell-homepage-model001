@@ -45,7 +45,6 @@ body {
   font-family: 'PyeojinGothic', sans-serif;
   background-color: #D9D9D9;
   overflow-x: hidden; /* 가로 스크롤 방지 */
-  word-break: keep-all;
 }
 
 #root {
@@ -64,4 +63,8 @@ body {
 .solutions-section{
   max-width: 1150px;
   margin: 0 auto;
+}
+
+.sidebar{
+    max-width: 200px;
 }

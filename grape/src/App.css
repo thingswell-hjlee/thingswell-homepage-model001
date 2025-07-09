@@ -53,6 +53,7 @@ body {
   padding: 0;
   text-align: center;
   box-sizing: border-box;
+  background-color: #1a1a1a;
 }
 
 /* 새로운 앱 컨테이너 구조 */
@@ -67,11 +68,7 @@ body {
   position: relative;
 }
 
-/* 푸터가 새로운 구조에서 올바르게 작동하도록 */
-.app-container .footer {
-  margin-top: auto;
-  width: 100%;
-}
+`
 
 .content-container {
   position: relative;

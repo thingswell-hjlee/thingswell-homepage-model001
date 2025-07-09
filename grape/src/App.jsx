@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import './App.css'
-import Menu from './Menu.jsx'
-import Footer from './Footer.jsx'
+import Menu from './components/Menu.jsx'
+import Footer from './components/Footer.jsx'
 import Government_support from './pages/Goverment_support/Government_support.jsx'
+import Government_support_2 from './pages/Goverment_support/Government_support_2.jsx'
+import Government_support_3 from './pages/Goverment_support/Government_support_3.jsx'
+import Government_support_4 from './pages/Goverment_support/Government_support_4.jsx'
 import Government_support_main from './pages/Goverment_support/Government_support_main.jsx'
 import logo from './assets/main_image.jpg';
 
@@ -72,8 +75,11 @@ function App() {
       <main className="main-content">
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/government" element={<Government_support />} />
           <Route path="/government-support-main" element={<Government_support_main />} />
+          <Route path="/government-support-1" element={<Government_support />} />
+          <Route path="/government-support-2" element={<Government_support_2 />} />
+          <Route path="/government-support-3" element={<Government_support_3 />} />
+          <Route path="/government-support-4" element={<Government_support_4 />} />
         </Routes>
       </main>
       
