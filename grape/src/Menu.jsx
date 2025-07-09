@@ -4,7 +4,7 @@ import './Menu.css';
 import logo from './assets/logo.png';
 
 const defaultMenuItems = [
-  { label: '정부지원 사업안내', submenu: [ { label: '사업1', path: '/government' }, { label: '사업2', path: '/government-support/startup' }, { label: '사업3', path: '/government-support/tech' }, { label: '사업4', path: '/government-support/funding' } ] },
+  { label: '정부지원 사업안내', submenu: [ { label: '스마트 안전장비지원사업', path: '/government' }, { label: '사업2', path: '/government-support/startup' }, { label: '사업3', path: '/government-support/tech' }, { label: '사업4', path: '/government-support/funding' } ] },
   { label: '솔루션', submenu: [ { label: '솔루션1', path: '/solutions' }, { label: '솔루션2', path: '/solutions/cloud' } ] },
   { label: '제품', submenu: [ { label: '제품1', path: '/products/software' }, { label: '제품2', path: '/products/hardware' }, { label: '제품3', path: '/products/services' }, { label: '제품4', path: '/products/new' } ] },
   { label: '적용분야', submenu: [ { label: '적용분야1', path: '/applications/manufacturing' }, { label: '적용분야2', path: '/applications/finance' }, { label: '적용분야3', path: '/applications/healthcare' }, { label: '적용분야4', path: '/applications/education' } ] },
@@ -30,7 +30,7 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
       '제품': '/products',
       '적용분야': '/applications',
       '납품사례': '/cases',
-      '정부지원 사업안내': '/government-support',
+      '정부지원 사업안내': '/government-support-main',
       '고객지원': '/support',
       '회사소개': '/about'
     };
@@ -171,7 +171,7 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
       
       // 메인 메뉴 페이지로 이동 (서브메뉴가 있는 메뉴의 경우)
       const pageRoutes = {
-        '정부지원 사업안내': '/government-support',
+        '정부지원 사업안내': '/government-support-main',
         '솔루션': '/solutions',
         '제품': '/products',
         '적용분야': '/applications',
@@ -234,75 +234,77 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
   };
 
   return (
-    <div 
-      ref={menuRef} 
-      className={`menu-container menu-${orientation} menu-${theme} ${openSubmenu !== null ? 'open' : ''} ${isMobileMenuOpen ? 'mobile-open' : ''} ${activeMenuIndex !== null ? 'has-active-menu' : ''}`}
-      onMouseLeave={handleMouseLeave}
-    >
-      <div className="menu-logo">
-        <img src={logo} alt="로고" className="logo-image" onClick={() => navigate('/')} style={{ cursor: 'pointer' }} />
-        {isMobile && (
-          <button 
-            className="mobile-menu-toggle"
-            onClick={toggleMobileMenu}
-            aria-label="메뉴 열기/닫기"
-          >
-            <span className={`hamburger ${isMobileMenuOpen ? 'open' : ''}`}></span>
-          </button>
-        )}
-      </div>
-      
-      <nav className={`menu menu-${orientation} menu-${theme} ${isMobileMenuOpen ? 'mobile-visible' : ''}`}>
-        <ul className="menu-list">
-          {defaultMenuItems.map((item, index) => (
-            <li 
-              key={index} 
-              className={`menu-item ${item.submenu && item.submenu.length > 0 ? 'has-submenu' : ''}`}
-              onMouseEnter={() => handleMouseEnter(index)}
+    <div className="menu-wrapper">
+      <div 
+        ref={menuRef} 
+        className={`menu-container menu-${orientation} menu-${theme} ${openSubmenu !== null ? 'open' : ''} ${isMobileMenuOpen ? 'mobile-open' : ''} ${activeMenuIndex !== null ? 'has-active-menu' : ''}`}
+        onMouseLeave={handleMouseLeave}
+      >
+        <div className="menu-logo">
+          <img src={logo} alt="로고" className="logo-image" onClick={() => navigate('/')} style={{ cursor: 'pointer' }} />
+          {isMobile && (
+            <button 
+              className="mobile-menu-toggle"
+              onClick={toggleMobileMenu}
+              aria-label="메뉴 열기/닫기"
             >
-              <button
-                className={`menu-button ${item.submenu && item.submenu.length > 0 ? 'has-submenu' : ''} ${openSubmenu === index ? 'active' : ''} ${activeMenuIndex === index ? 'active' : ''}`}
-                onClick={() => handleItemClick(item, index)}
-                disabled={item.disabled}
+              <span className={`hamburger ${isMobileMenuOpen ? 'open' : ''}`}></span>
+            </button>
+          )}
+        </div>
+        
+        <nav className={`menu menu-${orientation} menu-${theme} ${isMobileMenuOpen ? 'mobile-visible' : ''}`}>
+          <ul className="menu-list">
+            {defaultMenuItems.map((item, index) => (
+              <li 
+                key={index} 
+                className={`menu-item ${item.submenu && item.submenu.length > 0 ? 'has-submenu' : ''}`}
+                onMouseEnter={() => handleMouseEnter(index)}
               >
-                <span className="menu-text">{item.label}</span>
-                {item.submenu && item.submenu.length > 0 && isMobile && (
-                  <span className="submenu-indicator">{openSubmenu === index ? '−' : '+'}</span>
-                )}
-              </button>
-            </li>
-          ))}
-        </ul>
-      </nav>
-      
-      {openSubmenu !== null && defaultMenuItems[openSubmenu] && defaultMenuItems[openSubmenu].submenu && (
-        <div 
-          className={`full-width-submenu ${isMobile ? 'mobile-submenu' : ''}`}
-          onMouseEnter={() => !isMobile && setOpenSubmenu(openSubmenu)}
-          onMouseLeave={() => {
-            if (!isMobile && activeMenuIndex === null && openSubmenu !== null) {
-              // 페이지 이동 후에는 서브메뉴를 닫지 않음
-              if (location.pathname !== '/') {
-                return;
-              }
-              setOpenSubmenu(null);
-            }
-          }}
-        >
-          <ul className="submenu-list">
-            {defaultMenuItems[openSubmenu].submenu.map((submenuItem, subIndex) => (
-              <li key={subIndex} className="submenu-item">
                 <button
-                  className={`submenu-button ${activeSubmenuIndex === subIndex ? 'active' : ''}`}
-                  onClick={() => handleSubmenuItemClick(submenuItem, subIndex)}
+                  className={`menu-button ${item.submenu && item.submenu.length > 0 ? 'has-submenu' : ''} ${openSubmenu === index ? 'active' : ''} ${activeMenuIndex === index ? 'active' : ''}`}
+                  onClick={() => handleItemClick(item, index)}
+                  disabled={item.disabled}
                 >
-                  <span className="submenu-text">{submenuItem.label}</span>
+                  <span className="menu-text">{item.label}</span>
+                  {item.submenu && item.submenu.length > 0 && isMobile && (
+                    <span className="submenu-indicator">{openSubmenu === index ? '−' : '+'}</span>
+                  )}
                 </button>
               </li>
             ))}
           </ul>
-        </div>
-      )}
+        </nav>
+        
+        {openSubmenu !== null && defaultMenuItems[openSubmenu] && defaultMenuItems[openSubmenu].submenu && (
+          <div 
+            className={`full-width-submenu ${isMobile ? 'mobile-submenu' : ''}`}
+            onMouseEnter={() => !isMobile && setOpenSubmenu(openSubmenu)}
+            onMouseLeave={() => {
+              if (!isMobile && activeMenuIndex === null && openSubmenu !== null) {
+                // 페이지 이동 후에는 서브메뉴를 닫지 않음
+                if (location.pathname !== '/') {
+                  return;
+                }
+                setOpenSubmenu(null);
+              }
+            }}
+          >
+            <ul className="submenu-list">
+              {defaultMenuItems[openSubmenu].submenu.map((submenuItem, subIndex) => (
+                <li key={subIndex} className="submenu-item">
+                  <button
+                    className={`submenu-button ${activeSubmenuIndex === subIndex ? 'active' : ''}`}
+                    onClick={() => handleSubmenuItemClick(submenuItem, subIndex)}
+                  >
+                    <span className="submenu-text">{submenuItem.label}</span>
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

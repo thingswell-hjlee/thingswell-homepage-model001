@@ -34,6 +34,16 @@
   font-style: normal;
 }
 
+/* 메뉴 래퍼 - 화면 중앙 정렬 */
+.menu-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  z-index: 99999;
+}
+
 .menu-wrapper.open {
   border-radius: 40px;
 }
