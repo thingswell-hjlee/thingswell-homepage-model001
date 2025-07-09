@@ -76,6 +76,10 @@
 /* 반응형 디자인 */
 @media (max-width: 800px) {
   .sidebar-content {
-    display: none;
+    position: relative;
+    top: 0;
+    max-height: none;
+    width: 100%;
+    margin-bottom: var(--spacing-lg);
   }
 } 

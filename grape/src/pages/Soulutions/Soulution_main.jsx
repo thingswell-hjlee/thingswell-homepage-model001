@@ -14,9 +14,9 @@ const Soulution_main = () => {
   // 각 솔루션별 데이터 정의
   const solutionDataArray = [
     {
-      subtitle: "솔루션 1",
-      title: "솔루션 1",
-      description: "첫 번째 솔루션에 대한 상세한 설명입니다. 이 솔루션은 기술‧재정적 능력이 취약한 산재보험가입 50인 미만 사업장을 대상으로 합니다.",
+      subtitle: "Industrial safety solutions",
+      title: "산업안전 솔루션",
+      description: "산업안전 솔루션은 산업 현장에서 발생할 수 있는 각종 사고와 위험을 사전에 예방하고, 근로자의 안전을 체계적으로 관리하기 위해 도입되는 첨단 시스템입니다. AI, IoT, 빅데이터, 영상 분석 등 다양한 IT 기술이 융합되어, 실시간 위험 감지와 신속한 대응이 가능합니다",
       image: welding,
       imageAlt: "솔루션 1",
       link: "/solution"

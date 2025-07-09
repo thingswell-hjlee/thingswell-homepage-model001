@@ -1,15 +1,18 @@
 import React, { useState, useEffect, useRef } from 'react';
 import welding from '../../assets/welding.jpg';
-import grinding from '../../assets/grinding.jpg';
-import construction from '../../assets/construction.jpg';
+import falldown from '../../assets/falldown.jpg';
+import dangerous from '../../assets/dangerous.jpg';
+import fire from '../../assets/fire.jpg';
+import Collision from '../../assets/collision.jpg';
+import POE from '../../assets/poe.jpg';
+import Personel_violation from '../../assets/Personnel_violations.jpg';
+import Collapse from '../../assets/collapse.jpg';
 import SolutionCard from '../../components/SolutionCard';
 import manufacturing from '../../assets/manufacturing.jpg';
 import ApplicationCardsSection from '../../components/ApplicationCardsSection';
-import ApplicationPeriodCard from '../../components/ApplicationPeriodCard';
-import SupportInfoCard from '../../components/SupportInfoCard';
-import RestrictionCard from '../../components/RestrictionCard';
 import FormCard from '../../components/FormCard';
 import SidebarMenu from '../../components/SidebarMenu';
+import FeatureDescription from '../../components/FeatureDescription';
 
 const Soulution = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -46,18 +49,14 @@ const Soulution = () => {
   // 각 섹션별 ref 생성
   const solutionRef = useRef(null);
   const applicationRef = useRef(null);
-  const periodRef = useRef(null);
-  const supportRef = useRef(null);
-  const restrictionRef = useRef(null);
+  const featureDescriptionRef = useRef(null);
   const formRef = useRef(null);
 
   // ref를 객체로 묶어서 SidebarMenu에 전달
   const sectionRefs = {
     solution: solutionRef,
-    application: applicationRef,
-    period: periodRef,
-    support: supportRef,
-    restriction: restrictionRef,
+    ApplicationCardsSection: applicationRef,
+    FeatureDescription: featureDescriptionRef,
     form: formRef,
   };
 
@@ -65,116 +64,93 @@ const Soulution = () => {
   const solutionData = {
     subtitle: "Industrial safety solutions",
     title: "산업안전 솔루션",
-    description: "산업변화와 기술발전에 따른 다양한 산업재해를 예방하기 위해 재정 및 기술여건이 취약한 중소사업장에 스마트 안전장비 도입 시 보조금을 지원하는 사업",
+    description: "산업안전 솔루션은 산업 현장에서 발생할 수 있는 각종 사고와 위험을 사전에 예방하고, 근로자의 안전을 체계적으로 관리하기 위해 도입되는 첨단 시스템입니다. AI, IoT, 빅데이터, 영상 분석 등 다양한 IT 기술이 융합되어, 실시간 위험 감지와 신속한 대응이 가능합니다",
     image: welding,
-    imageAlt: "스마트 안전장비 지원사업"
+    imageAlt: "스마트 안전장비 지원사업",
+    buttonText: "데모 신청"
   };
 
   const applicationCardsData = [
     {
-      image: manufacturing,
-      imageAlt: "제조업 공장",
-      label: "Manufacturing",
-      title: "제조업 공장"
+      image: Collapse,
+      imageAlt: "쓰러짐",
+      label: "Collapse",
+      title: "쓰러짐"
     },
     {
-      image: construction,
-      imageAlt: "건설 현장",
-      label: "Construction",
-      title: "건설 현장"
+      image: fire,
+      imageAlt: "화재",
+      label: "Fire",
+      title: "화재"
     },
     {
-      image: grinding,
-      imageAlt: "위험작업 현장",
-      label: "Dangerous Work",
-      title: "위험작업 현장"
-    }
+      image: Collision,
+      imageAlt: "충돌",
+      label: "Collision",
+      title: "충돌"
+    },
+    {
+      image: falldown,
+      imageAlt: "낙상",
+      label: "Falldown",
+      title: "낙상"
+    },
+    {
+      image: dangerous,
+      imageAlt: "위험지역 접근",
+      label: "Dangerous areas",
+      title: "위험지역 접근"
+    },
+    {
+      image: Personel_violation,
+      imageAlt: "작업인원 위반",
+      label: "Personnel violations",
+      title: "작업인원 위반"
+    },
+    {
+      image: POE,
+      imageAlt: "POE 착용 감지",
+      label: "POE detection",
+      title: "POE 착용 감지"
+    },
   ];
 
-  const applicationPeriodData = {
-    title: "신청기간",
-    subtitle: "인공지능(AI) 기반 인체감지시스템",
-    period: {
-      start: "2025년 7월 3일 ~ 8월 3일",
-    },
-    cards: [
-      {
-        date: "2025년 7월 3일",
-        status: "신청시작",
-        day: "월",
-        time: "15:00"
-      },
-      {
-        date: "2025년 8월 3일",
-        status: "신청마감",
-        day: "금",
-        time: "15:00"
-      }
-    ]
-  };
-
-  const supportInfoData = {
-    title: "지원 정보",
-    subtitle: "인공지능(AI) 기반 인체감지시스템",
-    supportLimit: {
-      year: "2025년",
-      amount: "최대 5,000만원",
-      description: "관리품목"
-    },
-    qualifications: {
-      description: "중소기업 및 소기업으로서 다음 조건을 만족하는 사업장",
-      items: [
-        {
-          main: "상시근로자 수 50명 미만 사업장의 사업주 (단, 건설업의 경우 건설현장은 제외하며, 건설업 본사는 신청 가능)",
-        },
-        {
-          main: "중소기업기본법 시행령 제8조제1항 및 별표 3에 따른 주된 업종별 평균매출액 등이 '소기업 규모 기준' 이하인 기업의 사업주 (반드시 중소기업 확인서(소기업, 소기업(소상공인))를 발급받아 제출해야 함, 단, 안전투자 혁신사업 보조금을 지급받은 설비는 제외)",
-        },
-        {
-          main: "상시근로자 수 50명 미만 사업장의 사업주로서, 산업안전보건법 시행령 제71조 별표 21에 따른 2호~24호 설비를 보유하거나 임대업을 하는 사업장의 사업주 (단, 안전동행 지원사업 보조금을 지급받은 설비는 지원대상에서 제외)",
-        },
-      ]
-    }
-  };
-
-  const restrictionData = {
-    title: "지원 제한사항",
-    subtitle: "인공지능(AI) 기반 인체감지시스템",
-    restrictions: [
-      {
-        main: "상호출자제한 기업집단 소속회사 및 국가, 지방자치단체 등 공공단체",
-      },
-      {
-        main: "산업안전보건법 제 158조제4항(보조금 부당수급 등)에 따른 제한기간 중인 자",
-      },
-      {
-        main: "산업재해보상보험료을 체납한 사업주",
-      },
-      {
-        main: "근로자를 고용하고 있지 않는 사업주 (단, 영 제거조 별표 21에 따른 기계 • 기구설비를 보유하거나 그에 대한 임대업을 하는 사업장의 사업주」 제외)",
-      },
-      {
-        main: "24년도 사고사망 등 고위험개선사업, 산재예방시설 융자금 지원사업, 안전 투자혁신사업, 건강일터 조성 지원사업 결정 사업장",
-      },
-      {
-        main: "스마트 안전장비 지원사업을 금년도 2회 이상 결정 받은 사업장",
-      }
-    ]
-  };
-
+  
   const FormData = {
     title: "문의하기",
     subtitle: ""
   };
 
+  const featureDescriptionData1 = {
+    image: manufacturing,
+    title: "AI 기반 실시간 모니터링",
+    description: "산업안전 솔루션은 AI 기반 실시간 모니터링을 통해 작업 현장의 위험 요소를 사전에 감지하고 예방합니다. 고성능 영상 분석 알고리즘을 통해 작업자의 행동 패턴을 분석하여 잠재적 위험을 조기에 발견합니다."
+  };
+
+  const featureDescriptionData2 = {
+    image: welding,
+    title: "IoT 센서 기술 활용",
+    description: "IoT 센서와 영상 분석 기술을 활용하여 작업자의 안전을 최우선으로 보호합니다. 다양한 센서를 통해 환경 데이터를 수집하고, 실시간으로 위험 상황을 감지하여 즉시 대응할 수 있습니다."
+  };
+
+  const featureDescriptionData3 = {
+    image: fire,
+    title: "빅데이터 분석 시스템",
+    description: "빅데이터 분석을 통한 사고 예방 시스템을 구축합니다. 과거 사고 데이터와 현재 상황을 비교 분석하여 위험도를 예측하고, 사전 예방 조치를 제안합니다."
+  };
+
+  const featureDescriptionData4 = {
+    youtubeUrl: "https://www.youtube.com/watch?v=gZ1h4kgTC28&ab_channel=intenseye",
+    title: "실시간 안전 모니터링 데모",
+    description: "실제 산업 현장에서 적용되는 AI 기반 안전 모니터링 시스템의 데모 영상입니다. 실시간으로 작업자의 행동을 분석하고 위험 상황을 감지하는 과정을 확인할 수 있습니다."
+  };
+
   // 사이드바 제목 및 메뉴 항목 정의
-  const sidebarTitle = "스마트 안전장비지원사업";
+  const sidebarTitle = "산업안전 솔루션";
   const sidebarMenuItems = [
     { id: "solution", label: "개요" },
-    { id: "application", label: "적용분야" },
-    { id: "period", label: "신청기간" },
-    { id: "support", label: "지원정보" },
-    { id: "restriction", label: "지원 제한사항" },
+    { id: "ApplicationCardsSection", label: "기능" },
+    { id: "FeatureDescription", label: "특징" },
     { id: "form", label: "문의하기" }
   ];
 
@@ -189,15 +165,14 @@ const Soulution = () => {
           </div>
           <div className="main-content">
             <div className="solutions-section">
-              <SolutionCard ref={solutionRef} {...solutionData} />
+              <SolutionCard ref={solutionRef} {...solutionData} showButton={true} />
               
               <ApplicationCardsSection ref={applicationRef} applicationCardsData={applicationCardsData} />
               
-              <ApplicationPeriodCard ref={periodRef} {...applicationPeriodData} />
-              
-              <SupportInfoCard ref={supportRef} {...supportInfoData} />
-              
-              <RestrictionCard ref={restrictionRef} {...restrictionData} />
+              <FeatureDescription ref={featureDescriptionRef} {...featureDescriptionData1} />
+              <FeatureDescription {...featureDescriptionData2} reverse={true} />
+              <FeatureDescription {...featureDescriptionData3} />
+              <FeatureDescription {...featureDescriptionData4} reverse={true} />
               
               <FormCard ref={formRef} {...FormData} />
 
