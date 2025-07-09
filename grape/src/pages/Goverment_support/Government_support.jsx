@@ -1,13 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
-import '../App.css';
-import welding from '../assets/welding.jpg';
-import SolutionCard from '../components/SolutionCard';
-import ApplicationCardsSection from '../components/ApplicationCardsSection';
-import ApplicationPeriodCard from '../components/ApplicationPeriodCard';
-import SupportInfoCard from '../components/SupportInfoCard';
-import RestrictionCard from '../components/RestrictionCard';
-import FormCard from '../components/FormCard';
-import SidebarMenu from '../components/SidebarMenu';
+import './Government_support_main.css';
+import welding from '../../assets/welding.jpg';
+import grinding from '../../assets/grinding.jpg';
+import construction from '../../assets/construction.jpg';
+import SolutionCard from '../../components/SolutionCard';
+import manufacturing from '../../assets/manufacturing.jpg';
+import ApplicationCardsSection from '../../components/ApplicationCardsSection';
+import ApplicationPeriodCard from '../../components/ApplicationPeriodCard';
+import SupportInfoCard from '../../components/SupportInfoCard';
+import RestrictionCard from '../../components/RestrictionCard';
+import FormCard from '../../components/FormCard';
+import SidebarMenu from '../../components/SidebarMenu';
 
 const Government_support = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -70,21 +73,21 @@ const Government_support = () => {
 
   const applicationCardsData = [
     {
-      image: welding,
+      image: manufacturing,
       imageAlt: "제조업 공장",
       label: "Manufacturing",
       title: "제조업 공장"
     },
     {
-      image: welding,
+      image: construction,
       imageAlt: "건설 현장",
-      label: "Manufacturing",
+      label: "Construction",
       title: "건설 현장"
     },
     {
-      image: welding,
+      image: grinding,
       imageAlt: "위험작업 현장",
-      label: "Manufacturing",
+      label: "Dangerous Work",
       title: "위험작업 현장"
     }
   ];
@@ -93,8 +96,7 @@ const Government_support = () => {
     title: "신청기간",
     subtitle: "인공지능(AI) 기반 인체감지시스템",
     period: {
-      start: "2025년 7월 3일 ~",
-      end: "8월 3일"
+      start: "2025년 7월 3일 ~ 8월 3일",
     },
     cards: [
       {
@@ -173,7 +175,7 @@ const Government_support = () => {
     { id: "application", label: "적용분야" },
     { id: "period", label: "신청기간" },
     { id: "support", label: "지원정보" },
-    { id: "restriction", label: "지원제한사항" },
+    { id: "restriction", label: "지원 제한사항" },
     { id: "form", label: "문의하기" }
   ];
 

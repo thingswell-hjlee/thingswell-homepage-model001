@@ -1,4 +1,5 @@
 import React, { forwardRef } from 'react';
+import './SolutionCard.css';
 
 const SolutionCard = forwardRef((props, ref) => {
   const { subtitle, title, description, image, imageAlt } = props;

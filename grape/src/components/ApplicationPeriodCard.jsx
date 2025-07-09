@@ -1,4 +1,5 @@
 import React, { forwardRef } from 'react';
+import './ApplicationPeriodCard.css';
 
 const ApplicationPeriodCard = forwardRef((props, ref) => {
   const { title, subtitle, period, cards } = props;
@@ -18,10 +19,12 @@ const ApplicationPeriodCard = forwardRef((props, ref) => {
             <div className="application-period-cards">
               {cards.map((card, index) => (
                 <div key={index} className="application-period-card">
-                  <div className="application-period-date">{card.date}</div>
-                  <div className="application-period-status">{card.status}</div>
-                  <div className="application-period-day">{card.day}</div>
-                  <div className="application-period-time">{card.time}</div>
+                  <div className="application-period-content">
+                    <div className="application-period-date">{card.date}</div>
+                    <div className="application-period-status">{card.status}</div>
+                    <div className="application-period-day">{card.day}</div>
+                    <div className="application-period-time">{card.time}</div>
+                  </div>
                 </div>
               ))}
             </div>

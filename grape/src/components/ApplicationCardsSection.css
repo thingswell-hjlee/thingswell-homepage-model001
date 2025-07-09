@@ -1,0 +1,72 @@
+/* ApplicationCardsSection 컴포넌트 스타일 */
+
+.application-cards {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  margin: 3rem 0 2rem 0;
+  flex-wrap: wrap;
+}
+
+/* 적용분야 카드 반응형 개선 */
+.application-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 3rem;
+  margin: 3rem 0 2rem 0;
+}
+
+/* 반응형 적용 분야 섹션 */
+.application-section-responsive {
+  background: #000;
+  padding: 3rem 0;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.responsive-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 3rem;
+  margin: 3rem 0 2rem 0;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* 반응형 스타일 */
+@media (max-width: 1024px) {
+  .application-cards {
+    gap: 2rem;
+  }
+  
+  .application-section-responsive {
+    padding: 2.5rem 0;
+  }
+  
+  .responsive-cards {
+    gap: 2rem;
+    margin: 2.5rem 0 1.5rem 0;
+  }
+}
+
+@media (max-width: 1000px) {
+  .application-cards {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 1.2rem !important;
+  }
+  
+  .application-section-responsive {
+    padding: 2.2rem 0;
+  }
+  
+  .responsive-cards {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 1.2rem !important;
+    margin: 2.2rem 0 1.2rem 0;
+  }
+} 

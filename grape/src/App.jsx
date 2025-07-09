@@ -3,7 +3,8 @@ import { Routes, Route, useLocation } from 'react-router-dom'
 import './App.css'
 import Menu from './Menu.jsx'
 import Footer from './Footer.jsx'
-import Government_support from './pages/Government_support.jsx'
+import Government_support from './pages/Goverment_support/Government_support.jsx'
+import Government_support_main from './pages/Goverment_support/Government_support_main.jsx'
 import logo from './assets/main_image.jpg';
 
 function HomePage() {
@@ -72,6 +73,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/government" element={<Government_support />} />
+          <Route path="/government-support-main" element={<Government_support_main />} />
         </Routes>
       </main>
       

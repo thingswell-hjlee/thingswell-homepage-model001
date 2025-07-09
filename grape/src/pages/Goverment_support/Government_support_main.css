@@ -1,0 +1,56 @@
+/* Font Face Definitions */
+@font-face {
+  font-family: 'PyeojinGothic';
+  src: url('./assets/font/PyeojinGothic-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'PyeojinGothic';
+  src: url('./assets/font/PyeojinGothic-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'PyeojinGothic';
+  src: url('./assets/font/PyeojinGothic-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'PyeojinGothic';
+  src: url('./assets/font/PyeojinGothic-SemiBold.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'PyeojinGothic';
+  src: url('./assets/font/PyeojinGothic-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* 기본 스타일 */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'PyeojinGothic', sans-serif;
+  background-color: #D9D9D9;
+  overflow-x: hidden; /* 가로 스크롤 방지 */
+}
+
+#root {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  text-align: center;
+  box-sizing: border-box;
+}

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './SidebarMenu.css';
 
 const SidebarMenu = ({ menuItems = [], sectionRefs = {}, menuTitle = '사이드메뉴' }) => {
   const [activeItem, setActiveItem] = useState('');

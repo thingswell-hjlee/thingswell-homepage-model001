@@ -1,5 +1,6 @@
 import React, { forwardRef } from 'react';
 import ApplicationCard from './ApplicationCard';
+import './ApplicationCardsSection.css';
 
 const ApplicationCardsSection = forwardRef((props, ref) => {
   const { applicationCardsData } = props;

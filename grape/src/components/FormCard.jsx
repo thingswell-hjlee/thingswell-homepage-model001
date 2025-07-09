@@ -1,4 +1,5 @@
 import React, { useState, forwardRef } from 'react';
+import './FormCard.css';
 
 const FormCard = forwardRef((props, ref) => {
   const { title, subtitle, onSubmit } = props;

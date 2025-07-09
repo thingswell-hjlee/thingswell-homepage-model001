@@ -1,17 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
-import '../App.css';
-import welding from '../assets/welding.jpg';
-import grinding from '../assets/grinding.jpg';
-import construction from '../assets/construction.jpg';
-import SolutionCard from '../components/SolutionCard';
-import manufacturing from '../assets/manufacturing.jpg';
-import ApplicationCardsSection from '../components/ApplicationCardsSection';
-import ApplicationPeriodCard from '../components/ApplicationPeriodCard';
-import SupportInfoCard from '../components/SupportInfoCard';
-import RestrictionCard from '../components/RestrictionCard';
-import FormCard from '../components/FormCard';
-import SidebarMenu from '../components/SidebarMenu';
-
+import './Government_support_main.css';
+import welding from '../../assets/welding.jpg';
+import grinding from '../../assets/grinding.jpg';
+import construction from '../../assets/construction.jpg';
+import SolutionCard from '../../components/SolutionCard';
+import ApplicationCardsSection from '../../components/ApplicationCardsSection';
+import ApplicationPeriodCard from '../../components/ApplicationPeriodCard';
+import SupportInfoCard from '../../components/SupportInfoCard';
+import RestrictionCard from '../../components/RestrictionCard';
+import FormCard from '../../components/FormCard';
 const Government_support_main = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -73,7 +70,7 @@ const Government_support_main = () => {
 
   const applicationCardsData = [
     {
-      image: manufacturing,
+      image: welding,
       imageAlt: "제조업 공장",
       label: "Manufacturing",
       title: "제조업 공장"
@@ -169,40 +166,18 @@ const Government_support_main = () => {
     subtitle: ""
   };
 
-  // 사이드바 제목 및 메뉴 항목 정의
-  const sidebarTitle = "스마트 안전장비지원사업";
-  const sidebarMenuItems = [
-    { id: "solution", label: "개요" },
-    { id: "application", label: "적용분야" },
-    { id: "period", label: "신청기간" },
-    { id: "support", label: "지원정보" },
-    { id: "restriction", label: "지원 제한사항" },
-    { id: "form", label: "문의하기" }
-  ];
+
 
   return (
     <div className="page-container">
       
       <div className="page-content">
         <div className="page-layout">
-          <div className={`sidebar ${isSidebarOpen ? 'show' : ''}`}>
-            {(!isMobile) && (
-              <SidebarMenu menuItems={sidebarMenuItems} sectionRefs={sectionRefs} menuTitle={sidebarTitle} />
-            )}
-          </div>
           <div className="main-content">
             <div className="solutions-section">
               <SolutionCard ref={solutionRef} {...solutionData} />
-              
               <ApplicationCardsSection ref={applicationRef} applicationCardsData={applicationCardsData} />
               
-              <ApplicationPeriodCard ref={periodRef} {...applicationPeriodData} />
-              
-              <SupportInfoCard ref={supportRef} {...supportInfoData} />
-              
-              <RestrictionCard ref={restrictionRef} {...restrictionData} />
-              
-              <FormCard ref={formRef} {...FormData} />
 
             </div>
           </div>

@@ -1,22 +1,23 @@
 import React, { forwardRef } from 'react';
+import './SupportInfoCard.css';
 
 const SupportInfoCard = forwardRef((props, ref) => {
   const { title, subtitle, supportLimit, qualifications } = props;
   return (
-    <div ref={ref} className="applicationdate-card">
-      <div className="application-period-flex">
-        <div className="application-period-header">
+    <div ref={ref} className="support-info-card">
+      <div className="support-info-card-flex">
+        <div className="support-info-card-header">
           <h1>{title}</h1>
           <p>{subtitle}</p>
         </div>
-        <div className="support-info-row">
-          <div className="support-limit">
-            <div className="support-info-row-header">
+        <div className="support-info-card-row">
+          <div className="support-info-card-limit">
+            <div className="support-info-card-row-header">
               <h2>지원한도</h2>
             </div>
-            <div className="support-limit-card">
-              <div className="support-limit-year">{supportLimit.year}</div>
-              <div className="support-limit-graph">
+            <div className="support-info-card-limit-card">
+              <div className="support-info-card-limit-year">{supportLimit.year}</div>
+              <div className="support-info-card-limit-graph">
                 <svg width="300" height="180" viewBox="0 0 300 180">
                   <defs>
                     <linearGradient id="arcGradient" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -34,16 +35,16 @@ const SupportInfoCard = forwardRef((props, ref) => {
                   />
                 </svg>
               </div>
-              <div className="support-limit-amount">{supportLimit.amount}</div>
-              <div className="support-limit-desc">{supportLimit.description}</div>
+              <div className="support-info-card-limit-amount">{supportLimit.amount}</div>
+              <div className="support-info-card-limit-desc">{supportLimit.description}</div>
             </div>
           </div>
-          <div className="support-qualification">
+          <div className="support-info-card-qualification">
             <h2>신청자격</h2>
-            <p className="support-qualification-desc">
+            <p className="support-info-card-qualification-desc">
               {qualifications.description}
             </p>
-            <ul className="support-limit-list">
+            <ul className="support-info-card-limit-list">
               {qualifications.items.map((item, index) => (
                 <li key={index}>
                   <span>{item.main}</span>
