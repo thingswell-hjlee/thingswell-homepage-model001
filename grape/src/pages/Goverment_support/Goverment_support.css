@@ -65,6 +65,4 @@ body {
   margin: 0 auto;
 }
 
-.sidebar{
-    max-width: 200px;
-}
+/* 사이드바 스타일은 App.css에서 통합 관리 */
