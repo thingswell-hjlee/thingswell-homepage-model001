@@ -1,3 +1,37 @@
+/**
+ * SidebarMenu 컴포넌트
+ * 
+ * 사이드바 형태의 네비게이션 메뉴를 렌더링하는 컴포넌트입니다.
+ * 스크롤 위치에 따라 현재 활성화된 메뉴 항목을 자동으로 업데이트하며,
+ * 메뉴 클릭 시 해당 섹션으로 부드럽게 스크롤합니다.
+ * 
+ * @param {Object} props - 컴포넌트 props
+ * @param {Array} props.menuItems - 메뉴 항목 배열 (기본값: [])
+ * @param {string} props.menuItems[].id - 메뉴 항목 고유 ID
+ * @param {string} props.menuItems[].label - 메뉴 항목 표시 텍스트
+ * @param {Object} props.sectionRefs - 섹션별 ref 객체 (기본값: {})
+ * @param {string} props.menuTitle - 메뉴 제목 (기본값: '사이드메뉴')
+ * 
+ * 사용법:
+ * <SidebarMenu 
+ *   menuItems={[
+ *     { id: 'section1', label: '섹션 1' },
+ *     { id: 'section2', label: '섹션 2' },
+ *     { id: 'section3', label: '섹션 3' }
+ *   ]}
+ *   sectionRefs={{
+ *     section1: section1Ref,
+ *     section2: section2Ref,
+ *     section3: section3Ref
+ *   }}
+ *   menuTitle="목차"
+ * />
+ * 
+ * 주요 기능:
+ * - 스크롤 위치에 따른 자동 메뉴 활성화
+ * - 클릭 시 해당 섹션으로 부드러운 스크롤
+ * - 현재 활성화된 메뉴 항목 시각적 구분
+ */
 import React, { useState, useEffect } from 'react';
 import './SidebarMenu.css';
 

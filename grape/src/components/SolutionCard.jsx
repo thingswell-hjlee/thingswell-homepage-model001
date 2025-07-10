@@ -1,3 +1,31 @@
+/**
+ * SolutionCard 컴포넌트
+ * 
+ * 솔루션 정보를 카드 형태로 표시하는 컴포넌트입니다.
+ * 제목, 부제목, 설명, 이미지를 포함하며, 선택적으로 버튼을 표시할 수 있습니다.
+ * forwardRef를 사용하여 외부에서 ref를 전달받을 수 있습니다.
+ * 
+ * @param {Object} props - 컴포넌트 props
+ * @param {string} props.subtitle - 카드 부제목
+ * @param {string} props.title - 카드 제목
+ * @param {string} props.description - 카드 설명
+ * @param {string} props.image - 카드 이미지 경로
+ * @param {string} props.imageAlt - 이미지 대체 텍스트
+ * @param {boolean} props.showButton - 버튼 표시 여부 (기본값: false)
+ * @param {string} props.link - 버튼 클릭 시 이동할 링크
+ * @param {React.Ref} ref - forwardRef를 통해 전달되는 ref
+ * 
+ * 사용법:
+ * <SolutionCard 
+ *   subtitle="솔루션 카테고리"
+ *   title="솔루션 제목"
+ *   description="솔루션에 대한 상세한 설명입니다."
+ *   image="/path/to/image.jpg"
+ *   imageAlt="솔루션 이미지"
+ *   showButton={true}
+ *   link="/solutions/detail"
+ * />
+ */
 import React, { forwardRef } from 'react';
 import './SolutionCard.css';
 

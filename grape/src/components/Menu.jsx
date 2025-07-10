@@ -1,16 +1,89 @@
+/**
+ * Menu 컴포넌트
+ * 
+ * 네비게이션 메뉴를 렌더링하는 컴포넌트입니다.
+ * 메인 메뉴와 서브메뉴를 포함하며, 반응형 디자인을 지원합니다.
+ * 데스크톱에서는 호버로 서브메뉴가 열리고, 모바일에서는 클릭으로 토글됩니다.
+ * 
+ * @param {Object} props - 컴포넌트 props
+ * @param {string} props.orientation - 메뉴 방향 ('horizontal' | 'vertical')
+ * @param {string} props.theme - 메뉴 테마 ('primary' | 'secondary')
+ * 
+ * 사용법:
+ * <Menu orientation="horizontal" theme="primary" />
+ * 
+ * 주요 기능:
+ * - 반응형 디자인 (모바일/데스크톱)
+ * - 서브메뉴 호버/클릭 토글
+ * - 현재 페이지에 따른 메뉴 활성화
+ * - 외부 클릭 시 메뉴 닫기
+ */
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import './Menu.css';
 import logo from '../assets/logo.png';
 
 const defaultMenuItems = [
-  { label: '정부지원 사업안내', submenu: [ { label: '스마트 안전장비지원사업', path: '/government-support-1' }, { label: '사업2', path: '/government-support-2' }, { label: '사업3', path: '/government-support-3' }, { label: '사업4', path: '/government-support-4' } ] },
-  { label: '솔루션', submenu: [ { label: '솔루션1', path: '/solutions' }, { label: '솔루션2', path: '/solutions/cloud' } ] },
-  { label: '제품', submenu: [ { label: '제품1', path: '/products/software' }, { label: '제품2', path: '/products/hardware' }, { label: '제품3', path: '/products/services' }, { label: '제품4', path: '/products/new' } ] },
-  { label: '적용분야', submenu: [ { label: '적용분야1', path: '/applications/manufacturing' }, { label: '적용분야2', path: '/applications/finance' }, { label: '적용분야3', path: '/applications/healthcare' }, { label: '적용분야4', path: '/applications/education' } ] },
-  { label: '납품사례', submenu: [ { label: '사례1', path: '/cases/enterprise' }, { label: '사례2', path: '/cases/sme' }, { label: '사례3', path: '/cases/public' }, { label: '사례4', path: '/cases/overseas' } ] },
-  { label: '고객지원', submenu: [ { label: '견적문의', path: '/support/contact' }, { label: '공지사항', path: '/support/download' } ] },
-  { label: '회사소개', submenu: [ { label: '목표', path: '/about/overview' }, { label: '연혁', path: '/about/history' }, { label: '오시는 길', path: '/about/organization' } ] }
+  { 
+    label: '정부지원 사업안내', 
+    submenu: [ 
+      { label: 'AI 제조 지원사업', path: '/ai-manufacturing-support' }, 
+      { label: '그린에너지 지원사업', path: '/green-energy-support' }, 
+      { label: '디지털 전환 지원사업', path: '/digital-transformation-support' }, 
+      { label: '정부지원사업 목록', path: '/government-support' } 
+    ] 
+  },
+  { 
+    label: '솔루션', 
+    submenu: [ 
+      { label: '산업 안전 솔루션', path: '/solution' }, 
+      { label: '화학 안전 솔루션', path: '/chemical-solution' },
+      { label: '제조 안전 솔루션', path: '/manufacturing-solution' },
+      { label: '건설 안전 솔루션', path: '/construction-solution' }
+    ] 
+  },
+  { 
+    label: '제품', 
+    submenu: [ 
+      { label: '제품1', path: '/products/software' }, 
+      { label: '제품2', path: '/products/hardware' }, 
+      { label: '제품3', path: '/products/services' }, 
+      { label: '제품4', path: '/products/new' } 
+    ] 
+  },
+  { 
+    label: '적용분야', 
+    submenu: [ 
+      { label: '적용분야1', path: '/applications/manufacturing' }, 
+      { label: '적용분야2', path: '/applications/finance' }, 
+      { label: '적용분야3', path: '/applications/healthcare' }, 
+      { label: '적용분야4', path: '/applications/education' } 
+    ] 
+  },
+  { 
+    label: '납품사례', 
+    submenu: [ 
+      { label: '사례1', path: '/cases/enterprise' }, 
+      { label: '사례2', path: '/cases/sme' }, 
+      { label: '사례3', path: '/cases/public' }, 
+      { label: '사례4', path: '/cases/overseas' } 
+    ] 
+  },
+  { 
+    label: '고객지원', 
+    submenu: [ 
+      { label: '견적문의', path: '/support/contact' }, 
+      { label: '공지사항', path: '/support/download' } 
+    ] 
+  },
+  { 
+    label: '회사소개', 
+    submenu: [ 
+      { label: '목표', path: '/about/overview' }, 
+      { label: '연혁', path: '/about/history' }, 
+      { label: '오시는 길', path: '/about/organization' } 
+    ] 
+  }
 ];
 
 const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
@@ -30,7 +103,7 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
       '제품': '/products',
       '적용분야': '/applications',
       '납품사례': '/cases',
-      '정부지원 사업안내': '/government-support-main',
+      '정부지원 사업안내': '/government-support',
       '고객지원': '/support',
       '회사소개': '/about'
     };
@@ -95,7 +168,7 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
           '제품': '/products',
           '적용분야': '/applications',
           '납품사례': '/cases',
-          '정부지원 사업안내': '/government-support-main',
+          '정부지원 사업안내': '/government-support',
           '고객지원': '/support',
           '회사소개': '/about'
         };
@@ -114,26 +187,8 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
       setActiveSubmenuIndex(null);
     }
     
-    // 메인 메뉴 페이지인 경우 해당 서브메뉴 자동 열기
-    if (foundActiveMenu && !isMobile) {
-      setOpenSubmenu(activeMenuIndex);
-    }
-    
-    // 서브메뉴 페이지인 경우 해당 부모 메뉴의 서브메뉴 자동 열기
-    if (foundActiveSubmenu && !isMobile && menuIndexForSubmenu !== null) {
-      setOpenSubmenu(menuIndexForSubmenu);
-    }
-    
-    // 활성화된 메뉴가 있으면 서브메뉴 열기 유지 (페이지 이동 후)
-    if (activeMenuIndex !== null && !isMobile && foundActiveMenu) {
-      // 페이지 이동 후 서브메뉴 열기
-      setOpenSubmenu(activeMenuIndex);
-    }
-    
-    // 서브메뉴 페이지인 경우에도 부모 메뉴의 서브메뉴 열기
-    if (foundActiveSubmenu && !isMobile && menuIndexForSubmenu !== null) {
-      setOpenSubmenu(menuIndexForSubmenu);
-    }
+    // 데스크톱에서는 호버 시에만 서브메뉴가 열리도록 하므로
+    // 페이지 로드 시 자동으로 서브메뉴를 열지 않음
   }, [location.pathname, isMobile, activeMenuIndex]);
 
   useEffect(() => {
@@ -162,31 +217,27 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
         // 모바일에서는 서브메뉴 토글
         setOpenSubmenu(openSubmenu === index ? null : index);
       } else {
-        // 데스크톱에서는 먼저 페이지 이동 후 서브메뉴 열기
-        setOpenSubmenu(null); // 먼저 닫기
-      }
-      // 해당 메뉴 활성화
-      setActiveMenuIndex(index);
-      setActiveSubmenuIndex(null);
-      
-      // 메인 메뉴 페이지로 이동 (서브메뉴가 있는 메뉴의 경우)
-      const pageRoutes = {
-        '정부지원 사업안내': '/government-support-main',
-        '솔루션': '/solutions',
-        '제품': '/products',
-        '적용분야': '/applications',
-        '납품사례': '/cases',
-        '고객지원': '/support',
-        '회사소개': '/about'
-      };
-      const targetPath = pageRoutes[item.label];
-      if (targetPath) {
-        navigate(targetPath);
-        // 페이지 이동 후 서브메뉴 열기
-        setTimeout(() => {
-          setOpenSubmenu(index);
-        }, 100);
-      }
+              // 데스크톱에서는 호버 시에만 서브메뉴가 열리므로 클릭 시에는 페이지 이동만
+      setOpenSubmenu(null);
+    }
+    // 해당 메뉴 활성화
+    setActiveMenuIndex(index);
+    setActiveSubmenuIndex(null);
+    
+    // 메인 메뉴 페이지로 이동 (서브메뉴가 있는 메뉴의 경우)
+    const pageRoutes = {
+      '정부지원 사업안내': '/government-support',
+      '솔루션': '/solutions',
+      '제품': '/products',
+      '적용분야': '/applications',
+      '납품사례': '/cases',
+      '고객지원': '/support',
+      '회사소개': '/about'
+    };
+    const targetPath = pageRoutes[item.label];
+    if (targetPath) {
+      navigate(targetPath);
+    }
     } else {
       // 서브메뉴가 없는 메뉴 클릭 시
       handleMenuClick(item, index);
@@ -205,14 +256,9 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
     }
   };
 
-  // 마우스가 메뉴를 벗어날 때 서브메뉴 숨김 (활성화된 메뉴가 있으면 유지)
+  // 마우스가 메뉴를 벗어날 때 서브메뉴 숨김
   const handleMouseLeave = () => {
-    // 활성화된 메뉴가 있으면 서브메뉴를 계속 열어둠
-    if (!isMobile && activeMenuIndex === null && openSubmenu !== null) {
-      // 페이지 이동 후에는 서브메뉴를 닫지 않음
-      if (location.pathname !== '/') {
-        return;
-      }
+    if (!isMobile) {
       setOpenSubmenu(null);
     }
   };
@@ -281,11 +327,7 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
             className={`full-width-submenu ${isMobile ? 'mobile-submenu' : ''}`}
             onMouseEnter={() => !isMobile && setOpenSubmenu(openSubmenu)}
             onMouseLeave={() => {
-              if (!isMobile && activeMenuIndex === null && openSubmenu !== null) {
-                // 페이지 이동 후에는 서브메뉴를 닫지 않음
-                if (location.pathname !== '/') {
-                  return;
-                }
+              if (!isMobile) {
                 setOpenSubmenu(null);
               }
             }}

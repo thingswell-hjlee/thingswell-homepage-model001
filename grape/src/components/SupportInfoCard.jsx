@@ -1,3 +1,43 @@
+/**
+ * SupportInfoCard 컴포넌트
+ * 
+ * 지원 정보를 카드 형태로 표시하는 컴포넌트입니다.
+ * 제목, 부제목, 지원 한도, 신청 자격을 포함하며, 지원 한도는 SVG 그래프로 시각화됩니다.
+ * forwardRef를 사용하여 외부에서 ref를 전달받을 수 있습니다.
+ * 
+ * @param {Object} props - 컴포넌트 props
+ * @param {string} props.title - 카드 제목
+ * @param {string} props.subtitle - 카드 부제목
+ * @param {Object} props.supportLimit - 지원 한도 정보
+ * @param {string} props.supportLimit.year - 지원 연도
+ * @param {string} props.supportLimit.amount - 지원 금액
+ * @param {string} props.supportLimit.description - 지원 한도 설명
+ * @param {Object} props.qualifications - 신청 자격 정보
+ * @param {string} props.qualifications.description - 자격 설명
+ * @param {Array} props.qualifications.items - 자격 항목 배열
+ * @param {string} props.qualifications.items[].main - 주요 자격 요건
+ * @param {string} props.qualifications.items[].sub - 세부 자격 요건 (선택사항)
+ * @param {React.Ref} ref - forwardRef를 통해 전달되는 ref
+ * 
+ * 사용법:
+ * <SupportInfoCard 
+ *   title="지원 정보"
+ *   subtitle="2024년 정부지원사업 지원 정보입니다"
+ *   supportLimit={{
+ *     year: "2024년",
+ *     amount: "최대 5천만원",
+ *     description: "사업비의 80%까지 지원"
+ *   }}
+ *   qualifications={{
+ *     description: "다음 조건을 만족하는 기업이 신청 가능합니다",
+ *     items: [
+ *       { main: "중소기업", sub: "대기업 제외" },
+ *       { main: "특정 업종", sub: "제조업, IT업종" },
+ *       { main: "지역 제한" }
+ *     ]
+ *   }}
+ * />
+ */
 import React, { forwardRef } from 'react';
 import './SupportInfoCard.css';
 

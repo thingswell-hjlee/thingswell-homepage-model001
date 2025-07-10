@@ -9,6 +9,7 @@
   box-sizing: border-box;
   padding: var(--spacing-xl);
   font-family: var(--font-family-primary);
+  width: 100%;
 }
 
 .solution-card-inner {
