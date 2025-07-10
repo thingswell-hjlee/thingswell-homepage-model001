@@ -97,7 +97,7 @@ const Soulution_main = () => {
                   setSelectedIdx(index);
                 }}
               />
-              <SolutionCard ref={solutionRef} {...currentSolutionData} showButton={true} />
+              <SolutionCard ref={solutionRef} {...currentSolutionData} showButton={true} buttonText="자세히 보기" variant="solution-main" />
 
 
             </div>

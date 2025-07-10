@@ -3,25 +3,72 @@ import React, { useState, useEffect, useRef } from 'react';
 import './Product_main.css';
 import welding from '../../assets/welding.jpg';
 import SolutionCard from '../../components/SolutionCard';
+import Kategorie from '../../components/Kategorie';
 
 const Product_main = () => {
 
   // 각 섹션별 ref 생성
   const solutionRef = useRef(null);
+  const kategorieRef = useRef(null);
   
   // 각 정부지원사업별 데이터 정의
   const solutionDataArray = [
     {
       subtitle: "Product  ",
       title: "제품",
-      description: "산업변화와 기술발전에 따른 다양한 산업재해를 예방하기 위해 재정 및 기술여건이 취약한 중소사업장에 스마트 안전장비 도입 시 보조금을 지원하는 사업입니다. AI, IoT, 빅데이터, 영상 분석 등 다양한 IT 기술이 융합되어, 실시간 위험 감지와 신속한 대응이 가능합니다.",
+      description: "보안, 그 이상의 선구자, 스마트한 의사 결정 지원과 상업적 성장 제공",
       image: welding,
       imageAlt: "스마트 안전장비지원사업",
       link: "/government-support-detail"
     },
-
   ];
-
+  
+  // 제품 카테고리 데이터
+  const productItems = [
+    {
+      image: welding,
+      imageAlt: "용접 제품",
+      label: "카메라",
+      title: "카메라",
+      link: "/product/1"
+    },
+    {
+      image: welding,
+      imageAlt: "용접 제품",
+      label: "카메라",
+      title: "카메라",
+      link: "/product/2"
+    },
+    {
+      image: welding,
+      imageAlt: "용접 제품",
+      label: "카메라",
+      title: "카메라",
+      link: "/product/3"
+    },
+    {
+      image: welding,
+      imageAlt: "용접 제품",
+      label: "용접 제품",
+      title: "용접 안전장비",
+      link: "/product/4"
+    },
+    {
+      image: welding,
+      imageAlt: "안전장비",
+      label: "안전장비",
+      title: "개인보호장비",
+      link: "/product/5"
+    },
+    {
+      image: welding,
+      imageAlt: "모니터링 시스템",
+      label: "모니터링",
+      title: "안전 모니터링 시스템",
+      link: "/product/6"
+    }
+  ];
+  
   const [selectedIdx] = useState(0); // 기본값을 0으로 설정
 
   // 현재 선택된 인덱스에 따른 solutionData
@@ -33,9 +80,8 @@ const Product_main = () => {
         <div className="page-layout">
           <div className="main-content">
             <div className="solutions-section">
-              <SolutionCard ref={solutionRef} {...currentSolutionData} showButton={true} />
-
-
+              <SolutionCard ref={solutionRef} {...currentSolutionData} showButton={false} variant="product" />
+              <Kategorie ref={kategorieRef} title="제품" items={productItems} />
             </div>
           </div>
         </div>

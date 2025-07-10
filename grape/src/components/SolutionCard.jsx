@@ -13,6 +13,8 @@
  * @param {string} props.imageAlt - 이미지 대체 텍스트
  * @param {boolean} props.showButton - 버튼 표시 여부 (기본값: false)
  * @param {string} props.link - 버튼 클릭 시 이동할 링크
+ * @param {string} props.className - 추가 CSS 클래스명
+ * @param {string} props.variant - 카드 스타일 변형 (full-height, compact, hero 등)
  * @param {React.Ref} ref - forwardRef를 통해 전달되는 ref
  * 
  * 사용법:
@@ -24,15 +26,32 @@
  *   imageAlt="솔루션 이미지"
  *   showButton={true}
  *   link="/solutions/detail"
+ *   className="custom-solution-card"
+ *   variant="full-height"
  * />
  */
 import React, { forwardRef } from 'react';
 import './SolutionCard.css';
 
 const SolutionCard = forwardRef((props, ref) => {
-  const { subtitle, title, description, image, imageAlt, showButton = false, link } = props;
+  const { 
+    subtitle, 
+    title, 
+    description, 
+    image, 
+    imageAlt, 
+    showButton = false, 
+    link,
+    className = '',
+    variant = 'default',
+    buttonText = ''
+  } = props;
+
+  // 기본 클래스와 추가 클래스, 변형 클래스를 조합
+  const cardClassName = `solution-card solution-card-${variant} ${className}`.trim();
+
   return (
-    <div ref={ref} className="solution-card">
+    <div ref={ref} className={cardClassName}>
       <div className="solution-card-inner">
         <div className="solution-card-header">
         </div>
@@ -42,7 +61,7 @@ const SolutionCard = forwardRef((props, ref) => {
           <div className="solution-card-desc">{description}</div>
           {showButton && (
             <div className="solution-card-button">
-              <button className="solution-card-button-text" onClick={() => window.location.href = link}>자세히 보기</button>
+              <button className="solution-card-button-text" onClick={() => window.location.href = link}>{buttonText}</button>
             </div>
           )}
         </div>

@@ -157,7 +157,7 @@ const Soulution = () => {
           </div>
           <div className="main-content">
             <div className="solutions-section">
-              <SolutionCard ref={solutionRef} {...solutionData} showButton={true} />
+              <SolutionCard ref={solutionRef} {...solutionData} showButton={true} variant="compact" />
               
               {applicationCardsData && (
                 <ApplicationCardsSection ref={applicationRef} applicationCardsData={applicationCardsData} boxName="AI기반 영역 제어" />

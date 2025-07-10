@@ -176,10 +176,10 @@ const DigitalTransformationSupport = () => {
           </div>
           <div className="main-content">
             <div className="solutions-section">
-              <SolutionCard ref={solutionRef} {...solutionData} />
+              <SolutionCard ref={solutionRef} {...solutionData} variant="compact" />
               
               {applicationCardsData && (
-                <ApplicationCardsSection ref={applicationRef} applicationCardsData={applicationCardsData} />
+                <ApplicationCardsSection ref={applicationRef} applicationCardsData={applicationCardsData} boxName="AI기반 영역 제어" />
               )}
               
               {applicationPeriodData && (

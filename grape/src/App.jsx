@@ -38,7 +38,7 @@
  * - 각 솔루션 상세 페이지들
  */
 import { useState, useEffect } from 'react'
-import { Routes, Route, useLocation } from 'react-router-dom'
+import { Routes, Route, useLocation, Link } from 'react-router-dom'
 import './App.css'
 import Menu from './components/Menu.jsx'
 import Footer from './components/Footer.jsx'
@@ -53,6 +53,7 @@ import ChemicalSolution from './pages/Soulutions/ChemicalSolution.jsx'
 import ManufacturingSolution from './pages/Soulutions/ManufacturingSolution.jsx'
 import ConstructionSolution from './pages/Soulutions/ConstructionSolution.jsx'
 import Product_main from './pages/Products/Product_main.jsx'
+import Product_1 from './pages/Products/Product_1.jsx'
 import logo from './assets/main_image.jpg';
 
 function HomePage() {
@@ -82,9 +83,11 @@ function HomePage() {
             <h1>Intelligence</h1>
           </div>
           <div className="button">
+          <Link to="/solutions">
             <button className="button-text">
-              <p>더 알아보기</p>
+            <p>더 알아보기</p>
             </button>
+            </Link>
           </div>
         </div>
       </div>
@@ -142,6 +145,7 @@ function App() {
 
           {/* 제품 라우팅 */}
           <Route path="/products" element={<Product_main />} />
+          <Route path="/product/1" element={<Product_1 />} />
         </Routes>
       </main>
       

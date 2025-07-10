@@ -42,14 +42,15 @@
 body {
   margin: 0;
   padding: 0;
+  width: 100%;
   font-family: var(--font-family-primary);
   background-color: var(--color-background-light);
   overflow-x: hidden; /* 가로 스크롤 방지 */
 }
 
 #root {
-  max-width: 100%;
-  margin: 0 auto;
+  width: 100%;
+  margin: 0;
   padding: 0;
   text-align: center;
   box-sizing: border-box;
@@ -59,6 +60,7 @@ body {
 /* 새로운 앱 컨테이너 구조 */
 .app-container {
   min-height: 100vh;
+  width: 100%;
   display: flex;
   flex-direction: column;
 }
@@ -66,6 +68,8 @@ body {
 .main-content {
   flex: 1;
   position: relative;
+  width: 100%;
+  min-height: 100vh;
 }
 
 .content-container {
@@ -75,7 +79,7 @@ body {
   margin: 0 auto;
   text-align: center;
   width: 100%;
-  max-width: var(--container-max-width);
+  max-width: 100vw;
   box-sizing: border-box;
   height: 100vh;
   overflow: hidden;
@@ -114,6 +118,25 @@ body {
   top: 30%;
   left: 50%;
   transform: translateX(-50%);
+  outline: none;
+}
+
+.button:focus {
+  outline: none;
+  border: none;
+  box-shadow: none;
+}
+
+.button-text:focus {
+  outline: none;
+  border: none;
+  box-shadow: none;
+}
+
+.button-text:active {
+  outline: none;
+  border: none;
+  box-shadow: none;
 }
 
 .button-text {
@@ -151,6 +174,7 @@ body {
 .content-text h1 {
   margin: 0;
   line-height: var(--line-height-normal);
+  font-size: var(--font-size-6xl);
 }
 
 @keyframes logo-spin {
@@ -186,6 +210,7 @@ body {
   .button-text {
     padding: 0 90px 0 90px;
     font-size: 18px;
+
   }
   
   .button {

@@ -183,10 +183,10 @@ const Government_support = () => {
           </div>
           <div className="main-content">
             <div className="solutions-section">
-              <SolutionCard ref={solutionRef} {...solutionData} />
+              <SolutionCard ref={solutionRef} {...solutionData} variant="compact"/>
               
               {applicationCardsData && (
-                <ApplicationCardsSection ref={applicationRef} applicationCardsData={applicationCardsData} />
+                <ApplicationCardsSection ref={applicationRef} applicationCardsData={applicationCardsData}boxName="적용분야" />
               )}
               
               {applicationPeriodData && (
