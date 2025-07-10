@@ -1,37 +1,42 @@
-/* Font Face Definitions */
+/* Font Face Definitions with Fallback */
 @font-face {
   font-family: 'PyeojinGothic';
   src: url('../assets/font/PyeojinGothic-Light.woff') format('woff');
-  font-weight: var(--font-weight-light);
+  font-weight: 300;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
   font-family: 'PyeojinGothic';
   src: url('../assets/font/PyeojinGothic-Regular.woff') format('woff');
-  font-weight: var(--font-weight-regular);
+  font-weight: 400;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
   font-family: 'PyeojinGothic';
   src: url('../assets/font/PyeojinGothic-Medium.woff') format('woff');
-  font-weight: var(--font-weight-medium);
+  font-weight: 500;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
   font-family: 'PyeojinGothic';
   src: url('../assets/font/PyeojinGothic-SemiBold.woff') format('woff');
-  font-weight: var(--font-weight-semibold);
+  font-weight: 600;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
   font-family: 'PyeojinGothic';
   src: url('../assets/font/PyeojinGothic-Bold.woff') format('woff');
-  font-weight: var(--font-weight-bold);
+  font-weight: 700;
   font-style: normal;
+  font-display: swap;
 }
 
 /* 메뉴 래퍼 - 화면 중앙 정렬 */
@@ -65,7 +70,7 @@
     overflow: visible;
     background: var(--color-surface);
     box-shadow: var(--shadow-menu);
-    font-family: var(--font-family-primary);
+    font-family: 'PyeojinGothic', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
     position: relative;
     height: var(--menu-height);
     margin: 20px auto 0 auto;
@@ -93,7 +98,7 @@
 }
 
 .menu {
-  font-family: var(--font-family-primary);
+  font-family: 'PyeojinGothic', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 }
 
 .menu-list {
@@ -148,9 +153,9 @@ margin-top: 20px;
   visibility: visible;
 }
 
-/* 메뉴 아이템에 서브메뉴가 있을 때 호버 효과 */
-.menu-item.has-submenu:hover .menu-button {
-  background-color: var(--color-primary) !important;
+/* 메뉴 아이템에 서브메뉴가 있을 때 호버 효과 (활성화된 메뉴 제외) */
+.menu-item.has-submenu:hover .menu-button:not(.active) {
+  background-color: var(--color-secondary) !important;
   color: var(--color-text-white) !important;
 }
 
@@ -187,9 +192,9 @@ margin-top: 20px;
   transform: rotate(180deg);
 }
 
-/* 호버 상태 - primary 색상 사용 */
-.menu-button:hover:not(:disabled) {
-  background-color: var(--color-primary) !important; 
+/* 호버 상태 - secondary 색상 사용 (활성화된 메뉴 제외) */
+.menu-button:hover:not(:disabled):not(.active) {
+  background-color: var(--color-secondary) !important; 
   color: var(--color-text-white) !important;
   outline: none;
   box-shadow: none;
@@ -198,10 +203,10 @@ margin-top: 20px;
   -webkit-focus-ring-color: transparent;
 }
 
-/* 액티브/포커스 상태 - primary 색상 사용 */
-.menu-button:active:not(:disabled),
-.menu-button:focus:not(:disabled) {
-  background-color: var(--color-primary) !important;
+/* 액티브/포커스 상태 - secondary 색상 사용 (활성화된 메뉴 제외) */
+.menu-button:active:not(:disabled):not(.active),
+.menu-button:focus:not(:disabled):not(.active) {
+  background-color: var(--color-secondary) !important;
   color: var(--color-text-white) !important;
   outline: none;
   box-shadow: none;
@@ -340,15 +345,15 @@ margin-top: 20px;
   border-right: none;
 }
 
-/* 서브메뉴 버튼 호버 효과 */
-.submenu-button:hover {
-  background-color: var(--color-primary) !important;
+/* 서브메뉴 버튼 호버 효과 (활성화된 버튼 제외) */
+.submenu-button:hover:not(.active) {
+  background-color: var(--color-secondary) !important;
   color: var(--color-text-white) !important;
 }
 
-/* 서브메뉴 버튼 클릭 효과 */
-.submenu-button:active {
-  background-color: var(--color-primary) !important;
+/* 서브메뉴 버튼 클릭 효과 (활성화된 버튼 제외) */
+.submenu-button:active:not(.active) {
+  background-color: var(--color-secondary) !important;
   color: var(--color-text-white) !important;
 }
 
@@ -443,8 +448,8 @@ margin-top: 20px;
   background: none;
   border: none;
 }   
-.menu-primary .menu-button:hover:not(:disabled) {
-  background-color: var(--color-primary) !important;
+.menu-primary .menu-button:hover:not(:disabled):not(.active) {
+  background-color: var(--color-secondary) !important;
   color: var(--color-text-white) !important;
 }
 .menu-primary .menu-item {
@@ -459,8 +464,8 @@ margin-top: 20px;
   border: none;
   background: none;
 }
-.menu-primary .submenu-button:hover {
-  background-color: var(--color-primary) !important;
+.menu-primary .submenu-button:hover:not(.active) {
+  background-color: var(--color-secondary) !important;
   color: var(--color-text-white) !important;
 }
 
@@ -612,8 +617,8 @@ margin-top: 20px;
     width: 100%;
   }
   
-  .menu-button:hover:not(:disabled) {
-    background-color: var(--color-primary) !important;
+  .menu-button:hover:not(:disabled):not(.active) {
+    background-color: var(--color-secondary) !important;
     color: var(--color-text-white) !important;
   }
   
@@ -656,8 +661,8 @@ margin-top: 20px;
     border-bottom: none;
   }
   
-  .submenu-button:hover {
-    background-color: var(--color-primary) !important;
+  .submenu-button:hover:not(.active) {
+    background-color: var(--color-secondary) !important;
     color: var(--color-text-white) !important;
   }
 }

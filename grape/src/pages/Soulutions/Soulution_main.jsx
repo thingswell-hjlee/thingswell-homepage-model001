@@ -28,6 +28,7 @@ import manufacturing from '../../assets/manufacturing.jpg';
 import grinding from '../../assets/grinding.jpg';
 import SolutionCard from '../../components/SolutionCard';
 import SelectCardList from '../../components/SelectCardList';
+
 const Soulution_main = () => {
 
   // 각 섹션별 ref 생성

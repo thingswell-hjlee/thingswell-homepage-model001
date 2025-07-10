@@ -9,6 +9,13 @@
   border-radius: var(--border-radius-lg);
 }
 
+.application-card-section-title {
+  font-size: var(--font-size-5xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  text-align: left;
+}
+
 .cards-container {
   width: 100%;
   max-width: 1200px;
@@ -17,6 +24,7 @@
   display: flex;
   justify-content: flex-start;
   padding: 0 var(--spacing-xl);
+  flex-direction: column;
 }
 
 .responsive-cards {

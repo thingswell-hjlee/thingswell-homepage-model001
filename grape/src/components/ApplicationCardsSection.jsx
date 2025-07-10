@@ -21,10 +21,11 @@ import ApplicationCard from './ApplicationCard';
 import './ApplicationCardsSection.css';
 
 const ApplicationCardsSection = forwardRef((props, ref) => {
-  const { applicationCardsData } = props;
+  const { applicationCardsData, boxName } = props;
   return (
     <div ref={ref} className="application-card application-section-responsive">
       <div className="cards-container">
+      <div className="application-card-section-title">{boxName}</div>
         <div className="application-cards no-line responsive-cards">
           {applicationCardsData.map((card, index) => (
             <ApplicationCard key={index} {...card} />

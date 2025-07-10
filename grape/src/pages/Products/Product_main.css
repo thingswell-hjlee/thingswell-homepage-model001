@@ -43,7 +43,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'PyeojinGothic', sans-serif;
-  background-color: #D9D9D9;
+  background-color: #1a1a1a;
   overflow-x: hidden; /* 가로 스크롤 방지 */
 }
 
@@ -54,15 +54,3 @@ body {
   text-align: center;
   box-sizing: border-box;
 }
-
-.main-content{
-  max-width: 100%;
-  margin: 0 auto;
-}
-
-.solutions-section{
-  max-width: 1150px;
-  margin: 0 auto;
-}
-
-/* 사이드바 스타일은 App.css에서 통합 관리 */

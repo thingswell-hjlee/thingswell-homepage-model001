@@ -27,10 +27,11 @@ const defaultMenuItems = [
   { 
     label: '정부지원 사업안내', 
     submenu: [ 
+      { label: '스마트 안전장비지원사업', path: '/government-support-detail' }, 
       { label: 'AI 제조 지원사업', path: '/ai-manufacturing-support' }, 
       { label: '그린에너지 지원사업', path: '/green-energy-support' }, 
       { label: '디지털 전환 지원사업', path: '/digital-transformation-support' }, 
-      { label: '정부지원사업 목록', path: '/government-support' } 
+      
     ] 
   },
   { 

@@ -13,15 +13,13 @@
  * 
  * 라우팅 구조:
  * - /: 홈페이지 (메인 이미지와 "더 알아보기" 버튼)
- * - /government-support: 정부지원사업 목록 페이지
- * - /government-support/:supportId: 정부지원사업 상세 페이지
- * - /government-support-main: 정부지원사업 메인 페이지 (기존)
- * - /government-support-1~4: 각 정부지원사업 상세 페이지 (기존)
- * - /solutions: 솔루션 메인 페이지
- * - /solution: 솔루션 상세 페이지
+ * - /government-support: 정부지원사업 메인 페이지
+ * - /government-support-detail: 정부지원사업 상세 페이지
  * - /ai-manufacturing-support: AI 제조 지원 페이지
  * - /green-energy-support: 그린에너지 지원 페이지
  * - /digital-transformation-support: 디지털 전환 지원 페이지
+ * - /solutions: 솔루션 메인 페이지
+ * - /solution: 솔루션 상세 페이지
  * - /chemical-solution: 화학 안전 솔루션 페이지
  * - /manufacturing-solution: 제조 안전 솔루션 페이지
  * - /construction-solution: 건설 안전 솔루션 페이지
@@ -34,6 +32,7 @@
  * - Footer: 웹사이트 푸터
  * - HomePage: 홈페이지 콘텐츠
  * - Government_support_main: 정부지원사업 메인 페이지
+ * - Government_support: 정부지원사업 상세 페이지
  * - Soulution_main: 솔루션 메인 페이지
  * - 각 정부지원사업 상세 페이지들
  * - 각 솔루션 상세 페이지들
@@ -43,9 +42,8 @@ import { Routes, Route, useLocation } from 'react-router-dom'
 import './App.css'
 import Menu from './components/Menu.jsx'
 import Footer from './components/Footer.jsx'
-import Government_support from './pages/Goverment_support/Government_support.jsx'
 import Government_support_main from './pages/Goverment_support/Government_support_main.jsx'
-import GovernmentSupportDetail from './pages/Goverment_support/GovernmentSupportDetail.jsx'
+import Government_support from './pages/Goverment_support/Government_support.jsx'
 import AiManufacturingSupport from './pages/Goverment_support/AiManufacturingSupport.jsx'
 import GreenEnergySupport from './pages/Goverment_support/GreenEnergySupport.jsx'
 import DigitalTransformationSupport from './pages/Goverment_support/DigitalTransformationSupport.jsx'
@@ -54,6 +52,7 @@ import Soulution from './pages/Soulutions/Soulution.jsx'
 import ChemicalSolution from './pages/Soulutions/ChemicalSolution.jsx'
 import ManufacturingSolution from './pages/Soulutions/ManufacturingSolution.jsx'
 import ConstructionSolution from './pages/Soulutions/ConstructionSolution.jsx'
+import Product_main from './pages/Products/Product_main.jsx'
 import logo from './assets/main_image.jpg';
 
 function HomePage() {
@@ -124,13 +123,10 @@ function App() {
           
           {/* 정부지원사업 라우팅 */}
           <Route path="/government-support" element={<Government_support_main />} />
-          <Route path="/government-support/:supportId" element={<GovernmentSupportDetail />} />
           
-          {/* 기존 라우팅 (하위 호환성) */}
-          <Route path="/government-support-main" element={<Government_support_main />} />
-          <Route path="/government-support-1" element={<Government_support />} />
           
           {/* 정부지원사업 상세 페이지들 */}
+          <Route path="/government-support-detail" element={<Government_support />} />
           <Route path="/ai-manufacturing-support" element={<AiManufacturingSupport />} />
           <Route path="/green-energy-support" element={<GreenEnergySupport />} />
           <Route path="/digital-transformation-support" element={<DigitalTransformationSupport />} />
@@ -143,6 +139,9 @@ function App() {
           <Route path="/chemical-solution" element={<ChemicalSolution />} />
           <Route path="/manufacturing-solution" element={<ManufacturingSolution />} />
           <Route path="/construction-solution" element={<ConstructionSolution />} />
+
+          {/* 제품 라우팅 */}
+          <Route path="/products" element={<Product_main />} />
         </Routes>
       </main>
       
