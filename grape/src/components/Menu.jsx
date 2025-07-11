@@ -73,7 +73,6 @@ const defaultMenuItems = [
   { 
     label: '고객지원', 
     submenu: [ 
-      { label: '견적문의', path: '/support/contact' }, 
       { label: '공지사항', path: '/announcement' },
       { label: '자료실', path: '/downloads' },
       { label: '문의하기', path: '/contect' }

@@ -63,6 +63,21 @@
   height: 100%;
 }
 
+/* 좌측 정렬을 위한 커스텀 클래스 */
+.solution-card.custom-solution-left .solution-card-inner {
+  justify-content: flex-start;
+  margin: 0;
+  max-width: none;
+  gap: 0;
+  
+}
+
+.solution-card.custom-solution-left {
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 0;
+} 
+
 /* 좌우반전 클래스 */
 .solution-card-reverse .solution-card-inner {
   flex-direction: row-reverse;
