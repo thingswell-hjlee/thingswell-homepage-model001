@@ -70,6 +70,7 @@ import Case from './pages/Cases/Case.jsx'
 import Case_2 from './pages/Cases/Case_2.jsx'
 import Case_3 from './pages/Cases/Case_3.jsx'
 import Case_4 from './pages/Cases/Case_4.jsx'
+import About from './pages/About/About.jsx'
 
 function HomePage() {
   const [isMobile, setIsMobile] = useState(false)
@@ -182,6 +183,9 @@ function App() {
           <Route path="/case-2" element={<Case_2 />} />
           <Route path="/case-3" element={<Case_3 />} />
           <Route path="/case-4" element={<Case_4 />} />
+
+          {/* 회사소개 라우팅 */}
+          <Route path="/about" element={<About />} />
           </Routes>
       </main>
       
