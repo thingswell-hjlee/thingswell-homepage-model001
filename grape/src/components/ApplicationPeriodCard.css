@@ -60,6 +60,7 @@
   margin-bottom: var(--spacing-md);
   background: var(--color-surface-light);
   border-radius: var(--border-radius-md);
+  padding: var(--spacing-md);
   margin: 0;
 }
 
