@@ -61,7 +61,7 @@ const defaultMenuItems = [
       { label: '적용분야4', path: '/applications/education' } 
     ] 
   },
-  { 
+  {   
     label: '납품사례', 
     submenu: [ 
       { label: '사례1', path: '/cases/enterprise' }, 
@@ -75,7 +75,7 @@ const defaultMenuItems = [
     submenu: [ 
       { label: '공지사항', path: '/announcement' },
       { label: '자료실', path: '/downloads' },
-      { label: '문의하기', path: '/contect' }
+      { label: '문의하기', path: '/contact' }
     ] 
   },
   { 

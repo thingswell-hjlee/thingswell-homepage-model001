@@ -1,8 +1,9 @@
 import React from 'react';
 import SolutionCard from '../../components/SolutionCard.jsx';
 import Form from '../../components/Form.jsx';
+import { Link } from 'react-router-dom'; 
 
-const Contect = () => {
+const Contact = () => {
   return (
     <div className="page-container">
       <div className="page-content">
@@ -19,4 +20,4 @@ const Contect = () => {
   );
 };
 
-export default Contect;  
+export default Contact;  

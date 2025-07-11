@@ -59,7 +59,7 @@ import logo from './assets/main_image.jpg';
 import Announcement from './pages/Customer_Service/Announcement.jsx'
 import Customer_service from './pages/Customer_Service/Customer_service.jsx'
 import Downloads from './pages/Customer_Service/Downloads.jsx'
-import Contect from './pages/Customer_Service/Contect.jsx'
+import Contact from './pages/Customer_Service/Contact.jsx'
 
 function HomePage() {
   const [isMobile, setIsMobile] = useState(false)
@@ -157,7 +157,7 @@ function App() {
           <Route path="/customer-service" element={<Customer_service />} />
           <Route path="/announcement" element={<Announcement />} />
           <Route path="/downloads" element={<Downloads />} />
-          <Route path="/contect" element={<Contect />} />
+          <Route path="/contact" element={<Contact />} />
         </Routes>
       </main>
       
