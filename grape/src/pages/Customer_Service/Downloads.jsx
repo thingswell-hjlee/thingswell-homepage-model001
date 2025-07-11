@@ -9,7 +9,7 @@ const Downloads = () => {
         <div className="page-layout">
           <div className="main-content">
           <div className="solutions-section">
-              <SolutionCard subtitle="Downloads" title="싱스웰 자료실" description="고객지원" showButton={false} link="/solutions/detail" className="custom-solution-card" variant="hero" reverse={false} />
+              <SolutionCard subtitle="Downloads" title="싱스웰 자료실" description="고객지원" showButton={false} link="/solutions/detail" className="custom-solution-left" variant="hero" reverse={false} />
             </div>
             <Board />
           </div>

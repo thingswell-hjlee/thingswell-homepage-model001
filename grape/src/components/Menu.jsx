@@ -55,19 +55,19 @@ const defaultMenuItems = [
   { 
     label: '적용분야', 
     submenu: [ 
-      { label: '적용분야1', path: '/applications/manufacturing' }, 
-      { label: '적용분야2', path: '/applications/finance' }, 
-      { label: '적용분야3', path: '/applications/healthcare' }, 
-      { label: '적용분야4', path: '/applications/education' } 
+      { label: '적용분야1', path: '/application-field' }, 
+      { label: '적용분야2', path: '/application-field-2' }, 
+      { label: '적용분야3', path: '/application-field-3' }, 
+      { label: '적용분야4', path: '/application-field-4' } 
     ] 
   },
   {   
     label: '납품사례', 
     submenu: [ 
-      { label: '사례1', path: '/cases/enterprise' }, 
-      { label: '사례2', path: '/cases/sme' }, 
-      { label: '사례3', path: '/cases/public' }, 
-      { label: '사례4', path: '/cases/overseas' } 
+      { label: '사례1', path: '/case' }, 
+      { label: '사례2', path: '/case-2' }, 
+      { label: '사례3', path: '/case-3' }, 
+      { label: '사례4', path: '/case-4' } 
     ] 
   },
   { 
@@ -103,7 +103,7 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
     const pageRoutes = {
       '솔루션': '/solutions',
       '제품': '/products',
-      '적용분야': '/applications',
+      '적용분야': '/application-field-main',
       '납품사례': '/cases',
       '정부지원 사업안내': '/government-support',
       '고객지원': '/customer-service',
@@ -231,7 +231,7 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
       '정부지원 사업안내': '/government-support',
       '솔루션': '/solutions',
       '제품': '/products',
-      '적용분야': '/applications',
+      '적용분야': '/application-field-main',
       '납품사례': '/cases',
       '고객지원': '/customer-service',
       '회사소개': '/about'

@@ -60,6 +60,16 @@ import Announcement from './pages/Customer_Service/Announcement.jsx'
 import Customer_service from './pages/Customer_Service/Customer_service.jsx'
 import Downloads from './pages/Customer_Service/Downloads.jsx'
 import Contact from './pages/Customer_Service/Contact.jsx'
+import Application_filed_main from './pages/Application_field/Application_filed_main.jsx'
+import Application_filed from './pages/Application_field/Application_filed.jsx'
+import Application_filed_2 from './pages/Application_field/Application_filed_2.jsx'
+import Application_filed_3 from './pages/Application_field/Application_filed_3.jsx'
+import Application_filed_4 from './pages/Application_field/Application_filed_4.jsx'
+import Case_main from './pages/Cases/Case_main.jsx'
+import Case from './pages/Cases/Case.jsx'
+import Case_2 from './pages/Cases/Case_2.jsx'
+import Case_3 from './pages/Cases/Case_3.jsx'
+import Case_4 from './pages/Cases/Case_4.jsx'
 
 function HomePage() {
   const [isMobile, setIsMobile] = useState(false)
@@ -158,7 +168,21 @@ function App() {
           <Route path="/announcement" element={<Announcement />} />
           <Route path="/downloads" element={<Downloads />} />
           <Route path="/contact" element={<Contact />} />
-        </Routes>
+
+          {/* 응용분야 라우팅 */}
+          <Route path="/application-field-main" element={<Application_filed_main />} />
+          <Route path="/application-field" element={<Application_filed />} />
+          <Route path="/application-field-2" element={<Application_filed_2 />} />
+          <Route path="/application-field-3" element={<Application_filed_3 />} />
+          <Route path="/application-field-4" element={<Application_filed_4 />} />
+
+          {/* 납품사례 라우팅 */}
+          <Route path="/cases" element={<Case_main />} />
+          <Route path="/case" element={<Case />} />
+          <Route path="/case-2" element={<Case_2 />} />
+          <Route path="/case-3" element={<Case_3 />} />
+          <Route path="/case-4" element={<Case_4 />} />
+          </Routes>
       </main>
       
       {/* 푸터는 모든 페이지에서 유지 */}

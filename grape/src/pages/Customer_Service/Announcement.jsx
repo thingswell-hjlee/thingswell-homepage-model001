@@ -9,7 +9,7 @@ const Announcement = () => {
         <div className="page-layout">
           <div className="main-content">
           <div className="solutions-section">
-              <SolutionCard subtitle="Announcement" title="싱스웰 공지사항" description="고객지원" showButton={false} link="/solutions/detail" className="custom-solution-card" variant="hero" reverse={false} />
+              <SolutionCard subtitle="Announcement" title="싱스웰 공지사항" description="고객지원" showButton={false} link="/solutions/detail" className="custom-solution-left" variant="hero" reverse={false} />
             </div>
             <Board />
           </div>
