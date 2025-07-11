@@ -1,0 +1,216 @@
+.specification-card {
+  width: 100%;
+  padding: var(--spacing-lg);
+  background: var(--color-surface);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: var(--spacing-lg);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.specification-flex {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+}
+
+.specification-header {
+  padding: var(--spacing-xl) var(--spacing-xl) var(--spacing-sm) var(--spacing-xl);
+  color: var(--color-text-primary);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-sm);
+}
+
+.specification-header h1 {
+  font-size: var(--font-size-5xl);
+  margin-bottom: 0;
+  color: var(--color-text-primary);
+  line-height: var(--line-height-tight);
+}
+
+.specification-header p {
+  margin: 0;    
+  font-size: var(--font-size-3xl);
+  color: var(--color-text-primary);
+  padding: 0;
+}
+
+.specification-content {
+  display: flex;
+  justify-content: center;
+  padding: var(--spacing-sm) var(--spacing-xl) var(--spacing-sm) var(--spacing-xl);
+  width: 100%;
+  max-width: 1200px;
+}
+
+.specification-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-md);
+  width: 100%;
+}
+
+.specification-item {
+  padding: var(--spacing-md);
+  background: var(--color-surface);
+  border: var(--border-width-thin) solid var(--border-color-light);
+  border-radius: var(--border-radius-md);
+  text-align: center;
+  transition: all var(--transition-base);
+}
+
+.specification-item:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.specification-item-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+}
+
+.specification-label {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-xs);
+}
+
+.specification-value {
+  font-size: var(--font-size-xl);
+  color: var(--color-focus);
+  font-weight: var(--font-weight-medium);
+  margin-bottom: var(--spacing-xs);
+}
+
+.specification-description {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  font-weight: var(--font-weight-light);
+  line-height: var(--line-height-relaxed);
+}
+
+.product-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 32px;
+  margin: 32px 0;
+}
+
+.product-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  padding: 24px 18px 18px 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-height: 320px;
+  transition: box-shadow 0.2s;
+}
+
+.product-card:hover {
+  box-shadow: 0 4px 20px rgba(0,0,0,0.13);
+}
+
+.product-image {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  margin-bottom: 18px;
+}
+
+.product-title {
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+  color: #222;
+}
+
+.product-desc {
+  font-size: 0.98rem;
+  color: #666;
+  margin-bottom: 18px;
+  min-height: 38px;
+}
+
+.compare-label {
+  font-size: 0.95rem;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: auto;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 1024px) {
+  .specification-header {
+    padding: var(--spacing-lg) var(--spacing-lg) var(--spacing-lg) var(--spacing-lg);
+  }
+  
+  .specification-header h1 {
+    font-size: var(--font-size-4xl);
+  }
+  
+  .specification-header p {
+    font-size: var(--font-size-xl);
+  }
+  
+  .specification-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .specification-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .specification-header h1 {
+    font-size: var(--font-size-4xl);
+  }
+  
+  .specification-header p {
+    font-size: var(--font-size-lg);
+  }
+}
+
+@media (max-width: 480px) {
+  .specification-header {
+    padding: var(--spacing-md) var(--spacing-md) var(--spacing-md) var(--spacing-md);
+  }
+  
+  .specification-header h1 {
+    font-size: var(--font-size-2xl);
+  }
+  
+  .specification-header p {
+    font-size: var(--font-size-xl);
+  }
+  
+  .specification-value {
+    font-size: var(--font-size-xl);
+  }
+}
+
+@media (max-width: 360px) {
+  .specification-header {
+    padding: var(--spacing-sm) var(--spacing-sm) var(--spacing-sm) var(--spacing-sm);
+  }
+  
+  .specification-header h1 {
+    font-size: var(--font-size-xl);
+  }
+  
+  .specification-header p {
+    font-size: var(--font-size-lg);
+  }
+} 

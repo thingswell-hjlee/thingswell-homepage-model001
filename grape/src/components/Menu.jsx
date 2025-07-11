@@ -46,7 +46,7 @@ const defaultMenuItems = [
   { 
     label: '제품', 
     submenu: [ 
-      { label: '제품1', path: '/products/software' }, 
+      { label: '제품1', path: '/product/1' }, 
       { label: '제품2', path: '/products/hardware' }, 
       { label: '제품3', path: '/products/services' }, 
       { label: '제품4', path: '/products/new' } 
@@ -74,7 +74,9 @@ const defaultMenuItems = [
     label: '고객지원', 
     submenu: [ 
       { label: '견적문의', path: '/support/contact' }, 
-      { label: '공지사항', path: '/support/download' } 
+      { label: '공지사항', path: '/announcement' },
+      { label: '자료실', path: '/downloads' },
+      { label: '문의하기', path: '/contect' }
     ] 
   },
   { 
@@ -105,7 +107,7 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
       '적용분야': '/applications',
       '납품사례': '/cases',
       '정부지원 사업안내': '/government-support',
-      '고객지원': '/support',
+      '고객지원': '/customer-service',
       '회사소개': '/about'
     };
     const targetPath = pageRoutes[item.label] || item.path;
@@ -170,7 +172,7 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
           '적용분야': '/applications',
           '납품사례': '/cases',
           '정부지원 사업안내': '/government-support',
-          '고객지원': '/support',
+          '고객지원': '/customer-service',
           '회사소개': '/about'
         };
         const targetPath = pageRoutes[item.label];
@@ -232,7 +234,7 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
       '제품': '/products',
       '적용분야': '/applications',
       '납품사례': '/cases',
-      '고객지원': '/support',
+      '고객지원': '/customer-service',
       '회사소개': '/about'
     };
     const targetPath = pageRoutes[item.label];

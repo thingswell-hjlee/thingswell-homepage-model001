@@ -15,6 +15,7 @@
  * @param {string} props.link - 버튼 클릭 시 이동할 링크
  * @param {string} props.className - 추가 CSS 클래스명
  * @param {string} props.variant - 카드 스타일 변형 (full-height, compact, hero 등)
+ * @param {boolean} props.reverse - 좌우반전 여부 (기본값: false)
  * @param {React.Ref} ref - forwardRef를 통해 전달되는 ref
  * 
  * 사용법:
@@ -28,6 +29,7 @@
  *   link="/solutions/detail"
  *   className="custom-solution-card"
  *   variant="full-height"
+ *   reverse={true}
  * />
  */
 import React, { forwardRef } from 'react';
@@ -44,11 +46,12 @@ const SolutionCard = forwardRef((props, ref) => {
     link,
     className = '',
     variant = 'default',
-    buttonText = ''
+    buttonText = '',
+    reverse = false
   } = props;
 
-  // 기본 클래스와 추가 클래스, 변형 클래스를 조합
-  const cardClassName = `solution-card solution-card-${variant} ${className}`.trim();
+  // 기본 클래스와 추가 클래스, 변형 클래스, 반전 클래스를 조합
+  const cardClassName = `solution-card solution-card-${variant} ${reverse ? 'solution-card-reverse' : ''} ${className}`.trim();
 
   return (
     <div ref={ref} className={cardClassName}>
@@ -65,9 +68,11 @@ const SolutionCard = forwardRef((props, ref) => {
             </div>
           )}
         </div>
-        <div className="solution-card-image">
-          <img src={image} alt={imageAlt} />
-        </div>
+        {image && (
+          <div className="solution-card-image">
+            <img src={image} alt={imageAlt} />
+          </div>
+        )}
 
       </div>
     </div>

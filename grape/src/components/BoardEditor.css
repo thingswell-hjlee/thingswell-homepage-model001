@@ -1,0 +1,83 @@
+.board-editor {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.editor-header {
+  margin-bottom: 20px;
+}
+
+.title-input {
+  width: 100%;
+  padding: 15px;
+  font-size: 18px;
+  border: 2px solid #e1e5e9;
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.title-input:focus {
+  border-color: #007bff;
+}
+
+.editor-container {
+  border: 1px solid #e1e5e9;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.editor-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #e1e5e9;
+}
+
+.btn-cancel,
+.btn-save {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-cancel {
+  background-color: #6c757d;
+  color: white;
+}
+
+.btn-cancel:hover {
+  background-color: #5a6268;
+}
+
+.btn-save {
+  background-color: #007bff;
+  color: white;
+}
+
+.btn-save:hover {
+  background-color: #0056b3;
+}
+
+/* 토스트 에디터 커스텀 스타일 */
+.toastui-editor-defaultUI {
+  border: none !important;
+}
+
+.toastui-editor-defaultUI-toolbar {
+  border-bottom: 1px solid #e1e5e9 !important;
+}
+
+.toastui-editor-contents {
+  font-family: 'Noto Sans KR', sans-serif !important;
+} 

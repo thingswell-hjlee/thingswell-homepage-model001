@@ -54,7 +54,12 @@ import ManufacturingSolution from './pages/Soulutions/ManufacturingSolution.jsx'
 import ConstructionSolution from './pages/Soulutions/ConstructionSolution.jsx'
 import Product_main from './pages/Products/Product_main.jsx'
 import Product_1 from './pages/Products/Product_1.jsx'
+import Product_list from './pages/Products/Product_list.jsx'
 import logo from './assets/main_image.jpg';
+import Announcement from './pages/Customer_Service/Announcement.jsx'
+import Customer_service from './pages/Customer_Service/Customer_service.jsx'
+import Downloads from './pages/Customer_Service/Downloads.jsx'
+import Contect from './pages/Customer_Service/Contect.jsx'
 
 function HomePage() {
   const [isMobile, setIsMobile] = useState(false)
@@ -145,7 +150,14 @@ function App() {
 
           {/* 제품 라우팅 */}
           <Route path="/products" element={<Product_main />} />
+          <Route path="/product-list" element={<Product_list />} />
           <Route path="/product/1" element={<Product_1 />} />
+
+          {/* 고객서비스 라우팅 */}
+          <Route path="/customer-service" element={<Customer_service />} />
+          <Route path="/announcement" element={<Announcement />} />
+          <Route path="/downloads" element={<Downloads />} />
+          <Route path="/contect" element={<Contect />} />
         </Routes>
       </main>
       

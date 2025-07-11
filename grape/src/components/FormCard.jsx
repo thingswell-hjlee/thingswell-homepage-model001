@@ -72,6 +72,10 @@ const FormCard = forwardRef((props, ref) => {
                 <input type="text" id="company" name="company" value={formData.company} onChange={handleChange} required />
               </div>
               <div className="form-group">
+                <label htmlFor="phone">연락처</label>
+                <input type="text" id="phone" name="phone" value={formData.phone} onChange={handleChange} required />
+              </div>
+              <div className="form-group">
                 <label htmlFor="message">문의 내용</label>
                 <textarea id="message" name="message" value={formData.message} onChange={handleChange} required />
               </div>

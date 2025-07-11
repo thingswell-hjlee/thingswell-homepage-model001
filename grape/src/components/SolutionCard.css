@@ -28,7 +28,7 @@
 
 /* 히어로 변형 - 상세 페이지용 */
 .solution-card-hero {
-  min-height: 100vh;
+  min-height: 10vh;
   height: 100%;
 }
 
@@ -63,6 +63,11 @@
   height: 100%;
 }
 
+/* 좌우반전 클래스 */
+.solution-card-reverse .solution-card-inner {
+  flex-direction: row-reverse;
+}
+
 .solution-card-text {
   flex: 2;
   display: flex;
@@ -70,6 +75,15 @@
   justify-content: center;
   align-items: flex-start;
   height: 100%;
+}
+
+/* 좌우반전 시 텍스트 정렬 조정 */
+.solution-card-reverse .solution-card-text {
+  align-items: flex-end;
+}
+
+.solution-card-reverse .solution-card-desc {
+  text-align: right;
 }
 
 .solution-card-subtitle {
@@ -259,6 +273,19 @@
     justify-content: center;
   }
   
+  /* 모바일에서는 좌우반전 무시하고 항상 세로 배치 */
+  .solution-card-reverse .solution-card-inner {
+    flex-direction: column;
+  }
+  
+  .solution-card-reverse .solution-card-text {
+    align-items: flex-start;
+  }
+  
+  .solution-card-reverse .solution-card-desc {
+    text-align: left;
+  }
+  
   .solution-card-title {
     font-size: 1.8rem;
   }
@@ -308,6 +335,19 @@
   .solution-card-image {
     height: 150px;
     max-height: 200px;
+  }
+  
+  /* 360px 이하에서도 좌우반전 무시 */
+  .solution-card-reverse .solution-card-inner {
+    flex-direction: column;
+  }
+  
+  .solution-card-reverse .solution-card-text {
+    align-items: flex-start;
+  }
+  
+  .solution-card-reverse .solution-card-desc {
+    text-align: left;
   }
 } 
 

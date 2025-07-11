@@ -56,32 +56,29 @@
   padding: var(--spacing-sm) var(--spacing-md);
   border: var(--border-width-normal) solid var(--border-color-light);
   border-radius: var(--border-radius-md);
-  font-size: var(--font-size-sm);
+  font-size: 16px; /* 모바일에서 자동 확대 방지 */
   font-family: var(--font-family-primary);
   transition: border-color var(--transition-slow);
   background-color: var(--color-surface);
   color: var(--color-text-primary);
+  transform: none !important;
+  box-sizing: border-box;
+}
+
+.form-group textarea {
+  min-height: 120px;
+  resize: vertical;
+  font-size: 16px; /* 모바일에서 자동 확대 방지 */
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: var(--color-focus);
-  box-shadow: 0 0 0 3px rgba(100, 108, 255, 0.1);
+  border-color: var(--color-primary);
+  transform: none !important;
+  box-sizing: border-box;
 }
 
-.form-group input::placeholder,
-.form-group textarea::placeholder {
-  color: var(--color-text-muted);
-  opacity: 1;
-}
-
-.form-group textarea {
-  resize: vertical;
-  min-height: 100px;
-  flex: 2;
-  min-width: 100%;
-}
 
 .form-group input.error,
 .form-group textarea.error {
@@ -102,7 +99,7 @@
   background-color: var(--color-primary);
   color: var(--color-text-white);
   border: none;
-  padding: var(--spacing-sm) var(--spacing-2xl);
+  padding: var(--spacing-md) var(--spacing-2xl);
   border-radius: var(--border-radius-md);
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-semibold);
@@ -135,7 +132,7 @@
   .form-group input,
   .form-group textarea {
     padding: 11px 14px;
-    font-size: 13px;
+    font-size: 16px; /* 모바일에서 자동 확대 방지 */
   }
   
   .submit-btn {
@@ -164,7 +161,7 @@
   .form-group input,
   .form-group textarea {
     padding: 10px 12px;
-    font-size: 13px;
+    font-size: 16px; /* 모바일에서 자동 확대 방지 */
   }
   
   .submit-btn {
@@ -182,7 +179,7 @@
   .form-group input,
   .form-group textarea {
     padding: 8px 10px;
-    font-size: 12px;
+    font-size: 16px; /* 모바일에서 자동 확대 방지 */
   }
   
   .submit-btn {

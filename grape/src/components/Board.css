@@ -1,0 +1,30 @@
+.board-container {
+  min-height: 100vh;
+  background-color: var(--color-background-light);
+  padding: 20px;
+  margin-top: var(--spacing-2xl);
+  border-radius: var(--border-radius-xl);
+}
+
+/* 페이지 전환 애니메이션 */
+.board-container > * {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .board-container {
+    padding: 10px;
+  }
+} 

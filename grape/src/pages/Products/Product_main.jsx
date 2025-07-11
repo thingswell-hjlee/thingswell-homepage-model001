@@ -30,7 +30,7 @@ const Product_main = () => {
       imageAlt: "용접 제품",
       label: "카메라",
       title: "카메라",
-      link: "/product/1"
+      link: "/product-list"
     },
     {
       image: welding,
