@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import './BoardList.css';
 import { supabase } from '../lib/supabase';
+import { useAuth } from '../contexts/AuthContext';
 
-const BoardList = ({ post, onBack, onEdit, onDelete, onPostClick, tableName }) => {
+const BoardList = ({ post, onBack, onEdit, onDelete, onPostClick, onWriteClick, tableName }) => {
   const [instruments, setInstruments] = useState([]);
   const [filteredInstruments, setFilteredInstruments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const { user } = useAuth(); // 로그인 상태 가져오기
 
   useEffect(() => {
     getInstruments();
@@ -22,6 +24,7 @@ const BoardList = ({ post, onBack, onEdit, onDelete, onPostClick, tableName }) =
   async function getInstruments() {
     try {
       setLoading(true);
+      setError(null); // 오류 상태 초기화
       
       // props로 전달받은 테이블명 사용
       let data = null;
@@ -34,33 +37,35 @@ const BoardList = ({ post, onBack, onEdit, onDelete, onPostClick, tableName }) =
         return;
       }
       
-      console.log(`테이블 "${tableName}" 시도 중...`);
+      console.log(`테이블 "${tableName}"에서 데이터를 가져오는 중...`);
       const result = await supabase.from(tableName).select("*");
-      console.log(`${tableName} 결과:`, result);
+      console.log(`${tableName} 쿼리 결과:`, result);
       
-      if (!result.error && result.data) {
-        data = result.data;
-        console.log(`성공! 테이블 "${tableName}"에서 데이터를 가져왔습니다.`);
-        console.log('데이터 개수:', data.length);
-        if (data.length > 0) {
-          console.log('첫 번째 데이터 구조:', data[0]);
-          console.log('모든 데이터:', data);
-        }
-      } else if (result.error) {
-        console.log(`${tableName} 오류:`, result.error);
+      if (result.error) {
+        console.error(`${tableName} Supabase 오류:`, result.error);
         error = result.error;
+      } else {
+        data = result.data;
+        console.log(`성공! 테이블 "${tableName}"에서 ${data ? data.length : 0}개의 데이터를 가져왔습니다.`);
+        if (data && data.length > 0) {
+          console.log('첫 번째 데이터 구조:', data[0]);
+        }
       }
       
       if (error) {
         console.error("Supabase 오류:", error);
-        setError(error.message);
+        setError(`데이터베이스 오류: ${error.message}`);
         setInstruments([]);
-      } else if (data && data.length > 0) {
+      } else if (data) {
         console.log('받아온 데이터:', data);
         setInstruments(data);
+        // 데이터가 없어도 오류가 아닌 정상적인 상태로 처리
+        if (data.length === 0) {
+          console.log('테이블에 데이터가 없습니다. (정상적인 상태)');
+        }
       } else {
-        console.log('모든 테이블에서 데이 터를 찾을 수 없습니다.');
-        setError("데이터베이스에 게시글이 없거나 테이블을 찾을 수 없습니다.");
+        console.error('예상치 못한 오류: 데이터와 오류 모두 null');
+        setError("데이터를 가져오는 중 예상치 못한 오류가 발생했습니다.");
         setInstruments([]);
       }
     } catch (err) {
@@ -139,9 +144,11 @@ const BoardList = ({ post, onBack, onEdit, onDelete, onPostClick, tableName }) =
             <button id="search-button" onClick={handleSearch}>검색</button>
             
         </div>
-        {/* <button onClick={onWriteClick} className="btn-write">
-          글쓰기
-        </button> */}
+        {user && (
+          <button onClick={onWriteClick} className="btn-write">
+            글쓰기
+          </button>
+        )}
       </div>
       
       <div className="board-table">
@@ -152,6 +159,7 @@ const BoardList = ({ post, onBack, onEdit, onDelete, onPostClick, tableName }) =
               <th id="board-title">제목</th>
               {/* <th>작성자</th> */}
               <th id="board-date">작성일</th>
+              {user && <th id="board-actions">관리</th>}
               {/* <th>조회수</th> */}
             </tr>
           </thead>
@@ -182,12 +190,27 @@ const BoardList = ({ post, onBack, onEdit, onDelete, onPostClick, tableName }) =
                 }
                 
                 return (
-                  <tr key={instrument.id || index} onClick={() => handlePostClick(instrument)}>
-                    <td id="board-number">{instrument.id}</td>
-                    <td id="board-title">
+                  <tr key={instrument.id || index}>
+                    <td id="board-number" onClick={() => handlePostClick(instrument)}>{instrument.id}</td>
+                    <td id="board-title" onClick={() => handlePostClick(instrument)}>
                       {title}
                     </td>
-                    <td id="board-date">{createdAt}</td>
+                    <td id="board-date" onClick={() => handlePostClick(instrument)}>{createdAt}</td>
+                    {user && (
+                      <td id="board-actions">
+                        <button 
+                          className="delete-btn" 
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            if (onDelete) {
+                              onDelete(instrument);
+                            }
+                          }}
+                        >
+                          삭제
+                        </button>
+                      </td>
+                    )}
                   </tr>
                 );
               })
@@ -205,6 +228,14 @@ const BoardList = ({ post, onBack, onEdit, onDelete, onPostClick, tableName }) =
       {(!filteredInstruments || filteredInstruments.length === 0) && (
         <div className="empty-state">
           <p>{searchTerm.trim() !== '' ? '검색 결과가 없습니다.' : '등록된 게시글이 없습니다.'}</p>
+          {user && searchTerm.trim() === '' && (
+            <div className="empty-state-actions">
+              <p>첫 번째 게시글을 작성해보세요!</p>
+              <button onClick={onWriteClick} className="btn-write-empty">
+                글쓰기
+              </button>
+            </div>
+          )}
         </div>
       )}
     </div>

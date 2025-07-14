@@ -145,4 +145,32 @@
     padding: 10px 8px;
     font-size: 12px;
   }
+}
+
+/* 삭제 버튼 스타일 */
+.delete-btn {
+  padding: 6px 12px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.delete-btn:hover {
+  background-color: #c82333;
+}
+
+#board-actions {
+  text-align: center;
+  width: 80px;
+}
+
+#board-number,
+#board-title,
+#board-date {
+  cursor: pointer;
 } 

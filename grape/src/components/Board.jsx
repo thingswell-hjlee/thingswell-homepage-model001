@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import BoardList from './BoardList';
 import BoardDetail from './BoardDetail';
 import BoardEditor from './BoardEditor';
+import { supabase } from '../lib/supabase';
+import { useAuth } from '../contexts/AuthContext';
 import './Board.css';
 
 const Board = ({ tableName }) => {
@@ -84,12 +86,28 @@ const Board = ({ tableName }) => {
     setEditingPost(null);
   };
 
-  const handleDeletePost = (postId) => {
+  const handleDeletePost = async (post) => {
     if (window.confirm('정말 삭제하시겠습니까?')) {
-      const updatedPosts = posts.filter(post => post.id !== postId);
-      setPosts(updatedPosts);
-      setCurrentView('list');
-      setSelectedPost(null);
+      try {
+        // Supabase에서 실제 데이터 삭제
+        const { error } = await supabase
+          .from(tableName)
+          .delete()
+          .eq('id', post.id);
+
+        if (error) {
+          console.error('삭제 오류:', error);
+          alert('삭제 중 오류가 발생했습니다: ' + error.message);
+        } else {
+          console.log('게시물이 성공적으로 삭제되었습니다.');
+          alert('게시물이 삭제되었습니다.');
+          // 목록 새로고침을 위해 페이지를 다시 로드하거나 상태를 업데이트
+          window.location.reload();
+        }
+      } catch (error) {
+        console.error('삭제 중 예외 발생:', error);
+        alert('삭제 중 오류가 발생했습니다.');
+      }
     }
   };
 
@@ -100,6 +118,7 @@ const Board = ({ tableName }) => {
           <BoardList
             onPostClick={handlePostClick}
             onWriteClick={handleWriteClick}
+            onDelete={handleDeletePost}
             tableName={tableName}
           />
         );
@@ -116,6 +135,8 @@ const Board = ({ tableName }) => {
         return (
           <BoardEditor
             onSave={handleSavePost}
+            tableName={tableName}
+            onCancel={handleBackToList}
           />
         );
       case 'edit':
@@ -124,10 +145,12 @@ const Board = ({ tableName }) => {
             initialContent={editingPost?.content || ''}
             title={editingPost?.title || ''}
             onSave={handleSavePost}
+            tableName={tableName}
+            onCancel={handleBackToList}
           />
         );
       default:
-        return <BoardList onPostClick={handlePostClick} onWriteClick={handleWriteClick} tableName={tableName} />;
+        return <BoardList onPostClick={handlePostClick} onWriteClick={handleWriteClick} onDelete={handleDeletePost} tableName={tableName} />;
     }
   };
 
