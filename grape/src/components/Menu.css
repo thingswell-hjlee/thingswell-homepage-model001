@@ -176,7 +176,10 @@ margin-top: 20px;
   transition: all var(--transition-base);
   position: relative;
   white-space: nowrap;
-  outline: none;
+  outline: none !important;
+  box-shadow: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+  -webkit-focus-ring-color: transparent !important;
   border-radius: var(--menu-button-border-radius);
 }
 
@@ -196,11 +199,11 @@ margin-top: 20px;
 .menu-button:hover:not(:disabled):not(.active) {
   background-color: var(--color-secondary) !important; 
   color: var(--color-text-white) !important;
-  outline: none;
-  box-shadow: none;
-  border: none;
-  -webkit-tap-highlight-color: transparent;
-  -webkit-focus-ring-color: transparent;
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+  -webkit-focus-ring-color: transparent !important;
 }
 
 /* 액티브/포커스 상태 - secondary 색상 사용 (활성화된 메뉴 제외) */
@@ -208,11 +211,11 @@ margin-top: 20px;
 .menu-button:focus:not(:disabled):not(.active) {
   background-color: var(--color-secondary) !important;
   color: var(--color-text-white) !important;
-  outline: none;
-  box-shadow: none;
-  border: none;
-  -webkit-tap-highlight-color: transparent;
-  -webkit-focus-ring-color: transparent;
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+  -webkit-focus-ring-color: transparent !important;
 }
 
 /* 활성화된 메뉴 버튼 스타일 - primary 색상 사용 */
@@ -226,6 +229,13 @@ margin-top: 20px;
 
 /* 활성화된 메뉴가 있을 때 서브메뉴 항상 표시 */
 .menu-container.has-active-menu .full-width-submenu {
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: block !important;
+}
+
+/* 활성화된 서브메뉴가 있는 메뉴의 서브메뉴 항상 표시 */
+.menu-container.has-active-menu .menu-item[data-active="true"] .full-width-submenu {
   opacity: 1 !important;
   visibility: visible !important;
   display: block !important;
@@ -336,7 +346,10 @@ margin-top: 20px;
   color: #333;
   transition: all 0.2s ease;
   border-right: 1px solid #f0f0f0;
-  outline: none;
+  outline: none !important;
+  box-shadow: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+  -webkit-focus-ring-color: transparent !important;
   justify-content: center;
 }
 
@@ -349,12 +362,22 @@ margin-top: 20px;
 .submenu-button:hover:not(.active) {
   background-color: var(--color-hover) !important;
   color: var(--color-text-white) !important;
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+  -webkit-focus-ring-color: transparent !important;
 }
 
 /* 서브메뉴 버튼 클릭 효과 (활성화된 버튼 제외) */
 .submenu-button:active:not(.active) {
   background-color: var(--color-hover) !important;
   color: var(--color-text-white) !important;
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+  -webkit-focus-ring-color: transparent !important;
 }
 
 /* 활성화된 서브메뉴 버튼 스타일 */
@@ -368,7 +391,11 @@ margin-top: 20px;
 
 /* 서브메뉴 버튼 포커스 효과 제거 */
 .submenu-button:focus {
-  outline: none;
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+  -webkit-focus-ring-color: transparent !important;
 }
 
 /* 서브메뉴 텍스트 스타일 */
@@ -475,7 +502,10 @@ margin-top: 20px;
   cursor: pointer;
   padding: 8px;
   margin-left: 15px;
-  outline: none;
+  outline: none !important;
+  box-shadow: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+  -webkit-focus-ring-color: transparent !important;
 }
 
 .hamburger {
@@ -618,6 +648,11 @@ margin-top: 20px;
   .menu-button:hover:not(:disabled):not(.active) {
     background-color: var(--color-secondary) !important;
     color: var(--color-text-white) !important;
+    outline: none !important;
+    box-shadow: none !important;
+    border: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+    -webkit-focus-ring-color: transparent !important;
   }
   
   .full-width-submenu {
@@ -662,6 +697,11 @@ margin-top: 20px;
   .submenu-button:hover:not(.active) {
     background-color: var(--color-secondary) !important;
     color: var(--color-text-white) !important;
+    outline: none !important;
+    box-shadow: none !important;
+    border: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+    -webkit-focus-ring-color: transparent !important;
   }
 }
 

@@ -162,6 +162,10 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
             setActiveSubmenuIndex(subIndex);
             foundActiveSubmenu = true;
             menuIndexForSubmenu = index;
+            // 데스크톱에서는 서브메뉴가 있는 메뉴의 서브메뉴를 열어두기
+            if (!isMobile) {
+              setOpenSubmenu(index);
+            }
           }
         });
       } else {
@@ -188,16 +192,67 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
     if (!foundActiveMenu && !foundActiveSubmenu) {
       setActiveMenuIndex(null);
       setActiveSubmenuIndex(null);
+      // 데스크톱에서는 서브메뉴도 닫기
+      if (!isMobile) {
+        setOpenSubmenu(null);
+      }
+    }
+  }, [location.pathname, isMobile]);
+
+
+
+  // 메뉴 위치 기반 활성화 상태 확인 함수
+  const isMenuActive = (menuIndex) => {
+    // 현재 페이지가 해당 메뉴의 서브메뉴 중 하나와 일치하는 경우
+    if (defaultMenuItems[menuIndex] && defaultMenuItems[menuIndex].submenu) {
+      const hasActiveSubmenu = defaultMenuItems[menuIndex].submenu.some(subItem => {
+        return subItem.path === location.pathname;
+      });
+      
+      if (hasActiveSubmenu) {
+        return true;
+      }
     }
     
-    // 데스크톱에서는 호버 시에만 서브메뉴가 열리도록 하므로
-    // 페이지 로드 시 자동으로 서브메뉴를 열지 않음
-  }, [location.pathname, isMobile, activeMenuIndex]);
+    // 현재 페이지가 해당 메뉴의 메인 페이지와 일치하는 경우
+    const pageRoutes = {
+      '솔루션': '/solutions',
+      '제품': '/products',
+      '적용분야': '/applications',
+      '납품사례': '/cases',
+      '정부지원 사업안내': '/government-support',
+      '고객지원': '/customer-service',
+      '회사소개': '/about'
+    };
+    
+    const menuItem = defaultMenuItems[menuIndex];
+    if (menuItem && pageRoutes[menuItem.label] === location.pathname) {
+      return true;
+    }
+    
+    return false;
+  };
+
+  // 서브메뉴 활성화 상태 확인 함수
+  const isSubmenuActive = (parentIndex, subIndex) => {
+    // 현재 페이지가 해당 서브메뉴의 경로와 일치하는 경우
+    if (defaultMenuItems[parentIndex] && defaultMenuItems[parentIndex].submenu) {
+      const subItem = defaultMenuItems[parentIndex].submenu[subIndex];
+      if (subItem && subItem.path === location.pathname) {
+        return true;
+      }
+    }
+    
+    return false;
+  };
 
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
-        setOpenSubmenu(null);
+        // 활성화된 메뉴가 없을 때만 서브메뉴 닫기
+        if (activeMenuIndex === null) {
+          setOpenSubmenu(null);
+        }
         if (isMobile) {
           setIsMobileMenuOpen(false);
         }
@@ -211,7 +266,7 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
       document.removeEventListener('mousedown', handleClickOutside);
       document.removeEventListener('touchstart', handleClickOutside);
     };
-  }, [isMobile]);
+  }, [isMobile, activeMenuIndex]);
 
   const handleItemClick = (item, index) => {
     if (item.submenu && item.submenu.length > 0) {
@@ -254,24 +309,27 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
   const handleMouseEnter = (index) => {
     if (!isMobile && defaultMenuItems[index].submenu && defaultMenuItems[index].submenu.length > 0) {
       setOpenSubmenu(index);
-      setActiveMenuIndex(index);
-      setActiveSubmenuIndex(null);
+      // 호버 시에는 활성화 상태를 변경하지 않음 (클릭 시에만 활성화)
     }
   };
 
-  // 마우스가 메뉴를 벗어날 때 서브메뉴 숨김
+  // 마우스가 메뉴를 벗어날 때 서브메뉴 숨김 (활성화된 메뉴가 아닌 경우에만)
   const handleMouseLeave = () => {
-    if (!isMobile) {
+    if (!isMobile && activeMenuIndex === null) {
       setOpenSubmenu(null);
     }
   };
 
   const handleSubmenuItemClick = (submenuItem, subIndex) => {
     handleSubmenuClick(submenuItem, subIndex, openSubmenu);
-    // 데스크톱에서는 서브메뉴를 열어두고, 모바일에서만 닫기
+    // 모바일에서만 서브메뉴 닫기, 데스크톱에서는 서브메뉴 유지
     if (isMobile) {
+      // 모바일에서는 서브메뉴 클릭 후 메뉴 닫기
       setOpenSubmenu(null);
       setIsMobileMenuOpen(false);
+    } else {
+      // 데스크톱에서는 서브메뉴 클릭 후에도 서브메뉴 유지
+      setOpenSubmenu(openSubmenu);
     }
   };
 
@@ -305,13 +363,14 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
         <nav className={`menu menu-${orientation} menu-${theme} ${isMobileMenuOpen ? 'mobile-visible' : ''}`}>
           <ul className="menu-list">
             {defaultMenuItems.map((item, index) => (
-              <li 
+                              <li 
                 key={index} 
                 className={`menu-item ${item.submenu && item.submenu.length > 0 ? 'has-submenu' : ''}`}
+                data-active={isMenuActive(index) ? 'true' : 'false'}
                 onMouseEnter={() => handleMouseEnter(index)}
               >
                 <button
-                  className={`menu-button ${item.submenu && item.submenu.length > 0 ? 'has-submenu' : ''} ${openSubmenu === index ? 'active' : ''} ${activeMenuIndex === index ? 'active' : ''}`}
+                  className={`menu-button ${item.submenu && item.submenu.length > 0 ? 'has-submenu' : ''} ${openSubmenu === index ? 'active' : ''} ${isMenuActive(index) ? 'active' : ''}`}
                   onClick={() => handleItemClick(item, index)}
                   disabled={item.disabled}
                 >
@@ -325,21 +384,21 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
           </ul>
         </nav>
         
-        {openSubmenu !== null && defaultMenuItems[openSubmenu] && defaultMenuItems[openSubmenu].submenu && (
+        {((openSubmenu !== null || (activeMenuIndex !== null && defaultMenuItems[activeMenuIndex] && defaultMenuItems[activeMenuIndex].submenu)) && defaultMenuItems[openSubmenu !== null ? openSubmenu : activeMenuIndex] && defaultMenuItems[openSubmenu !== null ? openSubmenu : activeMenuIndex].submenu) && (
           <div 
             className={`full-width-submenu ${isMobile ? 'mobile-submenu' : ''}`}
-            onMouseEnter={() => !isMobile && setOpenSubmenu(openSubmenu)}
+            onMouseEnter={() => !isMobile && setOpenSubmenu(openSubmenu !== null ? openSubmenu : activeMenuIndex)}
             onMouseLeave={() => {
-              if (!isMobile) {
+              if (!isMobile && activeMenuIndex === null) {
                 setOpenSubmenu(null);
               }
             }}
           >
             <ul className="submenu-list">
-              {defaultMenuItems[openSubmenu].submenu.map((submenuItem, subIndex) => (
+              {defaultMenuItems[openSubmenu !== null ? openSubmenu : activeMenuIndex].submenu.map((submenuItem, subIndex) => (
                 <li key={subIndex} className="submenu-item">
                   <button
-                    className={`submenu-button ${activeSubmenuIndex === subIndex ? 'active' : ''}`}
+                    className={`submenu-button ${isSubmenuActive(openSubmenu !== null ? openSubmenu : activeMenuIndex, subIndex) ? 'active' : ''}`}
                     onClick={() => handleSubmenuItemClick(submenuItem, subIndex)}
                   >
                     <span className="submenu-text">{submenuItem.label}</span>
