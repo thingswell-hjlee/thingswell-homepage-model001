@@ -50,7 +50,7 @@ const SidebarMenu = ({ menuItems = [], sectionRefs = {}, menuTitle = '사이드�
   useEffect(() => {
     const handleScroll = () => {
       const sections = menuItems.filter(item => item.id);
-      const scrollPosition = window.scrollY + 200; // 오프셋 증가
+      const scrollPosition = window.scrollY + 100; // 오프셋 조정
 
       let activeSection = null;
 

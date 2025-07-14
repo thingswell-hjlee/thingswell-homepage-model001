@@ -13,18 +13,45 @@ const About = () => {
   // URL 해시에 따라 해당 섹션으로 스크롤
   useEffect(() => {
     if (location.hash) {
-      const element = document.querySelector(location.hash);
-      if (element) {
-        // 헤더 높이만큼 오프셋을 주어 스크롤
-        const headerOffset = 100;
-        const elementPosition = element.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth'
-        });
-      }
+      const hash = location.hash.substring(1); // # 제거
+      
+      const scrollToElement = () => {
+        let element = document.querySelector(`#${hash}`);
+        if (!element) {
+          element = document.querySelector(`[name="${hash}"]`);
+        }
+        if (!element) {
+          element = document.querySelector(`.${hash}`);
+        }
+        
+        if (element) {
+          const headerOffset = 120;
+          const elementRect = element.getBoundingClientRect();
+          const elementTop = elementRect.top + window.pageYOffset;
+          const scrollTop = elementTop - headerOffset;
+          
+          console.log('About page scrolling to:', hash, 'position:', scrollTop);
+          
+          window.scrollTo({
+            top: scrollTop,
+            behavior: 'smooth'
+          });
+        } else {
+          const hashElement = document.getElementById(hash);
+          if (hashElement) {
+            hashElement.scrollIntoView({ 
+              behavior: 'smooth', 
+              block: 'start' 
+            });
+          }
+        }
+      };
+      
+      // 여러 번 시도하여 확실히 실행되도록 함
+      scrollToElement();
+      setTimeout(scrollToElement, 50);
+      setTimeout(scrollToElement, 200);
+      setTimeout(scrollToElement, 500);
     }
   }, [location.hash]);
   return (
@@ -230,13 +257,6 @@ const About = () => {
                         </div>
                         <div className="location-info">
                             <div className="location-card">
-                                <h3 className="location-title">주소</h3>
-                                <p className="location-text">
-                                경기 안양시 동안구 학의로 2825<br />
-                                금강펜타리움 IT타워 A동 1302호
-                                </p>
-                            </div>
-                            <div className="location-card">
                                 <h3 className="location-title">연락처</h3>
                                 <p className="location-text">
                                     전화: 031-689-5959<br />
@@ -245,7 +265,6 @@ const About = () => {
                                 </p>
                             </div>
                         </div>
-                        
                     </div>
                 </div>
             </div>

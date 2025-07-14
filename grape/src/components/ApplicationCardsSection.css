@@ -10,11 +10,21 @@
 }
 
 .application-card-section-title {
-  font-size: var(--font-size-5xl);
+  font-size: clamp(var(--font-size-2xl), 4vw, var(--font-size-4xl));
   font-weight: var(--font-weight-bold);
   color: var(--color-text-primary);
-  text-align: left;
-  padding-top: var(--spacing-xl);
+  text-align: center;
+  margin-bottom: var(--spacing-2xl);
+  font-family: var(--font-family-primary);
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Standard */
+  -webkit-user-drag: none; /* Safari */
+  -khtml-user-drag: none; /* Konqueror HTML */
+  -moz-user-drag: none; /* Firefox */
+  -o-user-drag: none; /* Opera */
+  user-drag: none; /* Standard */
 }
 
 .cards-container {
@@ -28,50 +38,6 @@
   flex-direction: column;
 }
 
-.responsive-cards {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  gap: var(--spacing-2xl);
-  margin: var(--spacing-2xl) 0 var(--spacing-xl) 0;
-  width: 100%;
-}
-
-/* 반응형 스타일 */
-@media (max-width: 1024px) {
-  .application-cards {
-    gap: var(--spacing-xl);
-  }
-  
-  .application-section-responsive {
-    padding: var(--spacing-xl) 0;
-  }
-  
-  .responsive-cards {
-    gap: var(--spacing-xl);
-    margin: var(--spacing-xl) 0 var(--spacing-lg) 0;
-  }
-}
-
-@media (max-width: 1000px) {
-  .application-cards {
-    flex-direction: column !important;
-    align-items: flex-start !important;
-    gap: var(--spacing-md) !important;
-  }
-  
-  .application-section-responsive {
-    padding: var(--spacing-lg) 0;
-  }
-  
-  .responsive-cards {
-    flex-direction: column !important;
-    align-items: flex-start !important;
-    gap: var(--spacing-md) !important;
-    margin: var(--spacing-lg) 0 var(--spacing-md) 0;
-  }
-} 
-
 .application-cards,
 .responsive-cards {
   display: grid;
@@ -79,20 +45,49 @@
   gap: var(--spacing-2xl);
   align-items: flex-start;
   width: 100%;
+  margin: var(--spacing-2xl) 0 var(--spacing-xl) 0;
 }
 
+/* 반응형 스타일 */
 @media (max-width: 1024px) {
   .application-cards,
   .responsive-cards {
     grid-template-columns: repeat(2, 1fr);
     gap: var(--spacing-xl);
   }
+  
+  .application-section-responsive {
+    padding: var(--spacing-xl) 0;
+  }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .application-cards,
   .responsive-cards {
     grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+  }
+  
+  .application-section-responsive {
+    padding: var(--spacing-lg) 0;
+  }
+  
+  .cards-container {
+    padding: 0 var(--spacing-lg);
+  }
+}
+
+@media (max-width: 480px) {
+  .application-cards,
+  .responsive-cards {
     gap: var(--spacing-md);
+  }
+  
+  .application-section-responsive {
+    padding: var(--spacing-md) 0;
+  }
+  
+  .cards-container {
+    padding: 0 var(--spacing-md);
   }
 } 

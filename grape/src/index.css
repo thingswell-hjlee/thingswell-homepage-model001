@@ -1,71 +1,135 @@
 /* Import CSS Variables */
-@import './styles/variables.css';
+@import url('./styles/variables.css');
+@import url('./styles/utilities.css');
 
-:root {
-  font-family: var(--font-family-primary);
-  line-height: var(--line-height-relaxed);
-  font-weight: var(--font-weight-regular);
+/* ===== GLOBAL RESET & BASE STYLES ===== */
 
-  color-scheme: light dark;
-  color: var(--color-text-primary);
-  background-color: var(--color-background);
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+* {
+  box-sizing: border-box;
 }
 
-a {
-  font-weight: var(--font-weight-medium);
-  color: var(--color-focus);
-  text-decoration: inherit;
-}
-a:hover {
-  color: var(--color-primary-light);
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
 }
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  padding: 0;
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-relaxed);
+  color: var(--color-text-primary);
+  background-color: var(--color-background-light);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
-h1 {
-  font-size: var(--font-size-5xl);
-  line-height: var(--line-height-tight);
+/* ===== RESPONSIVE VIEWPORT ===== */
+
+/* 모바일 최적화 */
+@media screen and (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
 }
 
-button {
-  border-radius: var(--button-border-radius);
-  border: var(--border-width-thin) solid transparent;
-  padding: var(--button-padding);
-  font-size: var(--button-font-size);
-  font-weight: var(--button-font-weight);
-  font-family: inherit;
-  background-color: var(--color-background-dark);
+@media screen and (max-width: 480px) {
+  html {
+    font-size: 13px;
+  }
+}
+
+/* ===== ACCESSIBILITY ===== */
+
+/* 스크린 리더 전용 텍스트 */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* 포커스 표시 개선 */
+*:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* ===== PERFORMANCE OPTIMIZATIONS ===== */
+
+/* 이미지 최적화 */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* 스크롤 성능 개선 */
+* {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ===== UTILITY CLASSES ===== */
+
+/* 텍스트 선택 방지 */
+.no-select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* 커서 스타일 */
+.pointer {
   cursor: pointer;
-  transition: border-color var(--transition-base);
-}
-button:hover {
-  border-color: var(--color-focus);
-}
-button:focus,
-button:focus-visible {
-  outline: var(--border-width-thick) auto -webkit-focus-ring-color;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: var(--color-text-primary);
-    background-color: var(--color-background);
+.not-allowed {
+  cursor: not-allowed;
+}
+
+/* ===== RESPONSIVE UTILITIES ===== */
+
+/* 반응형 숨김/표시 */
+@media (max-width: 768px) {
+  .md\:hidden { display: none !important; }
+  .md\:block { display: block !important; }
+}
+
+@media (max-width: 480px) {
+  .sm\:hidden { display: none !important; }
+  .sm\:block { display: block !important; }
+}
+
+/* ===== PRINT STYLES ===== */
+
+@media print {
+  .no-print {
+    display: none !important;
   }
-  a:hover {
-    color: var(--color-primary-light);
+  
+  .print-only {
+    display: block !important;
   }
-  button {
-    background-color: var(--color-surface-light);
+  
+  * {
+    background: transparent !important;
+    color: black !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+  
+  body {
+    font-size: 12pt;
+    line-height: 1.4;
   }
 }

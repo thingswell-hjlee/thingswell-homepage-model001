@@ -155,7 +155,13 @@ margin-top: 20px;
 
 /* 메뉴 아이템에 서브메뉴가 있을 때 호버 효과 (활성화된 메뉴 제외) */
 .menu-item.has-submenu:hover .menu-button:not(.active) {
-  background-color: var(--color-secondary) !important;
+  background-color: var(--color-primary) !important;
+  color: var(--color-text-white) !important;
+}
+
+/* 활성화된 메뉴는 호버 효과 제거 */
+.menu-item.has-submenu:hover .menu-button.active {
+  background-color: var(--color-primary-dark) !important;
   color: var(--color-text-white) !important;
 }
 
@@ -176,10 +182,7 @@ margin-top: 20px;
   transition: all var(--transition-base);
   position: relative;
   white-space: nowrap;
-  outline: none !important;
-  box-shadow: none !important;
-  -webkit-tap-highlight-color: transparent !important;
-  -webkit-focus-ring-color: transparent !important;
+  outline: none;
   border-radius: var(--menu-button-border-radius);
 }
 
@@ -195,56 +198,64 @@ margin-top: 20px;
   transform: rotate(180deg);
 }
 
-/* 호버 상태 - secondary 색상 사용 (활성화된 메뉴 제외) */
+/* 호버 상태 - primary 색상 사용 (활성화된 메뉴 제외) */
 .menu-button:hover:not(:disabled):not(.active) {
-  background-color: var(--color-secondary) !important; 
+  background-color: var(--color-primary) !important; 
   color: var(--color-text-white) !important;
-  outline: none !important;
-  box-shadow: none !important;
-  border: none !important;
-  -webkit-tap-highlight-color: transparent !important;
-  -webkit-focus-ring-color: transparent !important;
+  outline: none;
+  box-shadow: none;
+  border: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-focus-ring-color: transparent;
 }
 
-/* 액티브/포커스 상태 - secondary 색상 사용 (활성화된 메뉴 제외) */
+/* 활성화된 메뉴 버튼 호버 시에도 primary-dark 유지 */
+.menu-button.active:hover {
+  background-color: var(--color-primary-dark) !important;
+  color: var(--color-text-white) !important;
+  outline: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  border: 2px solid var(--color-primary-dark);
+}
+
+/* 액티브/포커스 상태 - primary-dark 색상 사용 (활성화된 메뉴 제외) */
 .menu-button:active:not(:disabled):not(.active),
 .menu-button:focus:not(:disabled):not(.active) {
-  background-color: var(--color-secondary) !important;
+  background-color: var(--color-primary-dark) !important;
   color: var(--color-text-white) !important;
-  outline: none !important;
-  box-shadow: none !important;
-  border: none !important;
-  -webkit-tap-highlight-color: transparent !important;
-  -webkit-focus-ring-color: transparent !important;
+  outline: none;
+  box-shadow: none;
+  border: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-focus-ring-color: transparent;
 }
 
-/* 활성화된 메뉴 버튼 스타일 - primary 색상 사용 */
+/* 활성화된 메뉴 버튼 액티브/포커스 시에도 primary-dark 유지 */
+.menu-button.active:active,
+.menu-button.active:focus {
+  background-color: var(--color-primary-dark) !important;
+  color: var(--color-text-white) !important;
+  outline: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  border: 2px solid var(--color-primary-dark);
+}
+
+/* 활성화된 메뉴 버튼 스타일 - primary-dark 색상 사용 */
 .menu-button.active {
-  background-color: var(--color-primary) !important;
+  background-color: var(--color-primary-dark) !important;
   color: var(--color-text-white) !important;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   font-weight: 600;
-  border: 2px solid var(--color-primary);
+  border: 2px solid var(--color-primary-dark);
 }
 
-/* 활성화된 메뉴가 있을 때 서브메뉴 항상 표시 */
-.menu-container.has-active-menu .full-width-submenu {
-  opacity: 1 !important;
-  visibility: visible !important;
-  display: block !important;
-}
+/* 활성화된 메뉴가 있을 때 서브메뉴 항상 표시하지 않음 - 호버나 클릭 시에만 표시 */
 
-/* 활성화된 서브메뉴가 있는 메뉴의 서브메뉴 항상 표시 */
-.menu-container.has-active-menu .menu-item[data-active="true"] .full-width-submenu {
-  opacity: 1 !important;
-  visibility: visible !important;
-  display: block !important;
-}
-
-/* 서브메뉴가 열린 상태일 때 항상 표시 */
+/* 서브메뉴가 열린 상태일 때만 표시 */
 .menu-container.open .full-width-submenu {
   opacity: 1 !important;
   visibility: visible !important;
+  display: block !important;
 }
 
 /* 비활성화 상태 */
@@ -273,6 +284,7 @@ margin-top: 20px;
   padding: 0;
   opacity: 0;
   visibility: hidden;
+  display: none;
   transition: opacity 0.2s ease, visibility 0.2s ease;
 }
 
@@ -280,12 +292,14 @@ margin-top: 20px;
 .menu-item:hover .full-width-submenu {
   opacity: 1;
   visibility: visible;
+  display: block;
 }
 
 /* 메뉴 컨테이너 호버 시 서브메뉴 표시 */
 .menu-container:hover .full-width-submenu {
   opacity: 1;
   visibility: visible;
+  display: block;
 }
 
 /* 서브메뉴가 열린 상태일 때 표시 */
@@ -315,7 +329,7 @@ margin-top: 20px;
 .submenu-list {
   list-style: none;
   margin: 0;
-  padding: 0;
+ secpndadying: 0;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -327,7 +341,7 @@ margin-top: 20px;
 .submenu-item {
   margin: 0;
   flex: 1;
-  min-width: 120px;
+  minsecondaryh: 120px;
   max-width: 180px;
 }
 
@@ -346,11 +360,9 @@ margin-top: 20px;
   color: #333;
   transition: all 0.2s ease;
   border-right: 1px solid #f0f0f0;
-  outline: none !important;
-  box-shadow: none !important;
-  -webkit-tap-highlight-color: transparent !important;
-  -webkit-focus-ring-color: transparent !important;
+  outline: none;
   justify-content: center;
+  border-radius: var(--menu-button-border-radius);
 }
 
 /* 마지막 서브메뉴 버튼의 오른쪽 테두리 제거 */
@@ -360,42 +372,46 @@ margin-top: 20px;
 
 /* 서브메뉴 버튼 호버 효과 (활성화된 버튼 제외) */
 .submenu-button:hover:not(.active) {
-  background-color: var(--color-hover) !important;
+  background-color: var(--color-primary) !important;
   color: var(--color-text-white) !important;
-  outline: none !important;
-  box-shadow: none !important;
-  border: none !important;
-  -webkit-tap-highlight-color: transparent !important;
-  -webkit-focus-ring-color: transparent !important;
 }
 
 /* 서브메뉴 버튼 클릭 효과 (활성화된 버튼 제외) */
 .submenu-button:active:not(.active) {
-  background-color: var(--color-hover) !important;
+  background-color: var(--color-primary-dark) !important;
   color: var(--color-text-white) !important;
-  outline: none !important;
-  box-shadow: none !important;
-  border: none !important;
-  -webkit-tap-highlight-color: transparent !important;
-  -webkit-focus-ring-color: transparent !important;
+}
+
+/* 활성화된 서브메뉴 버튼 호버 시에도 primary-dark 유지 */
+.submenu-button.active:hover {
+  background-color: var(--color-primary-dark) !important;
+  color: var(--color-text-white) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  font-weight: 600;
+  border-right: 2px solid var(--color-primary-dark);
+}
+
+/* 활성화된 서브메뉴 버튼 액티브 시에도 primary-dark 유지 */
+.submenu-button.active:active {
+  background-color: var(--color-primary-dark) !important;
+  color: var(--color-text-white) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  font-weight: 600;
+  border-right: 2px solid var(--color-primary-dark);
 }
 
 /* 활성화된 서브메뉴 버튼 스타일 */
 .submenu-button.active {
-  background-color: var(--color-primary) !important;
+  background-color: var(--color-primary-dark) !important;
   color: var(--color-text-white) !important;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   font-weight: 600;
-  border-right: 2px solid var(--color-primary);
+  border-right: 2px solid var(--color-primary-dark);
 }
 
 /* 서브메뉴 버튼 포커스 효과 제거 */
 .submenu-button:focus {
-  outline: none !important;
-  box-shadow: none !important;
-  border: none !important;
-  -webkit-tap-highlight-color: transparent !important;
-  -webkit-focus-ring-color: transparent !important;
+  outline: none;
 }
 
 /* 서브메뉴 텍스트 스타일 */
@@ -476,7 +492,7 @@ margin-top: 20px;
   border: none;
 }   
 .menu-primary .menu-button:hover:not(:disabled):not(.active) {
-  background-color: var(--color-hover) !important;
+  background-color: var(--color-primary) !important;
 }
 .menu-primary .menu-item {
   border: none;
@@ -491,7 +507,7 @@ margin-top: 20px;
   background: none;
 }
 .menu-primary .submenu-button:hover:not(.active) {
-  background-color: var(--color-hover) !important;
+  background-color: var(--color-primary) !important;
 }
 
 /* 모바일 햄버거 메뉴 토글 버튼 */
@@ -502,10 +518,7 @@ margin-top: 20px;
   cursor: pointer;
   padding: 8px;
   margin-left: 15px;
-  outline: none !important;
-  box-shadow: none !important;
-  -webkit-tap-highlight-color: transparent !important;
-  -webkit-focus-ring-color: transparent !important;
+  outline: none;
 }
 
 .hamburger {
@@ -646,13 +659,14 @@ margin-top: 20px;
   }
   
   .menu-button:hover:not(:disabled):not(.active) {
-    background-color: var(--color-secondary) !important;
+    background-color: var(--color-primary) !important;
     color: var(--color-text-white) !important;
-    outline: none !important;
-    box-shadow: none !important;
-    border: none !important;
-    -webkit-tap-highlight-color: transparent !important;
-    -webkit-focus-ring-color: transparent !important;
+  }
+  
+  /* 모바일에서 활성화된 메뉴 버튼 호버 시에도 primary-dark 유지 */
+  .menu-button.active:hover {
+    background-color: var(--color-primary-dark) !important;
+    color: var(--color-text-white) !important;
   }
   
   .full-width-submenu {
@@ -695,13 +709,14 @@ margin-top: 20px;
   }
   
   .submenu-button:hover:not(.active) {
-    background-color: var(--color-secondary) !important;
+    background-color: var(--color-primary) !important;
     color: var(--color-text-white) !important;
-    outline: none !important;
-    box-shadow: none !important;
-    border: none !important;
-    -webkit-tap-highlight-color: transparent !important;
-    -webkit-focus-ring-color: transparent !important;
+  }
+  
+  /* 모바일에서 활성화된 서브메뉴 버튼 호버 시에도 primary-dark 유지 */
+  .submenu-button.active:hover {
+    background-color: var(--color-primary-dark) !important;
+    color: var(--color-text-white) !important;
   }
 }
 

@@ -177,9 +177,7 @@ const Government_support = () => {
       <div className="page-content">
         <div className="page-layout">
           <div className={`sidebar ${isSidebarOpen ? 'show' : ''}`}>
-            {(!isMobile) && (
-              <SidebarMenu menuItems={sidebarMenuItems} sectionRefs={sectionRefs} menuTitle={sidebarTitle} />
-            )}
+            <SidebarMenu menuItems={sidebarMenuItems} sectionRefs={sectionRefs} menuTitle={sidebarTitle} />
           </div>
           <div className="main-content">
             <div className="solutions-section">

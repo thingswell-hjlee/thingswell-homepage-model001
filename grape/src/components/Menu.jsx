@@ -119,8 +119,41 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
   };
 
   const handleSubmenuClick = (submenuItem, subIndex, parentIndex) => {
+    console.log('handleSubmenuClick called:', { submenuItem, subIndex, parentIndex });
     if (submenuItem.path) {
-      navigate(submenuItem.path);
+      // 회사소개 하단 메뉴의 경우 해시가 포함된 경로 처리
+      if (submenuItem.path.includes('#')) {
+        const [basePath, hash] = submenuItem.path.split('#');
+        console.log('Navigating to:', basePath, 'with hash:', hash);
+        
+        // 현재 경로와 다른 경우에만 navigate 호출
+        if (location.pathname !== basePath) {
+          navigate(basePath);
+        }
+        
+        // 해시가 있는 경우 약간의 지연 후 스크롤 처리
+        setTimeout(() => {
+          // URL 해시 업데이트
+          if (window.location.hash !== `#${hash}`) {
+            window.location.hash = hash;
+          }
+          
+          const element = document.querySelector(`#${hash}`);
+          console.log('Looking for element:', `#${hash}`, 'Found:', element);
+          if (element) {
+            const headerOffset = 100;
+            const elementPosition = element.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: 'smooth'
+            });
+          }
+        }, 300); // 지연 시간을 늘려서 페이지 로딩 완료 후 스크롤
+      } else {
+        console.log('Navigating to:', submenuItem.path);
+        navigate(submenuItem.path);
+      }
       // 서브메뉴 클릭 시 부모 메뉴와 해당 서브메뉴 모두 활성화
       setActiveMenuIndex(parentIndex);
       setActiveSubmenuIndex(subIndex);
@@ -148,6 +181,7 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
   // 현재 페이지에 따라 활성화된 메뉴 설정
   useEffect(() => {
     const currentPath = location.pathname;
+    const currentHash = location.hash;
     let foundActiveMenu = false;
     let foundActiveSubmenu = false;
     let menuIndexForSubmenu = null;
@@ -156,7 +190,19 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
     defaultMenuItems.forEach((item, index) => {
       if (item.submenu) {
         item.submenu.forEach((subItem, subIndex) => {
-          if (subItem.path === currentPath) {
+          // 해시가 포함된 경로인 경우 해시까지 비교
+          if (subItem.path.includes('#')) {
+            const [basePath, hash] = subItem.path.split('#');
+            if (basePath === currentPath && `#${hash}` === currentHash) {
+              setActiveMenuIndex(index);
+              setActiveSubmenuIndex(subIndex);
+              foundActiveSubmenu = true;
+              menuIndexForSubmenu = index;
+              if (!isMobile) {
+                setOpenSubmenu(index);
+              }
+            }
+          } else if (subItem.path === currentPath) {
             // 서브메뉴 페이지인 경우 부모 메뉴와 해당 서브메뉴 모두 활성화
             setActiveMenuIndex(index);
             setActiveSubmenuIndex(subIndex);
@@ -197,7 +243,7 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
         setOpenSubmenu(null);
       }
     }
-  }, [location.pathname, isMobile]);
+  }, [location.pathname, location.hash, isMobile]);
 
 
 
@@ -206,6 +252,11 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
     // 현재 페이지가 해당 메뉴의 서브메뉴 중 하나와 일치하는 경우
     if (defaultMenuItems[menuIndex] && defaultMenuItems[menuIndex].submenu) {
       const hasActiveSubmenu = defaultMenuItems[menuIndex].submenu.some(subItem => {
+        // 해시가 포함된 경로인 경우 해시까지 비교
+        if (subItem.path.includes('#')) {
+          const [basePath, hash] = subItem.path.split('#');
+          return basePath === location.pathname && `#${hash}` === location.hash;
+        }
         return subItem.path === location.pathname;
       });
       
@@ -238,8 +289,16 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
     // 현재 페이지가 해당 서브메뉴의 경로와 일치하는 경우
     if (defaultMenuItems[parentIndex] && defaultMenuItems[parentIndex].submenu) {
       const subItem = defaultMenuItems[parentIndex].submenu[subIndex];
-      if (subItem && subItem.path === location.pathname) {
-        return true;
+      if (subItem) {
+        // 해시가 포함된 경로인 경우 해시까지 비교
+        if (subItem.path.includes('#')) {
+          const [basePath, hash] = subItem.path.split('#');
+          if (basePath === location.pathname && `#${hash}` === location.hash) {
+            return true;
+          }
+        } else if (subItem.path === location.pathname) {
+          return true;
+        }
       }
     }
     
@@ -249,10 +308,8 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
-        // 활성화된 메뉴가 없을 때만 서브메뉴 닫기
-        if (activeMenuIndex === null) {
-          setOpenSubmenu(null);
-        }
+        // 페이지의 다른 부분을 클릭하면 서브메뉴 닫기 (활성화된 메뉴가 있어도)
+        setOpenSubmenu(null);
         if (isMobile) {
           setIsMobileMenuOpen(false);
         }
@@ -266,7 +323,7 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
       document.removeEventListener('mousedown', handleClickOutside);
       document.removeEventListener('touchstart', handleClickOutside);
     };
-  }, [isMobile, activeMenuIndex]);
+  }, [isMobile]);
 
   const handleItemClick = (item, index) => {
     if (item.submenu && item.submenu.length > 0) {
@@ -313,23 +370,28 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
     }
   };
 
-  // 마우스가 메뉴를 벗어날 때 서브메뉴 숨김 (활성화된 메뉴가 아닌 경우에만)
+  // 마우스가 메뉴를 벗어날 때 서브메뉴 숨김
   const handleMouseLeave = () => {
-    if (!isMobile && activeMenuIndex === null) {
+    if (!isMobile) {
       setOpenSubmenu(null);
     }
   };
 
   const handleSubmenuItemClick = (submenuItem, subIndex) => {
-    handleSubmenuClick(submenuItem, subIndex, openSubmenu);
-    // 모바일에서만 서브메뉴 닫기, 데스크톱에서는 서브메뉴 유지
-    if (isMobile) {
-      // 모바일에서는 서브메뉴 클릭 후 메뉴 닫기
+    console.log('handleSubmenuItemClick called:', { submenuItem, subIndex });
+    // 현재 열린 서브메뉴의 부모 인덱스 찾기
+    const currentOpenSubmenu = openSubmenu;
+    console.log('currentOpenSubmenu:', currentOpenSubmenu);
+    
+    if (currentOpenSubmenu !== null) {
+      handleSubmenuClick(submenuItem, subIndex, currentOpenSubmenu);
+      // 서브메뉴 클릭 후 서브메뉴 닫기 (모바일과 데스크톱 모두)
       setOpenSubmenu(null);
-      setIsMobileMenuOpen(false);
+      if (isMobile) {
+        setIsMobileMenuOpen(false);
+      }
     } else {
-      // 데스크톱에서는 서브메뉴 클릭 후에도 서브메뉴 유지
-      setOpenSubmenu(openSubmenu);
+      console.log('currentOpenSubmenu is null, cannot handle click');
     }
   };
 
@@ -384,30 +446,44 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
           </ul>
         </nav>
         
-        {((openSubmenu !== null || (activeMenuIndex !== null && defaultMenuItems[activeMenuIndex] && defaultMenuItems[activeMenuIndex].submenu)) && defaultMenuItems[openSubmenu !== null ? openSubmenu : activeMenuIndex] && defaultMenuItems[openSubmenu !== null ? openSubmenu : activeMenuIndex].submenu) && (
-          <div 
-            className={`full-width-submenu ${isMobile ? 'mobile-submenu' : ''}`}
-            onMouseEnter={() => !isMobile && setOpenSubmenu(openSubmenu !== null ? openSubmenu : activeMenuIndex)}
-            onMouseLeave={() => {
-              if (!isMobile && activeMenuIndex === null) {
-                setOpenSubmenu(null);
-              }
-            }}
-          >
-            <ul className="submenu-list">
-              {defaultMenuItems[openSubmenu !== null ? openSubmenu : activeMenuIndex].submenu.map((submenuItem, subIndex) => (
-                <li key={subIndex} className="submenu-item">
-                  <button
-                    className={`submenu-button ${isSubmenuActive(openSubmenu !== null ? openSubmenu : activeMenuIndex, subIndex) ? 'active' : ''}`}
-                    onClick={() => handleSubmenuItemClick(submenuItem, subIndex)}
-                  >
-                    <span className="submenu-text">{submenuItem.label}</span>
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+        {(() => {
+          // openSubmenu가 null이 아닐 때만 서브메뉴 표시 (activeMenuIndex 사용하지 않음)
+          const currentOpenSubmenu = openSubmenu;
+          const hasSubmenu = currentOpenSubmenu !== null && 
+                            defaultMenuItems[currentOpenSubmenu] && 
+                            defaultMenuItems[currentOpenSubmenu].submenu;
+          
+          return hasSubmenu && (
+            <div 
+              className={`full-width-submenu ${isMobile ? 'mobile-submenu' : ''}`}
+              onMouseEnter={() => !isMobile && setOpenSubmenu(currentOpenSubmenu)}
+              onMouseLeave={() => {
+                if (!isMobile) {
+                  setOpenSubmenu(null);
+                }
+              }}
+            >
+              <ul className="submenu-list">
+                {defaultMenuItems[currentOpenSubmenu].submenu.map((submenuItem, subIndex) => (
+                  <li key={subIndex} className="submenu-item">
+                    <button
+                      className={`submenu-button ${isSubmenuActive(currentOpenSubmenu, subIndex) ? 'active' : ''}`}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        console.log('Submenu button clicked:', submenuItem.label);
+                        handleSubmenuItemClick(submenuItem, subIndex);
+                      }}
+                      type="button"
+                    >
+                      <span className="submenu-text">{submenuItem.label}</span>
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          );
+        })()}
       </div>
     </div>
   );

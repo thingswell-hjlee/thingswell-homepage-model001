@@ -145,7 +145,7 @@ const Application_filed_3 = () => {
       <div className="page-content">
         <div className="page-layout">
           <div className={`sidebar ${isSidebarOpen ? 'show' : ''}`}>
-            {(!isMobile) && (
+            {(!isSmallDesktop) && (
               <SidebarMenu menuItems={sidebarMenuItems} sectionRefs={sectionRefs} menuTitle={sidebarTitle} />
             )}
           </div>

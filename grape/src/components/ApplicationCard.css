@@ -8,8 +8,17 @@
   align-items: flex-start;
   width: 100%;
   min-width: 0;
-  max-width: unset;
+  max-width: 100%;
   font-family: var(--font-family-primary);
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Standard */
+  -webkit-user-drag: none; /* Safari */
+  -khtml-user-drag: none; /* Konqueror HTML */
+  -moz-user-drag: none; /* Firefox */
+  -o-user-drag: none; /* Opera */
+  user-drag: none; /* Standard */
 }
 
 .application-card img {
@@ -23,7 +32,7 @@
 
 .application-card-content {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: var(--spacing-md);
   width: 100%;
 }
@@ -39,42 +48,19 @@
   font-weight: var(--font-weight-medium);
   font-family: var(--font-family-primary);
   color: var(--color-text-primary);
+  text-align: left;
 }
 
 /* 반응형 스타일 */
 @media (max-width: 1024px) {
-  .application-card {
-    flex: 1 1 45%;
-    min-width: 220px;
-    max-width: 350px;
-  }
-  
   .application-card img {
     height: 300px;
   }
 }
 
-@media (max-width: 1000px) {
-  .application-card {
-    width: 95vw !important;
-    min-width: unset !important;
-    max-width: 500px !important;
-  }
-  
-  .application-card img {
-    height: 280px;
-  }
-}
-
-@media (max-width: 900px) {
-  .application-card img {
-    height: 250px;
-  }
-}
-
 @media (max-width: 768px) {
   .application-card img {
-    height: 220px;
+    height: 250px;
   }
 }
 

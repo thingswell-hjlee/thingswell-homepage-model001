@@ -25,7 +25,9 @@ const ApplicationCardsSection = forwardRef((props, ref) => {
   return (
     <div ref={ref} className="application-card application-section-responsive">
       <div className="cards-container">
-      <div className="application-card-section-title">{boxName}</div>
+        <div className="application-card-section-title-container">
+          <div className="application-card-section-title">{boxName}</div>
+        </div>
         <div className="application-cards no-line responsive-cards">
           {applicationCardsData.map((card, index) => (
             <ApplicationCard key={index} {...card} />
