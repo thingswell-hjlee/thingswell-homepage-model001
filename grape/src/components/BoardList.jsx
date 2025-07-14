@@ -20,7 +20,7 @@ const BoardList = ({ posts, onPostClick, onWriteClick }) => {
             <tr>
               <th>번호</th>
               <th>제목</th>
-              <th>작성자</th>
+              {/* <th>작성자</th> */}
               <th>작성일</th>
               <th>조회수</th>
             </tr>
@@ -33,7 +33,7 @@ const BoardList = ({ posts, onPostClick, onWriteClick }) => {
                   {post.title}
                   {post.isNew && <span className="new-badge">NEW</span>}
                 </td>
-                <td>{post.author}</td>
+                {/* <td>{post.author}</td> */}
                 <td>{post.createdAt}</td>
                 <td>{post.views}</td>
               </tr>
