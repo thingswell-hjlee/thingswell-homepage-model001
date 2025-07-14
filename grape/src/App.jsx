@@ -71,6 +71,8 @@ import Case_2 from './pages/Cases/Case_2.jsx'
 import Case_3 from './pages/Cases/Case_3.jsx'
 import Case_4 from './pages/Cases/Case_4.jsx'
 import About from './pages/About/About.jsx'
+import Login from './pages/Login/Login.jsx'
+import { AuthProvider } from './contexts/AuthContext.jsx'
 
 function HomePage() {
   const [isMobile, setIsMobile] = useState(false)
@@ -129,69 +131,75 @@ function App() {
   }, [])
 
   return (
-    <div className="app-container">
-      {/* 메뉴는 모든 페이지에서 유지 */}
-      <div className="menu-overlay-subpage">
-        <Menu orientation={isMobile ? "vertical" : "horizontal"} theme="primary" />
+    <AuthProvider>
+      <div className="app-container">
+        {/* 메뉴는 모든 페이지에서 유지 */}
+        <div className="menu-overlay-subpage">
+          <Menu orientation={isMobile ? "vertical" : "horizontal"} theme="primary" />
+        </div>
+        
+        {/* 메인 콘텐츠 영역 */}
+        <main className="main-content">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            
+            {/* 정부지원사업 라우팅 */}
+            <Route path="/government-support" element={<Government_support_main />} />
+            
+            
+            {/* 정부지원사업 상세 페이지들 */}
+            <Route path="/government-support-detail" element={<Government_support />} />
+            <Route path="/ai-manufacturing-support" element={<AiManufacturingSupport />} />
+            <Route path="/green-energy-support" element={<GreenEnergySupport />} />
+            <Route path="/digital-transformation-support" element={<DigitalTransformationSupport />} />
+            
+            {/* 솔루션 라우팅 */}
+            <Route path="/solutions" element={<Soulution_main />} />
+            <Route path="/solution" element={<Soulution />} />
+            
+            {/* 솔루션 상세 페이지들 */}
+            <Route path="/chemical-solution" element={<ChemicalSolution />} />
+            <Route path="/manufacturing-solution" element={<ManufacturingSolution />} />
+            <Route path="/construction-solution" element={<ConstructionSolution />} />
+
+            {/* 제품 라우팅 */}
+            <Route path="/products" element={<Product_main />} />
+            <Route path="/product-list" element={<Product_list />} />
+            <Route path="/product/1" element={<Product_1 />} />
+
+            {/* 고객서비스 라우팅 */}
+            <Route path="/customer-service" element={<Customer_service />} />
+            <Route path="/announcement" element={<Announcement />} />
+            <Route path="/downloads" element={<Downloads />} />
+            <Route path="/contact" element={<Contact />} />
+
+            {/* 응용분야 라우팅 */}
+            <Route path="/application-field-main" element={<Application_filed_main />} />
+            <Route path="/application-field" element={<Application_filed />} />
+            <Route path="/application-field-2" element={<Application_filed_2 />} />
+            <Route path="/application-field-3" element={<Application_filed_3 />} />
+            <Route path="/application-field-4" element={<Application_filed_4 />} />
+
+            {/* 납품사례 라우팅 */}
+            <Route path="/cases" element={<Case_main />} />
+            <Route path="/case" element={<Case />} />
+            <Route path="/case-2" element={<Case_2 />} />
+            <Route path="/case-3" element={<Case_3 />} />
+            <Route path="/case-4" element={<Case_4 />} />
+
+            {/* 회사소개 라우팅 */}
+            <Route path="/about" element={<About />} />
+
+            {/* 로그인 라우팅 */}
+            <Route path="/login" element={<Login />} />
+            
+            </Routes>
+        </main>
+        
+        {/* 푸터는 모든 페이지에서 유지 */}
+        <Footer />
       </div>
-      
-      {/* 메인 콘텐츠 영역 */}
-      <main className="main-content">
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          
-          {/* 정부지원사업 라우팅 */}
-          <Route path="/government-support" element={<Government_support_main />} />
-          
-          
-          {/* 정부지원사업 상세 페이지들 */}
-          <Route path="/government-support-detail" element={<Government_support />} />
-          <Route path="/ai-manufacturing-support" element={<AiManufacturingSupport />} />
-          <Route path="/green-energy-support" element={<GreenEnergySupport />} />
-          <Route path="/digital-transformation-support" element={<DigitalTransformationSupport />} />
-          
-          {/* 솔루션 라우팅 */}
-          <Route path="/solutions" element={<Soulution_main />} />
-          <Route path="/solution" element={<Soulution />} />
-          
-          {/* 솔루션 상세 페이지들 */}
-          <Route path="/chemical-solution" element={<ChemicalSolution />} />
-          <Route path="/manufacturing-solution" element={<ManufacturingSolution />} />
-          <Route path="/construction-solution" element={<ConstructionSolution />} />
-
-          {/* 제품 라우팅 */}
-          <Route path="/products" element={<Product_main />} />
-          <Route path="/product-list" element={<Product_list />} />
-          <Route path="/product/1" element={<Product_1 />} />
-
-          {/* 고객서비스 라우팅 */}
-          <Route path="/customer-service" element={<Customer_service />} />
-          <Route path="/announcement" element={<Announcement />} />
-          <Route path="/downloads" element={<Downloads />} />
-          <Route path="/contact" element={<Contact />} />
-
-          {/* 응용분야 라우팅 */}
-          <Route path="/application-field-main" element={<Application_filed_main />} />
-          <Route path="/application-field" element={<Application_filed />} />
-          <Route path="/application-field-2" element={<Application_filed_2 />} />
-          <Route path="/application-field-3" element={<Application_filed_3 />} />
-          <Route path="/application-field-4" element={<Application_filed_4 />} />
-
-          {/* 납품사례 라우팅 */}
-          <Route path="/cases" element={<Case_main />} />
-          <Route path="/case" element={<Case />} />
-          <Route path="/case-2" element={<Case_2 />} />
-          <Route path="/case-3" element={<Case_3 />} />
-          <Route path="/case-4" element={<Case_4 />} />
-
-          {/* 회사소개 라우팅 */}
-          <Route path="/about" element={<About />} />
-          </Routes>
-      </main>
-      
-      {/* 푸터는 모든 페이지에서 유지 */}
-      <Footer />
-    </div>
+    </AuthProvider>
   )
 }
 
