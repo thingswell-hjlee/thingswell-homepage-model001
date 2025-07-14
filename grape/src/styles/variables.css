@@ -2,91 +2,96 @@
 
 :root {
   /* ===== COLORS ===== */
-  
+
   /* Primary Colors */
-  --color-primary: #1976D2;        /* 메인 블루 - 신뢰, 기술, 안전 */
-  --color-primary-light: #42A5F5;  /* Lighter variant of primary */
-  --color-primary-dark: #1565C0;   /* Darker variant of primary */
-  
+  --color-primary: #1976d2; /* 메인 블루 - 신뢰, 기술, 안전 */
+  --color-primary-light: #42a5f5; /* Lighter variant of primary */
+  --color-primary-dark: #1565c0; /* Darker variant of primary */
+
   /* Secondary Colors */
-  --color-secondary: #212121;      /* 서브 다크 그레이 - 현대적, 전문적 */
+  --color-secondary: #212121; /* 서브 다크 그레이 - 현대적, 전문적 */
   --color-secondary-light: #424242; /* Lighter variant of secondary */
   --color-secondary-dark: #000000; /* Darker variant of secondary */
-  
+
   /* Background Colors */
-  --color-background: #F5F5F5;     /* 배경 라이트 그레이 - 깔끔함, 가독성 */
+  --color-background: #f5f5f5; /* 배경 라이트 그레이 - 깔끔함, 가독성 */
   --color-background-light: #ffffff;
   --color-background-dark: #020202; /* Darker variant of background */
-  --color-surface: #F5F5F5;
-  --color-surface-light: #FAFAFA;   /* Lighter variant of surface */
-  --color-surface-dark: #E0E0E0;    /* Darker variant of surface */
-  
+  --color-surface: #f5f5f5;
+  --color-surface-light: #fafafa; /* Lighter variant of surface */
+  --color-surface-dark: #e0e0e0; /* Darker variant of surface */
+
   /* Text Colors */
-  --color-text-primary: #212121;   /* 서브 다크 그레이 - 주요 텍스트 */
-  --color-text-secondary: #424242;  /* 중간 그레이 - 보조 텍스트 */
-  --color-text-muted: #757575;     /* 연한 그레이 - 비활성 텍스트 */
-  --color-text-light: #F5F5F5;     /* 라이트 그레이 - 밝은 배경의 텍스트 */
+  --color-text-primary: #212121; /* 서브 다크 그레이 - 주요 텍스트 */
+  --color-text-secondary: #424242; /* 중간 그레이 - 보조 텍스트 */
+  --color-text-muted: #757575; /* 연한 그레이 - 비활성 텍스트 */
+  --color-text-light: #f5f5f5; /* 라이트 그레이 - 밝은 배경의 텍스트 */
   --color-text-white: #ffffff;
-  
+
   /* Overlay Colors */
   --color-overlay: rgba(0, 0, 0, 0.7);
   --color-overlay-light: rgba(0, 0, 0, 0.5);
   --color-overlay-dark: rgba(0, 0, 0, 0.8);
-  
+
   /* Interactive Colors */
-  --color-hover: #42A5F5;          /* Lighter variant of primary */
-  --color-active: #1565C0;          /* Darker variant of primary */
-  --color-focus: #1976D2;           /* Primary color */
-  --color-disabled: #BDBDBD;        /* Muted gray for disabled state */
-  
+  --color-hover: #42a5f5; /* Lighter variant of primary */
+  --color-active: #1565c0; /* Darker variant of primary */
+  --color-focus: #1976d2; /* Primary color */
+  --color-disabled: #bdbdbd; /* Muted gray for disabled state */
+
   /* Accent Colors */
-  --color-accent: #FF9800;          /* 포인트 오렌지 - 주목성, 경고, 에너지 */
-  --color-accent-light: #FFB74D;    /* Lighter variant of accent */
-  --color-accent-dark: #F57C00;     /* Darker variant of accent */
-  
+  --color-accent: #ff9800; /* 포인트 오렌지 - 주목성, 경고, 에너지 */
+  --color-accent-light: #ffb74d; /* Lighter variant of accent */
+  --color-accent-dark: #f57c00; /* Darker variant of accent */
+
   /* ===== TYPOGRAPHY ===== */
-  
+
   /* Font Family */
-  --font-family-primary: 'PyeojinGothic', sans-serif;
-  
+  --font-family-primary: "PyeojinGothic", sans-serif;
+
   /* Font Weights */
   --font-weight-light: 300;
   --font-weight-regular: 400;
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
-  
+
   /* Font Sizes */
-  --font-size-xs: 0.75rem;    /* 12px */
-  --font-size-sm: 0.875rem;   /* 14px */
-  --font-size-base: 1rem;     /* 16px */
-  --font-size-lg: 1.125rem;   /* 18px */
-  --font-size-xl: 1.25rem;    /* 20px */
-  --font-size-2xl: 1.5rem;    /* 24px */
-  --font-size-3xl: 1.875rem;  /* 30px */
-  --font-size-4xl: 2.25rem;   /* 36px */
-  --font-size-5xl: 3rem;      /* 48px */
-  --font-size-6xl: 6rem;      /* 64px */
-  
+  --font-size-xs: 0.75rem; /* 12px */
+  --font-size-sm: 0.875rem; /* 14px */
+  --font-size-base: 1rem; /* 16px */
+  --font-size-lg: 1.125rem; /* 18px */
+  --font-size-xl: 1.25rem; /* 20px */
+  --font-size-2xl: 1.5rem; /* 24px */
+  --font-size-3xl: 1.875rem; /* 30px */
+  --font-size-4xl: 2.25rem; /* 36px */
+  --font-size-5xl: 3rem; /* 48px */
+  --font-size-6xl: 6rem; /* 64px */
+
+  /* Extra Small Font Sizes for Footer */
+  --font-size-xxs: 0.625rem; /* 10px */
+  --font-size-xxx: 0.5rem; /* 8px */
+  --font-size-micro: 0.4rem; /* 6.4px */
+
   /* Line Heights */
   --line-height-tight: 1.1;
   --line-height-normal: 1.2;
   --line-height-relaxed: 1.5;
   --line-height-loose: 1.8;
-  
+
   /* ===== SPACING ===== */
-  
-  --spacing-xs: 0.25rem;   /* 4px */
-  --spacing-sm: 0.5rem;    /* 8px */
-  --spacing-md: 1rem;      /* 16px */
-  --spacing-lg: 1.5rem;    /* 24px */
-  --spacing-xl: 2rem;      /* 32px */
-  --spacing-2xl: 3rem;     /* 48px */
-  --spacing-3xl: 4rem;     /* 64px */
-  --spacing-4xl: 6rem;     /* 96px */
-  
+
+  --spacing-xs: 0.25rem; /* 4px */
+  --spacing-sm: 0.5rem; /* 8px */
+  --spacing-md: 1rem; /* 16px */
+  --spacing-lg: 1.5rem; /* 24px */
+  --spacing-xl: 2rem; /* 32px */
+  --spacing-2xl: 3rem; /* 48px */
+  --spacing-3xl: 4rem; /* 64px */
+  --spacing-4xl: 6rem; /* 96px */
+
   /* ===== BORDERS ===== */
-  
+
   /* Border Radius */
   --border-radius-sm: 4px;
   --border-radius-md: 8px;
@@ -95,41 +100,44 @@
   --border-radius-2xl: 20px;
   --border-radius-3xl: 30px;
   --border-radius-full: 9999px;
-  
+
   /* Border Width */
   --border-width-thin: 1px;
   --border-width-normal: 2px;
   --border-width-thick: 4px;
-  
+
   /* Border Colors */
-  --border-color-light: #E0E0E0;    /* 연한 그레이 - 가벼운 구분선 */
-  --border-color-normal: #BDBDBD;    /* 중간 그레이 - 일반 구분선 */
-  --border-color-dark: #757575;      /* 진한 그레이 - 강한 구분선 */
-  
+  --border-color-light: #e0e0e0; /* 연한 그레이 - 가벼운 구분선 */
+  --border-color-normal: #bdbdbd; /* 중간 그레이 - 일반 구분선 */
+  --border-color-dark: #757575; /* 진한 그레이 - 강한 구분선 */
+
   /* ===== SHADOWS ===== */
-  
+
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
   --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-  
+
   /* Menu Specific Shadows */
   --shadow-menu: 0 4px 20px rgba(0, 0, 0, 0.5);
-  
+
   /* ===== TRANSITIONS ===== */
-  
+
   --transition-fast: 0.15s ease;
   --transition-base: 0.2s ease;
   --transition-slow: 0.3s ease;
   --transition-slower: 0.5s ease;
-  
+
   /* ===== LAYOUT ===== */
-  
+
   /* Container */
   --container-max-width: 1600px;
   --container-padding: 1rem;
-  
+
   /* Z-Index Scale */
   --z-index-dropdown: 1000;
   --z-index-sticky: 1020;
@@ -139,17 +147,17 @@
   --z-index-popover: 1060;
   --z-index-tooltip: 1070;
   --z-index-menu: 99999;
-  
+
   /* ===== BREAKPOINTS ===== */
-  
+
   --breakpoint-sm: 480px;
   --breakpoint-md: 768px;
   --breakpoint-lg: 1024px;
   --breakpoint-xl: 1200px;
   --breakpoint-2xl: 1400px;
-  
+
   /* ===== RESPONSIVE LAYOUT ===== */
-  
+
   /* Grid Columns */
   --grid-cols-1: 1;
   --grid-cols-2: 2;
@@ -157,16 +165,16 @@
   --grid-cols-4: 4;
   --grid-cols-6: 6;
   --grid-cols-12: 12;
-  
+
   /* Container Max Widths */
   --container-sm: 540px;
   --container-md: 720px;
   --container-lg: 960px;
   --container-xl: 1140px;
   --container-2xl: 1320px;
-  
+
   /* ===== COMPONENT SPECIFIC ===== */
-  
+
   /* Menu */
   --menu-height: 70px;
   --menu-border-radius: 30px;
@@ -174,25 +182,25 @@
   --menu-item-gap: 10px;
   --menu-button-padding: 12px 8px;
   --menu-button-border-radius: 30px;
-  
+
   /* Button */
   --button-padding: 0.6em 1.2em;
   --button-border-radius: 8px;
   --button-font-size: 1em;
   --button-font-weight: 500;
-  
+
   /* Card */
   --card-padding: 2em;
   --card-border-radius: 8px;
   --card-shadow: var(--shadow-md);
-  
+
   /* ===== ANIMATIONS ===== */
-  
+
   --animation-duration-fast: 0.15s;
   --animation-duration-base: 0.2s;
   --animation-duration-slow: 0.3s;
   --animation-duration-slower: 0.5s;
-  
+
   --animation-easing-ease: ease;
   --animation-easing-ease-in: ease-in;
   --animation-easing-ease-out: ease-out;
@@ -202,9 +210,9 @@
 /* ===== RESPONSIVE FONT SIZES ===== */
 @media (max-width: 768px) {
   :root {
-    --font-size-3xl: 1.5rem;  /* 24px */
-    --font-size-4xl: 2rem;    /* 32px */
-    --font-size-5xl: 2.5rem;  /* 40px */
+    --font-size-3xl: 1.5rem; /* 24px */
+    --font-size-4xl: 2rem; /* 32px */
+    --font-size-5xl: 2.5rem; /* 40px */
   }
 }
 
@@ -212,8 +220,8 @@
   :root {
     --font-size-2xl: 1.25rem; /* 20px */
     --font-size-3xl: 1.375rem; /* 22px */
-    --font-size-4xl: 1.75rem;  /* 28px */
-    --font-size-5xl: 2.25rem;  /* 36px */
+    --font-size-4xl: 1.75rem; /* 28px */
+    --font-size-5xl: 2.25rem; /* 36px */
   }
 }
 
@@ -225,34 +233,68 @@
   gap: var(--spacing-md);
 }
 
-.grid-cols-1 { grid-template-columns: repeat(1, 1fr); }
-.grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
-.grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
-.grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+.grid-cols-1 {
+  grid-template-columns: repeat(1, 1fr);
+}
+.grid-cols-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+.grid-cols-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+.grid-cols-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
 
 /* Flexbox Utilities */
-.flex { display: flex; }
-.flex-col { flex-direction: column; }
-.flex-row { flex-direction: row; }
-.flex-wrap { flex-wrap: wrap; }
-.flex-nowrap { flex-wrap: nowrap; }
+.flex {
+  display: flex;
+}
+.flex-col {
+  flex-direction: column;
+}
+.flex-row {
+  flex-direction: row;
+}
+.flex-wrap {
+  flex-wrap: wrap;
+}
+.flex-nowrap {
+  flex-wrap: nowrap;
+}
 
 /* Responsive Grid */
 @media (max-width: 1024px) {
-  .lg\:grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
-  .lg\:grid-cols-1 { grid-template-columns: repeat(1, 1fr); }
+  .lg\:grid-cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .lg\:grid-cols-1 {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }
 
 @media (max-width: 768px) {
-  .md\:grid-cols-1 { grid-template-columns: repeat(1, 1fr); }
-  .md\:flex-col { flex-direction: column; }
-  .md\:text-center { text-align: center; }
+  .md\:grid-cols-1 {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .md\:flex-col {
+    flex-direction: column;
+  }
+  .md\:text-center {
+    text-align: center;
+  }
 }
 
 @media (max-width: 480px) {
-  .sm\:grid-cols-1 { grid-template-columns: repeat(1, 1fr); }
-  .sm\:flex-col { flex-direction: column; }
-  .sm\:text-center { text-align: center; }
+  .sm\:grid-cols-1 {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .sm\:flex-col {
+    flex-direction: column;
+  }
+  .sm\:text-center {
+    text-align: center;
+  }
 }
 
 /* Container Responsive */
@@ -265,21 +307,31 @@
 }
 
 @media (min-width: 480px) {
-  .container { max-width: var(--container-sm); }
+  .container {
+    max-width: var(--container-sm);
+  }
 }
 
 @media (min-width: 768px) {
-  .container { max-width: var(--container-md); }
+  .container {
+    max-width: var(--container-md);
+  }
 }
 
 @media (min-width: 1024px) {
-  .container { max-width: var(--container-lg); }
+  .container {
+    max-width: var(--container-lg);
+  }
 }
 
 @media (min-width: 1200px) {
-  .container { max-width: var(--container-xl); }
+  .container {
+    max-width: var(--container-xl);
+  }
 }
 
 @media (min-width: 1400px) {
-  .container { max-width: var(--container-2xl); }
-} 
+  .container {
+    max-width: var(--container-2xl);
+  }
+}

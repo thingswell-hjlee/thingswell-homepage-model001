@@ -1,38 +1,4 @@
-/* Font Face Definitions */
-@font-face {
-  font-family: 'PyeojinGothic';
-  src: url('../../assets/font/PyeojinGothic-Light.woff') format('woff');
-  font-weight: 300;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'PyeojinGothic';
-  src: url('../../assets/font/PyeojinGothic-Regular.woff') format('woff');
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'PyeojinGothic';
-  src: url('../../assets/font/PyeojinGothic-Medium.woff') format('woff');
-  font-weight: 500;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'PyeojinGothic';
-  src: url('../../assets/font/PyeojinGothic-SemiBold.woff') format('woff');
-  font-weight: 600;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'PyeojinGothic';
-  src: url('../../assets/font/PyeojinGothic-Bold.woff') format('woff');
-  font-weight: 700;
-  font-style: normal;
-}
+/* Font Face Definitions - CDN에서 로드됨 */
 
 /* 기본 스타일 */
 * {
@@ -42,7 +8,7 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: 'PyeojinGothic', sans-serif;
+  font-family: "PyeojinGothic", sans-serif;
   overflow-x: hidden; /* 가로 스크롤 방지 */
 }
 
@@ -52,4 +18,4 @@ body {
   padding: 0;
   text-align: center;
   box-sizing: border-box;
-} 
+}

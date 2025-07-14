@@ -8,7 +8,8 @@
   box-shadow: var(--shadow-md);
   box-sizing: border-box;
   padding: var(--spacing-xl);
-  width: 1500px;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .select-card-list {
@@ -63,4 +64,128 @@
   background: var(--color-primary-light);
   outline: none;
   border: none;
-} 
+}
+
+/* 대형 데스크톱 반응형 (1200px 이상) */
+@media screen and (min-width: 1200px) {
+  .select-card-container {
+    padding: var(--spacing-xl);
+  }
+
+  .select-button {
+    min-width: 160px;
+    padding: var(--spacing-md) var(--spacing-xl);
+    font-size: var(--font-size-base);
+  }
+}
+
+/* 태블릿 반응형 (1024px 이하) */
+@media screen and (max-width: 1024px) {
+  .select-card-container {
+    height: 180px;
+    padding: var(--spacing-lg);
+  }
+
+  .select-card-list {
+    max-width: 90%;
+    gap: var(--spacing-sm);
+  }
+
+  .select-button {
+    min-width: 120px;
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: var(--font-size-xs);
+  }
+}
+
+/* 중간 태블릿 반응형 (900px 이하) */
+@media screen and (max-width: 900px) {
+  .select-card-container {
+    height: 160px;
+    padding: var(--spacing-md);
+  }
+
+  .select-card-list {
+    max-width: 95%;
+    gap: var(--spacing-xs);
+  }
+
+  .select-button {
+    min-width: 110px;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font-size: var(--font-size-xs);
+  }
+}
+
+/* 모바일 반응형 (768px 이하) */
+@media screen and (max-width: 768px) {
+  .select-card-container {
+    height: auto;
+    min-height: 150px;
+    padding: var(--spacing-md);
+    margin: 0 1rem;
+  }
+
+  .select-card-list {
+    max-width: 100%;
+    gap: var(--spacing-xs);
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .select-button {
+    min-width: 200px;
+    width: 100%;
+    max-width: 300px;
+    padding: var(--spacing-sm);
+    font-size: var(--font-size-sm);
+  }
+}
+
+/* 작은 모바일 반응형 (480px 이하) */
+@media screen and (max-width: 480px) {
+  .select-card-container {
+    padding: var(--spacing-sm);
+    margin: 0 0.8rem;
+  }
+
+  .select-card-list {
+    gap: var(--spacing-xs);
+  }
+
+  .select-button {
+    min-width: 180px;
+    max-width: 250px;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font-size: var(--font-size-xs);
+  }
+}
+
+/* 매우 작은 모바일 반응형 (360px 이하) */
+@media screen and (max-width: 360px) {
+  .select-card-container {
+    padding: var(--spacing-xs);
+    margin: 0 0.5rem;
+  }
+
+  .select-button {
+    min-width: 160px;
+    max-width: 220px;
+    padding: var(--spacing-xs);
+    font-size: var(--font-size-xs);
+  }
+}
+
+/* 가로 모드 반응형 */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+  .select-card-container {
+    height: 120px;
+    padding: var(--spacing-sm);
+  }
+
+  .select-button {
+    min-width: 100px;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font-size: var(--font-size-xs);
+  }
+}
