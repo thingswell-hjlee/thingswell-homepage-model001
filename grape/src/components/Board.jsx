@@ -4,7 +4,7 @@ import BoardDetail from './BoardDetail';
 import BoardEditor from './BoardEditor';
 import './Board.css';
 
-const Board = () => {
+const Board = ({ tableName }) => {
   const [posts, setPosts] = useState([]);
   const [currentView, setCurrentView] = useState('list'); // 'list', 'detail', 'write', 'edit'
   const [selectedPost, setSelectedPost] = useState(null);
@@ -38,6 +38,7 @@ const Board = () => {
   }, []);
 
   const handlePostClick = (post) => {
+    console.log('게시물 클릭:', post);
     setSelectedPost(post);
     setCurrentView('detail');
   };
@@ -97,9 +98,9 @@ const Board = () => {
       case 'list':
         return (
           <BoardList
-            posts={posts}
             onPostClick={handlePostClick}
             onWriteClick={handleWriteClick}
+            tableName={tableName}
           />
         );
       case 'detail':
@@ -126,7 +127,7 @@ const Board = () => {
           />
         );
       default:
-        return <BoardList posts={posts} onPostClick={handlePostClick} onWriteClick={handleWriteClick} />;
+        return <BoardList onPostClick={handlePostClick} onWriteClick={handleWriteClick} tableName={tableName} />;
     }
   };
 

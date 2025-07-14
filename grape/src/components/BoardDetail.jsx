@@ -12,6 +12,33 @@ const BoardDetail = ({ post, onBack, onEdit, onDelete }) => {
     );
   }
 
+  // Supabase 데이터 구조에 맞게 필드 매핑
+  const title = post.title ||'제목 없음';
+  const content = post.content ||  '';
+  const author = post.author || '작성자';
+  let createdAt = post.created_at || '날짜 없음';
+
+  // 날짜 형식을 시간과 분까지만 표시하도록 변환
+
+  if (createdAt !== '날짜 없음' && createdAt) {
+    try {
+      const date = new Date(createdAt);
+      if (!isNaN(date.getTime())) {
+        createdAt = date.toLocaleString('ko-KR', {
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit',
+          hour: '2-digit',
+          minute: '2-digit',
+          hour12: false
+        });
+      }
+    } catch (error) {
+      console.error('날짜 변환 오류:', error);
+    }
+  } 
+
+
   return (
     <div className="board-detail">
       <div className="detail-header">
@@ -19,29 +46,28 @@ const BoardDetail = ({ post, onBack, onEdit, onDelete }) => {
           ← 목록으로
         </button>
         <div className="detail-actions">
-          <button onClick={() => onEdit(post)} className="btn-edit">
+          {/* <button onClick={() => onEdit(post)} className="btn-edit">
             수정
           </button>
           <button onClick={() => onDelete(post.id)} className="btn-delete">
             삭제
-          </button>
+          </button> */}
         </div>
       </div>
       
       <div className="post-content">
         <div className="post-header">
-          <h1 className="post-title">{post.title}</h1>
+          <h1 className="post-title">{title}</h1>
           <div className="post-meta">
-            <span className="author">작성자: {post.author}</span>
-            <span className="date">작성일: {post.createdAt}</span>
-            <span className="views">조회수: {post.views}</span>
+            <span className="author">작성자: {author}</span>
+            <span className="date">작성일: {createdAt}</span>
           </div>
         </div>
         
         <div className="post-body">
           <div 
             className="content-html"
-            dangerouslySetInnerHTML={{ __html: post.htmlContent || post.content }}
+            dangerouslySetInnerHTML={{ __html: content }}
           />
         </div>
       </div>
