@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import SolutionCard from '../../components/SolutionCard.jsx';
 import './About.css';
 import ceo from '../../assets/ceo.jpg';
@@ -7,6 +8,25 @@ import construction from '../../assets/construction.jpg';
 import OpenStreetMap from '../../components/OpenStreetMap.jsx';
 
 const About = () => {
+  const location = useLocation();
+
+  // URL 해시에 따라 해당 섹션으로 스크롤
+  useEffect(() => {
+    if (location.hash) {
+      const element = document.querySelector(location.hash);
+      if (element) {
+        // 헤더 높이만큼 오프셋을 주어 스크롤
+        const headerOffset = 100;
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }
+    }
+  }, [location.hash]);
   return (
     <div className="page-container">
       <div className="page-content">
@@ -15,7 +35,7 @@ const About = () => {
           <div className="solutions-section">
               <SolutionCard subtitle="About" title="회사소개" showButton={false} link="/solutions/detail" className="custom-solution-left" variant="hero" reverse={false} />
             </div>
-            <div className="about-section">
+            <div id="greeting" className="about-section">
                 <div className="about-section-title-image-container">
                     <div className="about-section-title">
                         <p className="about-section-title-subtitle">CEO's Greeting</p>
@@ -33,7 +53,7 @@ const About = () => {
                     </div>
                 </div>
             </div>
-            <div className="about-section">
+            <div id="mission" className="about-section">
                 <div className="about-section-title-image-container">
                     <div className="about-section-title">
                         <p className="about-section-title-subtitle">Mission and Vision</p>
@@ -65,7 +85,7 @@ const About = () => {
                     </div>
                 </div>
             </div>
-            <div className="about-section">
+            <div id="history" className="about-section">
                 <div className="about-section-title-image-container">
                     <div className="about-section-title">
                         <p className="about-section-title-subtitle">Company History</p>
@@ -195,7 +215,7 @@ const About = () => {
                     </div>
                 </div>
             </div>
-            <div className="about-section">
+            <div id="location" className="about-section">
                 <div className="about-section-title-image-container">
                     <div className="about-section-title">
                         <p className="about-section-title-subtitle">Location & Contact</p>

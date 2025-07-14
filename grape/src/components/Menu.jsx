@@ -81,9 +81,10 @@ const defaultMenuItems = [
   { 
     label: '회사소개', 
     submenu: [ 
-      { label: '목표', path: '/about/overview' }, 
-      { label: '연혁', path: '/about/history' }, 
-      { label: '오시는 길', path: '/about/organization' } 
+      { label: '인사말', path: '/about#greeting' }, 
+      { label: '미션 및 비전', path: '/about#mission' }, 
+      { label: '연혁', path: '/about#history' }, 
+      { label: '오시는 길', path: '/about#location' } 
     ] 
   }
 ];

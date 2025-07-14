@@ -347,13 +347,13 @@ margin-top: 20px;
 
 /* 서브메뉴 버튼 호버 효과 (활성화된 버튼 제외) */
 .submenu-button:hover:not(.active) {
-  background-color: var(--color-secondary) !important;
+  background-color: var(--color-hover) !important;
   color: var(--color-text-white) !important;
 }
 
 /* 서브메뉴 버튼 클릭 효과 (활성화된 버튼 제외) */
 .submenu-button:active:not(.active) {
-  background-color: var(--color-secondary) !important;
+  background-color: var(--color-hover) !important;
   color: var(--color-text-white) !important;
 }
 
@@ -449,8 +449,7 @@ margin-top: 20px;
   border: none;
 }   
 .menu-primary .menu-button:hover:not(:disabled):not(.active) {
-  background-color: var(--color-secondary) !important;
-  color: var(--color-text-white) !important;
+  background-color: var(--color-hover) !important;
 }
 .menu-primary .menu-item {
   border: none;
@@ -465,8 +464,7 @@ margin-top: 20px;
   background: none;
 }
 .menu-primary .submenu-button:hover:not(.active) {
-  background-color: var(--color-secondary) !important;
-  color: var(--color-text-white) !important;
+  background-color: var(--color-hover) !important;
 }
 
 /* 모바일 햄버거 메뉴 토글 버튼 */
