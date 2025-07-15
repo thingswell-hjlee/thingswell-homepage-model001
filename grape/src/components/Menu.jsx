@@ -17,25 +17,29 @@
  * - 서브메뉴 호버/클릭 토글
  * - 현재 페이지에 따른 메뉴 활성화
  * - 외부 클릭 시 메뉴 닫기
+ * - 접근성 지원
  */
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import './Menu.css';
 import logo from '../assets/logo.png';
+import hamburgerIcon from '../assets/hamburger.svg';
 
+// 메뉴 아이템 데이터
 const defaultMenuItems = [
   { 
     label: '정부지원 사업안내', 
+    path: '/government-support',
     submenu: [ 
       { label: '스마트 안전장비지원사업', path: '/government-support-detail' }, 
       { label: 'AI 제조 지원사업', path: '/ai-manufacturing-support' }, 
       { label: '그린에너지 지원사업', path: '/green-energy-support' }, 
       { label: '디지털 전환 지원사업', path: '/digital-transformation-support' }, 
-      
     ] 
   },
   { 
     label: '솔루션', 
+    path: '/solutions',
     submenu: [ 
       { label: '산업 안전 솔루션', path: '/solution' }, 
       { label: '화학 안전 솔루션', path: '/chemical-solution' },
@@ -45,6 +49,7 @@ const defaultMenuItems = [
   },
   { 
     label: '제품', 
+    path: '/products',
     submenu: [ 
       { label: '제품1', path: '/product/1' }, 
       { label: '제품2', path: '/products/hardware' }, 
@@ -54,6 +59,7 @@ const defaultMenuItems = [
   },
   { 
     label: '적용분야', 
+    path: '/application-field-main',
     submenu: [ 
       { label: '적용분야1', path: '/application-field' }, 
       { label: '적용분야2', path: '/application-field-2' }, 
@@ -63,6 +69,7 @@ const defaultMenuItems = [
   },
   {   
     label: '납품사례', 
+    path: '/cases',
     submenu: [ 
       { label: '사례1', path: '/case' }, 
       { label: '사례2', path: '/case-2' }, 
@@ -72,6 +79,7 @@ const defaultMenuItems = [
   },
   { 
     label: '고객지원', 
+    path: '/customer-service',
     submenu: [ 
       { label: '공지사항', path: '/announcement' },
       { label: '자료실', path: '/downloads' },
@@ -80,6 +88,7 @@ const defaultMenuItems = [
   },
   { 
     label: '회사소개', 
+    path: '/about',
     submenu: [ 
       { label: '인사말', path: '/about#greeting' }, 
       { label: '미션 및 비전', path: '/about#mission' }, 
@@ -89,85 +98,32 @@ const defaultMenuItems = [
   }
 ];
 
+// 브레이크포인트 상수
+const MOBILE_BREAKPOINT = 768;
+
 const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
   const navigate = useNavigate();
   const location = useLocation();
+  const menuRef = useRef(null);
+  
+  // 상태 관리
   const [openSubmenu, setOpenSubmenu] = useState(null);
   const [activeMenuIndex, setActiveMenuIndex] = useState(null);
   const [activeSubmenuIndex, setActiveSubmenuIndex] = useState(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const menuRef = useRef(null);
-
-  const handleMenuClick = (item, index) => {
-    if (item.submenu && item.submenu.length > 0) return;
-    const pageRoutes = {
-      '솔루션': '/solutions',
-      '제품': '/products',
-      '적용분야': '/application-field-main',
-      '납품사례': '/cases',
-      '정부지원 사업안내': '/government-support',
-      '고객지원': '/customer-service',
-      '회사소개': '/about'
-    };
-    const targetPath = pageRoutes[item.label] || item.path;
-    if (targetPath) {
-      navigate(targetPath);
-      setActiveMenuIndex(index);
-      setActiveSubmenuIndex(null);
-    }
-  };
-
-  const handleSubmenuClick = (submenuItem, subIndex, parentIndex) => {
-    console.log('handleSubmenuClick called:', { submenuItem, subIndex, parentIndex });
-    if (submenuItem.path) {
-      // 회사소개 하단 메뉴의 경우 해시가 포함된 경로 처리
-      if (submenuItem.path.includes('#')) {
-        const [basePath, hash] = submenuItem.path.split('#');
-        console.log('Navigating to:', basePath, 'with hash:', hash);
-        
-        // 현재 경로와 다른 경우에만 navigate 호출
-        if (location.pathname !== basePath) {
-          navigate(basePath);
-        }
-        
-        // 해시가 있는 경우 약간의 지연 후 스크롤 처리
-        setTimeout(() => {
-          // URL 해시 업데이트
-          if (window.location.hash !== `#${hash}`) {
-            window.location.hash = hash;
-          }
-          
-          const element = document.querySelector(`#${hash}`);
-          console.log('Looking for element:', `#${hash}`, 'Found:', element);
-          if (element) {
-            const headerOffset = 100;
-            const elementPosition = element.getBoundingClientRect().top;
-            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-            window.scrollTo({
-              top: offsetPosition,
-              behavior: 'smooth'
-            });
-          }
-        }, 300); // 지연 시간을 늘려서 페이지 로딩 완료 후 스크롤
-      } else {
-        console.log('Navigating to:', submenuItem.path);
-        navigate(submenuItem.path);
-      }
-      // 서브메뉴 클릭 시 부모 메뉴와 해당 서브메뉴 모두 활성화
-      setActiveMenuIndex(parentIndex);
-      setActiveSubmenuIndex(subIndex);
-      // 서브메뉴 클릭 시 부모 메뉴의 서브메뉴는 열어두기
-      if (!isMobile) {
-        setOpenSubmenu(parentIndex);
-      }
-    }
-  };
+  const [isMenuAnimating, setIsMenuAnimating] = useState(false);
 
   // 화면 크기 감지
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 768);
+      const mobile = window.innerWidth <= MOBILE_BREAKPOINT;
+      setIsMobile(mobile);
+      
+      // 모바일이 아닐 때 모바일 메뉴 닫기
+      if (!mobile && isMobileMenuOpen) {
+        setIsMobileMenuOpen(false);
+      }
     };
 
     checkMobile();
@@ -176,9 +132,9 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
     return () => {
       window.removeEventListener('resize', checkMobile);
     };
-  }, []);
+  }, [isMobileMenuOpen]);
 
-  // 현재 페이지에 따라 활성화된 메뉴 설정
+  // 현재 페이지에 따른 활성화된 메뉴 설정
   useEffect(() => {
     const currentPath = location.pathname;
     const currentHash = location.hash;
@@ -216,17 +172,7 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
         });
       } else {
         // 서브메뉴가 없는 메뉴 항목의 경우
-        const pageRoutes = {
-          '솔루션': '/solutions',
-          '제품': '/products',
-          '적용분야': '/applications',
-          '납품사례': '/cases',
-          '정부지원 사업안내': '/government-support',
-          '고객지원': '/customer-service',
-          '회사소개': '/about'
-        };
-        const targetPath = pageRoutes[item.label];
-        if (targetPath === currentPath) {
+        if (item.path === currentPath) {
           setActiveMenuIndex(index);
           setActiveSubmenuIndex(null);
           foundActiveMenu = true;
@@ -245,10 +191,29 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
     }
   }, [location.pathname, location.hash, isMobile]);
 
+  // 외부 클릭 감지
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        // 페이지의 다른 부분을 클릭하면 서브메뉴 닫기
+        setOpenSubmenu(null);
+        if (isMobile) {
+          setIsMobileMenuOpen(false);
+        }
+      }
+    };
 
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('touchstart', handleClickOutside);
+    
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('touchstart', handleClickOutside);
+    };
+  }, [isMobile]);
 
-  // 메뉴 위치 기반 활성화 상태 확인 함수
-  const isMenuActive = (menuIndex) => {
+  // 메뉴 활성화 상태 확인 함수
+  const isMenuActive = useCallback((menuIndex) => {
     // 현재 페이지가 해당 메뉴의 서브메뉴 중 하나와 일치하는 경우
     if (defaultMenuItems[menuIndex] && defaultMenuItems[menuIndex].submenu) {
       const hasActiveSubmenu = defaultMenuItems[menuIndex].submenu.some(subItem => {
@@ -266,26 +231,16 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
     }
     
     // 현재 페이지가 해당 메뉴의 메인 페이지와 일치하는 경우
-    const pageRoutes = {
-      '솔루션': '/solutions',
-      '제품': '/products',
-      '적용분야': '/applications',
-      '납품사례': '/cases',
-      '정부지원 사업안내': '/government-support',
-      '고객지원': '/customer-service',
-      '회사소개': '/about'
-    };
-    
     const menuItem = defaultMenuItems[menuIndex];
-    if (menuItem && pageRoutes[menuItem.label] === location.pathname) {
+    if (menuItem && menuItem.path === location.pathname) {
       return true;
     }
     
     return false;
-  };
+  }, [location.pathname, location.hash]);
 
   // 서브메뉴 활성화 상태 확인 함수
-  const isSubmenuActive = (parentIndex, subIndex) => {
+  const isSubmenuActive = useCallback((parentIndex, subIndex) => {
     // 현재 페이지가 해당 서브메뉴의 경로와 일치하는 경우
     if (defaultMenuItems[parentIndex] && defaultMenuItems[parentIndex].submenu) {
       const subItem = defaultMenuItems[parentIndex].submenu[subIndex];
@@ -303,29 +258,10 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
     }
     
     return false;
-  };
+  }, [location.pathname, location.hash]);
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (menuRef.current && !menuRef.current.contains(event.target)) {
-        // 페이지의 다른 부분을 클릭하면 서브메뉴 닫기 (활성화된 메뉴가 있어도)
-        setOpenSubmenu(null);
-        if (isMobile) {
-          setIsMobileMenuOpen(false);
-        }
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    document.addEventListener('touchstart', handleClickOutside);
-    
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-      document.removeEventListener('touchstart', handleClickOutside);
-    };
-  }, [isMobile]);
-
-  const handleItemClick = (item, index) => {
+  // 메뉴 클릭 핸들러
+  const handleItemClick = useCallback((item, index) => {
     if (item.submenu && item.submenu.length > 0) {
       // 서브메뉴가 있는 메뉴 클릭 시
       if (isMobile) {
@@ -338,92 +274,161 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
         setActiveMenuIndex(index);
         setActiveSubmenuIndex(null);
         
-        // 메인 메뉴 페이지로 이동 (서브메뉴가 있는 메뉴의 경우)
-        const pageRoutes = {
-          '정부지원 사업안내': '/government-support',
-          '솔루션': '/solutions',
-          '제품': '/products',
-          '적용분야': '/application-field-main',
-          '납품사례': '/cases',
-          '고객지원': '/customer-service',
-          '회사소개': '/about'
-        };
-        const targetPath = pageRoutes[item.label];
-        if (targetPath) {
-          navigate(targetPath);
+        // 메인 메뉴 페이지로 이동
+        if (item.path) {
+          navigate(item.path);
         }
       }
     } else {
       // 서브메뉴가 없는 메뉴 클릭 시
-      handleMenuClick(item, index);
+      if (item.path) {
+        navigate(item.path);
+      }
+      setActiveMenuIndex(index);
+      setActiveSubmenuIndex(null);
       if (isMobile) {
         setIsMobileMenuOpen(false);
       }
     }
-  };    
+  }, [isMobile, openSubmenu, navigate]);
 
-  // 데스크톱에서 호버 시 서브메뉴 표시 (페이지 이동 없이)
-  const handleMouseEnter = (index) => {
+  // 서브메뉴 클릭 핸들러
+  const handleSubmenuClick = useCallback((submenuItem, subIndex, parentIndex) => {
+    if (submenuItem.path) {
+      // 회사소개 하단 메뉴의 경우 해시가 포함된 경로 처리
+      if (submenuItem.path.includes('#')) {
+        const [basePath, hash] = submenuItem.path.split('#');
+        
+        // 현재 경로와 다른 경우에만 navigate 호출
+        if (location.pathname !== basePath) {
+          navigate(basePath);
+        }
+        
+        // 해시가 있는 경우 약간의 지연 후 스크롤 처리
+        setTimeout(() => {
+          // URL 해시 업데이트
+          if (window.location.hash !== `#${hash}`) {
+            window.location.hash = hash;
+          }
+          
+          const element = document.querySelector(`#${hash}`);
+          if (element) {
+            const headerOffset = 100;
+            const elementPosition = element.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: 'smooth'
+            });
+          }
+        }, 300);
+      } else {
+        navigate(submenuItem.path);
+      }
+      
+      // 서브메뉴 클릭 시 부모 메뉴와 해당 서브메뉴 모두 활성화
+      setActiveMenuIndex(parentIndex);
+      setActiveSubmenuIndex(subIndex);
+      
+      // 서브메뉴 클릭 후 서브메뉴 닫기
+      setOpenSubmenu(null);
+      if (isMobile) {
+        setIsMobileMenuOpen(false);
+      }
+    }
+  }, [navigate, location.pathname, isMobile]);
+
+  // 데스크톱에서 호버 시 서브메뉴 표시
+  const handleMouseEnter = useCallback((index) => {
     if (!isMobile && defaultMenuItems[index].submenu && defaultMenuItems[index].submenu.length > 0) {
       setOpenSubmenu(index);
-      // 호버 시에는 활성화 상태를 변경하지 않음 (클릭 시에만 활성화)
     }
-  };
+  }, [isMobile]);
 
   // 마우스가 메뉴를 벗어날 때 서브메뉴 숨김
-  const handleMouseLeave = () => {
+  const handleMouseLeave = useCallback(() => {
     if (!isMobile) {
       setOpenSubmenu(null);
     }
-  };
+  }, [isMobile]);
 
-  const handleSubmenuItemClick = (submenuItem, subIndex) => {
-    console.log('handleSubmenuItemClick called:', { submenuItem, subIndex });
-    // 현재 열린 서브메뉴의 부모 인덱스 찾기
-    const currentOpenSubmenu = openSubmenu;
-    console.log('currentOpenSubmenu:', currentOpenSubmenu);
+  // 모바일 메뉴 토글
+  const toggleMobileMenu = useCallback(() => {
+    if (isMenuAnimating) return; // 애니메이션 중에는 클릭 무시
     
-    if (currentOpenSubmenu !== null) {
-      handleSubmenuClick(submenuItem, subIndex, currentOpenSubmenu);
-      // 서브메뉴 클릭 후 서브메뉴 닫기 (모바일과 데스크톱 모두)
-      setOpenSubmenu(null);
-      if (isMobile) {
-        setIsMobileMenuOpen(false);
-      }
-    } else {
-      console.log('currentOpenSubmenu is null, cannot handle click');
-    }
-  };
+    setIsMenuAnimating(true);
+    const newState = !isMobileMenuOpen;
+    setIsMobileMenuOpen(newState);
+    
+    // 애니메이션 완료 후 상태 초기화
+    setTimeout(() => {
+      setIsMenuAnimating(false);
+    }, 300);
+  }, [isMobileMenuOpen, isMenuAnimating]);
 
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
-    if (isMobileMenuOpen) {
-      setOpenSubmenu(null);
+  // 로고 클릭 핸들러
+  const handleLogoClick = useCallback(() => {
+    navigate('/');
+    if (isMobile) {
+      setIsMobileMenuOpen(false);
     }
-  };
+  }, [navigate, isMobile]);
+
+  // 현재 열린 서브메뉴 데이터
+  const currentSubmenu = useMemo(() => {
+    if (openSubmenu !== null && defaultMenuItems[openSubmenu]) {
+      return defaultMenuItems[openSubmenu].submenu;
+    }
+    return null;
+  }, [openSubmenu]);
 
   return (
-    <div className="menu-wrapper">
+    <div className={`menu-wrapper${isMobileMenuOpen ? ' mobile-open' : ''}`}>
       <div 
         ref={menuRef} 
-        className={`menu-container menu-${orientation} menu-${theme} ${openSubmenu !== null ? 'open' : ''} ${isMobileMenuOpen ? 'mobile-open' : ''} ${activeMenuIndex !== null ? 'has-active-menu' : ''}`}
+        className={`menu-container menu-${orientation} menu-${theme} ${openSubmenu !== null ? 'open' : ''} ${activeMenuIndex !== null ? 'has-active-menu' : ''}`}
         onMouseLeave={handleMouseLeave}
       >
         <div className="menu-logo">
-          <img src={logo} alt="로고" className="logo-image" onClick={() => navigate('/')} style={{ cursor: 'pointer' }} />
+          {!isMobile ? (
+            <img 
+              src={logo} 
+              alt="로고" 
+              className="logo-image" 
+              onClick={handleLogoClick}
+            />
+          ) : (
+            <div style={{ width: '24px', height: '24px' }}></div>
+          )}
           {isMobile && (
             <button 
               className="mobile-menu-toggle"
               onClick={toggleMobileMenu}
-              aria-label="메뉴 열기/닫기"
+              aria-label={isMobileMenuOpen ? "메뉴 닫기" : "메뉴 열기"}
+              disabled={isMenuAnimating}
             >
-              <span className={`hamburger ${isMobileMenuOpen ? 'open' : ''}`}></span>
+              {!isMobileMenuOpen ? (
+                <img src={hamburgerIcon} alt="메뉴" className="hamburger-icon" />
+              ) : (
+                <span className="close-icon" aria-hidden="true">×</span>
+              )}
             </button>
           )}
         </div>
         
         <nav className={`menu menu-${orientation} menu-${theme} ${isMobileMenuOpen ? 'mobile-visible' : ''}`}>
           <ul className="menu-list">
+            {isMobile && isMobileMenuOpen && (
+              <li className="menu-item logo-list-item" style={{textAlign: 'center', padding: '24px 0', borderBottom: '1px solid #f0f0f0'}}>
+                <img 
+                  src={logo} 
+                  alt="로고" 
+                  className="logo-image" 
+                  style={{height: '48px', width: 'auto', margin: '0 auto', cursor: 'pointer'}} 
+                  onClick={handleLogoClick}
+                />
+              </li>
+            )}
             {defaultMenuItems.map((item, index) => (
               <li 
                 key={index} 
@@ -435,77 +440,58 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
                   className={`menu-button ${item.submenu && item.submenu.length > 0 ? 'has-submenu' : ''} ${openSubmenu === index ? 'active' : ''} ${isMenuActive(index) ? 'active' : ''}`}
                   onClick={() => handleItemClick(item, index)}
                   disabled={item.disabled}
+                  aria-expanded={openSubmenu === index}
+                  aria-haspopup={item.submenu && item.submenu.length > 0}
                 >
                   <span className="menu-text">{item.label}</span>
-                  {item.submenu && item.submenu.length > 0 && isMobile && (
-                    <span className="submenu-indicator">{openSubmenu === index ? '−' : '+'}</span>
-                  )}
                 </button>
                 
-                {/* 모바일에서만 서브메뉴를 각 메뉴 아이템 바로 아래에 렌더링 */}
-                {isMobile && openSubmenu === index && item.submenu && item.submenu.length > 0 && (
-                  <div 
-                    className="full-width-submenu mobile-submenu"
-                  >
-                    <ul className="submenu-list">
-                      {item.submenu.map((submenuItem, subIndex) => (
-                        <li key={subIndex} className="submenu-item">
-                          <button
-                            className={`submenu-button ${isSubmenuActive(index, subIndex) ? 'active' : ''}`}
-                            onClick={(e) => {
-                              e.preventDefault();
-                              e.stopPropagation();
-                              console.log('Submenu button clicked:', submenuItem.label);
-                              handleSubmenuItemClick(submenuItem, subIndex);
-                            }}
-                            type="button"
-                          >
-                            <span className="submenu-text">{submenuItem.label}</span>
-                          </button>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                {/* 모바일에서 서브메뉴 표시 */}
+                {isMobile && item.submenu && item.submenu.length > 0 && openSubmenu === index && (
+                  <ul className="submenu-list mobile-submenu">
+                    {item.submenu.map((submenuItem, subIndex) => (
+                      <li key={subIndex} className="submenu-item">
+                        <button
+                          className={`submenu-button ${isSubmenuActive(index, subIndex) ? 'active' : ''}`}
+                          onClick={() => handleSubmenuClick(submenuItem, subIndex, index)}
+                        >
+                          <span className="submenu-text">{submenuItem.label}</span>
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
                 )}
               </li>
             ))}
           </ul>
         </nav>
         
-        {/* 데스크톱용 서브메뉴 - 메뉴 컨테이너 하단에 표시 */}
-        {!isMobile && (() => {
-          const currentOpenSubmenu = openSubmenu;
-          const hasSubmenu = currentOpenSubmenu !== null && 
-                            defaultMenuItems[currentOpenSubmenu] && 
-                            defaultMenuItems[currentOpenSubmenu].submenu;
-          
-          return hasSubmenu && (
-            <div 
-              className="full-width-submenu"
-              onMouseEnter={() => setOpenSubmenu(currentOpenSubmenu)}
-              onMouseLeave={() => setOpenSubmenu(null)}
-            >
-              <ul className="submenu-list">
-                {defaultMenuItems[currentOpenSubmenu].submenu.map((submenuItem, subIndex) => (
-                  <li key={subIndex} className="submenu-item">
-                    <button
-                      className={`submenu-button ${isSubmenuActive(currentOpenSubmenu, subIndex) ? 'active' : ''}`}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        console.log('Submenu button clicked:', submenuItem.label);
-                        handleSubmenuItemClick(submenuItem, subIndex);
-                      }}
-                      type="button"
-                    >
-                      <span className="submenu-text">{submenuItem.label}</span>
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          );
-        })()}
+        {/* 데스크톱용 서브메뉴 */}
+        {!isMobile && currentSubmenu && (
+          <div 
+            className="full-width-submenu"
+            onMouseEnter={() => setOpenSubmenu(openSubmenu)}
+            onMouseLeave={() => setOpenSubmenu(null)}
+          >
+            <ul className="submenu-list">
+              {currentSubmenu.map((submenuItem, subIndex) => (
+                <li key={subIndex} className="submenu-item">
+                  <button
+                    className={`submenu-button ${isSubmenuActive(openSubmenu, subIndex) ? 'active' : ''}`}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      handleSubmenuClick(submenuItem, subIndex, openSubmenu);
+                    }}
+                    type="button"
+                  >
+                    <span className="submenu-text">{submenuItem.label}</span>
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
     </div>
   );
