@@ -3,6 +3,56 @@
 
 /* Utility Classes - Responsive Design System */
 
+/* ===== MENU SPACING UTILITIES ===== */
+/* 메뉴와 겹치지 않도록 상단 여백을 제공하는 유틸리티 클래스들 */
+
+/* 기본 메뉴 여백 클래스 */
+.menu-spacing {
+  margin-top: 0;
+  padding-top: var(--spacing-xl);
+}
+
+/* 태블릿 (768px - 1023px) */
+@media (max-width: 1023px) and (min-width: 768px) {
+  .menu-spacing {
+    margin-top: 80px; /* 메뉴 높이만큼 상단 여백 */
+    padding-top: var(--spacing-2xl);
+  }
+}
+
+/* 모바일 (767px 이하) */
+@media (max-width: 767px) {
+  .menu-spacing {
+    margin-top: 120px; /* 모바일 메뉴 높이만큼 상단 여백 */
+    padding-top: var(--spacing-2xl);
+    min-height: calc(100vh - 120px); /* 메뉴 높이를 뺀 최소 높이 */
+  }
+}
+
+/* 작은 모바일 (500px 이하) */
+@media (max-width: 500px) {
+  .menu-spacing {
+    margin-top: 140px; /* 작은 모바일에서 더 큰 상단 여백 */
+    padding-top: var(--spacing-xl);
+    min-height: calc(100vh - 140px);
+  }
+}
+
+/* 페이지 컨테이너용 메뉴 여백 */
+.page-with-menu {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.page-content-with-menu {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
 /* ===== DISPLAY ===== */
 .block { display: block; }
 .inline { display: inline; }

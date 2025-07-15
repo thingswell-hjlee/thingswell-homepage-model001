@@ -79,7 +79,7 @@ const Product_main = () => {
       <div className="page-content">
         <div className="page-layout">
           <div className="main-content">
-            <div className="solutions-section">
+            <div className="solutions-section menu-spacing">
               <SolutionCard ref={solutionRef} {...currentSolutionData} showButton={false} variant="product" />
               <Kategorie ref={kategorieRef} title="제품" items={productItems} />
             </div>

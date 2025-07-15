@@ -75,7 +75,7 @@ const ProductList = () => (
     <div className="page-content">
       <div className="page-layout">
         <div className="main-content">
-          <div className="solutions-section">
+          <div className="solutions-section menu-spacing">
             <div className="product-list-container">
               <h1 className="product-list-title">제품 리스트</h1>
               <div className="product-grid">

@@ -88,7 +88,7 @@ const Case_main = () => {
       <div className="page-content">
         <div className="page-layout">
           <div className="main-content">
-            <div className="solutions-section">
+            <div className="solutions-section menu-spacing">
               <SelectCardList 
                 options={selectCardData}
                 selectedOption={selectedIdx !== null ? selectCardData[selectedIdx] : null}

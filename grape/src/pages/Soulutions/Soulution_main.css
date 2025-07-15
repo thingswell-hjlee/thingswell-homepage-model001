@@ -32,16 +32,3 @@ body {
   position: relative;
   gap: var(--spacing-xl);
 }
-
-
-@media (max-width: 767px) {
-  .solutions-section{
-    margin-top: var(--spacing-2xl);
-  }
-}
-
-@media (max-width: 500px) {
-  .solutions-section{
-    margin-top: var(--spacing-4xl);
-  }
-}

@@ -149,7 +149,7 @@ const Case_2 = () => {
             )}
           </div>
           <div className="main-content">
-            <div className="solutions-section">
+            <div className="solutions-section menu-spacing">
               <SolutionCard ref={solutionRef} {...solutionData} showButton={true} variant="compact" />
               
               {applicationCardsData && (

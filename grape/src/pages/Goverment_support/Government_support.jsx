@@ -180,7 +180,7 @@ const Government_support = () => {
             <SidebarMenu menuItems={sidebarMenuItems} sectionRefs={sectionRefs} menuTitle={sidebarTitle} />
           </div>
           <div className="main-content">
-            <div className="solutions-section">
+            <div className="solutions-section menu-spacing">
               <SolutionCard ref={solutionRef} {...solutionData} variant="compact"/>
               
               {applicationCardsData && (
