@@ -21,7 +21,7 @@
   margin-left: auto;
   margin-right: auto;
   flex-wrap: wrap;
-}
+} 
 
 .footer-section {
   text-align: center;
@@ -233,6 +233,7 @@
     gap: var(--spacing-lg);
   }
 
+
   .footer-bottom-content {
     flex-direction: column;
     align-items: center;
@@ -339,9 +340,11 @@
     gap: var(--spacing-xl);
     margin-bottom: var(--spacing-xl);
     align-items: flex-start;
+    
   }
 
   .footer-bottom {
+    
     margin-top: var(--spacing-xl);
   }
 

@@ -24,40 +24,40 @@
 
 /* 기본 변형 (기존 스타일) */
 .solution-card-default {
-  min-height: 100vh;
-  height: 100%;
+  height: 600px;
+  min-height: 600px;
 }
 
 /* 컴팩트 변형 - 메인 페이지용 */
 .solution-card-compact {
-  min-height: 40vh;
-  height: auto;
+  height: 400px;
+  min-height: 400px;
   padding: var(--spacing-lg);
 }
 
 /* 히어로 변형 - 상세 페이지용 */
 .solution-card-hero {
-  min-height: 10vh;
-  height: 100%;
+  height: 300px;
+  min-height: 300px;
 }
 
 /* 제품 페이지용 변형 */
 .solution-card-product {
-  min-height: 20vh;
-  height: auto;
+  height: 350px;
+  min-height: 350px;
   width: 1500px;
 }
 
 /* 정부지원사업용 변형 */
 .solution-card-government {
-  min-height: 80vh;
-  height: auto;
+  height: 700px;
+  min-height: 700px;
 }
 
 /* 솔루션 메인 페이지용 변형 */
 .solution-card-solution-main {
-  min-height: 50vh;
-  height: auto;
+  height: 500px;
+  min-height: 500px;
   padding: var(--spacing-lg);
 }
 
@@ -163,28 +163,48 @@
 @media (max-width: 1279px) {
   .solution-card {
     width: 100%;
-    min-height: 100vh;
+  }
+  
+  .solution-card-default {
+    height: 550px;
+    min-height: 550px;
   }
   
   .solution-card-compact {
-    min-height: 50vh;
+    height: 350px;
+    min-height: 350px;
   }
   
   .solution-card-product {
-    min-height: 60vh;
+    height: 300px;
+    min-height: 300px;
   }
   
   .solution-card-government {
-    min-height: 70vh;
+    height: 600px;
+    min-height: 600px;
   }
   
   .solution-card-solution-main {
-    min-height: 40vh;
+    height: 450px;
+    min-height: 450px;
   }
   
   .solution-card-inner {
     width: 95%;
     gap: 2rem;
+  }
+  
+  .solution-card-subtitle {
+    font-size: clamp(var(--font-size-sm), 2vw, var(--font-size-base));
+  }
+  
+  .solution-card-title {
+    font-size: clamp(var(--font-size-2xl), 3.5vw, var(--font-size-3xl));
+  }
+  
+  .solution-card-desc {
+    font-size: clamp(var(--font-size-sm), 2.2vw, var(--font-size-lg));
   }
 }
 
@@ -192,24 +212,31 @@
 @media (max-width: 1023px) {
   .solution-card {
     width: 100%;
-    min-height: 100vh;
-    height: auto;
+  }
+  
+  .solution-card-default {
+    height: 500px;
+    min-height: 500px;
   }
   
   .solution-card-compact {
-    min-height: 40vh;
+    height: 300px;
+    min-height: 300px;
   }
   
   .solution-card-product {
-    min-height: 50vh;
+    height: 250px;
+    min-height: 250px;
   }
   
   .solution-card-government {
-    min-height: 60vh;
+    height: 550px;
+    min-height: 550px;
   }
   
   .solution-card-solution-main {
-    min-height: 35vh;
+    height: 400px;
+    min-height: 400px;
   }
   
   .solution-card-inner {
@@ -223,12 +250,16 @@
     min-height: 20vh;
   }
   
+  .solution-card-subtitle {
+    font-size: clamp(var(--font-size-xs), 1.8vw, var(--font-size-sm));
+  }
+  
   .solution-card-title {
-    font-size: var(--font-size-3xl);
+    font-size: clamp(var(--font-size-xl), 3vw, var(--font-size-2xl));
   }
   
   .solution-card-desc {
-    font-size: var(--font-size-lg);
+    font-size: clamp(var(--font-size-xs), 2vw, var(--font-size-base));
   }
 }
 
@@ -237,24 +268,32 @@
   .solution-card {
     padding: 1.5rem;
     width: 100%;
-    min-height: 100vh;
+  }
+
+  .solution-card-default {
+    height: 450px;
+    min-height: 450px;
   }
 
   .solution-card-compact {
-    min-height: 35vh;
+    height: 250px;
+    min-height: 250px;
     padding: 1rem;
   }
   
   .solution-card-product {
-    min-height: 45vh;
+    height: 200px;
+    min-height: 200px;
   }
   
   .solution-card-government {
-    min-height: 55vh;
+    height: 500px;
+    min-height: 500px;
   }
   
   .solution-card-solution-main {
-    min-height: 30vh;
+    height: 350px;
+    min-height: 350px;
     padding: 1rem;
   }
   
@@ -273,12 +312,16 @@
     min-height: 20vh;
   }
   
+  .solution-card-subtitle {
+    font-size: clamp(var(--font-size-xs), 1.5vw, var(--font-size-sm));
+  }
+  
   .solution-card-title {
-    font-size: var(--font-size-base);
+    font-size: clamp(var(--font-size-lg), 2.5vw, var(--font-size-xl));
   }
   
   .solution-card-desc {
-    font-size: var(--font-size-base);
+    font-size: clamp(var(--font-size-xs), 1.8vw, var(--font-size-sm));
   }
 }
 
@@ -287,24 +330,32 @@
   .solution-card {
     padding: 1.5rem;
     width: 100%;
-    min-height: 100vh;
+  }
+
+  .solution-card-default {
+    height: 400px;
+    min-height: 400px;
   }
 
   .solution-card-compact {
-    min-height: 35vh;
+    height: 200px;
+    min-height: 200px;
     padding: 1rem;
   }
   
   .solution-card-product {
-    min-height: 45vh;
+    height: 180px;
+    min-height: 180px;
   }
   
   .solution-card-government {
-    min-height: 55vh;
+    height: 450px;
+    min-height: 450px;
   }
   
   .solution-card-solution-main {
-    min-height: 30vh;
+    height: 300px;
+    min-height: 300px;
     padding: 1rem;
   }
   
@@ -323,12 +374,16 @@
     min-height: 20vh;
   }
   
+  .solution-card-subtitle {
+    font-size: clamp(var(--font-size-xs), 1.2vw, var(--font-size-sm));
+  }
+  
   .solution-card-title {
-    font-size: var(--font-size-base);
+    font-size: clamp(var(--font-size-base), 2vw, var(--font-size-lg));
   }
   
   .solution-card-desc {
-    font-size: var(--font-size-base);
+    font-size: clamp(var(--font-size-xs), 1.5vw, var(--font-size-sm));
   }
 }
 

@@ -30,5 +30,31 @@ body {
   padding: var(--spacing-xl) var(--spacing-xl);
   margin: 0 auto;
   position: relative;
-  gap: var(--spacing-xl);
+  gap: var(--spacing-xl) !important;
+}
+
+
+/* 태블릿 반응형 */
+@media (max-width: 1024px) {
+  .solutions-section {
+    gap: var(--spacing-lg) !important;
+    padding: var(--spacing-lg) var(--spacing-lg);
+  }
+}
+
+/* 모바일 반응형 */
+@media (max-width: 768px) {
+  .solutions-section {
+    gap: var(--spacing-lg) !important;
+    padding: var(--spacing-md) var(--spacing-md);
+  }
+}
+
+/* 작은 모바일 반응형 */
+@media (max-width: 480px) {
+  .solutions-section {
+    gap: var(--spacing-lg) !important;
+    padding: var(--spacing-sm) var(--spacing-sm);
+    margin-top: 5vh;
+  }
 }

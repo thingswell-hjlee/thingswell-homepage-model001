@@ -23,7 +23,9 @@ function Footer() {
 
   return (
     <div className="footer-wrapper">
+      
       <footer className="footer">
+        
         <div className="footer-container">
           <div className="footer-content">
             <div className="footer-section">
