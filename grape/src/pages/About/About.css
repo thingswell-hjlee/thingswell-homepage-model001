@@ -4,7 +4,6 @@
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
-  max-width: var(--container-max-width);
 }
 
 .about-hero {
@@ -182,6 +181,8 @@
   -moz-user-select: none;
   -ms-user-select: none;
   padding-bottom: 0 !important;
+  margin-top: var(--spacing-4xl);
+  max-width: var(--container-max-width);
 }
 
 /* 기존 스타일 유지 */
@@ -523,10 +524,35 @@
     overflow-x: hidden;
   }
 
+  .about-section-content-container {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-lg);
+  }
+
   .about-section-title-image {
     width: 100%;
     height: auto;
     max-width: 300px;
+    min-height: 200px;
+    align-self: center;
+  }
+
+  .about-section-title-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .about-section-title-image-description {
+    width: 100%;
+    text-align: left;
+  }
+
+  .about-section-title-image-description p,
+  .about-section-title-image-description h2,
+  .about-section-title-image-description h3 {
+    text-align: left;
   }
 
   .about-content-body {
@@ -534,12 +560,33 @@
     width: 100%;
     max-width: 100%;
     overflow-x: hidden;
+    align-items: center;
+    gap: var(--spacing-lg);
   }
 
   .about-content-image {
     width: 100%;
     height: auto;
     max-width: 300px;
+    min-height: 200px;
+    align-self: center;
+  }
+
+  .about-content-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .about-content-text {
+    width: 100%;
+    text-align: left;
+  }
+
+  .about-content-text p,
+  .about-content-text h2,
+  .about-content-text h3 {
+    text-align: left;
   }
 
   .mission-vision-container {
@@ -554,6 +601,59 @@
     width: 100%;
     max-width: 100%;
     height: 250px;
+  }
+
+  .mission-background,
+  .vision-background {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+/* 태블릿 반응형 */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .about-section-title-image {
+    width: 250px;
+    height: 250px;
+  }
+
+  .about-content-image {
+    width: 250px;
+    height: 250px;
+  }
+
+  .mission-card,
+  .vision-card {
+    height: 280px;
+  }
+}
+
+/* 작은 모바일 화면 */
+@media (max-width: 480px) {
+  .about-section-title-image {
+    width: 100%;
+    height: 180px;
+    max-width: none;
+  }
+
+  .about-content-image {
+    width: 100%;
+    height: 180px;
+    max-width: none;
+  }
+
+  .mission-card,
+  .vision-card {
+    height: 200px;
+  }
+
+  .about-section-title-image-container {
+    padding: var(--spacing-md);
+  }
+
+  .about-content {
+    padding: var(--spacing-md);
   }
 }
 

@@ -6,12 +6,11 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: var(--z-index-menu);
+  position: relative;
   transition: all var(--transition-base);
   background: transparent;
+  margin-bottom: var(--spacing-xl);
+  max-width: var(--container-max-width);
 }
 
 .menu-wrapper.open {
@@ -38,7 +37,6 @@
   align-items: center;
   justify-content: space-between;
   padding: var(--menu-padding);
-  z-index: var(--z-index-menu);
   transition: all var(--transition-base);
   overflow: visible;
 }
@@ -213,7 +211,6 @@
   box-shadow: var(--shadow-xl);
   border: var(--border-width-thin) solid var(--border-color-light);
   border-top: none;
-  z-index: calc(var(--z-index-menu) - 1);
   overflow: hidden;
   opacity: 0;
   visibility: hidden;
@@ -425,9 +422,7 @@
 /* 모바일 가로 & 태블릿 세로 */
 @media (max-width: 767px) and (min-width: 480px) {
   .menu-wrapper {
-    position: fixed;
-    top: 0;
-    left: 0;
+    position: relative;
     width: 100%;
     z-index: var(--z-index-menu);
     margin: 0;
@@ -436,13 +431,9 @@
 
   /* 햄버거 메뉴가 열렸을 때 전체 화면 덮기 */
   .menu-wrapper.mobile-open {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
+    position: relative;
+    width: 100%;
     background: var(--color-background-light);
-    z-index: var(--z-index-menu);
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
@@ -572,7 +563,6 @@
     margin-top: 0;
     border-top: var(--border-width-thin) solid var(--border-color-light);
     display: none;
-    z-index: calc(var(--z-index-menu) + 1);
   }
 
   .full-width-submenu.mobile-submenu {
@@ -680,9 +670,7 @@
 /* 모바일 */
 @media (max-width: 480px) {
   .menu-wrapper {
-    position: fixed;
-    top: 0;
-    left: 0;
+    position: relative;
     width: 100%;
     z-index: var(--z-index-menu);
     margin: 0;
@@ -691,13 +679,9 @@
 
   /* 햄버거 메뉴가 열렸을 때 전체 화면 덮기 */
   .menu-wrapper.mobile-open {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
+    position: relative;
+    width: 100%;
     background: var(--color-background-light);
-    z-index: var(--z-index-menu);
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
@@ -744,7 +728,6 @@
     background: var(--color-background-light);
     position: sticky;
     top: 0;
-    z-index: 1000;
   }
 
   .mobile-menu-toggle {
