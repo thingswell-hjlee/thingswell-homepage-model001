@@ -144,7 +144,7 @@ function App() {
         </div>
 
         {/* 메인 콘텐츠 영역 */}
-        <main className="main-content container-global">
+        <main className="main-content">
           <Routes>
             <Route path="/" element={<HomePage />} />
 
