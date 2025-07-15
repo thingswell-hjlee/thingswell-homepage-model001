@@ -5,13 +5,15 @@
   box-sizing: border-box
 }
 
-body {
+html, body {
   margin: 0;
   padding: 0;
   width: 100%;
   font-family: var(--font-family-primary);
-  background-color: var(--color-background-light);
-  overflow-x: hidden; /* 가로 스크롤 방지 */
+  background-color: var(--color-background-dark); /* 배경색을 다크로 변경 */
+  overflow-x: hidden; /* 가로 스크롤만 방지 */
+  overscroll-behavior: none; /* 오버스크롤 방지 */
+  -webkit-overflow-scrolling: touch; /* iOS 스크롤 최적화 */
 }
 
 #root {
@@ -21,6 +23,8 @@ body {
   text-align: center;
   box-sizing: border-box;
   background-color: var(--color-background-dark);
+  overscroll-behavior: none;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* 새로운 앱 컨테이너 구조 */
@@ -48,13 +52,15 @@ body {
 .content-container {
   position: relative;
   display: block;
-  background-color: var(--color-overlay);
+  background-color: var(--color-background-dark); /* 배경색을 다크로 변경 */
   margin: 0 auto;
   text-align: center;
   width: 100%;
+  min-height: 100vh; /* height 대신 min-height 사용 */
   box-sizing: border-box;
   overflow: hidden;
-  min-height: 100vh; /* height 대신 min-height 사용 */
+  overscroll-behavior: none;
+  -webkit-overflow-scrolling: touch;
 }
 
 .main-image {
