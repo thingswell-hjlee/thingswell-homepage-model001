@@ -1,9 +1,13 @@
 .board-container {
   min-height: 100vh;
   background-color: var(--color-background-light);
-  padding: 20px;
-  margin-top: var(--spacing-2xl);
+  padding: var(--board-container-padding);
+  margin-top: var(--spacing-xl);
   border-radius: var(--border-radius-xl);
+  max-width: var(--board-container-max-width);
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
 }
 
 /* 페이지 전환 애니메이션 */
@@ -25,6 +29,6 @@
 /* 반응형 디자인 */
 @media (max-width: 768px) {
   .board-container {
-    padding: 10px;
+    padding: calc(var(--board-container-padding) / 2);
   }
-} 
+}

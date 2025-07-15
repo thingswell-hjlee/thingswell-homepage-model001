@@ -1,6 +1,6 @@
-import React from 'react';
-import Board from '../../components/Board.jsx';
-import SolutionCard from '../../components/SolutionCard.jsx';
+import React from "react";
+import Board from "../../components/Board.jsx";
+import SolutionCard from "../../components/SolutionCard.jsx";
 
 const Downloads = () => {
   return (
@@ -8,10 +8,19 @@ const Downloads = () => {
       <div className="page-content">
         <div className="page-layout">
           <div className="main-content">
-          <div className="solutions-section">
-              <SolutionCard subtitle="Downloads" title="싱스웰 자료실" description="고객지원" showButton={false} link="/solutions/detail" className="custom-solution-left" variant="hero" reverse={false} />
+            <div className="solutions-section">
+              <SolutionCard
+                subtitle="Downloads"
+                title="싱스웰 자료실"
+                description="고객지원"
+                showButton={false}
+                link="/solutions/detail"
+                className="custom-solution-left"
+                variant="hero"
+                reverse={false}
+              />
+              <Board tableName="Board_Download" />
             </div>
-            <Board tableName="Board_Download"/>
           </div>
         </div>
       </div>
@@ -19,4 +28,4 @@ const Downloads = () => {
   );
 };
 
-export default Downloads;  
+export default Downloads;
