@@ -80,6 +80,15 @@ img {
 
 /* ===== UTILITY CLASSES ===== */
 
+/* 전역 컨테이너 - 모든 컴포넌트에 최대 너비 1500px 적용 */
+.container-global {
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+  width: 100%;
+  box-sizing: border-box;
+}
+
 /* 텍스트 선택 방지 */
 .no-select {
   -webkit-user-select: none;

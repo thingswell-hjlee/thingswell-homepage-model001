@@ -113,6 +113,8 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [isMenuAnimating, setIsMenuAnimating] = useState(false);
+  const [isMenuHidden, setIsMenuHidden] = useState(false);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
   // 화면 크기 감지
   useEffect(() => {
@@ -133,6 +135,39 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
       window.removeEventListener('resize', checkMobile);
     };
   }, [isMobileMenuOpen]);
+
+  // 스크롤 감지 및 메뉴 숨김/표시
+  useEffect(() => {
+    let scrollTimeout;
+    
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      
+      // 스크롤 방향 감지
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        // 아래로 스크롤하고 100px 이상 스크롤된 경우 메뉴 숨김
+        setIsMenuHidden(true);
+      } else if (currentScrollY < lastScrollY || currentScrollY <= 100) {
+        // 위로 스크롤하거나 상단에 가까운 경우 메뉴 표시
+        setIsMenuHidden(false);
+      }
+      
+      setLastScrollY(currentScrollY);
+      
+      // 스크롤이 멈추면 메뉴 다시 표시
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        setIsMenuHidden(false);
+      }, 1000);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      clearTimeout(scrollTimeout);
+    };
+  }, [lastScrollY]);
 
   // 현재 페이지에 따른 활성화된 메뉴 설정
   useEffect(() => {
@@ -383,7 +418,7 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
   }, [openSubmenu]);
 
   return (
-    <div className={`menu-wrapper${isMobileMenuOpen ? ' mobile-open' : ''}`}>
+    <div className={`menu-wrapper${isMobileMenuOpen ? ' mobile-open' : ''}${isMenuHidden ? ' hidden' : ''}`}>
       <div 
         ref={menuRef} 
         className={`menu-container menu-${orientation} menu-${theme} ${openSubmenu !== null ? 'open' : ''} ${activeMenuIndex !== null ? 'has-active-menu' : ''}`}

@@ -6,13 +6,21 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
   z-index: var(--z-index-menu);
   transition: all var(--transition-base);
+  background: transparent;
 }
 
 .menu-wrapper.open {
   border-radius: var(--border-radius-3xl);
+}
+
+/* 스크롤 시 메뉴 숨김 */
+.menu-wrapper.hidden {
+  transform: translateY(-100%);
 }
 
 /* 메뉴 컨테이너 */
@@ -218,6 +226,13 @@
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
+}
+
+/* 서브메뉴가 열렸을 때 menu-container 하단 좌우 radius 제거 */
+.menu-container.open {
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  transition: none !important;
 }
 
 /* 서브메뉴 리스트 */
