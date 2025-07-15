@@ -633,15 +633,38 @@
     visibility: hidden;
   }
 
+  .menu-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 99999;
+    margin: 0;
+    padding: 0;
+  }
+
   .menu-container {
     width: 100vw;
-    padding:var(--spacing-sm) var(--spacing-xl);
+    padding: var(--spacing-sm) var(--spacing-xl);
     height: auto;
     min-height: 60px;
-    border-radius: var(--menu-border-radius);
+    border-radius: 0;
     flex-direction: column;
     align-items: stretch;
-    
+    margin: 0;
+    position: relative;
+  }
+
+  /* 모바일에서 메뉴 컨테이너가 열렸을 때 border radius 제거 */
+  .menu-container.menu-vertical.menu-primary.open.mobile-open {
+    border-radius: 0 !important;
+  }
+
+  /* 스크롤된 상태의 메뉴 컨테이너 */
+  .menu-container.scrolled {
+    background: #fff;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid #e0e0e0;
   }
 
   .menu-logo {
@@ -707,7 +730,7 @@
     left: 0;
     width: 100%;
     height: auto;
-    border-radius: 0;
+    border-radius: 0 !important;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     background-color: #f8f8f8;
     margin-top: 0;
@@ -722,7 +745,7 @@
     box-shadow: none;
     display: block;
     align-items: flex-start;
-    border-radius: 0;
+    border-radius: 0 !important;
     margin-top: var(--spacing-lg);
   }
 
@@ -731,7 +754,7 @@
     gap: var(--spacing-lg);
     justify-content: flex-start;
     align-items: flex-start;
-    border-radius: 0;
+    border-radius: 0 !important;
     padding: var(--spacing-lg) var(--spacing-xl);
   }
 
@@ -744,7 +767,7 @@
     max-width: 100%;
     min-width: 100%;
     width: 100%;
-    border-radius: 0;
+    border-radius: 0 !important;
   }
 
   .submenu-button {
@@ -755,7 +778,7 @@
     background-color: #f8f8f8;
     width: 100% !important;
     min-width: auto;
-    border-radius: 0;
+    border-radius: 0 !important;
   }
 
   .submenu-item:last-child .submenu-button {
@@ -782,14 +805,38 @@
     visibility: hidden;
   }
 
+  .menu-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 99999;
+    margin: 0;
+    padding: 0;
+  }
+
   .menu-container {
     width: 100vw;
-    padding:var(--spacing-sm) var(--spacing-xl);
+    padding: var(--spacing-sm) var(--spacing-xl);
     height: auto;
     min-height: 60px;
-    border-radius: var(--menu-border-radius);
+    border-radius: 0;
     flex-direction: column;
     align-items: stretch;
+    margin: 0;
+    position: relative;
+  }
+
+  /* 모바일에서 메뉴 컨테이너가 열렸을 때 border radius 제거 */
+  .menu-container.menu-vertical.menu-primary.open.mobile-open {
+    border-radius: 0 !important;
+  }
+
+  /* 스크롤된 상태의 메뉴 컨테이너 */
+  .menu-container.scrolled {
+    background: #fff;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid #e0e0e0;
   }
 
   .menu-logo {
@@ -853,7 +900,7 @@
     left: 0;
     width: 100%;
     height: auto;
-    border-radius: 0;
+    border-radius: 0 !important;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     background-color: #f8f8f8;
     margin-top: 0;
@@ -868,7 +915,7 @@
     box-shadow: none;
     display: block;
     align-items: flex-start;
-    border-radius: 0;
+    border-radius: 0 !important;
     margin-top: var(--spacing-lg);
   }
 
@@ -877,7 +924,7 @@
     gap: var(--spacing-lg);
     justify-content: flex-start;
     align-items: flex-start;
-    border-radius: 0;
+    border-radius: 0 !important;
     padding: var(--spacing-lg) var(--spacing-xl);
   }
 
@@ -890,7 +937,7 @@
     max-width: 100%;
     min-width: 100%;
     width: 100%;
-    border-radius: 0;
+    border-radius: 0 !important;
   }
 
   .submenu-button {
@@ -901,7 +948,7 @@
     background-color: #f8f8f8;
     width: 100% !important;
     min-width: auto;
-    border-radius: 0;
+    border-radius: 0 !important;
   }
 
   .submenu-item:last-child .submenu-button {
@@ -918,4 +965,9 @@
     background-color: var(--color-primary-dark) !important;
     color: var(--color-text-white) !important;
   }
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
 }
