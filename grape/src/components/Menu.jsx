@@ -329,30 +329,30 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
     if (item.submenu && item.submenu.length > 0) {
       // 서브메뉴가 있는 메뉴 클릭 시
       if (isMobile) {
-        // 모바일에서는 서브메뉴 토글
+        // 모바일에서는 서브메뉴 토글만 (페이지 이동 없음)
         setOpenSubmenu(openSubmenu === index ? null : index);
       } else {
-              // 데스크톱에서는 호버 시에만 서브메뉴가 열리므로 클릭 시에는 페이지 이동만
-      setOpenSubmenu(null);
-    }
-    // 해당 메뉴 활성화
-    setActiveMenuIndex(index);
-    setActiveSubmenuIndex(null);
-    
-    // 메인 메뉴 페이지로 이동 (서브메뉴가 있는 메뉴의 경우)
-    const pageRoutes = {
-      '정부지원 사업안내': '/government-support',
-      '솔루션': '/solutions',
-      '제품': '/products',
-      '적용분야': '/application-field-main',
-      '납품사례': '/cases',
-      '고객지원': '/customer-service',
-      '회사소개': '/about'
-    };
-    const targetPath = pageRoutes[item.label];
-    if (targetPath) {
-      navigate(targetPath);
-    }
+        // 데스크톱에서는 호버 시에만 서브메뉴가 열리므로 클릭 시에는 페이지 이동만
+        setOpenSubmenu(null);
+        // 해당 메뉴 활성화
+        setActiveMenuIndex(index);
+        setActiveSubmenuIndex(null);
+        
+        // 메인 메뉴 페이지로 이동 (서브메뉴가 있는 메뉴의 경우)
+        const pageRoutes = {
+          '정부지원 사업안내': '/government-support',
+          '솔루션': '/solutions',
+          '제품': '/products',
+          '적용분야': '/application-field-main',
+          '납품사례': '/cases',
+          '고객지원': '/customer-service',
+          '회사소개': '/about'
+        };
+        const targetPath = pageRoutes[item.label];
+        if (targetPath) {
+          navigate(targetPath);
+        }
+      }
     } else {
       // 서브메뉴가 없는 메뉴 클릭 시
       handleMenuClick(item, index);
@@ -360,7 +360,7 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
         setIsMobileMenuOpen(false);
       }
     }
-  };
+  };    
 
   // 데스크톱에서 호버 시 서브메뉴 표시 (페이지 이동 없이)
   const handleMouseEnter = (index) => {
@@ -425,7 +425,7 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
         <nav className={`menu menu-${orientation} menu-${theme} ${isMobileMenuOpen ? 'mobile-visible' : ''}`}>
           <ul className="menu-list">
             {defaultMenuItems.map((item, index) => (
-                              <li 
+              <li 
                 key={index} 
                 className={`menu-item ${item.submenu && item.submenu.length > 0 ? 'has-submenu' : ''}`}
                 data-active={isMenuActive(index) ? 'true' : 'false'}
@@ -441,13 +441,39 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
                     <span className="submenu-indicator">{openSubmenu === index ? '−' : '+'}</span>
                   )}
                 </button>
+                
+                {/* 모바일에서만 서브메뉴를 각 메뉴 아이템 바로 아래에 렌더링 */}
+                {isMobile && openSubmenu === index && item.submenu && item.submenu.length > 0 && (
+                  <div 
+                    className="full-width-submenu mobile-submenu"
+                  >
+                    <ul className="submenu-list">
+                      {item.submenu.map((submenuItem, subIndex) => (
+                        <li key={subIndex} className="submenu-item">
+                          <button
+                            className={`submenu-button ${isSubmenuActive(index, subIndex) ? 'active' : ''}`}
+                            onClick={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              console.log('Submenu button clicked:', submenuItem.label);
+                              handleSubmenuItemClick(submenuItem, subIndex);
+                            }}
+                            type="button"
+                          >
+                            <span className="submenu-text">{submenuItem.label}</span>
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </li>
             ))}
           </ul>
         </nav>
         
-        {(() => {
-          // openSubmenu가 null이 아닐 때만 서브메뉴 표시 (activeMenuIndex 사용하지 않음)
+        {/* 데스크톱용 서브메뉴 - 메뉴 컨테이너 하단에 표시 */}
+        {!isMobile && (() => {
           const currentOpenSubmenu = openSubmenu;
           const hasSubmenu = currentOpenSubmenu !== null && 
                             defaultMenuItems[currentOpenSubmenu] && 
@@ -455,13 +481,9 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
           
           return hasSubmenu && (
             <div 
-              className={`full-width-submenu ${isMobile ? 'mobile-submenu' : ''}`}
-              onMouseEnter={() => !isMobile && setOpenSubmenu(currentOpenSubmenu)}
-              onMouseLeave={() => {
-                if (!isMobile) {
-                  setOpenSubmenu(null);
-                }
-              }}
+              className="full-width-submenu"
+              onMouseEnter={() => setOpenSubmenu(currentOpenSubmenu)}
+              onMouseLeave={() => setOpenSubmenu(null)}
             >
               <ul className="submenu-list">
                 {defaultMenuItems[currentOpenSubmenu].submenu.map((submenuItem, subIndex) => (
