@@ -232,14 +232,18 @@ body {
 /* 모바일 (479px 이하) */
 @media screen and (max-width: 479px) {
   .content-text {
-    font-size: var(--font-size-xl);
+    font-size: 12px !important; /* 직접 픽셀 값 사용 */
     top: 20%;
     text-align: center;
   }
 
+  .content-text h1 {
+    font-size: 50px !important; /* h1 태그도 명시적으로 설정 */
+  }
+
   .button-text {
     padding: 0 70px 0 70px;
-    font-size: var(--font-size-base);
+    font-size: 14px !important; /* 버튼 텍스트도 작게 조정 */
   }
 
   .button {
