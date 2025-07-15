@@ -24,7 +24,7 @@
 
 /* About Section 스타일 */
 .about-section {
-  margin-bottom: var(--spacing-3xl);
+  margin-bottom: var(--spacing-sm);
   width: 100%;
   scroll-margin-top: 120px; /* 헤더 높이만큼 스크롤 마진 추가 */
   user-select: none; /* 드래그 방지 */

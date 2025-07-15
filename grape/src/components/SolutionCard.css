@@ -37,8 +37,9 @@
 
 /* 히어로 변형 - 상세 페이지용 */
 .solution-card-hero {
-  height: 300px;
-  min-height: 300px;
+  height: 200px;
+  min-height: 200px;
+  max-height: 200px;
 }
 
 /* 제품 페이지용 변형 */
@@ -78,14 +79,21 @@
   margin: 0;
   max-width: none;
   gap: 0;
-  
+  max-height: 200px;
 }
 
 .solution-card.custom-solution-left {
   justify-content: flex-start;
   align-items: flex-start;
   gap: 0;
-} 
+  max-height: 200px;
+}
+
+.solution-card.custom-solution-left {
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 0;
+}
 
 /* 좌우반전 클래스 */
 .solution-card-reverse .solution-card-inner {
@@ -113,7 +121,7 @@
 .solution-card-subtitle {
   font-size: clamp(var(--font-size-base), 2.5vw, var(--font-size-lg));
   color: var(--color-text-muted);
-  margin-bottom: var(--spacing-xs); 
+  margin-bottom: var(--spacing-xs);
   font-family: var(--font-family-primary);
   text-align: left;
 }
@@ -164,45 +172,45 @@
   .solution-card {
     width: 100%;
   }
-  
+
   .solution-card-default {
     height: 550px;
     min-height: 550px;
   }
-  
+
   .solution-card-compact {
     height: 350px;
     min-height: 350px;
   }
-  
+
   .solution-card-product {
     height: 300px;
     min-height: 300px;
   }
-  
+
   .solution-card-government {
     height: 600px;
     min-height: 600px;
   }
-  
+
   .solution-card-solution-main {
     height: 450px;
     min-height: 450px;
   }
-  
+
   .solution-card-inner {
     width: 95%;
     gap: 2rem;
   }
-  
+
   .solution-card-subtitle {
     font-size: clamp(var(--font-size-sm), 2vw, var(--font-size-base));
   }
-  
+
   .solution-card-title {
     font-size: clamp(var(--font-size-2xl), 3.5vw, var(--font-size-3xl));
   }
-  
+
   .solution-card-desc {
     font-size: clamp(var(--font-size-sm), 2.2vw, var(--font-size-lg));
   }
@@ -213,32 +221,32 @@
   .solution-card {
     width: 100%;
   }
-  
+
   .solution-card-default {
     height: 500px;
     min-height: 500px;
   }
-  
+
   .solution-card-compact {
     height: 300px;
     min-height: 300px;
   }
-  
+
   .solution-card-product {
     height: 250px;
     min-height: 250px;
   }
-  
+
   .solution-card-government {
     height: 550px;
     min-height: 550px;
   }
-  
+
   .solution-card-solution-main {
     height: 400px;
     min-height: 400px;
   }
-  
+
   .solution-card-inner {
     width: 95%;
     gap: 1.5rem;
@@ -249,15 +257,15 @@
     max-height: 30vh;
     min-height: 20vh;
   }
-  
+
   .solution-card-subtitle {
     font-size: clamp(var(--font-size-xs), 1.8vw, var(--font-size-sm));
   }
-  
+
   .solution-card-title {
     font-size: clamp(var(--font-size-xl), 3vw, var(--font-size-2xl));
   }
-  
+
   .solution-card-desc {
     font-size: clamp(var(--font-size-xs), 2vw, var(--font-size-base));
   }
@@ -280,46 +288,46 @@
     min-height: 250px;
     padding: 1rem;
   }
-  
+
   .solution-card-product {
     height: 200px;
     min-height: 200px;
   }
-  
+
   .solution-card-government {
     height: 500px;
     min-height: 500px;
   }
-  
+
   .solution-card-solution-main {
     height: 350px;
     min-height: 350px;
     padding: 1rem;
   }
-  
+
   .solution-card-inner {
     width: 100%;
     gap: 1rem;
   }
-  
+
   .solution-card-text {
     flex: 1;
   }
-  
+
   .solution-card-image {
     height: 30vh;
     max-height: 30vh;
     min-height: 20vh;
   }
-  
+
   .solution-card-subtitle {
     font-size: clamp(var(--font-size-xs), 1.5vw, var(--font-size-sm));
   }
-  
+
   .solution-card-title {
     font-size: clamp(var(--font-size-lg), 2.5vw, var(--font-size-xl));
   }
-  
+
   .solution-card-desc {
     font-size: clamp(var(--font-size-xs), 1.8vw, var(--font-size-sm));
   }
@@ -342,51 +350,50 @@
     min-height: 200px;
     padding: 1rem;
   }
-  
+
   .solution-card-product {
     height: 180px;
     min-height: 180px;
   }
-  
+
   .solution-card-government {
     height: 450px;
     min-height: 450px;
   }
-  
+
   .solution-card-solution-main {
     height: 300px;
     min-height: 300px;
     padding: 1rem;
   }
-  
+
   .solution-card-inner {
     width: 100%;
     gap: 1rem;
   }
-  
+
   .solution-card-text {
     flex: 1;
   }
-  
+
   .solution-card-image {
     height: 30vh;
     max-height: 30vh;
     min-height: 20vh;
   }
-  
+
   .solution-card-subtitle {
     font-size: clamp(var(--font-size-xs), 1.2vw, var(--font-size-sm));
   }
-  
+
   .solution-card-title {
     font-size: clamp(var(--font-size-base), 2vw, var(--font-size-lg));
   }
-  
+
   .solution-card-desc {
     font-size: clamp(var(--font-size-xs), 1.5vw, var(--font-size-sm));
   }
 }
-
 
 .solution-card-button {
   display: flex;
