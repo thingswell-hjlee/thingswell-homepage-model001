@@ -42,6 +42,7 @@ html, body {
   display: flex;
   flex-direction: column;
   margin-bottom: var(--spacing-md);
+  margin-top: var(--spacing-4xl);
 }
 
 /* 홈페이지에서만 margin-bottom 제거 */
