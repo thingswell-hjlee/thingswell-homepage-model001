@@ -48,6 +48,7 @@ html, body {
 /* 홈페이지에서만 margin-bottom 제거 */
 .main-content:has(.content-container) {
   margin-bottom: 0;
+  margin-top: 0;
 }
 
 .main-center-wrapper {

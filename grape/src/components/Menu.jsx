@@ -215,6 +215,16 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
       }
     });
     
+    // 메인 메뉴 페이지에 도달했을 때 해당 메뉴에 서브메뉴가 있다면 열어두기
+    defaultMenuItems.forEach((item, index) => {
+      if (item.path === currentPath && item.submenu && item.submenu.length > 0) {
+        if (!isMobile) {
+          setOpenSubmenu(index);
+        }
+        foundActiveMenu = true;
+      }
+    });
+    
     // 현재 페이지에 해당하는 메뉴가 없으면 활성화 상태 초기화
     if (!foundActiveMenu && !foundActiveSubmenu) {
       setActiveMenuIndex(null);
@@ -303,8 +313,8 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
         // 모바일에서는 서브메뉴 토글만 (페이지 이동 없음)
         setOpenSubmenu(openSubmenu === index ? null : index);
       } else {
-        // 데스크톱에서는 호버 시에만 서브메뉴가 열리므로 클릭 시에는 페이지 이동만
-        setOpenSubmenu(null);
+        // 데스크톱에서는 클릭 시 해당 서브메뉴 자동으로 열기
+        setOpenSubmenu(index);
         // 해당 메뉴 활성화
         setActiveMenuIndex(index);
         setActiveSubmenuIndex(null);
@@ -321,6 +331,8 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
       }
       setActiveMenuIndex(index);
       setActiveSubmenuIndex(null);
+      // 서브메뉴가 없는 메뉴 클릭 시 다른 서브메뉴들 닫기
+      setOpenSubmenu(null);
       if (isMobile) {
         setIsMobileMenuOpen(false);
       }
@@ -380,12 +392,12 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
     }
   }, [isMobile]);
 
-  // 마우스가 메뉴를 벗어날 때 서브메뉴 숨김
-  const handleMouseLeave = useCallback(() => {
-    if (!isMobile) {
-      setOpenSubmenu(null);
-    }
-  }, [isMobile]);
+  // 마우스가 메뉴를 벗어날 때 서브메뉴 숨김 (제거 - 다른 부분 클릭할 때까지 유지)
+  // const handleMouseLeave = useCallback(() => {
+  //   if (!isMobile) {
+  //     setOpenSubmenu(null);
+  //   }
+  // }, [isMobile]);
 
   // 모바일 메뉴 토글
   const toggleMobileMenu = useCallback(() => {
@@ -419,11 +431,10 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
 
   return (
     <div className={`menu-wrapper${isMobileMenuOpen ? ' mobile-open' : ''}${isMenuHidden ? ' hidden' : ''}`}>
-      <div 
-        ref={menuRef} 
-        className={`menu-container menu-${orientation} menu-${theme} ${openSubmenu !== null ? 'open' : ''} ${activeMenuIndex !== null ? 'has-active-menu' : ''}`}
-        onMouseLeave={handleMouseLeave}
-      >
+              <div 
+          ref={menuRef} 
+          className={`menu-container menu-${orientation} menu-${theme} ${openSubmenu !== null ? 'open' : ''} ${activeMenuIndex !== null ? 'has-active-menu' : ''}`}
+        >
         <div className="menu-logo">
           {!isMobile ? (
             <img 
@@ -505,8 +516,6 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
         {!isMobile && currentSubmenu && (
           <div 
             className="full-width-submenu"
-            onMouseEnter={() => setOpenSubmenu(openSubmenu)}
-            onMouseLeave={() => setOpenSubmenu(null)}
           >
             <ul className="submenu-list">
               {currentSubmenu.map((submenuItem, subIndex) => (

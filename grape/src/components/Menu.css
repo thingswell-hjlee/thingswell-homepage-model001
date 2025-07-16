@@ -122,12 +122,12 @@
   transition: all var(--transition-base);
 }
 
-/* 메뉴 아이템 호버 시 서브메뉴 표시 */
-.menu-item:hover .full-width-submenu {
+/* 메뉴 아이템 호버 시 서브메뉴 표시 (제거 - JavaScript로 제어) */
+/* .menu-item:hover .full-width-submenu {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
-}
+} */
 
 /* 메뉴 버튼 */
 .menu-button {
@@ -276,7 +276,7 @@
   transition: all var(--transition-base);
   border-right: var(--border-width-thin) solid var(--border-color-light);
   outline: none;
-  border-radius: var(--border-radius-sm);
+  border-radius: var(--border-radius-lg);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
