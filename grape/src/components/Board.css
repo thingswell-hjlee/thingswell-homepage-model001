@@ -4,8 +4,6 @@
   padding: var(--board-container-padding);
   border-radius: var(--border-radius-xl);
   max-width: var(--board-container-max-width);
-  margin-left: auto;
-  margin-right: auto;
   width: 100%;
 }
 

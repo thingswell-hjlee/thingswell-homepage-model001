@@ -279,20 +279,6 @@ const BoardList = ({
           </tbody>
         </table>
       </div>
-
-      {(!filteredInstruments || filteredInstruments.length === 0) && (
-        <div className="empty-state">
-          <p>등록된 게시글이 없습니다.</p>
-          {user && (
-            <div className="empty-state-actions">
-              <p>첫 번째 게시글을 작성해보세요!</p>
-              <button onClick={onWriteClick} className="btn-write-empty">
-                글쓰기
-              </button>
-            </div>
-          )}
-        </div>
-      )}
     </div>
   );
 };
