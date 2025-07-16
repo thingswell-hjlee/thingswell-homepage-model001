@@ -11,8 +11,9 @@ const Contact = () => {
           <div className="main-content">
           <div className="solutions-section" >
               <SolutionCard subtitle="Announcement" title="문의하기" description="고객지원" showButton={false} link="/solutions/detail" className="custom-solution-left" variant="hero" reverse={false} />
+              <Form />
             </div>
-            <Form />
+            
           </div>
         </div>
       </div>
