@@ -55,8 +55,9 @@ html, body {
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+  padding-bottom: 500px; /* 고정된 픽셀 값으로 일정한 위치 유지 */
 }
 
 .content-container {
@@ -91,7 +92,8 @@ html, body {
   z-index: 10;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start; /* 상단 정렬로 변경 */
+  padding-top: 200px; /* 상단에서 고정된 거리 */
 }
 
 .menu-overlay-subpage {
@@ -272,6 +274,15 @@ html, body {
 
   .main-content {
     margin-top: var(--spacing-xl);
+  }
+
+  /* 모바일에서 일정한 위치 유지 */
+  .main-center-wrapper {
+    padding-bottom: 200px; /* 모바일에서는 더 작은 값 */
+  }
+
+  .overlay-container {
+    padding-top: 100px; /* 모바일에서는 더 작은 값 */
   }
 }
 
