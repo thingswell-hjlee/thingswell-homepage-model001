@@ -1,5 +1,5 @@
 .footer {
-  background-color: var(--color-background-dark);
+  background-color: var(--color-footer);
   color: var(--color-text-white);
   padding: var(--spacing-2xl) 0 var(--spacing-lg) 0;
   font-family: var(--font-family-primary);

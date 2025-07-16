@@ -16,10 +16,11 @@
   /* Background Colors */
   --color-background: #f5f5f5; /* 배경 라이트 그레이 - 깔끔함, 가독성 */
   --color-background-light: #ffffff;
-  --color-background-dark: #020202; /* Darker variant of background */
+  --color-background-dark: #323232  ; /* Darker variant of background */
   --color-surface: #f5f5f5;
   --color-surface-light: #fafafa; /* Lighter variant of surface */
   --color-surface-dark: #e0e0e0; /* Darker variant of surface */
+  --color-footer: #1E1E1E;
 
   /* Text Colors */
   --color-text-primary: #212121; /* 서브 다크 그레이 - 주요 텍스트 */
