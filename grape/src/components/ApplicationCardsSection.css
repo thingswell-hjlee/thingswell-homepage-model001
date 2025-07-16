@@ -10,7 +10,7 @@
 }
 
 .application-card-section-title {
-  font-size: clamp(var(--font-size-2xl), 4vw, var(--font-size-4xl));
+  font-size: var(--font-size-4xl)!important;
   font-weight: var(--font-weight-bold);
   color: var(--color-text-primary);
   text-align: center;
@@ -28,12 +28,8 @@
 
 .cards-container {
   width: 100%;
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
   display: flex;
   justify-content: flex-start;
-  padding: 0 var(--spacing-xl);
   flex-direction: column;
 }
 
@@ -56,7 +52,7 @@
   }
   
   .application-section-responsive {
-    padding: var(--spacing-xl) 0;
+    padding: var(--spacing-xl);
   }
 }
 
@@ -68,7 +64,7 @@
   }
   
   .application-section-responsive {
-    padding: var(--spacing-lg) 0;
+    padding: var(--spacing-xl);
   }
   
   .cards-container {
@@ -83,7 +79,7 @@
   }
   
   .application-section-responsive {
-    padding: var(--spacing-md) 0;
+    padding: var(--spacing-lg);
   }
   
   .cards-container {

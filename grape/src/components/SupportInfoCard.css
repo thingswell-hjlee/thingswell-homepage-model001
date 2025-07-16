@@ -22,7 +22,6 @@
 }
 
 .support-info-card-header {
-  padding: var(--spacing-xl) var(--spacing-xl) var(--spacing-xl) var(--spacing-xl);
   color: var(--color-text-primary);
   display: flex;
   flex-direction: column;
@@ -31,7 +30,7 @@
 }
 
 .support-info-card-header h1 {
-  font-size: var(--font-size-5xl);
+  font-size: var(--font-size-4xl);
   margin-bottom: 0;
   color: var(--color-text-primary);
   line-height: var(--line-height-tight);
@@ -45,7 +44,6 @@
 }
 
 .support-info-card-row {
-  padding: var(--spacing-xl) var(--spacing-xl) var(--spacing-xl) var(--spacing-xl);
   display: flex;
   gap: var(--spacing-xl);
   flex-wrap: wrap;
@@ -54,7 +52,7 @@
 
 .support-info-card-limit {
   flex: 1;
-  min-width: 300px;
+  width: 100%;
   background: var(--color-surface-light);
   border-radius: var(--border-radius-lg);
   padding: var(--spacing-xl);
@@ -109,7 +107,7 @@
 
 .support-info-card-qualification {
   flex: 1;
-  min-width: 300px;
+  width: 100%;
   background: var(--color-surface-light);
   border-radius: var(--border-radius-lg);
   padding: var(--spacing-xl);
@@ -210,7 +208,6 @@
   }
   
   .support-info-card-header {
-    padding: var(--spacing-lg) var(--spacing-lg) var(--spacing-lg) var(--spacing-lg);
   }
   
   .support-info-card-header h1 {
@@ -224,7 +221,6 @@
 
 @media (max-width: 480px) {
   .support-info-card-header {
-    padding: var(--spacing-lg) var(--spacing-lg) var(--spacing-lg) var(--spacing-lg);
   }
   
   .support-info-card-header h1 {
@@ -238,7 +234,6 @@
 
 @media (max-width: 360px) {
   .support-info-card-header {
-    padding: var(--spacing-md) var(--spacing-md) var(--spacing-md) var(--spacing-md);
   }
   
   .support-info-card-header h1 {

@@ -17,9 +17,6 @@ const Product_main = () => {
       subtitle: "Product  ",
       title: "제품",
       description: "보안, 그 이상의 선구자, 스마트한 의사 결정 지원과 상업적 성장 제공",
-      image: welding,
-      imageAlt: "스마트 안전장비지원사업",
-      link: "/government-support-detail"
     },
   ];
   
