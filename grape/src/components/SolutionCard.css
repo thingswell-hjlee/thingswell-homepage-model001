@@ -35,6 +35,14 @@
   padding: var(--spacing-lg);
 }
 
+.solution-card-compact .solution-card-image img {
+  max-width: 70%;
+  max-height: 30vh;
+  min-width: 25%;
+  min-height: 18vh;
+  border-radius: 15px !important;
+}
+
 /* 히어로 변형 - 상세 페이지용 */
 .solution-card-hero {
   height: 200px;
@@ -152,6 +160,8 @@
   height: 100%;
   max-height: 40vh;
   min-height: 25vh;
+  overflow: hidden;
+  object-fit: contain;
 }
 
 .solution-card-image img {
@@ -161,8 +171,9 @@
   max-height: 35vh;
   min-width: 30%;
   min-height: 20vh;
-  object-fit: cover;
-  border-radius: var(--border-radius-xl);
+  object-fit: contain;
+  border-radius: 20px;
+  transition: all var(--transition-base);
 }
 
 /* 반응형 디자인 */
@@ -181,6 +192,14 @@
   .solution-card-compact {
     height: 350px;
     min-height: 350px;
+  }
+
+  .solution-card-compact .solution-card-image img {
+    max-width: 65%;
+    max-height: 27vh;
+    min-width: 22%;
+    min-height: 15vh;
+    border-radius: 12px !important;
   }
 
   .solution-card-product {
@@ -214,6 +233,7 @@
   .solution-card-desc {
     font-size: clamp(var(--font-size-sm), 2.2vw, var(--font-size-lg));
   }
+
 }
 
 /* 태블릿 가로 : 769px-1023px */
@@ -230,6 +250,14 @@
   .solution-card-compact {
     height: 300px;
     min-height: 300px;
+  }
+
+  .solution-card-compact .solution-card-image img {
+    max-width: 60%;
+    max-height: 25vh;
+    min-width: 20%;
+    min-height: 13vh;
+    border-radius: 10px !important;
   }
 
   .solution-card-product {
@@ -252,11 +280,7 @@
     gap: 1.5rem;
   }
 
-  .solution-card-image {
-    height: 30vh;
-    max-height: 30vh;
-    min-height: 20vh;
-  }
+
 
   .solution-card-subtitle {
     font-size: clamp(var(--font-size-xs), 1.8vw, var(--font-size-sm));
@@ -289,6 +313,14 @@
     padding: 1rem;
   }
 
+  .solution-card-compact .solution-card-image img {
+    max-width: 55%;
+    max-height: 22vh;
+    min-width: 18%;
+    min-height: 11vh;
+    border-radius: 8px !important;
+  }
+
   .solution-card-product {
     height: 200px;
     min-height: 200px;
@@ -314,11 +346,6 @@
     flex: 1;
   }
 
-  .solution-card-image {
-    height: 30vh;
-    max-height: 30vh;
-    min-height: 20vh;
-  }
 
   .solution-card-subtitle {
     font-size: clamp(var(--font-size-xs), 1.5vw, var(--font-size-sm));
@@ -351,6 +378,14 @@
     padding: 1rem;
   }
 
+  .solution-card-compact .solution-card-image img {
+    max-width: 50%;
+    max-height: 20vh;
+    min-width: 15%;
+    min-height: 9vh;
+    border-radius: 6px !important;
+  }
+
   .solution-card-product {
     height: 180px;
     min-height: 180px;
@@ -376,11 +411,6 @@
     flex: 1;
   }
 
-  .solution-card-image {
-    height: 30vh;
-    max-height: 30vh;
-    min-height: 20vh;
-  }
 
   .solution-card-subtitle {
     font-size: clamp(var(--font-size-xs), 1.2vw, var(--font-size-sm));

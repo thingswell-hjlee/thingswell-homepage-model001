@@ -11,6 +11,8 @@
   padding: var(--spacing-xl);
   gap: var(--spacing-2xl);
   font-family: var(--font-family-primary);
+  max-width: var(--container-max-width);
+  width: 100%;
 }
 
 /* 좌우 반전을 위한 reverse 클래스 */
@@ -74,7 +76,6 @@
 @media (max-width: 1200px) {
   .feature-description-container {
     width: 100%;
-    max-width: 1000px;
   }
   .feature-description-container {
     gap: 2rem;
@@ -84,7 +85,6 @@
 @media (max-width: 1024px) {
   .feature-description-container {
     width: 100%;
-    max-width: 900px;
     padding: 2rem;
   }
   .feature-description-title {
@@ -96,7 +96,8 @@
 }
 
 @media (max-width: 900px) {
-  .feature-description-container {
+  .feature-description-container,
+  .feature-description-container.reverse {
     flex-direction: column;
     padding: 1.5rem;
     max-width: 100%;
