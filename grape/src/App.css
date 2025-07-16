@@ -41,6 +41,12 @@ html, body {
   width: 100%;
   display: flex;
   flex-direction: column;
+  margin-bottom: var(--spacing-md);
+}
+
+/* 홈페이지에서만 margin-bottom 제거 */
+.main-content:has(.content-container) {
+  margin-bottom: 0;
 }
 
 .main-center-wrapper {
