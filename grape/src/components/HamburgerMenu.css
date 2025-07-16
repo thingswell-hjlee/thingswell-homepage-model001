@@ -1,0 +1,296 @@
+/* ===== HAMBURGER MENU COMPONENT STYLES ===== */
+
+@import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css');
+/* 메뉴 오버레이 */
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: calc(var(--z-index-menu) - 1);
+  cursor: pointer;
+}
+
+/* 햄버거 메뉴 래퍼 */
+.hamburger-menu-wrapper {
+  display: none;
+  position: relative;
+  width: 100%;
+  z-index: var(--z-index-menu);
+  margin: 0;
+  padding: 0;
+}
+
+/* 햄버거 메뉴가 열렸을 때 전체 화면 덮기 */
+.hamburger-menu-wrapper.mobile-open {
+  position: relative;
+  width: 60%;
+  height: 100%;
+  background: var(--color-background-light);
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 0;
+  margin: 0;
+  overflow-y: auto;
+}
+
+/* 메뉴 오버레이 서브페이지 */
+.menu-overlay-subpage {
+  height: 100%;
+}
+
+/* 햄버거 메뉴 컨테이너 */
+.hamburger-menu-container {
+  padding: var(--spacing-sm) var(--spacing-xl);
+  height: 100%;
+  border-radius: 0;
+  flex-direction: column;
+  align-items: stretch;
+  margin: 0;
+  position: relative;
+  background: transparent;
+  box-shadow: none;
+}
+
+/* 햄버거 메뉴가 열렸을 때 메뉴 컨테이너 스타일 */
+.hamburger-menu-wrapper.mobile-open .hamburger-menu-container {
+  background: transparent;
+  box-shadow: none;
+  border-radius: 0;
+  max-height: none;
+  overflow-y: visible;
+  width: 100%;
+  padding: 0;
+}
+
+/* 햄버거 메뉴 로고 영역 */
+.hamburger-menu-logo {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 60px;
+  margin-bottom: 0;
+  padding: var(--spacing-sm) 0;
+  position: relative;
+}
+
+/* 햄버거 메뉴가 열렸을 때 상단 헤더 스타일 */
+.hamburger-menu-wrapper.mobile-open .hamburger-menu-logo {
+  padding: 20px var(--spacing-xl);
+  border-bottom: var(--border-width-thin) solid var(--border-color-light);
+  background: var(--color-background-light);
+  position: sticky;
+  top: 0;
+  z-index: calc(var(--z-index-menu) + 1);
+}
+
+/* 모바일 햄버거 메뉴 토글 버튼 */
+.mobile-menu-toggle {
+  display: block;
+  background: #fff;
+  border: none;
+  cursor: pointer;
+  padding: var(--spacing-sm);
+  margin-right: var(--spacing-sm);
+  outline: none;
+  border-radius: var(--border-radius-full);
+  box-shadow: var(--shadow-md);
+}
+
+.mobile-menu-toggle:hover {
+  background-color: var(--color-surface-dark);
+}
+
+.mobile-menu-toggle:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* 햄버거 메뉴가 열렸을 때 버튼 숨기기 */
+.hamburger-menu-wrapper.mobile-open .mobile-menu-toggle {
+  display: none;
+}
+
+.hamburger-icon {
+  width: 24px;
+  height: 24px;
+}
+
+/* 햄버거 메뉴 네비게이션 */
+.hamburger-menu {
+  width: 100%;
+  display: none;
+  background: transparent;
+  box-shadow: none;
+  font-weight: var(--font-weight-semibold);
+}
+
+.hamburger-menu.mobile-visible {
+  display: block;
+  background: transparent;
+  box-shadow: none;
+}
+
+/* 햄버거 메뉴가 열렸을 때 메뉴 스타일 */
+.hamburger-menu-wrapper.mobile-open .hamburger-menu {
+  display: block;
+  background: var(--color-background-light);
+  padding: 0;
+}
+
+/* 햄버거 메뉴 리스트 */
+.hamburger-menu-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  background-color: transparent;
+}
+
+/* 햄버거 메뉴 아이템 */
+.hamburger-menu-item {
+  margin: 0;
+  position: relative;
+  border-bottom: var(--border-width-thin) solid var(--border-color-light);
+}
+
+.hamburger-menu-item:last-child {
+  border-bottom: none;
+}
+
+/* 로고 리스트 아이템 */
+.hamburger-menu-item.logo-list-item {
+  text-align: center;
+  padding: 24px 0;
+  border-bottom: 1px solid #f0f0f0;
+  margin-left: var(--spacing-xl);
+}
+
+.hamburger-menu-item.logo-list-item .logo-image {
+  height: 20px;
+  width: auto;
+  cursor: pointer;
+}
+
+.hamburger-menu-item.logo-list-item .logo-image:hover {
+  transform: scale(1.05);
+}
+
+/* 햄버거 메뉴 버튼 */
+.hamburger-menu-button {
+  margin: 0;
+  padding: 20px var(--spacing-xl);
+  font-size: var(--font-size-base);
+  font-family: 'NanumSquare';
+  justify-content: flex-start;
+  text-align: left;
+  border-radius: 0;
+  width: 100%;
+  background: var(--color-background-light);
+  color: var(--color-text-primary);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  outline: none;
+  user-select: none;
+  border-bottom: var(--border-width-thin) solid var(--border-color-light);
+}
+
+.hamburger-menu-button:hover {
+  background: var(--color-surface);
+  color: var(--color-text-primary);
+}
+
+.hamburger-menu-button.active {
+  background: var(--color-surface);
+  color: var(--color-text-primary);
+}
+
+.hamburger-menu-button:disabled {
+  background-color: transparent;
+  color: var(--color-text-muted);
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* 햄버거 메뉴 애니메이션 제거됨 */
+
+/* ===== 반응형 디자인 ===== */
+
+/* 모바일 가로 & 태블릿 세로 */
+@media (max-width: 768px) {
+  .hamburger-menu-wrapper {
+    display: flex;
+  }
+}
+
+/* 모바일 */
+@media (max-width: 480px) {
+  .hamburger-menu-wrapper {
+    display: flex;
+  }
+}
+
+/* ===== 접근성 및 사용성 개선 ===== */
+
+/* 포커스 표시 */
+.mobile-menu-toggle:focus-visible,
+.hamburger-menu-button:focus-visible {
+  outline: var(--border-width-normal) solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* 스크린 리더 지원 */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* 다크 테마 지원 */
+@media (prefers-color-scheme: dark) {
+  .hamburger-menu-wrapper.mobile-open {
+    background: var(--color-secondary);
+  }
+
+  .hamburger-menu-wrapper.mobile-open .hamburger-menu-logo {
+    background: var(--color-secondary);
+    border-color: var(--color-secondary-light);
+  }
+
+  .hamburger-menu-wrapper.mobile-open .hamburger-menu {
+    background: var(--color-secondary);
+  }
+
+  .hamburger-menu-button {
+    background: var(--color-secondary);
+    color: var(--color-text-white);
+    border-color: var(--color-secondary-light);
+  }
+
+  .hamburger-menu-button:hover {
+    background: var(--color-surface-dark);
+    color: var(--color-text-white);
+  }
+}
+
+/* 고대비 모드 지원 */
+@media (prefers-contrast: high) {
+  .hamburger-menu-button {
+    border: var(--border-width-thin) solid var(--color-text-primary);
+  }
+}
+
+/* 모션 감소 설정 지원 - 애니메이션이 이미 제거됨 */ 

@@ -23,7 +23,7 @@ import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom';
 import './Menu.css';
 import logo from '../assets/logo.png';
-import hamburgerIcon from '../assets/hamburger.svg';
+import HamburgerMenu from './HamburgerMenu';
 
 // 메뉴 아이템 데이터
 const defaultMenuItems = [
@@ -430,114 +430,88 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
   }, [openSubmenu]);
 
   return (
-    <div className={`menu-wrapper${isMobileMenuOpen ? ' mobile-open' : ''}${isMenuHidden ? ' hidden' : ''}`}>
-              <div 
-          ref={menuRef} 
-          className={`menu-container menu-${orientation} menu-${theme} ${openSubmenu !== null ? 'open' : ''} ${activeMenuIndex !== null ? 'has-active-menu' : ''}`}
-        >
-        <div className="menu-logo">
-          {!isMobile ? (
-            <img 
-              src={logo} 
-              alt="로고" 
-              className="logo-image" 
-              onClick={handleLogoClick}
-            />
-          ) : (
-            <div style={{ width: '24px', height: '24px' }}></div>
-          )}
-          {isMobile && (
-            <button 
-              className="mobile-menu-toggle"
-              onClick={toggleMobileMenu}
-              aria-label={isMobileMenuOpen ? "메뉴 닫기" : "메뉴 열기"}
-              disabled={isMenuAnimating}
-            >
-              {!isMobileMenuOpen ? (
-                <img src={hamburgerIcon} alt="메뉴" className="hamburger-icon" />
-              ) : (
-                <span className="close-icon" aria-hidden="true">×</span>
-              )}
-            </button>
-          )}
-        </div>
-        
-        <nav className={`menu menu-${orientation} menu-${theme} ${isMobileMenuOpen ? 'mobile-visible' : ''}`}>
-          <ul className="menu-list">
-            {isMobile && isMobileMenuOpen && (
-              <li className="menu-item logo-list-item" style={{textAlign: 'center', padding: '24px 0', borderBottom: '1px solid #f0f0f0'}}>
-                <img 
-                  src={logo} 
-                  alt="로고" 
-                  className="logo-image" 
-                  style={{height: '48px', width: 'auto', margin: '0 auto', cursor: 'pointer'}} 
-                  onClick={handleLogoClick}
-                />
-              </li>
-            )}
-            {defaultMenuItems.map((item, index) => (
-              <li 
-                key={index} 
-                className={`menu-item ${item.submenu && item.submenu.length > 0 ? 'has-submenu' : ''}`}
-                data-active={isMenuActive(index) ? 'true' : 'false'}
-                onMouseEnter={() => handleMouseEnter(index)}
-              >
-                <button
-                  className={`menu-button ${item.submenu && item.submenu.length > 0 ? 'has-submenu' : ''} ${openSubmenu === index ? 'active' : ''} ${isMenuActive(index) ? 'active' : ''}`}
-                  onClick={() => handleItemClick(item, index)}
-                  disabled={item.disabled}
-                  aria-expanded={openSubmenu === index}
-                  aria-haspopup={item.submenu && item.submenu.length > 0}
-                >
-                  <span className="menu-text">{item.label}</span>
-                </button>
-                
-                {/* 모바일에서 서브메뉴 표시 */}
-                {isMobile && item.submenu && item.submenu.length > 0 && openSubmenu === index && (
-                  <ul className="submenu-list mobile-submenu">
-                    {item.submenu.map((submenuItem, subIndex) => (
-                      <li key={subIndex} className="submenu-item">
-                        <button
-                          className={`submenu-button ${isSubmenuActive(index, subIndex) ? 'active' : ''}`}
-                          onClick={() => handleSubmenuClick(submenuItem, subIndex, index)}
-                        >
-                          <span className="submenu-text">{submenuItem.label}</span>
-                        </button>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </li>
-            ))}
-          </ul>
-        </nav>
-        
-        {/* 데스크톱용 서브메뉴 */}
-        {!isMobile && currentSubmenu && (
+    <>
+      {/* 데스크톱 메뉴 */}
+      {!isMobile && (
+        <div className={`menu-wrapper${isMenuHidden ? ' hidden' : ''}`}>
           <div 
-            className="full-width-submenu"
+            ref={menuRef} 
+            className={`menu-container menu-${orientation} menu-${theme} ${openSubmenu !== null ? 'open' : ''} ${activeMenuIndex !== null ? 'has-active-menu' : ''}`}
           >
-            <ul className="submenu-list">
-              {currentSubmenu.map((submenuItem, subIndex) => (
-                <li key={subIndex} className="submenu-item">
-                  <button
-                    className={`submenu-button ${isSubmenuActive(openSubmenu, subIndex) ? 'active' : ''}`}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      handleSubmenuClick(submenuItem, subIndex, openSubmenu);
-                    }}
-                    type="button"
+            <div className="menu-logo">
+              <img 
+                src={logo} 
+                alt="로고" 
+                className="logo-image" 
+                onClick={handleLogoClick}
+              />
+            </div>
+            
+            <nav className={`menu menu-${orientation} menu-${theme}`}>
+              <ul className="menu-list">
+                {defaultMenuItems.map((item, index) => (
+                  <li 
+                    key={index} 
+                    className={`menu-item ${item.submenu && item.submenu.length > 0 ? 'has-submenu' : ''}`}
+                    data-active={isMenuActive(index) ? 'true' : 'false'}
+                    onMouseEnter={() => handleMouseEnter(index)}
                   >
-                    <span className="submenu-text">{submenuItem.label}</span>
-                  </button>
-                </li>
-              ))}
-            </ul>
+                    <button
+                      className={`menu-button ${item.submenu && item.submenu.length > 0 ? 'has-submenu' : ''} ${openSubmenu === index ? 'active' : ''} ${isMenuActive(index) ? 'active' : ''}`}
+                      onClick={() => handleItemClick(item, index)}
+                      disabled={item.disabled}
+                      aria-expanded={openSubmenu === index}
+                      aria-haspopup={item.submenu && item.submenu.length > 0}
+                    >
+                      <span className="menu-text">{item.label}</span>
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+            
+            {/* 데스크톱용 서브메뉴 */}
+            {currentSubmenu && (
+              <div className="full-width-submenu">
+                <ul className="submenu-list">
+                  {currentSubmenu.map((submenuItem, subIndex) => (
+                    <li key={subIndex} className="submenu-item">
+                      <button
+                        className={`submenu-button ${isSubmenuActive(openSubmenu, subIndex) ? 'active' : ''}`}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          handleSubmenuClick(submenuItem, subIndex, openSubmenu);
+                        }}
+                        type="button"
+                      >
+                        <span className="submenu-text">{submenuItem.label}</span>
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
-        )}
-      </div>
-    </div>
+        </div>
+      )}
+      
+      {/* 모바일 햄버거 메뉴 */}
+      {isMobile && (
+        <HamburgerMenu
+          isOpen={isMobileMenuOpen}
+          onToggle={toggleMobileMenu}
+          isAnimating={isMenuAnimating}
+          menuItems={defaultMenuItems}
+          onItemClick={handleItemClick}
+          onSubmenuClick={handleSubmenuClick}
+          isMenuActive={isMenuActive}
+          isSubmenuActive={isSubmenuActive}
+          openSubmenu={openSubmenu}
+          onLogoClick={handleLogoClick}
+        />
+      )}
+    </>
   );
 };
 
