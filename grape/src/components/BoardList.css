@@ -91,7 +91,7 @@
 
 .board-table th,
 .board-table td {
-  padding: 15px 10px;
+  padding: var(--spacing-md);
   text-align: left;
   border-bottom: 1px solid #e1e5e9;
 }
