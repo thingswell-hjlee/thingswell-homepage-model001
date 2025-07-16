@@ -1,8 +1,7 @@
 .board-list {
-  max-width: var(--max-width);
-  padding: : varcing-lg);
   background: none;
   border-radius: 8px;
+  
 }
 
 .board-header {
@@ -12,12 +11,13 @@
   margin-bottom: 20px;
   padding-bottom: 15px;
   gap: 20px;
+  width: 100%;
 }
 
 .board-search-container {
   display: flex;
   flex: 1;
-  max-width: 600px;
+  max-width: 1500px;
   gap: 10px;
 }
 

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./BoardList.css";
 import { supabase } from "../lib/supabase";
 import { useAuth } from "../contexts/AuthContext";
+import SearchComponent from "./SearchComponent";
 
 const BoardList = ({
   post,
@@ -16,7 +17,6 @@ const BoardList = ({
   const [filteredInstruments, setFilteredInstruments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [searchTerm, setSearchTerm] = useState("");
   const [isMobile, setIsMobile] = useState(false);
   const { user } = useAuth(); // 로그인 상태 가져오기
 
@@ -113,9 +113,9 @@ const BoardList = ({
   };
 
   // 검색 함수
-  const handleSearch = () => {
+  const handleSearch = (searchValue) => {
     // 검색어가 비어있으면 모든 데이터 표시
-    if (searchTerm.trim() === "") {
+    if (searchValue.trim() === "") {
       // 내림차순으로 정렬
       const sorted = instruments.sort((a, b) => (b.id || 0) - (a.id || 0));
       setFilteredInstruments(sorted);
@@ -123,7 +123,7 @@ const BoardList = ({
       // 제목과 내용에서 검색어 찾기
       const filtered = instruments.filter((instrument) => {
         const title = (instrument.title || "").toLowerCase();
-        const searchLower = searchTerm.toLowerCase();
+        const searchLower = searchValue.toLowerCase();
 
         return title.includes(searchLower);
       });
@@ -133,12 +133,12 @@ const BoardList = ({
     }
   };
 
-  // Enter 키로 검색 실행
-  const handleKeyPress = (e) => {
-    if (e.key === "Enter") {
-      handleSearch();
-    }
-  };
+  // Enter 키로 검색 실행 - 이 함수는 이제 필요 없음
+  // const handleKeyPress = (e) => {
+  //   if (e.key === "Enter") {
+  //     handleSearch();
+  //   }
+  // };
 
   // 제목 길이 제한 함수 (모바일에서 사용)
   const truncateTitle = (title, maxLength = 20) => {
@@ -199,16 +199,12 @@ const BoardList = ({
     <div className="board-list">
       <div className="board-header">
         <div className="board-search-container">
-          <input
-            type="text"
+          <SearchComponent
             placeholder={isMobile ? "검색" : "검색어를 입력하세요"}
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            onKeyPress={handleKeyPress}
+            onSearch={handleSearch}
+            backgroundColor="var(--color-background-light)"
+            noPadding={true}
           />
-          <button id="search-button" onClick={handleSearch}>
-            {isMobile ? "검색" : "검색"}
-          </button>
         </div>
         {user && (
           <button onClick={onWriteClick} className="btn-write">
@@ -276,9 +272,7 @@ const BoardList = ({
             ) : (
               <tr>
                 <td colSpan={user ? 4 : 3} className="no-data">
-                  {searchTerm.trim() !== ""
-                    ? "검색 결과가 없습니다."
-                    : "데이터가 없습니다."}
+                  데이터가 없습니다.
                 </td>
               </tr>
             )}
@@ -288,12 +282,8 @@ const BoardList = ({
 
       {(!filteredInstruments || filteredInstruments.length === 0) && (
         <div className="empty-state">
-          <p>
-            {searchTerm.trim() !== ""
-              ? "검색 결과가 없습니다."
-              : "등록된 게시글이 없습니다."}
-          </p>
-          {user && searchTerm.trim() === "" && (
+          <p>등록된 게시글이 없습니다.</p>
+          {user && (
             <div className="empty-state-actions">
               <p>첫 번째 게시글을 작성해보세요!</p>
               <button onClick={onWriteClick} className="btn-write-empty">

@@ -193,6 +193,32 @@
   --button-border-radius: 8px;
   --button-font-size: 1em;
   --button-font-weight: 500;
+  
+  /* Button Sizes */
+  --button-height-sm: 32px;
+  --button-height-md: 40px;
+  --button-height-lg: 48px;
+  --button-height-xl: 56px;
+  
+  --button-padding-sm: 0.5em 1em;
+  --button-padding-md: 0.6em 1.2em;
+  --button-padding-lg: 0.75em 1.5em;
+  --button-padding-xl: 0.875em 1.75em;
+  
+  --button-font-size-sm: 0.875rem; /* 14px */
+  --button-font-size-md: 1rem; /* 16px */
+  --button-font-size-lg: 1.125rem; /* 18px */
+  --button-font-size-xl: 1.25rem; /* 20px */
+  
+  --button-border-radius-sm: 6px;
+  --button-border-radius-md: 8px;
+  --button-border-radius-lg: 10px;
+  --button-border-radius-xl: 12px;
+  
+  --button-min-width-sm: 80px;
+  --button-min-width-md: 100px;
+  --button-min-width-lg: 120px;
+  --button-min-width-xl: 140px;
 
   /* Card */
   --card-padding: 2em;

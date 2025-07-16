@@ -1,5 +1,6 @@
 import React from "react";
 import SolutionCard from "../../components/SolutionCard.jsx";
+import SearchComponent from "../../components/SearchComponent.jsx";
 import "./Customer_service.css";
 import { Link } from "react-router-dom";
 
@@ -21,10 +22,16 @@ const Customer_service = () => {
                 reverse={false}
               />
               <div className="customer-service-container">
-                <div className="search-section-container">
-                  <input type="text" placeholder="검색어를 입력하세요" />
-                  <button>검색</button>
-                </div>
+                <SearchComponent 
+                  placeholder="검색어를 입력하세요"
+                  onSearch={(searchTerm) => {
+                    console.log("검색어:", searchTerm);
+
+                    // 여기에 검색 로직을 추가할 수 있습니다
+                  }}
+                  backgroundColor="var(--color-background-dark)"
+                  noPadding={true}
+                />
                 <div className="customer-service-section">
                   <div className="service-grid">
                     <div className="service-box">
