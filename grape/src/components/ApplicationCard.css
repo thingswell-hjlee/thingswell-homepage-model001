@@ -21,13 +21,27 @@
   user-drag: none; /* Standard */
 }
 
+/* 이미지 컨테이너 추가 */
+.application-card-image-container {
+  width: 100%;
+  aspect-ratio: 16/9;
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+  margin-bottom: var(--spacing-lg);
+  background: var(--color-surface-secondary);
+  position: relative;
+}
+
 .application-card img {
   width: 100%;
-  height: 350px;
+  height: 100%;
   object-fit: cover;
-  border-radius: var(--border-radius-md);
-  margin-bottom: var(--spacing-lg);
+  object-position: center;
   transition: all var(--transition-slow);
+}
+
+.application-card:hover img {
+  transform: scale(1.05);
 }
 
 .application-card-content {
@@ -53,25 +67,25 @@
 
 /* 반응형 스타일 */
 @media (max-width: 1024px) {
-  .application-card img {
-    height: 300px;
+  .application-card-image-container {
+    aspect-ratio: 4/3;
   }
 }
 
 @media (max-width: 768px) {
-  .application-card img {
-    height: 250px;
+  .application-card-image-container {
+    aspect-ratio: 3/2;
   }
 }
 
 @media (max-width: 480px) {
-  .application-card img {
-    height: 200px;
+  .application-card-image-container {
+    aspect-ratio: 1/1;
   }
 }
 
 @media (max-width: 360px) {
-  .application-card img {
-    height: 180px;
+  .application-card-image-container {
+    aspect-ratio: 1/1;
   }
 } 

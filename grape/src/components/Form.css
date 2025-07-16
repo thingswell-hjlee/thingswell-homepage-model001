@@ -21,7 +21,7 @@
   .form-title{
     text-align: left !important;
     margin-bottom: var(--spacing-2xl);
-    font-size: var(--font-size-2xl);
+    font-size: var(--font-size-xl);
     font-weight: var(--font-weight-bold);
     color: var(--color-text-primary);
     font-family: var(--font-family-primary);
@@ -41,7 +41,7 @@
   
   .support-form {
     width: 100%;
-    margin: var(--spacing-xl) 0 0 0;
+    margin: 0;
     padding: var(--spacing-xl);
     background-color: #fff;
     border-radius: var(--border-radius-md);
@@ -269,9 +269,19 @@
   }
   
   @media screen and (max-width: 480px) {
+    .form-card{
+      flex-direction: column;
+      padding: var(--spacing-lg);
+    }
+    .form-title h1{
+      font-size: var(--font-size-lg);
+    }
+    .form-title p{ 
+      font-size: var(--font-size-sm);
+    }
     .support-form {
       padding: 10px;
-      margin: 0 5px;
+      margin: 0;
     }
     
     .form-group input,

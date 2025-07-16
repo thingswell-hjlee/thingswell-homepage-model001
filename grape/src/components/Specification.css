@@ -1,13 +1,12 @@
 .specification-card {
   width: 100%;
-  padding: var(--spacing-lg);
   background: var(--color-surface);
   border-radius: var(--border-radius-md);
   box-shadow: var(--shadow-sm);
-  margin-bottom: var(--spacing-lg);
   overflow-y: auto;
   display: flex;
   flex-direction: column;
+  padding: var(--spacing-xl);
 }
 
 .specification-flex {
@@ -17,7 +16,6 @@
 }
 
 .specification-header {
-  padding: var(--spacing-xl) var(--spacing-xl) var(--spacing-sm) var(--spacing-xl);
   color: var(--color-text-primary);
   display: flex;
   flex-direction: column;
@@ -26,7 +24,7 @@
 }
 
 .specification-header h1 {
-  font-size: var(--font-size-5xl);
+  font-size: var(--font-size-4xl);
   margin-bottom: 0;
   color: var(--color-text-primary);
   line-height: var(--line-height-tight);
@@ -34,7 +32,7 @@
 
 .specification-header p {
   margin: 0;    
-  font-size: var(--font-size-3xl);
+  font-size: var(--font-size-xl);
   color: var(--color-text-primary);
   padding: 0;
 }
@@ -153,7 +151,7 @@
 /* 반응형 디자인 */
 @media (max-width: 1024px) {
   .specification-header {
-    padding: var(--spacing-lg) var(--spacing-lg) var(--spacing-lg) var(--spacing-lg);
+   
   }
   
   .specification-header h1 {
@@ -169,7 +167,11 @@
   }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 768px) {
+  .specification-card {
+    padding: var(--spacing-xl);
+  }
+
   .specification-grid {
     grid-template-columns: 1fr;
   }
@@ -184,8 +186,8 @@
 }
 
 @media (max-width: 480px) {
-  .specification-header {
-    padding: var(--spacing-md) var(--spacing-md) var(--spacing-md) var(--spacing-md);
+  .specification-card {
+    padding: var(--spacing-lg);
   }
   
   .specification-header h1 {
@@ -203,7 +205,7 @@
 
 @media (max-width: 360px) {
   .specification-header {
-    padding: var(--spacing-sm) var(--spacing-sm) var(--spacing-sm) var(--spacing-sm);
+    
   }
   
   .specification-header h1 {

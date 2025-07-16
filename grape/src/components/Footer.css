@@ -192,9 +192,13 @@
 }
 
 /* 태블릿 가로 (769px - 1023px) */
-@media screen and (max-width: 1023px) and (min-width: 769px) {
+@media screen and (max-width: 1023px){
   .footer {
     padding: var(--spacing-xl) 0 var(--spacing-lg) 0;
+  }
+
+  .footer-container {
+    padding: 0 var(--spacing-xl);
   }
 
   .footer-content {
@@ -253,12 +257,13 @@
 }
 
 /* 모바일 가로 & 태블릿 세로 (480px - 767px) */
-@media screen and (max-width: 767px) and (min-width: 480px) {
+@media screen and (max-width: 768px) {
   .footer {
     padding: var(--spacing-xs) 0 var(--spacing-xs) 0;
   }
 
   .footer-container{
+    padding: 0 var(--spacing-xl);
     gap: var(--spacing-xl);
     margin-bottom: var(--spacing-xl);
     align-items: flex-start;
@@ -331,12 +336,13 @@
 }
 
 /* 모바일 (479px 이하) */
-@media screen and (max-width: 479px) {
+@media screen and (max-width: 480px) {
   .footer {
     padding: var(--spacing-xs) 0 var(--spacing-xs) 0;
   }
 
   .footer-container{
+    padding: 0 var(--spacing-lg);
     gap: var(--spacing-xl);
     margin-bottom: var(--spacing-xl);
     align-items: flex-start;

@@ -27,7 +27,11 @@ import './ApplicationCard.css';
 const ApplicationCard = ({ image, imageAlt, label, title, link }) => {
   const cardContent = (
     <>
-      {image && <img src={image} alt={imageAlt} />}
+      {image && (
+        <div className="application-card-image-container">
+          <img src={image} alt={imageAlt} />
+        </div>
+      )}
       <div className="application-card-label">{label}</div>
       <div className="application-card-title">{title}</div>
     </>

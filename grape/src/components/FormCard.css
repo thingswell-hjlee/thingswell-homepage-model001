@@ -27,17 +27,17 @@
   margin-bottom: var(--spacing-sm);
   flex-shrink: 0;
   box-sizing: border-box;
-  padding: var(--spacing-xl);
   flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   overflow: hidden;
   min-height: 0;
+  text-align: left;
 }
 
 .application-period-flex h1 {
-  font-size: var(--font-size-5xl);
+  font-size: var(--font-size-4xl);
   margin-bottom: var(--spacing-sm);
   color: var(--color-text-primary);
   word-wrap: break-word;
@@ -331,6 +331,13 @@
     flex-shrink: 0;
     z-index: 10;
   }
+  .application-period-flex h1 {
+    font-size: var(--font-size-4xl);
+  }
+  
+  .application-period-flex p {
+    font-size: clamp(0.8rem, 2vw, 1rem);
+  }
 }
 
 /* 작은 모바일 반응형 스타일 */
@@ -389,6 +396,15 @@
     flex-shrink: 0;
     z-index: 10;
   }
+
+  .application-period-flex h1 {
+    font-size: var(--font-size-2xl);
+  }
+  
+  .application-period-flex p {
+    font-size: clamp(0.8rem, 2vw, 1rem);
+  }
+  
 }
 
 /* 매우 작은 화면 반응형 스타일 */

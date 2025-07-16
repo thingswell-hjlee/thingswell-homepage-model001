@@ -24,7 +24,7 @@ const Product_1 = () => {
         <div className="page-layout">
           <div className="main-content">
             <div className="solutions-section menu-spacing">
-              <SolutionCard ref={solutionRef} {...solutionData} showButton={true} variant="compact" />
+              <SolutionCard ref={solutionRef} {...solutionData} showButton={false} variant="compact" />
               <Specification 
                 title="제품 스펙" 
                 subtitle="상세 사양 정보" 
