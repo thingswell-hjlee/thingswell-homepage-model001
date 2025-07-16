@@ -5,7 +5,7 @@ import ApplicationPeriodCard from '../../components/ApplicationPeriodCard';
 import SupportInfoCard from '../../components/SupportInfoCard';
 import RestrictionCard from '../../components/RestrictionCard';
 import FormCard from '../../components/FormCard';
-import SidebarMenu from '../../components/SidebarMenu';
+// import SidebarMenu from '../../components/SidebarMenu';
 import manufacturing from '../../assets/manufacturing.jpg';
 import construction from '../../assets/construction.jpg';
 import grinding from '../../assets/grinding.jpg';
@@ -169,11 +169,11 @@ const DigitalTransformationSupport = () => {
     <div className="page-container">
       <div className="page-content">
         <div className="page-layout">
-          <div className={`sidebar ${isSidebarOpen ? 'show' : ''}`}>
+          {/* <div className={`sidebar ${isSidebarOpen ? 'show' : ''}`}>
             {(!isMobile) && (
               <SidebarMenu menuItems={sidebarMenuItems} sectionRefs={sectionRefs} menuTitle={sidebarTitle} />
             )}
-          </div>
+          </div> */}
           <div className="main-content">
             <div className="solutions-section menu-spacing">
               <SolutionCard ref={solutionRef} {...solutionData} variant="compact"/>

@@ -144,11 +144,11 @@ const Application_filed_3 = () => {
     <div className="page-container">
       <div className="page-content">
         <div className="page-layout">
-          <div className={`sidebar ${isSidebarOpen ? 'show' : ''}`}>
+          {/* <div className={`sidebar ${isSidebarOpen ? 'show' : ''}`}>
             {(!isSmallDesktop) && (
               <SidebarMenu menuItems={sidebarMenuItems} sectionRefs={sectionRefs} menuTitle={sidebarTitle} />
             )}
-          </div>
+          </div> */}
           <div className="main-content">
             <div className="solutions-section menu-spacing">
               <SolutionCard ref={solutionRef} {...solutionData} showButton={true} variant="compact" />

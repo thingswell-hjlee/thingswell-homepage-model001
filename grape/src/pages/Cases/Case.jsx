@@ -150,11 +150,11 @@ const Case = () => {
     <div className="page-container">
       <div className="page-content">
         <div className="page-layout">
-          <div className={`sidebar ${isSidebarOpen ? 'show' : ''}`}>
+          {/* <div className={`sidebar ${isSidebarOpen ? 'show' : ''}`}>
             {(!isMobile) && (
               <SidebarMenu menuItems={sidebarMenuItems} sectionRefs={sectionRefs} menuTitle={sidebarTitle} />
             )}
-          </div>
+          </div> */}
           <div className="main-content">
             <div className="solutions-section">
               <SolutionCard ref={solutionRef} {...solutionData} showButton={true} variant="compact" />

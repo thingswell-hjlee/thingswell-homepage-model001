@@ -5,7 +5,7 @@ import ApplicationPeriodCard from '../../components/ApplicationPeriodCard';
 import SupportInfoCard from '../../components/SupportInfoCard';
 import RestrictionCard from '../../components/RestrictionCard';
 import FormCard from '../../components/FormCard';
-import SidebarMenu from '../../components/SidebarMenu';
+// import SidebarMenu from '../../components/SidebarMenu';
 import welding from '../../assets/welding.jpg';
 import manufacturing from '../../assets/manufacturing.jpg';
 import construction from '../../assets/construction.jpg';
@@ -176,11 +176,14 @@ const Government_support = () => {
     <div className="page-container">
       <div className="page-content">
         <div className="page-layout">
-          <div className={`sidebar ${isSidebarOpen ? 'show' : ''}`}>
-            <SidebarMenu menuItems={sidebarMenuItems} sectionRefs={sectionRefs} menuTitle={sidebarTitle} />
-          </div>
+          {/* <div className={`sidebar ${isSidebarOpen ? 'show' : ''}`}>
+            {(!isMobile) && (
+              <SidebarMenu menuItems={sidebarMenuItems} sectionRefs={sectionRefs} menuTitle={sidebarTitle} />
+            )}
+          </div> */}
           <div className="main-content">
             <div className="solutions-section menu-spacing">
+              
               <SolutionCard ref={solutionRef} {...solutionData} variant="compact"/>
               
               {applicationCardsData && (

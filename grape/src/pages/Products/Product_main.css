@@ -10,12 +10,5 @@ body {
   padding: 0;
   font-family: "PyeojinGothic", sans-serif;
   overflow-x: hidden; /* 가로 스크롤 방지 */
-}
-
-#root {
-  max-width: 100%;
-  margin: 0 auto;
-  padding: 0;
-  text-align: center;
-  box-sizing: border-box;
+  max-width: var(--max-width);
 }

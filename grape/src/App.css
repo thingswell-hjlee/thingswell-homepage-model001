@@ -2,7 +2,8 @@
 
 /* 기본 스타일 */
 * {
-  box-sizing: border-box
+  box-sizing: border-box;
+  text-decoration: none;
 }
 
 html, body {
@@ -14,6 +15,7 @@ html, body {
   overflow-x: hidden; /* 가로 스크롤만 방지 */
   overscroll-behavior: none; /* 오버스크롤 방지 */
   -webkit-overflow-scrolling: touch; /* iOS 스크롤 최적화 */
+
 }
 
 #root {

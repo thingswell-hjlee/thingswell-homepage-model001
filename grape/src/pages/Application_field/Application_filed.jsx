@@ -49,7 +49,7 @@ const Application_filed = () => {
 
   // ref를 객체로 묶어서 SidebarMenu에 전달
   const sectionRefs = {
-    solution: solutionRef,
+    solution: solutionRef,  
     ApplicationCardsSection: applicationRef,
     FeatureDescription: featureDescriptionRef,
     form: formRef,
@@ -150,11 +150,11 @@ const Application_filed = () => {
     <div className="page-container">
       <div className="page-content">
         <div className="page-layout">
-          <div className={`sidebar ${isSidebarOpen ? 'show' : ''}`}>
+          {/* <div className={`sidebar ${isSidebarOpen ? 'show' : ''}`}>
             {(!isSmallDesktop) && (
               <SidebarMenu menuItems={sidebarMenuItems} sectionRefs={sectionRefs} menuTitle={sidebarTitle} />
             )}
-          </div>
+          </div> */}
           <div className="main-content">
             <div className="solutions-section menu-spacing">
               <SolutionCard ref={solutionRef} {...solutionData} showButton={true} variant="compact" />
