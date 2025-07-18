@@ -27,6 +27,11 @@
   user-drag: none; /* Standard */
 }
 
+/* About 페이지의 인증서 섹션에서만 적용되는 스타일 */
+.about-page .application-card-section-title {
+  font-size: var(--font-size-2xl)!important;
+}
+
 .cards-container {
   width: 100%;
   display: flex;

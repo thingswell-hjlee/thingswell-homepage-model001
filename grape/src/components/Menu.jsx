@@ -93,6 +93,7 @@ const defaultMenuItems = [
       { label: '인사말', path: '/about#greeting' }, 
       { label: '미션 및 비전', path: '/about#mission' }, 
       { label: '연혁', path: '/about#history' }, 
+      { label: '인증서', path: '/about#certificate' },
       { label: '오시는 길', path: '/about#location' } 
     ] 
   }
