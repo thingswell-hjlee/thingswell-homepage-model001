@@ -39,10 +39,8 @@
 
 .specification-content {
   display: flex;
-  justify-content: center;
-  padding: var(--spacing-sm) var(--spacing-xl) var(--spacing-sm) var(--spacing-xl);
+  justify-content: space-between;
   width: 100%;
-  max-width: 1200px;
 }
 
 .specification-grid {
@@ -59,6 +57,10 @@
   border-radius: var(--border-radius-md);
   text-align: center;
   transition: all var(--transition-base);
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .specification-item:hover {
@@ -72,6 +74,8 @@
   align-items: center;
   justify-content: center;
   gap: var(--spacing-sm);
+  width: 100%;
+  height: 100%;
 }
 
 .specification-label {
@@ -150,8 +154,8 @@
 
 /* 반응형 디자인 */
 @media (max-width: 1024px) {
-  .specification-header {
-   
+  .specification-card {
+    padding: var(--spacing-xl);
   }
   
   .specification-header h1 {
@@ -204,10 +208,6 @@
 }
 
 @media (max-width: 360px) {
-  .specification-header {
-    
-  }
-  
   .specification-header h1 {
     font-size: var(--font-size-xl);
   }
