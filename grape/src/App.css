@@ -20,9 +20,7 @@ html, body {
   font-family: var(--font-family-primary);
   background-color: var(--color-background-dark); /* 배경색을 다크로 변경 */
   overflow-x: hidden; /* 가로 스크롤만 방지 */
-  overscroll-behavior: none; /* 오버스크롤 방지 */
   -webkit-overflow-scrolling: touch; /* iOS 스크롤 최적화 */
-
 }
 
 #root {
@@ -32,7 +30,6 @@ html, body {
   text-align: center;
   box-sizing: border-box;
   background-color: var(--color-background-dark);
-  overscroll-behavior: none;
   -webkit-overflow-scrolling: touch;
 }
 
@@ -49,6 +46,7 @@ html, body {
   display: flex;
   flex-direction: column;
   overflow-y: auto; /* 내용이 넘칠 경우 스크롤 허용 */
+  -webkit-overflow-scrolling: touch; /* iOS 스크롤 최적화 */
 }
 
 /* 홈페이지의 content-container에 대한 특별한 스타일 */
@@ -61,7 +59,6 @@ html, body {
   width: 100%;
   box-sizing: border-box;
   overflow: hidden;
-  overscroll-behavior: none;
   -webkit-overflow-scrolling: touch;
   height: 100vh; /* 뷰포트 높이로 설정 */
 }
@@ -80,6 +77,7 @@ html, body {
   max-height: 1400px;
   width: 100%;
   overflow-y: auto; /* 내용이 넘칠 경우 스크롤 허용 */
+  -webkit-overflow-scrolling: touch; /* iOS 스크롤 최적화 */
 }
 
 
@@ -256,6 +254,14 @@ html, body {
 
   .main-content {
     margin-top: var(--spacing-xl);
+    overflow-y: auto; /* 모바일에서 스크롤 보장 */
+    -webkit-overflow-scrolling: touch; /* iOS 스크롤 최적화 */
+  }
+
+  /* 모바일에서 스크롤 개선 */
+  .content {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 } 
 
@@ -282,6 +288,8 @@ html, body {
 
   .main-content {
     margin-top: var(--spacing-xl);
+    overflow-y: auto; /* 모바일에서 스크롤 보장 */
+    -webkit-overflow-scrolling: touch; /* iOS 스크롤 최적화 */
   }
 
   /* 모바일에서 일정한 위치 유지 */
@@ -291,6 +299,12 @@ html, body {
 
   .overlay-container {
     padding-top: 100px; /* 모바일에서는 더 작은 값 */
+  }
+
+  /* 모바일에서 스크롤 개선 */
+  .content {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 }
 

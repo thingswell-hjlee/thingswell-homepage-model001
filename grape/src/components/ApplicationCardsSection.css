@@ -59,7 +59,6 @@
   
   .application-section-responsive {
     padding: var(--spacing-xl);
-    margin: var(--spacing-xl);
   }
 }
 
@@ -72,7 +71,7 @@
   
   .application-section-responsive {
     padding: var(--spacing-xl);
-    margin: var(--spacing-xl);
+
   }
   
   .cards-container {
@@ -88,7 +87,6 @@
   
   .application-section-responsive {
     padding: var(--spacing-lg);
-    margin: var(--spacing-lg);
   }
   
   .cards-container {
