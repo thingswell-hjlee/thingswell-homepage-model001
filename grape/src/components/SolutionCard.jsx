@@ -56,8 +56,6 @@ const SolutionCard = forwardRef((props, ref) => {
   return (
     <div ref={ref} className={cardClassName}>
       <div className="solution-card-inner">
-        <div className="solution-card-header">
-        </div>
         <div className="solution-card-text">
           <div className="solution-card-subtitle">{subtitle}</div>
           <div className="solution-card-title">{title}</div>
@@ -72,8 +70,7 @@ const SolutionCard = forwardRef((props, ref) => {
           <div className="solution-card-image">
             <img src={image} alt={imageAlt} />
           </div>
-        )}
-
+        )} 
       </div>
     </div>
   );

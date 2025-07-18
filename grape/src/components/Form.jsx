@@ -66,26 +66,64 @@ const Form = forwardRef((props, ref) => {
               <div className="form-group-container">
                 <div className="form-group">
                   <label htmlFor="name">이름</label>
-                  <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} required />
+                  <input 
+                    type="text" 
+                    id="name" 
+                    name="name" 
+                    value={formData.name} 
+                    onChange={handleChange} 
+                    placeholder="홍길동"
+                    required 
+                  />
                 </div>
                 <div className="form-group">
                   <label htmlFor="email">이메일</label>
-                  <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required />
+                  <input 
+                    type="email" 
+                    id="email" 
+                    name="email" 
+                    value={formData.email} 
+                    onChange={handleChange} 
+                    placeholder="hong@company.com"
+                    required 
+                  />
                 </div>
               </div>  
               <div className="form-group-container">
                 <div className="form-group">
                   <label htmlFor="company">소속 회사명</label>
-                  <input type="text" id="company" name="company" value={formData.company} onChange={handleChange} required />
+                  <input 
+                    type="text" 
+                    id="company" 
+                    name="company" 
+                    value={formData.company} 
+                    onChange={handleChange} 
+                    placeholder="(주)싱스웰"
+                    required 
+                  />
                 </div>
                 <div className="form-group">
                   <label htmlFor="phone">연락처</label>
-                  <input type="text" id="phone" name="phone" value={formData.phone} onChange={handleChange} required />
+                  <input 
+                    type="text" 
+                    id="phone" 
+                    name="phone" 
+                    value={formData.phone} 
+                    onChange={handleChange} 
+                    placeholder="010-1234-5678"
+                    required 
+                  />
                 </div>
               </div>
               <div className="form-group">
                 <label htmlFor="message">문의 내용</label>
-                <textarea id="message" name="message" value={formData.message} onChange={handleChange} required />
+                <textarea 
+                  id="message" 
+                  name="message" 
+                  value={formData.message} 
+                  onChange={handleChange} 
+                  required 
+                />
               </div>    
               <div className="privacy-info">
                 <strong>개인정보 수집 및 이용 동의서</strong>

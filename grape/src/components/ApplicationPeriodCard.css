@@ -1,7 +1,7 @@
 .applicationdate-card {
   width: 100%;
   background: var(--color-surface);
-  border-radius: var(--border-radius-md);
+  border-radius: var(--border-radius-lg);
   box-shadow: var(--shadow-sm);
   max-height: 600px; /* 최대 높이 600으로 설정 */
   display: flex;

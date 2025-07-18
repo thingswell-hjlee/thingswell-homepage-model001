@@ -61,8 +61,8 @@ const Government_support = () => {
     subtitle: "정부지원사업",
     title: "스마트 안전장비지원사업",
     description: "산업변화와 기술발전에 따른 다양한 산업재해를 예방하기 위해 재정 및 기술여건이 취약한 중소사업장에 스마트 안전장비 도입 시 보조금을 지원하는 사업",
-    image: welding,
-    imageAlt: "스마트 안전장비 지원사업"
+    // image: welding,
+    // imageAlt: "스마트 안전장비 지원사업"
   };
 
   const applicationCardsData = [
@@ -184,7 +184,7 @@ const Government_support = () => {
           <div className="main-content">
             <div className="solutions-section menu-spacing">
               
-              <SolutionCard ref={solutionRef} {...solutionData} variant="compact"/>
+              <SolutionCard ref={solutionRef} {...solutionData} variant="hero"/>
               
               {applicationCardsData && (
                 <ApplicationCardsSection ref={applicationRef} applicationCardsData={applicationCardsData}boxName="적용분야" />

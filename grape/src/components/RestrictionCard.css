@@ -6,9 +6,9 @@
   align-items: flex-start;
   justify-content: flex-start;
   width: 100%;
-  height: 800px;
+  max-height: 600px;
   background: white;
-  border-radius: 12px;
+  border-radius: var(--border-radius-lg);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
   padding: var(--spacing-xl);
@@ -110,7 +110,7 @@
 .restriction-limit-list li {
   background: var(--color-surface-light);
   border-radius: var(--border-radius-md);
-  padding: var(--spacing-lg);
+  padding: var(--spacing-sm);
   margin-bottom: var(--spacing-sm);
   font-size: var(--font-size-sm);
   line-height: var(--line-height-normal);

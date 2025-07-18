@@ -79,9 +79,9 @@
 }
 
 .form-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: var(--spacing-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
   width: 100%;
   box-sizing: border-box;
   overflow: hidden;
@@ -100,17 +100,18 @@
   width: 100%;
   box-sizing: border-box;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: center;
   user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   position: relative;
+  gap: var(--spacing-md);
 }
 
 .form-group label {
-  display: block;
-  margin-bottom: var(--spacing-sm);
+  display: flex;
   font-weight: var(--font-weight-semibold);
   color: var(--color-text-secondary);
   font-size: var(--font-size-sm);
@@ -120,11 +121,14 @@
   -ms-user-select: none;
   word-wrap: break-word;
   overflow-wrap: break-word;
+  text-align: left;
+  align-items: center;
+  min-width: 120px;
+  flex-shrink: 0;
 }
 
 .form-group input,
 .form-group textarea {
-  width: 100%;
   padding: var(--spacing-sm) var(--spacing-md);
   border: var(--border-width-normal) solid var(--border-color-light);
   border-radius: var(--border-radius-md);
@@ -135,13 +139,26 @@
   color: var(--color-text-primary);
   transform: none !important;
   box-sizing: border-box;
-  max-width: 100%;
   user-select: text;
   -webkit-user-select: text;
   -moz-user-select: text;
   -ms-user-select: text;
   resize: none;
   overflow: hidden;
+}
+
+.form-group input {
+  flex: 0 0 200px;
+  max-width: 200px;
+}
+
+.form-group textarea {
+  flex: 1;
+}
+
+.form-group textarea {
+  width: 100% !important;
+  max-width: 100% !important;
 }
 
 .form-group textarea {
@@ -223,7 +240,7 @@
     width: 100%;
     max-width: 100%;
     overflow: hidden;
-    height: auto;
+    height: auto; 
     min-height: 400px;
   }
   
@@ -238,23 +255,34 @@
   }
   
   .form-container {
-    grid-template-columns: 1fr;
-    gap: var(--spacing-sm);
+    gap: var(--spacing-xs);
     width: 100%;
     max-width: 100%;
     overflow: hidden;
   }
   
   .form-group {
-    margin-bottom: var(--spacing-sm);
+    flex-direction: row;
+    align-items: center;
+  }
+  
+  .form-group label {
+    min-width: 100px;
   }
   
   .form-group input,
   .form-group textarea {
     padding: 10px 12px;
     font-size: 16px;
-    width: 100%;
-    max-width: 100%;
+  }
+  
+  .form-group input {
+    flex: 0 0 180px;
+    max-width: 180px;
+  }
+  
+  .form-group textarea {
+    flex: 1;
   }
   
   .form-group textarea {
@@ -296,8 +324,7 @@
   }
   
   .form-container {
-    flex-direction: column;
-    gap: var(--spacing-sm);
+    gap: var(--spacing-xs);
     width: 100%;
     max-width: 100%;
     overflow: hidden;
@@ -307,14 +334,27 @@
     width: 100%;
     max-width: 100%;
     margin-bottom: var(--spacing-sm);
+    flex-direction: row;
+    align-items: center;
+  }
+  
+  .form-group label {
+    min-width: 80px;
   }
   
   .form-group input,
   .form-group textarea {
     padding: 8px 10px;
     font-size: 16px;
-    width: 100%;
-    max-width: 100%;
+  }
+  
+  .form-group input {
+    flex: 0 0 150px;
+    max-width: 150px;
+  }
+  
+  .form-group textarea {
+    flex: 1;
   }
   
   .form-group textarea {
@@ -372,14 +412,27 @@
     width: 100%;
     max-width: 100%;
     margin-bottom: var(--spacing-xs);
+    flex-direction: row;
+    align-items: center;
+  }
+  
+  .form-group label {
+    min-width: 70px;
   }
   
   .form-group input,
   .form-group textarea {
     padding: 6px 8px;
     font-size: 16px;
-    width: 100%;
-    max-width: 100%;
+  }
+  
+  .form-group input {
+    flex: 0 0 120px;
+    max-width: 120px;
+  }
+  
+  .form-group textarea {
+    flex: 1;
   }
   
   .form-group textarea {
@@ -439,14 +492,27 @@
     width: 100%;
     max-width: 100%;
     margin-bottom: var(--spacing-xs);
+    flex-direction: row;
+    align-items: center;
+  }
+  
+  .form-group label {
+    min-width: 60px;
   }
   
   .form-group input,
   .form-group textarea {
     padding: 4px 6px;
     font-size: 16px;
-    width: 100%;
-    max-width: 100%;
+  }
+  
+  .form-group input {
+    flex: 0 0 100px;
+    max-width: 100px;
+  }
+  
+  .form-group textarea {
+    flex: 1;
   }
   
   .form-group textarea {

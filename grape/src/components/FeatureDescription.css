@@ -48,13 +48,12 @@
 }
 
 .feature-description-text-section {
-  flex: 2;
   color: var(--color-text-primary);
   display: flex;
   flex-direction: column;
-  justify-content: center;
   font-family: var(--font-family-primary);
   text-align: left;
+  align-self: flex-start;
 }
 
 .feature-description-title {

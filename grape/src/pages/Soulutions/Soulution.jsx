@@ -60,9 +60,9 @@ const Soulution = () => {
     subtitle: "Industrial safety solutions",
     title: "산업안전 솔루션",
     description: "산업안전 솔루션은 산업 현장에서 발생할 수 있는 각종 사고와 위험을 사전에 예방하고, 근로자의 안전을 체계적으로 관리하기 위해 도입되는 첨단 시스템입니다. AI, IoT, 빅데이터, 영상 분석 등 다양한 IT 기술이 융합되어, 실시간 위험 감지와 신속한 대응이 가능합니다",
-    image: welding,
-    imageAlt: "스마트 안전장비 지원사업",
-    buttonText: "데모 신청"
+    // image: welding,
+    // imageAlt: "스마트 안전장비 지원사업",
+    // buttonText: "데모 신청"
   };
 
   const applicationCardsData = [
@@ -157,7 +157,7 @@ const Soulution = () => {
           </div> */}
           <div className="main-content">
             <div className="solutions-section menu-spacing">
-              <SolutionCard ref={solutionRef} {...solutionData} showButton={true} variant="compact" />
+              <SolutionCard ref={solutionRef} {...solutionData} showButton={false} variant="default" />
               
               {applicationCardsData && (
                 <ApplicationCardsSection ref={applicationRef} applicationCardsData={applicationCardsData} boxName="AI기반 영역 제어" />
