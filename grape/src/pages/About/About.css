@@ -999,7 +999,6 @@
 
 .location-card {
   background: var(--color-surface);
-  padding: var(--spacing-xl);
   border-radius: var(--border-radius-lg);
   box-shadow: var(--shadow-md);
   user-select: none;
@@ -1009,9 +1008,10 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   transition: all 0.3s ease;
   border: 1px solid var(--color-border);
+  text-align: left;
 }
 
 .location-card:hover {
@@ -1040,6 +1040,7 @@
   -moz-user-select: none;
   -ms-user-select: none;
   position: relative;
+  margin-top: 0;
 }
 
 .location-title::after {
