@@ -916,16 +916,7 @@
 
 
 
-/* 고대비 모드 지원 */
-@media (prefers-contrast: high) {
-  .menu-button {
-    border: var(--border-width-thin) solid var(--color-text-primary);
-  }
 
-  .submenu-button {
-    border: var(--border-width-thin) solid var(--color-text-primary);
-  }
-}
 
 /* 모션 감소 설정 지원 */
 @media (prefers-reduced-motion: reduce) {

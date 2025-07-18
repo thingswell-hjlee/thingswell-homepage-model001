@@ -382,29 +382,4 @@
   }
 }
 
-/* 다크 모드 지원 */
-@media (prefers-color-scheme: dark) {
-  .board-list {
-    background: #2d3748;
-    color: #e2e8f0;
-  }
 
-  .board-table th {
-    background-color: #4a5568;
-    color: #e2e8f0;
-  }
-
-  .board-table tbody tr:hover {
-    background-color: #4a5568;
-  }
-
-  .board-search-container input {
-    background-color: #4a5568;
-    color: #e2e8f0;
-    border-color: #718096;
-  }
-
-  .board-search-container input:focus {
-    border-color: var(--color-primary);
-  }
-}
