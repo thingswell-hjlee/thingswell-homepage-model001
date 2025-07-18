@@ -6,6 +6,13 @@
   text-decoration: none;
 }
 
+.content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
 html, body {
   margin: 0;
   padding: 0;
@@ -41,14 +48,22 @@ html, body {
   width: 100%;
   display: flex;
   flex-direction: column;
-  margin-bottom: var(--spacing-md);
-  margin-top: var(--spacing-4xl);
+  overflow-y: auto; /* 내용이 넘칠 경우 스크롤 허용 */
 }
 
-/* 홈페이지에서만 margin-bottom 제거 */
-.main-content:has(.content-container) {
-  margin-bottom: 0;
-  margin-top: 0;
+/* 홈페이지의 content-container에 대한 특별한 스타일 */
+.content-container {
+  position: relative;
+  display: block;
+  background-color: var(--color-background-dark); /* 배경색을 다크로 변경 */
+  margin: 0 auto;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  overscroll-behavior: none;
+  -webkit-overflow-scrolling: touch;
+  height: 100vh; /* 뷰포트 높이로 설정 */
 }
 
 .main-center-wrapper {
@@ -60,24 +75,18 @@ html, body {
   padding-bottom: 500px; /* 고정된 픽셀 값으로 일정한 위치 유지 */
 }
 
-.content-container {
-  position: relative;
-  display: block;
-  background-color: var(--color-background-dark); /* 배경색을 다크로 변경 */
-  margin: 0 auto;
-  text-align: center;
+.content{
+  height: 100vh;
+  max-height: 1400px;
   width: 100%;
-  min-height: 100vh; /* height 대신 min-height 사용 */
-  box-sizing: border-box;
-  overflow: hidden;
-  overscroll-behavior: none;
-  -webkit-overflow-scrolling: touch;
+  overflow-y: auto; /* 내용이 넘칠 경우 스크롤 허용 */
 }
 
+
+
 .main-image {
-  max-width: 100%;
   width: 100%;
-  min-height: 100vh; /* height 대신 min-height 사용 */
+  height: 100%;
   object-fit: cover;
   opacity: 0.6;
   display: block;
@@ -92,8 +101,8 @@ html, body {
   z-index: 10;
   display: flex;
   justify-content: center;
-  align-items: flex-start; /* 상단 정렬로 변경 */
-  padding-top: 200px; /* 상단에서 고정된 거리 */
+  align-items: center; /* 중앙 정렬로 변경 */
+  padding-top: 200px; /* margin-top 대신 padding-top 사용 */
 }
 
 .menu-overlay-subpage {
@@ -195,19 +204,18 @@ html, body {
 
 /* 노트북 & 태블릿 가로 (1024px - 1279px) */
 @media screen and (min-width: 1024px) and (max-width: 1279px) {
+  .overlay-container {
+    padding-top: 150px;
+  }
+
   .content-text {
     font-size: var(--font-size-xl);
-    top: 20%;
     text-align: center;
   }
 
   .button-text {
     padding: 0 70px 0 70px;
     font-size: var(--font-size-base);
-  }
-
-  .button {
-    top: 30%;
   }
 }
 

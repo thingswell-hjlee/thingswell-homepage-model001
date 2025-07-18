@@ -111,6 +111,7 @@ function HomePage() {
           </div>
         </div>
       </div>
+      
     </div>
   );
 }
@@ -232,7 +233,7 @@ function App() {
           </Routes>
         </main>
 
-        {/* 푸터는 모든 페이지에서 유지 */}
+        {/* Footer는 모든 페이지에서 공통으로 사용 */}
         <Footer />
       </div>
     </AuthProvider>
