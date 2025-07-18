@@ -202,7 +202,7 @@
 /* 서브메뉴 */
 .full-width-submenu {
   width: 100%;
-  height: var(--menu-height);
+  height: var(--sub-menu-height);
   position: absolute;
   top: 100%;
   left: 0;
