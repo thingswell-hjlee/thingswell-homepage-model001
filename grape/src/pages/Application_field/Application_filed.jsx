@@ -57,12 +57,13 @@ const Application_filed = () => {
 
   // 데이터 직접 정의
   const solutionData = {
-    subtitle: "Industrial safety solutions",
-    title: "산업안전 솔루션",
-    description: "산업안전 솔루션은 산업 현장에서 발생할 수 있는 각종 사고와 위험을 사전에 예방하고, 근로자의 안전을 체계적으로 관리하기 위해 도입되는 첨단 시스템입니다. AI, IoT, 빅데이터, 영상 분석 등 다양한 IT 기술이 융합되어, 실시간 위험 감지와 신속한 대응이 가능합니다",
+    subtitle: "Construction safety solutions",
+    title: "건설 안전 및 자산관리",
+    description: "건설 현장의 특수한 환경과 위험 요소를 고려한 전문 안전 솔루션입니다. 고소작업, 중장비 운전, 구조물 시공 등 건설업 특화 위험 요소를 실시간으로 모니터링하고 예방합니다.",
     image: welding,
-    imageAlt: "스마트 안전장비 지원사업",
-    buttonText: "데모 신청"
+    imageAlt: "건설 안전 및 자산관리",
+    buttonText: "데모 신청",
+    link: "/contact"
   };
 
   const applicationCardsData = [
@@ -84,30 +85,6 @@ const Application_filed = () => {
       label: "Collision",
       title: "충돌"
     },
-    {
-      image: falldown,
-      imageAlt: "낙상",
-      label: "Falldown",
-      title: "낙상"
-    },
-    {
-      image: dangerous,
-      imageAlt: "위험지역 접근",
-      label: "Dangerous areas",
-      title: "위험지역 접근"
-    },
-    {
-      image: Personel_violation,
-      imageAlt: "작업인원 위반",
-      label: "Personnel violations",
-      title: "작업인원 위반"
-    },
-    {
-      image: POE,
-      imageAlt: "POE 미착용",
-      label: "POE detection",
-      title: "POE 미착용"
-    },
   ];
 
   const featureDescriptions = [
@@ -115,17 +92,7 @@ const Application_filed = () => {
       image: manufacturing,
       title: "AI 기반 실시간 모니터링",
       description: "산업안전 솔루션은 AI 기반 실시간 모니터링을 통해 작업 현장의 위험 요소를 사전에 감지하고 예방합니다. 고성능 영상 분석 알고리즘을 통해 작업자의 행동 패턴을 분석하여 잠재적 위험을 조기에 발견합니다."
-    },
-    {
-      image: welding,
-      title: "IoT 센서 기술 활용",
-      description: "IoT 센서와 영상 분석 기술을 활용하여 작업자의 안전을 최우선으로 보호합니다. 다양한 센서를 통해 환경 데이터를 수집하고, 실시간으로 위험 상황을 감지하여 즉시 대응할 수 있습니다."
-    },
-    {
-      image: fire,
-      title: "빅데이터 분석 시스템",
-      description: "빅데이터 분석을 통한 사고 예방 시스템을 구축합니다. 과거 사고 데이터와 현재 상황을 비교 분석하여 위험도를 예측하고, 사전 예방 조치를 제안합니다."
-    },
+    },  
     {
       youtubeUrl: "https://www.youtube.com/watch?v=gZ1h4kgTC28&ab_channel=intenseye",
       title: "실시간 안전 모니터링 데모",
@@ -138,13 +105,6 @@ const Application_filed = () => {
     subtitle: ""
   };
 
-  const sidebarTitle = "산업안전 솔루션";
-  const sidebarMenuItems = [
-    { id: "solution", label: "개요" },
-    { id: "ApplicationCardsSection", label: "기능" },
-    { id: "FeatureDescription", label: "특징" },
-    { id: "form", label: "문의하기" }
-  ];
 
   return (
     <div className="page-container">
@@ -160,7 +120,7 @@ const Application_filed = () => {
               <SolutionCard ref={solutionRef} {...solutionData} showButton={true} variant="compact" />
               
               {applicationCardsData && (
-                <ApplicationCardsSection ref={applicationRef} applicationCardsData={applicationCardsData} boxName="AI기반 영역 제어" />
+                <ApplicationCardsSection ref={applicationRef} applicationCardsData={applicationCardsData} boxName="건설 현장 안전 관리" subtitle="Construction safsety solutions" />
               )}
               
               {featureDescriptions && featureDescriptions.map((feature, index) => (
