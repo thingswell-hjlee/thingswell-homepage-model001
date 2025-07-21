@@ -464,7 +464,7 @@ const About = () => {
               </div>
               <div id="certificate">
               {applicationCardsData && (
-                <ApplicationCardsSection ref={applicationRef} applicationCardsData={applicationCardsData} boxName="인증서, 인정서, 지적재산권" />
+                <ApplicationCardsSection ref={applicationRef} applicationCardsData={applicationCardsData} boxName="인증서, 인정서, 지적재산권" columnsPerRow={4} subtitle="Certificate" />
               )}
               </div>
               <div id="location" className="about-section">

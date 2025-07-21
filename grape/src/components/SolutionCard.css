@@ -134,6 +134,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  margin-bottom: var(--spacing-sm);
 }
 
 .solution-card-title {
