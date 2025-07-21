@@ -15,6 +15,7 @@
 .search-section-container.no-padding {
   padding: 0 !important;
   gap: var(--spacing-md);
+  background-color: none;
 }
 
 .search-section-container input {

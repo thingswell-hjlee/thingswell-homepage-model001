@@ -159,7 +159,7 @@ const Government_support = () => {
 
   const formData = {
     title: "문의하기",
-    subtitle: ""
+    subtitle: "궁금한 점이 있으시면 문의해주세요."
   };
 
   const sidebarTitle = "스마트 안전장비지원사업";

@@ -33,18 +33,14 @@ body {
 
 /* 사례 카드 스타일 */
 .case-card {
-  background: #1a1a1a;
+  background: var(--color-surface);
   border-radius: 12px;
   overflow: hidden;
-  border: 1px solid #333;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   position: relative;
 }
 
-.case-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(255, 165, 0, 0.2);
-}
+
 
 .case-card::before {
   content: '';
@@ -73,21 +69,21 @@ body {
 
 .case-category {
   font-size: 0.875rem;
-  color: #888;
+  color: var(--color-text-secondary);
   margin-bottom: 0.5rem;
   font-weight: 300;
 }
 
 .case-company {
   font-size: 1rem;
-  color: #fff;
+  color: var(--color-text-primary);
   margin-bottom: 1rem;
   font-weight: 500;
 }
 
 .case-title {
   font-size: 1.5rem;
-  color: #ff6600;
+  color: var(--color-text-primary);
   margin: 0 0 1rem 0;
   font-weight: 600;
   line-height: 1.3;
@@ -95,7 +91,7 @@ body {
 
 .case-description {
   font-size: 0.95rem;
-  color: #ccc;
+  color: var(--color-text-secondary);
   line-height: 1.6;
   margin: 0 0 1.5rem 0;
   flex-grow: 1;
@@ -105,7 +101,7 @@ body {
   display: flex;
   align-items: center;
   font-size: 0.875rem;
-  color: #888;
+  color: var(--color-text-secondary);
   margin-top: auto;
 }
 
@@ -151,9 +147,7 @@ body {
   left: 20%;
   width: 60%;
   height: 40%;
-  border: 2px solid #ff6600;
   border-radius: 8px;
-  background: rgba(255, 102, 0, 0.1);
 }
 
 .safety-lines {
@@ -164,31 +158,7 @@ body {
   height: 60%;
 }
 
-.safety-lines::before,
-.safety-lines::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  width: 0;
-  height: 0;
-  border-left: 2px solid #ff6600;
-  border-bottom: 2px solid #ff6600;
-}
 
-.safety-lines::before {
-  left: 10%;
-  border-left-width: 3px;
-  border-bottom-width: 3px;
-  height: 40%;
-}
-
-.safety-lines::after {
-  right: 10%;
-  border-right: 2px solid #ff6600;
-  border-bottom: 2px solid #ff6600;
-  border-left: none;
-  height: 40%;
-}
 
 /* 사례 연구 보기 버튼 */
 .view-case-btn {
@@ -197,8 +167,8 @@ body {
   justify-content: center;
   gap: 0.5rem;
   padding: 1rem;
-  background: #2a2a2a;
-  color: #fff;
+  background: var(--color-surface-dark);
+  color: var(--color-text-primary);
   text-decoration: none;
   font-size: 0.9rem;
   font-weight: 500;
