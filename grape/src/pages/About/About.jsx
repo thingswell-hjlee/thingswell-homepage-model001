@@ -6,6 +6,7 @@ import "./About.css";
 import ceo from "../../assets/ceo.jpg";
 import manufacturing from "../../assets/manufacturing.jpg";
 import construction from "../../assets/construction.jpg";
+import logo from "../../assets/logo.png";
 
 // Certificate imports
 import patentCertificate1 from "../../assets/patent_certificate_10-2404374.png";
@@ -150,7 +151,7 @@ const About = () => {
                   </div>
                   <div className="about-section-content-container">
                     <div className="about-section-title-image">
-                      <img src={ceo} alt="ceo" />
+                      <img src={logo} alt="ceo" />
                     </div>
                     <div className="about-section-title-image-description">
                       <p>
