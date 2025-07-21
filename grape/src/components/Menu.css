@@ -32,7 +32,7 @@
   font-family: var(--font-family-primary);
   position: relative;
   height: var(--menu-height);
-  margin: var(--spacing-xl);
+  margin-top: var(--spacing-xl);
   display: flex;
   align-items: center;
   justify-content: space-between;

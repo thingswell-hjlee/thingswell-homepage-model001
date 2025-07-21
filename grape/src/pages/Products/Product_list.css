@@ -1,15 +1,32 @@
-.product-list-container {
+/* 페이지 레이아웃 */
+.page-layout {
+  display: flex;
+  gap: var(--spacing-xl);
   max-width: 1500px;
   margin: 0 auto;
-  padding: var(--spacing-2xl);
+  margin-top: var(--spacing-xl);
+}
+
+.solutions-section{
+  max-width: 1500px;
+  padding:0 !important;
+}
+
+
+
+/* 메인 콘텐츠 */
+.main-content {
+  flex: 1;
+}
+
+.product-list-container {
   background-color: var(--color-surface);
   border-radius: var(--border-radius-md);
   width: 100%;
+  min-height: 800px;
 }
 
 .product-list-title {
-  margin-bottom: var(--spacing-xl);
-  padding-left: var(--spacing-xl);
   font-family: var(--font-family-primary);
   font-size: var(--font-size-5xl);
   font-weight: var(--font-weight-semibold);
@@ -17,12 +34,45 @@
   text-align: left !important;
 }
 
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+.product-list-header{
+  margin-bottom: var(--spacing-xl);
+  padding: var(--spacing-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.product-list-header p{
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-light);
+  color: var(--color-text-primary);
+  text-align: left !important;
+  margin:0;
+}
+
+.product-list-header h1{
+  font-size: var(--font-size-5xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  text-align: left !important;
+  margin:0;
+}
+
+/* 필터와 제품 그리드 레이아웃 */
+.product-list-layout {
+  display: flex;
   gap: var(--spacing-xl);
   padding: var(--spacing-xl);
-  margin-top: 0;
+  padding-top: 0;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--spacing-xl);
+  flex: 1;
+  min-height: 600px;
+  align-content: start;
 }
 
 .product-card {
@@ -32,6 +82,7 @@
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   text-align: left;
+  padding-bottom: var(--spacing-md);
 }
 
 .product-card:hover {
@@ -50,7 +101,7 @@
   font-size: 1.2rem;
   font-weight: 600;
   color: #333;
-  margin-top: var(--spacing-md);
+  margin: var(--spacing-md) var(--spacing-md) var(--spacing-sm) var(--spacing-md);
 }
 
 .product-card p {
@@ -58,14 +109,75 @@
   color: #666;
   font-size: 0.9rem;
   line-height: 1.4;
+  margin: 0 var(--spacing-md) var(--spacing-sm) var(--spacing-md);
+}
+
+.product-category {
+  display: inline-block;
+  background-color: var(--color-primary);
+  color: white;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius-sm);
+  font-size: 0.8rem;
+  font-weight: var(--font-weight-medium);
+  margin: 0 var(--spacing-md);
+}
+
+/* 제품이 없을 때 그리드 영역 유지 */
+.product-grid:empty::after {
+  content: '';
+  display: block;
+  min-height: 400px;
+}
+
+.product-grid:empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+}
+
+/* 제품이 없을 때 메시지 스타일 */
+.no-products-message {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  text-align: center;
+  color: var(--color-text-secondary);
+}
+
+.no-products-message p {
+  margin: var(--spacing-sm) 0;
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+.no-products-message p:first-child {
+  font-size: 1.3rem;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
 }
 
 /* 반응형 디자인 */
+@media (max-width: 1024px) {
+  .page-layout {
+    flex-direction: column;
+    gap: var(--spacing-lg);
+  }
+  
+  .product-list-layout {
+    flex-direction: column;
+    gap: var(--spacing-lg);
+  }
+}
+
 @media (max-width: 768px) {
   .product-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
-    padding: 1rem;
   }
   
   .product-card h3 {
@@ -75,12 +187,29 @@
   .product-card p {
     font-size: 0.85rem;
   }
+  
+  .page-layout {
+    padding: var(--spacing-lg);
+  }
+  
+  .product-list-layout {
+    padding: var(--spacing-lg);
+    padding-top: 0;
+  }
 }
 
 @media (max-width: 480px) {
   .product-grid {
     grid-template-columns: 1fr;
     gap: 1rem;
-    padding: 0.5rem;
+  }
+  
+  .page-layout {
+    padding: var(--spacing-md);
+  }
+  
+  .product-list-layout {
+    padding: var(--spacing-md);
+    padding-top: 0;
   }
 }
