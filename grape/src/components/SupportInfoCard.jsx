@@ -47,8 +47,8 @@ const SupportInfoCard = forwardRef((props, ref) => {
     <div ref={ref} className="support-info-card">
       <div className="support-info-card-flex">
         <div className="support-info-card-header">
+        <p>{subtitle}</p>
           <h1>{title}</h1>
-          <p>{subtitle}</p>
         </div>
         <div className="support-info-card-row">
           <div className="support-info-card-limit">

@@ -27,21 +27,19 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: var(--spacing-sm);
 }
 
 .restriction-card-header h1 {
   font-size: var(--font-size-4xl);
-  margin-bottom: 0;
+  margin: 0;
   color: var(--color-text-primary);
-  line-height: var(--line-height-tight);
 }
 
 .restriction-card-header p {
   margin: 0;
-  font-size: var(--font-size-xl);
-  color: var(--color-text-primary);
-  padding: 0;
+  font-size: clamp(var(--font-size-sm), 2.5vw, var(--font-size-lg));
+  color: var(--color-text-muted);
+  margin-bottom: var(--spacing-sm);
 }
 
 .restriction-info-row {

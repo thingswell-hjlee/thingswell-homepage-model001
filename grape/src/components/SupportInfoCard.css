@@ -32,14 +32,15 @@
   font-size: var(--font-size-4xl);
   margin-bottom: 0;
   color: var(--color-text-primary);
-  line-height: var(--line-height-tight);
+  margin:0;
 }
 
 .support-info-card-header p {
   margin: 0;
-  font-size: var(--font-size-xl);
-  color: var(--color-text-primary);
+  font-size: clamp(var(--font-size-sm), 2.5vw, var(--font-size-lg));
+  color: var(--color-text-muted);
   padding: 0;
+  margin-bottom: var(--spacing-sm);
 }
 
 .support-info-card-row {
