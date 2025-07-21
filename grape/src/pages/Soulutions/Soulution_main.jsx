@@ -38,43 +38,43 @@ const Soulution_main = () => {
   const solutionDataArray = [
     {
       subtitle: "Industrial safety solutions",
-      title: "산업안전 솔루션",
-      description: "산업안전 솔루션은 산업 현장에서 발생할 수 있는 각종 사고와 위험을 사전에 예방하고, 근로자의 안전을 체계적으로 관리하기 위해 도입되는 첨단 시스템입니다. AI, IoT, 빅데이터, 영상 분석 등 다양한 IT 기술이 융합되어, 실시간 위험 감지와 신속한 대응이 가능합니다",
+      title: "제조 안전 솔루션",
+      description: "RAG 기반의 대규모 비전 모델(LVM), 대규모 언어 모델(LLM), 실시간 센싱 시스템의 멀티모달 데이터를 통합한 작업자 안전 솔루션",
       image: welding,
-      imageAlt: "산업안전 솔루션",
+      imageAlt: "제조 안전 솔루션",
       link: "/solution"
     },
     {
       subtitle: "Construction safety solutions", 
-      title: "건설안전 솔루션",
-      description: "건설 현장의 특수한 환경과 위험 요소를 고려한 전문 안전 솔루션입니다. 고소작업, 중장비 운전, 구조물 시공 등 건설업 특화 위험 요소를 실시간으로 모니터링하고 예방합니다.",
+      title: "건설 안전 솔루션",
+      description: "건설 현장의 특수한 환경과 위험 요소를 고려한 전문 안전 솔루션",
       image: construction,
-      imageAlt: "건설안전 솔루션",
+      imageAlt: "건설 안전 솔루션",
       link: "/construction-solution"
     },
     {
       subtitle: "Manufacturing safety solutions",
-      title: "제조업 안전 솔루션", 
-      description: "제조업 현장의 특수한 작업 환경과 위험 요소를 고려한 전문 안전 솔루션입니다. 기계 작업, 화학물질 취급, 고온 작업 등 제조업 특화 위험 요소를 실시간으로 모니터링하고 예방합니다.",
+      title: "노인 장애인 안전 솔루션", 
+      description: "인지장애가 있는 장애인, 노인의 생활 안전 솔루션",
       image: manufacturing,
-      imageAlt: "제조업 안전 솔루션",
+      imageAlt: "노인 장애인 안전 솔루션",
       link: "/manufacturing-solution"
     },
     {
       subtitle: "Chemical industry safety solutions",
-      title: "화학공업 안전 솔루션",
-      description: "화학공업 현장의 특수한 위험 요소와 환경을 고려한 전문 안전 솔루션입니다. 유해화학물질 취급, 고압 고온 작업, 폭발 위험 등 화학공업 특화 위험 요소를 실시간으로 모니터링하고 예방합니다.",
+      title: "전기차 화재 안전 솔루션",
+      description: "실시간 온도 모니터링을 통한 화재 감지 솔루션",
       image: grinding,
-      imageAlt: "화학공업 안전 솔루션",
+      imageAlt: "전기차 화재 안전 솔루션",
       link: "/chemical-solution"
     }
   ];
 
   const selectCardData = [
-    "산업안전 솔루션",
-    "건설안전 솔루션", 
-    "제조업 안전 솔루션",
-    "화학공업 안전 솔루션",
+    "제조 안전 솔루션",
+    "건설 안전 솔루션", 
+    "노인 장애인 안전 솔루션",
+    "전기차 화재 안전 솔루션",
   ];
 
   const [selectedIdx, setSelectedIdx] = useState(0); // 기본값을 0으로 설정

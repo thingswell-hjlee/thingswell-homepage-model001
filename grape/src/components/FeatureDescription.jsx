@@ -13,6 +13,7 @@
  * @param {string} props.description - 기능 설명
  * @param {boolean} props.reverse - 레이아웃 방향 (true: 이미지/비디오가 오른쪽, 기본값: false)
  * @param {React.Ref} ref - forwardRef를 통해 전달되는 ref
+ * @param {string} props.subtitle - 기능 부제목
  * 
  * 사용법:
  * <FeatureDescription 
@@ -32,7 +33,7 @@
 import React, { forwardRef } from "react";
 import "./FeatureDescription.css";
 
-const FeatureDescription = forwardRef(({ image, youtubeUrl, title, description, reverse = false }, ref) => {
+const FeatureDescription = forwardRef(({ image, youtubeUrl, title, description, reverse = false, subtitle }, ref) => {
   // 유튜브 URL에서 비디오 ID 추출하는 함수
   const getYoutubeVideoId = (url) => {
     if (!url) return null;
@@ -61,6 +62,7 @@ const FeatureDescription = forwardRef(({ image, youtubeUrl, title, description, 
         )}
       </div>
       <div className="feature-description-text-section">
+        <div className="solution-card-subtitle">{subtitle}</div>
         <h2 className="feature-description-title">{title}</h2>
         <p className="feature-description-desc">{description}</p>
       </div>
