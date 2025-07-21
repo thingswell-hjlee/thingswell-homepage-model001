@@ -336,6 +336,27 @@
   .empty-state p {
     font-size: 14px;
   }
+
+  /* 모바일 페이징 스타일 */
+  .pagination {
+    gap: 5px;
+    margin-top: var(--spacing-md);
+  }
+
+  .pagination-btn {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  .page-numbers {
+    gap: 3px;
+  }
+
+  .page-number {
+    padding: 6px 8px;
+    font-size: 12px;
+    min-width: 32px;
+  }
 }
 
 /* 반응형 디자인 - 작은 모바일 */
@@ -369,6 +390,93 @@
     padding: 3px 6px;
     font-size: 9px;
   }
+
+  /* 작은 모바일 페이징 스타일 */
+  .pagination {
+    gap: 3px;
+  }
+
+  .pagination-btn {
+    padding: 4px 8px;
+    font-size: 11px;
+  }
+
+  .page-numbers {
+    gap: 2px;
+  }
+
+  .page-number {
+    padding: 4px 6px;
+    font-size: 11px;
+    min-width: 28px;
+  }
+}
+
+/* 페이징 컴포넌트 스타일 */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: var(--spacing-lg);
+  padding: var(--spacing-md) 0;
+}
+
+.pagination-btn {
+  padding: 8px 16px;
+  background-color: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.pagination-btn:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+.pagination-btn:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.page-numbers {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.page-number {
+  padding: 8px 12px;
+  background-color: #f8f9fa;
+  color: #495057;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 40px;
+  text-align: center;
+}
+
+.page-number:hover {
+  background-color: #e9ecef;
+  border-color: #adb5bd;
+}
+
+.page-number.active {
+  background-color: var(--color-primary);
+  color: white;
+  border-color: var(--color-primary);
+}
+
+.page-number.active:hover {
+  background-color: #0056b3;
 }
 
 /* 접근성 개선 */
@@ -377,7 +485,9 @@
   .btn-write,
   .delete-btn,
   .board-search-container input,
-  .board-search-container button {
+  .board-search-container button,
+  .pagination-btn,
+  .page-number {
     transition: none;
   }
 }

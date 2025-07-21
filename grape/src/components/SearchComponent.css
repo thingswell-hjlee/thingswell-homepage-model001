@@ -5,7 +5,6 @@
   justify-content: flex-start;
   width: 100%;
   background-color: var(--color-surface);
-  border-radius: var(--border-radius-lg);
   text-align: left;
   overflow: hidden;
   gap: var(--spacing-md);
@@ -122,7 +121,6 @@
   .search-section-container {
     flex-direction: row;
     padding: var(--spacing-sm);
-    border-radius: var(--border-radius-md);
     gap: var(--spacing-md);
   }
 
@@ -153,7 +151,6 @@
   .search-section-container {
     flex-direction: row;
     padding: var(--spacing-sm);
-    border-radius: var(--border-radius-md);
     gap: var(--spacing-md);
   }
 
