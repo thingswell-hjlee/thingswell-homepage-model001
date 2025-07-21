@@ -117,10 +117,11 @@ const ProductList = () => {
                     placeholder="검색어를 입력하세요"
                     onSearch={(searchTerm) => {
                       console.log("검색어:", searchTerm);
-
-                      // 여기에 검색 로직을 추가할 수 있습니다
+                      setSearchTerm(searchTerm);
                     }}
                     noPadding={false}
+                    searchTerm={searchTerm}
+                    setSearchTerm={setSearchTerm}
                   />
                 </div>
                 <div className="product-list-search-container">

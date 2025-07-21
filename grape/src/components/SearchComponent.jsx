@@ -1,14 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import "./SearchComponent.css";
 
 const SearchComponent = ({ 
   placeholder = "검색어를 입력하세요", 
   onSearch, 
   backgroundColor = "var(--color-surface)",
-  noPadding = false
+  noPadding = false,
+  searchTerm = "",
+  setSearchTerm
 }) => {
-  const [searchTerm, setSearchTerm] = useState("");
-
   const handleSearch = () => {
     if (onSearch) {
       onSearch(searchTerm);
