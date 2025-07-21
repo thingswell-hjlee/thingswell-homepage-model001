@@ -185,9 +185,7 @@ const FormCard = forwardRef((props, ref) => {
                 <span className="error-message">{errors.message.message}</span>
               )}
             </div>
-          </div>
-          
-          <div className="form-group">
+            <div className="form-group">
             <button 
               type="submit" 
               className="submit-btn"
@@ -195,6 +193,7 @@ const FormCard = forwardRef((props, ref) => {
             >
               {isSubmitting ? '제출 중...' : '문의하기'}
             </button>
+          </div>
           </div>
         </form>
       </div>
