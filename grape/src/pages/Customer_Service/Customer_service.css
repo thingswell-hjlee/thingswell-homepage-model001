@@ -17,7 +17,7 @@
   background-color: var(--color-surface);
   border-radius: var(--border-radius-lg);
   text-align: left;
-  padding: var(--spacing-xl);
+  padding: var(--spacing-2xl);
 }
 
 .customer-service-container {
@@ -68,7 +68,7 @@
 /* 태블릿 반응형 (768px 이하) */
 @media (max-width: 768px) {
   .customer-service-section {
-    padding: var(--spacing-lg);
+    padding: var(--spacing-2xl);
     margin-top: var(--spacing-lg);
   }
 
@@ -93,7 +93,7 @@
 /* 모바일 반응형 (480px 이하) */
 @media (max-width: 480px) {
   .customer-service-section {
-    padding: var(--spacing-md);
+    padding: var(--spacing-xl);
     border-radius: var(--border-radius-md);
     margin-top: var(--spacing-lg);
   }
@@ -117,7 +117,7 @@
 /* 작은 모바일 반응형 (320px 이하) */
 @media (max-width: 320px) {
   .customer-service-section {
-    padding: var(--spacing-sm);
+    padding: var(--spacing-xl);
     margin-top: var(--spacing-lg);
   }
 

@@ -184,7 +184,7 @@ const Government_support = () => {
           <div className="main-content">
             <div className="solutions-section menu-spacing">
               
-              <SolutionCard ref={solutionRef} {...solutionData} variant="hero"/>
+              <SolutionCard ref={solutionRef} {...solutionData} variant="default"/>
               
               {applicationCardsData && (
                 <ApplicationCardsSection ref={applicationRef} applicationCardsData={applicationCardsData}boxName="적용분야" />

@@ -85,18 +85,30 @@
 
 /* 반응형 스타일 */
 @media (max-width: 1024px) {
+  .application-card {
+    padding: var(--spacing-2xl);
+  }
+  
   .application-card-image-container {
     aspect-ratio: 4/3;
   }
 }
 
 @media (max-width: 768px) {
+  .application-card {
+    padding: var(--spacing-2xl);
+  }
+  
   .application-card-image-container {
     aspect-ratio: 3/2;
   }
 }
 
 @media (max-width: 480px) {
+  .application-card {
+    padding: var(--spacing-xl);
+  }
+  
   .application-card-image-container {
     aspect-ratio: 1/1;
   }

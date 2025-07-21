@@ -38,6 +38,7 @@ body {
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   position: relative;
+  padding: var(--spacing-2xl);
 }
 
 
@@ -193,14 +194,14 @@ body {
 /* 반응형 디자인 */
 @media (max-width: 1024px) {
   .cases-grid {
-    padding: 0 var(--spacing-xl);
+    padding: 0 var(--spacing-2xl);
   }
 }
 
 @media (max-width: 768px) {
   .cases-grid {
     grid-template-columns: 1fr;
-    padding: 0 var(--spacing-xl);
+    padding: 0 var(--spacing-2xl);
   }
   
   .case-content {
@@ -227,7 +228,7 @@ body {
 @media (max-width: 480px) {
   .cases-grid {
     gap: 1.5rem;
-    padding: 0 var(--spacing-lg);
+    padding: 0 var(--spacing-xl);
   }
   
   .case-text {

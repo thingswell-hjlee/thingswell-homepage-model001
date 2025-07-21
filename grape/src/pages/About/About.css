@@ -79,7 +79,7 @@
   gap: var(--spacing-xl);
   background-color: var(--color-surface);
   border-radius: var(--border-radius-lg);
-  padding: var(--spacing-xl);
+  padding: var(--spacing-2xl);
   word-break: keep-all;
   user-select: none; /* 드래그 방지 */
   -webkit-user-select: none;
@@ -517,7 +517,7 @@
 /* 반응형 디자인 */
 @media (max-width: 768px) {
   .about-section-title-image-container {
-    padding: var(--spacing-lg);
+    padding: var(--spacing-2xl);
     width: 100%;
     max-width: 100%;
     overflow-x: hidden;
@@ -612,6 +612,10 @@
 
 /* 태블릿 반응형 */
 @media (max-width: 1024px) and (min-width: 769px) {
+  .about-section-title-image-container {
+    padding: var(--spacing-2xl);
+  }
+  
   .about-section-title-image {
     width: 250px;
     height: 250px;
@@ -648,7 +652,7 @@
   }
 
   .about-section-title-image-container {
-    padding: var(--spacing-md);
+    padding: var(--spacing-xl);
   }
 
   .about-content {

@@ -7,7 +7,7 @@
   border-radius: var(--border-radius-lg);
   box-shadow: var(--shadow-md);
   box-sizing: border-box;
-  padding: var(--spacing-xl);
+  padding: var(--spacing-2xl);
   font-family: var(--font-family-primary);
   width: 100%;
   -webkit-user-select: none; /* Safari */
@@ -192,7 +192,7 @@
 @media (max-width: 1279px) {
   .solution-card {
     width: 100%;
-    padding: var(--spacing-xl);
+    padding: var(--spacing-2xl);
   }
 
   .solution-card-default {
@@ -251,7 +251,7 @@
 @media (max-width: 1024px) {
   .solution-card {
     width: 100%;
-    padding: var(--spacing-xl);
+    padding: var(--spacing-2xl);
   }
 
   .solution-card-default {
@@ -296,7 +296,7 @@
 @media (max-width: 768px) {
   .solution-card {
     width: 100%;
-    padding: var(--spacing-xl);
+    padding: var(--spacing-2xl);
   }
 
   .solution-card-default {
@@ -358,7 +358,7 @@
 @media (max-width: 480px) {
   .solution-card {
     width: 100%;
-    padding: var(--spacing-lg);
+    padding: var(--spacing-xl);
   }
 
   .solution-card-default {

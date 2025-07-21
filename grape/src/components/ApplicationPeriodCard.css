@@ -6,7 +6,7 @@
   max-height: 600px; /* 최대 높이 600으로 설정 */
   display: flex;
   flex-direction: column;
-  padding: var(--spacing-xl);
+  padding: var(--spacing-2xl);
 
 }
 
@@ -132,7 +132,7 @@
 /* 노트북 & 태블릿 가로 : 1024px-1279px */
 @media (max-width: 1279px) and (min-width: 1024px) {
   .applicationdate-card {
-    padding: var(--spacing-xl);
+    padding: var(--spacing-2xl);
   }
   
   .application-period-header h1 {
@@ -148,7 +148,7 @@
 /* 태블릿 가로 : 769px-1023px */
 @media (max-width: 1023px) and (min-width: 769px) {
   .applicationdate-card {
-    padding: var(--spacing-xl);
+    padding: var(--spacing-2xl);
   }
   
   .application-period-header h1 {
@@ -177,7 +177,7 @@
 /* 모바일 가로 & 태블릿 세로 : 480px-767px */
 @media (max-width: 767px) and (min-width: 480px) {
   .applicationdate-card {
-    padding: var(--spacing-lg);
+    padding: var(--spacing-xl);
   }
 
   

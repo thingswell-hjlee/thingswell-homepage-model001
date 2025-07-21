@@ -2,7 +2,7 @@
 /* 반응형 적용 분야 섹션 */
 .application-section-responsive {
   background: var(--color-surface);
-  padding: var(--spacing-xl);
+  padding: var(--spacing-2xl);
   width: 100%;
   max-width: 100%;
   overflow: hidden;
@@ -58,7 +58,7 @@
   }
   
   .application-section-responsive {
-    padding: var(--spacing-xl);
+    padding: var(--spacing-2xl);
   }
 }
 
@@ -70,8 +70,7 @@
   }
   
   .application-section-responsive {
-    padding: var(--spacing-xl);
-
+    padding: var(--spacing-2xl);
   }
   
   .cards-container {
@@ -86,7 +85,7 @@
   }
   
   .application-section-responsive {
-    padding: var(--spacing-lg);
+    padding: var(--spacing-xl);
   }
   
   .cards-container {

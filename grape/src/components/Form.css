@@ -11,7 +11,7 @@
   border-radius: var(--border-radius-lg);
   box-shadow: var(--shadow-md);
   box-sizing: border-box;
-  padding: var(--spacing-xl);
+  padding: var(--spacing-2xl);
   font-family: var(--font-family-primary);
   overflow: hidden;
   user-select: none;
@@ -360,7 +360,7 @@
 @media screen and (max-width: 1024px) {
   .form-card {
     flex-direction: column;
-    padding: var(--spacing-xl);
+    padding: var(--spacing-2xl);
     width: 100%;
     max-width: 100%;
     overflow: hidden;
@@ -434,7 +434,7 @@
 @media screen and (max-width: 768px) {
   .form-card {
     flex-direction: column;
-    padding: var(--spacing-sm);
+    padding: var(--spacing-2xl);
     width: 100%;
     max-width: 100%;
     overflow: hidden;
@@ -530,7 +530,7 @@
 @media screen and (max-width: 480px) {
   .form-card {
     flex-direction: column;
-    padding: var(--spacing-xs);
+    padding: var(--spacing-xl);
     width: 100%;
     max-width: 100%;
     overflow: hidden;
@@ -626,7 +626,7 @@
 
 @media screen and (max-width: 320px) {
   .form-card {
-    padding: var(--spacing-xs);
+    padding: var(--spacing-xl);
     width: 100%;
     max-width: 100%;
     overflow: hidden;
