@@ -120,16 +120,21 @@ const Soulution = () => {
 
   const formData = {
     title: "문의하기",
-    subtitle: ""
+    subtitle: "궁금한 점이 있으시면 언제든 문의해주세요"
   };
 
-  const sidebarTitle = "산업안전 솔루션";
-  const sidebarMenuItems = [
-    { id: "solution", label: "개요" },
-    { id: "ApplicationCardsSection", label: "기능" },
-    { id: "FeatureDescription", label: "특징" },
-    { id: "form", label: "문의하기" }
-  ];
+  const handleFormSubmit = async (data) => {
+    try {
+      console.log('폼 데이터:', data);
+      // 여기에 실제 API 호출 로직을 추가할 수 있습니다
+      alert('문의가 성공적으로 제출되었습니다.');
+    } catch (error) {
+      console.error('폼 제출 중 오류 발생:', error);
+      alert('문의 제출 중 오류가 발생했습니다.');
+    }
+  };
+
+
 
   const applicationCardsData2 = [
     {
@@ -156,11 +161,6 @@ const Soulution = () => {
     <div className="page-container">
       <div className="page-content">
         <div className="page-layout">
-          {/* <div className={`sidebar ${isSidebarOpen ? 'show' : ''}`}>
-            {(!isMobile) && (
-              <SidebarMenu menuItems={sidebarMenuItems} sectionRefs={sectionRefs} menuTitle={sidebarTitle} />
-            )}
-          </div> */}
           <div className="main-content">
             <div className="solutions-section menu-spacing">
               <SolutionCard ref={solutionRef} {...solutionData} showButton={false} variant="default" />
@@ -182,7 +182,7 @@ const Soulution = () => {
                 />
               ))}
               
-              <FormCard ref={formRef} {...formData} />
+              <FormCard ref={formRef} {...formData} onSubmit={handleFormSubmit} />
             </div>
           </div>
         </div>
