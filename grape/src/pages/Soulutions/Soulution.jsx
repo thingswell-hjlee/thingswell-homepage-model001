@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import SolutionCard from '../../components/SolutionCard';
 import ApplicationCardsSection from '../../components/ApplicationCardsSection';
-import FormCard from '../../components/FormCard';
+import Form from '../../components/Form';
 import FeatureDescription from '../../components/FeatureDescription';
 import welding from '../../assets/welding.jpg';
 import falldown from '../../assets/falldown.jpg';
@@ -182,7 +182,7 @@ const Soulution = () => {
                 />
               ))}
               
-              <FormCard ref={formRef} {...formData} onSubmit={handleFormSubmit} />
+              <Form ref={formRef} {...formData} onSubmit={handleFormSubmit} />
             </div>
           </div>
         </div>

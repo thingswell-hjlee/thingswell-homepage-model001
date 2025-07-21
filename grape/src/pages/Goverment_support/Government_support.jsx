@@ -4,7 +4,7 @@ import ApplicationCardsSection from '../../components/ApplicationCardsSection';
 import ApplicationPeriodCard from '../../components/ApplicationPeriodCard';
 import SupportInfoCard from '../../components/SupportInfoCard';
 import RestrictionCard from '../../components/RestrictionCard';
-import FormCard from '../../components/FormCard';
+import Form from '../../components/Form';
 // import SidebarMenu from '../../components/SidebarMenu';
 import welding from '../../assets/welding.jpg';
 import manufacturing from '../../assets/manufacturing.jpg';
@@ -202,7 +202,7 @@ const Government_support = () => {
                 <RestrictionCard ref={restrictionRef} {...restrictionData} />
               )}
               
-              <FormCard ref={formRef} {...formData} />
+              <Form ref={formRef} {...formData} />
             </div>
           </div>
         </div>

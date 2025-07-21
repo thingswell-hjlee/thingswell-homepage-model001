@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import SolutionCard from '../../components/SolutionCard';
 import ApplicationCardsSection from '../../components/ApplicationCardsSection';
-import FormCard from '../../components/FormCard';
+import Form from '../../components/Form';
 import SidebarMenu from '../../components/SidebarMenu';
 import FeatureDescription from '../../components/FeatureDescription';
 import fire from '../../assets/fire.jpg';
@@ -165,7 +165,7 @@ const Application_filed_2 = () => {
                 />
               ))}
               
-              <FormCard ref={formRef} {...formData} />
+              <Form ref={formRef} {...formData} />
             </div>
           </div>
         </div>

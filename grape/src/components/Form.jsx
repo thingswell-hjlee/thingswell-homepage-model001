@@ -1,5 +1,5 @@
 /**
- * FormCard 컴포넌트
+ * Form 컴포넌트
  * 
  * 문의 폼을 렌더링하는 카드 형태의 컴포넌트입니다.
  * 이름, 이메일, 회사명, 문의내용을 입력받는 폼을 제공합니다.
@@ -12,7 +12,7 @@
  * @param {React.Ref} ref - forwardRef를 통해 전달되는 ref
  * 
  * 사용법:
- * <FormCard 
+ * <Form 
  *   title="문의하기"
  *   subtitle="궁금한 점이 있으시면 언제든 문의해주세요"
  *   onSubmit={(formData) => {
