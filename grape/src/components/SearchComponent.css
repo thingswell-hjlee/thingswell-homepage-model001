@@ -43,6 +43,10 @@
   height: 40px;
   min-width: 80px;
   box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 .search-section-container button:hover {
@@ -76,6 +80,10 @@
     padding: var(--spacing-sm) var(--spacing-md);
     font-size: 14px;
     min-width: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
   }
 }
 
@@ -102,6 +110,10 @@
     padding: var(--spacing-sm) var(--spacing-md);
     font-size: 14px;
     min-width: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
   }
 }
 
@@ -129,6 +141,10 @@
     font-size: 14px;
     padding: var(--spacing-sm) var(--spacing-md);
     min-width: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
   }
 }
 
@@ -156,5 +172,9 @@
     padding: var(--spacing-sm) var(--spacing-md);
     font-size: 12px;
     min-width: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
   }
 } 
