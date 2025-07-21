@@ -49,6 +49,11 @@ html, body {
   -webkit-overflow-scrolling: touch; /* iOS 스크롤 최적화 */
 }
 
+/* 페이지 콘텐츠 스타일 */
+.page-content {
+  margin-bottom: 2rem; /* 하단 마진 추가 */
+}
+
 /* 홈페이지의 content-container에 대한 특별한 스타일 */
 .content-container {
   position: relative;
