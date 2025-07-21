@@ -40,7 +40,7 @@ const ProductFilter = ({
         </div>
       </div>
 
-      <div className="filter-section">
+      {/* <div className="filter-section">
         <h3 className="filter-title">검색</h3>
         <input
           type="text"
@@ -49,7 +49,7 @@ const ProductFilter = ({
           onChange={(e) => setSearchTerm(e.target.value)}
           className="search-input"
         />
-      </div>
+      </div> */}
 
       <div className="filter-section">
         <h3 className="filter-title">결과</h3>

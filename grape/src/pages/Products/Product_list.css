@@ -60,12 +60,20 @@
   margin:0;
 }
 
+/* 검색바 컨테이너 */
+.product-list-search-container {
+  padding: var(--spacing-xl);
+  padding-top: 0;
+}
+
+.product-list-search {
+  margin-bottom: var(--spacing-xl);
+}
+
 /* 필터와 제품 그리드 레이아웃 */
 .product-list-layout {
   display: flex;
   gap: var(--spacing-xl);
-  padding: var(--spacing-xl);
-  padding-top: 0;
 }
 
 .product-grid {

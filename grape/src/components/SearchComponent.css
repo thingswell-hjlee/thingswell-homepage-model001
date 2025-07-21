@@ -9,7 +9,7 @@
   text-align: left;
   overflow: hidden;
   gap: var(--spacing-md);
-  padding: var(--spacing-md);
+  padding: var(--spacing-xl);
 }
 
 .search-section-container.no-padding {

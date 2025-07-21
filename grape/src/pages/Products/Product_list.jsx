@@ -12,6 +12,7 @@ import collision from '../../assets/collision.jpg';
 import collapse from '../../assets/collapse.jpg';
 import poe from '../../assets/poe.jpg';
 import { Link } from "react-router-dom";
+import SearchComponent from "../../components/SearchComponent";
 
 const products = [
   {
@@ -111,35 +112,47 @@ const ProductList = () => {
                   <p>Products List</p>
                   <h1 className="product-list-title">제품 리스트</h1>
                 </div>
-                
-                <div className="product-list-layout">
-                  <ProductFilter
-                    selectedCategory={selectedCategory}
-                    setSelectedCategory={setSelectedCategory}
-                    searchTerm={searchTerm}
-                    setSearchTerm={setSearchTerm}
-                    categories={categories}
-                    filteredProductsCount={filteredProducts.length}
+                <div className="product-list-search">
+                  <SearchComponent 
+                    placeholder="검색어를 입력하세요"
+                    onSearch={(searchTerm) => {
+                      console.log("검색어:", searchTerm);
+
+                      // 여기에 검색 로직을 추가할 수 있습니다
+                    }}
+                    noPadding={false}
                   />
-                  
-                  <div className="product-grid">
-                    {filteredProducts.length > 0 ? (
-                      filteredProducts.map((product, idx) => (
-                        <Link to={product.link} key={idx}>
-                          <div className="product-card">
-                            <img src={product.img} alt={product.name} />
-                            <h3>{product.name}</h3>
-                            <p>{product.desc}</p>
-                            <span className="product-category">{product.category}</span>
-                          </div>
-                        </Link>
-                      ))
-                    ) : (
-                      <div className="no-products-message">
-                        <p>선택한 조건에 맞는 제품이 없습니다.</p>
-                        <p>다른 카테고리나 검색어를 시도해보세요.</p>
-                      </div>
-                    )}
+                </div>
+                <div className="product-list-search-container">
+                  <div className="product-list-layout">
+                    <ProductFilter
+                      selectedCategory={selectedCategory}
+                      setSelectedCategory={setSelectedCategory}
+                      searchTerm={searchTerm}
+                      setSearchTerm={setSearchTerm}
+                      categories={categories}
+                      filteredProductsCount={filteredProducts.length}
+                    />
+                    
+                    <div className="product-grid">
+                      {filteredProducts.length > 0 ? (
+                        filteredProducts.map((product, idx) => (
+                          <Link to={product.link} key={idx}>
+                            <div className="product-card">
+                              <img src={product.img} alt={product.name} />
+                              <h3>{product.name}</h3>
+                              <p>{product.desc}</p>
+                              <span className="product-category">{product.category}</span>
+                            </div>
+                          </Link>
+                        ))
+                      ) : (
+                        <div className="no-products-message">
+                          <p>선택한 조건에 맞는 제품이 없습니다.</p>
+                          <p>다른 카테고리나 검색어를 시도해보세요.</p>
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
