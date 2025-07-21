@@ -51,7 +51,7 @@ const defaultMenuItems = [
     label: '제품', 
     path: '/products',
     submenu: [ 
-      { label: '카메라', path: '/product/1' }, 
+      { label: '카메라', path: '/product-list' }, 
       { label: '영상분석', path: '/products/hardware' }, 
       { label: '모니터링', path: '/products/services' }, 
       { label: '안전장비', path: '/products/new/safety-equipment' },
