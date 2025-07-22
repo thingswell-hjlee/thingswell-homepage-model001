@@ -26,6 +26,9 @@
   min-height: 200px;
   margin-top: var(--spacing-2xl);
   padding: var(--spacing-2xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
 }
 
 .product-list-title {
@@ -37,7 +40,6 @@
 }
 
 .product-list-header{
-  margin-bottom: var(--spacing-md);
   display: flex;
   flex-direction: column;
   gap: var(--spacing-xs);
@@ -61,20 +63,19 @@
 
 /* 검색바 컨테이너 */
 .product-list-search-container {
-  padding: var(--spacing-xl);
-  padding-top: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
 }
 
 .product-list-search {
-  margin-bottom: var(--spacing-xl);
+  /* margin-bottom 제거 - gap으로 대체됨 */
 }
 
 /* 뷰 모드 전환 버튼 */
 .view-mode-toggle {
   display: flex;
   gap: var(--spacing-sm);
-  margin-bottom: var(--spacing-lg);
-  padding: 0 var(--spacing-xl);
   align-items: flex-end;
   justify-content: flex-end;
 }
@@ -117,6 +118,7 @@
 .product-list-layout {
   display: flex;
   gap: var(--spacing-xl);
+  flex: 1;
 }
 
 .product-grid {
@@ -156,7 +158,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--spacing-sm);
-  padding-top: 0;
+  padding: var(--spacing-sm);
 }
 
 .product-card.list-item h3 {
@@ -183,14 +185,14 @@
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   text-align: left;
-  padding-bottom: var(--spacing-md);
-  gap: var(--spacing-sm);
+  padding: 0;
 }
 
 .product-card .product-info {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-md);
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm);
 }
 
 .product-card:hover {
@@ -280,7 +282,7 @@
   }
   
   .product-list-container {
-    padding: var(--spacing-2xl);
+    padding: var(--spacing-xl);
   }
 }
 
@@ -315,7 +317,7 @@
   
   .view-mode-toggle {
     justify-content: center;
-    padding: 0 var(--spacing-lg);
+
   }
   
   .page-layout {
@@ -328,7 +330,7 @@
   }
   
   .product-list-container {
-    padding: var(--spacing-2xl);
+    padding: var(--spacing-xl);
   }
 }
 
