@@ -3,7 +3,7 @@
  * 
  * 솔루션 메인 페이지를 렌더링하는 컴포넌트입니다.
  * 여러 솔루션을 선택할 수 있는 카드 리스트와 선택된 솔루션의 상세 정보를 표시합니다.
- * SelectCardList를 통해 솔루션을 선택하고, SolutionCard로 선택된 솔루션의 정보를 보여줍니다.
+ * SelectCardList를 통해 솔루션을 선택하고, CaseGrid로 선택된 솔루션의 정보를 보여줍니다.
  * 
  * 주요 기능:
  * - 4개의 솔루션 중 선택 가능
@@ -26,7 +26,7 @@ import welding from '../../assets/welding.jpg';
 import construction from '../../assets/construction.jpg';
 import manufacturing from '../../assets/manufacturing.jpg';
 import grinding from '../../assets/grinding.jpg';
-import SolutionCard from '../../components/SolutionCard';
+import CaseGrid from '../../components/CaseGrid';
 import SelectCardList from '../../components/SelectCardList';
 
 const Soulution_main = () => {
@@ -34,39 +34,51 @@ const Soulution_main = () => {
   // 각 섹션별 ref 생성
   const solutionRef = useRef(null);
   
-  // 각 솔루션별 데이터 정의
+  // 각 솔루션별 데이터 정의 (CaseGrid 형식에 맞게 조정)
   const solutionDataArray = [
     {
-      subtitle: "Industrial safety solutions",
+      id: 1,
+      category: "솔루션",
+      company: "싱스웰",
       title: "제조 안전 솔루션",
       description: "RAG 기반의 대규모 비전 모델(LVM), 대규모 언어 모델(LLM), 실시간 센싱 시스템의 멀티모달 데이터를 통합한 작업자 안전 솔루션",
       image: welding,
-      imageAlt: "제조 안전 솔루션",
-      link: "/solution"
+      industry: "제조 안전 솔루션",
+      link: "/solution",
+      btnText: "자세히 보기"
     },
     {
-      subtitle: "Construction safety solutions", 
+      id: 2,
+      category: "솔루션",
+      company: "싱스웰",
       title: "건설 안전 솔루션",
       description: "건설 현장의 특수한 환경과 위험 요소를 고려한 전문 안전 솔루션",
       image: construction,
-      imageAlt: "건설 안전 솔루션",
-      link: "/construction-solution"
+      industry: "건설 안전 솔루션",
+      link: "/construction-solution",
+      btnText: "자세히 보기"
     },
     {
-      subtitle: "Manufacturing safety solutions",
+      id: 3,
+      category: "솔루션",
+      company: "싱스웰",
       title: "노인 장애인 안전 솔루션", 
       description: "인지장애가 있는 장애인, 노인의 생활 안전 솔루션",
       image: manufacturing,
-      imageAlt: "노인 장애인 안전 솔루션",
-      link: "/manufacturing-solution"
+      industry: "노인 장애인 안전 솔루션",
+      link: "/manufacturing-solution",
+      btnText: "자세히 보기"
     },
     {
-      subtitle: "Chemical industry safety solutions",
+      id: 4,
+      category: "솔루션",
+      company: "싱스웰",
       title: "전기차 화재 안전 솔루션",
       description: "실시간 온도 모니터링을 통한 화재 감지 솔루션",
       image: grinding,
-      imageAlt: "전기차 화재 안전 솔루션",
-      link: "/chemical-solution"
+      industry: "전기차 화재 안전 솔루션",
+      link: "/chemical-solution",
+      btnText: "자세히 보기"
     }
   ];
 
@@ -79,8 +91,8 @@ const Soulution_main = () => {
 
   const [selectedIdx, setSelectedIdx] = useState(0); // 기본값을 0으로 설정
 
-  // 현재 선택된 인덱스에 따른 solutionData
-  const currentSolutionData = solutionDataArray[selectedIdx];
+  // 현재 선택된 인덱스에 따른 solutionData (CaseGrid는 배열 형태로 전달)
+  const currentSolutionData = [solutionDataArray[selectedIdx]];
 
   return (
     <div className="page-container">
@@ -97,9 +109,7 @@ const Soulution_main = () => {
                   setSelectedIdx(index);
                 }}
               />
-              <SolutionCard ref={solutionRef} {...currentSolutionData} showButton={true} buttonText="자세히 보기" variant="solution-main" />
-
-
+              <CaseGrid ref={solutionRef} cases={currentSolutionData} />
             </div>
           </div>
         </div>
