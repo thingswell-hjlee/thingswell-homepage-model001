@@ -84,6 +84,7 @@ const products = [
 const ProductList = () => {
   const [selectedCategory, setSelectedCategory] = useState("전체");
   const [searchTerm, setSearchTerm] = useState("");
+  const [viewMode, setViewMode] = useState("card"); // "card" 또는 "list"
 
   // 카테고리 목록 추출
   const categories = useMemo(() => {
@@ -124,6 +125,37 @@ const ProductList = () => {
                     setSearchTerm={setSearchTerm}
                   />
                 </div>
+                
+                {/* 뷰 모드 전환 버튼 */}
+                <div className="view-mode-toggle">
+                  <button 
+                    className={`view-mode-btn ${viewMode === 'card' ? 'active' : ''}`}
+                    onClick={() => setViewMode('card')}
+                  >
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <rect x="3" y="3" width="7" height="7"></rect>
+                      <rect x="14" y="3" width="7" height="7"></rect>
+                      <rect x="14" y="14" width="7" height="7"></rect>
+                      <rect x="3" y="14" width="7" height="7"></rect>
+                    </svg>
+                    카드 보기
+                  </button>
+                  <button 
+                    className={`view-mode-btn ${viewMode === 'list' ? 'active' : ''}`}
+                    onClick={() => setViewMode('list')}
+                  >
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <line x1="8" y1="6" x2="21" y2="6"></line>
+                      <line x1="8" y1="12" x2="21" y2="12"></line>
+                      <line x1="8" y1="18" x2="21" y2="18"></line>
+                      <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                      <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                      <line x1="3" y1="18" x2="3.01" y2="18"></line>
+                    </svg>
+                    리스트 보기
+                  </button>
+                </div>
+                
                 <div className="product-list-search-container">
                   <div className="product-list-layout">
                     <ProductFilter
@@ -135,15 +167,17 @@ const ProductList = () => {
                       filteredProductsCount={filteredProducts.length}
                     />
                     
-                    <div className="product-grid">
+                    <div className={`product-grid ${viewMode === 'list' ? 'list-view' : ''}`}>
                       {filteredProducts.length > 0 ? (
                         filteredProducts.map((product, idx) => (
                           <Link to={product.link} key={idx}>
-                            <div className="product-card">
+                            <div className={`product-card ${viewMode === 'list' ? 'list-item' : ''}`}>
                               <img src={product.img} alt={product.name} />
-                              <h3>{product.name}</h3>
-                              <p>{product.desc}</p>
-                              <span className="product-category">{product.category}</span>
+                              <div className="product-info">
+                                <h3>{product.name}</h3>
+                                <p>{product.desc}</p>
+                                <span className="product-category">{product.category}</span>
+                              </div>
                             </div>
                           </Link>
                         ))

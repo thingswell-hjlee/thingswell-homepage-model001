@@ -59,7 +59,7 @@
   margin-bottom: 1rem;
   font-weight: 500;
 }
-    
+
 .case-title {
   font-size: 1.5rem;
   color: var(--color-text-primary);
@@ -160,6 +160,12 @@
 .view-case-btn:hover {
   background: #ff6600;
   color: #000;
+}
+
+.view-case-btn span:active {
+  color: #000;
+  border: none;
+  outline: none;
 }
 
 .btn-icon {
