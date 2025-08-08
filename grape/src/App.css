@@ -108,6 +108,20 @@ html, body {
   padding-top: 200px; /* margin-top 대신 padding-top 사용 */
 }
 
+/* 홈 히어로를 화면 중앙에 배치 */
+.home-overlay {
+  padding-top: 0; /* 상단 여백 제거 */
+}
+
+.home-hero {
+  width: 100%;
+  align-items: center; /* 좌측 정렬에서 중앙 정렬로 변경 */
+}
+
+.hero-content-text { 
+  width: min(92vw, 960px); 
+}
+
 .menu-overlay-subpage {
   position: fixed;
   top: 0;
@@ -180,6 +194,115 @@ html, body {
   margin: 0;
   line-height: var(--line-height-normal);
   font-size: var(--font-size-6xl);
+}
+
+.rolling-text {
+  display: inline-block;
+}
+
+.fade-in {
+  opacity: 1;
+  transition: opacity 250ms ease-in;
+}
+
+.fade-out {
+  opacity: 0;
+  transition: opacity 250ms ease-out;
+}
+
+/* 카드 전환 UI */
+
+/* 히어로 카드 레이아웃 (좌측 정렬) */
+.home-hero { align-items: flex-start; }
+.hero-content-text { width: 100%; }
+
+.card-rotator {
+  position: relative;
+  width: min(92vw, 960px);
+  margin: 0 auto 24px auto;
+  /* 높이는 내용에 따라 유동적으로 확장 */
+}
+
+/* 새 히어로 카드 */
+.hero-card {
+  position: relative;
+  display: grid;
+  gap: 16px;
+  text-align: left;
+  border-radius: 14px;
+  background: rgba(10, 10, 10, 0.55);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: var(--color-text-light);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+  padding: clamp(16px, 3vw, 28px);
+  width: 100%;
+}
+
+.hero-eyebrow {
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 12px;
+  color: rgba(255,255,255,0.72);
+  margin: 0 0 4px 0;
+}
+
+.hero-title {
+  font-size: clamp(28px, 5.8vw, 60px);
+  line-height: 1.1;
+  margin: 0;
+}
+
+.hero-desc {
+  color: rgba(255,255,255,0.86);
+  font-size: clamp(14px, 1.8vw, 18px);
+  line-height: 1.55;
+  margin: 0;
+  max-width: 56ch;
+}
+
+.hero-cta-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.hero-cta {
+  font-family: var(--font-family-primary);
+  font-weight: 600;
+  padding: 12px 18px;
+  background: #ff4d2d;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 160ms ease, background 200ms ease;
+}
+
+.hero-cta:hover { background: #ff5f43; transform: translateY(-1px); }
+.hero-cta:active { transform: translateY(0); }
+
+.hero-caption {
+  font-size: 12px;
+  color: rgba(255,255,255,0.7);
+}
+
+.card-enter {
+  animation: cardEnter 350ms ease forwards;
+}
+
+.card-leave {
+  animation: cardLeave 350ms ease forwards;
+}
+
+@keyframes cardEnter {
+  0% { opacity: 0; transform: translateY(12px) scale(0.995); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes cardLeave {
+  0% { opacity: 1; transform: translateY(0) scale(1); }
+  100% { opacity: 0; transform: translateY(-10px) scale(0.995); }
 }
 
 @keyframes logo-spin {

@@ -76,6 +76,28 @@ import { AuthProvider } from "./contexts/AuthContext.jsx";
 
 function HomePage() {
   const [isMobile, setIsMobile] = useState(false);
+  const cards = [
+    {
+      eyebrow: "THE NEW STANDARD IN WORKPLACE SAFETY",
+      title: "Real-time safety management & SIF prevention—powered by AI",
+      description:
+        "24/7 detection and resolution of potential SIFs—scores risk in real time, recommends action, and prevents life-altering injuries before they happen.",
+      ctaText: "Schedule a demo",
+      ctaHref: "/contact",
+      caption: "15 min demo, no commitment required",
+    },
+    {
+      eyebrow: "EDGE AI FOR INDUSTRY",
+      title: "On-device computing for privacy-first, low-latency AI",
+      description:
+        "Process video streams on-premise to minimize bandwidth, preserve privacy, and enable instant, reliable detections across harsh environments.",
+      ctaText: "Schedule a demo",
+      ctaHref: "/contact",
+      caption: "Run where it matters most—on site, at the edge",
+    },
+  ];
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isFading, setIsFading] = useState(true);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -90,23 +112,39 @@ function HomePage() {
     };
   }, []);
 
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setIsFading(false);
+      setTimeout(() => {
+        setCurrentIndex((prev) => (prev + 1) % cards.length);
+        setIsFading(true);
+      }, 250);
+    }, 3500);
+
+    return () => clearInterval(intervalId);
+  }, []);
+
   return (
     <div className="content">
       <div className="content-container">
         <img src={logo} alt="메인 이미지" className="main-image" />
         {/* 이미지 위에 오는 모든 요소들 */}
-        <div className="overlay-container">
-          <div className="main-center-wrapper">
-            <div className="content-text">
-              <h1>Artificial</h1>
-              <h1>Intelligence</h1>
-            </div>
-            <div className="button">
-              <Link to="/solutions">
-                <button className="button-text">
-                  <p>더 알아보기</p>
-                </button>
-              </Link>
+        <div className="overlay-container home-overlay">
+          <div className="main-center-wrapper home-hero">
+            <div className="content-text hero-content-text">
+              <div className="card-rotator">
+                <article className={`hero-card ${isFading ? "card-enter" : "card-leave"}`}>
+                  <p className="hero-eyebrow">{cards[currentIndex].eyebrow}</p>
+                  <h1 className="hero-title">{cards[currentIndex].title}</h1>
+                  <p className="hero-desc">{cards[currentIndex].description}</p>
+                  <div className="hero-cta-row">
+                    <Link to={cards[currentIndex].ctaHref}>
+                      <button className="hero-cta">{cards[currentIndex].ctaText}</button>
+                    </Link>
+                    <span className="hero-caption">{cards[currentIndex].caption}</span>
+                  </div>
+                </article>
+              </div>
             </div>
           </div>
         </div>
