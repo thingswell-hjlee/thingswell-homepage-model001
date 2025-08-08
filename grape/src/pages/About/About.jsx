@@ -1,14 +1,85 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import SolutionCard from "../../components/SolutionCard.jsx";
+import ApplicationCardsSection from "../../components/ApplicationCardsSection.jsx";
 import "./About.css";
 import ceo from "../../assets/ceo.jpg";
 import manufacturing from "../../assets/manufacturing.jpg";
 import construction from "../../assets/construction.jpg";
-import OpenStreetMap from "../../components/OpenStreetMap.jsx";
+import logo from "../../assets/logo.png";
+
+// Certificate imports
+import patentCertificate1 from "../../assets/patent_certificate_10-2404374.png";
+import patentCertificate2 from "../../assets/patent_certificate_10-2424407.png";
+import patentCertificate3 from "../../assets/patent_certificate_10-2529240.png";
+import patentCertificate4 from "../../assets/patent_certificate_10-2825255.png";
+import softwareBusinessOperatorCertificate from "../../assets/software_business_operator_certificate.png";
+import factoryRegistrationCertificate from "../../assets/factory_registration_certificate.png";
+import corporateResearchInstituteCertificate from "../../assets/corporate_research_institute_certificate.png";
+import ventureEnterpriseCertificate from "../../assets/venture_enterprise_certificate.png";
+import informationCommunicationBusinessCertificate from "../../assets/information_communication_business_certificate.png"; 
 
 const About = () => {
   const location = useLocation();
+  const applicationRef = useRef(null);
+
+  // applicationCardsData를 useEffect 밖으로 이동
+  const applicationCardsData = [
+    {
+      title: "벤처기업 확인서",
+      label: "확인서",
+      image: ventureEnterpriseCertificate,
+      imageAlt: "벤처기업 확인서",
+    },
+    {
+      title: "기업부설연구소 인증서",
+      label: "인증서",
+      image: corporateResearchInstituteCertificate,
+      imageAlt: "기업부설연구소 인증서",
+    },
+    {
+      title: "정보통신공사업등록증",
+      label: "등록증",
+      image: informationCommunicationBusinessCertificate,
+      imageAlt: "정보통신공사업등록증",
+    },
+    {
+      title: "공장등록증명서",
+      label: "증명서",
+      image: factoryRegistrationCertificate,
+      imageAlt: "공장등록증명서",
+    },
+    {
+      title: "SW사업자 일반현황관리확인서",
+      label: "확인서",
+      image: softwareBusinessOperatorCertificate,
+      imageAlt: "SW사업자 일반현황관리확인서",
+    },
+    {
+      title: "실내외 센서 모듈을 이용한 공기질 관리 방법 및 장치",
+      label: "특허증",
+      image: patentCertificate1,
+      imageAlt: "특허증 - 실내외 센서 모듈을 이용한 공기질 관리 방법 및 장치",
+    },      
+    {
+      title: "AI 기반의 캡슐형 스마트 쉘터",
+      label: "특허증",
+      image: patentCertificate2,
+      imageAlt: "특허증 - AI 기반의 캡슐형 스마트 쉘터",
+    },
+    {
+      title: "사용자 맞춤형 서비스를 제공하는 캡슐형 스마트 쉘터",
+      label: "특허증",
+      image: patentCertificate3,
+      imageAlt: "특허증 - 사용자 맞춤형 서비스를 제공하는 캡슐형 스마트 쉘터",
+    },
+    {
+      title: "레이더와 카메라를 이용한 위급 상황 알람 장치",
+      label: "특허증",
+      image: patentCertificate4,
+      imageAlt: "특허증 - 레이더와 카메라를 이용한 위급 상황 알람 장치",
+    },
+  ];
 
   // URL 해시에 따라 해당 섹션으로 스크롤
   useEffect(() => {
@@ -55,7 +126,7 @@ const About = () => {
     }
   }, [location.hash]);
   return (
-    <div className="page-container">
+    <div className="page-container about-page">
       <div className="page-content">
         <div className="page-layout">
           <div className="main-content">
@@ -80,7 +151,7 @@ const About = () => {
                   </div>
                   <div className="about-section-content-container">
                     <div className="about-section-title-image">
-                      <img src={ceo} alt="ceo" />
+                      <img src={logo} alt="ceo" />
                     </div>
                     <div className="about-section-title-image-description">
                       <p>
@@ -391,6 +462,11 @@ const About = () => {
                   </div>
                 </div>
               </div>
+              <div id="certificate">
+              {applicationCardsData && (
+                <ApplicationCardsSection ref={applicationRef} applicationCardsData={applicationCardsData} boxName="인증서, 인정서, 지적재산권" columnsPerRow={4} subtitle="Certificate" />
+              )}
+              </div>
               <div id="location" className="about-section">
                 <div className="about-section-title-image-container">
                   <div className="about-section-title">
@@ -401,10 +477,7 @@ const About = () => {
                   </div>
                   <div className="location-container">
                     <div className="map-container">
-                      <OpenStreetMap
-                        address="경기 안양시 동안구 학의로 2825 금강펜타리움 IT타워 A동 1302호"
-                        companyName="(주)싱스웰"
-                      />
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3169.532835223222!2d126.96427059698114!3d37.40087886162995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357b5e3a312a3d07%3A0x8362eaabc267ff81!2z6riI6rCV7Y6c7YWM66as7JuASVTtg4Dsm4w!5e0!3m2!1sko!2skr!4v1752822417888!5m2!1sko!2skr" width="600" height="450" style={{border: 0}} allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                     <div className="location-info">
                       <div className="location-card">

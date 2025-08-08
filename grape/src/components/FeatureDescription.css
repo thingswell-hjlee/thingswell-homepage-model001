@@ -1,14 +1,14 @@
 .feature-description-container {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: left;
   background: var(--color-surface);
   border-radius: var(--border-radius-lg);
   box-shadow: var(--shadow-md);
   box-sizing: border-box;
   width: 100%;
   max-width: 1300px;
-  padding: var(--spacing-xl);
+  padding: var(--spacing-2xl);
   gap: var(--spacing-2xl);
   font-family: var(--font-family-primary);
   max-width: var(--container-max-width);
@@ -18,6 +18,8 @@
 /* 좌우 반전을 위한 reverse 클래스 */
 .feature-description-container.reverse {
   flex-direction: row-reverse;
+  align-items: flex-end;
+  justify-content: right;
 }
 
 .feature-description-image-section {
@@ -48,13 +50,12 @@
 }
 
 .feature-description-text-section {
-  flex: 2;
   color: var(--color-text-primary);
   display: flex;
   flex-direction: column;
-  justify-content: center;
   font-family: var(--font-family-primary);
   text-align: left;
+  align-self: flex-start;
 }
 
 .feature-description-title {
@@ -78,7 +79,7 @@
 @media (max-width: 1200px) {
   .feature-description-container {
     width: 100%;
-    padding: var(--spacing-xl);
+    padding: var(--spacing-2xl);
   }
   .feature-description-container {
     gap: 2rem;
@@ -90,7 +91,7 @@
   .feature-description-container,
   .feature-description-container.reverse {
     flex-direction: column;
-    padding: var(--spacing-lg);
+    padding: var(--spacing-2xl);
     max-width: 100%;
   }
   .feature-description-title {
@@ -109,7 +110,7 @@
 @media (max-width: 480px) {
   .feature-description-container,
   .feature-description-container.reverse {
-    padding: var(--spacing-md);
+    padding: var(--spacing-xl);
   }
   .feature-description-title {
     font-size: 1.8rem;

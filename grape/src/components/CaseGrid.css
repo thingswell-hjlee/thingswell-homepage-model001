@@ -1,0 +1,233 @@
+/* CaseGrid 컴포넌트 스타일 */
+
+.cases-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 2rem;
+  max-width: 1500px !important; /* 강제 적용 */
+  margin: 0 auto !important; /* 중앙 정렬 강제 적용 */
+  width: 100% !important; /* 전체 너비 사용 */
+  box-sizing: border-box;
+}
+
+/* 사례 카드 스타일 */
+.case-card {
+  background: var(--color-surface);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  padding: var(--spacing-2xl);
+  width: 100%;
+}
+
+.case-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #ff6600, #ff8800);
+}
+
+.case-content {
+  display: flex;
+  min-height: 300px;
+}
+
+.case-text {
+  flex: 1;
+  padding: 2rem;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  word-break: keep-all;
+}
+
+.case-category {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 0.5rem;
+  font-weight: 300;
+}
+
+.case-company {
+  font-size: 1rem;
+  color: var(--color-text-primary);
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.case-title {
+  font-size: 1.5rem;
+  color: var(--color-text-primary);
+  margin: 0 0 1rem 0;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.case-description {
+  font-size: 0.95rem;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  margin: 0 0 1.5rem 0;
+  flex-grow: 1;
+}
+
+.case-industry {
+  display: flex;
+  align-items: center;
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  margin-top: auto;
+}
+
+.bullet {
+  color: #ff6600;
+  margin-right: 0.5rem;
+  font-size: 1.2rem;
+}
+
+/* 이미지 섹션 */
+.case-image-section {
+  flex: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.case-image-container {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  min-height: 250px;
+  max-height: 300px;
+}
+
+.case-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0 12px 0 0;
+  min-height: 250px;
+  max-height: 300px;
+}
+
+.image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+.detection-box {
+  position: absolute;
+  top: 20%;
+  left: 20%;
+  width: 60%;
+  height: 40%;
+  border-radius: 8px;
+}
+
+.safety-lines {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60%;
+}
+
+/* 사례 연구 보기 버튼 */
+.view-case-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: var(--color-surface-dark);
+  color: var(--color-text-primary);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border-top: 1px solid #333;
+}
+
+.view-case-btn:hover {
+  background: #ff6600;
+  color: #000;
+}
+
+.view-case-btn span:active {
+  color: #000;
+  border: none;
+  outline: none;
+}
+
+.btn-icon {
+  font-size: 1.1rem;
+  transition: transform 0.3s ease;
+}
+
+.view-case-btn:hover .btn-icon {
+  transform: translateX(3px);
+}
+
+/* 반응형 디자인 */
+@media (max-width: 1024px) {
+  .cases-grid {
+    padding: 0 var(--spacing-2xl);
+  }
+}
+
+@media (max-width: 768px) {
+  .cases-grid {
+    grid-template-columns: 1fr;
+    padding: 0 var(--spacing-2xl);
+  }
+  
+  .case-content {
+    flex-direction: column;
+  }
+  
+  .case-image-container {
+    height: 200px;
+    min-height: 200px;
+    max-height: 200px;
+  }
+  
+  .case-image {
+    border-radius: 0;
+  }
+  
+  .case-title {
+    font-size: 1.25rem;
+  }
+  
+  .case-text {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .cases-grid {
+    gap: 1.5rem;
+    padding: 0 var(--spacing-xl);
+  }
+  
+  .case-text {
+    padding: 1rem;
+  }
+  
+  .case-title {
+    font-size: 1.1rem;
+  }
+  
+  .case-description {
+    font-size: 0.875rem;
+  }
+} 

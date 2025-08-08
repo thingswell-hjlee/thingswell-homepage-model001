@@ -7,7 +7,7 @@
   border-radius: var(--border-radius-lg);
   box-shadow: var(--shadow-md);
   box-sizing: border-box;
-  padding: var(--spacing-xl);
+  padding: var(--spacing-2xl);
   font-family: var(--font-family-primary);
   width: 100%;
   -webkit-user-select: none; /* Safari */
@@ -20,19 +20,19 @@
   -o-user-drag: none; /* Opera */
   user-drag: none; /* Standard */
   max-width: 1500px;
+  margin: 0;
 }
 
 /* 기본 변형 (기존 스타일) */
 .solution-card-default {
-  height: 600px;
-  min-height: 600px;
+  height: 300px;
+  min-height: 300px;
 }
 
 /* 컴팩트 변형 - 메인 페이지용 */
 .solution-card-compact {
   height: 400px;
   min-height: 400px;
-  padding: var(--spacing-lg);
 }
 
   .solution-card-compact .solution-card-image img {
@@ -66,18 +66,17 @@
 .solution-card-solution-main {
   height: 500px;
   min-height: 500px;
-  padding: var(--spacing-lg);
 }
 
 .solution-card-inner {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--spacing-2xl);
   width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
+  max-width: 100%;
   height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 /* 좌측 정렬을 위한 커스텀 클래스 */
@@ -111,7 +110,7 @@
   flex: 2;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: flex-start;
   height: 100%;
   overflow: hidden;
@@ -130,18 +129,17 @@
 .solution-card-subtitle {
   font-size: clamp(var(--font-size-sm), 2.5vw, var(--font-size-lg));
   color: var(--color-text-muted);
-  margin-bottom: var(--spacing-xs);
   font-family: var(--font-family-primary);
   text-align: left;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  margin-bottom: var(--spacing-sm);
 }
 
 .solution-card-title {
   font-size: clamp(var(--font-size-2xl), 4.5vw, var(--font-size-4xl));
   font-weight: var(--font-weight-bold);
-  margin-bottom: var(--spacing-lg);
   color: var(--color-text-primary);
   font-family: var(--font-family-primary);
   overflow: hidden;
@@ -160,27 +158,30 @@
   overflow-wrap: break-word;
   hyphens: auto;
   overflow: hidden;
-  text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
+  max-width: 800px;
+  word-break: keep-all;
 }
 
 .solution-card-image {
   flex: 1;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-end;
+  align-items: flex-start;
   height: 100%;
-  max-height: 40vh;
-  min-height: 25vh;
   overflow: hidden;
   object-fit: contain;
+  max-width: 100%;
+  position: relative;
 }
 
 .solution-card-image img {
-  width: 600px;
-  height: 400px;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
   object-fit: cover;
   border-radius: 20px;
   transition: all var(--transition-base);
@@ -192,7 +193,7 @@
 @media (max-width: 1279px) {
   .solution-card {
     width: 100%;
-    padding: var(--spacing-xl);
+    padding: var(--spacing-2xl);
   }
 
   .solution-card-default {
@@ -227,10 +228,6 @@
     min-height: 450px;
   }
 
-  .solution-card-inner {
-    width: 95%;
-    gap: 2rem;
-  }
 
   .solution-card-subtitle {
     font-size: clamp(var(--font-size-xs), 1.8vw, var(--font-size-base));
@@ -255,7 +252,7 @@
 @media (max-width: 1024px) {
   .solution-card {
     width: 100%;
-    padding: var(--spacing-xl);
+    padding: var(--spacing-2xl);
   }
 
   .solution-card-default {
@@ -290,11 +287,6 @@
     min-height: 400px;
   }
 
-  .solution-card-inner {
-    width: 95%;
-    gap: 1.5rem;
-  }
-
   .solution-card-button-text {
     font-size: clamp(var(--font-size-xxs), 1vw, var(--font-size-xs));
     padding: var(--spacing-xxs) var(--spacing-xs);
@@ -304,8 +296,8 @@
 /* 모바일 가로 & 태블릿 세로 : 480px-767px */
 @media (max-width: 768px) {
   .solution-card {
-    padding: var(--spacing-lg);
     width: 100%;
+    padding: var(--spacing-2xl);
   }
 
   .solution-card-default {
@@ -316,7 +308,6 @@
   .solution-card-compact {
     height: 250px;
     min-height: 250px;
-    padding: 1rem;
   }
 
   .solution-card-compact .solution-card-image img {
@@ -339,13 +330,8 @@
   .solution-card-solution-main {
     height: 350px;
     min-height: 350px;
-    padding: 1rem;
   }
 
-  .solution-card-inner {
-    width: 100%;
-    gap: 1rem;
-  }
 
   .solution-card-text {
     flex: 1;
@@ -372,8 +358,8 @@
 /* 모바일 : -479px */
 @media (max-width: 480px) {
   .solution-card {
-    padding: var(--spacing-lg);
     width: 100%;
+    padding: var(--spacing-xl);
   }
 
   .solution-card-default {
@@ -384,7 +370,6 @@
   .solution-card-compact {
     height: 200px;
     min-height: 200px;
-    padding: 1rem;
   }
 
   .solution-card-compact .solution-card-image img {
@@ -407,13 +392,8 @@
   .solution-card-solution-main {
     height: 300px;
     min-height: 300px;
-    padding: 1rem;
   }
 
-  .solution-card-inner {
-    width: 100%;
-    gap: 1rem;
-  }
 
   .solution-card-text {
     flex: 1;
@@ -444,22 +424,23 @@
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
-  margin-top: var(--spacing-md);
   outline: none;
   border: none;
+
 }
 
 .solution-card-button-text {
   background-color: var(--color-primary);
   color: var(--color-text-white);
   border: none;
-  padding: var(--spacing-sm) var(--spacing-md);
   border-radius: var(--button-border-radius);
   font-size: clamp(var(--font-size-xs), 1.5vw, var(--font-size-base));
   font-family: var(--font-family-primary);
   cursor: pointer;
   transition: all var(--transition-base);
   outline: none;
+  padding:var(--spacing-md);
+  margin-top: var(--spacing-lg);
 }
 
 .solution-card-button-text:hover {

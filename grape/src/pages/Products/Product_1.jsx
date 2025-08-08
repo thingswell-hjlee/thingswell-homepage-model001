@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import SolutionCard from '../../components/SolutionCard';   
 import Specification from '../../components/Specification';
-import FormCard from '../../components/FormCard';
+import Form from '../../components/Form';
 import { Link } from 'react-router-dom';
 import welding from '../../assets/welding.jpg';
 
@@ -45,7 +45,7 @@ const Product_1 = () => {
                   { label: "데이터시트", value: "다운로드", description: "v200/2025.07.10",link: "" },
                 ]} 
               />
-              <FormCard 
+              <Form 
                 title="문의하기" 
                 subtitle="궁금한 점이 있으시면 언제든 문의해주세요" 
                 onSubmit={(formData) => {

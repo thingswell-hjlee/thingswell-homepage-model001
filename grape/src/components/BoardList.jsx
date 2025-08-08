@@ -18,7 +18,12 @@ const BoardList = ({
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
+  const [searchTerm, setSearchTerm] = useState(""); // 검색어 상태 추가
   const { user } = useAuth(); // 로그인 상태 가져오기
+
+  // 페이징 관련 상태 추가
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(10); // 페이지당 아이템 수
 
   // 화면 크기 감지
   useEffect(() => {
@@ -40,6 +45,7 @@ const BoardList = ({
   useEffect(() => {
     const sorted = instruments.sort((a, b) => (b.id || 0) - (a.id || 0));
     setFilteredInstruments(sorted);
+    setCurrentPage(1); // 데이터가 변경되면 첫 페이지로 이동
   }, [instruments]);
 
   async function getInstruments() {
@@ -112,6 +118,28 @@ const BoardList = ({
     }
   };
 
+  // 페이징 관련 함수들
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = filteredInstruments.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = Math.ceil(filteredInstruments.length / itemsPerPage);
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
   // 검색 함수
   const handleSearch = (searchValue) => {
     // 검색어가 비어있으면 모든 데이터 표시
@@ -131,6 +159,7 @@ const BoardList = ({
       const sorted = filtered.sort((a, b) => (b.id || 0) - (a.id || 0));
       setFilteredInstruments(sorted);
     }
+    setCurrentPage(1); // 검색 시 첫 페이지로 이동
   };
 
   // Enter 키로 검색 실행 - 이 함수는 이제 필요 없음
@@ -204,6 +233,8 @@ const BoardList = ({
             onSearch={handleSearch}
             backgroundColor="var(--color-background-light)"
             noPadding={true}
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
           />
         </div>
         {user && (
@@ -224,8 +255,8 @@ const BoardList = ({
             </tr>
           </thead>
           <tbody>
-            {filteredInstruments && filteredInstruments.length > 0 ? (
-              filteredInstruments.map((instrument, index) => {
+            {currentItems && currentItems.length > 0 ? (
+              currentItems.map((instrument, index) => {
                 // 데이터베이스 컬럼명에 맞춰서 필드 매핑
                 const title = instrument.title || "제목 없음";
                 const formattedDate = formatDate(instrument.created_at);
@@ -279,6 +310,39 @@ const BoardList = ({
           </tbody>
         </table>
       </div>
+
+      {/* 페이징 컴포넌트 */}
+      {totalPages > 1 && (
+        <div className="pagination">
+          <button 
+            onClick={handlePrevPage} 
+            disabled={currentPage === 1}
+            className="pagination-btn"
+          >
+            이전
+          </button>
+          
+          <div className="page-numbers">
+            {Array.from({ length: totalPages }, (_, index) => index + 1).map((pageNumber) => (
+              <button
+                key={pageNumber}
+                onClick={() => handlePageChange(pageNumber)}
+                className={`page-number ${currentPage === pageNumber ? 'active' : ''}`}
+              >
+                {pageNumber}
+              </button>
+            ))}
+          </div>
+          
+          <button 
+            onClick={handleNextPage} 
+            disabled={currentPage === totalPages}
+            className="pagination-btn"
+          >
+            다음
+          </button>
+        </div>
+      )}
     </div>
   );
 };

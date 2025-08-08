@@ -1,12 +1,12 @@
 .applicationdate-card {
   width: 100%;
   background: var(--color-surface);
-  border-radius: var(--border-radius-md);
+  border-radius: var(--border-radius-lg);
   box-shadow: var(--shadow-sm);
   max-height: 600px; /* 최대 높이 600으로 설정 */
   display: flex;
   flex-direction: column;
-  padding: var(--spacing-xl);
+  padding: var(--spacing-2xl);
 
 }
 
@@ -28,21 +28,21 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: var(--spacing-sm);
 }
 
 .application-period-header h1 {
   font-size: var(--font-size-4xl);
   margin-bottom: 0;
   color: var(--color-text-primary);
-  line-height: var(--line-height-tight);
+  margin:0;
 }
 
 .application-period-header p {
   margin: 0;
-  font-size: var(--font-size-3xl);
-  color: var(--color-text-primary);
+  font-size: clamp(var(--font-size-sm), 2.5vw, var(--font-size-lg));
+  color: var(--color-text-muted);
   padding: 0;
+  margin-bottom: var(--spacing-sm);
 }
 
 .support-info-row {
@@ -132,7 +132,7 @@
 /* 노트북 & 태블릿 가로 : 1024px-1279px */
 @media (max-width: 1279px) and (min-width: 1024px) {
   .applicationdate-card {
-    padding: var(--spacing-xl);
+    padding: var(--spacing-2xl);
   }
   
   .application-period-header h1 {
@@ -148,7 +148,7 @@
 /* 태블릿 가로 : 769px-1023px */
 @media (max-width: 1023px) and (min-width: 769px) {
   .applicationdate-card {
-    padding: var(--spacing-xl);
+    padding: var(--spacing-2xl);
   }
   
   .application-period-header h1 {
@@ -177,7 +177,7 @@
 /* 모바일 가로 & 태블릿 세로 : 480px-767px */
 @media (max-width: 767px) and (min-width: 480px) {
   .applicationdate-card {
-    padding: var(--spacing-lg);
+    padding: var(--spacing-xl);
   }
 
   

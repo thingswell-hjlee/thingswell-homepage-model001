@@ -33,8 +33,9 @@ const RestrictionCard = forwardRef((props, ref) => {
     <div ref={ref} className="restriction-card">
       <div className="restriction-card-flex">
         <div className="restriction-card-header">
-          <h1>{title}</h1>
           <p>{subtitle}</p>
+          <h1>{title}</h1>
+
         </div>
         <div className="restriction-info-row">
           <div className="restriction-qualification">

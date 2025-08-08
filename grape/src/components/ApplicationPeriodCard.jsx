@@ -6,8 +6,9 @@ const ApplicationPeriodCard = forwardRef((props, ref) => {
   return (
     <div ref={ref} className="applicationdate-card">
         <div className="application-period-header">
+        <p>{subtitle}</p>
           <h1>{title}</h1>
-          <p>{subtitle}</p>
+
         </div>
         <div className="support-info-row">
           <div className="application-period-box">

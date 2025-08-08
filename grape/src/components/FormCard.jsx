@@ -67,8 +67,10 @@ const FormCard = forwardRef((props, ref) => {
   return (
     <div ref={ref} className="form-card">
       <div className="application-period-flex">
-        <h1>{title}</h1>
-        <p>{subtitle}</p>
+        <div className="application-card-section-title">
+          <p>{subtitle}</p>
+          <h1>{title}</h1>
+        </div>
         <form onSubmit={handleSubmit(onFormSubmit)} className="support-form">
           <div className="form-container">
             <div className="form-group">
@@ -89,6 +91,14 @@ const FormCard = forwardRef((props, ref) => {
                 })}
                 className={errors.name ? 'error' : ''}
                 placeholder="이름을 입력해주세요"
+                style={{
+                  resize: 'none',
+                  overflow: 'auto',
+                  outline: 'none',
+                  WebkitAppearance: 'none',
+                  MozAppearance: 'none',
+                  appearance: 'none'
+                }}
               />
               {errors.name && (
                 <span className="error-message">{errors.name.message}</span>
@@ -109,6 +119,14 @@ const FormCard = forwardRef((props, ref) => {
                 })}
                 className={errors.email ? 'error' : ''}
                 placeholder="example@company.com"
+                style={{
+                  resize: 'none',
+                  overflow: 'auto',
+                  outline: 'none',
+                  WebkitAppearance: 'none',
+                  MozAppearance: 'none',
+                  appearance: 'none'
+                }}
               />
               {errors.email && (
                 <span className="error-message">{errors.email.message}</span>
@@ -133,6 +151,14 @@ const FormCard = forwardRef((props, ref) => {
                 })}
                 className={errors.company ? 'error' : ''}
                 placeholder="회사명을 입력해주세요"
+                style={{
+                  resize: 'none',
+                  overflow: 'auto',
+                  outline: 'none',
+                  WebkitAppearance: 'none',
+                  MozAppearance: 'none',
+                  appearance: 'none'
+                }}
               />
               {errors.company && (
                 <span className="error-message">{errors.company.message}</span>
@@ -157,6 +183,14 @@ const FormCard = forwardRef((props, ref) => {
                 })}
                 className={errors.phone ? 'error' : ''}
                 placeholder="010-1234-5678"
+                style={{
+                  resize: 'none',
+                  overflow: 'auto',
+                  outline: 'none',
+                  WebkitAppearance: 'none',
+                  MozAppearance: 'none',
+                  appearance: 'none'
+                }}
               />
               {errors.phone && (
                 <span className="error-message">{errors.phone.message}</span>
@@ -180,14 +214,20 @@ const FormCard = forwardRef((props, ref) => {
                 })}
                 className={errors.message ? 'error' : ''}
                 placeholder="문의하실 내용을 자세히 입력해주세요"
+                style={{
+                  resize: 'none',
+                  overflow: 'auto',
+                  outline: 'none',
+                  WebkitAppearance: 'none',
+                  MozAppearance: 'none',
+                  appearance: 'none'
+                }}
               />
               {errors.message && (
                 <span className="error-message">{errors.message.message}</span>
               )}
             </div>
-          </div>
-          
-          <div className="form-group">
+            <div className="form-group">
             <button 
               type="submit" 
               className="submit-btn"
@@ -195,6 +235,7 @@ const FormCard = forwardRef((props, ref) => {
             >
               {isSubmitting ? '제출 중...' : '문의하기'}
             </button>
+          </div>
           </div>
         </form>
       </div>

@@ -1,10 +1,9 @@
 
 .support-info-card {
   background: var(--color-surface);
-  border-radius: var(--border-radius-2xl);
-  padding: var(--spacing-xl);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-2xl);
   box-shadow: var(--shadow-lg);
-  margin-bottom: var(--spacing-xl);
   min-height: 800px;
   display: flex;
   flex-direction: column;
@@ -33,14 +32,15 @@
   font-size: var(--font-size-4xl);
   margin-bottom: 0;
   color: var(--color-text-primary);
-  line-height: var(--line-height-tight);
+  margin:0;
 }
 
 .support-info-card-header p {
   margin: 0;
-  font-size: var(--font-size-xl);
-  color: var(--color-text-primary);
+  font-size: clamp(var(--font-size-sm), 2.5vw, var(--font-size-lg));
+  color: var(--color-text-muted);
   padding: 0;
+  margin-bottom: var(--spacing-sm);
 }
 
 .support-info-card-row {
@@ -48,17 +48,18 @@
   gap: var(--spacing-xl);
   flex-wrap: wrap;
   text-align: left;
+  min-width: 0;
 }
 
 .support-info-card-limit {
-  flex: 1;
-  width: 100%;
+  flex: 1 1 300px;
   background: var(--color-surface-light);
   border-radius: var(--border-radius-lg);
-  padding: var(--spacing-xl);
+  padding: var(--spacing-lg);
   border: 2px solid var(--color-border);
   box-shadow: var(--shadow-md);
   transition: all 0.3s ease;
+  min-width: 0;
 }
 
 .support-info-card-limit:hover {
@@ -106,14 +107,14 @@
 }
 
 .support-info-card-qualification {
-  flex: 1;
-  width: 100%;
+  flex: 2 1 500px;
   background: var(--color-surface-light);
   border-radius: var(--border-radius-lg);
-  padding: var(--spacing-xl);
+  padding: var(--spacing-lg);
   border: 2px solid var(--color-border);
   box-shadow: var(--shadow-md);
   transition: all 0.3s ease;
+  min-width: 0;
 }
 
 .support-info-card-qualification:hover {
@@ -174,6 +175,10 @@
 
 /* 반응형 디자인 */
 @media (max-width: 1024px) {
+  .support-info-card {
+    padding: var(--spacing-2xl);
+  }
+  
   .support-info-card-header h1 {
     font-size: var(--font-size-4xl);
   }
@@ -194,6 +199,10 @@
 }
 
 @media (max-width: 768px) {
+  .support-info-card {
+    padding: var(--spacing-2xl);
+  }
+  
   .support-info-card-row {
     flex-direction: column;
   }
@@ -201,13 +210,6 @@
   .support-info-card-limit,
   .support-info-card-qualification {
     min-width: 100%;
-  }
-  
-  .support-info-card {
-    padding: var(--spacing-xl);
-  }
-  
-  .support-info-card-header {
   }
   
   .support-info-card-header h1 {
@@ -220,7 +222,8 @@
 }
 
 @media (max-width: 480px) {
-  .support-info-card-header {
+  .support-info-card {
+    padding: var(--spacing-xl);
   }
   
   .support-info-card-header h1 {
@@ -233,9 +236,6 @@
 }
 
 @media (max-width: 360px) {
-  .support-info-card-header {
-  }
-  
   .support-info-card-header h1 {
     font-size: var(--font-size-2xl);
   }

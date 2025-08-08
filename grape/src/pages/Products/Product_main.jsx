@@ -32,15 +32,15 @@ const Product_main = () => {
     {
       image: welding,
       imageAlt: "용접 제품",
-      label: "카메라",
-      title: "카메라",
+      label: "영상분석 디바이스",
+      title: "영상분석 디바이스",
       link: "/product/2"
     },
     {
       image: welding,
-      imageAlt: "용접 제품",
-      label: "카메라",
-      title: "카메라",
+      imageAlt: "원격 모니터링 시스템",
+      label: "원격 모니터링 시스템",
+      title: "원격 모니터링 시스템",
       link: "/product/3"
     },
     {
@@ -57,14 +57,8 @@ const Product_main = () => {
       title: "개인보호장비",
       link: "/product/5"
     },
-    {
-      image: welding,
-      imageAlt: "모니터링 시스템",
-      label: "모니터링",
-      title: "안전 모니터링 시스템",
-      link: "/product/6"
-    }
   ];
+    
   
   const [selectedIdx] = useState(0); // 기본값을 0으로 설정
 

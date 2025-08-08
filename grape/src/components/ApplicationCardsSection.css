@@ -2,11 +2,12 @@
 /* 반응형 적용 분야 섹션 */
 .application-section-responsive {
   background: var(--color-surface);
-  padding: var(--spacing-lg);
+  padding: var(--spacing-2xl);
   width: 100%;
   max-width: 100%;
   overflow: hidden;
   border-radius: var(--border-radius-lg);
+  margin: 0;
 }
 
 .application-card-section-title {
@@ -26,6 +27,11 @@
   user-drag: none; /* Standard */
 }
 
+/* About 페이지의 인증서 섹션에서만 적용되는 스타일 */
+.about-page .application-card-section-title {
+  font-size: var(--font-size-2xl)!important;
+}
+
 .cards-container {
   width: 100%;
   display: flex;
@@ -43,6 +49,31 @@
   margin: var(--spacing-2xl) 0 var(--spacing-xl) 0;
 }
 
+/* 그리드 레이아웃 클래스들 */
+.grid-1 {
+  grid-template-columns: 1fr;
+}
+
+.grid-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.grid-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.grid-5 {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.grid-6 {
+  grid-template-columns: repeat(6, 1fr);
+}
+
 /* 반응형 스타일 */
 @media (max-width: 1024px) {
   .application-cards,
@@ -51,8 +82,15 @@
     gap: var(--spacing-xl);
   }
   
+  /* 태블릿에서 그리드 조정 */
+  .grid-4,
+  .grid-5,
+  .grid-6 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
   .application-section-responsive {
-    padding: var(--spacing-xl);
+    padding: var(--spacing-2xl);
   }
 }
 
@@ -63,8 +101,17 @@
     gap: var(--spacing-lg);
   }
   
+  /* 모바일에서 그리드 조정 */
+  .grid-2,
+  .grid-3,
+  .grid-4,
+  .grid-5,
+  .grid-6 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
   .application-section-responsive {
-    padding: var(--spacing-xl);
+    padding: var(--spacing-2xl);
   }
   
   .cards-container {
@@ -78,8 +125,17 @@
     gap: var(--spacing-md);
   }
   
+  /* 작은 모바일에서 모든 그리드를 1열로 */
+  .grid-2,
+  .grid-3,
+  .grid-4,
+  .grid-5,
+  .grid-6 {
+    grid-template-columns: 1fr;
+  }
+  
   .application-section-responsive {
-    padding: var(--spacing-lg);
+    padding: var(--spacing-xl);
   }
   
   .cards-container {

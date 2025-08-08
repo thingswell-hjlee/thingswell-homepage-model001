@@ -4,7 +4,7 @@ import ApplicationCardsSection from '../../components/ApplicationCardsSection';
 import ApplicationPeriodCard from '../../components/ApplicationPeriodCard';
 import SupportInfoCard from '../../components/SupportInfoCard';
 import RestrictionCard from '../../components/RestrictionCard';
-import FormCard from '../../components/FormCard';
+import Form from '../../components/Form';
 // import SidebarMenu from '../../components/SidebarMenu';
 import welding from '../../assets/welding.jpg';
 import manufacturing from '../../assets/manufacturing.jpg';
@@ -61,8 +61,8 @@ const Government_support = () => {
     subtitle: "정부지원사업",
     title: "스마트 안전장비지원사업",
     description: "산업변화와 기술발전에 따른 다양한 산업재해를 예방하기 위해 재정 및 기술여건이 취약한 중소사업장에 스마트 안전장비 도입 시 보조금을 지원하는 사업",
-    image: welding,
-    imageAlt: "스마트 안전장비 지원사업"
+    // image: welding,
+    // imageAlt: "스마트 안전장비 지원사업"
   };
 
   const applicationCardsData = [
@@ -88,7 +88,7 @@ const Government_support = () => {
 
   const applicationPeriodData = {
     title: "신청기간",
-    subtitle: "인공지능(AI) 기반 인체감지시스템",
+    subtitle: "Application Period",
     period: {
       start: "2025년 7월 3일 ~ 8월 3일",
     },
@@ -110,7 +110,7 @@ const Government_support = () => {
 
   const supportInfoData = {
     title: "지원 정보",
-    subtitle: "인공지능(AI) 기반 인체감지시스템",
+    subtitle: "Support Information",
     supportLimit: {
       year: "2025년",
       amount: "최대 5,000만원",
@@ -134,7 +134,7 @@ const Government_support = () => {
 
   const restrictionData = {
     title: "지원 제한사항",
-    subtitle: "인공지능(AI) 기반 인체감지시스템",
+    subtitle: "Support Restrictions",
     restrictions: [
       {
         main: "상호출자제한 기업집단 소속회사 및 국가, 지방자치단체 등 공공단체",
@@ -159,7 +159,7 @@ const Government_support = () => {
 
   const formData = {
     title: "문의하기",
-    subtitle: ""
+    subtitle: "궁금한 점이 있으시면 문의해주세요."
   };
 
   const sidebarTitle = "스마트 안전장비지원사업";
@@ -184,10 +184,10 @@ const Government_support = () => {
           <div className="main-content">
             <div className="solutions-section menu-spacing">
               
-              <SolutionCard ref={solutionRef} {...solutionData} variant="compact"/>
+              <SolutionCard ref={solutionRef} {...solutionData} variant="default"/>
               
               {applicationCardsData && (
-                <ApplicationCardsSection ref={applicationRef} applicationCardsData={applicationCardsData}boxName="적용분야" />
+                <ApplicationCardsSection ref={applicationRef} applicationCardsData={applicationCardsData}boxName="적용분야"  subtitle="Application Field"/>
               )}
               
               {applicationPeriodData && (
@@ -202,7 +202,7 @@ const Government_support = () => {
                 <RestrictionCard ref={restrictionRef} {...restrictionData} />
               )}
               
-              <FormCard ref={formRef} {...formData} />
+              <Form ref={formRef} {...formData} />
             </div>
           </div>
         </div>

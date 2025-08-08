@@ -19,3 +19,8 @@ body {
   text-align: center;
   box-sizing: border-box;
 }
+
+/* 사례 섹션 스타일 */
+.cases-section {
+  padding: 2rem 0;
+}

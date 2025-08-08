@@ -29,22 +29,22 @@ function Footer() {
         <div className="footer-container">
           <div className="footer-content">
             <div className="footer-section">
-              <a href="/about" className="footer-subtitle">
+              <a href="/solutions" className="footer-subtitle">
                 솔루션
               </a>
             </div>
             <div className="footer-section">
-              <a href="/about" className="footer-subtitle">
+              <a href="/products" className="footer-subtitle">
                 제품
               </a>
             </div>
             <div className="footer-section">
-              <a href="/about" className="footer-subtitle">
+              <a href="/cases" className="footer-subtitle">
                 납품사례
               </a>
             </div>
             <div className="footer-section">
-              <a href="/about" className="footer-subtitle">
+              <a href="/customer-service" className="footer-subtitle">
                 고객지원
               </a>
             </div>

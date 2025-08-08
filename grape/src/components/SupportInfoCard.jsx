@@ -47,8 +47,8 @@ const SupportInfoCard = forwardRef((props, ref) => {
     <div ref={ref} className="support-info-card">
       <div className="support-info-card-flex">
         <div className="support-info-card-header">
+        <p>{subtitle}</p>
           <h1>{title}</h1>
-          <p>{subtitle}</p>
         </div>
         <div className="support-info-card-row">
           <div className="support-info-card-limit">
@@ -58,7 +58,7 @@ const SupportInfoCard = forwardRef((props, ref) => {
             <div className="support-info-card-limit-card">
               <div className="support-info-card-limit-year">{supportLimit.year}</div>
               <div className="support-info-card-limit-graph">
-                <svg width="100%" height="auto" viewBox="0 0 300 180">
+                <svg width="50%" height="180" viewBox="0 0 300 180">
                   <defs>
                     <linearGradient id="arcGradient" x1="0%" y1="0%" x2="100%" y2="0%">
                       <stop offset="0%" stopColor="#FFD77A"/>

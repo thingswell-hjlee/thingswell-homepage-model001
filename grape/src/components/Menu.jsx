@@ -51,31 +51,33 @@ const defaultMenuItems = [
     label: '제품', 
     path: '/products',
     submenu: [ 
-      { label: '제품1', path: '/product/1' }, 
-      { label: '제품2', path: '/products/hardware' }, 
-      { label: '제품3', path: '/products/services' }, 
-      { label: '제품4', path: '/products/new' } 
+      { label: '카메라', path: '/product-list' }, 
+      { label: '영상분석', path: '/products/hardware' }, 
+      { label: '모니터링', path: '/products/services' }, 
+      { label: '안전장비', path: '/products/new/safety-equipment' },
+      { label: '개인보호장비', path: '/products/new/personal-protective-equipment' },
+      { label: '원격 모니터링', path: '/products/new/remote-monitoring' }
     ] 
   },
   { 
     label: '적용분야', 
     path: '/application-field-main',
     submenu: [ 
-      { label: '적용분야1', path: '/application-field' }, 
-      { label: '적용분야2', path: '/application-field-2' }, 
-      { label: '적용분야3', path: '/application-field-3' }, 
-      { label: '적용분야4', path: '/application-field-4' } 
+      { label: '건물안전 및 자산관리', path: '/application-field' }, 
+      { label: '보안 및 감시', path: '/application-field-2' }, 
+      { label: '제조업 안전 및 자산관리', path: '/application-field-3' }, 
+      { label: '화학공업 안전 및 자산관리', path: '/application-field-4' } 
     ] 
   },
   {   
     label: '납품사례', 
     path: '/cases',
-    submenu: [ 
-      { label: '사례1', path: '/case' }, 
-      { label: '사례2', path: '/case-2' }, 
-      { label: '사례3', path: '/case-3' }, 
-      { label: '사례4', path: '/case-4' } 
-    ] 
+    // submenu: [ 
+    //   { label: '제조업', path: '/case' }, 
+    //   { label: '사례2', path: '/case-2' }, 
+    //   { label: '사례3', path: '/case-3' }, 
+    //   { label: '사례4', path: '/case-4' } 
+    // ] 
   },
   { 
     label: '고객지원', 
@@ -93,6 +95,7 @@ const defaultMenuItems = [
       { label: '인사말', path: '/about#greeting' }, 
       { label: '미션 및 비전', path: '/about#mission' }, 
       { label: '연혁', path: '/about#history' }, 
+      { label: '인증서', path: '/about#certificate' },
       { label: '오시는 길', path: '/about#location' } 
     ] 
   }
