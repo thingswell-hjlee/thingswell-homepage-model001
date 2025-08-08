@@ -139,6 +139,9 @@
   /* Container */
   --container-max-width: 1500px;
   --container-padding: 1rem;
+  
+  /* Footer height used to ensure footer is visible without scroll on home */
+  --footer-height: 200px;
 
   /* Z-Index Scale */
   --z-index-dropdown: 1000;

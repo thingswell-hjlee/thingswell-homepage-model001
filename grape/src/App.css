@@ -8,7 +8,7 @@
 
 .content {
   width: 100%;
-  height: 100%;
+  height: calc(100vh - var(--footer-height));
   display: flex;
   flex-direction: column;
 }
@@ -65,20 +65,20 @@ html, body {
   box-sizing: border-box;
   overflow: hidden;
   -webkit-overflow-scrolling: touch;
-  height: 100vh; /* 뷰포트 높이로 설정 */
+  height: calc(100vh - var(--footer-height)); /* 푸터를 뺀 높이로 설정 */
 }
 
 .main-center-wrapper {
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
-  padding-bottom: 500px; /* 고정된 픽셀 값으로 일정한 위치 유지 */
+  padding-bottom: 0; /* 중앙 정렬을 위해 불필요한 하단 여백 제거 */
 }
 
 .content{
-  height: 100vh;
+  height: calc(100vh - var(--footer-height));
   max-height: 1400px;
   width: 100%;
   overflow-y: auto; /* 내용이 넘칠 경우 스크롤 허용 */
@@ -95,13 +95,28 @@ html, body {
   display: block;
 }
 
+/* 배경 이미지 전환 애니메이션 - CardRotator와 동기화 */
+.main-image {
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  transition: opacity 525ms ease;
+}
+
+.main-image.transitioning {
+  opacity: 0.15;
+}
+
+.main-image.transitioned {
+  opacity: 0.6;
+}
+
 .overlay-container {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 10;
+  z-index: 1000;
   display: flex;
   justify-content: center;
   align-items: center; /* 중앙 정렬로 변경 */
@@ -110,7 +125,14 @@ html, body {
 
 /* 홈 히어로를 화면 중앙에 배치 */
 .home-overlay {
-  padding-top: 0; /* 상단 여백 제거 */
+  /* 상단 고정 정렬 + 메뉴 높이만큼 여백 확보 */
+  align-items: flex-start;
+  padding-top: calc(var(--menu-height) + var(--spacing-2xl));
+}
+
+/* 홈 히어로 컨테이너도 상단 정렬 유지 */
+.home-overlay .main-center-wrapper {
+  justify-content: flex-start;
 }
 
 .home-hero {
@@ -119,7 +141,7 @@ html, body {
 }
 
 .hero-content-text { 
-  width: min(92vw, 960px); 
+  width: min(92vw, 1500px); 
 }
 
 .menu-overlay-subpage {
@@ -212,97 +234,13 @@ html, body {
 
 /* 카드 전환 UI */
 
-/* 히어로 카드 레이아웃 (좌측 정렬) */
-.home-hero { align-items: flex-start; }
-.hero-content-text { width: 100%; }
+/* 히어로 카드 레이아웃 (중앙 정렬) */
+.home-hero { align-items: center; }
+.hero-content-text { width: min(92vw, 1500px); margin: 0 auto; }
 
-.card-rotator {
-  position: relative;
-  width: min(92vw, 960px);
-  margin: 0 auto 24px auto;
-  /* 높이는 내용에 따라 유동적으로 확장 */
-}
-
-/* 새 히어로 카드 */
-.hero-card {
-  position: relative;
-  display: grid;
-  gap: 16px;
-  text-align: left;
-  border-radius: 14px;
-  background: rgba(10, 10, 10, 0.55);
-  backdrop-filter: blur(6px);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  color: var(--color-text-light);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.45);
-  padding: clamp(16px, 3vw, 28px);
-  width: 100%;
-}
-
-.hero-eyebrow {
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  font-size: 12px;
-  color: rgba(255,255,255,0.72);
-  margin: 0 0 4px 0;
-}
-
-.hero-title {
-  font-size: clamp(28px, 5.8vw, 60px);
-  line-height: 1.1;
-  margin: 0;
-}
-
-.hero-desc {
-  color: rgba(255,255,255,0.86);
-  font-size: clamp(14px, 1.8vw, 18px);
-  line-height: 1.55;
-  margin: 0;
-  max-width: 56ch;
-}
-
-.hero-cta-row {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.hero-cta {
-  font-family: var(--font-family-primary);
-  font-weight: 600;
-  padding: 12px 18px;
-  background: #ff4d2d;
-  color: #ffffff;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: transform 160ms ease, background 200ms ease;
-}
-
-.hero-cta:hover { background: #ff5f43; transform: translateY(-1px); }
-.hero-cta:active { transform: translateY(0); }
-
-.hero-caption {
-  font-size: 12px;
-  color: rgba(255,255,255,0.7);
-}
-
-.card-enter {
-  animation: cardEnter 350ms ease forwards;
-}
-
-.card-leave {
-  animation: cardLeave 350ms ease forwards;
-}
-
-@keyframes cardEnter {
-  0% { opacity: 0; transform: translateY(12px) scale(0.995); }
-  100% { opacity: 1; transform: translateY(0) scale(1); }
-}
-
-@keyframes cardLeave {
-  0% { opacity: 1; transform: translateY(0) scale(1); }
-  100% { opacity: 0; transform: translateY(-10px) scale(0.995); }
+/* 홈페이지에서 메뉴가 CardRotator를 가리지 않도록 z-index 조정 */
+.home-overlay .menu-overlay-subpage {
+  z-index: 1;
 }
 
 @keyframes logo-spin {
@@ -422,7 +360,7 @@ html, body {
 
   /* 모바일에서 일정한 위치 유지 */
   .main-center-wrapper {
-    padding-bottom: 200px; /* 모바일에서는 더 작은 값 */
+    padding-bottom: 0; /* 모바일에서도 중앙 정렬 유지 */
   }
 
   .overlay-container {

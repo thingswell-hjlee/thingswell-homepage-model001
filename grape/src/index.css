@@ -37,6 +37,25 @@ body {
   }
 }
 
+/* ===== TEXT SELECTION CONTROL ===== */
+/* 전역 텍스트 선택(드래그) 방지 */
+html, body, #root, * {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+/* 예외: 폼 요소, contenteditable, 명시적으로 허용한 요소 */
+input, textarea, select, [contenteditable="true"], .allow-select {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+  -webkit-touch-callout: default;
+}
+
 @media screen and (max-width: 480px) {
   html {
     font-size: 13px;

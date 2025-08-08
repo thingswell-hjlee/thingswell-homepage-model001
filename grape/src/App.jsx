@@ -38,10 +38,11 @@
  * - 각 솔루션 상세 페이지들
  */
 import { useState, useEffect } from "react";
-import { Routes, Route, useLocation, Link } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import "./App.css";
 import Menu from "./components/Menu.jsx";
 import Footer from "./components/Footer.jsx";
+import CardRotator from "./components/CardRotator.jsx";
 import Government_support_main from "./pages/Goverment_support/Government_support_main.jsx";
 import Government_support from "./pages/Goverment_support/Government_support.jsx";
 import AiManufacturingSupport from "./pages/Goverment_support/AiManufacturingSupport.jsx";
@@ -56,6 +57,11 @@ import Product_main from "./pages/Products/Product_main.jsx";
 import Product_1 from "./pages/Products/Product_1.jsx";
 import Product_list from "./pages/Products/Product_list.jsx";
 import logo from "./assets/main_image.jpg";
+import manufacturing from "./assets/manufacturing.jpg";
+import construction from "./assets/construction.jpg";
+import fire from "./assets/fire.jpg";
+import welding from "./assets/welding.jpg";
+import grinding from "./assets/grinding.jpg";
 import Announcement from "./pages/Customer_Service/Announcement.jsx";
 import Customer_service from "./pages/Customer_Service/Customer_service.jsx";
 import Downloads from "./pages/Customer_Service/Downloads.jsx";
@@ -76,28 +82,85 @@ import { AuthProvider } from "./contexts/AuthContext.jsx";
 
 function HomePage() {
   const [isMobile, setIsMobile] = useState(false);
+  const [currentCardIndex, setCurrentCardIndex] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  
   const cards = [
     {
       eyebrow: "THE NEW STANDARD IN WORKPLACE SAFETY",
-      title: "Real-time safety management & SIF prevention—powered by AI",
+      title: "Industrial safety",
       description:
         "24/7 detection and resolution of potential SIFs—scores risk in real time, recommends action, and prevents life-altering injuries before they happen.",
-      ctaText: "Schedule a demo",
+      ctaText: "Learn more",
       ctaHref: "/contact",
-      caption: "15 min demo, no commitment required",
+      caption: "Advanced AI Detection",
+      backgroundImage: logo,
     },
     {
-      eyebrow: "EDGE AI FOR INDUSTRY",
-      title: "On-device computing for privacy-first, low-latency AI",
+      eyebrow: "AI-POWERED MANUFACTURING SAFETY",
+      title: "Smart Manufacturing",
       description:
-        "Process video streams on-premise to minimize bandwidth, preserve privacy, and enable instant, reliable detections across harsh environments.",
-      ctaText: "Schedule a demo",
+        "Advanced AI technology monitors manufacturing processes in real-time, detecting potential hazards and ensuring worker safety across all production lines.",
+      ctaText: "Learn more",
       ctaHref: "/contact",
-      caption: "Run where it matters most—on site, at the edge",
+      caption: "Real-time Monitoring",
+      backgroundImage: manufacturing,
+    },
+    {
+      eyebrow: "CONSTRUCTION SITE PROTECTION",
+      title: "Construction Safety",
+      description:
+        "Comprehensive safety monitoring for construction sites, preventing accidents through intelligent detection and real-time alerts for hazardous conditions.",
+      ctaText: "Learn more",
+      ctaHref: "/contact",
+      caption: "Site Protection",
+      backgroundImage: construction,
+    },
+    {
+      eyebrow: "FIRE PREVENTION & DETECTION",
+      title: "Fire Safety",
+      description:
+        "Early fire detection and prevention systems that monitor industrial environments, providing instant alerts and automated safety responses.",
+      ctaText: "Learn more",
+      ctaHref: "/contact",
+      caption: "Prevention System",
+      backgroundImage: fire,
+    },
+    {
+      eyebrow: "WELDING OPERATION SAFETY",
+      title: "Welding Protection",
+      description:
+        "Specialized safety monitoring for welding operations, ensuring proper protective equipment usage and safe work practices.",
+      ctaText: "Learn more",
+      ctaHref: "/contact",
+      caption: "Operation Safety",
+      backgroundImage: welding,
+    },
+    {
+      eyebrow: "GRINDING & MACHINING SAFETY",
+      title: "Machining Safety",
+      description:
+        "Real-time monitoring of grinding and machining operations, detecting unsafe conditions and ensuring proper safety protocols.",
+      ctaText: "Learn more",
+      ctaHref: "/contact",
+      caption: "Protocol Management",
+      backgroundImage: grinding,
     },
   ];
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isFading, setIsFading] = useState(true);
+
+  const handleCardChange = (index) => {
+    if (index !== currentCardIndex) {
+      setIsTransitioning(true);
+      // 이미지 페이드 아웃 후 새 이미지로 변경
+      setTimeout(() => {
+        setCurrentCardIndex(index);
+      }, 525); // CardRotator 전환의 절반 지점
+      // 전체 전환 완료 후 상태 리셋
+      setTimeout(() => {
+        setIsTransitioning(false);
+      }, 1050); // 전체 전환 시간과 맞춤
+    }
+  };
 
   useEffect(() => {
     const checkMobile = () => {
@@ -112,39 +175,23 @@ function HomePage() {
     };
   }, []);
 
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setIsFading(false);
-      setTimeout(() => {
-        setCurrentIndex((prev) => (prev + 1) % cards.length);
-        setIsFading(true);
-      }, 250);
-    }, 3500);
-
-    return () => clearInterval(intervalId);
-  }, []);
-
   return (
     <div className="content">
       <div className="content-container">
-        <img src={logo} alt="메인 이미지" className="main-image" />
+        <img 
+          src={cards[currentCardIndex].backgroundImage} 
+          alt="메인 이미지" 
+          className={`main-image ${isTransitioning ? 'transitioning' : 'transitioned'}`}
+        />
         {/* 이미지 위에 오는 모든 요소들 */}
         <div className="overlay-container home-overlay">
           <div className="main-center-wrapper home-hero">
             <div className="content-text hero-content-text">
-              <div className="card-rotator">
-                <article className={`hero-card ${isFading ? "card-enter" : "card-leave"}`}>
-                  <p className="hero-eyebrow">{cards[currentIndex].eyebrow}</p>
-                  <h1 className="hero-title">{cards[currentIndex].title}</h1>
-                  <p className="hero-desc">{cards[currentIndex].description}</p>
-                  <div className="hero-cta-row">
-                    <Link to={cards[currentIndex].ctaHref}>
-                      <button className="hero-cta">{cards[currentIndex].ctaText}</button>
-                    </Link>
-                    <span className="hero-caption">{cards[currentIndex].caption}</span>
-                  </div>
-                </article>
-              </div>
+              <CardRotator 
+                cards={cards} 
+                onCardChange={handleCardChange}
+                currentIndex={currentCardIndex}
+              />
             </div>
           </div>
         </div>
