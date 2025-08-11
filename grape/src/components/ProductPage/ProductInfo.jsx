@@ -1,4 +1,5 @@
 import React from 'react';
+import Breadcrumbs from '../Breadcrumbs';
 import './ProductInfo.css';
 
 const ProductInfo = ({ 
@@ -9,23 +10,9 @@ const ProductInfo = ({
 }) => {
   return (
     <div className="product-info">
-      <div className="breadcrumbs">
-        {breadcrumbs.map((crumb, index) => (
-          <React.Fragment key={index}>
-            <span className="breadcrumb-item">{crumb}</span>
-            {index < breadcrumbs.length - 1 && (
-              <span className="breadcrumb-separator"> &gt; </span>
-            )}
-          </React.Fragment>
-        ))}
-      </div>
-      
+      <Breadcrumbs breadcrumbs={breadcrumbs} />
       <h1 className="product-name">{productName}</h1>
-      
-      <div className="product-details">
-        <h2 className="product-title">{productTitle}</h2>
-        <p className="product-description">{description}</p>
-      </div>
+
     </div>
   );
 };

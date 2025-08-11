@@ -277,7 +277,15 @@ function App() {
             {/* 제품 라우팅 */}
             <Route path="/products" element={<Product_main />} />
             <Route path="/product-list" element={<Product_list />} />
-            <Route path="/product/1" element={<Product_1 />} />
+            <Route path="/product-list/1" element={<Product_1 />} />
+            <Route path="/product-list/2" element={<Product_1 />} />
+            <Route path="/product-list/3" element={<Product_1 />} />
+            <Route path="/product-list/4" element={<Product_1 />} />
+            <Route path="/product-list/5" element={<Product_1 />} />
+            <Route path="/product-list/6" element={<Product_1 />} />
+            <Route path="/product-list/7" element={<Product_1 />} />
+            <Route path="/product-list/8" element={<Product_1 />} />
+            <Route path="/product-list/9" element={<Product_1 />} />
             <Route path="/product-detail" element={<ProductDetail />} />
 
             {/* 고객서비스 라우팅 */}

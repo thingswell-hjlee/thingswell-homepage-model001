@@ -51,7 +51,7 @@ const defaultMenuItems = [
     label: '제품', 
     path: '/products',
     submenu: [ 
-      { label: '카메라', path: '/product-list' }, 
+      { label: '통합제어', path: '/product-list' }, 
       { label: '영상분석', path: '/products/hardware' }, 
       { label: '모니터링', path: '/products/services' }, 
       { label: '안전장비', path: '/products/new/safety-equipment' },
@@ -192,6 +192,7 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
               setActiveSubmenuIndex(subIndex);
               foundActiveSubmenu = true;
               menuIndexForSubmenu = index;
+              // 현재 페이지에 해당하는 서브메뉴가 있으면 자동으로 열기
               if (!isMobile) {
                 setOpenSubmenu(index);
               }
@@ -202,7 +203,7 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
             setActiveSubmenuIndex(subIndex);
             foundActiveSubmenu = true;
             menuIndexForSubmenu = index;
-            // 데스크톱에서는 서브메뉴가 있는 메뉴의 서브메뉴를 열어두기
+            // 현재 페이지에 해당하는 서브메뉴가 있으면 자동으로 열기
             if (!isMobile) {
               setOpenSubmenu(index);
             }
@@ -228,14 +229,11 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
       }
     });
     
-    // 현재 페이지에 해당하는 메뉴가 없으면 활성화 상태 초기화
+    // 현재 페이지에 해당하는 메뉴가 없으면 활성화 상태만 초기화 (서브메뉴는 유지)
     if (!foundActiveMenu && !foundActiveSubmenu) {
       setActiveMenuIndex(null);
       setActiveSubmenuIndex(null);
-      // 데스크톱에서는 서브메뉴도 닫기
-      if (!isMobile) {
-        setOpenSubmenu(null);
-      }
+      // 서브메뉴는 수동으로 닫을 때까지 유지
     }
   }, [location.pathname, location.hash, isMobile]);
 
@@ -243,8 +241,23 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
-        // 페이지의 다른 부분을 클릭하면 서브메뉴 닫기
-        setOpenSubmenu(null);
+        // 외부 클릭 시 현재 활성화된 메뉴가 아닌 경우 서브메뉴 닫기
+        if (!isMobile && openSubmenu !== null) {
+          // 현재 경로와 서브메뉴 경로를 직접 비교
+          const currentMenuItem = defaultMenuItems[openSubmenu];
+          const isCurrentMenuActive = currentMenuItem && (
+            currentMenuItem.path === location.pathname ||
+            (currentMenuItem.submenu && currentMenuItem.submenu.some(subItem => 
+              subItem.path === location.pathname || 
+              location.pathname.startsWith(subItem.path + '/')
+            ))
+          );
+          
+          if (!isCurrentMenuActive) {
+            setOpenSubmenu(null);
+          }
+        }
+        // 모바일 메뉴 닫기
         if (isMobile) {
           setIsMobileMenuOpen(false);
         }
@@ -258,7 +271,7 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
       document.removeEventListener('mousedown', handleClickOutside);
       document.removeEventListener('touchstart', handleClickOutside);
     };
-  }, [isMobile]);
+  }, [isMobile, openSubmenu, location.pathname]);
 
   // 메뉴 활성화 상태 확인 함수
   const isMenuActive = useCallback((menuIndex) => {
@@ -270,7 +283,8 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
           const [basePath, hash] = subItem.path.split('#');
           return basePath === location.pathname && `#${hash}` === location.hash;
         }
-        return subItem.path === location.pathname;
+        // 정확한 경로 일치 또는 경로가 포함되는 경우 (예: /product-list/1이 /product-list를 포함)
+        return subItem.path === location.pathname || location.pathname.startsWith(subItem.path + '/');
       });
       
       if (hasActiveSubmenu) {
@@ -281,6 +295,11 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
     // 현재 페이지가 해당 메뉴의 메인 페이지와 일치하는 경우
     const menuItem = defaultMenuItems[menuIndex];
     if (menuItem && menuItem.path === location.pathname) {
+      return true;
+    }
+    
+    // 메인 페이지 경로가 현재 경로에 포함되는 경우 (예: /products가 /product-list/1에 포함)
+    if (menuItem && menuItem.path && location.pathname.startsWith(menuItem.path + '/')) {
       return true;
     }
     
@@ -301,6 +320,9 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
           }
         } else if (subItem.path === location.pathname) {
           return true;
+        } else if (location.pathname.startsWith(subItem.path + '/')) {
+          // 경로가 포함되는 경우 (예: /product-list/1이 /product-list를 포함)
+          return true;
         }
       }
     }
@@ -311,22 +333,16 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
   // 메뉴 클릭 핸들러
   const handleItemClick = useCallback((item, index) => {
     if (item.submenu && item.submenu.length > 0) {
-      // 서브메뉴가 있는 메뉴 클릭 시
-      if (isMobile) {
-        // 모바일에서는 서브메뉴 토글만 (페이지 이동 없음)
-        setOpenSubmenu(openSubmenu === index ? null : index);
+      // 서브메뉴가 있는 메뉴 클릭 시 - 페이지 이동 없이 메뉴만 토글
+      if (openSubmenu === index) {
+        // 같은 메뉴를 다시 클릭하면 닫기
+        setOpenSubmenu(null);
       } else {
-        // 데스크톱에서는 클릭 시 해당 서브메뉴 자동으로 열기
+        // 다른 메뉴를 클릭하면 해당 메뉴 열기
         setOpenSubmenu(index);
-        // 해당 메뉴 활성화
-        setActiveMenuIndex(index);
-        setActiveSubmenuIndex(null);
-        
-        // 메인 메뉴 페이지로 이동
-        if (item.path) {
-          navigate(item.path);
-        }
       }
+      setActiveMenuIndex(index);
+      setActiveSubmenuIndex(null);
     } else {
       // 서브메뉴가 없는 메뉴 클릭 시
       if (item.path) {
@@ -380,27 +396,24 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
       setActiveMenuIndex(parentIndex);
       setActiveSubmenuIndex(subIndex);
       
-      // 서브메뉴 클릭 후 서브메뉴 닫기
-      setOpenSubmenu(null);
+      // 서브메뉴 클릭 후에도 서브메뉴는 유지 (닫지 않음)
+      // 모바일에서만 메뉴 닫기
       if (isMobile) {
         setIsMobileMenuOpen(false);
       }
     }
   }, [navigate, location.pathname, isMobile]);
 
-  // 데스크톱에서 호버 시 서브메뉴 표시
+  // 데스크톱에서 호버 시 서브메뉴 표시 (현재는 사용하지 않음)
   const handleMouseEnter = useCallback((index) => {
-    if (!isMobile && defaultMenuItems[index].submenu && defaultMenuItems[index].submenu.length > 0) {
-      setOpenSubmenu(index);
-    }
-  }, [isMobile]);
+    // 호버로 서브메뉴를 열지 않음 - 클릭으로만 열림
+  }, []);
 
-  // 마우스가 메뉴를 벗어날 때 서브메뉴 숨김 (제거 - 다른 부분 클릭할 때까지 유지)
-  // const handleMouseLeave = useCallback(() => {
-  //   if (!isMobile) {
-  //     setOpenSubmenu(null);
-  //   }
-  // }, [isMobile]);
+  // 마우스가 메뉴를 벗어날 때 서브메뉴 숨김 (현재는 사용하지 않음)
+  const handleMouseLeave = useCallback(() => {
+    // 마우스가 벗어나도 서브메뉴를 닫지 않음
+    // 필요시 여기에 로직 추가
+  }, []);
 
   // 모바일 메뉴 토글
   const toggleMobileMenu = useCallback(() => {
@@ -419,6 +432,11 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
   // 로고 클릭 핸들러
   const handleLogoClick = useCallback(() => {
     navigate('/');
+    // active 상태 해제
+    setActiveMenuIndex(null);
+    setActiveSubmenuIndex(null);
+    // 서브메뉴 닫기
+    setOpenSubmenu(null);
     if (isMobile) {
       setIsMobileMenuOpen(false);
     }
@@ -456,11 +474,10 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
                   <li 
                     key={index} 
                     className={`menu-item ${item.submenu && item.submenu.length > 0 ? 'has-submenu' : ''}`}
-                    data-active={isMenuActive(index) ? 'true' : 'false'}
-                    onMouseEnter={() => handleMouseEnter(index)}
+                    data-active={activeMenuIndex === index ? 'true' : 'false'}
                   >
                     <button
-                      className={`menu-button ${item.submenu && item.submenu.length > 0 ? 'has-submenu' : ''} ${openSubmenu === index ? 'active' : ''} ${isMenuActive(index) ? 'active' : ''}`}
+                      className={`menu-button ${item.submenu && item.submenu.length > 0 ? 'has-submenu' : ''} ${openSubmenu === index ? 'active' : ''} ${activeMenuIndex === index ? 'active' : ''}`}
                       onClick={() => handleItemClick(item, index)}
                       disabled={item.disabled}
                       aria-expanded={openSubmenu === index}
@@ -475,7 +492,7 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
             
             {/* 데스크톱용 서브메뉴 */}
             {currentSubmenu && (
-              <div className="full-width-submenu">
+              <div className="full-width-submenu" onMouseEnter={() => setOpenSubmenu(openSubmenu)}>
                 <ul className="submenu-list">
                   {currentSubmenu.map((submenuItem, subIndex) => (
                     <li key={subIndex} className="submenu-item">

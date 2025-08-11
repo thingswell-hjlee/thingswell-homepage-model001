@@ -30,7 +30,7 @@ const ProductGallery = ({
         <img
           src={images[selectedImage]}
           alt={`${productName} - 이미지 ${selectedImage + 1}`}
-          className="main-image"
+          className="gallery-main-image"
         />
       </div>
       

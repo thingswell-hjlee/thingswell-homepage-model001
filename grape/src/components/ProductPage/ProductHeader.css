@@ -5,6 +5,11 @@
   position: relative;
   overflow: hidden;
   z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-height:15vh;
 }
 
 .product-header::before {
@@ -25,8 +30,17 @@
 }
 
 .header-top {
-  padding: 1rem 2rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.header-top-image {
+  width: 100%;
+}
+
+.header-top-image img {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
 .company-logo h1 {
@@ -142,7 +156,6 @@
     justify-content: center;
   }
   
-  .header-top,
   .main-navigation,
   .sub-navigation,
   .company-info {

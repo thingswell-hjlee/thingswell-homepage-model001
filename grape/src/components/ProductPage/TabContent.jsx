@@ -7,25 +7,13 @@ const TabContent = ({ tabId, productData }) => {
       case 'overview':
         return (
           <div className="tab-overview">
-            <div className="overview-grid">
+            <div className="overview-section">
               <div className="overview-item">
-                <h3>제품 개요</h3>
+                <div className="overview-item-title">
+                  <h1>{productData?.title}</h1>
+                  <p>{productData?.description}</p>
+                </div>
                 <p>{productData?.overview || "제품에 대한 전반적인 개요를 제공합니다."}</p>
-              </div>
-              <div className="overview-item">
-                <h3>주요 특징</h3>
-                <ul>
-                  {productData?.keyFeatures?.map((feature, index) => (
-                    <li key={index}>{feature}</li>
-                  )) || [
-                    "고성능 처리 능력",
-                    "안정적인 연결성",
-                    "정밀한 제어 기능",
-                    "확장 가능한 구조"
-                  ].map((feature, index) => (
-                    <li key={index}>{feature}</li>
-                  ))}
-                </ul>
               </div>
             </div>
           </div>
@@ -182,42 +170,15 @@ const TabContent = ({ tabId, productData }) => {
       case 'videos':
         return (
           <div className="tab-videos">
-            <div className="videos-grid">
-              {productData?.videos?.map((video, index) => (
-                <div key={index} className="video-card">
-                  <div className="video-thumbnail">
-                    <img src={video.thumbnail} alt={video.title} />
-                    <div className="play-button">▶</div>
-                  </div>
-                  <h3>{video.title}</h3>
-                  <p>{video.description}</p>
-                </div>
-              )) || [
-                {
-                  title: "제품 소개 영상",
-                  description: "XCN-3000의 주요 기능과 특징을 소개합니다.",
-                  thumbnail: "/placeholder-video.png"
-                },
-                {
-                  title: "설치 및 설정 가이드",
-                  description: "단계별 설치 및 설정 방법을 보여줍니다.",
-                  thumbnail: "/placeholder-video.png"
-                },
-                {
-                  title: "사용법 데모",
-                  description: "실제 사용 사례와 데모를 제공합니다.",
-                  thumbnail: "/placeholder-video.png"
-                }
-              ].map((video, index) => (
-                <div key={index} className="video-card">
-                  <div className="video-thumbnail">
-                    <div className="video-placeholder">🎥</div>
-                    <div className="play-button">▶</div>
-                  </div>
-                  <h3>{video.title}</h3>
-                  <p>{video.description}</p>
-                </div>
-              ))}
+            <div className="video-embed">
+              <iframe
+                src="https://www.youtube.com/embed/LGLkdzIt4Jo?si=rD4ovuspBYJcM_U3"
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+              />
             </div>
           </div>
         );

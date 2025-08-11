@@ -9,51 +9,60 @@ const ProductFilter = ({
   categories, 
   filteredProductsCount 
 }) => {
+  // 선택된 카테고리들을 배열로 관리
+  const selectedCategories = selectedCategory === "전체" ? ["전체"] : selectedCategory.split(',').filter(cat => cat.trim());
+
+  const handleCategoryClick = (category) => {
+    if (category === "전체") {
+      // 전체 선택 시 다른 모든 선택 초기화
+      setSelectedCategory("전체");
+    } else {
+      // 개별 카테고리 선택 시
+      if (selectedCategory === "전체") {
+        // 전체가 선택되어 있으면 전체 해제하고 해당 카테고리만 선택
+        setSelectedCategory(category);
+      } else {
+        // 이미 선택된 카테고리들 중에서
+        const currentSelected = selectedCategories.filter(cat => cat !== "전체");
+        
+        if (currentSelected.includes(category)) {
+          // 이미 선택된 카테고리면 제거
+          const newSelected = currentSelected.filter(cat => cat !== category);
+          if (newSelected.length === 0) {
+            // 아무것도 선택되지 않으면 전체로 설정
+            setSelectedCategory("전체");
+          } else {
+            setSelectedCategory(newSelected.join(','));
+          }
+        } else {
+          // 새로운 카테고리 추가
+          const newSelected = [...currentSelected, category];
+          setSelectedCategory(newSelected.join(','));
+        }
+      }
+    }
+  };
+
   return (
-    
     <div className="filter-sidebar">
       <div className="filter-section">
-        <h3 className="filter-title">카테고리</h3>
         <div className="filter-options">
-          <label className="filter-option">
-            <input
-              type="radio"
-              name="category"
-              value="전체"
-              checked={selectedCategory === "전체"}
-              onChange={(e) => setSelectedCategory(e.target.value)}
-            />
-            <span>전체</span>
-          </label>
+          <button
+            className={`filter-button ${selectedCategory === "전체" ? "active" : ""}`}
+            onClick={() => handleCategoryClick("전체")}
+          >
+            전체
+          </button>
           {categories.map(category => (
-            <label key={category} className="filter-option">
-              <input
-                type="radio"
-                name="category"
-                value={category}
-                checked={selectedCategory === category}
-                onChange={(e) => setSelectedCategory(e.target.value)}
-              />
-              <span>{category}</span>
-            </label>
+            <button
+              key={category}
+              className={`filter-button ${selectedCategories.includes(category) ? "active" : ""}`}
+              onClick={() => handleCategoryClick(category)}
+            >
+              {category}
+            </button>
           ))}
         </div>
-      </div>
-
-      {/* <div className="filter-section">
-        <h3 className="filter-title">검색</h3>
-        <input
-          type="text"
-          placeholder="제품명 또는 설명 검색..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="search-input"
-        />
-      </div> */}
-
-      <div className="filter-section">
-        <h3 className="filter-title">결과</h3>
-        <p className="result-count">{filteredProductsCount}개의 제품</p>
       </div>
     </div>
   );

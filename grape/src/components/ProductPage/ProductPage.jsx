@@ -132,27 +132,38 @@ const ProductPage = ({
           />
           
           <div className="product-main-section">
-            <div className="product-gallery-section">
-              <ProductGallery 
-                images={productData.images}
-                productName={productData.name}
-              />
-            </div>
-            
-            <div className="product-tabs-section">
+            <div className="product-tabs-header">
               <ProductTabs 
                 productName={productData.name}
                 tabs={tabs}
                 activeTab={activeTab}
                 onTabChange={handleTabChange}
               />
-              
-              <div className="tab-content-area">
-                <TabContent 
-                  tabId={activeTab}
-                  productData={productData}
-                />
-              </div>
+              {activeTab === 'overview' ? (
+                <div className="product-content-section">
+                  <div className="product-gallery-section">
+                    <ProductGallery 
+                      images={productData.images}
+                      productName={productData.name}
+                    />
+                  </div>
+                  <div className="tab-content-area">
+                    <TabContent 
+                      tabId={activeTab}
+                      productData={productData}
+                    />
+                  </div>
+                </div>
+              ) : (
+                <div className="tab-content-area">
+                  <TabContent 
+                    tabId={activeTab}
+                    productData={productData}
+                  />
+                </div>
+              )}
+            
+            
             </div>
           </div>
         </div>

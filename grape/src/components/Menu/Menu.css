@@ -1,10 +1,10 @@
 /* ===== MENU COMPONENT STYLES ===== */
 
-/* 메뉴 래퍼 - 화면 중앙 정렬 */
+/* 메뉴 래퍼 - 화면 상단 정렬 */
 .menu-wrapper {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   width: 100%;
   position: relative;
   transition: all var(--transition-base);
@@ -216,6 +216,8 @@
   visibility: hidden;
   transform: translateY(-10px);
   transition: all var(--transition-base);
+  z-index: var(--z-index-menu);
+  pointer-events: none;
 }
 
 /* 서브메뉴가 열린 상태 */
@@ -230,6 +232,7 @@
   border-bottom-left-radius: 0 !important;
   border-bottom-right-radius: 0 !important;
   transition: none !important;
+  z-index: calc(var(--z-index-menu) + 1);
 }
 
 /* 서브메뉴 리스트 */
@@ -377,8 +380,6 @@
   .menu-wrapper {
     display: none;
   }
-<<<<<<< HEAD
-=======
 
   .menu.mobile-visible {
     display: block;
@@ -563,15 +564,12 @@
   .submenu-item:last-child .submenu-button {
     border-bottom: none;
   }
->>>>>>> recover-detached
 }
 
 /* 모바일 */
 @media (max-width: 480px) {
   .menu-wrapper {
     display: none;
-<<<<<<< HEAD
-=======
     background: transparent;
     box-shadow: none;
   }
@@ -674,7 +672,6 @@
 
   .submenu-item:last-child .submenu-button {
     border-bottom: none;
->>>>>>> recover-detached
   }
 }
 

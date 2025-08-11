@@ -9,7 +9,7 @@ const ProductDetail = () => {
     name: "XCN-3000",
     title: "어드밴스드 통합제어기",
     description: "산업 자동화 및 스마트 시스템 통합을 위한 다목적 인터페이스 제어 모듈로, 다양한 환경에서 안정적인 연결성과 정밀한 제어를 제공하며, 효율적인 관리와 운영을 가능하게 합니다.",
-    breadcrumbs: ["Home", "Products", "Control system"],
+    breadcrumbs: ["Home", "Products", "통합제어"],
     images: [],
     overview: "XCN-3000은 산업용 통합 제어 시스템으로, 다양한 센서와 장비를 연결하여 실시간 모니터링 및 제어를 제공합니다.",
     keyFeatures: [
