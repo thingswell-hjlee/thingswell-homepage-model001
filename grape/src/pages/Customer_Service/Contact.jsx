@@ -1,6 +1,6 @@
 import React from 'react';
-import SolutionCard from '../../components/SolutionCard.jsx';
-import Form from '../../components/Form.jsx';
+import SolutionCard from '../../components/SolutionCard';
+import Form from '../../components/Form';
 import { Link } from 'react-router-dom'; 
 
 const Contact = () => {

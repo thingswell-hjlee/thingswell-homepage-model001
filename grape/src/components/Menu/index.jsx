@@ -22,8 +22,8 @@
 import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import './Menu.css';
-import logo from '../assets/logo.png';
-import HamburgerMenu from './HamburgerMenu';
+import logo from '../../assets/logo.png';
+import HamburgerMenu from '../HamburgerMenu';
 
 // 메뉴 아이템 데이터
 const defaultMenuItems = [

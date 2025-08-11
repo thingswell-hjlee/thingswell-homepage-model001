@@ -26,8 +26,8 @@
  */
 import React from 'react';
 import './HamburgerMenu.css';
-import logo from '../assets/logo.png';
-import hamburgerIcon from '../assets/hamburger.svg';
+import logo from '../../assets/logo.png';
+import hamburgerIcon from '../../assets/hamburger.svg';
 
 const HamburgerMenu = ({
   isOpen,

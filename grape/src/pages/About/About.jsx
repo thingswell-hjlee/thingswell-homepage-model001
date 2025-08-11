@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
-import SolutionCard from "../../components/SolutionCard.jsx";
-import ApplicationCardsSection from "../../components/ApplicationCardsSection.jsx";
+import SolutionCard from "../../components/SolutionCard";
+import ApplicationCardsSection from "../../components/ApplicationCardsSection";
 import "./About.css";
 import ceo from "../../assets/ceo.jpg";
 import manufacturing from "../../assets/manufacturing.jpg";

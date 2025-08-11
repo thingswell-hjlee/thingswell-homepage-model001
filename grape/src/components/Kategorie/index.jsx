@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
 import './Kategorie.css';
-import ApplicationCard from './ApplicationCard';
+import ApplicationCard from '../ApplicationCard';
 /**
  * Kategorie 컴포넌트
  * 

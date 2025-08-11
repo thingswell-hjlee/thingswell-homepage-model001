@@ -1,6 +1,6 @@
 import React from "react";
-import SolutionCard from "../../components/SolutionCard.jsx";
-import SearchComponent from "../../components/SearchComponent.jsx";
+import SolutionCard from "../../components/SolutionCard";
+import SearchComponent from "../../components/SearchComponent";
 import "./Customer_service.css";
 import { Link } from "react-router-dom";
 

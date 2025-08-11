@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import BoardList from './BoardList';
-import BoardDetail from './BoardDetail';
-import BoardEditor from './BoardEditor';
-import { supabase } from '../lib/supabase';
-import { useAuth } from '../contexts/AuthContext';
+import BoardList from '../BoardList';
+import BoardDetail from '../BoardDetail';
+import BoardEditor from '../BoardEditor';
+import { supabase } from '../../lib/supabase';
+import { useAuth } from '../../contexts/AuthContext';
 import './Board.css';
 
 const Board = ({ tableName }) => {

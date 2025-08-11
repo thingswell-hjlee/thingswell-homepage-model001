@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../../lib/supabase.js';
 import { useAuth } from '../../contexts/AuthContext.jsx';
-import SolutionCard from '../../components/SolutionCard.jsx';
+import SolutionCard from '../../components/SolutionCard';
 import './Login.css';
 
 const Login = () => {

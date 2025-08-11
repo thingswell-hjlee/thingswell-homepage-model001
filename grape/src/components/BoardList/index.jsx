@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./BoardList.css";
-import { supabase } from "../lib/supabase";
-import { useAuth } from "../contexts/AuthContext";
-import SearchComponent from "./SearchComponent";
+import { supabase } from "../../lib/supabase";
+import { useAuth } from "../../contexts/AuthContext";
+import SearchComponent from "../SearchComponent";
 
 const BoardList = ({
   post,

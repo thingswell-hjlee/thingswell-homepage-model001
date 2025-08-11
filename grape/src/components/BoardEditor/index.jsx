@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import '@toast-ui/editor/dist/toastui-editor.css';
 import { Editor } from '@toast-ui/react-editor';
-import { supabase } from '../lib/supabase';
+import { supabase } from '../../lib/supabase';
 import './BoardEditor.css';
 
 const BoardEditor = ({ onSave, initialContent = '', title = '', onTitleChange, tableName, onCancel }) => {

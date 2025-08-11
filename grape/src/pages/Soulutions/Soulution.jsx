@@ -54,6 +54,8 @@ const Soulution = () => {
     form: formRef,
   };
 
+
+
   // 데이터 직접 정의
   const solutionData = {
     subtitle: "Industrial safety solutions",
@@ -133,8 +135,6 @@ const Soulution = () => {
       alert('문의 제출 중 오류가 발생했습니다.');
     }
   };
-
-
 
   const applicationCardsData2 = [
     {

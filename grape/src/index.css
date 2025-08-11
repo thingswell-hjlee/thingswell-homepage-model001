@@ -25,7 +25,6 @@ body {
   background-color: var(--color-background-light);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
 }
 
 /* ===== RESPONSIVE VIEWPORT ===== */
@@ -38,8 +37,8 @@ body {
 }
 
 /* ===== TEXT SELECTION CONTROL ===== */
-/* 전역 텍스트 선택(드래그) 방지 */
-html, body, #root, * {
+/* 전역 텍스트 선택(드래그) 방지 - 더 선택적으로 적용 */
+.no-select {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -95,6 +94,36 @@ img {
 /* 스크롤 성능 개선 */
 * {
   -webkit-overflow-scrolling: touch;
+}
+
+/* 클릭 이벤트 보장 */
+button, a, input, select, textarea, [role="button"] {
+  pointer-events: auto;
+}
+
+/* 기본 포인터 이벤트 설정 */
+.page-container, .page-content, .main-content {
+  pointer-events: auto;
+}
+
+/* 스크롤바 스타일링 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
 }
 
 /* ===== UTILITY CLASSES ===== */

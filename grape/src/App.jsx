@@ -40,9 +40,9 @@
 import { useState, useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import "./App.css";
-import Menu from "./components/Menu.jsx";
-import Footer from "./components/Footer.jsx";
-import CardRotator from "./components/CardRotator.jsx";
+import Menu from "./components/Menu";
+import Footer from "./components/Footer";
+import CardRotator from "./components/CardRotator";
 import Government_support_main from "./pages/Goverment_support/Government_support_main.jsx";
 import Government_support from "./pages/Goverment_support/Government_support.jsx";
 import AiManufacturingSupport from "./pages/Goverment_support/AiManufacturingSupport.jsx";
@@ -56,6 +56,7 @@ import ConstructionSolution from "./pages/Soulutions/ConstructionSolution.jsx";
 import Product_main from "./pages/Products/Product_main.jsx";
 import Product_1 from "./pages/Products/Product_1.jsx";
 import Product_list from "./pages/Products/Product_list.jsx";
+import ProductDetail from "./pages/Products/ProductDetail.jsx";
 import logo from "./assets/main_image.jpg";
 import manufacturing from "./assets/manufacturing.jpg";
 import construction from "./assets/construction.jpg";
@@ -277,6 +278,7 @@ function App() {
             <Route path="/products" element={<Product_main />} />
             <Route path="/product-list" element={<Product_list />} />
             <Route path="/product/1" element={<Product_1 />} />
+            <Route path="/product-detail" element={<ProductDetail />} />
 
             {/* 고객서비스 라우팅 */}
             <Route path="/customer-service" element={<Customer_service />} />

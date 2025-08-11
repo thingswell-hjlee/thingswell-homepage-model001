@@ -1,6 +1,6 @@
 import React from "react";
-import Board from "../../components/Board.jsx";
-import SolutionCard from "../../components/SolutionCard.jsx";
+import Board from "../../components/Board";
+import SolutionCard from "../../components/SolutionCard";
 
 const Downloads = () => {
   return (
