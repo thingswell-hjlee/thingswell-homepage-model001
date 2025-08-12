@@ -53,6 +53,8 @@
   flex-direction: column;
 }
 
+/* moved .content-bottom-box styles to ContentBottomBox.css */
+
 
 @media (max-width: 1024px) {
   .product-content-section {

@@ -1,0 +1,43 @@
+.image-with-caption {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.iwc-image {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.iwc-caption {
+  position: absolute;
+  padding: 6px 10px;
+  background: rgba(0, 0, 0, 0.55);
+  color: #ffffff;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.2px;
+  pointer-events: none;
+}
+
+.iwc-pos-top-left { top: 8px; left: 8px; }
+.iwc-pos-top-right { top: 8px; right: 8px; }
+.iwc-pos-bottom-left { bottom: 8px; left: 8px; }
+.iwc-pos-bottom-right { bottom: 8px; right: 8px; }
+.iwc-pos-center { top: 50%; left: 50%; transform: translate(-50%, -50%); }
+
+.image-with-caption.iwc-hover .iwc-caption {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.image-with-caption.iwc-hover:hover .iwc-caption {
+  opacity: 1;
+}
+
+

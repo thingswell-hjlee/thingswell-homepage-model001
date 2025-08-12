@@ -1,0 +1,57 @@
+.content-bottom-box {
+  grid-column: 1 / -1;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: var(--spacing-2xl);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+  gap: var(--spacing-2xl);
+}
+
+.content-bottom-box .bottom-box-content {
+  display: grid;
+  gap: var(--spacing-lg);
+  align-items: start;
+}
+
+
+.content-bottom-box .bottom-box-content p {
+  margin: 0;
+  color: #000000;
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-md);
+  text-align: left;
+}
+
+/* 하단 박스 캡션/설명 통일 */
+.content-bottom-box .media-description {
+  color: #6b7280;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin: 0;
+  text-align: left;
+  word-break: keep-all;
+}
+
+.bottom-box-images {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-lg);
+}
+
+.bottom-box-image {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #f8fafc;
+}
+
+.bottom-box-image img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+

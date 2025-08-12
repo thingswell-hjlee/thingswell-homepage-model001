@@ -2,6 +2,12 @@
   min-height: 400px;
 }
 
+.tab-overview {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
 .overview-section {
   display: flex;
   flex-direction: column;
@@ -63,6 +69,8 @@
   font-weight: bold;
 }
 
+/* moved bottom box styles to ProductPage.css as .content-bottom-box */
+
 /* Features Tab */
 .tab-features {
   padding: 1rem 0;
@@ -80,9 +88,12 @@
   background: white;
   border: 1px solid #e5e7eb;
   border-radius: 8px;
-  padding: 1.5rem;
-  text-align: center;
+  padding: 0;
+  text-align: left;
   transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
 }
 
 .feature-card:hover {
@@ -96,22 +107,128 @@
   margin-bottom: 1rem;
 }
 
-.feature-card h3 {
-  color: #0D0D0D;
-  margin-bottom: 0.75rem;
-  font-size: var(--font-size-lg);
-  font-weight: 600;
+/* 이미지 카드 레이아웃 */
+.feature-media {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8fafc;
+  min-height: 260px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
-.feature-card p {
-  color: #A6A6A6;
-  line-height: 1.5;
-  font-size: var(--font-size-md);
+.feature-image {
+  width: 100%;
+  height: auto;
+  max-height: 260px;
+  object-fit: contain;
+  display: block;
 }
+
+.feature-title-overlay { display: none; }
+
+.feature-title { display: none; }
+
+.feature-card h3 { display: block; }
+
+.feature-card p { display: none; }
 
 /* Specs Tab */
 .tab-specs {
   padding: 1rem 0;
+}
+
+.specs-media-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.specs-media-left,
+.specs-media-right-item {
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* 공통 미디어 박스 (그리드 셀 내부의 이미지 컨테이너로 재사용) */
+.specs-media-box {
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.specs-media-left img,
+.specs-media-right-item img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.specs-media-box img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.specs-media-caption {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  padding: 6px 10px;
+  background: rgba(0, 0, 0, 0.55);
+  color: #ffffff;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.2px;
+}
+
+.specs-media-right {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 768px) {
+  .specs-media-grid {
+    grid-template-columns: 1fr;
+  }
+  .specs-media-right {
+    grid-template-rows: auto;
+    grid-auto-rows: 1fr;
+  }
+}
+
+/* 이미지 아래 설명을 위한 공통 레이아웃/타이포그래피 */
+.media-with-description {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.media-description {
+  color: #6b7280;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin: 0 0.25rem;
+  text-align: left;
+  word-break: keep-all;
 }
 
 .specs-table {
@@ -160,7 +277,7 @@
   background: white;
   border: 1px solid #e5e7eb;
   border-radius: 8px;
-  padding: 1.5rem;
+  padding: 0;
   text-align: center;
   transition: all 0.3s ease;
 }
@@ -170,11 +287,22 @@
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
+.certification-media {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8fafc;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 1rem;
+  min-height: 140px;
+}
+
 .certification-image {
-  width: 80px;
-  height: 80px;
+  width: 100%;
+  max-width: 160px;
+  height: auto;
   object-fit: contain;
-  margin-bottom: 1rem;
 }
 
 .certification-placeholder {
@@ -183,15 +311,11 @@
   color: #9ca3af;
 }
 
-.certification-card h3 {
-  color: #374151;
-  margin-bottom: 0.5rem;
-  font-size: 1rem;
-  font-weight: 600;
-}
+.certification-card h3 { display: none; }
 
 .certification-card p {
   color: #6b7280;
+  margin: 0.75rem 1rem 1rem;
   font-size: 0.9rem;
   line-height: 1.4;
 }

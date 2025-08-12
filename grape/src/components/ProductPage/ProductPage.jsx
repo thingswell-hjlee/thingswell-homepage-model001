@@ -4,13 +4,14 @@ import ProductInfo from './ProductInfo';
 import ProductGallery from './ProductGallery';
 import ProductTabs from './ProductTabs';
 import TabContent from './TabContent';
+import ContentBottomBox from './ContentBottomBox';
 import './ProductPage.css';
 
 const ProductPage = ({ 
   productData = {
     name: "XCN-3000",
     title: "어드밴스드 통합제어기",
-    description: "산업 자동화 및 스마트 시스템 통합을 위한 다목적 인터페이스 제어 모듈로, 다양한 환경에서 안정적인 연결성과 정밀한 제어를 제공하며, 효율적인 관리와 운영을 가능하게 합니다.",
+    description: "카트 이동식 태양광 80w 30배 줌 5백만 화소 초 고화질 PTZ 카메라 세트는 비 포장 공사 현장에서도 이동이 용이하며, LTE 라우터를 설치하여 PC 또는 모바일로 원격 관제 합니다.",
     breadcrumbs: ["Home", "Products", "Control system"],
     images: [],
     overview: "XCN-3000은 산업용 통합 제어 시스템으로, 다양한 센서와 장비를 연결하여 실시간 모니터링 및 제어를 제공합니다.",
@@ -106,7 +107,7 @@ const ProductPage = ({
   const [activeTab, setActiveTab] = useState('overview');
 
   const tabs = [
-    { id: 'overview', label: productData.name, content: 'overview' },
+    { id: 'overview', label: '소개', content: 'overview' },
     { id: 'features', label: '주요기능', content: 'features' },
     { id: 'specs', label: '제품스펙', content: 'specs' },
     { id: 'certifications', label: '인증', content: 'certifications' },
@@ -145,6 +146,7 @@ const ProductPage = ({
                     <ProductGallery 
                       images={productData.images}
                       productName={productData.name}
+                      captions={productData?.gallery_captions}
                     />
                   </div>
                   <div className="tab-content-area">
@@ -153,6 +155,14 @@ const ProductPage = ({
                       productData={productData}
                     />
                   </div>
+                  <ContentBottomBox
+                    title={productData?.bottom_box_title || '추가 정보'}
+                    description={productData?.bottom_box_description}
+                    photo={productData?.bottom_box_photo}
+                    photos={productData?.bottom_box_photos}
+                    photoCaption={productData?.bottom_box_photo_caption}
+                    photoCaptions={productData?.bottom_box_photo_captions}
+                  />
                 </div>
               ) : (
                 <div className="tab-content-area">

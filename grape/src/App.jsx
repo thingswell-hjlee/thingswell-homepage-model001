@@ -56,8 +56,9 @@ import ConstructionSolution from "./pages/Soulutions/ConstructionSolution.jsx";
 import Product_main from "./pages/Products/Product_main.jsx";
 import Product_list_control from "./pages/Products/Product_list_control.jsx";
 import Product_control from "./pages/Products/Product_control.jsx";
-import Product_safety_1 from "./pages/Products/Product_safety.jsx";
+import Product_safety_1 from "./pages/Products/Product_TWEDG_01.jsx";
 import Product_list_safety from "./pages/Products/Product_list_safety.jsx";
+import Product_TWEDG_04 from "./pages/Products/Product_TWEDG_04.jsx";
 import logo from "./assets/main_image.jpg";
 import manufacturing from "./assets/manufacturing.jpg";
 import construction from "./assets/construction.jpg";
@@ -279,8 +280,9 @@ function App() {
             <Route path="/products" element={<Product_main />} />
             <Route path="/product-list/control" element={<Product_list_control />} />
             <Route path="/products/control" element={<Product_control />} />
-            <Route path="/products/safety/1" element={<Product_safety_1/>} />
+            <Route path="/products/twmob-01" element={<Product_safety_1/>} />
             <Route path="/product-list/safety" element={<Product_list_safety />} />
+            <Route path="/products/twedg-04" element={<Product_TWEDG_04 />} />
 
             {/* 고객서비스 라우팅 */}
             <Route path="/customer-service" element={<Customer_service />} />

@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import './ProductGallery.css';
+import ImageWithCaption from '../Common/ImageWithCaption';
 
 const ProductGallery = ({ 
   images = [],
-  productName = "XCN-3000"
+  productName = "XCN-3000",
+  captions = []
 }) => {
   const [selectedImage, setSelectedImage] = useState(0);
 
@@ -26,13 +28,14 @@ const ProductGallery = ({
 
   return (
     <div className="product-gallery">
-      <div className="main-image-container">
-        <img
-          src={images[selectedImage]}
-          alt={`${productName} - 이미지 ${selectedImage + 1}`}
-          className="gallery-main-image"
-        />
-      </div>
+      <ImageWithCaption
+        className="main-image-container"
+        imgClassName="gallery-main-image"
+        src={images[selectedImage]}
+        alt={`${productName} - 이미지 ${selectedImage + 1}`}
+        caption={Array.isArray(captions) ? captions[selectedImage] : undefined}
+        position="top-left"
+      />
       
       <div className="thumbnail-container">
         {images.map((image, index) => (
@@ -41,10 +44,13 @@ const ProductGallery = ({
             className={`thumbnail ${selectedImage === index ? 'active' : ''}`}
             onClick={() => setSelectedImage(index)}
           >
-            <img
+            <ImageWithCaption
               src={image}
               alt={`${productName} 썸네일 ${index + 1}`}
-              className="thumbnail-image"
+              className="thumbnail__inner"
+              imgClassName="thumbnail-image"
+              caption={Array.isArray(captions) ? captions[index] : undefined}
+              position="top-left"
             />
           </div>
         ))}

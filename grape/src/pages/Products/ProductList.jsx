@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import SearchComponent from '../../components/SearchComponent';
+import ProductFilter from '../../components/ProductFilter';
 import ProductHeader from '../../components/ProductPage/ProductHeader';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 import { BaseLayout } from '../../components/Layout';
@@ -30,14 +31,22 @@ const ProductList = ({
 
   const filteredProducts = useMemo(() => {
     return products.filter((product) => {
-      const matchesCategory =
-        selectedCategory === '전체' || product.category === selectedCategory;
       const term = searchTerm.trim().toLowerCase();
       const matchesSearch =
         !term ||
         product.name.toLowerCase().includes(term) ||
         (product.desc || '').toLowerCase().includes(term) ||
         (product.title || '').toLowerCase().includes(term);
+
+      if (selectedCategory === '전체') {
+        return matchesSearch;
+      }
+
+      const selectedList = selectedCategory
+        .split(',')
+        .map((c) => c.trim())
+        .filter(Boolean);
+      const matchesCategory = selectedList.includes(product.category);
       return matchesCategory && matchesSearch;
     });
   }, [products, selectedCategory, searchTerm]);
@@ -52,25 +61,14 @@ const ProductList = ({
       <div className="product-list-content">
         <div className="product-list-toolbar">
           <div className="product-list-filter">
-            {/* 간단한 카테고리 필터 (기존 ProductFilter 의존 없이 경량 구현) */}
-            <div className="filter-container">
-              <label htmlFor="category-select" className="sr-only">카테고리</label>
-              <select
-                id="category-select"
-                value={selectedCategory}
-                onChange={(e) => setSelectedCategory(e.target.value)}
-              >
-                <option value="전체">전체</option>
-                {categories.map((c) => (
-                  <option key={c} value={c}>
-                    {c}
-                  </option>
-                ))}
-              </select>
-              <span style={{ marginLeft: '8px', color: 'var(--color-text-secondary)' }}>
-                {filteredProducts.length}개 결과
-              </span>
-            </div>
+            <ProductFilter
+              selectedCategory={selectedCategory}
+              setSelectedCategory={setSelectedCategory}
+              searchTerm={searchTerm}
+              setSearchTerm={setSearchTerm}
+              categories={categories}
+              filteredProductsCount={filteredProducts.length}
+            />
           </div>
           <div className="product-list-actions">
             <div className="product-list-search">

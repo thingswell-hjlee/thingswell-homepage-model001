@@ -29,7 +29,7 @@ const ProductTabs = ({
         {tabs.map((tab) => (
           <button
             key={tab.id}
-            className={`tab-button ${currentTab === tab.id ? 'active' : ''} ${tab.id === 'overview' ? 'overview-tab' : ''}`}
+            className={`tab-button ${currentTab === tab.id ? 'active' : ''}`}
             onClick={() => handleTabClick(tab.id)}
           >
             {tab.label}
