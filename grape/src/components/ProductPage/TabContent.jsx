@@ -22,14 +22,52 @@ const TabContent = ({ tabId, productData }) => {
                 <p>{productData?.overview || "제품에 대한 전반적인 개요를 제공합니다."}</p>
               </div>
             </div>
+            {(() => {
+              const images = Array.isArray(productData?.overview_media)
+                ? productData.overview_media
+                : (Array.isArray(productData?.overview_images) ? productData.overview_images : []);
+              if (!images || images.length === 0) return null;
+              const gridClass = `overview-media-grid${images.length === 1 ? ' single' : ''}`;
+              return (
+                <div className={gridClass}>
+                  {images.map((item, idx) => (
+                    <ImageWithCaption
+                      key={idx}
+                      className="overview-media-box"
+                      src={item?.image || item?.src || item}
+                      alt={item?.title || item?.caption || `overview-${idx}`}
+                      caption={item?.title || item?.caption}
+                      position="top-left"
+                    />
+                  ))}
+                </div>
+              );
+            })()}
           </div>
         );
         
       case 'features':
         return (
           <div className="tab-features">
-            <ThreeColumnGrid>
-              {(() => {
+            {(() => {
+              const isTextOnly = Boolean(productData?.features_text_only);
+              if (isTextOnly) {
+                const unifiedFeatures = Array.isArray(productData?.features_media)
+                  ? productData.features_media
+                  : productData?.features || [];
+                const items = Array.isArray(unifiedFeatures) ? unifiedFeatures : [];
+                return (
+                  <ul className="feature-text-list">
+                    {items.map((item, index) => (
+                      <li key={index}>{item?.title || item?.caption || String(item)}</li>
+                    ))}
+                  </ul>
+                );
+              }
+            })()}
+            {!productData?.features_text_only && (
+              <ThreeColumnGrid>
+                {(() => {
                 const fallbackImages = [featureImg1, featureImg2, featureImg3, featureImg4];
                 const unifiedFeatures = Array.isArray(productData?.features_media)
                   ? productData.features_media
@@ -68,22 +106,23 @@ const TabContent = ({ tabId, productData }) => {
                   image: f.image || fallbackImages[idx % fallbackImages.length],
                 }));
                 return featuresWithImages;
-              })().map((feature, index) => (
-                <div key={index} className="feature-card media-with-description">
-                  <ImageWithCaption
-                    className="feature-media"
-                    imgClassName="feature-image"
-                    src={feature.image}
-                    alt={feature.title || 'feature'}
-                    caption={feature.title}
-                    position="top-left"
-                  />
-                  {feature.description ? (
-                    <p className="media-description">{feature.description}</p>
-                  ) : null}
-                </div>
-              ))}
-            </ThreeColumnGrid>
+                })().map((feature, index) => (
+                  <div key={index} className="feature-card media-with-description">
+                    <ImageWithCaption
+                      className="feature-media"
+                      imgClassName="feature-image"
+                      src={feature.image}
+                      alt={feature.title || 'feature'}
+                      caption={feature.title}
+                      position="top-left"
+                    />
+                    {feature.description ? (
+                      <p className="media-description">{feature.description}</p>
+                    ) : null}
+                  </div>
+                ))}
+              </ThreeColumnGrid>
+            )}
           </div>
         );
         
@@ -98,6 +137,22 @@ const TabContent = ({ tabId, productData }) => {
 
               // 통합 포맷: productData.specs_media
               const specsMedia = productData?.specs_media;
+              if (Array.isArray(specsMedia) && specsMedia.length === 1) {
+                const onlyItem = specsMedia[0];
+                const onlyImage = onlyItem?.image || onlyItem?.src || galleryImages[0];
+                const onlyCaption = onlyItem?.title || onlyItem?.caption;
+                return (
+                  <div className="specs-media-grid single">
+                    <ImageWithCaption
+                      className="specs-media-box single"
+                      src={onlyImage}
+                      alt={onlyCaption || 'specs-single'}
+                      caption={onlyCaption}
+                      position="top-left"
+                    />
+                  </div>
+                );
+              }
               let leftItem = null;
               let rightTopItem = null;
               let rightBottomItem = null;
@@ -201,11 +256,11 @@ const TabContent = ({ tabId, productData }) => {
                 ? unifiedCerts
                 : (Array.isArray(productData?.certifications) && productData.certifications.length > 0)
                   ? productData.certifications
-                  : [
-                      { name: 'ISO 9001', description: '품질 관리 시스템 인증', image: fallbackImages[0] },
-                      { name: 'CE 인증', description: '유럽 안전 표준 인증', image: fallbackImages[1] },
-                      { name: 'FCC 인증', description: '미국 연방 통신 위원회 인증', image: fallbackImages[2] },
-                    ];
+                  : [];
+
+              if (!certs || certs.length === 0) {
+                return null;
+              }
 
               const leftCert = certs[0];
               const rightTopCert = certs[1];

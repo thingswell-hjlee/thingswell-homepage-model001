@@ -105,6 +105,12 @@ const ProductPage = ({
   }
 }) => {
   const [activeTab, setActiveTab] = useState('overview');
+  const hasBottomBoxContent = Boolean(
+    productData?.bottom_box_title ||
+    productData?.bottom_box_description ||
+    productData?.bottom_box_photo ||
+    (productData?.bottom_box_photos && productData.bottom_box_photos.length > 0)
+  );
 
   const tabs = [
     { id: 'overview', label: '소개', content: 'overview' },
@@ -155,14 +161,16 @@ const ProductPage = ({
                       productData={productData}
                     />
                   </div>
-                  <ContentBottomBox
-                    title={productData?.bottom_box_title || '추가 정보'}
-                    description={productData?.bottom_box_description}
-                    photo={productData?.bottom_box_photo}
-                    photos={productData?.bottom_box_photos}
-                    photoCaption={productData?.bottom_box_photo_caption}
-                    photoCaptions={productData?.bottom_box_photo_captions}
-                  />
+                  {hasBottomBoxContent && (
+                    <ContentBottomBox
+                      title={productData?.bottom_box_title || '추가 정보'}
+                      description={productData?.bottom_box_description}
+                      photo={productData?.bottom_box_photo}
+                      photos={productData?.bottom_box_photos}
+                      photoCaption={productData?.bottom_box_photo_caption}
+                      photoCaptions={productData?.bottom_box_photo_captions}
+                    />
+                  )}
                 </div>
               ) : (
                 <div className="tab-content-area">
