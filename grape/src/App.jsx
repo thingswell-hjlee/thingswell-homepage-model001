@@ -53,6 +53,7 @@ import Soulution from "./pages/Soulutions/Soulution.jsx";
 import ChemicalSolution from "./pages/Soulutions/ChemicalSolution.jsx";
 import ManufacturingSolution from "./pages/Soulutions/ManufacturingSolution.jsx";
 import ConstructionSolution from "./pages/Soulutions/ConstructionSolution.jsx";
+import ForwardThreatDetection from "./pages/Soulutions/ForwardThreatDetection.jsx";
 import Product_main from "./pages/Products/Product_main.jsx";
 import Product_list_control from "./pages/Products/Product_list_control.jsx";
 import Product_control from "./pages/Products/Product_control.jsx";
@@ -264,6 +265,7 @@ function App() {
             {/* 솔루션 라우팅 */}
             <Route path="/solutions" element={<Soulution_main />} />
             <Route path="/solution" element={<Soulution />} />
+            <Route path="/solution/forward-threat-detection" element={<ForwardThreatDetection />} />
 
             {/* 솔루션 상세 페이지들 */}
             <Route path="/chemical-solution" element={<ChemicalSolution />} />

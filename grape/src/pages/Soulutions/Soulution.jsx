@@ -23,7 +23,8 @@ const Soulution = () => {
       image: Collision,
       imageAlt: "전방 위협 요소 감지",
       label: "Forward threat detection",
-      title: "전방 위협 요소 감지"
+      title: "전방 위협 요소 감지",
+      link: "/solution/forward-threat-detection"
     },
     {
       image: fire,
