@@ -27,7 +27,7 @@ const Product_main = () => {
       imageAlt: "용접 제품",
       label: "통합제어",
       title: "통합제어",
-      link: "/product-list"
+      link: "/product-list/control"
     },
     {
       image: welding,

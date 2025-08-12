@@ -47,15 +47,15 @@ const defaultMenuItems = [
       { label: '건설 안전 솔루션', path: '/construction-solution' }
     ] 
   },
-  { 
-    label: '제품', 
-    path: '/products',
-    submenu: [ 
-      { label: '통합제어', path: '/product-list' }, 
-      { label: '영상분석', path: '/products/hardware' }, 
-      { label: '모니터링', path: '/products/services' }, 
-      { label: '안전장비', path: '/products/new/safety-equipment' },
-      { label: '개인보호장비', path: '/products/new/personal-protective-equipment' },
+      { 
+        label: '제품', 
+        path: '/products',
+        submenu: [
+          { label: '스마트안전장비', path: '/product-list/safety' }, 
+          { label: '통합제어', path: '/product-list/control' }, 
+      { label: '모니터링', path: '/products/monitoring' }, 
+      { label: '안전장비', path: '/products/safety-equipment' },
+      { label: '개인보호장비', path: '/products/personal-protective-equipment' },
       { label: '원격 모니터링', path: '/products/new/remote-monitoring' }
     ] 
   },

@@ -1,8 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
-import SolutionCard from '../../components/SolutionCard';
-import ApplicationCardsSection from '../../components/ApplicationCardsSection';
-import Form from '../../components/Form';
-import FeatureDescription from '../../components/FeatureDescription';
+import React from 'react';
+import SolutionDetailPage from './SolutionDetailPage';
 import welding from '../../assets/welding.jpg';
 import falldown from '../../assets/falldown.jpg';
 import fire from '../../assets/fire.jpg';
@@ -14,56 +11,11 @@ import grinding from '../../assets/grinding.jpg';
 import server from '../../assets/server.jpg';
 
 const Soulution = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-  const [isSmallDesktop, setIsSmallDesktop] = useState(false);
-
-  // 화면 크기 감지
-  useEffect(() => {
-    const checkScreenSize = () => {
-      const mobile = window.innerWidth <= 768;
-      const smallDesktop = window.innerWidth <= 1400;
-      setIsMobile(mobile);
-      setIsSmallDesktop(smallDesktop);
-      
-      // 1400px 이하에서는 사이드메뉴 자동으로 닫기
-      if (smallDesktop) {
-        setIsSidebarOpen(false);
-      }
-    };
-
-    checkScreenSize();
-    window.addEventListener('resize', checkScreenSize);
-    
-    return () => {
-      window.removeEventListener('resize', checkScreenSize);
-    };
-  }, []);
-
-  // 각 섹션별 ref 생성
-  const solutionRef = useRef(null);
-  const applicationRef = useRef(null);
-  const featureDescriptionRef = useRef(null);
-  const formRef = useRef(null);
-
-  // ref를 객체로 묶어서 SidebarMenu에 전달
-  const sectionRefs = {
-    solution: solutionRef,
-    ApplicationCardsSection: applicationRef,
-    FeatureDescription: featureDescriptionRef,
-    form: formRef,
-  };
-
-
-
-  // 데이터 직접 정의
+  // 데이터
   const solutionData = {
     subtitle: "Industrial safety solutions",
     title: "제조 안전 솔루션",
     description: "RAG 기반의 대규모 비전 모델(LVM), 대규모 언어 모델(LLM), 실시간 센싱 시스템의 멀티모달 데이터를 통합한 작업자 안전 솔루션",
-    // image: welding,
-    // imageAlt: "스마트 안전장비 지원사업",
-    // buttonText: "데모 신청"
   };
 
   const applicationCardsData = [
@@ -120,21 +72,7 @@ const Soulution = () => {
     }
   ];
 
-  const formData = {
-    title: "문의하기",
-    subtitle: "궁금한 점이 있으시면 언제든 문의해주세요"
-  };
-
-  const handleFormSubmit = async (data) => {
-    try {
-      console.log('폼 데이터:', data);
-      // 여기에 실제 API 호출 로직을 추가할 수 있습니다
-      alert('문의가 성공적으로 제출되었습니다.');
-    } catch (error) {
-      console.error('폼 제출 중 오류 발생:', error);
-      alert('문의 제출 중 오류가 발생했습니다.');
-    }
-  };
+  const formData = { title: '문의하기', subtitle: '궁금한 점이 있으시면 언제든 문의해주세요' };
 
   const applicationCardsData2 = [
     {
@@ -157,37 +95,19 @@ const Soulution = () => {
     }
   ];
 
-  return (
-    <div className="page-container">
-      <div className="page-content">
-        <div className="page-layout">
-          <div className="main-content">
-            <div className="solutions-section menu-spacing">
-              <SolutionCard ref={solutionRef} {...solutionData} showButton={false} variant="default" />
+  const blocks = [
+    { type: 'applicationCards', data: applicationCardsData2, props: { boxName: '적용분야', subtitle: 'Application field' } },
+    { type: 'applicationCards', data: applicationCardsData, props: { boxName: '작업자 안전 보호', subtitle: 'Worker safety protection' } },
+    { type: 'features', data: featureDescriptions },
+  ];
 
-              {applicationCardsData && (
-                <ApplicationCardsSection ref={applicationRef} applicationCardsData={applicationCardsData2}boxName="적용분야" subtitle="Application field" />
-              )}
-              
-              {applicationCardsData && (
-                <ApplicationCardsSection ref={applicationRef} applicationCardsData={applicationCardsData} boxName="작업자 안전 보호" subtitle="Worker safety protection" />
-              )}
-              
-              {featureDescriptions && featureDescriptions.map((feature, index) => (
-                <FeatureDescription 
-                  key={index}
-                  ref={index === 0 ? featureDescriptionRef : null}
-                  {...feature} 
-                  reverse={index % 2 === 1}
-                />
-              ))}
-              
-              <Form ref={formRef} {...formData} onSubmit={handleFormSubmit} />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+  return (
+    <SolutionDetailPage
+      solutionData={solutionData}
+      solutionVariant="default"
+      blocks={blocks}
+      formData={formData}
+    />
   );
 };
 

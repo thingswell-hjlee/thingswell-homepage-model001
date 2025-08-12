@@ -54,9 +54,10 @@ import ChemicalSolution from "./pages/Soulutions/ChemicalSolution.jsx";
 import ManufacturingSolution from "./pages/Soulutions/ManufacturingSolution.jsx";
 import ConstructionSolution from "./pages/Soulutions/ConstructionSolution.jsx";
 import Product_main from "./pages/Products/Product_main.jsx";
-import Product_1 from "./pages/Products/Product_1.jsx";
-import Product_list from "./pages/Products/Product_list.jsx";
-import ProductDetail from "./pages/Products/ProductDetail.jsx";
+import Product_list_control from "./pages/Products/Product_list_control.jsx";
+import Product_control from "./pages/Products/Product_control.jsx";
+import Product_safety_1 from "./pages/Products/Product_safety.jsx";
+import Product_list_safety from "./pages/Products/Product_list_safety.jsx";
 import logo from "./assets/main_image.jpg";
 import manufacturing from "./assets/manufacturing.jpg";
 import construction from "./assets/construction.jpg";
@@ -276,17 +277,10 @@ function App() {
 
             {/* 제품 라우팅 */}
             <Route path="/products" element={<Product_main />} />
-            <Route path="/product-list" element={<Product_list />} />
-            <Route path="/product-list/1" element={<Product_1 />} />
-            <Route path="/product-list/2" element={<Product_1 />} />
-            <Route path="/product-list/3" element={<Product_1 />} />
-            <Route path="/product-list/4" element={<Product_1 />} />
-            <Route path="/product-list/5" element={<Product_1 />} />
-            <Route path="/product-list/6" element={<Product_1 />} />
-            <Route path="/product-list/7" element={<Product_1 />} />
-            <Route path="/product-list/8" element={<Product_1 />} />
-            <Route path="/product-list/9" element={<Product_1 />} />
-            <Route path="/product-detail" element={<ProductDetail />} />
+            <Route path="/product-list/control" element={<Product_list_control />} />
+            <Route path="/products/control" element={<Product_control />} />
+            <Route path="/products/safety/1" element={<Product_safety_1/>} />
+            <Route path="/product-list/safety" element={<Product_list_safety />} />
 
             {/* 고객서비스 라우팅 */}
             <Route path="/customer-service" element={<Customer_service />} />

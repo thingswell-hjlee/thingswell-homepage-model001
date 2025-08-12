@@ -2,9 +2,9 @@ import React from 'react';
 import ProductPage from '../../components/ProductPage/ProductPage';
 import welding from '../../assets/welding.jpg';
 import welding2 from '../../assets/fire.jpg';
-import './Product_1.css';
+import './ProductsCommon.css';
 
-const Product_1 = () => {
+const Product_control = () => {
   // AI 브릿지 제품 데이터 정의
   const productData = {
     name: "AIB-TS2-08",
@@ -107,4 +107,4 @@ const Product_1 = () => {
   );
 };
 
-export default Product_1;
+export default Product_control;
