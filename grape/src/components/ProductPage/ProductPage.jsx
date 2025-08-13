@@ -3,6 +3,7 @@ import ProductHeader from './ProductHeader';
 import ProductInfo from './ProductInfo';
 import ProductGallery from './ProductGallery';
 import ProductTabs from './ProductTabs';
+import Lightbox from '../Common/Lightbox';
 import TabContent from './TabContent';
 import ContentBottomBox from './ContentBottomBox';
 import './ProductPage.css';
@@ -105,6 +106,8 @@ const ProductPage = ({
   }
 }) => {
   const [activeTab, setActiveTab] = useState('overview');
+  const [lightbox, setLightbox] = useState({ open: false, src: null, caption: null, alt: '' });
+  const [tabsCollapsed, setTabsCollapsed] = useState(true);
   const hasBottomBoxContent = Boolean(
     productData?.bottom_box_title ||
     productData?.bottom_box_description ||
@@ -123,6 +126,17 @@ const ProductPage = ({
 
   const handleTabChange = (tabId) => {
     setActiveTab(tabId);
+    if (tabId !== 'overview') {
+      setTabsCollapsed(true);
+    }
+  };
+
+  const openLightbox = (src, caption, alt = '') => {
+    setLightbox({ open: true, src, caption, alt });
+  };
+
+  const closeLightbox = () => {
+    setLightbox({ open: false, src: null, caption: null, alt: '' });
   };
 
   return (
@@ -145,6 +159,8 @@ const ProductPage = ({
                 tabs={tabs}
                 activeTab={activeTab}
                 onTabChange={handleTabChange}
+                collapsed={tabsCollapsed}
+                onToggleChange={setTabsCollapsed}
               />
               {activeTab === 'overview' ? (
                 <div className="product-content-section">
@@ -153,12 +169,15 @@ const ProductPage = ({
                       images={productData.images}
                       productName={productData.name}
                       captions={productData?.gallery_captions}
+                      onImageClick={openLightbox}
                     />
                   </div>
                   <div className="tab-content-area">
-                    <TabContent 
+                     <TabContent 
                       tabId={activeTab}
                       productData={productData}
+                      featureClickToOpen={true}
+                       onFeatureImageClick={openLightbox}
                     />
                   </div>
                   {hasBottomBoxContent && (
@@ -177,7 +196,25 @@ const ProductPage = ({
                   <TabContent 
                     tabId={activeTab}
                     productData={productData}
+                    featureClickToOpen={true}
+                     onFeatureImageClick={openLightbox}
+                    
                   />
+                </div>
+              )}
+
+              {!tabsCollapsed && activeTab === 'overview' && (
+                <div className="collapsed-content-strip">
+                  {tabs.filter(t => t.id !== 'overview').map(t => (
+                    <div key={t.id} className="collapsed-item">
+                      <TabContent 
+                        tabId={t.id}
+                        productData={productData}
+                        featureClickToOpen={true}
+                        onFeatureImageClick={openLightbox}
+                      />
+                    </div>
+                  ))}
                 </div>
               )}
             
@@ -186,6 +223,13 @@ const ProductPage = ({
           </div>
         </div>
       </div>
+      <Lightbox
+        isOpen={lightbox.open}
+        src={lightbox.src}
+        caption={lightbox.caption}
+        alt={lightbox.alt}
+        onClose={closeLightbox}
+      />
     </div>
   );
 };

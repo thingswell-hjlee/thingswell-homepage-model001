@@ -5,7 +5,8 @@ import ImageWithCaption from '../Common/ImageWithCaption';
 const ProductGallery = ({ 
   images = [],
   productName = "XCN-3000",
-  captions = []
+  captions = [],
+  onImageClick,
 }) => {
   const [selectedImage, setSelectedImage] = useState(0);
 
@@ -35,6 +36,7 @@ const ProductGallery = ({
         alt={`${productName} - 이미지 ${selectedImage + 1}`}
         caption={Array.isArray(captions) ? captions[selectedImage] : undefined}
         position="top-left"
+        onClick={() => onImageClick && onImageClick(images[selectedImage], Array.isArray(captions) ? captions[selectedImage] : undefined, `${productName} - 이미지 ${selectedImage + 1}`)}
       />
       
       <div className="thumbnail-container">

@@ -39,12 +39,12 @@ const Product_safety_1 = () => {
     bottom_box_photo_captions: ['스마트 무선 CCTV', 'PTZ 구성도'],
 
     features: [
-      { title: "움직임 감지 알람", description: "움직임 감지 시 알림을 전송하여 즉각 대응이 가능합니다.", image: sub8Img },
-      { title: "양방향 통신", description: "양방향 오디오로 현장과 실시간 소통을 지원합니다.", image: main4Img },
-      { title: "다양한 멀티 플랫폼", description: "PC/모바일 등 다양한 플랫폼에서 관제가 가능합니다.", image: sub3Img },
-      { title: "30X 광학 줌 효과", description: "장거리 피사체를 선명하게 포착하는 30배 광학 줌.", image: sub5Img },
-      { title: "5백만 화소 효과", description: "고해상도 영상으로 디테일을 정확히 확인.", image: sub9Img },
-      { title: "휴대폰 어플 등록 하기", description: "모바일 앱 등록으로 간편한 원격 관제.", image: sub4Img }
+      { description: "움직임 감지 시 알림을 전송하여 즉각 대응이 가능합니다.", image: sub8Img },
+      {  description: "양방향 오디오로 현장과 실시간 소통을 지원합니다.", image: main4Img },
+      {  description: "PC/모바일 등 다양한 플랫폼에서 관제가 가능합니다.", image: sub3Img },
+      { description: "장거리 피사체를 선명하게 포착하는 30배 광학 줌.", image: sub5Img },
+      { description: "고해상도 영상으로 디테일을 정확히 확인.", image: sub9Img },
+      { description: "모바일 앱 등록으로 간편한 원격 관제.", image: sub4Img }
     ],
     // 새로운 통합 포맷: specs_media (배열 또는 객체)
     specs_media: [

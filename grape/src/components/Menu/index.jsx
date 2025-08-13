@@ -28,17 +28,22 @@ import HamburgerMenu from '../HamburgerMenu';
 // 메뉴 아이템 데이터
 const defaultMenuItems = [
   { 
-    label: '정부지원 사업안내', 
-    path: '/government-support',
+    label: '회사', 
+    path: '/about',
     submenu: [ 
-      { label: '스마트 안전장비지원사업', path: '/government-support-detail' }, 
-      { label: 'AI 제조 지원사업', path: '/ai-manufacturing-support' }, 
-      { label: '그린에너지 지원사업', path: '/green-energy-support' }, 
-      { label: '디지털 전환 지원사업', path: '/digital-transformation-support' }, 
+      { label: '인사말', path: '/about#greeting' }, 
+      { label: '미션 및 비전', path: '/about#mission' }, 
+      { label: '연혁', path: '/about#history' }, 
+      { label: '핵심가치', path: '/about#core-value' },
+      { label: '인증서', path: '/about#certificate' },
+      { label: '오시는 길', path: '/about#location' },
+      { label: '문의하기', path: '/contact' },
+      { label: '게시판', path: '/announcement' },
     ] 
   },
+ 
   { 
-    label: '솔루션', 
+    label: '기술', 
     path: '/solutions',
     submenu: [ 
       { label: '산업 안전 솔루션', path: '/solution' }, 
@@ -59,18 +64,18 @@ const defaultMenuItems = [
       { label: '원격 모니터링', path: '/products/new/remote-monitoring' }
     ] 
   },
-  { 
-    label: '적용분야', 
-    path: '/application-field-main',
-    submenu: [ 
-      { label: '건물안전 및 자산관리', path: '/application-field' }, 
-      { label: '보안 및 감시', path: '/application-field-2' }, 
-      { label: '제조업 안전 및 자산관리', path: '/application-field-3' }, 
-      { label: '화학공업 안전 및 자산관리', path: '/application-field-4' } 
-    ] 
-  },
+  // { 
+  //   label: '적용분야', 
+  //   path: '/application-field-main',
+  //   submenu: [ 
+  //     { label: '건물안전 및 자산관리', path: '/application-field' }, 
+  //     { label: '보안 및 감시', path: '/application-field-2' }, 
+  //     { label: '제조업 안전 및 자산관리', path: '/application-field-3' }, 
+  //     { label: '화학공업 안전 및 자산관리', path: '/application-field-4' } 
+  //   ] 
+  // },
   {   
-    label: '납품사례', 
+    label: '실적', 
     path: '/cases',
     // submenu: [ 
     //   { label: '제조업', path: '/case' }, 
@@ -80,19 +85,21 @@ const defaultMenuItems = [
     // ] 
   },
   { 
-    label: '회사소개', 
-    path: '/about',
+    label: '정부지원사업', 
+    path: '/government-support',
     submenu: [ 
-      { label: '인사말', path: '/about#greeting' }, 
-      { label: '미션 및 비전', path: '/about#mission' }, 
-      { label: '연혁', path: '/about#history' }, 
-      { label: '핵심가치', path: '/about#core-value' },
-      { label: '인증서', path: '/about#certificate' },
-      { label: '오시는 길', path: '/about#location' },
-      { label: '문의하기', path: '/contact' },
-      { label: '게시판', path: '/announcement' },
+      { label: '스마트 안전장비지원사업', path: '/government-support-detail' }, 
+      { label: 'AI 제조 지원사업', path: '/ai-manufacturing-support' }, 
+      { label: '그린에너지 지원사업', path: '/green-energy-support' }, 
+      { label: '디지털 전환 지원사업', path: '/digital-transformation-support' }, 
     ] 
+  },
+
+  { 
+    label: '쇼핑몰', 
+    path: '/government-support',
   }
+
 ];
 
 // 브레이크포인트 상수
@@ -102,6 +109,7 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const menuRef = useRef(null);
+  const hoverCloseTimerRef = useRef(null);
   
   // 상태 관리
   const [openSubmenu, setOpenSubmenu] = useState(null);
@@ -235,21 +243,9 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
-        // 외부 클릭 시 현재 활성화된 메뉴가 아닌 경우 서브메뉴 닫기
+        // 외부 클릭 시에는 데스크톱에서 서브메뉴 닫기
         if (!isMobile && openSubmenu !== null) {
-          // 현재 경로와 서브메뉴 경로를 직접 비교
-          const currentMenuItem = defaultMenuItems[openSubmenu];
-          const isCurrentMenuActive = currentMenuItem && (
-            currentMenuItem.path === location.pathname ||
-            (currentMenuItem.submenu && currentMenuItem.submenu.some(subItem => 
-              subItem.path === location.pathname || 
-              location.pathname.startsWith(subItem.path + '/')
-            ))
-          );
-          
-          if (!isCurrentMenuActive) {
-            setOpenSubmenu(null);
-          }
+          setOpenSubmenu(null);
         }
         // 모바일 메뉴 닫기
         if (isMobile) {
@@ -327,12 +323,15 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
   // 메뉴 클릭 핸들러
   const handleItemClick = useCallback((item, index) => {
     if (item.submenu && item.submenu.length > 0) {
-      // 서브메뉴가 있는 메뉴 클릭 시 - 페이지 이동 없이 메뉴만 토글
-      if (openSubmenu === index) {
-        // 같은 메뉴를 다시 클릭하면 닫기
-        setOpenSubmenu(null);
+      if (isMobile) {
+        // 모바일: 클릭으로 토글
+        if (openSubmenu === index) {
+          setOpenSubmenu(null);
+        } else {
+          setOpenSubmenu(index);
+        }
       } else {
-        // 다른 메뉴를 클릭하면 해당 메뉴 열기
+        // 데스크톱: 클릭 시에도 열린 상태 유지 (호버 우선)
         setOpenSubmenu(index);
       }
       setActiveMenuIndex(index);
@@ -398,15 +397,48 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
     }
   }, [navigate, location.pathname, isMobile]);
 
-  // 데스크톱에서 호버 시 서브메뉴 표시 (현재는 사용하지 않음)
+  // 데스크톱에서 호버 시 서브메뉴 표시
   const handleMouseEnter = useCallback((index) => {
-    // 호버로 서브메뉴를 열지 않음 - 클릭으로만 열림
+    if (isMobile) return;
+    const hasSubmenu = !!(defaultMenuItems[index] && defaultMenuItems[index].submenu && defaultMenuItems[index].submenu.length > 0);
+    setOpenSubmenu(hasSubmenu ? index : null);
+  }, [isMobile]);
+
+  // 메뉴 영역으로 다시 진입 시 닫힘 타이머 취소
+  const cancelHoverCloseTimer = useCallback(() => {
+    if (hoverCloseTimerRef.current) {
+      clearTimeout(hoverCloseTimerRef.current);
+      hoverCloseTimerRef.current = null;
+    }
   }, []);
 
-  // 마우스가 메뉴를 벗어날 때 서브메뉴 숨김 (현재는 사용하지 않음)
+  // 마우스를 메뉴 영역에서 떼면 약간의 지연 후 현재 페이지 기준 하단메뉴로 복원
   const handleMouseLeave = useCallback(() => {
-    // 마우스가 벗어나도 서브메뉴를 닫지 않음
-    // 필요시 여기에 로직 추가
+    if (isMobile) return;
+    cancelHoverCloseTimer();
+    hoverCloseTimerRef.current = setTimeout(() => {
+      if (
+        activeMenuIndex !== null &&
+        defaultMenuItems[activeMenuIndex] &&
+        defaultMenuItems[activeMenuIndex].submenu &&
+        defaultMenuItems[activeMenuIndex].submenu.length > 0
+      ) {
+        setOpenSubmenu(activeMenuIndex);
+      } else {
+        setOpenSubmenu(null);
+      }
+      hoverCloseTimerRef.current = null;
+    }, 200);
+  }, [isMobile, activeMenuIndex, cancelHoverCloseTimer]);
+
+  // 언마운트 시 타이머 정리
+  useEffect(() => {
+    return () => {
+      if (hoverCloseTimerRef.current) {
+        clearTimeout(hoverCloseTimerRef.current);
+        hoverCloseTimerRef.current = null;
+      }
+    };
   }, []);
 
   // 모바일 메뉴 토글
@@ -452,6 +484,8 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
           <div 
             ref={menuRef} 
             className={`menu-container menu-${orientation} menu-${theme} ${openSubmenu !== null ? 'open' : ''} ${activeMenuIndex !== null ? 'has-active-menu' : ''}`}
+            onMouseLeave={handleMouseLeave}
+            onMouseEnter={cancelHoverCloseTimer}
           >
             <div className="menu-logo">
               <img 
@@ -469,6 +503,7 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
                     key={index} 
                     className={`menu-item ${item.submenu && item.submenu.length > 0 ? 'has-submenu' : ''}`}
                     data-active={activeMenuIndex === index ? 'true' : 'false'}
+                    onMouseEnter={() => handleMouseEnter(index)}
                   >
                     <button
                       className={`menu-button ${item.submenu && item.submenu.length > 0 ? 'has-submenu' : ''} ${openSubmenu === index ? 'active' : ''} ${activeMenuIndex === index ? 'active' : ''}`}
@@ -486,7 +521,7 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
             
             {/* 데스크톱용 서브메뉴 */}
             {currentSubmenu && (
-              <div className="full-width-submenu" onMouseEnter={() => setOpenSubmenu(openSubmenu)}>
+              <div className="full-width-submenu" onMouseEnter={cancelHoverCloseTimer}>
                 <ul className="submenu-list">
                   {currentSubmenu.map((submenuItem, subIndex) => (
                     <li key={subIndex} className="submenu-item">

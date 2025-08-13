@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './TabContent.css';
 import ThreeColumnGrid from '../ThreeColumnGrid';
 import ImageWithCaption from '../Common/ImageWithCaption';
@@ -7,7 +7,8 @@ import featureImg2 from '../../assets/manufacturing.jpg';
 import featureImg3 from '../../assets/construction.jpg';
 import featureImg4 from '../../assets/buildings.jpg';
 
-const TabContent = ({ tabId, productData }) => {
+const TabContent = ({ tabId, productData, featureClickToOpen = false, onFeatureImageClick }) => {
+  const [openedFeatureIndex, setOpenedFeatureIndex] = useState(null);
   const renderContent = () => {
     switch (tabId) {
       case 'overview':
@@ -106,21 +107,49 @@ const TabContent = ({ tabId, productData }) => {
                   image: f.image || fallbackImages[idx % fallbackImages.length],
                 }));
                 return featuresWithImages;
-                })().map((feature, index) => (
-                  <div key={index} className="feature-card media-with-description">
-                    <ImageWithCaption
-                      className="feature-media"
-                      imgClassName="feature-image"
-                      src={feature.image}
-                      alt={feature.title || 'feature'}
-                      caption={feature.title}
-                      position="top-left"
-                    />
-                    {feature.description ? (
-                      <p className="media-description">{feature.description}</p>
-                    ) : null}
-                  </div>
-                ))}
+                })().map((feature, index) => {
+                  const isOpen = featureClickToOpen && openedFeatureIndex === index;
+                  const handleClick = () => {
+                    if (!featureClickToOpen) return;
+                    setOpenedFeatureIndex(isOpen ? null : index);
+                  };
+                  const handleKeyDown = (e) => {
+                    if (!featureClickToOpen) return;
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      setOpenedFeatureIndex(isOpen ? null : index);
+                    }
+                  };
+                  return (
+                    <div
+                      key={index}
+                      className={`feature-card media-with-description${isOpen ? ' open' : ''}`}
+                      onClick={handleClick}
+                      role={featureClickToOpen ? 'button' : undefined}
+                      tabIndex={featureClickToOpen ? 0 : undefined}
+                      onKeyDown={handleKeyDown}
+                    >
+                      <ImageWithCaption
+                        className="feature-media"
+                        imgClassName="feature-image"
+                        src={feature.image}
+                        alt={feature.title || 'feature'}
+                        caption={feature.title}
+                        position="top-left"
+                        onClick={() => {
+                          if (onFeatureImageClick) {
+                            onFeatureImageClick(feature.image, feature.title, feature.title || 'feature');
+                          }
+                        }}
+                      />
+                      {feature.description ? (
+                        isOpen ? (
+                          <p className="media-description">{feature.description}</p>
+                        ) : null
+                      ) : null}
+                    </div>
+                  );
+                })}
               </ThreeColumnGrid>
             )}
           </div>

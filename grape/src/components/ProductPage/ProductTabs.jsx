@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './ProductTabs.css';
 
 const ProductTabs = ({ 
@@ -12,14 +12,29 @@ const ProductTabs = ({
     { id: 'videos', label: '관련영상', content: 'videos' }
   ],
   activeTab = 'overview',
-  onTabChange
+  onTabChange,
+  collapsed = false,
+  onToggleChange
 }) => {
   const [currentTab, setCurrentTab] = useState(activeTab);
+  const [isCollapsed, setIsCollapsed] = useState(collapsed);
+
+  useEffect(() => {
+    setIsCollapsed(collapsed);
+  }, [collapsed]);
 
   const handleTabClick = (tabId) => {
     setCurrentTab(tabId);
     if (onTabChange) {
       onTabChange(tabId);
+    }
+  };
+
+  const handleToggle = () => {
+    const next = !isCollapsed;
+    setIsCollapsed(next);
+    if (onToggleChange) {
+      onToggleChange(next);
     }
   };
 
@@ -35,6 +50,18 @@ const ProductTabs = ({
             {tab.label}
           </button>
         ))}
+        {currentTab === 'overview' && (
+        <button
+          type="button"
+          className={`tab-toggle-button${isCollapsed ? ' collapsed' : ''}`}
+          onClick={handleToggle}
+          aria-pressed={!isCollapsed}
+          aria-label={isCollapsed ? '탭 콘텐츠 열기' : '탭 콘텐츠 닫기'}
+          title={isCollapsed ? '열기' : '닫기'}
+        >
+          {isCollapsed ? '+' : '−'}
+        </button>
+        )}
       </div>
     </div>
   );
