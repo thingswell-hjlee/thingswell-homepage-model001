@@ -108,7 +108,7 @@ html, body {
 .main-image {
   backface-visibility: hidden;
   transform: translateZ(0);
-  transition: opacity 525ms ease;
+  transition: opacity 1000ms ease;
 }
 
 .main-image.transitioning {

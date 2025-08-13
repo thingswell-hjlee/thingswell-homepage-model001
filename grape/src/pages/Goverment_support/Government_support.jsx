@@ -19,7 +19,7 @@ const Government_support = () => {
         </section>
 
         <section className="gs-section">
-          <h3><span className="num">2.</span> 대상</h3>
+          <h3><span className="num">2</span> 대상</h3>
           <ul className="gs-list">
             <li>상시근로자 수 50명 미만 사업장의 사업주 (건설업의 경우 현장 제외, 본사 신청 가능)</li>
             <li>중소기업기본법상 소기업 규모 기준 이하 기업의 사업주 (중소기업확인서 제출)</li>
