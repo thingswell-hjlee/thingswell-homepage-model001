@@ -31,7 +31,6 @@ body {
   margin: 0 auto;
   position: relative;
   gap: var(--spacing-xl) !important;
-  margin-top: var(--spacing-4xl);
 }
 
 
@@ -56,6 +55,5 @@ body {
   .solutions-section {
     gap: var(--spacing-lg) !important;
     padding: var(--spacing-sm) var(--spacing-sm);
-    margin-top: 5vh;
   }
 }

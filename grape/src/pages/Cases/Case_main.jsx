@@ -49,7 +49,7 @@ const Case_main = () => {
       <div className="page-content">
         <div className="page-layout">
           <div className="main-content">
-            <div className="solutions-section menu-spacing">
+            <div className="solutions-section">
               <SolutionCard
                 subtitle="Cases"
                 title="도입사례"

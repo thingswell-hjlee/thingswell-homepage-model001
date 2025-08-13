@@ -330,6 +330,10 @@
   object-fit: cover;
 }
 
+.product-card.list-item .product-info-title {
+  display: none;
+}
+
 .product-card.list-item .product-info {
   flex: 1;
   display: flex;

@@ -149,7 +149,7 @@ const Application_filed_2 = () => {
             )}
           </div> */}
           <div className="main-content">
-            <div className="solutions-section menu-spacing">
+            <div className="solutions-section">
               <SolutionCard ref={solutionRef} {...solutionData} showButton={true} variant="compact" />
               
               {applicationCardsData && (

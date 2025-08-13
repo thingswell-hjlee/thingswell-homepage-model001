@@ -84,6 +84,7 @@ import Case_4 from "./pages/Cases/Case_4.jsx";
 import About from "./pages/About/About.jsx";
 import Login from "./pages/Login/Login.jsx";
 import { AuthProvider } from "./contexts/AuthContext.jsx";
+import Case_Bus_Seoul from "./pages/Cases/Case_Bus_Seoul.jsx";
 
 function HomePage() {
   const [isMobile, setIsMobile] = useState(false);
@@ -318,6 +319,7 @@ function App() {
             <Route path="/case-2" element={<Case_2 />} />
             <Route path="/case-3" element={<Case_3 />} />
             <Route path="/case-4" element={<Case_4 />} />
+            <Route path="/case_bus_seoul" element={<Case_Bus_Seoul />} />
 
             {/* 회사소개 라우팅 */}
             <Route path="/about" element={<About />} />

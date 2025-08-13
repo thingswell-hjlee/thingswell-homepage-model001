@@ -100,7 +100,7 @@ const Government_support_main = () => {
       <div className="page-content">
         <div className="page-layout">
           <div className="main-content">
-            <div className="solutions-section menu-spacing">
+            <div className="solutions-section">
               <SelectCardList 
                 options={selectCardData}
                 selectedOption={selectedIdx !== null ? selectCardData[selectedIdx] : null}

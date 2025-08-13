@@ -2,6 +2,10 @@
   margin: 2rem 0;
 }
 
+.product-tabs.disabled {
+  opacity: 0.5;
+}
+
 .tabs-header {
   display: flex;
   border-bottom: 2px solid #e5e7eb;
@@ -43,6 +47,13 @@
   color: #fff;
   border-bottom-color: #1e40af;
   background:  #3151bc;
+}
+
+.tab-button[disabled],
+.tab-button[aria-disabled="true"] {
+  cursor: not-allowed;
+  color: #9ca3af;
+  background: #f3f4f6;
 }
 
 .tab-button:focus {

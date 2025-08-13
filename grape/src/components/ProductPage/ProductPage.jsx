@@ -124,6 +124,15 @@ const ProductPage = ({
     { id: 'videos', label: '관련영상', content: 'videos' }
   ];
 
+  // 페이지별 탭 제한 설정 (없으면 전체 노출)
+  const tabConfig = productData?.tab_config || {};
+  const allowedTabIdsConfig = Array.isArray(productData?.allowedTabIds)
+    ? productData.allowedTabIds
+    : (Array.isArray(tabConfig?.allowedTabIds) ? tabConfig.allowedTabIds : undefined);
+  const maxVisibleTabsConfig = Number.isFinite(productData?.maxVisibleTabs)
+    ? productData.maxVisibleTabs
+    : (Number.isFinite(tabConfig?.maxVisibleTabs) ? tabConfig.maxVisibleTabs : undefined);
+
   const handleTabChange = (tabId) => {
     setActiveTab(tabId);
     if (tabId !== 'overview') {
@@ -157,6 +166,8 @@ const ProductPage = ({
               <ProductTabs 
                 productName={productData.name}
                 tabs={tabs}
+                allowedTabIds={allowedTabIdsConfig}
+                maxVisibleTabs={maxVisibleTabsConfig}
                 activeTab={activeTab}
                 onTabChange={handleTabChange}
                 collapsed={tabsCollapsed}

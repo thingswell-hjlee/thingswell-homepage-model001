@@ -3,27 +3,36 @@ import './ProductTabs.css';
 
 const ProductTabs = ({ 
   productName = "XCN-3000",
-  tabs = [
-    { id: 'overview', label: 'XCN-3000', content: 'overview' },
-    { id: 'features', label: '주요기능', content: 'features' },
-    { id: 'specs', label: '제품스펙', content: 'specs' },
-    { id: 'certifications', label: '인증', content: 'certifications' },
-    { id: 'downloads', label: '자료 다운로드', content: 'downloads' },
-    { id: 'videos', label: '관련영상', content: 'videos' }
-  ],
+  tabs = [],
   activeTab = 'overview',
   onTabChange,
   collapsed = false,
-  onToggleChange
+  onToggleChange,
+  allowedTabIds,
+  maxVisibleTabs
 }) => {
-  const [currentTab, setCurrentTab] = useState(activeTab);
+  const [currentTab, setCurrentTab] = useState(null);
   const [isCollapsed, setIsCollapsed] = useState(collapsed);
+  const normalizedAllowed = Array.isArray(allowedTabIds) && allowedTabIds.length > 0 ? allowedTabIds : null;
+  const visibleTabsAll = Array.isArray(tabs) ? (normalizedAllowed ? tabs.filter(t => normalizedAllowed.includes(t.id)) : tabs) : [];
+  const visibleTabs = Number.isFinite(maxVisibleTabs) ? visibleTabsAll.slice(0, maxVisibleTabs) : visibleTabsAll;
+  const isEnabled = Array.isArray(visibleTabs) && visibleTabs.length > 0;
 
   useEffect(() => {
     setIsCollapsed(collapsed);
   }, [collapsed]);
 
+  useEffect(() => {
+    if (isEnabled) {
+      const hasActive = visibleTabs.some(t => t.id === activeTab);
+      setCurrentTab(hasActive ? activeTab : visibleTabs[0]?.id || null);
+    } else {
+      setCurrentTab(null);
+    }
+  }, [isEnabled, visibleTabs, activeTab]);
+
   const handleTabClick = (tabId) => {
+    if (!isEnabled) return;
     setCurrentTab(tabId);
     if (onTabChange) {
       onTabChange(tabId);
@@ -39,18 +48,32 @@ const ProductTabs = ({
   };
 
   return (
-    <div className="product-tabs">
+    <div className={`product-tabs${!isEnabled ? ' disabled' : ''}`}>
       <div className="tabs-header">
-        {tabs.map((tab) => (
+        {isEnabled ? (
+          visibleTabs.map((tab) => (
+            <button
+              key={tab.id}
+              className={`tab-button ${currentTab === tab.id ? 'active' : ''}`}
+              onClick={() => handleTabClick(tab.id)}
+              disabled={Boolean(tab.disabled)}
+              aria-disabled={Boolean(tab.disabled)}
+            >
+              {tab.label}
+            </button>
+          ))
+        ) : (
           <button
-            key={tab.id}
-            className={`tab-button ${currentTab === tab.id ? 'active' : ''}`}
-            onClick={() => handleTabClick(tab.id)}
+            type="button"
+            className="tab-button"
+            disabled
+            aria-disabled
+            title="탭이 제공되지 않았습니다"
           >
-            {tab.label}
+            탭 없음
           </button>
-        ))}
-        {currentTab === 'overview' && (
+        )}
+        {isEnabled && currentTab === 'overview' && (
         <button
           type="button"
           className={`tab-toggle-button${isCollapsed ? ' collapsed' : ''}`}

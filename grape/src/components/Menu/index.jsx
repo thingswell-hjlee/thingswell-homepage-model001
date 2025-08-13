@@ -77,12 +77,12 @@ const defaultMenuItems = [
   {   
     label: '실적', 
     path: '/cases',
-    // submenu: [ 
-    //   { label: '제조업', path: '/case' }, 
-    //   { label: '사례2', path: '/case-2' }, 
-    //   { label: '사례3', path: '/case-3' }, 
-    //   { label: '사례4', path: '/case-4' } 
-    // ] 
+    submenu: [ 
+      { label: '스마트안전장비', path: '/case' }, 
+      { label: 'AI 솔루션', path: '/case-2' }, 
+      { label: '통합제어솔루션', path: '/case-3' }, 
+      { label: '정보통신공사', path: '/case-4' } 
+    ] 
   },
   { 
     label: '정부지원사업', 

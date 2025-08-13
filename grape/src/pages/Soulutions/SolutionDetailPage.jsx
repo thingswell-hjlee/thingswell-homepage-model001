@@ -18,7 +18,7 @@ export default function SolutionDetailPage({
       <div className="page-content">
         <div className="page-layout">
           <div className="main-content">
-            <div className="solutions-section menu-spacing">
+            <div className="solutions-section">
               {solutionData && (
                 <SolutionCard {...solutionData} variant={solutionVariant} />
               )}
