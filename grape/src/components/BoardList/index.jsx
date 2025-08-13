@@ -301,8 +301,8 @@ const BoardList = ({
             <tr>
               <th id="board-number">번호</th>
               <th id="board-title">제목</th>
-              <th id="board-date">작성일</th>
               {user && <th id="board-actions">관리</th>}
+              <th id="board-date">작성일</th>
             </tr>
           </thead>
           <tbody>
@@ -326,12 +326,6 @@ const BoardList = ({
                     >
                       {truncateTitle(title)}
                     </td>
-                    <td
-                      id="board-date"
-                      onClick={() => handlePostClick(instrument)}
-                    >
-                      {formattedDate}
-                    </td>
                     {user && (
                       <td id="board-actions">
                         <button
@@ -348,6 +342,12 @@ const BoardList = ({
                         </button>
                       </td>
                     )}
+                    <td
+                      id="board-date"
+                      onClick={() => handlePostClick(instrument)}
+                    >
+                      {formattedDate}
+                    </td>
                   </tr>
                 );
               })
