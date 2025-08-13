@@ -6,11 +6,12 @@ import { supabase } from '../../lib/supabase';
 import { useAuth } from '../../contexts/AuthContext';
 import './Board.css';
 
-const Board = ({ tableName }) => {
+const Board = ({ tableName, tableNames }) => {
   const [posts, setPosts] = useState([]);
   const [currentView, setCurrentView] = useState('list'); // 'list', 'detail', 'write', 'edit'
   const [selectedPost, setSelectedPost] = useState(null);
   const [editingPost, setEditingPost] = useState(null);
+  const resolvedTableName = tableName || (Array.isArray(tableNames) && tableNames.length > 0 ? tableNames[0] : undefined);
 
   // 샘플 데이터 (실제로는 API에서 가져올 데이터)
   useEffect(() => {
@@ -70,8 +71,9 @@ const Board = ({ tableName }) => {
     if (window.confirm('정말 삭제하시겠습니까?')) {
       try {
         // Supabase에서 실제 데이터 삭제
+        const targetTable = post?.tableName || resolvedTableName;
         const { error } = await supabase
-          .from(tableName)
+          .from(targetTable)
           .delete()
           .eq('id', post.id);
 
@@ -99,7 +101,8 @@ const Board = ({ tableName }) => {
             onPostClick={handlePostClick}
             onWriteClick={handleWriteClick}
             onDelete={handleDeletePost}
-            tableName={tableName}
+            tableName={resolvedTableName}
+            tableNames={tableNames}
           />
         );
       case 'detail':
@@ -115,7 +118,7 @@ const Board = ({ tableName }) => {
         return (
           <BoardEditor
             onSave={handleSavePost}
-            tableName={tableName}
+            tableName={resolvedTableName}
             onCancel={handleBackToList}
           />
         );
@@ -125,7 +128,7 @@ const Board = ({ tableName }) => {
             initialContent={editingPost?.content || ''}
             title={editingPost?.title || ''}
             onSave={handleSavePost}
-            tableName={tableName}
+            tableName={resolvedTableName}
             onCancel={handleBackToList}
           />
         );

@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import "./BoardList.css";
 import { supabase } from "../../lib/supabase";
 import { useAuth } from "../../contexts/AuthContext";
 import SearchComponent from "../SearchComponent";
+import ProductFilter from "../ProductFilter";
 
 const BoardList = ({
   post,
@@ -12,14 +13,17 @@ const BoardList = ({
   onPostClick,
   onWriteClick,
   tableName,
+  tableNames,
 }) => {
   const [instruments, setInstruments] = useState([]);
   const [filteredInstruments, setFilteredInstruments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
-  const [searchTerm, setSearchTerm] = useState(""); // 검색어 상태 추가
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("전체");
   const { user } = useAuth(); // 로그인 상태 가져오기
+  const [selectedBoardType, setSelectedBoardType] = useState('전체');
 
   // 페이징 관련 상태 추가
   const [currentPage, setCurrentPage] = useState(1);
@@ -39,65 +43,114 @@ const BoardList = ({
 
   useEffect(() => {
     getInstruments();
-  }, []);
+  }, [tableName, JSON.stringify(tableNames)]);
 
-  // 초기 로딩 시 모든 데이터를 내림차순으로 정렬하여 표시
-  useEffect(() => {
-    const sorted = instruments.sort((a, b) => (b.id || 0) - (a.id || 0));
-    setFilteredInstruments(sorted);
-    setCurrentPage(1); // 데이터가 변경되면 첫 페이지로 이동
+  // 카테고리 목록 계산
+  const categories = useMemo(() => {
+    const unique = new Set(
+      instruments
+        .map((item) => item.category)
+        .filter((c) => typeof c === "string" && c.trim().length > 0)
+    );
+    return Array.from(unique);
   }, [instruments]);
+
+  // 게시판 종류 옵션 계산
+  const boardTypeOptions = useMemo(() => {
+    const labelMap = {
+      Board_Announcement: '공지사항',
+      Board_Download: '자료실',
+    };
+    const unique = new Set(
+      (tableNames && Array.isArray(tableNames) && tableNames.length > 0
+        ? tableNames
+        : instruments.map((i) => i.tableName)
+      ).filter(Boolean)
+    );
+    return ['전체', ...Array.from(unique)];
+  }, [tableNames, instruments]);
+
+  // 필터/검색 적용 및 정렬
+  useEffect(() => {
+    const term = searchTerm.trim().toLowerCase();
+
+    const filtered = instruments.filter((item) => {
+      // 검색 매칭
+      const title = (item.title || "").toLowerCase();
+      const matchesSearch = !term || title.includes(term);
+
+      // 게시판 종류 매칭
+      if (selectedBoardType !== '전체') {
+        if (item.tableName !== selectedBoardType) return false;
+      }
+
+      // 카테고리 매칭
+      if (selectedCategory === "전체") return matchesSearch;
+      const selectedList = selectedCategory
+        .split(",")
+        .map((c) => c.trim())
+        .filter(Boolean);
+      const itemCategory = item.category;
+      const matchesCategory = selectedList.includes(itemCategory);
+
+      return matchesCategory && matchesSearch;
+    });
+
+    // 내림차순 정렬
+    const sorted = filtered.sort((a, b) => (b.id || 0) - (a.id || 0));
+    setFilteredInstruments(sorted);
+    setCurrentPage(1);
+  }, [instruments, searchTerm, selectedCategory, selectedBoardType]);
 
   async function getInstruments() {
     try {
       setLoading(true);
       setError(null); // 오류 상태 초기화
 
-      // props로 전달받은 테이블명 사용
-      let data = null;
-      let error = null;
-
-      if (!tableName) {
-        console.error("테이블명이 전달되지 않았습니다.");
-        setError("테이블명이 지정되지 않았습니다.");
-        setInstruments([]);
-        return;
-      }
-
-      console.log(`테이블 "${tableName}"에서 데이터를 가져오는 중...`);
-      const result = await supabase.from(tableName).select("*");
-      console.log(`${tableName} 쿼리 결과:`, result);
-
-      if (result.error) {
-        console.error(`${tableName} Supabase 오류:`, result.error);
-        error = result.error;
-      } else {
-        data = result.data;
-        console.log(
-          `성공! 테이블 "${tableName}"에서 ${
-            data ? data.length : 0
-          }개의 데이터를 가져왔습니다.`
+      // 단일/다중 테이블 지원
+      if (tableNames && Array.isArray(tableNames) && tableNames.length > 0) {
+        console.log('다중 테이블에서 데이터를 가져오는 중...', tableNames);
+        const results = await Promise.all(
+          tableNames.map((t) => supabase.from(t).select('*'))
         );
-        if (data && data.length > 0) {
-          console.log("첫 번째 데이터 구조:", data[0]);
-        }
-      }
 
-      if (error) {
-        console.error("Supabase 오류:", error);
-        setError(`데이터베이스 오류: ${error.message}`);
-        setInstruments([]);
-      } else if (data) {
-        console.log("받아온 데이터:", data);
-        setInstruments(data);
-        // 데이터가 없어도 오류가 아닌 정상적인 상태로 처리
-        if (data.length === 0) {
-          console.log("테이블에 데이터가 없습니다. (정상적인 상태)");
+        const errors = results.filter((r) => r.error).map((r) => r.error);
+        if (errors.length > 0) {
+          console.error('Supabase 오류(다중):', errors[0]);
+          setError(`데이터베이스 오류: ${errors[0].message}`);
+          setInstruments([]);
+        } else {
+          const merged = results.flatMap((r, idx) =>
+            (r.data || []).map((row) => ({ ...row, tableName: tableNames[idx] }))
+          );
+          console.log('병합 데이터:', merged);
+          setInstruments(merged);
         }
       } else {
-        console.error("예상치 못한 오류: 데이터와 오류 모두 null");
-        setError("데이터를 가져오는 중 예상치 못한 오류가 발생했습니다.");
-        setInstruments([]);
+        // 단일 테이블
+        if (!tableName) {
+          console.error('테이블명이 전달되지 않았습니다.');
+          setError('테이블명이 지정되지 않았습니다.');
+          setInstruments([]);
+          return;
+        }
+
+        console.log(`테이블 "${tableName}"에서 데이터를 가져오는 중...`);
+        const result = await supabase.from(tableName).select('*');
+        console.log(`${tableName} 쿼리 결과:`, result);
+
+        if (result.error) {
+          console.error(`${tableName} Supabase 오류:`, result.error);
+          setError(`데이터베이스 오류: ${result.error.message}`);
+          setInstruments([]);
+        } else {
+          const data = (result.data || []).map((row) => ({ ...row, tableName }));
+          console.log('받아온 데이터:', data);
+          setInstruments(data);
+          if (data.length === 0) {
+            console.log('테이블에 데이터가 없습니다. (정상적인 상태)');
+          }
+        }
       }
     } catch (err) {
       console.error("데이터 가져오기 오류:", err);
@@ -140,26 +193,9 @@ const BoardList = ({
     }
   };
 
-  // 검색 함수
-  const handleSearch = (searchValue) => {
-    // 검색어가 비어있으면 모든 데이터 표시
-    if (searchValue.trim() === "") {
-      // 내림차순으로 정렬
-      const sorted = instruments.sort((a, b) => (b.id || 0) - (a.id || 0));
-      setFilteredInstruments(sorted);
-    } else {
-      // 제목과 내용에서 검색어 찾기
-      const filtered = instruments.filter((instrument) => {
-        const title = (instrument.title || "").toLowerCase();
-        const searchLower = searchValue.toLowerCase();
-
-        return title.includes(searchLower);
-      });
-      // 검색 결과도 내림차순으로 정렬
-      const sorted = filtered.sort((a, b) => (b.id || 0) - (a.id || 0));
-      setFilteredInstruments(sorted);
-    }
-    setCurrentPage(1); // 검색 시 첫 페이지로 이동
+  // 검색 함수 - 검색어 상태만 업데이트
+  const handleSearch = (value) => {
+    setSearchTerm(value);
   };
 
   // Enter 키로 검색 실행 - 이 함수는 이제 필요 없음
@@ -226,7 +262,21 @@ const BoardList = ({
 
   return (
     <div className="board-list">
-      <div className="board-header">
+      <div className="board-header-bleed">
+        <div className="board-header">
+        <div className="board-filter-container">
+          <ProductFilter
+            selectedCategory={selectedCategory}
+            setSelectedCategory={setSelectedCategory}
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+            categories={categories}
+            filteredProductsCount={filteredInstruments.length}
+            boardTypeOptions={boardTypeOptions}
+            selectedBoardType={selectedBoardType}
+            setSelectedBoardType={setSelectedBoardType}
+          />
+        </div>
         <div className="board-search-container">
           <SearchComponent
             placeholder={isMobile ? "검색" : "검색어를 입력하세요"}
@@ -242,6 +292,7 @@ const BoardList = ({
             {isMobile ? "글쓰기" : "글쓰기"}
           </button>
         )}
+        </div>
       </div>
 
       <div className="board-table">

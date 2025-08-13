@@ -80,23 +80,17 @@ const defaultMenuItems = [
     // ] 
   },
   { 
-    label: '고객지원', 
-    path: '/customer-service',
-    submenu: [ 
-      { label: '공지사항', path: '/announcement' },
-      { label: '자료실', path: '/downloads' },
-      { label: '문의하기', path: '/contact' }
-    ] 
-  },
-  { 
     label: '회사소개', 
     path: '/about',
     submenu: [ 
       { label: '인사말', path: '/about#greeting' }, 
       { label: '미션 및 비전', path: '/about#mission' }, 
       { label: '연혁', path: '/about#history' }, 
+      { label: '핵심가치', path: '/about#core-value' },
       { label: '인증서', path: '/about#certificate' },
-      { label: '오시는 길', path: '/about#location' } 
+      { label: '오시는 길', path: '/about#location' },
+      { label: '문의하기', path: '/contact' },
+      { label: '게시판', path: '/announcement' },
     ] 
   }
 ];

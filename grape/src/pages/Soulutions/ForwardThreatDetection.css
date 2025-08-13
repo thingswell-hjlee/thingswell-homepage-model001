@@ -4,7 +4,7 @@
 }
 
 .ftd-container {
-  max-width: var(--container-xl);
+  max-width: var(--container-max-width);
   margin: 0 auto;
   padding: var(--spacing-2xl) var(--spacing-md) calc(var(--spacing-3xl) + var(--spacing-md));
 }

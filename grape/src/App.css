@@ -21,8 +21,6 @@ html, body {
   background-color: var(--color-background-dark); /* 배경색을 다크로 변경 */
   overflow-x: hidden; /* 가로 스크롤만 방지 */
   -webkit-overflow-scrolling: touch; /* iOS 스크롤 최적화 */
-  /* 스크롤바로 인한 레이아웃 시프트 방지 */
-  scrollbar-gutter: stable;
 }
 
 #root {
@@ -33,8 +31,6 @@ html, body {
   box-sizing: border-box;
   background-color: var(--color-background-dark);
   -webkit-overflow-scrolling: touch;
-  /* 스크롤바로 인한 레이아웃 시프트 방지 */
-  scrollbar-gutter: stable;
 }
 
 /* 새로운 앱 컨테이너 구조 */

@@ -1,30 +1,19 @@
 import React from "react";
 import Board from "../../components/Board";
-import SolutionCard from "../../components/SolutionCard";
+import { BaseLayout } from "../../components/Layout";
+import Breadcrumbs from "../../components/Breadcrumbs";
+import ProductHeader from "../../components/ProductPage/ProductHeader";
 
 const Announcement = () => {
   return (
-    <div className="page-container">
-      <div className="page-content">
-        <div className="page-layout">
-          <div className="main-content">
-            <div className="solutions-section">
-              <SolutionCard
-                subtitle="Announcement"
-                title="싱스웰 공지사항"
-                description="고객지원"
-                showButton={false}
-                link="/solutions/detail"
-                className="custom-solution-left"
-                variant="hero"
-                reverse={false}
-              />
-              <Board tableName="Board_Announcement" />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <BaseLayout
+      header={ProductHeader}
+      breadcrumbs={<Breadcrumbs breadcrumbs={["Home", "회사소개", "게시판"]} />}
+      title="게시판"
+      // subtitle="게시판을 확인하세요"
+    >
+      <Board tableNames={["Board_Announcement", "Board_Download"]} />
+    </BaseLayout>
   );
 };
 

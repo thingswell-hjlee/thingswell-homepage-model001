@@ -41,6 +41,7 @@ import { useState, useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import "./App.css";
 import Menu from "./components/Menu";
+import "./components/Layout/BaseLayout.css";
 import Footer from "./components/Footer";
 import CardRotator from "./components/CardRotator";
 import Government_support_main from "./pages/Goverment_support/Government_support_main.jsx";
@@ -224,7 +225,7 @@ function App() {
 
   return (
     <AuthProvider>
-      <div className="app-container">
+      <div className="app-container base-layout">
         {/* 메뉴는 모든 페이지에서 유지 */}
         <div className="menu-overlay-subpage">
           <Menu

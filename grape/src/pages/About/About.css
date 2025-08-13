@@ -1305,6 +1305,66 @@
   box-shadow: 0 4px 12px rgba(0, 123, 255, 0.4);
 }
 
+.core-value-section {
+  background: var(--color-surface);
+  padding: var(--spacing-2xl);
+  border-radius: var(--border-radius-lg);
+  /* box-shadow: var(--shadow-md); */
+  border: 1px solid var(--border-color-light);
+}
+
+.core-value-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  text-align: left;
+}
+.core-value-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: var(--spacing-lg);
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.core-value-list li {
+  position: relative;
+  background: var(--color-surface);
+  border: 1px solid var(--border-color-light);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-xl);
+  box-shadow: var(--shadow-sm);
+  text-align: left;
+  word-break: keep-all;
+  transition: background-color var(--transition-slow), border-color var(--transition-slow), box-shadow var(--transition-slow);
+  overflow: hidden;
+}
+
+
+.core-value-list li strong {
+  display: block;
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-white);
+  margin: calc(var(--spacing-xl) * -1) calc(var(--spacing-xl) * -1) var(--spacing-md);
+  padding: var(--spacing-sm) var(--spacing-xl);
+  background: linear-gradient(90deg, var(--color-primary), var(--color-primary-light));
+  letter-spacing: 0.02em;
+  text-align: center;
+  border-top-left-radius: var(--border-radius-lg);
+  border-top-right-radius: var(--border-radius-lg);
+}
+
+.core-value-list li {
+  color: var(--color-text-secondary);
+  line-height: 1.8;
+  font-size: var(--font-size-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
 @media (max-width: 768px) {
   .location-container {
     flex-direction: column;
@@ -1337,5 +1397,22 @@
   .map-button {
     padding: var(--spacing-sm) var(--spacing-lg);
     font-size: var(--font-size-sm);
+  }
+}
+
+/* Core Value - Responsive Grid */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .core-value-list ul {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .core-value-list ul {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+  }
+  .core-value-list li {
+    padding: var(--spacing-lg);
   }
 }

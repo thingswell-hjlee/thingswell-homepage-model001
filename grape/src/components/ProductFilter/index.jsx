@@ -7,7 +7,10 @@ const ProductFilter = ({
   searchTerm, 
   setSearchTerm, 
   categories, 
-  filteredProductsCount 
+  filteredProductsCount,
+  boardTypeOptions = [],
+  selectedBoardType,
+  setSelectedBoardType
 }) => {
   // 선택된 카테고리들을 배열로 관리
   const selectedCategories = selectedCategory === "전체" ? ["전체"] : selectedCategory.split(',').filter(cat => cat.trim());
@@ -47,21 +50,51 @@ const ProductFilter = ({
     <div className="filter-sidebar">
       <div className="filter-section">
         <div className="filter-options">
-          <button
-            className={`filter-button ${selectedCategory === "전체" ? "active" : ""}`}
-            onClick={() => handleCategoryClick("전체")}
-          >
-            전체
-          </button>
-          {categories.map(category => (
-            <button
-              key={category}
-              className={`filter-button ${selectedCategories.includes(category) ? "active" : ""}`}
-              onClick={() => handleCategoryClick(category)}
-            >
-              {category}
-            </button>
-          ))}
+          {Array.isArray(boardTypeOptions) && boardTypeOptions.length > 1 && (
+            <>
+              <button
+                key={`board-type-all`}
+                className={`filter-button ${selectedBoardType === '전체' ? 'active' : ''}`}
+                onClick={() => setSelectedBoardType && setSelectedBoardType('전체')}
+              >
+                전체 게시판
+              </button>
+              {boardTypeOptions
+                .filter((opt) => opt !== '전체')
+                .map((opt) => {
+                const isActive = selectedBoardType === opt;
+                const label = (opt === 'Board_Announcement' ? '공지사항' : (opt === 'Board_Download' ? '자료실' : opt));
+                return (
+                  <button
+                    key={`board-type-${opt}`}
+                    className={`filter-button ${isActive ? 'active' : ''}`}
+                    onClick={() => setSelectedBoardType && setSelectedBoardType(isActive ? '전체' : opt)}
+                  >
+                    {label}
+                  </button>
+                );
+              })}
+            </>
+          )}
+          {Array.isArray(categories) && categories.length > 0 && (
+            <>
+              <button
+                className={`filter-button ${selectedCategory === "전체" ? "active" : ""}`}
+                onClick={() => handleCategoryClick("전체")}
+              >
+                전체
+              </button>
+              {categories.map(category => (
+                <button
+                  key={category}
+                  className={`filter-button ${selectedCategories.includes(category) ? "active" : ""}`}
+                  onClick={() => handleCategoryClick(category)}
+                >
+                  {category}
+                </button>
+              ))}
+            </>
+          )}
         </div>
       </div>
     </div>

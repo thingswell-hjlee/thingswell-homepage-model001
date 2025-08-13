@@ -157,7 +157,7 @@ const About = () => {
                       <p>
                         (주)싱스웰(Thingswell Co., Ltd.)은 AI 에이전트를 활용한 멀티모달 상황 인지를 기반으로, 근로자와 노인, 장애인을 위한 안전·자동화 플랫폼 솔루션에 특화된 기업입니다. 다양한 센서(음향·영상·동작 등)와 무선 통신, 빅데이터 분석 기술을 결합하여 실시간으로 주변 환경을 모니터링하고 이상 상태를 조기에 감지함으로써, 사고를 예방하고 긴급 상황에서 즉각적인 대응이 가능하도록 지원합니다.
                       </p>
-
+                      {/* <div style={{color: "orange !important"}}>
                       <h2>회사 핵심 분야</h2>
 
                       <h3>멀티모달 상황 인지 기반 안전 시스템</h3>
@@ -202,6 +202,7 @@ const About = () => {
                           <strong>ESG 경영 실천:</strong> 환경·사회적 가치를 우선순위에 두고, 에너지 절감형 하드웨어 적용, 재활용 가능 소재 활용, 지역사회 지원 등에 앞장서며 지속 가능성을 추구
                         </li>
                       </ul>
+                      </div> */}
 
                       <p>
                         Thingswell은 멀티모달 AI 인지 기술과 자동화 플랫폼을 융합하여, “보다 안전하고 스마트한 미래 사회”를 실현하는 데 기여하고자 합니다. 끊임없는 기술 혁신과 협력 네트워크를 통해 한층 발전된 솔루션을 선보이며, 근로자, 노인, 장애인을 비롯한 모든 이들의 안전과 편의성을 향상하는 데 최선을 다하겠습니다.
@@ -258,6 +259,31 @@ const About = () => {
                   </div>
                 </div>
               </div>
+              <div id="core-value" className="core-value-section">
+                  <div className="about-section-title">
+                    <p className="about-section-title-subtitle">
+                      Core Value
+                    </p>
+                    <h1 className="about-section-content-title">핵심가치</h1>
+                  </div>
+                  <div className="core-value-list">
+                    <ul>
+                      <li>
+                        <strong>도전 (Innovation)</strong>미래지향적 R&D 투자와
+                        핵심기술 내재화를 통한 경쟁력 확보
+                      </li>
+                      <li>
+                        <strong>전문성 (Expertise)</strong>AI, 임베디드SW,
+                        정보통신공사 등 원스톱 역량 기반의
+                        솔루션 제공
+                      </li>
+                      <li>
+                        <strong>사회적 책임 (Social Impact)</strong>노인·장애인·산업현장 등 안전·복지 향상에 기여하여 공공의 이익 창출
+                      </li>
+                    </ul>
+                  </div>
+              </div>
+
               <div id="history" className="about-section">
                 <div className="about-section-title-image-container">
                   <div className="about-section-title">

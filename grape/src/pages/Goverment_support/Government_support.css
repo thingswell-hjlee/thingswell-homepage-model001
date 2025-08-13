@@ -3,9 +3,11 @@
   }
   
   .gs-container {
-    max-width: var(--container-xl);
+    max-width: var(--container-max-width);
     margin: 0 auto;
     padding: var(--spacing-2xl) var(--spacing-md) calc(var(--spacing-3xl) + var(--spacing-md));
+    background: var(--color-surface-light);
+    border: var(--border-width-thin) solid var(--border-color-light);
   }
   
   .gs-title {
@@ -16,8 +18,6 @@
   }
   
   .gs-section {
-    background: var(--color-surface-light);
-    border: var(--border-width-thin) solid var(--border-color-light);
     border-radius: var(--border-radius-md);
     padding: var(--spacing-md) var(--spacing-lg);
     margin-bottom: var(--spacing-md);
