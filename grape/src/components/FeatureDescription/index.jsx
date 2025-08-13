@@ -45,26 +45,34 @@ const FeatureDescription = forwardRef(({ image, youtubeUrl, title, description, 
 
   const videoId = youtubeUrl ? getYoutubeVideoId(youtubeUrl) : null;
 
+  const hasSubtitle = Boolean(subtitle && `${subtitle}`.trim());
+  const hasTitle = Boolean(title && `${title}`.trim());
+  const hasDescription = Boolean(description && `${description}`.trim());
+  const hasText = hasSubtitle || hasTitle || hasDescription;
+  if (!hasText) return null;
+
   return (
     <div ref={ref} className={`feature-description-container ${reverse ? 'reverse' : ''}`}>
-      <div className="feature-description-image-section">
-        {youtubeUrl && videoId ? (
-          <iframe
-            src={`https://www.youtube.com/embed/${videoId}`}
-            title={title}
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            className="feature-description-video"
-          />
-        ) : (
-          <img src={image} alt="feature" className="feature-description-image" />
-        )}
-      </div>
+      {(videoId || image) && (
+        <div className="feature-description-image-section">
+          {youtubeUrl && videoId ? (
+            <iframe
+              src={`https://www.youtube.com/embed/${videoId}`}
+              title={title}
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              className="feature-description-video"
+            />
+          ) : (
+            image && <img src={image} alt="feature" className="feature-description-image" />
+          )}
+        </div>
+      )}
       <div className="feature-description-text-section">
-        <div className="solution-card-subtitle">{subtitle}</div>
-        <h2 className="feature-description-title">{title}</h2>
-        <p className="feature-description-desc">{description}</p>
+        {hasSubtitle && <div className="solution-card-subtitle">{subtitle}</div>}
+        {hasTitle && <h2 className="feature-description-title">{title}</h2>}
+        {hasDescription && <p className="feature-description-desc">{description}</p>}
       </div>
     </div>
   );

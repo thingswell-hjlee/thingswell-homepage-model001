@@ -24,16 +24,101 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './ApplicationCard.css';
 
-const ApplicationCard = ({ image, imageAlt, label, title, link }) => {
+const ApplicationCard = ({ image, imageAlt, label, title, link, desc, desc2, fullWidthImage = false }) => {
+  const descriptions = Array.isArray(desc)
+    ? desc.filter(Boolean)
+    : [desc, desc2].filter(Boolean);
+
+  const HIGHLIGHT_TERMS = ["입력 소스", "데이터 정규화"]; 
+
+  const renderHighlighted = (text) => {
+    if (!text || typeof text !== 'string') return text;
+    let parts = [text];
+    HIGHLIGHT_TERMS.forEach((term) => {
+      const regex = new RegExp(`(${term}\\s*:)`, 'g');
+      parts = parts.flatMap((part, i) => {
+        if (typeof part !== 'string') return [part];
+        return part.split(regex).map((chunk, idx) => {
+          if (idx % 2 === 1) {
+            return <strong key={`${term}-${i}-${idx}`}>{chunk}</strong>;
+          }
+          return chunk;
+        });
+      });
+    });
+    return parts;
+  };
+
+  const hasLabelStructure = (text) => typeof text === 'string' && /.+:\s*/.test(text);
+
+  const renderAsListIfLabeled = (items) => {
+    const allLabeled = items.every((t) => hasLabelStructure(t));
+    if (!allLabeled) return null;
+
+    const parsed = items.map((t) => {
+      const [label, ...rest] = t.split(/:\s*/);
+      const body = rest.join(': ').trim();
+      return { label, body };
+    });
+
+    const structured = [];
+    let currentGroup = null;
+    parsed.forEach((it) => {
+      if (it.body.length === 0) {
+        currentGroup = { label: it.label, children: [] };
+        structured.push(currentGroup);
+        return;
+      }
+      if (currentGroup) {
+        currentGroup.children.push(it);
+      } else {
+        structured.push(it);
+      }
+    });
+
+    return (
+      <ul className="application-card-desc-list">
+        {structured.map((node, i) => {
+          if (node.children) {
+            return (
+              <li key={`g-${i}`}>
+                <span className="application-card-desc-label">{node.label}:</span>
+                {node.children.length > 0 && (
+                  <ul className="application-card-desc-sublist">
+                    {node.children.map((c, j) => (
+                      <li key={`c-${i}-${j}`}>
+                        <span className="application-card-desc-label">{c.label}:</span>{' '}
+                        <span className="application-card-desc-body">{c.body}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            );
+          }
+          return (
+            <li key={i}>
+              <span className="application-card-desc-label">{node.label}:</span>{' '}
+              <span className="application-card-desc-body">{node.body}</span>
+            </li>
+          );
+        })}
+      </ul>
+    );
+  };
   const cardContent = (
     <>
       {image && (
-        <div className="application-card-image-container">
+        <div className={`application-card-image-container ${fullWidthImage ? 'fullwidth' : ''}`}>
           <img src={image} alt={imageAlt} />
         </div>
       )}
       <div className="application-card-label">{label}</div>
       <div className="application-card-title">{title}</div>
+      {renderAsListIfLabeled(descriptions) ||
+        descriptions.map((text, index) => (
+          <div key={index} className="application-card-desc">{renderHighlighted(text)}</div>
+        ))}
     </>
   );
 

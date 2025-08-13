@@ -16,6 +16,13 @@
   text-align: left;
 }
 
+.ftd-hero-img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--border-radius-md);
+  margin-bottom: var(--spacing-lg);
+}
+
 .ftd-section {
   background: var(--color-surface-light);
   border: var(--border-width-thin) solid var(--border-color-light);
@@ -59,6 +66,10 @@
   text-align: left;
 }
 
+.ftd-list li {
+  margin-bottom: var(--spacing-md);
+}
+
 .ftd-table-wrapper {
   overflow-x: auto;
 }
@@ -71,7 +82,7 @@
 
 .ftd-table thead th {
   height: 44px;
-  text-align: left;
+  text-align: center;
   padding: var(--spacing-sm) var(--spacing-md);
   background: var(--color-surface-light);
   border: var(--border-width-thin) solid var(--border-color-light);
@@ -80,7 +91,7 @@
 .ftd-table td {
   padding: var(--spacing-md);
   border: var(--border-width-thin) solid var(--border-color-light);
-  vertical-align: top;
+  vertical-align: middle;
   color: var(--color-text-primary);
 }
 
