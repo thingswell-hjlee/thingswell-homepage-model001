@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import SearchComponent from '../../components/SearchComponent';
 import ProductFilter from '../../components/ProductFilter';
 import ProductHeader from '../../components/ProductPage/ProductHeader';
@@ -19,10 +19,24 @@ const ProductList = ({
   subtitle = '',
   breadcrumbs = ['Home', 'Products'],
   longVertical = false,
+  embedded = false,
+  hideToolbar = false,
 }) => {
   const [selectedCategory, setSelectedCategory] = useState('전체');
   const [searchTerm, setSearchTerm] = useState('');
   const [viewMode, setViewMode] = useState('card');
+  const [previewImage, setPreviewImage] = useState(null);
+
+  useEffect(() => {
+    if (!previewImage) return;
+    const onKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        setPreviewImage(null);
+      }
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [previewImage]);
 
   const categories = useMemo(() => {
     const unique = new Set(products.map((p) => p.category).filter(Boolean));
@@ -51,14 +65,9 @@ const ProductList = ({
     });
   }, [products, selectedCategory, searchTerm]);
 
-  return (
-    <BaseLayout
-      header={ProductHeader}
-      breadcrumbs={<Breadcrumbs breadcrumbs={breadcrumbs} />}
-      title={title}
-      subtitle={subtitle}
-    >
-      <div className="product-list-content">
+  const content = (
+    <div className="product-list-content">
+      {!hideToolbar && (
         <div className="product-list-toolbar">
           <div className="product-list-filter">
             <ProductFilter
@@ -110,37 +119,84 @@ const ProductList = ({
             </div>
           </div>
         </div>
+      )}
 
-        <div className="product-list-grid-container">
-          <ThreeColumnGrid listView={viewMode === 'list'} longVertical={longVertical}>
-            {filteredProducts.length > 0 ? (
-              filteredProducts.map((product, idx) => (
-                <Link to={product.link} key={idx}>
-                  <div className={`product-card ${viewMode === 'list' ? 'list-item' : ''}`}>
-                    <div className="product-info-title">
-                      <h3>{product.name}</h3>
-                    </div>
-                    <img src={product.img} alt={product.name} />
-                    {product.title && (
-                      <div className="product-info_title">
-                        <h3>{product.title}</h3>
-                      </div>
-                    )}
-                    <div className={product.title ? 'product-info_desc' : 'product-info'}>
-                      <p>{product.desc}</p>
-                    </div>
+      <div className="product-list-grid-container">
+        <ThreeColumnGrid listView={viewMode === 'list'} longVertical={longVertical}>
+          {filteredProducts.length > 0 ? (
+            filteredProducts.map((product, idx) => {
+              const Card = (
+                <div className={`product-card ${viewMode === 'list' ? 'list-item' : ''}`}>
+                  <div className="product-info-title">
+                    <h3>{product.name}</h3>
                   </div>
+                  <img
+                    src={product.img}
+                    alt={product.name}
+                    className={embedded ? 'clickable' : ''}
+                    onClick={() => {
+                      if (embedded) setPreviewImage(product.img);
+                    }}
+                  />
+                  {product.title && (
+                    <div className="product-info_title">
+                      <h3>{product.title}</h3>
+                    </div>
+                  )}
+                  <div className={product.title ? 'product-info_desc' : 'product-info'}>
+                    <p>{product.desc}</p>
+                  </div>
+                </div>
+              );
+              return product.link ? (
+                <Link to={product.link} key={idx}>
+                  {Card}
                 </Link>
-              ))
-            ) : (
-              <div className="no-products-message">
-                <p>선택한 조건에 맞는 제품이 없습니다.</p>
-                <p>다른 카테고리나 검색어를 시도해보세요.</p>
-              </div>
-            )}
-          </ThreeColumnGrid>
-        </div>
+              ) : (
+                <div key={idx}>{Card}</div>
+              );
+            })
+          ) : (
+            <div className="no-products-message">
+              <p>선택한 조건에 맞는 제품이 없습니다.</p>
+              <p>다른 카테고리나 검색어를 시도해보세요.</p>
+            </div>
+          )}
+        </ThreeColumnGrid>
       </div>
+    </div>
+  );
+
+  if (embedded) {
+    return (
+      <div className="product-list-embedded">
+        {content}
+        {previewImage && (
+          <div className="image-modal-overlay" onClick={() => setPreviewImage(null)}>
+            <div className="image-modal-content" onClick={(e) => e.stopPropagation()}>
+              <button
+                className="image-modal-close"
+                onClick={() => setPreviewImage(null)}
+                aria-label="닫기"
+              >
+                ×
+              </button>
+              <img src={previewImage} alt="확대 보기" />
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  return (
+    <BaseLayout
+      header={ProductHeader}
+      breadcrumbs={<Breadcrumbs breadcrumbs={breadcrumbs} />}
+      title={title}
+      subtitle={subtitle}
+    >
+      {content}
     </BaseLayout>
   );
 };

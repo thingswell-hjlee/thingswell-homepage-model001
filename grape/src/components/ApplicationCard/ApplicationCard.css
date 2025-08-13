@@ -53,9 +53,8 @@
   background-color: white;
 }
 
-.application-card:hover img {
-  transform: scale(1.05);
-}
+/* 기본 확대 효과 제거 (About 섹션 외 확장 방지) */
+.application-card:hover img { transform: none; }
 
 .application-card-content {
   display: flex;

@@ -7,6 +7,7 @@ import ceo from "../../assets/ceo.jpg";
 import manufacturing from "../../assets/manufacturing.jpg";
 import construction from "../../assets/construction.jpg";
 import logo from "../../assets/logo.png";
+import ProductList from '../../pages/Products/ProductList';
 
 // Certificate imports
 import patentCertificate1 from "../../assets/patent_certificate_10-2404374.png";
@@ -532,10 +533,30 @@ const About = () => {
                   </div>
                 </div>
               </div>
-              <div id="certificate">
-              {applicationCardsData && (
-                <ApplicationCardsSection ref={applicationRef} applicationCardsData={applicationCardsData} boxName="인증서, 인정서, 지적재산권" columnsPerRow={4} subtitle="Certificate" />
-              )}
+              <div id="certificate" className="application-section-responsive">
+                <div className="cards-container">
+                  <div className="application-card-section-title-container">
+                    <div className="solution-card-subtitle">Certificate</div>
+                    <div className="application-card-section-title">인증서 · 인정서 · 지적재산권</div>
+                  </div>
+                  <div className="application-cards no-line responsive-cards">
+                    <ProductList
+                      embedded
+                      hideToolbar
+                      title="인증 및 특허"
+                      subtitle="회사 보유 인증서와 특허"
+                      breadcrumbs={["Home", "About", "Certificates"]}
+                      products={applicationCardsData.map((c, idx) => ({
+                        name: c.title,
+                        title: c.label,
+                        img: c.image,
+                        desc: c.imageAlt,
+                        category: c.label,
+                        link: undefined,
+                      }))}
+                    />
+                  </div>
+                </div>
               </div>
               <div id="location" className="about-section">
                 <div className="about-section-title-image-container">

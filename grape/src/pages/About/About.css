@@ -750,6 +750,40 @@
   }
 }
 
+/* Certificate 섹션: ApplicationCardsSection 그리드 해제 */
+.about-page #certificate .application-cards,
+.about-page #certificate .responsive-cards {
+  display: block;
+}
+
+/* Certificate 섹션: ProductList 임베디드 여백 제거 */
+.about-page #certificate .product-list-embedded .product-list-content {
+  padding-bottom: 0;
+  margin-top: 0;
+  min-height: auto;
+}
+
+.about-page #certificate .product-list-embedded .product-list-grid-container {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/* Certificate 섹션: 인증서 영역 마진 제거 */
+.about-page #certificate .application-cards,
+.about-page #certificate .responsive-cards {
+  margin: 0;
+}
+
+/* Certificate 섹션: product-grid cols-3 패딩 제거 */
+.about-page #certificate .product-grid.cols-3 {
+  padding: 0;
+}
+
+/* Certificate 섹션: 이미지 확대(hover scale) 효과 제거 */
+.about-page #certificate .application-card:hover img {
+  transform: none;
+}
+
 /* 연혁 타임라인 스타일 */
 .timeline-container {
   width: 100%;
