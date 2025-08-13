@@ -2,7 +2,7 @@
 
 .card-rotator {
   position: relative;
-  width: min(92vw, 1500px);
+  width: min(92vw, 1400px);
   margin: 0 auto 24px auto;
   /* 높이는 내용에 따라 유동적으로 확장 */
   z-index: 100;
