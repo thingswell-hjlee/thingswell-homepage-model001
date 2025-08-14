@@ -70,6 +70,7 @@ import construction from "./assets/construction.jpg";
 import fire from "./assets/fire.jpg";
 import welding from "./assets/welding.jpg";
 import grinding from "./assets/grinding.jpg";
+import noticeBg from "./assets/1.png";
 import Announcement from "./pages/Customer_Service/Announcement.jsx";
 import Customer_service from "./pages/Customer_Service/Customer_service.jsx";
 import Downloads from "./pages/Customer_Service/Downloads.jsx";
@@ -238,18 +239,21 @@ function HomePage() {
               />
             </div>
             <div className="hero-content-section">
-                <div className="hero-content-card">
-                  {/* <h1 className="hero-content-card-title">신제품 소식</h1> */}
-                  <ul className="hero-content-card-list">
-                    <li><a href="/products/twmob-01/">2륜 카트 이동식 태양광 80w 무선CCTV 30배 줌 PTZ 5백만 화소 IP CCTV 세트</a></li>
-                  </ul>
-                </div>
-                <div className="hero-content-card">
+            <div className="hero-content-card">
+              <a
+                className="hero-content-card-title"
+                href="/products/twmob-01/"
+                style={{ textDecoration: "none", color: "inherit", cursor: "pointer", fontWeight: "bold" }}
+              >
+                TWMOB-01 2륜 카트 이동식 태양광 80W 무선CCTV 30배 줌 PTZ 5백만 화소 IP CCTV 세트
+              </a>
+            </div>
+                <div className="hero-content-card" style={{ backgroundImage: `linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.35)), url(${noticeBg})` }}>
                   {/* <h1 className="hero-content-card-title">공지사항</h1> */}
                   <ul className="hero-content-card-list">
-                    <li onClick={handleAnnouncementClick} style={{ cursor: 'pointer' }}>
+                    <h1 className="hero-content-card-title"  onClick={handleAnnouncementClick} style={{ cursor: 'pointer' }}>
                       {latestAnnouncement?.title || '등록된 공지사항이 없습니다.'}
-                    </li>
+                    </h1>
                   </ul>
                 </div>
                 <div className="hero-content-card">

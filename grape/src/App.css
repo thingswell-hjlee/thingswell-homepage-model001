@@ -283,7 +283,10 @@ html, body {
   background-repeat: no-repeat;
   border-radius: 15px;
   height: 200px;
+  word-break: keep-all;
 }
+
+
 
 .hero-content-card-title{
   font-size: var(--font-size-2xl)!important;

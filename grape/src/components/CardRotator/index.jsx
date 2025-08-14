@@ -90,7 +90,7 @@ function CardRotator({ cards, className = "", onCardChange, currentIndex: extern
         setIsFading(true);
         transitionTimeoutRef.current = null;
       }, 525); // 애니메이션의 절반 지점에서 새 카드 시작 (겹치는 효과)
-    }, 5000); // 10초로 변경
+    }, 2000); // 10초로 변경
 
     return () => {
       clearInterval(intervalId);

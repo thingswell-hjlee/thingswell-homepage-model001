@@ -70,7 +70,7 @@
   border: none;
   border-radius: 10px;
   cursor: pointer;
-  transition: transform 160ms ease, background 200ms ease;
+  transition: transform 100ms ease, background 100ms ease;
   position: relative;
   z-index: 10;
   pointer-events: auto;
@@ -107,7 +107,7 @@
   border: none;
   cursor: pointer;
   padding: 0;
-  transition: transform 160ms ease, background 200ms ease;
+  transition: transform 100ms ease, background 100ms ease;
 }
 
 .dot:hover { 
