@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useEffect } from 'react';
+import React, { useMemo, useState, useEffect, useRef } from 'react';
 import SearchComponent from '../../components/SearchComponent';
 import ProductFilter from '../../components/ProductFilter';
 import ProductHeader from '../../components/ProductPage/ProductHeader';
@@ -13,6 +13,44 @@ import './ProductsCommon.css';
  * - 필터, 검색, 카드/리스트 보기 토글을 포함
  * - 제품 데이터는 상위에서 주입
  */
+const MarqueeTitle = ({ text }) => {
+  const containerRef = useRef(null);
+  const textRef = useRef(null);
+  const [needsMarquee, setNeedsMarquee] = useState(false);
+
+  useEffect(() => {
+    const update = () => {
+      if (!containerRef.current || !textRef.current) return;
+      const containerWidth = containerRef.current.clientWidth;
+      const textWidth = textRef.current.scrollWidth;
+      setNeedsMarquee(textWidth > containerWidth);
+    };
+    update();
+    window.addEventListener('resize', update);
+    const id = setTimeout(update, 0);
+    return () => {
+      window.removeEventListener('resize', update);
+      clearTimeout(id);
+    };
+  }, [text]);
+
+  if (needsMarquee) {
+    return (
+      <div className="product-info-title" ref={containerRef}>
+        <div className="marquee">
+          <span className="marquee-text" ref={textRef}>{text}</span>
+          <span className="marquee-text" aria-hidden="true">{text}</span>
+        </div>
+      </div>
+    );
+  }
+  return (
+    <div className="product-info-title" ref={containerRef}>
+      <h3 ref={textRef}>{text}</h3>
+    </div>
+  );
+};
+
 const ProductList = ({
   products = [],
   title = 'Products',
@@ -127,9 +165,7 @@ const ProductList = ({
             filteredProducts.map((product, idx) => {
               const Card = (
                 <div className={`product-card ${viewMode === 'list' ? 'list-item' : ''}`}>
-                  <div className="product-info-title">
-                    <h3>{product.name}</h3>
-                  </div>
+                  <MarqueeTitle text={product.name} />
                   <img
                     src={product.img}
                     alt={product.name}

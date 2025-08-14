@@ -370,6 +370,54 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  /* 줄바꿈 방지 및 가로 스크롤/마키 */
+  overflow-x: hidden;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+
+.product-info-title h3 {
+  margin: 0;
+  white-space: nowrap;
+  display: inline-block;
+  flex: 0 0 auto;
+}
+
+/* 마키 컨테이너 */
+.product-info-title .marquee {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  min-width: 100%;
+  will-change: transform;
+  animation: marquee-scroll 15s linear infinite;
+}
+
+/* 반복 텍스트 */
+.product-info-title .marquee-text {
+  flex: 0 0 auto;
+  white-space: nowrap;
+  font-size: 1.1rem;
+  font-weight: var(--font-weight-semibold);
+}
+
+/* 카드가 호버되면 속도 살짝 증가 */
+.product-card:hover .marquee {
+  animation-duration: 12s;
+}
+
+/* 줄 길이에 따라 너무 짧으면 애니메이션 비활성화 대비 (옵션) */
+@media (prefers-reduced-motion: reduce) {
+  .product-info-title .marquee {
+    animation: none;
+    transform: none;
+  }
+}
+
+@keyframes marquee-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
 .product-category {
