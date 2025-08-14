@@ -8,7 +8,7 @@
 }
 
 .product-page-content {
-  padding-top:var(--spacing-xl);
+  padding-top:var(--spacing-sm);
   min-height: 100vh;
   overflow-y: auto;
   position: relative;

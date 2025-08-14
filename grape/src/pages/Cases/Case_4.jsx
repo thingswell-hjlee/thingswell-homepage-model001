@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import SolutionCard from '../../components/SolutionCard';
 import ApplicationCardsSection from '../../components/ApplicationCardsSection';
-import Form from '../../components/Form';
 import SidebarMenu from '../../components/SidebarMenu';
 import FeatureDescription from '../../components/FeatureDescription';
 import manufacturing from '../../assets/manufacturing.jpg';
@@ -43,14 +42,13 @@ const Case_4 = () => {
   const solutionRef = useRef(null);
   const applicationRef = useRef(null);
   const featureDescriptionRef = useRef(null);
-  const formRef = useRef(null);
+  
 
   // ref를 객체로 묶어서 SidebarMenu에 전달
   const sectionRefs = {
     solution: solutionRef,
     ApplicationCardsSection: applicationRef,
     FeatureDescription: featureDescriptionRef,
-    form: formRef,
   };
 
   // 데이터 직접 정의
@@ -125,10 +123,7 @@ const Case_4 = () => {
     }
   ];
 
-  const formData = {
-    title: "문의하기",
-    subtitle: ""
-  };
+  
 
   const sidebarTitle = "제조업 안전 솔루션";
   const sidebarMenuItems = [
@@ -164,7 +159,7 @@ const Case_4 = () => {
                 />
               ))}
               
-              <Form ref={formRef} {...formData} />
+              {/* Form 제거됨 */}
             </div>
           </div>
         </div>

@@ -4,7 +4,6 @@ import ApplicationCardsSection from '../../components/ApplicationCardsSection';
 import ApplicationPeriodCard from '../../components/ApplicationPeriodCard';
 import SupportInfoCard from '../../components/SupportInfoCard';
 import RestrictionCard from '../../components/RestrictionCard';
-import Form from '../../components/Form';
 
 /**
  * 정부지원 상세 공통 레이아웃
@@ -17,7 +16,6 @@ export default function SupportDetailPage({
   applicationPeriodData,
   supportInfoData,
   restrictionData,
-  formData,
 }) {
   return (
     <div className="page-container">
@@ -44,7 +42,7 @@ export default function SupportDetailPage({
 
               {restrictionData && <RestrictionCard {...restrictionData} />}
 
-              <Form {...(formData || {})} />
+              {/* Form 제거됨 */}
             </div>
           </div>
         </div>

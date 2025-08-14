@@ -10,7 +10,7 @@
  * @param {string} props.image - 이미지 경로 (youtubeUrl이 없을 때 사용)
  * @param {string} props.youtubeUrl - YouTube 비디오 URL (선택사항)
  * @param {string} props.title - 기능 제목
- * @param {string} props.description - 기능 설명
+ * @param {string | string[]} props.description - 기능 설명 (문자열 또는 문자열 배열)
  * @param {boolean} props.reverse - 레이아웃 방향 (true: 이미지/비디오가 오른쪽, 기본값: false)
  * @param {React.Ref} ref - forwardRef를 통해 전달되는 ref
  * @param {string} props.subtitle - 기능 부제목
@@ -47,7 +47,9 @@ const FeatureDescription = forwardRef(({ image, youtubeUrl, title, description, 
 
   const hasSubtitle = Boolean(subtitle && `${subtitle}`.trim());
   const hasTitle = Boolean(title && `${title}`.trim());
-  const hasDescription = Boolean(description && `${description}`.trim());
+  const hasDescription = Array.isArray(description)
+    ? description.length > 0
+    : Boolean(description && `${description}`.trim());
   const hasText = hasSubtitle || hasTitle || hasDescription;
   if (!hasText) return null;
 
@@ -72,7 +74,17 @@ const FeatureDescription = forwardRef(({ image, youtubeUrl, title, description, 
       <div className="feature-description-text-section">
         {hasSubtitle && <div className="solution-card-subtitle">{subtitle}</div>}
         {hasTitle && <h2 className="feature-description-title">{title}</h2>}
-        {hasDescription && <p className="feature-description-desc">{description}</p>}
+        {hasDescription && (
+          Array.isArray(description) ? (
+            <ul className="feature-description-list">
+              {description.map((item, idx) => (
+                <li key={idx} className="feature-description-list-item">{item}</li>
+              ))}
+            </ul>
+          ) : (
+            <p className="feature-description-desc">{description}</p>
+          )
+        )}
       </div>
     </div>
   );

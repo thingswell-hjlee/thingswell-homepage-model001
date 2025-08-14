@@ -31,10 +31,7 @@ const defaultMenuItems = [
     label: '회사', 
     path: '/about',
     submenu: [ 
-      { label: '인사말', path: '/about#greeting' }, 
-      { label: '미션 및 비전', path: '/about#mission' }, 
-      { label: '연혁', path: '/about#history' }, 
-      { label: '핵심가치', path: '/about#core-value' },
+      { label: '회사소개', path: '/about#greeting' }, 
       { label: '인증서', path: '/about#certificate' },
       { label: '오시는 길', path: '/about#location' },
       { label: '문의하기', path: '/contact' },
@@ -43,13 +40,12 @@ const defaultMenuItems = [
   },
  
   { 
-    label: '기술', 
+    label: '솔루션', 
     path: '/solutions',
     submenu: [ 
       { label: '산업 안전 솔루션', path: '/solution' }, 
-      { label: '화학 안전 솔루션', path: '/chemical-solution' },
-      { label: '제조 안전 솔루션', path: '/manufacturing-solution' },
-      { label: '건설 안전 솔루션', path: '/construction-solution' }
+      { label: '노인 장애인 안전 솔루션', path: '/chemical-solution' },
+      { label: '통합제어 솔루션', path: '/manufacturing-solution' },
     ] 
   },
       { 
@@ -57,11 +53,9 @@ const defaultMenuItems = [
         path: '/products',
         submenu: [
           { label: '스마트안전장비', path: '/product-list/safety' }, 
+          { label: '관제시스템', path: '/products/new/remote-monitoring' },
           { label: '통합제어', path: '/product-list/control' }, 
-      { label: '모니터링', path: '/products/monitoring' }, 
-      { label: '안전장비', path: '/products/safety-equipment' },
-      { label: '개인보호장비', path: '/products/personal-protective-equipment' },
-      { label: '원격 모니터링', path: '/products/new/remote-monitoring' }
+      
     ] 
   },
   // { 
@@ -79,8 +73,8 @@ const defaultMenuItems = [
     path: '/cases',
     submenu: [ 
       { label: '스마트안전장비', path: '/case' }, 
-      { label: 'AI 솔루션', path: '/case-2' }, 
-      { label: '통합제어솔루션', path: '/case-3' }, 
+      { label: '인공지능 AI', path: '/case-2' }, 
+      { label: '통합제어', path: '/case-3' }, 
       { label: '정보통신공사', path: '/case-4' } 
     ] 
   },
@@ -89,15 +83,15 @@ const defaultMenuItems = [
     path: '/government-support',
     submenu: [ 
       { label: '스마트 안전장비지원사업', path: '/government-support-detail' }, 
-      { label: 'AI 제조 지원사업', path: '/ai-manufacturing-support' }, 
-      { label: '그린에너지 지원사업', path: '/green-energy-support' }, 
-      { label: '디지털 전환 지원사업', path: '/digital-transformation-support' }, 
+      { label: '건강일터 조성지원사업', path: '/government-support-detail' }, 
+      { label: '소공인 클린제조환경조성', path: '/government-support-detail' }, 
     ] 
   },
 
   { 
     label: '쇼핑몰', 
-    path: '/government-support',
+    path: 'https://haa741123.cafe24.com/skin-skin1',
+    external: true, // 외부 링크임을 명시 (Menu 컴포넌트에서 이 값 활용하여 새창 이동 처리 필요)
   }
 
 ];
@@ -339,7 +333,11 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
     } else {
       // 서브메뉴가 없는 메뉴 클릭 시
       if (item.path) {
-        navigate(item.path);
+        if (item.external) {
+          window.open(item.path, '_blank');
+        } else {
+          navigate(item.path);
+        }
       }
       setActiveMenuIndex(index);
       setActiveSubmenuIndex(null);

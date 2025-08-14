@@ -1,19 +1,21 @@
 import React from 'react';
 import SolutionDetailPage from './SolutionDetailPage';
-import welding from '../../assets/welding.jpg';
 import fire from '../../assets/fire.jpg';
 import Collision from '../../assets/collision.jpg';
 import manufacturing from '../../assets/manufacturing.jpg';
 import construction from '../../assets/construction.jpg';
 import grinding from '../../assets/grinding.jpg';
 import server from '../../assets/server.jpg';
+import main from '../../assets/solution_1/main.png';
 import ProductHeader from '../../components/ProductPage/ProductHeader';
 import ProductInfo from '../../components/ProductPage/ProductInfo';
+import ContactInfo from '../../components/ContactInfo';
+import FeatureDescription from '../../components/FeatureDescription';
 
-const BREADCRUMBS = ["Home", "Solutions", "제조 안전 솔루션"];
+const BREADCRUMBS = ["Home", "Solutions", "산업 안전 솔루션"];
 
 const SOLUTION_DATA = {
-  title: "제조 안전 솔루션",
+  title: "산업 안전 솔루션",
   description:
     "AI 기반 멀티모달 산업안전 솔루션은 RAG(Retrieval-Augmented Generation) 기술을적용한 대규모 비전 모델(LVM)과 언어 모델(LLM), 그리고 다양한 실시간 센싱시스템에서 수집되는 데이터를 통합 분석하여 작업자 안전을 극대화하는 혁신적인 솔루션입니다.이 솔루션은 제조 현장의 안전 매뉴얼 정보를 기반으로 카메라, 레이더, 음향 센서 등여러 센서로부터 들어오는 멀티모달 데이터를 실시간으로 융합 및 분석합니다. 이를통해 작업자의 위험 행동을 정확하게 감지하고, 유해한 환경 요인을 미리 예측하여 사고를 예방하는 통합적인 데이터 처리 엔진을 제공합니다. 기존의 사후 대응 방식을 넘어, AI 기반의 예측적 위험 완화를 통해 제조 현장의 안전성과 생산성을 동시에 향상시킵니다.",
 };
@@ -98,10 +100,17 @@ const WORKER_SAFETY_CARDS = [
 //   },
 // ];
 
-const FORM_DATA = {
-  title: '문의하기',
-  subtitle: '궁금한 점이 있으시면 언제든 문의해주세요',
-};
+const FEATURE_DESCRIPTIONS = [
+  {
+    image: main,
+    title: "서비스 구성도",
+    description: [
+      "데이터 수집단계: 카메라, ToF/레이더, 마이크, 공기질 센서, 모션 센서 등에서 데이터를 실시간으로 수집·전처리합니다.",
+      "통합 엔진단계: 수집된 데이터를 융합하고, RAG-LVM/LLM을 활용해 지능적으로 추론하여 의사결정을 수행합니다.",
+      "조치 및 피드백단계: 작업자 피드백(시각/청각/촉각), 경고 알람, 자동 제어, 클라우드 서버 연동을 통해 조치 및 피드백을 제공합니다."
+    ],
+  },
+];
 
 const APPLICATION_FIELD_CARDS = [
   {
@@ -139,7 +148,7 @@ const APPLICATION_FIELD_CARDS = [
 
 const SERVICE_ARCHITECTURE_CARDS = [
   {
-    image: server,
+    image: main,
     imageAlt: "서비스 구성도",
     // title: "서비스 구성도",
     desc: [
@@ -148,6 +157,7 @@ const SERVICE_ARCHITECTURE_CARDS = [
       "조치 및 피드백단계: 작업자 피드백(시각/청각/촉각), 경고 알람, 자동 제어, 클라우드 서버 연동을 통해 조치 및 피드백을 제공합니다."
     ],
     fullWidthImage: true,
+    reverse: true,
   },
 ];
 
@@ -162,11 +172,16 @@ const BLOCKS = [
     data: WORKER_SAFETY_CARDS,
     props: { boxName: '주요 기능' },
   },
-  {
-    type: 'applicationCards',
-    data: SERVICE_ARCHITECTURE_CARDS,
-    props: { boxName: '서비스 구성도', columnsPerRow: 1 },
-  },
+    // {
+    //   type: 'applicationCards',
+    //   data: SERVICE_ARCHITECTURE_CARDS,
+    //   props: { boxName: '서비스 구성도', columnsPerRow: 1 },
+    // },
+    {
+      type: 'features',
+      data: FEATURE_DESCRIPTIONS,
+      props: { boxName: '서비스 구성도', columnsPerRow: 1 },
+    },
 ];
 
 const Soulution = () => {
@@ -185,8 +200,8 @@ const Soulution = () => {
         solutionData={SOLUTION_DATA}
         solutionVariant="default"
         blocks={BLOCKS}
-        formData={FORM_DATA}
       />
+      <ContactInfo />
         </div>
       </div>
      

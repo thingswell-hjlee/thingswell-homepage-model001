@@ -8,6 +8,10 @@
   border-radius: var(--border-radius-lg);
 }
 
+.solutions-section.no-padding {
+  padding: 0 !important;
+}
+
 .customer-service-section {
   display: flex;
   flex-direction: column;

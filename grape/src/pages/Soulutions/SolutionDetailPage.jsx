@@ -2,7 +2,6 @@ import React from 'react';
 import SolutionCard from '../../components/SolutionCard';
 import ApplicationCardsSection from '../../components/ApplicationCardsSection';
 import FeatureDescription from '../../components/FeatureDescription';
-import Form from '../../components/Form';
 
 /**
  * 솔루션 상세 공통 레이아웃
@@ -11,7 +10,6 @@ export default function SolutionDetailPage({
   solutionData,
   solutionVariant = 'compact',
   blocks = [],
-  formData,
 }) {
   return (
     <div className="page-container">
@@ -45,7 +43,7 @@ export default function SolutionDetailPage({
                 return null;
               })}
 
-              <Form {...(formData || {})} />
+              {/* Form 제거됨 */}
             </div>
           </div>
         </div>

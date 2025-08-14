@@ -128,7 +128,7 @@
   width: 100%;
   flex: 1;
   flex-direction: column;
-  gap: var(--spacing-lg);
+  gap: var(--spacing-3xl);
   user-select: none; /* 드래그 방지 */
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -179,7 +179,7 @@
 }
 
 #greeting .about-section-content-container {
-  align-items: center;
+  align-items: flex-start;
   gap: var(--spacing-2xl);
 }
 
@@ -580,6 +580,34 @@
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
+}
+
+/* Vision: 단색 배경, 사진 미사용 */
+.vision-card .vision-background {
+  display: none;
+}
+
+.vision-card::before,
+.vision-card::after {
+  display: none;
+}
+
+.vision-card .vision-overlay {
+  background: var(--color-primary);
+}
+
+/* Mission: 단색 배경, 사진 미사용 */
+.mission-card .mission-background {
+  display: none;
+}
+
+.mission-card::before,
+.mission-card::after {
+  display: none;
+}
+
+.mission-card .mission-overlay {
+  background: var(--color-primary);
 }
 
 .mission-overlay-title,

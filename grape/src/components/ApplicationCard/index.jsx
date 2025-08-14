@@ -108,13 +108,13 @@ const ApplicationCard = ({ image, imageAlt, label, title, link, desc, desc2, ful
   };
   const cardContent = (
     <>
+      {title && <div className="application-card-title">{title}</div>}
       {image && (
         <div className={`application-card-image-container ${fullWidthImage ? 'fullwidth' : ''}`}>
           <img src={image} alt={imageAlt} />
         </div>
       )}
       <div className="application-card-label">{label}</div>
-      <div className="application-card-title">{title}</div>
       {renderAsListIfLabeled(descriptions) ||
         descriptions.map((text, index) => (
           <div key={index} className="application-card-desc">{renderHighlighted(text)}</div>

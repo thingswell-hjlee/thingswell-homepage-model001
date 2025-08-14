@@ -8,6 +8,8 @@ import manufacturing from "../../assets/manufacturing.jpg";
 import construction from "../../assets/construction.jpg";
 import logo from "../../assets/logo.png";
 import ProductList from '../../pages/Products/ProductList';
+import ProductHeader from '../../components/ProductPage/ProductHeader';
+import ProductInfo from '../../components/ProductPage/ProductInfo';
 
 // Certificate imports
 import patentCertificate1 from "../../assets/patent_certificate_10-2404374.png";
@@ -131,30 +133,24 @@ const About = () => {
       <div className="page-content">
         <div className="page-layout">
           <div className="main-content">
-            <div className="solutions-section">
-              <SolutionCard
-                subtitle="About"
-                title="회사소개"
-                showButton={false}
-                link="/solutions/detail"
-                className="custom-solution-left"
-                variant="hero"
-                reverse={false}
-              />
+            <ProductHeader />
 
+            <div className="product-page-content">
+              <div className="container">
+                <ProductInfo productName="회사소개" productTitle="회사소개" breadcrumbs={["Home", "About"]} />
+              </div>
+            <div className="solutions-section">
               <div id="greeting" className="about-section">
                 <div className="about-section-title-image-container">
                   <div className="about-section-title">
-                    <p className="about-section-title-subtitle">
-                      CEO's Greeting
-                    </p>
-                    <h1 className="about-section-content-title">인사말</h1>
+                    <h1 className="about-section-content-title">회사소개</h1>
                   </div>
                   <div className="about-section-content-container">
                     <div className="about-section-title-image">
                       <img src={logo} alt="ceo" />
                     </div>
                     <div className="about-section-title-image-description">
+                      <div className="about-intro">
                       <p>
                         (주)싱스웰(Thingswell Co., Ltd.)은 AI 에이전트를 활용한 멀티모달 상황 인지를 기반으로, 근로자와 노인, 장애인을 위한 안전·자동화 플랫폼 솔루션에 특화된 기업입니다. 다양한 센서(음향·영상·동작 등)와 무선 통신, 빅데이터 분석 기술을 결합하여 실시간으로 주변 환경을 모니터링하고 이상 상태를 조기에 감지함으로써, 사고를 예방하고 긴급 상황에서 즉각적인 대응이 가능하도록 지원합니다.
                       </p>
@@ -211,78 +207,61 @@ const About = () => {
 
                       <h2>(주) 싱스웰 대표이사</h2>
                       <h3>이학준</h3>
+                      </div>
+
+                      <div className="mission-vision-container">
+                        <div className="mission-card">
+                          <img
+                            src={manufacturing}
+                            alt="Manufacturing"
+                            className="mission-background"
+                          />
+                          <div className="mission-overlay"></div>
+                          <div className="mission-content">
+                            <h3 className="mission-title">미션</h3>
+                            <p className="mission-description">
+                              AI 기술을 활용하여 모든 사람들이 안전하고 편리한 환경에서 생활할 수 있도록 혁신적인 솔루션을 제공합니다.
+                            </p>
+                          </div>
+                        </div>
+                        <div className="vision-card">
+                          <img
+                            src={construction}
+                            alt="Construction"
+                            className="vision-background"
+                          />
+                          <div className="vision-overlay"></div>
+                          <div className="vision-content">
+                            <h3 className="vision-title">비전</h3>
+                            <p className="vision-description">
+                              멀티모달 상황 인지 기술의 선두주자로서, 안전과 자동화 분야에서 글로벌 리더가 되겠습니다.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="core-value-section">
+                        <div className="about-section-title">
+                          <p className="about-section-title-subtitle">Core Value</p>
+                          <h1 className="about-section-content-title">핵심가치</h1>
+                        </div>
+                        <div className="core-value-list">
+                          <ul>
+                            <li>
+                              <strong>도전 (Innovation)</strong>미래지향적 R&D 투자와 핵심기술 내재화를 통한 경쟁력 확보
+                            </li>
+                            <li>
+                              <strong>전문성 (Expertise)</strong>AI, 임베디드SW, 정보통신공사 등 원스톱 역량 기반의 솔루션 제공
+                            </li>
+                            <li>
+                              <strong>사회적 책임 (Social Impact)</strong>노인·장애인·산업현장 등 안전·복지 향상에 기여하여 공공의 이익 창출
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div id="mission" className="about-section">
-                <div className="about-section-title-image-container">
-                  <div className="about-section-title">
-                    <p className="about-section-title-subtitle">
-                      Mission and Vision
-                    </p>
-                    <h1 className="about-section-content-title">
-                      미션 및 비전
-                    </h1>
-                  </div>
-                  <div className="mission-vision-container">
-                    <div className="mission-card">
-                      <img
-                        src={manufacturing}
-                        alt="Manufacturing"
-                        className="mission-background"
-                      />
-                      <div className="mission-overlay"></div>
-                      <div className="mission-content">
-                        <h3 className="mission-title">미션</h3>
-                        <p className="mission-description">
-                          AI 기술을 활용하여 모든 사람들이 안전하고 편리한
-                          환경에서 생활할 수 있도록 혁신적인 솔루션을
-                          제공합니다.
-                        </p>
-                      </div>
-                    </div>
-                    <div className="vision-card">
-                      <img
-                        src={construction}
-                        alt="Construction"
-                        className="vision-background"
-                      />
-                      <div className="vision-overlay"></div>
-                      <div className="vision-content">
-                        <h3 className="vision-title">비전</h3>
-                        <p className="vision-description">
-                          멀티모달 상황 인지 기술의 선두주자로서, 안전과 자동화
-                          분야에서 글로벌 리더가 되겠습니다.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div id="core-value" className="core-value-section">
-                  <div className="about-section-title">
-                    <p className="about-section-title-subtitle">
-                      Core Value
-                    </p>
-                    <h1 className="about-section-content-title">핵심가치</h1>
-                  </div>
-                  <div className="core-value-list">
-                    <ul>
-                      <li>
-                        <strong>도전 (Innovation)</strong>미래지향적 R&D 투자와
-                        핵심기술 내재화를 통한 경쟁력 확보
-                      </li>
-                      <li>
-                        <strong>전문성 (Expertise)</strong>AI, 임베디드SW,
-                        정보통신공사 등 원스톱 역량 기반의
-                        솔루션 제공
-                      </li>
-                      <li>
-                        <strong>사회적 책임 (Social Impact)</strong>노인·장애인·산업현장 등 안전·복지 향상에 기여하여 공공의 이익 창출
-                      </li>
-                    </ul>
-                  </div>
               </div>
 
               <div id="history" className="about-section">
@@ -574,11 +553,11 @@ const About = () => {
                       <div className="location-card">
                         <h3 className="location-title">연락처</h3>
                         <p className="location-text">
-                          전화: 031-689-5959
+                          대표번호: 1833-7758
                           <br />
                           팩스: 031-689-5959
                           <br />
-                          이메일: well@thingswell.co.kr
+                          이메일: contact@thingswell.co.kr
                         </p>
                       </div>
                     </div>
@@ -589,6 +568,7 @@ const About = () => {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 };

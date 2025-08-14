@@ -40,9 +40,11 @@
 }
 
 .application-card-image-container.fullwidth img {
-  width: 100%;
+  width: 50%;
   height: auto;
   object-fit: contain;
+  display: block;
+  margin: 0;
 }
 
 /* About 페이지의 인증서 섹션에서만 적용되는 스타일 */
@@ -87,7 +89,19 @@
   font-family: var(--font-family-primary);
   color: var(--color-text-primary);
   text-align: left;
+  margin-bottom: var(--spacing-md);
 }
+
+/* 제목 배경 가독성 향상 옵션 (필요 시 활성화)
+.application-card-title::before {
+  content: '';
+  position: absolute;
+  inset: -6px -10px;
+  background: linear-gradient(90deg, rgba(0,0,0,0.45), rgba(0,0,0,0.15));
+  border-radius: 8px;
+  z-index: -1;
+}
+*/
 
 .application-card-desc {
   color: var(--color-text-secondary);
@@ -107,10 +121,12 @@
   color: var(--color-text-secondary);
   font-size: clamp(var(--font-size-sm), 2.2vw, var(--font-size-lg));
   line-height: 1.6;
+  display: grid;
+  gap: var(--spacing-md);
 }
 
 .application-card-desc-list li {
-  margin-bottom: var(--spacing-2xs);
+  margin-bottom: 0;
 }
 
 .application-card-desc-label {
@@ -130,14 +146,12 @@
 }
 
 /* About 페이지의 인증서 섹션에서만 적용되는 스타일 */
-.about-page .application-card-title {
-  font-size: var(--font-size-2xl);
-}
+.about-page .application-card-title { font-size: var(--font-size-2xl); }
 
 /* 반응형 스타일 */
 @media (max-width: 1024px) {
   .application-card {
-    padding: var(--spacing-2xl);
+    padding: var(--spacing-md) var(--spacing-2xl);
   }
   
   .application-card-image-container {
@@ -147,7 +161,7 @@
 
 @media (max-width: 768px) {
   .application-card {
-    padding: var(--spacing-2xl);
+    padding: var(--spacing-md) var(--spacing-2xl);
   }
   
   .application-card-image-container {
@@ -157,7 +171,7 @@
 
 @media (max-width: 480px) {
   .application-card {
-    padding: var(--spacing-xl);
+    padding: var(--spacing-md) var(--spacing-xl);
   }
   
   .application-card-image-container {
