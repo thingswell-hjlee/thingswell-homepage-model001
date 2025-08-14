@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import BoardList from '../BoardList';
 import BoardDetail from '../BoardDetail';
 import BoardEditor from '../BoardEditor';
@@ -12,6 +13,7 @@ const Board = ({ tableName, tableNames }) => {
   const [selectedPost, setSelectedPost] = useState(null);
   const [editingPost, setEditingPost] = useState(null);
   const resolvedTableName = tableName || (Array.isArray(tableNames) && tableNames.length > 0 ? tableNames[0] : undefined);
+  const location = useLocation();
 
   // 샘플 데이터 (실제로는 API에서 가져올 데이터)
   useEffect(() => {
@@ -19,6 +21,34 @@ const Board = ({ tableName, tableNames }) => {
     ];
     setPosts(samplePosts);
   }, []);
+
+  // 쿼리스트링으로 들어온 id, t(테이블) 처리 -> 상세로 바로 진입
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const idParam = params.get('id');
+    const tableParam = params.get('t');
+    if (idParam) {
+      const targetTable = tableParam || resolvedTableName;
+      if (targetTable) {
+        // Supabase에서 해당 게시물 조회
+        (async () => {
+          try {
+            const { data, error } = await supabase
+              .from(targetTable)
+              .select('*')
+              .eq('id', idParam)
+              .single();
+            if (!error && data) {
+              setSelectedPost({ ...data, tableName: targetTable });
+              setCurrentView('detail');
+            }
+          } catch (e) {
+            console.error('상세 조회 오류:', e);
+          }
+        })();
+      }
+    }
+  }, [location.search, resolvedTableName]);
 
   const handlePostClick = (post) => {
     console.log('게시물 클릭:', post);

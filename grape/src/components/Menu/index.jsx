@@ -31,16 +31,28 @@ const defaultMenuItems = [
     label: '회사', 
     path: '/about',
     submenu: [ 
-      { label: '회사소개', path: '/about#greeting' }, 
-      { label: '인증서', path: '/about#certificate' },
-      { label: '오시는 길', path: '/about#location' },
-      { label: '문의하기', path: '/contact' },
+      { label: '회사소개', path: '/about#greeting' },
+      { label: '연혁', path: '/about#history' },
+      { label: '면허인증특허', path: '/about#certificate' },
       { label: '게시판', path: '/announcement' },
+      { label: '오시는 길', path: '/about#location' },
+      // { label: '문의하기', path: '/contact' },
+
     ] 
   },
  
   { 
-    label: '솔루션', 
+    label: '사업분야', 
+    path: '/solutions',
+    submenu: [ 
+      { label: '산업 안전 솔루션', path: '/solution' }, 
+      { label: '노인 장애인 안전 솔루션', path: '/chemical-solution' },
+      { label: '통합제어 솔루션', path: '/manufacturing-solution' },
+    ] 
+  },
+
+  { 
+    label: '연구개발', 
     path: '/solutions',
     submenu: [ 
       { label: '산업 안전 솔루션', path: '/solution' }, 

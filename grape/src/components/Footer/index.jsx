@@ -65,8 +65,8 @@ function Footer() {
                     경기 안양시 동안구 학의로 2825 금강펜타리움 IT타워 A동
                     1302호
                   </p>
-                  <p>031-689-5959</p>
-                  <p>well@thingswell.co.kr</p>
+                  <p>1833-7758</p>
+                  <p>contact@thingswell.co.kr</p>
                 </div>
                 <p>
                   © {currentYear} ThingsWell 본 사이트의 모든 컨텐츠는 저작권의
@@ -74,14 +74,11 @@ function Footer() {
                 </p>
               </div>
               <div className="footer-social">
-                <a href="#" className="social-link">
-                  LinkedIn
+                <a href="https://thingswell.tistory.com/" className="social-link">
+                  Tstory
                 </a>
-                <a href="#" className="social-link">
-                  Twitter
-                </a>
-                <a href="#" className="social-link">
-                  GitHub
+                <a href="https://sites.google.com/thingswell.co.kr/ucontrol/" className="social-link">
+                  Ucontrol
                 </a>
               </div>
             </div>

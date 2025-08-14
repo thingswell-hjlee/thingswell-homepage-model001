@@ -38,7 +38,7 @@
  * - 각 솔루션 상세 페이지들
  */
 import { useState, useEffect } from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import "./App.css";
 import Menu from "./components/Menu";
 import "./components/Layout/BaseLayout.css";
@@ -88,11 +88,14 @@ import About from "./pages/About/About.jsx";
 import Login from "./pages/Login/Login.jsx";
 import { AuthProvider } from "./contexts/AuthContext.jsx";
 import Case_Bus_Seoul from "./pages/Cases/Case_Bus_Seoul.jsx";
+import { supabase } from "./lib/supabase";
 
 function HomePage() {
   const [isMobile, setIsMobile] = useState(false);
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [latestAnnouncement, setLatestAnnouncement] = useState(null);
+  const navigate = useNavigate();
   
   const cards = [
     {
@@ -184,6 +187,38 @@ function HomePage() {
     };
   }, []);
 
+  // 최신 공지사항 1건 가져오기
+  useEffect(() => {
+    const fetchLatestAnnouncement = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('Board_Announcement')
+          .select('id, title, created_at')
+          .order('id', { ascending: false })
+          .limit(1);
+
+        if (error) {
+          console.error('최신 공지 조회 오류:', error);
+          return;
+        }
+        if (data && data.length > 0) {
+          setLatestAnnouncement(data[0]);
+        }
+      } catch (err) {
+        console.error('최신 공지 조회 예외:', err);
+      }
+    };
+    fetchLatestAnnouncement();
+  }, []);
+
+  const handleAnnouncementClick = () => {
+    if (latestAnnouncement && latestAnnouncement.id) {
+      navigate(`/announcement?id=${encodeURIComponent(latestAnnouncement.id)}&t=Board_Announcement`);
+    } else {
+      navigate('/announcement');
+    }
+  };
+
   return (
     <div className="content">
       <div className="content-container">
@@ -202,6 +237,26 @@ function HomePage() {
                 currentIndex={currentCardIndex}
               />
             </div>
+            <div className="hero-content-section">
+                <div className="hero-content-card">
+                  {/* <h1 className="hero-content-card-title">신제품 소식</h1> */}
+                  <ul className="hero-content-card-list">
+                    <li><a href="/products/twmob-01/">2륜 카트 이동식 태양광 80w 무선CCTV 30배 줌 PTZ 5백만 화소 IP CCTV 세트</a></li>
+                  </ul>
+                </div>
+                <div className="hero-content-card">
+                  {/* <h1 className="hero-content-card-title">공지사항</h1> */}
+                  <ul className="hero-content-card-list">
+                    <li onClick={handleAnnouncementClick} style={{ cursor: 'pointer' }}>
+                      {latestAnnouncement?.title || '등록된 공지사항이 없습니다.'}
+                    </li>
+                  </ul>
+                </div>
+                <div className="hero-content-card">
+                  <h1 className="hero-content-card-title">정부지원사업 상담</h1>
+                  <button className="hero-content-card-button" onClick={() => window.location.href = '/contact'}>상담하기</button>
+                </div>
+              </div>
           </div>
         </div>
       </div>
