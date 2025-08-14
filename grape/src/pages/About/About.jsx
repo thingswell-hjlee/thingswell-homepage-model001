@@ -516,7 +516,7 @@ const About = () => {
                 <div className="cards-container">
                   <div className="application-card-section-title-container">
                     <div className="solution-card-subtitle">Certificate</div>
-                    <div className="application-card-section-title">인증서 · 인정서 · 지적재산권</div>
+                    <div className="application-card-section-title">면허인증특허</div>
                   </div>
                   <div className="application-cards no-line responsive-cards">
                     <ProductList

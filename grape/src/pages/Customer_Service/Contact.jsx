@@ -1,6 +1,6 @@
 import React from 'react';
 import SolutionCard from '../../components/SolutionCard';
-import ContactInfo from '../../components/ContactInfo';
+import Form from '../../components/Form';
 
 const Contact = () => {
   return (
@@ -10,7 +10,7 @@ const Contact = () => {
           <div className="main-content">
           <div className="solutions-section no-padding" >
               <SolutionCard subtitle="Announcement" title="문의하기" description="고객지원" showButton={false} link="/solutions/detail" className="custom-solution-left" variant="hero" reverse={false} />
-              <ContactInfo />
+              <Form />
             </div>
             
           </div>
