@@ -158,7 +158,13 @@ const About = () => {
                       <h3>이학준</h3>
                       </div>
 
-                      <div className="mission-vision-container">
+
+                      <div className="core-value-section">
+                        <div className="about-section-title">
+                          <p className="about-section-title-subtitle">Mission & Vision</p>
+                          <h1 className="about-section-content-title">미션 & 비전</h1>
+                        </div>
+                        <div className="mission-vision-container">
                         <div className="mission-card">
                           <img
                             src={manufacturing}
@@ -188,24 +194,6 @@ const About = () => {
                           </div>
                         </div>
                       </div>
-                      <div className="core-value-section">
-                        <div className="about-section-title">
-                          <p className="about-section-title-subtitle">Core Value</p>
-                          <h1 className="about-section-content-title">핵심가치</h1>
-                        </div>
-                        <div className="core-value-list">
-                          <ul>
-                            <li>
-                              <strong>도전 (Innovation)</strong>미래지향적 R&D 투자와 핵심기술 내재화를 통한 경쟁력 확보
-                            </li>
-                            <li>
-                              <strong>전문성 (Expertise)</strong>AI, 임베디드SW, 정보통신공사 등 원스톱 역량 기반의 솔루션 제공
-                            </li>
-                            <li>
-                              <strong>사회적 책임 (Social Impact)</strong>노인·장애인·산업현장 등 안전·복지 향상에 기여하여 공공의 이익 창출
-                            </li>
-                          </ul>
-                        </div>
                       </div>
 
                       <div className="core-value-section">
