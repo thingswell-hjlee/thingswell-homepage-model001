@@ -274,7 +274,7 @@
   width: 100%;
   height: 100%;
   text-align: center;
-  font-size: clamp(9px, 2vw, 13px);
+  font-size: var(--font-size-md);
   font-weight: var(--font-weight-regular);
   color: var(--color-text-primary);
   transition: all var(--transition-base);
