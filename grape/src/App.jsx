@@ -91,6 +91,7 @@ import { AuthProvider } from "./contexts/AuthContext.jsx";
 import Case_Bus_Seoul from "./pages/Cases/Case_Bus_Seoul.jsx";
 import { supabase } from "./lib/supabase";
 
+
 function HomePage() {
   const [isMobile, setIsMobile] = useState(false);
   const [currentCardIndex, setCurrentCardIndex] = useState(0);

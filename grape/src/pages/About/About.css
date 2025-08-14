@@ -36,7 +36,7 @@
 .about-section-title {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
   width: 100%;
   user-select: none; /* 드래그 방지 */
@@ -59,11 +59,11 @@
 }
 
 .about-section-content-title {
-  font-size: var(--font-size-2xl);
+  font-size: var(--font-size-3xl);
   font-weight: var(--font-weight-bold);
   color: var(--color-text);
   text-align: left;
-  margin: 0 0 var(--spacing-xl) 0;
+  margin: 0 0 var(--spacing-md) 0;
   user-select: none; /* 드래그 방지 */
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -85,6 +85,7 @@
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
+
 }
 
 .about-section-title-image {
@@ -128,7 +129,7 @@
   width: 100%;
   flex: 1;
   flex-direction: column;
-  gap: var(--spacing-3xl);
+  gap: var(--spacing-xl);
   user-select: none; /* 드래그 방지 */
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -429,7 +430,7 @@
 .vision-card {
   flex: 1;
   position: relative;
-  height: 300px;
+  height: 150px;
   border-radius: var(--border-radius-lg);
   overflow: hidden;
   cursor: pointer;
@@ -438,6 +439,7 @@
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
+  font-weight: var(--font-weight-bold);
 }
 
 .mission-card:hover,
@@ -539,7 +541,6 @@
 .mission-title,
 .vision-title {
   font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-bold);
   margin-bottom: var(--spacing-md);
   user-select: none; /* 드래그 방지 */
   -webkit-user-select: none;
@@ -547,14 +548,29 @@
   -ms-user-select: none;
 }
 
-.mission-description,
-.vision-description {
-  font-size: var(--font-size-base);
+.mission-description{
+  font-size: var(--font-size-xl);
   line-height: 1.6;
   user-select: none; /* 드래그 방지 */
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
+  font-weight: var(--font-weight-extrabold)!important;
+  color:#fff;
+}
+
+
+
+
+.vision-description {
+  font-size: var(--font-size-xl);
+  line-height: 1.6;
+  user-select: none; /* 드래그 방지 */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  font-weight: var(--font-weight-extrabold)!important;
+  color:#fff!important;
 }
 
 .mission-overlay,
@@ -593,7 +609,7 @@
 }
 
 .vision-card .vision-overlay {
-  background: var(--color-primary);
+  background: #3c9166;
 }
 
 /* Mission: 단색 배경, 사진 미사용 */
@@ -607,7 +623,7 @@
 }
 
 .mission-card .mission-overlay {
-  background: var(--color-primary);
+  background: #455496;
 }
 
 .mission-overlay-title,
@@ -715,9 +731,9 @@
 
   .mission-card,
   .vision-card {
-    width: 100%;
+    width: 300%;
     max-width: 100%;
-    height: 250px;
+    height: 100px!important;
   }
 
   .mission-background,
@@ -1129,7 +1145,6 @@
 
 /* 오시는 길 스타일 */
 .location-container {
-  display: flex;
   gap: var(--spacing-xl);
   width: 100%;
   max-width: 100%;
@@ -1138,6 +1153,9 @@
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
+  border-radius: var(--border-radius-xl)!important;
+  border: 5px solid #d9d9d9;
+  height: 400px;
 }
 
 .location-info {
@@ -1225,12 +1243,20 @@
 }
 
 .map-container {
-  width: 50%;
-  max-width: 50%;
+  width: 100%;
+  max-width: 100%;
   user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
+  border-radius: var(--border-radius-md)!important;
+}
+
+.map-container iframe {
+  display: block;
+  width: 100% !important;
+  height: 450px;
+  border: 0;
 }
 
 .map-placeholder {
@@ -1369,11 +1395,10 @@
 
 .core-value-section {
   background: var(--color-surface);
-  padding: var(--spacing-2xl);
   border-radius: var(--border-radius-lg);
   /* box-shadow: var(--shadow-md); */
-  border: 1px solid var(--border-color-light);
-  width: 100%;
+  /* border: 1px solid var(--border-color-light); */
+  width: 80%;
 }
 
 .core-value-list {
@@ -1437,12 +1462,40 @@
   gap: var(--spacing-sm);
 }
 
+.about-section-value-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xl);
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  user-select: none;
+}
+
+.product-card {
+  background: #f0f0f0;
+}
+
+.product-card img{
+  object-fit: fit; /* 원본 크기 유지 (확대/축소 없음) */
+  object-position: top center; /* 상단부터 보이도록 정렬 */
+}
+
+.contact-section-title{
+  text-align: center;
+}
+
 @media (max-width: 768px) {
   .location-container {
-    flex-direction: column;
+    display: flex !important;
+    align-items: flex-start;
+    justify-content: left;
     width: 100%;
     max-width: 100%;
     overflow-x: hidden;
+    border-radius: var(--border-radius-md)!important;
   }
 
   .location-info {
@@ -1455,6 +1508,7 @@
     width: 100%;
     max-width: 100%;
     overflow-x: hidden;
+    border: 1px solid var(--color-border);
   }
 
   .location-card {

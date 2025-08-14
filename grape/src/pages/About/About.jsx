@@ -21,6 +21,7 @@ import factoryRegistrationCertificate from "../../assets/factory_registration_ce
 import corporateResearchInstituteCertificate from "../../assets/corporate_research_institute_certificate.png";
 import ventureEnterpriseCertificate from "../../assets/venture_enterprise_certificate.png";
 import informationCommunicationBusinessCertificate from "../../assets/information_communication_business_certificate.png"; 
+import ContactInfo from "../../components/ContactInfo";
 
 const About = () => {
   const location = useLocation();
@@ -150,7 +151,7 @@ const About = () => {
                       <img src={logo} alt="ceo" />
                     </div>
                     <div className="about-section-title-image-description">
-                      <div className="about-intro">
+                      <div className="about-intro" style={{marginBottom: 'var(--spacing-xl)'}}>
                       <p>
                         (주)싱스웰(Thingswell Co., Ltd.)은 AI 에이전트를 활용한 멀티모달 상황 인지를 기반으로, 근로자와 노인, 장애인을 위한 안전·자동화 플랫폼 솔루션에 특화된 기업입니다. 다양한 센서(음향·영상·동작 등)와 무선 통신, 빅데이터 분석 기술을 결합하여 실시간으로 주변 환경을 모니터링하고 이상 상태를 조기에 감지함으로써, 사고를 예방하고 긴급 상황에서 즉각적인 대응이 가능하도록 지원합니다,  Thingswell은 멀티모달 AI 인지 기술과 자동화 플랫폼을 융합하여, “보다 안전하고 스마트한 미래 사회”를 실현하는 데 기여하고자 합니다. 끊임없는 기술 혁신과 협력 네트워크를 통해 한층 발전된 솔루션을 선보이며, 근로자, 노인, 장애인을 비롯한 모든 이들의 안전과 편의성을 향상하는 데 최선을 다하겠습니다.
                       </p>
@@ -159,10 +160,14 @@ const About = () => {
                       </div>
 
 
-                      <div className="core-value-section">
+                      
+                    </div>
+                  </div>
+                  <div className="about-section-value-container">
+                  <div className="core-value-section">
                         <div className="about-section-title">
-                          <p className="about-section-title-subtitle">Mission & Vision</p>
-                          <h1 className="about-section-content-title">미션 & 비전</h1>
+                          <p className="about-section-title-subtitle">Mission </p>
+                          <h1 className="about-section-content-title">미션</h1>
                         </div>
                         <div className="mission-vision-container">
                         <div className="mission-card">
@@ -173,12 +178,21 @@ const About = () => {
                           />
                           <div className="mission-overlay"></div>
                           <div className="mission-content">
-                            <h3 className="mission-title">미션</h3>
                             <p className="mission-description">
                               AI 기술을 활용하여 모든 사람들이 안전하고 편리한 환경에서 생활할 수 있도록 혁신적인 솔루션을 제공합니다.
                             </p>
                           </div>
                         </div>
+                        
+                      </div>
+                      </div>
+
+                      <div className="core-value-section">
+                      <div className="about-section-title">
+                          <p className="about-section-title-subtitle">Vision</p>
+                          <h1 className="about-section-content-title">비전</h1>
+                        </div>
+                        <div className="mission-vision-container">
                         <div className="vision-card">
                           <img
                             src={construction}
@@ -187,7 +201,6 @@ const About = () => {
                           />
                           <div className="vision-overlay"></div>
                           <div className="vision-content">
-                            <h3 className="vision-title">비전</h3>
                             <p className="vision-description">
                               멀티모달 상황 인지 기술의 선두주자로서, 안전과 자동화 분야에서 글로벌 리더가 되겠습니다.
                             </p>
@@ -195,7 +208,6 @@ const About = () => {
                         </div>
                       </div>
                       </div>
-
                       <div className="core-value-section">
                         <div className="about-section-title">
                           <p className="about-section-title-subtitle">Core Value</p>
@@ -215,8 +227,7 @@ const About = () => {
                           </ul>
                         </div>
                       </div>
-                    </div>
-                  </div>
+                      </div>
                 </div>
               </div>
 
@@ -503,23 +514,12 @@ const About = () => {
                   </div>
                   <div className="location-container">
                     <div className="map-container">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3169.532835223222!2d126.96427059698114!3d37.40087886162995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357b5e3a312a3d07%3A0x8362eaabc267ff81!2z6riI6rCV7Y6c7YWM66as7JuASVTtg4Dsm4w!5e0!3m2!1sko!2skr!4v1752822417888!5m2!1sko!2skr" width="600" height="450" style={{border: 0}} allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
-                    </div>
-                    <div className="location-info">
-                      <div className="location-card">
-                        <h3 className="location-title">연락처</h3>
-                        <p className="location-text">
-                          대표번호: 1833-7758
-                          <br />
-                          팩스: 031-689-5959
-                          <br />
-                          이메일: contact@thingswell.co.kr
-                        </p>
-                      </div>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3169.532835223222!2d126.96427059698114!3d37.40087886162995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357b5e3a312a3d07%3A0x8362eaabc267ff81!2z6riI6rCV7Y6c7YWM66as7JuASVTtg4Dsm4w!5e0!3m2!1sko!2skr!4v1752822417888!5m2!1sko!2skr" width="100%" height="450" style={{ border: 0, width: '100%' }} allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                   </div>
                 </div>
               </div>
+              <ContactInfo />
             </div>
           </div>
         </div>

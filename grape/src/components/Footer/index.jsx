@@ -27,7 +27,7 @@ function Footer() {
       <footer className="footer">
         
         <div className="footer-container">
-          <div className="footer-content">
+          {/* <div className="footer-content">
             <div className="footer-section">
               <a href="/solutions" className="footer-subtitle">
                 솔루션
@@ -53,7 +53,7 @@ function Footer() {
                 회사소개
               </a>
             </div>
-          </div>
+          </div> */}
 
           <div className="footer-bottom">
             <div className="footer-divider"></div>
