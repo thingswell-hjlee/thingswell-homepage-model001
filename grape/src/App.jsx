@@ -93,11 +93,8 @@ import Application_filed from "./pages/Application_field/Application_filed.jsx";
 import Application_filed_2 from "./pages/Application_field/Application_filed_2.jsx";
 import Application_filed_3 from "./pages/Application_field/Application_filed_3.jsx";
 import Application_filed_4 from "./pages/Application_field/Application_filed_4.jsx";
-import Case_main from "./pages/Cases/Case_main.jsx";
 import Case from "./pages/Cases/Case.jsx";
-import Case_2 from "./pages/Cases/Case_2.jsx";
-import Case_3 from "./pages/Cases/Case_3.jsx";
-import Case_4 from "./pages/Cases/Case_4.jsx";
+import Case_main from "./pages/Cases/Case_main.jsx";
 import About from "./pages/About/About.jsx";
 import Login from "./pages/Login/Login.jsx";
 import { AuthProvider } from "./contexts/AuthContext.jsx";
@@ -378,18 +375,15 @@ function App() {
             {/* 납품사례 라우팅 */}
             <Route path="/cases" element={<Case_main />} />
             <Route path="/cases/overview" element={<Case />} />
-            <Route path="/cases/case-1" element={<Case_2 />} />
-            <Route path="/cases/case-2" element={<Case_3 />} />
-            <Route path="/cases/case-3" element={<Case_4 />} />
             <Route path="/cases/bus-seoul" element={<Case_Bus_Seoul />} />
 
-            {/* 회사소개 라우팅 */}
+            {/* 회사소개 라우팅 */} 
             <Route path="/about" element={<About />} />
 
             {/* 로그인 라우팅 */}
             <Route path="/login" element={<Login />} />
           </Routes>
-        </main>
+        </main> 
 
         {/* Footer - 홈페이지가 아닐 때만 표시 */}
         {location.pathname !== "/" && <Footer />}

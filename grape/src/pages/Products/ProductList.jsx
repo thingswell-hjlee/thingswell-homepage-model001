@@ -169,23 +169,43 @@ const ProductList = ({
             filteredProducts.map((product, idx) => {
               const Card = (
                 <div className={`product-card ${viewMode === 'list' ? 'list-item' : ''}`}>
-                  <MarqueeTitle text={product.name} />
-                  <img
-                    src={product.img}
-                    alt={product.name}
-                    className={embedded ? 'clickable' : ''}
-                    onClick={() => {
-                      if (embedded) setPreviewImage(product.img);
-                    }}
-                  />
-                  {product.title && (
-                    <div className="product-info_title">
-                      <h3>{product.title}</h3>
-                    </div>
+                  {viewMode === 'list' ? (
+                    // 리스트 뷰: 제목(왼쪽), 기관/날짜(오른쪽) 배치
+                    <>
+                      <div className="product-list-title">
+                        <h3>{product.name}</h3>
+                      </div>
+                      <div className="product-list-info">
+                        <div className="product-list-organization">
+                          <span>{product.organization || '기관명'}</span>
+                        </div>
+                        <div className="product-list-date">
+                          <span>{product.date || '날짜'}</span>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    // 카드 뷰: 기존 레이아웃 유지
+                    <>
+                      <MarqueeTitle text={product.name} />
+                      <img
+                        src={product.img}
+                        alt={product.name}
+                        className={embedded ? 'clickable' : ''}
+                        onClick={() => {
+                          if (embedded) setPreviewImage(product.img);
+                        }}
+                      />
+                      {product.title && (
+                        <div className="product-info_title">
+                          <h3>{product.title}</h3>
+                        </div>
+                      )}
+                      <div className={product.title ? 'product-info_desc' : 'product-info'}>
+                        <p>{product.desc}</p>
+                      </div>
+                    </>
                   )}
-                  <div className={product.title ? 'product-info_desc' : 'product-info'}>
-                    <p>{product.desc}</p>
-                  </div>
                 </div>
               );
               return product.link ? (
