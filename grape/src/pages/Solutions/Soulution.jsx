@@ -201,6 +201,8 @@ const Soulution = () => {
         solutionVariant="default"
         blocks={BLOCKS}
         />
+
+        
         </div>
       </div>
      

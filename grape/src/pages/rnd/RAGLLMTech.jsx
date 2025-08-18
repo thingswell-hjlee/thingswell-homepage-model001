@@ -1,26 +1,30 @@
 import React from 'react';
 import ProductHeader from '../../components/ProductPage/ProductHeader';
-import '../Government_support/Government_support.css';
+import './Soulution.css';
+import ProductInfo from '../../components/ProductPage/ProductInfo';
 
 const RAGLLMTech = () => {
   return (
-    <div className="ftd-page">
+    <div className="gs-page">
       <ProductHeader />
-      <div className="ftd-container">
-        <h2 className="ftd-title">RAG 기반 LLM 기술</h2>
+      <div className="product-page-content">
+          <div className="container">
+            <ProductInfo productName="RAG 기반 LLM 기술" productTitle="RAG 기반 LLM 기술" breadcrumbs={["Home", "솔루션", "RAG 기반 LLM 기술"]} />
+          </div>
+        <div className="gs-container">
 
-        <section className="ftd-section">
+        <section className="gs-section">
           <h3><span className="num">1</span> 개요</h3>
-          <p className="ftd-text">
+          <p className="gs-text">
             당사는 산업 현장의 복잡한 위험 상황을 실시간으로 이해하고 대응할 수 있도록, RAG(Retrieve-Augment-Generate) 기반 LLM(대형 언어 모델) 기술을 활용한
             대화형 안전 인지 시스템을 제공합니다. 이 솔루션은 상황 인지, 문맥 분석, 지식 검색을 결합하여 지능적인 경고, 보고, 대응 안내를 가능하게 하는 차세대 산업안전 솔루션입니다.
           </p>
         </section>
 
-        <section className="ftd-section">
+        <section className="gs-section">
           <h3><span className="num">2</span> 핵심 기술 구성</h3>
-          <div className="ftd-table-wrapper">
-            <table className="ftd-table">
+          <div className="gs-table-wrapper">
+            <table className="gs-table">
               <thead>
                 <tr>
                   <th className="col-type">구성 요소</th>
@@ -49,9 +53,9 @@ const RAGLLMTech = () => {
           </div>
         </section>
 
-        <section className="ftd-section">
+        <section className="gs-section">
           <h3><span className="num">3</span> 주요 기능 및 서비스 시나리오</h3>
-          <ul className="ftd-list">
+          <ul className="gs-list">
             <li>
               <strong>위험 상황 실시간 해석 및 안내</strong> — 예: "기계가 이상한 소리를 내요" 입력 시, 문맥 분석을 통해 "모터 과열 가능성이 있습니다. 즉시 전원을 차단하고 관리자를 호출해 주세요."와 같은 지침 제공
             </li>
@@ -67,10 +71,10 @@ const RAGLLMTech = () => {
           </ul>
         </section>
 
-        <section className="ftd-section">
+        <section className="gs-section">
           <h3><span className="num">4</span> 기술적 차별성</h3>
-          <div className="ftd-table-wrapper">
-            <table className="ftd-table">
+          <div className="gs-table-wrapper">
+            <table className="gs-table">
               <thead>
                 <tr>
                   <th className="col-type">항목</th>
@@ -104,9 +108,9 @@ const RAGLLMTech = () => {
           </div>
         </section>
 
-        <section className="ftd-section">
+        <section className="gs-section">
           <h3><span className="num">5</span> 기술 적용 분야</h3>
-          <ul className="ftd-list">
+          <ul className="gs-list">
             <li>건설 현장: 위험 행동 Q&A, 도급 근로자 안전교육 지원</li>
             <li>제조 공장: 설비 이상 징후 설명, 작업 매뉴얼 질의 대응</li>
             <li>야간 무인 작업장: 위험 탐지 후 상황 해석 및 대응 유도</li>
@@ -114,9 +118,9 @@ const RAGLLMTech = () => {
           </ul>
         </section>
 
-        <section className="ftd-section">
+        <section className="gs-section">
           <h3><span className="num">6</span> 서비스 가능 항목</h3>
-          <ul className="ftd-list">
+          <ul className="gs-list">
             <li>RAG + LLM 통합 대화형 시스템 커스터마이징</li>
             <li>현장 안전 매뉴얼 기반 벡터 데이터베이스 구축</li>
             <li>Jetson Orin 등 온디바이스에 최적화된 모델 제공</li>
@@ -124,6 +128,7 @@ const RAGLLMTech = () => {
             <li>실증 현장 시나리오 제작 및 POC(개념 증명) 테스트 지원</li>
           </ul>
         </section>
+      </div>
       </div>
     </div>
   );

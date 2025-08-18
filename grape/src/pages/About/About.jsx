@@ -36,6 +36,8 @@ const About = () => {
       image: ventureEnterpriseCertificate,
       imageAlt: "벤처기업 확인서",
       category: "기업인증",
+      organization: "벤처기업확인기관",
+      date: "2022-08-25"
     },
     {
       title: "기업부설연구소 인증서",
@@ -43,6 +45,8 @@ const About = () => {
       image: corporateResearchInstituteCertificate,
       imageAlt: "기업부설연구소 인증서",
       category: "기업인증",
+      organization: "한국산업기술진흥협회",
+      date: "2023-08-30"
     },
     {
       title: "정보통신공사업등록증",
@@ -50,6 +54,8 @@ const About = () => {
       image: informationCommunicationBusinessCertificate,
       imageAlt: "정보통신공사업등록증",
       category: "사업등록",
+      organization: "경기도",
+      date: "2023-09-14"
     },
     {
       title: "공장등록증명서",
@@ -57,6 +63,8 @@ const About = () => {
       image: factoryRegistrationCertificate,
       imageAlt: "공장등록증명서",
       category: "사업등록",
+      organization: "한국산업단지공단",
+      date: "2025-06-23"
     },
     {
       title: "SW사업자 일반현황관리확인서",
@@ -64,6 +72,8 @@ const About = () => {
       image: softwareBusinessOperatorCertificate,
       imageAlt: "SW사업자 일반현황관리확인서",
       category: "사업등록",
+      organization: "한국소프트웨어산업협회",
+      date: "2024-05-30"
     },
     {
       title: "실내외 센서 모듈을 이용한 공기질 관리 방법 및 장치",
@@ -71,6 +81,8 @@ const About = () => {
       image: patentCertificate1,
       imageAlt: "특허증 - 실내외 센서 모듈을 이용한 공기질 관리 방법 및 장치",
       category: "특허",
+      organization: "특허청",
+      date: "2022-05-27 "
     },      
     {
       title: "AI 기반의 캡슐형 스마트 쉘터",
@@ -78,6 +90,8 @@ const About = () => {
       image: patentCertificate2,
       imageAlt: "특허증 - AI 기반의 캡슐형 스마트 쉘터",
       category: "특허",
+      organization: "특허청",
+      date: "2022-07-19"
     },
     {
       title: "사용자 맞춤형 서비스를 제공하는 캡슐형 스마트 쉘터",
@@ -85,6 +99,8 @@ const About = () => {
       image: patentCertificate3,
       imageAlt: "특허증 - 사용자 맞춤형 서비스를 제공하는 캡슐형 스마트 쉘터",
       category: "특허",
+      organization: "특허청",
+      date: "2023-04-28"
     },
     {
       title: "레이더와 카메라를 이용한 위급 상황 알람 장치",
@@ -92,6 +108,8 @@ const About = () => {
       image: patentCertificate4,
       imageAlt: "특허증 - 레이더와 카메라를 이용한 위급 상황 알람 장치",
       category: "특허",
+      organization: "특허청",
+      date: "2025-06-20"
     },
   ];
 
@@ -501,6 +519,7 @@ const About = () => {
                       title="인증 및 특허"
                       subtitle="회사 보유 인증서와 특허"
                       breadcrumbs={["Home", "About", "Certificates"]}
+                      hideSearch={true}
                       products={applicationCardsData.map((c, idx) => ({
                         name: c.title,
                         title: c.label,
@@ -508,6 +527,8 @@ const About = () => {
                         desc: c.imageAlt,
                         category: c.category,
                         link: undefined,
+                        organization: c.organization,
+                        date: c.date
                       }))}
                     />
                   </div>

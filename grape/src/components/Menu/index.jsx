@@ -53,11 +53,11 @@ const defaultMenuItems = [
 
   { 
     label: '연구개발', 
-    path: '/solutions',
+    path: '/rnd',
     submenu: [ 
-      { label: '산업 안전 솔루션', path: '/solutions/overview' }, 
-      { label: '노인 장애인 안전 솔루션', path: '/solutions/chemical' },
-      { label: '통합제어 솔루션', path: '/solutions/manufacturing' },
+      { label: '산업 안전 솔루션', path: '/rnd/industrial-safety' }, 
+      { label: '노인 장애인 안전 솔루션', path: '/rnd/elderly-disabled' },
+      { label: '통합제어 솔루션', path: '/rnd/integrated-control' },
     ] 
   },
       { 

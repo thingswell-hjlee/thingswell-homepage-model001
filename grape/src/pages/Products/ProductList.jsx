@@ -60,6 +60,7 @@ const ProductList = ({
   embedded = false,
   hideToolbar = false,
   hideSearchAndView = false,
+  hideSearch = false,
   headerImage = null,
 }) => {
   const [selectedCategory, setSelectedCategory] = useState('전체');
@@ -121,15 +122,17 @@ const ProductList = ({
           </div>
           {!hideSearchAndView && (
             <div className="product-list-actions">
-              <div className="product-list-search">
-                <SearchComponent
-                  placeholder="검색어를 입력하세요"
-                  onSearch={(value) => setSearchTerm(value)}
-                  noPadding={false}
-                  searchTerm={searchTerm}
-                  setSearchTerm={setSearchTerm}
-                />
-              </div>
+              {!hideSearch && (
+                <div className="product-list-search">
+                  <SearchComponent
+                    placeholder="검색어를 입력하세요"
+                    onSearch={(value) => setSearchTerm(value)}
+                    noPadding={false}
+                    searchTerm={searchTerm}
+                    setSearchTerm={setSearchTerm}
+                  />
+                </div>
+              )}
               <div className="view-mode-toggle">
                 <button
                   className={`view-mode-btn ${viewMode === 'card' ? 'active' : ''}`}

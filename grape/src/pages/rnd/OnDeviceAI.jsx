@@ -1,27 +1,31 @@
 import React from 'react';
 import ProductHeader from '../../components/ProductPage/ProductHeader';
 import './Soulution.css';
+import ProductInfo from '../../components/ProductPage/ProductInfo';
 
 const OnDeviceAI = () => {
   return (
-    <div className="ftd-page">
+    <div className="gs-page">
       <ProductHeader />
-      <div className="ftd-container">
-        <h2 className="ftd-title">온디바이스 AI 기술</h2>
+      <div className="product-page-content">
+          <div className="container">
+            <ProductInfo productName="온디바이스 AI 기술" productTitle="온디바이스 AI 기술" breadcrumbs={["Home", "솔루션", "온디바이스 AI 기술"]} />
+          </div>
+        <div className="gs-container">
 
-        <section className="ftd-section">
+        <section className="gs-section">
           <h3><span className="num">1</span> 개요</h3>
-          <p className="ftd-text">
+          <p className="gs-text">
             당사는 산업안전 분야에 특화된 온디바이스 AI(On-Device Artificial Intelligence) 기술을 개발하여,
             통신이 불안정하거나 제한된 환경에서도 실시간으로 위험을 감지하고 즉각적으로 대응할 수 있는 솔루션을 제공합니다.
             현장에서 센서 데이터와 AI 알고리즘을 직접 처리함으로써 지연 없는 판단, 개인정보 보호, 저전력 운영을 동시에 실현합니다.
           </p>
         </section>
 
-        <section className="ftd-section">
+        <section className="gs-section">
           <h3><span className="num">2</span> 기술 구성 및 특징</h3>
-          <div className="ftd-table-wrapper">
-            <table className="ftd-table">
+          <div className="gs-table-wrapper">
+            <table className="gs-table">
               <thead>
                 <tr>
                   <th className="col-type">구성 요소</th>
@@ -55,9 +59,9 @@ const OnDeviceAI = () => {
           </div>
         </section>
 
-        <section className="ftd-section">
+        <section className="gs-section">
           <h3><span className="num">3</span> 주요 기능 및 적용 시나리오</h3>
-          <ul className="ftd-list">
+          <ul className="gs-list">
             <li>
               <strong>실시간 객체·행동 인식</strong> — 쓰러짐, 금지 구역 진입, 구조 신호(손 흔들기) 등 다양한 행동을 실시간 감지합니다.
               경량화된 모델(YOLOv11, MediaPipe, Pose Estimation 등)로 온디바이스 환경에서 효율 동작.
@@ -74,10 +78,10 @@ const OnDeviceAI = () => {
           </ul>
         </section>
 
-        <section className="ftd-section">
+        <section className="gs-section">
           <h3><span className="num">4</span> 기술적 차별성</h3>
-          <div className="ftd-table-wrapper">
-            <table className="ftd-table">
+          <div className="gs-table-wrapper">
+            <table className="gs-table">
               <thead>
                 <tr>
                   <th className="col-type">항목</th>
@@ -116,9 +120,9 @@ const OnDeviceAI = () => {
           </div>
         </section>
 
-        <section className="ftd-section">
+        <section className="gs-section">
           <h3><span className="num">5</span> 적용 가능 산업 환경</h3>
-          <ul className="ftd-list">
+          <ul className="gs-list">
             <li>건설 현장: 고소 작업 위험 행동 감지, 비가시 구역 접근 감시</li>
             <li>제조 공장: 설비·중장비 위험 구역 접근 감지 및 이상 행동 모니터링</li>
             <li>터널/지하 작업장: 통신 차단 구간에서 독립적 위험 탐지·경고</li>
@@ -127,9 +131,9 @@ const OnDeviceAI = () => {
           </ul>
         </section>
 
-        <section className="ftd-section">
+        <section className="gs-section">
           <h3><span className="num">6</span> 서비스 제공 항목</h3>
-          <ul className="ftd-list">
+          <ul className="gs-list">
             <li>온디바이스 AI 기반 POC 제품 및 시스템 개발</li>
             <li>현장 맞춤형 센서 조합 설계 및 최적화</li>
             <li>Jetson Orin, Rockchip 기반 AI 모델 최적화 서비스</li>
@@ -137,6 +141,7 @@ const OnDeviceAI = () => {
             <li>Edge-to-Cloud 연동 및 관리자용 대시보드 구축</li>
           </ul>
         </section>
+      </div>
       </div>
     </div>
   );

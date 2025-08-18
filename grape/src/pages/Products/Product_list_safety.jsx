@@ -9,9 +9,9 @@ import main3 from '../../assets/product_twedg_04/main.png';
 import safetyHeaderImage from '../../assets/header_image/product.jpg';
 
 const products = [
-  { name: 'TWMOB-01', title: '2륜 카트 이동식 태양광 80w 무선CCTV 30배 줌 PTZ 5백만 화소 IP CCTV 세트', desc: '카트 이동식 태양광 80w 30배 줌 5백만 화소 초 고화질 PTZ 카메라 세트는 비 포장 공사 현장에서도 이동이 용이하며, LTE 라우터를 설치하여 PC 또는 모바일로 원격 관제 합니다.', img: main1, link: '/products/twmob-01', category: '이동형 인체감지 AI 카메라' },
-  { name: 'TWMOB-02', title: '태양광40w 패널 20AH, WIFI PTZ 2백만 화소 IP CCTV 세트', desc: '태양광 40W 패널을 사용하므로 전기 및 인터넷이 필요치 않으며, 25A 배터리를 충전하여 PTZ 및 LTE 라우터를 작동하는 IP CCTV 입니다.', img: main2, link: '/product-list/2', category: '고정형 인체감지 AI 카메라' },
-  { name: 'TWEDG-04', title: 'On-Device Analytics 서버', desc: 'AI video analytics, LTE 8-CH(Extensible 16-CH mode)', img: main3, link: '/products/twedg-04', category: '네트워크장비' },
+  { name: 'TWMOB-01', title: '2륜 카트 이동식 태양광 80w 무선CCTV 30배 줌 PTZ 5백만 화소 IP CCTV 세트', desc: '카트 이동식 태양광 80w 30배 줌 5백만 화소 초 고화질 PTZ 카메라 세트는 비 포장 공사 현장에서도 이동이 용이하며, LTE 라우터를 설치하여 PC 또는 모바일로 원격 관제 합니다.', img: main1, link: '/products/twmob-01', category: '이동형 인체감지 AI 카메라', organization: '싱스웰', date: '2024-12-15' },
+  { name: 'TWMOB-02', title: '태양광40w 패널 20AH, WIFI PTZ 2백만 화소 IP CCTV 세트', desc: '태양광 40W 패널을 사용하므로 전기 및 인터넷이 필요치 않으며, 25A 배터리를 충전하여 PTZ 및 LTE 라우터를 작동하는 IP CCTV 입니다.', img: main2, link: '/product-list/2', category: '고정형 인체감지 AI 카메라', organization: '싱스웰', date: '2024-11-20' },
+  { name: 'TWEDG-04', title: 'On-Device Analytics 서버', desc: 'AI video analytics, LTE 8-CH(Extensible 16-CH mode)', img: main3, link: '/products/twedg-04', category: '네트워크장비', organization: '싱스웰', date: '2024-10-10' },
 ];
 
 export default function ProductListSafetyPage() {

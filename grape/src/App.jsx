@@ -68,9 +68,16 @@ import Soulution from "./pages/Solutions/Soulution.jsx";
 import ChemicalSolution from "./pages/Solutions/ChemicalSolution.jsx";
 import ManufacturingSolution from "./pages/Solutions/ManufacturingSolution.jsx";
 import ConstructionSolution from "./pages/Solutions/ConstructionSolution.jsx";
-import MultimodalAwareness from "./pages/Solutions/MultimodalAwareness.jsx";
-import RAGLLMTech from "./pages/Solutions/RAGLLMTech.jsx";
-import OnDeviceAI from "./pages/Solutions/OnDeviceAI.jsx";
+import MultimodalAwareness from "./pages/rnd/MultimodalAwareness.jsx";
+import RAGLLMTech from "./pages/rnd/RAGLLMTech.jsx";
+import OnDeviceAI from "./pages/rnd/OnDeviceAI.jsx";
+import RndSoulution from "./pages/rnd/Soulution_main.jsx";
+import ElderlyDisabledSolution from "./pages/rnd/rnd_elderlydisabled.jsx";
+import IndustrialSafetySolution from "./pages/rnd/rnd_industrialsafety.jsx";
+import IntegratedControlSolution from "./pages/rnd/rnd_Integratedcontrol.jsx";
+import Embeddedsystem from "./pages/rnd/Embeddedsystem .jsx";
+import SmartAssistiveTechnology from "./pages/rnd/SmartAssistiveTechnology.jsx";
+import AirQualityManagement from "./pages/rnd/AirQualityManagement.jsx";
 import Product_main from "./pages/Products/Product_main.jsx";
 import Product_list_control from "./pages/Products/Product_list_control.jsx";
 import Product_control from "./pages/Products/Product_control.jsx";
@@ -88,11 +95,6 @@ import Announcement from "./pages/Customer_Service/Announcement.jsx";
 import Customer_service from "./pages/Customer_Service/Customer_service.jsx";
 import Downloads from "./pages/Customer_Service/Downloads.jsx";
 import Contact from "./pages/Customer_Service/Contact.jsx";
-import Application_filed_main from "./pages/Application_field/Application_filed_main.jsx";
-import Application_filed from "./pages/Application_field/Application_filed.jsx";
-import Application_filed_2 from "./pages/Application_field/Application_filed_2.jsx";
-import Application_filed_3 from "./pages/Application_field/Application_filed_3.jsx";
-import Application_filed_4 from "./pages/Application_field/Application_filed_4.jsx";
 import Case from "./pages/Cases/Case.jsx";
 import Case_main from "./pages/Cases/Case_main.jsx";
 import About from "./pages/About/About.jsx";
@@ -344,13 +346,21 @@ function App() {
             {/* 솔루션 라우팅 */}
             <Route path="/solutions" element={<Soulution_main />} />
             <Route path="/solutions/overview" element={<Soulution />} />
-            <Route path="/solutions/multimodal-awareness" element={<MultimodalAwareness />} />
-            <Route path="/solutions/rag-llm" element={<RAGLLMTech />} />
-            <Route path="/solutions/on-device-ai" element={<OnDeviceAI />} />
             <Route path="/solutions/chemical" element={<ChemicalSolution />} />
             <Route path="/solutions/manufacturing" element={<ManufacturingSolution />} />
             <Route path="/solutions/construction" element={<ConstructionSolution />} />
 
+            {/* 연구개발 라우팅 */}
+            <Route path="/rnd" element={<RndSoulution />} />
+            <Route path="/rnd/elderly-disabled" element={<ElderlyDisabledSolution />} />
+            <Route path="/rnd/industrial-safety" element={<IndustrialSafetySolution />} />
+            <Route path="/rnd/integrated-control" element={<IntegratedControlSolution />} />
+            <Route path="/rnd/multimodal-awareness" element={<MultimodalAwareness />} />
+            <Route path="/rnd/rag-llm" element={<RAGLLMTech />} />
+            <Route path="/rnd/on-device-ai" element={<OnDeviceAI />} />
+            <Route path="/rnd/embedded-system" element={<Embeddedsystem />} />
+            <Route path="/rnd/smart-assistive-technology" element={<SmartAssistiveTechnology />} />
+            <Route path="/rnd/air-quality-management" element={<AirQualityManagement />} />
             {/* 제품 라우팅 */}
             <Route path="/products" element={<Product_main />} />
             <Route path="/products/control" element={<Product_control />} />
@@ -366,11 +376,11 @@ function App() {
             <Route path="/customer-service/contact" element={<Contact />} />
 
             {/* 응용분야 라우팅 */}
-            <Route path="/application-field" element={<Application_filed_main />} />
+            {/* <Route path="/application-field" element={<Application_filed_main />} />
             <Route path="/application-field/overview" element={<Application_filed />} />
             <Route path="/application-field/field-1" element={<Application_filed_2 />} />
             <Route path="/application-field/field-2" element={<Application_filed_3 />} />
-            <Route path="/application-field/field-3" element={<Application_filed_4 />} />
+            <Route path="/application-field/field-3" element={<Application_filed_4 />} /> */}
 
             {/* 납품사례 라우팅 */}
             <Route path="/cases" element={<Case_main />} />
