@@ -148,7 +148,7 @@
   white-space: nowrap;
   outline: none;
   border-radius: var(--menu-button-border-radius);
-  user-select: none;
+  user-select: text;
 }
 
 /* 서브메뉴 인디케이터 */
@@ -283,7 +283,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  user-select: none;
+  user-select: text;
   margin: 0 var(--spacing-xs);
 }
 

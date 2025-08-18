@@ -410,9 +410,16 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
   // 데스크톱에서 호버 시 서브메뉴 표시
   const handleMouseEnter = useCallback((index) => {
     if (isMobile) return;
+    
+    // 다른 메뉴에 호버할 때 active 상태 해제
+    if (activeMenuIndex !== null && activeMenuIndex !== index) {
+      setActiveMenuIndex(null);
+      setActiveSubmenuIndex(null);
+    }
+    
     const hasSubmenu = !!(defaultMenuItems[index] && defaultMenuItems[index].submenu && defaultMenuItems[index].submenu.length > 0);
     setOpenSubmenu(hasSubmenu ? index : null);
-  }, [isMobile]);
+  }, [isMobile, activeMenuIndex]);
 
   // 메뉴 영역으로 다시 진입 시 닫힘 타이머 취소
   const cancelHoverCloseTimer = useCallback(() => {
@@ -427,6 +434,8 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
     if (isMobile) return;
     cancelHoverCloseTimer();
     hoverCloseTimerRef.current = setTimeout(() => {
+      // 메뉴바에 마우스가 떠 있을 때는 서브메뉴를 닫지 않음
+      // 대신 현재 페이지 기준으로 서브메뉴 상태를 유지
       if (
         activeMenuIndex !== null &&
         defaultMenuItems[activeMenuIndex] &&
@@ -434,9 +443,8 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
         defaultMenuItems[activeMenuIndex].submenu.length > 0
       ) {
         setOpenSubmenu(activeMenuIndex);
-      } else {
-        setOpenSubmenu(null);
       }
+      // activeMenuIndex가 null이어도 현재 열린 서브메뉴는 유지
       hoverCloseTimerRef.current = null;
     }, 200);
   }, [isMobile, activeMenuIndex, cancelHoverCloseTimer]);
