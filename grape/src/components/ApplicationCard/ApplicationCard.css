@@ -90,6 +90,23 @@
   color: var(--color-text-primary);
   text-align: left;
   margin-bottom: var(--spacing-md);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  transition: all 0.3s ease;
+}
+
+.application-card-title:hover {
+  overflow: visible;
+  white-space: normal;
+  word-wrap: break-word;
+  background: var(--color-surface-primary);
+  padding: var(--spacing-sm);
+  border-radius: var(--border-radius-sm);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+  position: relative;
 }
 
 /* 제목 배경 가독성 향상 옵션 (필요 시 활성화)

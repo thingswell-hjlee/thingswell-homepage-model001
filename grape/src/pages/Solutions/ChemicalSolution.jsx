@@ -1,101 +1,152 @@
 import React from 'react';
 import SolutionDetailPage from './SolutionDetailPage';
 import fire from '../../assets/fire.jpg';
-import dangerous from '../../assets/dangerous.jpg';
-import welding from '../../assets/welding.jpg';
 import Collision from '../../assets/collision.jpg';
-import Personel_violation from '../../assets/Personnel_violations.jpg';
-import POE from '../../assets/poe.jpg';
 import manufacturing from '../../assets/manufacturing.jpg';
+import construction from '../../assets/construction.jpg';
 import grinding from '../../assets/grinding.jpg';
+import server from '../../assets/server.jpg';
+import main from '../../assets/solution_1/main.png';
+import ProductHeader from '../../components/ProductPage/ProductHeader';
+import ProductInfo from '../../components/ProductPage/ProductInfo';
+import ContactInfo from '../../components/ContactInfo';
+import solution from '../../assets/header_image/Solution.jpg';
+import care from '../../assets/care.png';
+
+const BREADCRUMBS = ["Home", "Solutions", "노인 및 장애인 홈케어 솔루션"];
+
+const SOLUTION_DATA = {
+  title: "노인 및 장애인을 위한 홈케어 솔루션",
+  description:
+    "AI 기반의 상황/행동 인지 홈케어 솔루션은 인지장애를 가진 노인 및 장애인의 안전과 편의를 향상하기 위해 개발된 비접촉식 스마트 모니터링 시스템입니다. 사생활 침해 우려 없이 위험 상황을 조기에 감지하고, 단계별 알림을 통해 신속한 대응을 돕습니다. 또한, 사용자의 일상생활 패턴을 학습하여 개개인에게 최적화된 맞춤형 케어를 제공합니다.",
+};
+
+const WORKER_SAFETY_CARDS = [
+  {
+    image: Collision,
+    imageAlt: "위험 상황 감지",
+    title: "위험 상황 감지 및 알림",
+    link: "/solutions/multimodal-awareness",
+    desc: [
+      "낙상 감지: 침대, 거실, 화장실 등에서 넘어지거나 쓰러지는 상황을 즉시 감지하여 알림을 보냅니다.",
+      "이상 행동 감지: 자해, 폭행 등 위험 행동이나 과도한 흥분, 과몰입, 배회 등 비정상적인 행동을 파악해 경고합니다.",
+      "생활 위험 감지: 주방에서 요리 중 장시간 방치하거나, 위험한 공간에 접근하는 것을 감지해 알립니다."
+    ]
+  },
+  {
+    image: fire,
+    imageAlt: "스마트 환경 제어",
+    title: "스마트 환경 제어",
+    link: "/solutions/rag-llm",
+    desc: [
+      "다양한 센서 데이터(영상, 음향, 공기질, 모션)를 분석하여 사용자의 상태에 따라 조명, 음향, 환기 등 스마트 홈 기기를 자동으로 제어합니다.",
+      "사용자의 심리 상태를 안정시키기 위한 테라피 콘텐츠(에어케어, 사운드, 비주얼)를 제공하여 정서적 안정에 도움을 줍니다."
+    ]
+  },
+  {
+    image: server,
+    imageAlt: "IoT 연동",
+    title: "스마트폰 및 IoT 연동",
+    link: "/solutions/overview",
+    desc: [
+      "스마트밴드, 스마트폰 등 IoT 기기와 연동하여 사용자의 움직임, 위치 등 다양한 데이터를 수집합니다.",
+      "수집된 데이터를 기반으로 개인화된 대화 및 알림 서비스를 제공합니다."
+    ]
+  },
+  {
+    image: server,
+    imageAlt: "개인 맞춤형 서비스",
+    title: "개인 맞춤형 솔루션",
+    link: "/solutions/on-device-ai",
+    desc: [
+      "사용자의 생활 패턴을 학습하여 투약 시간 알림, 건강 관리 스케줄 관리 등 인지장애 유형과 개인 특성을 고려한 맞춤형 서비스를 제공합니다.",
+      "지속적인 업그레이드와 사용성 평가를 통해 항상 최신 기술을 접목한 서비스를 제공합니다."
+    ]
+  },
+];
+
+const FEATURE_DESCRIPTIONS = [
+  {
+    image: care,
+    title: "서비스 구성도",
+    description: [
+      "데이터 수집 단계: AI 카메라/레이더 모듈, 복합 센서 모듈, 개인 IoT 기기에서 움직임, 행동, 환경, 생체 데이터를 수집합니다.",
+      "데이터 분석 단계: 융합형 멀티모달 모듈, AI 상황 추론 엔진, 클라우드 서버를 통해 수집된 데이터를 통합 분석하고 위험 상황을 실시간으로 판단합니다.",
+      "서비스 제공 단계: 스마트폰 앱, 단계별 알림, 홈 기기 통합 제어를 통해 실시간 상황 알림과 자동화된 환경 제어를 제공합니다."
+    ],
+  },
+];
+
+const APPLICATION_FIELD_CARDS = [
+  {
+    image: manufacturing,
+    imageAlt: "프라이버시 보호",
+    title: "프라이버시를 지키는 안전 모니터링",
+    desc: "침실, 화장실 등 사생활 공간에서도 CCTV 없이 AI 카메라, 레이더, 복합 센서를 활용해 낙상이나 이상 행동을 감지합니다. 사용자의 모습이 아닌 행동 패턴만을 분석하여 개인 정보를 보호합니다."
+  },
+  {
+    image: construction,
+    imageAlt: "3단계 알림 시스템",
+    title: "3단계 스마트 알림 시스템",
+    desc: "위험 상황 감지 시, 음성 안내 → 강력한 경고음 → 보호자 및 유관기관 알림 순으로 상황의 심각성에 맞는 알림을 제공해 골든타임을 확보합니다."
+  },
+  {
+    image: grinding,
+    imageAlt: "맞춤형 서비스",
+    title: "개인 맞춤형 솔루션",
+    desc: "사용자의 생활 패턴을 학습하여 투약 시간 알림, 건강 관리 스케줄 관리 등 인지장애 유형과 개인 특성을 고려한 맞춤형 서비스를 제공합니다."
+  },
+  {
+    image: grinding,
+    imageAlt: "지속적 관리",
+    title: "지속 가능한 관리 및 지원",
+    desc: "솔루션의 지속적인 업그레이드와 사용성 평가를 통해, 항상 최신 기술을 접목한 서비스를 제공하며 장애인·노인 삶의 질 제고에 기여합니다."
+  },
+];
+
+
+
+const BLOCKS = [
+  {
+    type: 'applicationCards',
+    data: APPLICATION_FIELD_CARDS,
+    props: { boxName: '서비스 특징' },
+  },
+  {
+    type: 'applicationCards',
+    data: WORKER_SAFETY_CARDS,
+    props: { boxName: '주요 기능' },
+  },
+  {
+    type: 'features',
+    data: FEATURE_DESCRIPTIONS,
+    props: { boxName: '서비스 구성도', columnsPerRow: 1 },
+  },
+];
 
 const ChemicalSolution = () => {
-  // 데이터
-  const solutionData = {
-    subtitle: "Chemical industry safety solutions",
-    title: "화학공업 안전 솔루션",
-    description: "화학공업 현장의 특수한 위험 요소와 환경을 고려한 전문 안전 솔루션입니다. 유해화학물질 취급, 고압 고온 작업, 폭발 위험 등 화학공업 특화 위험 요소를 실시간으로 모니터링하고 예방합니다.",
-    image: fire,
-    imageAlt: "화학공업 안전 솔루션",
-    buttonText: "데모 신청"
-  };
-
-  const applicationCardsData = [
-    {
-      image: fire,
-      imageAlt: "화학물질 누출",
-      label: "Chemical Leak",
-      title: "화학물질 누출"
-    },
-    {
-      image: dangerous,
-      imageAlt: "폭발 위험",
-      label: "Explosion Risk",
-      title: "폭발 위험"
-    },
-    {
-      image: welding,
-      imageAlt: "고압 작업",
-      label: "High Pressure Work",
-      title: "고압 작업"
-    },
-    {
-      image: Collision,
-      imageAlt: "설비 충돌",
-      label: "Equipment Collision",
-      title: "설비 충돌"
-    },
-    {
-      image: Personel_violation,
-      imageAlt: "보호장비 미착용",
-      label: "Safety Equipment Violation",
-      title: "보호장비 미착용"
-    },
-    {
-      image: POE,
-      imageAlt: "가스 누출",
-      label: "Gas Leak",
-      title: "가스 누출"
-    }
-  ];
-
-  const featureDescriptions = [
-    {
-      image: fire,
-      title: "화학공업 특화 안전 모니터링",
-      description: "화학공업 현장의 특수한 위험 요소와 환경에 특화된 안전 모니터링 시스템을 제공합니다. 유해화학물질 취급, 고압 고온 작업, 폭발 위험 등 화학공업 특화 위험 요소를 실시간으로 감지합니다."
-    },
-    {
-      image: manufacturing,
-      title: "화학물질 안전 관리 시스템",
-      description: "유해화학물질의 취급과 저장을 체계적으로 관리합니다. 화학물질의 누출이나 이상 상황을 실시간으로 감지하고 즉시 대응할 수 있습니다."
-    },
-    {
-      image: grinding,
-      title: "고압 고온 설비 모니터링",
-      description: "고압 고온 설비의 안전 상태를 실시간으로 모니터링하고 관리합니다. 설비의 이상 동작이나 고장 징후를 조기에 감지하여 사고를 예방합니다."
-    },
-    {
-      youtubeUrl: "https://www.youtube.com/watch?v=example3",
-      title: "화학공업 안전 모니터링 데모",
-      description: "실제 화학공업 현장에서 적용되는 안전 모니터링 시스템의 데모 영상입니다. 화학공업 특화 위험 요소 감지와 예방 시스템의 작동 과정을 확인할 수 있습니다."
-    }
-  ];
-
-  const formData = { title: '문의하기', subtitle: '' };
-
-  const blocks = [
-    { type: 'applicationCards', data: applicationCardsData },
-    { type: 'features', data: featureDescriptions },
-  ];
-
   return (
-    <SolutionDetailPage
-      solutionData={solutionData}
-      solutionVariant="compact"
-      blocks={blocks}
-      formData={formData}
-    />
+    <>
+      <ProductHeader image={solution} alt="solution" />
+      <div className="product-page-content">
+        <div className="container">
+          <ProductInfo
+            productName={SOLUTION_DATA.title}
+            productTitle={SOLUTION_DATA.title}
+            description={SOLUTION_DATA.description}
+            breadcrumbs={BREADCRUMBS}
+          />
+           <SolutionDetailPage
+        solutionData={SOLUTION_DATA}
+        solutionVariant="default"
+        blocks={BLOCKS}
+        />
+
+        
+        </div>
+      </div>
+     
+    </>
   );
 };
 
