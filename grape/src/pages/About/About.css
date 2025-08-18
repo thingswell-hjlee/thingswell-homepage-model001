@@ -1148,7 +1148,7 @@
   gap: var(--spacing-xl);
   width: 100%;
   max-width: 100%;
-  overflow-x: hidden;
+  overflow: hidden;
   user-select: text;
   -webkit-user-select: text;
   -moz-user-select: text;
@@ -1257,6 +1257,9 @@
   width: 100% !important;
   height: 450px;
   border: 0;
+  overflow: hidden;
+  scrolling: no;
+  -webkit-overflow-scrolling: touch;
 }
 
 .map-placeholder {
