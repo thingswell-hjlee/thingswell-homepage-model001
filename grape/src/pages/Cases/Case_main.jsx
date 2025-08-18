@@ -37,7 +37,7 @@ const Case_main = () => {
       title: "서울시 중구 40개 IP 카메라의 AI 안전 피플 카운팅 및 쓰러짐 감지 시스템 공급",
       description: "서울시 중구 40개 IP 카메라의 AI 안전 피플 카운팅 및 쓰러짐 감지 시스템 공급",
       image: manufacturing,
-      link: "/case",
+      link: "/cases/overview",
       industry: "보행자 안전",
       btnText: "사례 연구 보기"
     },

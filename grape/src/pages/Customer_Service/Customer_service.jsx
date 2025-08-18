@@ -16,7 +16,7 @@ const Customer_service = () => {
                 title="고객지원"
                 description="고객지원"
                 showButton={false}
-                link="/solutions/detail"
+                link="/solutions"
                 className="custom-solution-left"
                 variant="hero"
                 reverse={false}
@@ -34,19 +34,19 @@ const Customer_service = () => {
                 />
                   <div className="service-grid">
                     <div className="service-box">
-                      <Link to="/announcement">
+                      <Link to="/customer-service/announcement">
                         <h3>공지사항</h3>
                         <p>최신 공지사항을 확인하세요</p>
                       </Link>
                     </div>
                     <div className="service-box">
-                      <Link to="/contact">
+                      <Link to="/customer-service/contact">
                         <h3>문의하기</h3>
                         <p>궁금한 점을 문의하세요</p>
                       </Link>
                     </div>
                     <div className="service-box">
-                      <Link to="/downloads">
+                      <Link to="/customer-service/downloads">
                         <h3>다운로드</h3>
                         <p>관련 자료를 다운로드하세요</p>
                       </Link>

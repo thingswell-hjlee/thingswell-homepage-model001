@@ -1,6 +1,6 @@
 import React from 'react';
 import ProductHeader from '../../components/ProductPage/ProductHeader';
-import './ForwardThreatDetection.css';
+import './Soulution.css';
 
 const OnDeviceAI = () => {
   return (

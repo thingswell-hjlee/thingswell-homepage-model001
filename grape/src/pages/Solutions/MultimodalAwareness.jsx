@@ -1,26 +1,26 @@
 import React from 'react';
 import ProductHeader from '../../components/ProductPage/ProductHeader';
-import './ForwardThreatDetection.css';
+import './Soulution.css';
 import server from '../../assets/server.jpg';
 
 const MultimodalAwareness = () => {
   return (
-    <div className="ftd-page">
+    <div className="gs-page">
       <ProductHeader />
-      <div className="ftd-container">
-        <h2 className="ftd-title">멀티모달 상황인지 기술</h2>
-        <section className="ftd-section">
+      <div className="gs-container">
+        <h2 className="gs-title">멀티모달 상황인지 기술</h2>
+        <section className="gs-section">
           <h3><span className="num">1</span> 개요</h3>
-          <p className="ftd-text">
+          <p className="gs-text">
             당사는 산업 현장의 안전을 실시간으로 확보하기 위해 RGB 카메라, Time-of-Flight(ToF) 센서, UWB Radar 센서를 융합한 멀티모달 상황인지 기술을 개발 및 상용화하고 있습니다.
             이 기술은 기존 단일 센서 기반 감지의 한계를 극복하여, 조도 변화, 차폐, 분진 등 다양한 환경에서도 정확한 위험 인지 및 대응을 가능하게 합니다.
           </p>
         </section>
 
-        <section className="ftd-section">
+        <section className="gs-section">
           <h3><span className="num">2</span> 핵심 기술 구성</h3>
-          <div className="ftd-table-wrapper">
-            <table className="ftd-table">
+          <div className="gs-table-wrapper">
+            <table className="gs-table">
               <thead>
                 <tr>
                   <th className="col-type">기술 구성요소</th>
@@ -49,9 +49,9 @@ const MultimodalAwareness = () => {
           </div>
         </section>
 
-        <section className="ftd-section">
+        <section className="gs-section">
           <h3><span className="num">3</span> 적용 가능한 주요 서비스</h3>
-          <ul className="ftd-list">
+          <ul className="gs-list">
             <li>
               <strong>작업자 행동 감지 및 위험 경고 시스템</strong> — 쓰러짐/추락/과도한 움직임/이상 행동을 자동 감지해 사고를 예방하고,
               감지 즉시 음성·화면·모바일 앱 등 다양한 채널로 경고 알림을 제공합니다.
@@ -71,10 +71,10 @@ const MultimodalAwareness = () => {
           </ul>
         </section>
 
-        <section className="ftd-section">
+        <section className="gs-section">
           <h3><span className="num">4</span> 기술적 차별성</h3>
-          <div className="ftd-table-wrapper">
-            <table className="ftd-table">
+          <div className="gs-table-wrapper">
+            <table className="gs-table">
               <thead>
                 <tr>
                   <th className="col-type">항목</th>

@@ -26,7 +26,7 @@ const WORKER_SAFETY_CARDS = [
     imageAlt: "전방 위협 요소 감지",
     // label: "Forward threat detection",
     title: "멀티모달 데이터 수집 및 전처리",
-    link: "/solution/multimodal-awareness",
+    link: "/solutions/multimodal-awareness",
     desc:"입력 소스: 카메라(객체 감지, 행동 분석), ToF(깊이 매핑), 레이더(움직임 추적), 마이크(알람 감지), 공기질 센서, 모션 센서 등 다양한 센서에서 데이터를 실시간으로 수집합니다",
     desc2:"데이터 정규화: 다양한 형식의 센서 데이터를 표준화하여 분석 준비를 완료합니다"
   },
@@ -35,7 +35,7 @@ const WORKER_SAFETY_CARDS = [
     imageAlt: "후방 위협 요소 감지",
     // label: "Backward threat detection",
     title: "지능형 데이터 융합 및 추론",
-    link: "/solution/rag-llm",
+    link: "/solutions/rag-llm",
     desc: [
       "데이터 융합: 수집된 데이터를 시간순으로 정렬하고 상관관계를 분석하여 단일화된 데이터로 융합합니다.",
       "RAG-LVM/LLM 통합:",
@@ -48,7 +48,7 @@ const WORKER_SAFETY_CARDS = [
     imageAlt: "원격관리시스템",
     // label: "Remote management system",
     title: "자동화된 의사결정 및 조치",
-    link: "/solution/architecture/inference",
+    link: "/solutions/overview",
     desc: [
       "위험 평가: 추론된 데이터를 기반으로 위험 수준을 저-중-고로 분류하고, 상황에 맞는 즉각적인 조치를 결정합니다.",
       "조치 생성: 경고 알림 발송, 장비 자동 중단, 작업자에게 수정 조치 제안 등 자동화된 개입을 실행합니다."
@@ -59,7 +59,7 @@ const WORKER_SAFETY_CARDS = [
     imageAlt: "원격관리시스템",
     // label: "Remote management system",
     title: "엣지-클라우드 연동 처리",
-    link: "/solution/on-device-ai",
+    link: "/solutions/on-device-ai",
     desc: [
       "엣지 처리: 저지연 환경에서 즉각적인 위험 감지와 경고를 위해 디바이스 수준에서 핵심 연산을 수행합니다.",
       "클라우드 통합: 장기적인 데이터 분석, 모델 학습, 시스템 관리 등 비핵심 작업을 클라우드에서 처리하여 시스템의 확장성과 안정성을 확보합니다."

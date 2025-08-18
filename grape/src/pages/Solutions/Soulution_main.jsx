@@ -44,7 +44,7 @@ const Soulution_main = () => {
       description: "RAG 기반의 대규모 비전 모델(LVM), 대규모 언어 모델(LLM), 실시간 센싱 시스템의 멀티모달 데이터를 통합한 작업자 안전 솔루션",
       image: welding,
       industry: "제조 안전 솔루션",
-      link: "/solution",
+      link: "/solutions/overview",
       btnText: "자세히 보기"
     },
     {
@@ -55,7 +55,7 @@ const Soulution_main = () => {
       description: "건설 현장의 특수한 환경과 위험 요소를 고려한 전문 안전 솔루션",
       image: construction,
       industry: "건설 안전 솔루션",
-      link: "/construction-solution",
+      link: "/solutions/construction",
       btnText: "자세히 보기"
     },
     {
@@ -66,7 +66,7 @@ const Soulution_main = () => {
       description: "인지장애가 있는 장애인, 노인의 생활 안전 솔루션",
       image: manufacturing,
       industry: "노인 장애인 안전 솔루션",
-      link: "/manufacturing-solution",
+      link: "/solutions/manufacturing",
       btnText: "자세히 보기"
     },
     {
@@ -77,7 +77,7 @@ const Soulution_main = () => {
       description: "실시간 온도 모니터링을 통한 화재 감지 솔루션",
       image: grinding,
       industry: "전기차 화재 안전 솔루션",
-      link: "/chemical-solution",
+      link: "/solutions/chemical",
       btnText: "자세히 보기"
     }
   ];

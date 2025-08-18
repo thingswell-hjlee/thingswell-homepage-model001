@@ -67,7 +67,7 @@ function CardRotator({ cards, className = "", onCardChange, currentIndex: extern
       setCurrentIndex(index);
       setIsFading(true);
       transitionTimeoutRef.current = null;
-    }, 525); // 애니메이션의 절반 지점에서 새 카드 시작 (겹치는 효과)
+    }, 750); // 애니메이션의 절반 지점에서 새 카드 시작 (겹치는 효과)
   };
 
   // 자동 회전 효과
@@ -89,8 +89,8 @@ function CardRotator({ cards, className = "", onCardChange, currentIndex: extern
         setCurrentIndex(nextIndex);
         setIsFading(true);
         transitionTimeoutRef.current = null;
-      }, 525); // 애니메이션의 절반 지점에서 새 카드 시작 (겹치는 효과)
-    }, 2000); // 10초로 변경
+      }, 750); // 애니메이션의 절반 지점에서 새 카드 시작 (겹치는 효과)
+    }, 7000); // 7초로 변경
 
     return () => {
       clearInterval(intervalId);

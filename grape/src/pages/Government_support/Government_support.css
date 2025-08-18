@@ -24,8 +24,8 @@
   }
   
   .gs-section h3 {
-    font-size: var(--font-size-lg);
-    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
     margin: 0 0 var(--spacing-sm) 0;
     display: flex;
     align-items: center;
@@ -37,7 +37,7 @@
     width: 22px;
     height: 22px;
     border-radius: var(--border-radius-full);
-    background: var(--color-primary);
+    background: #000;
     color: var(--color-text-white);
     align-items: center;
     justify-content: center;
@@ -56,6 +56,10 @@
     padding-left: var(--spacing-md);
     color: var(--color-text-secondary);
     text-align: left;
+  }
+
+  .gs-list li {
+    margin-bottom: var(--spacing-sm);
   }
   
   .gs-table-wrapper {
@@ -77,11 +81,11 @@
   }
   
   .gs-table td {
-    padding: var(--spacing-md);
-    border: var(--border-width-thin) solid var(--border-color-light);
-    vertical-align: top;
-    color: var(--color-text-primary);
-  }
+  padding: var(--spacing-md);
+  border: var(--border-width-thin) solid var(--border-color-light);
+  vertical-align: middle;
+  color: var(--color-text-primary);
+}
   
   .gs-table .col-type {
     width: 160px;

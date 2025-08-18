@@ -55,7 +55,7 @@ const Login = () => {
         <div className="page-layout">
           <div className="main-content">
             <div className="solutions-section" >
-              <SolutionCard subtitle="Login" title="로그인" showButton={false} link="/solutions/detail" className="custom-solution-left" variant="hero" reverse={false} />
+              <SolutionCard subtitle="Login" title="로그인" showButton={false} link="/solutions" className="custom-solution-left" variant="hero" reverse={false} />
             </div>
             <div className="login-container">
               <div className="login-form">

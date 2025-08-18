@@ -55,7 +55,7 @@ const Application_filed_main = () => {
       description: "보안 및 감시 솔루션은 산업 현장에서 발생할 수 있는 각종 사고와 위험을 사전에 예방하고, 근로자의 안전을 체계적으로 관리하기 위해 도입되는 첨단 시스템입니다. AI, IoT, 빅데이터, 영상 분석 등 다양한 IT 기술이 융합되어, 실시간 위험 감지와 신속한 대응이 가능합니다",
       image: welding,
       industry: "보안 및 감시",
-      link: "/application-field-2",
+      link: "/application-field/field-1",
       btnText: "자세히 보기"
     },
     {
@@ -66,7 +66,7 @@ const Application_filed_main = () => {
       description: "제조업 현장의 특수한 작업 환경과 위험 요소를 고려한 전문 안전 솔루션입니다. 기계 작업, 화학물질 취급, 고온 작업 등 제조업 특화 위험 요소를 실시간으로 모니터링하고 예방합니다.",
       image: manufacturing,
       industry: "제조업 안전 및 자산관리",
-      link: "/application-field-3",
+      link: "/application-field/field-2",
       btnText: "자세히 보기"
     },
     {
@@ -77,7 +77,7 @@ const Application_filed_main = () => {
       description: "화학공업 현장의 특수한 위험 요소와 환경을 고려한 전문 안전 솔루션입니다. 유해화학물질 취급, 고압 고온 작업, 폭발 위험 등 화학공업 특화 위험 요소를 실시간으로 모니터링하고 예방합니다.",
       image: grinding,
       industry: "화학공업 안전 및 자산관리",
-      link: "/application-field-4",
+      link: "/application-field/field-3",
       btnText: "자세히 보기"
     }
   ];

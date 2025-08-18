@@ -141,7 +141,7 @@
   --container-padding: 1rem;
   
   /* Footer height used to ensure footer is visible without scroll on home */
-  --footer-height: 200px;
+  --footer-height: 200px; /* 실제 Footer 높이에 맞춰 조정 */
 
   /* Z-Index Scale */
   --z-index-dropdown: 1000;

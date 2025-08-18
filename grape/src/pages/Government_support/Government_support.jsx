@@ -72,7 +72,7 @@ const Government_support = () => {
         </section>
 
         <section className="gs-section">
-          <h3><span className="num">5.</span> 사업진행과정</h3>
+          <h3><span className="num">5</span> 사업진행과정</h3>
           <div className="gs-steps">
             <div className="gs-step">
               <div className="gs-step-title">보조금 신청</div>

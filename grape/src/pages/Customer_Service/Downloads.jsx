@@ -14,7 +14,7 @@ const Downloads = () => {
                 title="싱스웰 자료실"
                 description="고객지원"
                 showButton={false}
-                link="/solutions/detail"
+                link="/solutions"
                 className="custom-solution-left"
                 variant="hero"
                 reverse={false}

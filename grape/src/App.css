@@ -6,21 +6,9 @@
   text-decoration: none;
 }
 
-.content {
-  width: 100%;
-  height: calc(100vh - var(--footer-height));
-  display: flex;
-  flex-direction: column;
-}
-
 html, body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
   font-family: var(--font-family-primary);
-  background-color: var(--color-background-dark); /* 배경색을 다크로 변경 */
-  overflow-x: hidden; /* 가로 스크롤만 방지 */
-  -webkit-overflow-scrolling: touch; /* iOS 스크롤 최적화 */
+  background-color: var(--color-background-dark);
 }
 
 #root {
@@ -33,136 +21,119 @@ html, body {
   -webkit-overflow-scrolling: touch;
 }
 
-/* 새로운 앱 컨테이너 구조 */
+/* 앱 컨테이너 구조 */
 .app-container {
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* 전체 뷰포트 높이 보장 */
+  min-height: 100vh;
 }
 
 .main-content {
-  width: 100%;
+  flex: 1;
   display: flex;
   flex-direction: column;
-  overflow-y: auto; /* 내용이 넘칠 경우 스크롤 허용 */
-  -webkit-overflow-scrolling: touch; /* iOS 스크롤 최적화 */
-  pointer-events: auto;
-  position: relative;
-  z-index: 1;
-}
-
-/* 페이지 콘텐츠 스타일 */
-.page-content {
-  margin-bottom: 2rem; /* 하단 마진 추가 */
-  pointer-events: auto;
-  position: relative;
-  z-index: 1;
 }
 
 /* 홈페이지의 content-container에 대한 특별한 스타일 */
 .content-container {
   position: relative;
   display: block;
-  background-color: var(--color-background-dark); /* 배경색을 다크로 변경 */
+  background-color: var(--color-background-dark);
   margin: 0 auto;
   text-align: center;
   width: 100%;
+  height: 100vh;
   box-sizing: border-box;
   overflow: hidden;
-  -webkit-overflow-scrolling: touch;
-  height: calc(100vh - var(--footer-height)); /* 푸터를 뺀 높이로 설정 */
 }
 
-.main-center-wrapper {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding-bottom: 0; /* 중앙 정렬을 위해 불필요한 하단 여백 제거 */
-}
-
-.content{
-  height: calc(100vh - var(--footer-height));
-  max-height: 1400px;
-  width: 100%;
-  overflow-y: auto; /* 내용이 넘칠 경우 스크롤 허용 */
-  -webkit-overflow-scrolling: touch; /* iOS 스크롤 최적화 */
-}
-
-
-
+/* 배경 이미지 */
 .main-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0.6;
-  display: block;
-}
-
-/* 배경 이미지 전환 애니메이션 - CardRotator와 동기화 */
-.main-image {
-  backface-visibility: hidden;
-  transform: translateZ(0);
-  transition: opacity 1000ms ease;
-}
-
-.main-image.transitioning {
-  opacity: 0.15;
-}
-
-.main-image.transitioned {
-  opacity: 0.6;
-}
-
-.overlay-container {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.6;
+  display: block;
+  min-height: 100vh;
+  max-height: 100vh;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  transition: opacity 1000ms ease;
+  will-change: opacity;
+}
+
+.main-image.transitioning {
+  opacity: 0.15;
+  transform: translateZ(0) scale(1);
+}
+
+.main-image.transitioned {
+  opacity: 0.6;
+  transform: translateZ(0) scale(1);
+}
+
+/* 홈페이지 메인 오버레이 컨테이너 */
+.home-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
   z-index: 2;
   display: flex;
-  justify-content: center;
-  align-items: center; /* 중앙 정렬로 변경 */
-  padding-top: 200px; /* margin-top 대신 padding-top 사용 */
-}
-
-/* 홈 히어로를 화면 중앙에 배치 */
-.home-overlay {
-  /* 상단 고정 정렬 + 메뉴 높이만큼 여백 확보 */
-  align-items: flex-start;
-  padding-top: calc(var(--menu-height) + var(--spacing-2xl));
-}
-
-/* 홈 히어로 컨테이너도 상단 정렬 유지 */
-.home-overlay .main-center-wrapper {
+  flex-direction: column;
   justify-content: flex-start;
+  align-items: center;
+  box-sizing: border-box;
+  margin-top: calc(var(--menu-height) + var(--spacing-2xl));
 }
 
-.home-hero {
+/* 홈페이지 Footer 오버레이 */
+.home-footer-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
   width: 100%;
-  align-items: center; /* 좌측 정렬에서 중앙 정렬로 변경 */
+  z-index: 3;
 }
 
-.hero-content-text { 
-  width: min(92vw, 1500px); 
+/* 홈페이지 콘텐츠 래퍼 */
+.home-content-wrapper {
+  width: 100%;
+  max-width: 1400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: var(--spacing-2xl);
 }
 
+/* 카드 로테이터 섹션 */
+.card-rotator-section {
+  width: min(92vw, 1500px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 메뉴 오버레이 */
 .menu-overlay-subpage {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1000;
+  z-index: 11;
   width: 100%;
-  /* 래퍼는 클릭 통과, 내부 실제 메뉴만 클릭 허용 */
+  height: calc(var(--menu-height) + var(--spacing-xl) * 2);
   pointer-events: none;
   display: flex;
   justify-content: center;
 }
 
-/* 내부 실제 메뉴 요소에만 클릭 허용 */
+/* 메뉴 내부 요소들만 클릭 가능 */
 .menu-overlay-subpage .menu-container,
 .menu-overlay-subpage nav,
 .menu-overlay-subpage button,
@@ -175,39 +146,13 @@ html, body {
   pointer-events: auto;
 }
 
-.button {
-  position: static;
-  top: unset;
-  left: unset;
-  transform: none;
-  outline: none;
-}
-
-.button:focus {
-  outline: none;
-  border: none;
-  box-shadow: none;
-}
-
-.button-text:focus {
-  outline: none;
-  border: none;
-  box-shadow: none;
-}
-
-.button-text:active {
-  outline: none;
-  border: none;
-  box-shadow: none;
-}
-
+/* 버튼 스타일 */
 .button-text {
   font-family: var(--font-family-primary);
   font-weight: var(--font-weight-regular);
   padding: 0 80px 0 80px;
-  background-color: transparent;
-  border: none;
   background-color: var(--color-primary);
+  border: none;
   cursor: pointer;
   border-radius: var(--menu-button-border-radius);
   color: var(--color-text-white);
@@ -220,61 +165,27 @@ html, body {
   transform: scale(1.05);
 }
 
-.content-text {
-  text-align: center;
-  margin-bottom: 24px;
-  position: static;
-  top: unset;
-  left: unset;
-  transform: none;
-  color: var(--color-text-light);
-  font-weight: var(--font-weight-bold);
-  font-size: var(--font-size-3xl);
-  font-family: var(--font-family-primary);
+.button-text:focus,
+.button-text:active {
+  outline: none;
+  border: none;
+  box-shadow: none;
 }
 
-.content-text h1 {
-  margin: 0;
-  line-height: var(--line-height-normal);
-  font-size: var(--font-size-6xl);
-}
-
-.rolling-text {
-  display: inline-block;
-}
-
-.fade-in {
-  opacity: 1;
-  transition: opacity 250ms ease-in;
-}
-
-.fade-out {
-  opacity: 0;
-  transition: opacity 250ms ease-out;
-}
-
-/* 카드 전환 UI */
-
-/* 히어로 카드 레이아웃 (중앙 정렬) */
-.home-hero { align-items: center; }
-.hero-content-text { width: min(92vw, 1500px); margin: 0 auto; }
-
-/* 홈페이지에서 메뉴가 CardRotator를 가리지 않도록 z-index 조정 */
-.home-overlay .menu-overlay-subpage {
-  z-index: 1;
-}
-
-.hero-content-section{
+/* 히어로 콘텐츠 섹션 */
+.hero-content-section {
   max-width: 1400px;
   width: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: flex-start; /* 내부 컨텐츠를 상단(왼쪽) 끝에 배치 */
-  align-items: flex-start;     /* 내부 컨텐츠를 상단 끝에 배치 */
+  justify-content: center;
+  align-items: stretch;
   gap: var(--spacing-2xl);
-  width: 100%;
+  flex-shrink: 0;
+  position: relative;
 }
-.hero-content-card{
+
+.hero-content-card {
   padding: var(--spacing-2xl);
   text-align: left;
   background-image: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.35)), url('./assets/buildings.jpg');
@@ -283,28 +194,29 @@ html, body {
   background-repeat: no-repeat;
   border-radius: 15px;
   height: 200px;
+  min-height: 200px;
   word-break: keep-all;
+  flex: 1 1 0;
+  min-width: 0;
 }
 
-
-
-.hero-content-card-title{
-  font-size: var(--font-size-2xl)!important;
-  color: #fff!important;
+.hero-content-card-title {
+  font-size: var(--font-size-2xl) !important;
+  color: #fff !important;
   margin-top: 0;
   margin-bottom: var(--spacing-md);
 }
 
-.hero-content-card-description{
-  font-size: var(--font-size-xl)!important;
-  color: #fff!important;
+.hero-content-card-description {
+  font-size: var(--font-size-xl) !important;
+  color: #fff !important;
 }
 
-.hero-content-card-button{
+.hero-content-card-button {
   width: 100%;
   padding: 12px;
   background-color: #ff4d2d;
-  color:#fff !important;
+  color: #fff !important;
   font-weight: var(--font-weight-bold);
   border: none;
   border-radius: 4px;
@@ -313,26 +225,25 @@ html, body {
   transition: background-color 0.3s;
 }
 
-.hero-content-card-button:hover{
+.hero-content-card-button:hover {
   background-color: #f77862;
 }
 
-.hero-content-card li{
-  color: #fff!important;
+.hero-content-card li {
+  color: #fff !important;
   text-align: left;
   font-size: var(--font-size-xl);
 }
 
-/* 히어로 카드 리스트: 줄바꿈 시 들여쓰기 정렬 고정 */
-.hero-content-card-list{
+.hero-content-card-list {
   list-style: disc;
-  list-style-position: outside; /* 줄바꿈 시 텍스트가 동일한 시작선에 정렬 */
+  list-style-position: outside;
   margin: 0;
-  padding-left: 1.2em; /* 불릿 공간 확보 */
-  font-weight: var(--font-weight-bold); 
+  padding-left: 1.2em;
+  font-weight: var(--font-weight-bold);
 }
 
-/* 텍스트는 불투명 유지 */
+/* 텍스트 불투명 유지 */
 .hero-content-section,
 .hero-content-card,
 .hero-content-card * {
@@ -340,44 +251,10 @@ html, body {
   opacity: 1 !important;
 }
 
-/* 히어로 내부 카드 균일 분할 */
-.hero-content-card {
-  flex: 1 1 0;
-  min-width: 0;
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: var(--card-padding);
-}
-
-.read-the-docs {
-  color: var(--color-text-muted);
-}
-
-/* 노트북 & 태블릿 가로 (1024px - 1279px) */
+/* 반응형 스타일 */
 @media screen and (min-width: 1024px) and (max-width: 1279px) {
-  .overlay-container {
-    padding-top: 150px;
-  }
-
-  .content-text {
-    font-size: var(--font-size-xl);
-    text-align: center;
+  .home-overlay {
+    margin-top: calc(var(--menu-height) + var(--spacing-lg));
   }
 
   .button-text {
@@ -386,94 +263,67 @@ html, body {
   }
 }
 
-/* 태블릿 가로 (769px - 1023px) */
 @media screen and (min-width: 769px) and (max-width: 1023px) {
-  .content-text {
-    font-size: var(--font-size-xl);
-    top: 20%;
-    text-align: center;
-  }
-
   .button-text {
     padding: 0 70px 0 70px;
     font-size: var(--font-size-base);
-  }
-
-  .button {
-    top: 30%;
   }
 }
 
-/* 모바일 가로 & 태블릿 세로 (480px - 767px) */
 @media screen and (min-width: 480px) and (max-width: 767px) {
-  .content-text {
-    font-size: var(--font-size-xl);
-    top: 20%;
-    text-align: center;
-  }
-
   .button-text {
     padding: 0 70px 0 70px;
     font-size: var(--font-size-base);
   }
 
-  .button {
-    top: 30%;
+  .hero-content-section {
+    flex-direction: column;
+    gap: var(--spacing-lg);
   }
 
-  .main-content {
-    margin-top: var(--spacing-xl);
-    overflow-y: auto; /* 모바일에서 스크롤 보장 */
-    -webkit-overflow-scrolling: touch; /* iOS 스크롤 최적화 */
+  .hero-content-card {
+    min-height: 150px;
+    height: 150px;
   }
 
-  /* 모바일에서 스크롤 개선 */
-  .content {
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
+  .home-overlay {
+    margin-top: calc(var(--menu-height) + var(--spacing-sm));
+    padding: var(--spacing-sm) var(--spacing-md);
   }
-} 
 
-/* 모바일 (479px 이하) */
+  .home-content-wrapper {
+    gap: var(--spacing-lg);
+  }
+}
+
 @media screen and (max-width: 479px) {
-  .content-text {
-    font-size: 12px !important; /* 직접 픽셀 값 사용 */
-    top: 20%;
-    text-align: center;
-  }
-
-  .content-text h1 {
-    font-size: 50px !important; /* h1 태그도 명시적으로 설정 */
-  }
-
   .button-text {
     padding: 0 70px 0 70px;
-    font-size: 14px !important; /* 버튼 텍스트도 작게 조정 */
+    font-size: 14px !important;
   }
 
-  .button {
-    top: 30%;
+  .hero-content-section {
+    flex-direction: column;
+    gap: var(--spacing-md);
   }
 
-  .main-content {
-    margin-top: var(--spacing-xl);
-    overflow-y: auto; /* 모바일에서 스크롤 보장 */
-    -webkit-overflow-scrolling: touch; /* iOS 스크롤 최적화 */
+  .hero-content-card {
+    min-height: 120px;
+    height: 120px;
+    padding: var(--spacing-lg);
   }
 
-  /* 모바일에서 일정한 위치 유지 */
-  .main-center-wrapper {
-    padding-bottom: 0; /* 모바일에서도 중앙 정렬 유지 */
+  .hero-content-card-title {
+    font-size: var(--font-size-lg) !important;
   }
 
-  .overlay-container {
-    padding-top: 100px; /* 모바일에서는 더 작은 값 */
+  .home-overlay {
+    margin-top: calc(var(--menu-height) + var(--spacing-sm));
+    padding: var(--spacing-sm);
   }
 
-  /* 모바일에서 스크롤 개선 */
-  .content {
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
+  .home-content-wrapper {
+    gap: var(--spacing-lg);
   }
 }
 

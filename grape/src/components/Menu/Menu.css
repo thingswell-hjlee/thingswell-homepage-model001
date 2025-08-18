@@ -9,7 +9,6 @@
   position: relative;
   transition: all var(--transition-base);
   background: transparent;
-  margin-bottom: var(--spacing-xl);
   max-width: var(--container-max-width);
 }
 

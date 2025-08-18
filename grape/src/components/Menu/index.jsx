@@ -34,7 +34,7 @@ const defaultMenuItems = [
       { label: '회사소개', path: '/about#greeting' },
       { label: '연혁', path: '/about#history' },
       { label: '면허인증특허', path: '/about#certificate' },
-      { label: '게시판', path: '/announcement' },
+      { label: '게시판', path: '/customer-service/announcement' },
       { label: '오시는 길', path: '/about#location' },
       // { label: '문의하기', path: '/contact' },
 
@@ -45,9 +45,9 @@ const defaultMenuItems = [
     label: '사업분야', 
     path: '/solutions',
     submenu: [ 
-      { label: '산업 안전 솔루션', path: '/solution' }, 
-      { label: '노인 장애인 안전 솔루션', path: '/chemical-solution' },
-      { label: '통합제어 솔루션', path: '/manufacturing-solution' },
+      { label: '산업 안전 솔루션', path: '/solutions/overview' }, 
+      { label: '노인 장애인 안전 솔루션', path: '/solutions/chemical' },
+      { label: '통합제어 솔루션', path: '/solutions/manufacturing' },
     ] 
   },
 
@@ -55,39 +55,39 @@ const defaultMenuItems = [
     label: '연구개발', 
     path: '/solutions',
     submenu: [ 
-      { label: '산업 안전 솔루션', path: '/solution' }, 
-      { label: '노인 장애인 안전 솔루션', path: '/chemical-solution' },
-      { label: '통합제어 솔루션', path: '/manufacturing-solution' },
+      { label: '산업 안전 솔루션', path: '/solutions/overview' }, 
+      { label: '노인 장애인 안전 솔루션', path: '/solutions/chemical' },
+      { label: '통합제어 솔루션', path: '/solutions/manufacturing' },
     ] 
   },
       { 
         label: '제품', 
         path: '/products',
         submenu: [
-          { label: '스마트안전장비', path: '/product-list/safety' }, 
+          { label: '스마트안전장비', path: '/products/safety' }, 
           { label: '관제시스템', path: '/products/new/remote-monitoring' },
-          { label: '통합제어', path: '/product-list/control' }, 
+          { label: '통합제어', path: '/products/control/list' }, 
       
     ] 
   },
   // { 
   //   label: '적용분야', 
-  //   path: '/application-field-main',
+  //   path: '/application-field',
   //   submenu: [ 
-  //     { label: '건물안전 및 자산관리', path: '/application-field' }, 
-  //     { label: '보안 및 감시', path: '/application-field-2' }, 
-  //     { label: '제조업 안전 및 자산관리', path: '/application-field-3' }, 
-  //     { label: '화학공업 안전 및 자산관리', path: '/application-field-4' } 
+  //     { label: '건물안전 및 자산관리', path: '/application-field/overview' }, 
+  //     { label: '보안 및 감시', path: '/application-field/field-1' }, 
+  //     { label: '제조업 안전 및 자산관리', path: '/application-field/field-2' }, 
+  //     { label: '화학공업 안전 및 자산관리', path: '/application-field/field-3' } 
   //   ] 
   // },
   {   
     label: '실적', 
     path: '/cases',
     submenu: [ 
-      { label: '스마트안전장비', path: '/case' }, 
-      { label: '인공지능 AI', path: '/case-2' }, 
-      { label: '통합제어', path: '/case-3' }, 
-      { label: '정보통신공사', path: '/case-4' } 
+      { label: '스마트안전장비', path: '/cases/overview' }, 
+      { label: '인공지능 AI', path: '/cases/case-1' }, 
+      { label: '통합제어', path: '/cases/case-2' }, 
+      { label: '정보통신공사', path: '/cases/case-3' } 
     ] 
   },
   { 
@@ -95,8 +95,8 @@ const defaultMenuItems = [
     path: '/government-support',
     submenu: [ 
       { label: '스마트 안전장비지원사업', path: '/government-support-detail' }, 
-      { label: '건강일터 조성지원사업', path: '/government-support-detail' }, 
-      { label: '소공인 클린제조환경조성', path: '/government-support-detail' }, 
+      // { label: '건강일터 조성지원사업', path: '/government-support-detail' }, 
+      // { label: '소공인 클린제조환경조성', path: '/government-support-detail' }, 
     ] 
   },
 
