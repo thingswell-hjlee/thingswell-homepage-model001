@@ -2,13 +2,17 @@ import React from 'react';
 import ProductHeader from '../../components/ProductPage/ProductHeader';
 import './Soulution.css';
 import server from '../../assets/server.jpg';
+import ProductInfo from '../../components/ProductPage/ProductInfo';
 
 const MultimodalAwareness = () => {
   return (
     <div className="gs-page">
       <ProductHeader />
-      <div className="gs-container">
-        <h2 className="gs-title">멀티모달 상황인지 기술</h2>
+      <div className="product-page-content">
+          <div className="container">
+            <ProductInfo productName="멀티모달 상황인지 기술" productTitle="멀티모달 상황인지 기술" breadcrumbs={["Home", "솔루션", "멀티모달 상황인지 기술"]} />
+          </div>
+        <div className="gs-container">
         <section className="gs-section">
           <h3><span className="num">1</span> 개요</h3>
           <p className="gs-text">
@@ -107,6 +111,7 @@ const MultimodalAwareness = () => {
             </table>
           </div>
         </section>
+      </div>
       </div>
     </div>
   );

@@ -2,14 +2,18 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import ProductHeader from '../../components/ProductPage/ProductHeader';
 import './Government_support.css';
+import ProductInfo from '../../components/ProductPage/ProductInfo';
+import government from '../../assets/header_image/government_support.png';
 
 const Government_support = () => {
   return (
     <div className="gs-page">
-      <ProductHeader />
-      <div className="gs-container">
-        <h2 className="gs-title">스마트 안전장비 지원사업 (산업안전보건공단)</h2>
-
+      <ProductHeader image={government} alt="government" />
+      <div className="product-page-content">
+          <div className="container">
+            <ProductInfo productName="스마트 안전장비 지원사업 (산업안전보건공단)" productTitle="스마트 안전장비 지원사업 (산업안전보건공단)" breadcrumbs={["Home", "정부지원사업", "스마트 안전장비 지원사업"]} />
+          </div>
+          <div className="gs-container">
         <section className="gs-section">
           <h3><span className="num">1</span> 개요</h3>
           <p className="gs-text">
@@ -105,6 +109,8 @@ const Government_support = () => {
           <Link className="gs-button" to="/contact">문의하기</Link>
         </div>
       </div>
+        </div>
+      
     </div>
   );
 };

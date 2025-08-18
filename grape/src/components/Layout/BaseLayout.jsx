@@ -11,7 +11,11 @@ const BaseLayout = ({
 }) => {
   return (
     <div className={`base-layout ${className}`}>
-      {Header && <Header />}
+      {Header && (
+        <div className="header-wrapper">
+          <Header />
+        </div>
+      )}
       
       <div className="base-layout-content">
         <div className="container">

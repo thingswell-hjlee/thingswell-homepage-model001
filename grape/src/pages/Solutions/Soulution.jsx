@@ -10,7 +10,7 @@ import main from '../../assets/solution_1/main.png';
 import ProductHeader from '../../components/ProductPage/ProductHeader';
 import ProductInfo from '../../components/ProductPage/ProductInfo';
 import ContactInfo from '../../components/ContactInfo';
-import FeatureDescription from '../../components/FeatureDescription';
+import solution from '../../assets/header_image/Solution.jpg';
 
 const BREADCRUMBS = ["Home", "Solutions", "산업 안전 솔루션"];
 
@@ -187,7 +187,7 @@ const BLOCKS = [
 const Soulution = () => {
   return (
     <>
-      <ProductHeader />
+      <ProductHeader image={solution} alt="solution" />
       <div className="product-page-content">
         <div className="container">
           <ProductInfo
@@ -200,8 +200,7 @@ const Soulution = () => {
         solutionData={SOLUTION_DATA}
         solutionVariant="default"
         blocks={BLOCKS}
-      />
-      <ContactInfo />
+        />
         </div>
       </div>
      

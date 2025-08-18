@@ -2,6 +2,7 @@ import React from 'react';
 import SolutionCard from '../../components/SolutionCard';
 import ApplicationCardsSection from '../../components/ApplicationCardsSection';
 import FeatureDescription from '../../components/FeatureDescription';
+import ContactInfo from '../../components/ContactInfo';
 
 /**
  * 솔루션 상세 공통 레이아웃
@@ -44,6 +45,8 @@ export default function SolutionDetailPage({
               })}
 
               {/* Form 제거됨 */}
+              
+              <ContactInfo />
             </div>
           </div>
         </div>

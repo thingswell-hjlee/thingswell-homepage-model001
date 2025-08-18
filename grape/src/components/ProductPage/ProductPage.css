@@ -9,10 +9,10 @@
 
 .product-page-content {
   padding-top:var(--spacing-sm);
-  min-height: 100vh;
   overflow-y: auto;
   position: relative;
   z-index: 1;
+  margin-bottom: var(--spacing-2xl);
 }
 
 .container {

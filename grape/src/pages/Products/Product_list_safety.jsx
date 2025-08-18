@@ -6,6 +6,7 @@ import ProductList from './ProductList';
 import main1 from '../../assets/product_safety/main.jpg';
 import main2 from '../../assets/main_3.png';
 import main3 from '../../assets/product_twedg_04/main.png';
+import safetyHeaderImage from '../../assets/header_image/product.jpg';
 
 const products = [
   { name: 'TWMOB-01', title: '2륜 카트 이동식 태양광 80w 무선CCTV 30배 줌 PTZ 5백만 화소 IP CCTV 세트', desc: '카트 이동식 태양광 80w 30배 줌 5백만 화소 초 고화질 PTZ 카메라 세트는 비 포장 공사 현장에서도 이동이 용이하며, LTE 라우터를 설치하여 PC 또는 모바일로 원격 관제 합니다.', img: main1, link: '/products/twmob-01', category: '이동형 인체감지 AI 카메라' },
@@ -21,6 +22,7 @@ export default function ProductListSafetyPage() {
       subtitle="스마트 안전장비 제품들을 확인하세요"
       breadcrumbs={["Home", "Products", "Safety"]}
       longVertical
+      headerImage={safetyHeaderImage}
     />
   );
 }

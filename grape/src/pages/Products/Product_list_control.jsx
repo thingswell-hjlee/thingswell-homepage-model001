@@ -9,6 +9,7 @@ import falldown from '../../assets/falldown.jpg';
 import collision from '../../assets/collision.jpg';
 import collapse from '../../assets/collapse.jpg';
 import ProductList from './ProductList';
+import controlHeaderImage from '../../assets/header_image/product.jpg';
 
 const products = [
   { name: 'XCN-3000', title: '어드밴스드 통합제어기 - 산업용 통합 제어 시스템', img: welding, link: '/products/safety/1', category: '통합제어' },
@@ -29,7 +30,8 @@ export default function ProductListControlPage() {
       products={products}
       title="통합제어"
       subtitle="산업용 통합 제어 시스템 제품들을 확인하세요"
-      breadcrumbs={["Home", "Products", "System Control"]}
+      breadcrumbs={["Home", "Products", "통합제어"]}
+      headerImage={controlHeaderImage}
     />
   );
 }

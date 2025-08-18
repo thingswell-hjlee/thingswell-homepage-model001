@@ -60,6 +60,7 @@ const ProductList = ({
   embedded = false,
   hideToolbar = false,
   hideSearchAndView = false,
+  headerImage = null,
 }) => {
   const [selectedCategory, setSelectedCategory] = useState('전체');
   const [searchTerm, setSearchTerm] = useState('');
@@ -230,7 +231,7 @@ const ProductList = ({
 
   return (
     <BaseLayout
-      header={ProductHeader}
+      header={headerImage ? () => <ProductHeader image={headerImage} /> : ProductHeader}
       breadcrumbs={<Breadcrumbs breadcrumbs={breadcrumbs} />}
       title={title}
       subtitle={subtitle}

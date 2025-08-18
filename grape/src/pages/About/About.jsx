@@ -10,6 +10,7 @@ import logo from "../../assets/logo.png";
 import ProductList from '../../pages/Products/ProductList';
 import ProductHeader from '../../components/ProductPage/ProductHeader';
 import ProductInfo from '../../components/ProductPage/ProductInfo';
+import company from "../../assets/header_image/company.jpg";
 
 // Certificate imports
 import patentCertificate1 from "../../assets/patent_certificate_10-2404374.png";
@@ -143,7 +144,7 @@ const About = () => {
       <div className="page-content">
         <div className="page-layout">
           <div className="main-content">
-            <ProductHeader />
+            <ProductHeader image={company} alt="company" />
 
             <div className="product-page-content">
               <div className="container">

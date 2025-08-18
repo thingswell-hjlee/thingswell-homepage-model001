@@ -198,7 +198,7 @@
   display: flex;
   align-items: center;
   outline: none;
-  user-select: none;
+  user-select: text;
   border-bottom: var(--border-width-thin) solid var(--border-color-light);
 }
 

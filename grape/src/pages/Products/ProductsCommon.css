@@ -22,8 +22,6 @@
   display: flex;
   flex-direction: column;
   gap: var(--spacing-sm);
-  min-height: calc(100vh - 400px);
-  padding-bottom: var(--spacing-2xl);
   margin-top: var(--spacing-xl);
 }
 
@@ -98,7 +96,6 @@
 /* === 제품 그리드 === */
 .product-list-grid-container {
   margin-top: var(--spacing-lg);
-  margin-bottom: var(--spacing-2xl);
 }
 
 .product-grid > a {
@@ -112,7 +109,6 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: var(--spacing-xl);
-  min-height: 600px;
   align-content: start;
   align-items: stretch;
   padding: var(--spacing-xl);

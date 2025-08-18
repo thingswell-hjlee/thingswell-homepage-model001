@@ -6,9 +6,16 @@
   text-decoration: none;
 }
 
-html, body {
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
   font-family: var(--font-family-primary);
-  background-color: var(--color-background-dark);
+  background-color: var(--color-background-primary);
 }
 
 #root {
@@ -17,15 +24,17 @@ html, body {
   padding: 0;
   text-align: center;
   box-sizing: border-box;
-  background-color: var(--color-background-dark);
+  background-color: var(--color-background-primary);
   -webkit-overflow-scrolling: touch;
+  height: 100%;
 }
 
 /* 앱 컨테이너 구조 */
 .app-container {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  height: 100%;
+  min-height: 100%;
 }
 
 .main-content {
@@ -38,7 +47,7 @@ html, body {
 .content-container {
   position: relative;
   display: block;
-  background-color: var(--color-background-dark);
+  background-color: var(--color-background-primary);
   margin: 0 auto;
   text-align: center;
   width: 100%;
@@ -108,7 +117,7 @@ html, body {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  gap: var(--spacing-2xl);
+  gap: var(--spacing-md);
 }
 
 /* 카드 로테이터 섹션 */
@@ -127,7 +136,6 @@ html, body {
   right: 0;
   z-index: 11;
   width: 100%;
-  height: calc(var(--menu-height) + var(--spacing-xl) * 2);
   pointer-events: none;
   display: flex;
   justify-content: center;
@@ -186,18 +194,20 @@ html, body {
 }
 
 .hero-content-card {
-  padding: var(--spacing-2xl);
+  padding: var(--spacing-xl);
   text-align: left;
   background-image: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.35)), url('./assets/buildings.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   border-radius: 15px;
-  height: 200px;
+  height: 300px;
   min-height: 200px;
   word-break: keep-all;
   flex: 1 1 0;
   min-width: 0;
+  align-items: center;
+  border: 3px solid rgb(110, 110, 110);
 }
 
 .hero-content-card-title {
@@ -239,8 +249,9 @@ html, body {
   list-style: disc;
   list-style-position: outside;
   margin: 0;
-  padding-left: 1.2em;
   font-weight: var(--font-weight-bold);
+  padding:0;
+  text-align: left;
 }
 
 /* 텍스트 불투명 유지 */

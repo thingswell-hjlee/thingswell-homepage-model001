@@ -1,5 +1,8 @@
 .product-header {
   background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   color: white;
   padding: 0;
   position: relative;
@@ -9,19 +12,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  max-height:15vh;
-}
-
-.product-header::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><filter id="blur"><feGaussianBlur stdDeviation="10"/></filter></defs><rect width="100%" height="100%" fill="rgba(255,255,255,0.1)"/><circle cx="200" cy="200" r="50" fill="rgba(255,255,255,0.1)" filter="url(%23blur)"/><circle cx="800" cy="300" r="80" fill="rgba(255,255,255,0.1)" filter="url(%23blur)"/><circle cx="400" cy="700" r="60" fill="rgba(255,255,255,0.1)" filter="url(%23blur)"/></svg>');
-  opacity: 0.3;
-  z-index: 1;
+  max-height: 15vh;
+  min-height: 15vh;
 }
 
 .product-header > * {
@@ -33,15 +25,7 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.header-top-image {
-  width: 100%;
-}
 
-.header-top-image img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
 
 .company-logo h1 {
   font-size: 2rem;
