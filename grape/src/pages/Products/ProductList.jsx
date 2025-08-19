@@ -201,13 +201,6 @@ const ProductList = ({
 
   const content = (
     <div className="product-list-content">
-      {/* 추가 버튼 영역 */}
-      {addButton && (
-        <div className="product-list-add-button">
-          {addButton}
-        </div>
-      )}
-      
       {!hideToolbar && (
         <div className="product-list-toolbar">
           <div className="product-list-filter">
@@ -266,6 +259,13 @@ const ProductList = ({
         </div>
       )}
 
+      {/* 추가 버튼 영역 */}
+      {addButton && (
+        <div className="product-list-add-button" style={{ marginBottom: '20px', textAlign: 'right' }}>
+          {addButton}
+        </div>
+      )}
+
       <div className="product-list-grid-container">
         <ThreeColumnGrid listView={viewMode === 'list'} longVertical={longVertical}>
           {currentProducts.length > 0 ? (
@@ -291,14 +291,33 @@ const ProductList = ({
                     // 카드 뷰: 기존 레이아웃 유지
                     <>
                       <MarqueeTitle text={product.name} />
-                      <img
-                        src={product.img}
-                        alt={product.name}
-                        className={embedded ? 'clickable' : ''}
-                        onClick={() => {
-                          if (embedded) setPreviewImage(product.img);
-                        }}
-                      />
+                      {product.img && product.img !== 'undefined' ? (
+                        <img
+                          src={product.img}
+                          alt={product.name}
+                          className={embedded ? 'clickable' : ''}
+                          onClick={() => {
+                            if (embedded) setPreviewImage(product.img);
+                          }}
+                        />
+                      ) : (
+                        <div 
+                          style={{
+                            width: '100%',
+                            height: '200px',
+                            backgroundColor: '#f8f9fa',
+                            border: '2px dashed #dee2e6',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            color: '#6c757d',
+                            fontSize: '48px',
+                            fontWeight: 'bold'
+                          }}
+                        >
+                          ✕
+                        </div>
+                      )}
                       {product.title && (
                         <div className="product-info_title">
                           <h3>{product.title}</h3>

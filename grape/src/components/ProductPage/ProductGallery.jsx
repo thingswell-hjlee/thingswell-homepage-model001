@@ -14,14 +14,69 @@ const ProductGallery = ({
     return (
       <div className="product-gallery">
         <div className="main-image-container">
-          <div className="placeholder-image">
-            <span>제품 이미지</span>
+          <div 
+            style={{
+              width: '100%',
+              height: '400px',
+              backgroundColor: '#f8f9fa',
+              border: '2px dashed #dee2e6',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: '#6c757d',
+              fontSize: '72px',
+              fontWeight: 'bold'
+            }}
+          >
+            ✕
           </div>
         </div>
         <div className="thumbnail-container">
-          <div className="thumbnail placeholder-thumbnail"></div>
-          <div className="thumbnail placeholder-thumbnail"></div>
-          <div className="thumbnail placeholder-thumbnail"></div>
+          <div 
+            className="thumbnail"
+            style={{
+              backgroundColor: '#f8f9fa',
+              border: '2px dashed #dee2e6',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: '#6c757d',
+              fontSize: '24px',
+              fontWeight: 'bold'
+            }}
+          >
+            ✕
+          </div>
+          <div 
+            className="thumbnail"
+            style={{
+              backgroundColor: '#f8f9fa',
+              border: '2px dashed #dee2e6',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: '#6c757d',
+              fontSize: '24px',
+              fontWeight: 'bold'
+            }}
+          >
+            ✕
+          </div>
+          <div 
+            className="thumbnail"
+            style={{
+              backgroundColor: '#f8f9fa',
+              border: '2px dashed #dee2e6',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: '#6c757d',
+              fontSize: '24px',
+              fontWeight: 'bold'
+            }}
+          >
+            ✕
+          </div>
         </div>
       </div>
     );

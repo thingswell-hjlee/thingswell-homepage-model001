@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import ProductPage from '../ProductPage/ProductPage';
-import main from '../../assets/main_image.jpg';
 import { uploadImage, validateImageFile } from '../../utils/imageUpload';
 
 const RecordEditor = ({ 
@@ -9,35 +8,63 @@ const RecordEditor = ({
   onSave, 
   onCancel, 
   isModal = false,
-  submitting = false 
+  submitting = false,
+  mode = 'record', // 'record' 또는 'product'
+  tableName = 'Track_record' // 'Track_record' 또는 'Product'
 }) => {
   const [editingField, setEditingField] = useState(null);
   const [tempValue, setTempValue] = useState('');
   const [formData, setFormData] = useState({
-    name: '',
     title: '',
+    desc: '',
     overview_title: '',
-    overview: '',
-    bottom_box_title: '',
-    bottom_box_photo_caption: '',
-    bottom_box_photo_captions: '',
-    images: [main, main, main, main]
+    date: '',
+    orderer: '',
+    type: '',
+    kind: mode === 'product' ? '스마트안전장비' : '',
+    images: [],
+    // 제품 전용 필드들
+    keyFeatures: {
+      description: '',
+      features: ['', '', '', ''], // 주요 기능 목록 (4개)
+      images: [] // 각 이미지는 { url: '', caption: '' } 형태로 저장
+    },
+
+    specifications: [], // 이미지 배열로 변경
+    certifications: [], // 이미지 배열로 변경
+    downloads: [
+      { title: '', description: '', link: '' }
+    ],
+    videos: [] // 링크 배열로 변경
   });
 
   useEffect(() => {
     if (editData) {
       setFormData({
-        name: editData.title || '',
-        title: editData.desc || '',
+        title: editData.title || '',
+        desc: editData.desc || '',
         overview_title: editData.overview_title || '',
-        overview: editData.overview || '',
-        bottom_box_title: editData.bottom_box_title || '',
-        bottom_box_photo_caption: editData.bottom_box_photo_caption || '',
-        bottom_box_photo_captions: editData.bottom_box_photo_captions || '',
-        images: editData.images ? JSON.parse(editData.images) : [main, main, main, main]
+        date: editData.date || '',
+        orderer: editData.orderer || '',
+        type: editData.type || '',
+        kind: editData.kind || (mode === 'product' ? '스마트안전장비' : ''),
+        images: editData.images ? JSON.parse(editData.images) : [],
+        // 제품 전용 필드들
+        keyFeatures: editData.keyFeatures ? JSON.parse(editData.keyFeatures) : { 
+          description: '', 
+          features: ['', '', '', ''],
+          images: []
+        },
+
+        specifications: editData.specifications ? JSON.parse(editData.specifications) : [],
+        certifications: editData.certifications ? JSON.parse(editData.certifications) : [],
+        downloads: editData.downloads ? JSON.parse(editData.downloads) : [
+          { title: '', description: '', link: '' }
+        ],
+        videos: editData.videos ? JSON.parse(editData.videos) : []
       });
     }
-  }, [editData]);
+  }, [editData, mode]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -47,126 +74,52 @@ const RecordEditor = ({
     }));
   };
 
-  const handleImageChange = async (index, file) => {
-    if (file) {
+  const handleImageChange = async (files) => {
+    if (files && files.length > 0) {
       try {
-        // 파일 검증
-        validateImageFile(file, 5); // 5MB 제한
+        const uploadedImages = [];
         
-        // Supabase Storage에 업로드
-        const imageUrl = await uploadImage(file);
+        for (let i = 0; i < files.length; i++) {
+          const file = files[i];
+          validateImageFile(file, 5);
+          
+          try {
+            const imageUrl = await uploadImage(file);
+            uploadedImages.push(imageUrl);
+          } catch (uploadError) {
+            console.warn('Storage 업로드 실패, Base64로 대체:', uploadError);
+            // Storage 업로드 실패 시 Base64로 대체
+            const base64Url = await new Promise((resolve, reject) => {
+              const reader = new FileReader();
+              reader.onload = (e) => resolve(e.target.result);
+              reader.onerror = (e) => reject(new Error('파일 읽기 실패'));
+              reader.readAsDataURL(file);
+            });
+            uploadedImages.push(base64Url);
+          }
+        }
         
-        const newImages = [...formData.images];
-        newImages[index] = imageUrl;
         setFormData(prev => ({
           ...prev,
-          images: newImages
+          images: [...prev.images, ...uploadedImages]
         }));
         
-        console.log(`이미지 ${index + 1} 업로드 성공:`, imageUrl);
       } catch (error) {
-        console.error(`이미지 ${index + 1} 업로드 실패:`, error);
-        alert(error.message);
+        console.error('이미지 처리 실패:', error);
+        alert('이미지 처리 중 오류가 발생했습니다: ' + error.message);
       }
     }
   };
 
+  const removeImage = (index) => {
+    setFormData(prev => ({
+      ...prev,
+      images: prev.images.filter((_, i) => i !== index)
+    }));
+  };
+
   const handleSave = () => {
     onSave(formData);
-  };
-
-  const startEditing = (field, value) => {
-    setEditingField(field);
-    setTempValue(value || '');
-  };
-
-  const saveEdit = () => {
-    if (editingField) {
-      setFormData(prev => ({
-        ...prev,
-        [editingField]: tempValue
-      }));
-    }
-    setEditingField(null);
-    setTempValue('');
-  };
-
-  const cancelEdit = () => {
-    setEditingField(null);
-    setTempValue('');
-  };
-
-  const handleKeyDown = (e) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      saveEdit();
-    } else if (e.key === 'Escape') {
-      cancelEdit();
-    }
-  };
-
-  // 편집 가능한 텍스트 컴포넌트
-  const EditableText = ({ field, value, placeholder, multiline = false, style = {} }) => {
-    const isEditing = editingField === field;
-    
-    if (isEditing) {
-      const Component = multiline ? 'textarea' : 'input';
-      return (
-        <Component
-          value={tempValue}
-          onChange={(e) => setTempValue(e.target.value)}
-          onBlur={saveEdit}
-          onKeyDown={handleKeyDown}
-          placeholder={placeholder}
-          style={{
-            ...style,
-            border: '2px solid #007bff',
-            borderRadius: '4px',
-            padding: '8px',
-            fontSize: 'inherit',
-            fontFamily: 'inherit',
-            background: 'white',
-            outline: 'none',
-            resize: multiline ? 'vertical' : 'none',
-            minHeight: multiline ? '60px' : 'auto',
-            width: '100%',
-            boxSizing: 'border-box'
-          }}
-          autoFocus
-          lang="ko"
-          inputMode="text"
-          onCompositionStart={(e) => e.target.style.imeMode = 'active'}
-          onCompositionEnd={(e) => e.target.style.imeMode = 'auto'}
-        />
-      );
-    }
-
-    return (
-      <div
-        onClick={() => startEditing(field, value)}
-        style={{
-          ...style,
-          cursor: 'pointer',
-          border: '2px solid transparent',
-          borderRadius: '4px',
-          padding: '8px',
-          transition: 'all 0.2s ease',
-          minHeight: multiline ? '60px' : 'auto',
-          display: 'flex',
-          alignItems: multiline ? 'flex-start' : 'center'
-        }}
-        onMouseEnter={(e) => {
-          e.target.style.borderColor = '#e9ecef';
-          e.target.style.backgroundColor = '#f8f9fa';
-        }}
-        onMouseLeave={(e) => {
-          e.target.style.borderColor = 'transparent';
-          e.target.style.backgroundColor = 'transparent';
-        }}
-      >
-        {value || placeholder}
-      </div>
-    );
   };
 
   const handleCancel = () => {
@@ -179,6 +132,32 @@ const RecordEditor = ({
       [field]: value
     }));
   };
+
+  const getModeConfig = () => {
+    if (mode === 'product') {
+      return {
+        title: '제품',
+        kindOptions: [
+          { value: '스마트안전장비', label: '스마트안전장비' },
+          { value: '관제시스템', label: '관제시스템' },
+          { value: '통합제어', label: '통합제어' }
+        ],
+        breadcrumbs: ["Home", "제품", "미리보기"]
+      };
+    } else {
+      return {
+        title: '실적',
+        kindOptions: [
+          { value: 'AI제조지원', label: 'AI제조지원' },
+          { value: '디지털전환지원', label: '디지털전환지원' },
+          { value: '그린에너지지원', label: '그린에너지지원' }
+        ],
+        breadcrumbs: ["Home", "실적", "미리보기"]
+      };
+    }
+  };
+
+  const modeConfig = getModeConfig();
 
   const content = (
     <div style={{ 
@@ -202,23 +181,27 @@ const RecordEditor = ({
           transformOrigin: 'top left',
           minHeight: '400px'
         }}>
-          <ProductPage
-            productData={{
-              name: formData.name || '제목을 입력하세요',
-              title: formData.overview_title || '개요 제목을 입력하세요',
-              overview: formData.overview || '개요 내용을 입력하세요',
-              bottom_box_title: formData.bottom_box_title || '하단 박스 제목을 입력하세요',
-              images: formData.images || [main, main, main, main],
-              breadcrumbs: ["Home", "실적", "편집"]
-            }}
-            isEditMode={true}
-            onDataChange={(field, value) => {
-              setFormData(prev => ({
-                ...prev,
-                [field]: value
-              }));
-            }}
-          />
+                      <ProductPage
+              productData={{
+                name: formData.title || '제목을 입력하세요',
+                title: formData.overview_title || '개요 제목을 입력하세요',
+                overview_title: formData.overview_title || '개요 제목을 입력하세요',
+                overview: formData.desc || '내용을 입력하세요',
+                images: formData.images || [],
+                breadcrumbs: modeConfig.breadcrumbs,
+                // 제품 전용 데이터
+                keyFeatures: formData.keyFeatures.features.filter(f => f.trim() !== ''),
+                keyFeaturesImages: formData.keyFeatures.images || [],
+                specifications: formData.specifications || [],
+                certifications: formData.certifications || [],
+                downloads: formData.downloads,
+                videos: formData.videos
+              }}
+              isEditMode={true}
+              hideHeader={true}
+              isRecordPage={mode === 'record'}
+              onDataChange={handleDataChange}
+            />
         </div>
       </div>
 
@@ -231,45 +214,171 @@ const RecordEditor = ({
         borderRadius: '8px',
         minWidth: '300px'
       }}>
-        <h3 style={{ marginBottom: '20px', color: '#495057' }}>편집 도구</h3>
+        <h3 style={{ marginBottom: '20px', color: '#495057' }}>{modeConfig.title} 편집 도구</h3>
         
         <div style={{ marginBottom: '20px' }}>
-          <label style={{ display: 'block', marginBottom: '8px', fontSize: '14px', color: '#495057', fontWeight: 'bold' }}>
+          <label style={{ display: 'block', marginBottom: '8px', fontSize: '14px', color: '#495057', fontWeight: 'bold', textAlign: 'left' }}>
             제목 *
           </label>
           <input
             type="text"
-            name="name"
-            value={formData.name}
+            name="title"
+            value={formData.title}
             onChange={handleInputChange}
             required
-            lang="ko"
-            inputMode="text"
-            onCompositionStart={(e) => e.target.style.imeMode = 'active'}
-            onCompositionEnd={(e) => e.target.style.imeMode = 'inactive'}
             style={{
               width: '100%',
               padding: '10px',
               border: '1px solid #ddd',
               borderRadius: '4px',
-              fontSize: '14px'
+              fontSize: '14px',
+              textAlign: 'left'
             }}
           />
         </div>
 
         <div style={{ marginBottom: '20px' }}>
-          <label style={{ display: 'block', marginBottom: '8px', fontSize: '14px', color: '#495057', fontWeight: 'bold' }}>
-            개요 제목
+          <label style={{ display: 'block', marginBottom: '8px', fontSize: '14px', color: '#495057', fontWeight: 'bold', textAlign: 'left' }}>
+            개요 제목 *
           </label>
           <input
             type="text"
             name="overview_title"
             value={formData.overview_title}
             onChange={handleInputChange}
-            lang="ko"
-            inputMode="text"
-            onCompositionStart={(e) => e.target.style.imeMode = 'active'}
-            onCompositionEnd={(e) => e.target.style.imeMode = 'inactive'}
+            required
+            style={{
+              width: '100%',
+              padding: '10px',
+              border: '1px solid #ddd',
+              borderRadius: '4px',
+              fontSize: '14px',
+              textAlign: 'left'
+            }}
+          />
+        </div>
+
+        <div style={{ marginBottom: '20px' }}>
+          <label style={{ display: 'block', marginBottom: '8px', fontSize: '14px', color: '#495057', fontWeight: 'bold', textAlign: 'left' }}>
+            내용 *
+          </label>
+          <textarea
+            name="desc"
+            value={formData.desc}
+            onChange={handleInputChange}
+            required
+            style={{
+              width: '100%',
+              padding: '10px',
+              border: '1px solid #ddd',
+              borderRadius: '4px',
+              fontSize: '14px',
+              textAlign: 'left',
+              minHeight: '100px',
+              resize: 'vertical'
+            }}
+          />
+        </div>
+
+        <div style={{ marginBottom: '20px' }}>
+          <label style={{ display: 'block', marginBottom: '8px', fontSize: '14px', color: '#495057', fontWeight: 'bold', textAlign: 'left' }}>
+            날짜 *
+          </label>
+          <input
+            type="date"
+            name="date"
+            value={formData.date}
+            onChange={handleInputChange}
+            required
+            style={{
+              width: '100%',
+              padding: '10px',
+              border: '1px solid #ddd',
+              borderRadius: '4px',
+              fontSize: '14px',
+              textAlign: 'left'
+            }}
+          />
+        </div>
+
+        <div style={{ marginBottom: '20px' }}>
+          <label style={{ display: 'block', marginBottom: '8px', fontSize: '14px', color: '#495057', fontWeight: 'bold', textAlign: 'left' }}>
+            {mode === 'product' ? '제조사' : '발주처'} *
+          </label>
+          <input
+            type="text"
+            name="orderer"
+            value={formData.orderer}
+            onChange={handleInputChange}
+            required
+            style={{
+              width: '100%',
+              padding: '10px',
+              border: '1px solid #ddd',
+              borderRadius: '4px',
+              fontSize: '14px',
+              textAlign: 'left'
+            }}
+          />
+        </div>
+
+        <div style={{ marginBottom: '20px' }}>
+          <label style={{ display: 'block', marginBottom: '8px', fontSize: '14px', color: '#495057', fontWeight: 'bold', textAlign: 'left' }}>
+            카테고리 *
+          </label>
+          <input
+            type="text"
+            name="type"
+            value={formData.type}
+            onChange={handleInputChange}
+            required
+            style={{
+              width: '100%',
+              padding: '10px',
+              border: '1px solid #ddd',
+              borderRadius: '4px',
+              fontSize: '14px',
+              textAlign: 'left'
+            }}
+          />
+        </div>
+
+        <div style={{ marginBottom: '20px' }}>
+          <label style={{ display: 'block', marginBottom: '8px', fontSize: '14px', color: '#495057', fontWeight: 'bold', textAlign: 'left' }}>
+            유형 *
+          </label>
+          <select
+            name="kind"
+            value={formData.kind}
+            onChange={handleInputChange}
+            required
+            style={{
+              width: '100%',
+              padding: '10px',
+              border: '1px solid #ddd',
+              borderRadius: '4px',
+              fontSize: '14px',
+              textAlign: 'left'
+            }}
+          >
+            <option value="">유형을 선택하세요</option>
+            {modeConfig.kindOptions.map(option => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div style={{ marginBottom: '20px' }}>
+          <label style={{ display: 'block', marginBottom: '8px', fontSize: '14px', color: '#495057', fontWeight: 'bold', textAlign: 'left' }}>
+            이미지 업로드
+          </label>
+          <input
+            type="file"
+            multiple
+            accept="image/*"
+            onChange={(e) => handleImageChange(e.target.files)}
             style={{
               width: '100%',
               padding: '10px',
@@ -278,61 +387,508 @@ const RecordEditor = ({
               fontSize: '14px'
             }}
           />
+          {formData.images.length > 0 && (
+            <div style={{ marginTop: '10px' }}>
+              <h4>업로드된 이미지:</h4>
+              {formData.images.map((image, index) => (
+                <div key={index} style={{ marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <img src={image} alt={`이미지 ${index + 1}`} style={{ width: '50px', height: '50px', objectFit: 'cover' }} />
+                  <button
+                    type="button"
+                    onClick={() => removeImage(index)}
+                    style={{
+                      padding: '5px 10px',
+                      background: '#dc3545',
+                      color: 'white',
+                      border: 'none',
+                      borderRadius: '4px',
+                      cursor: 'pointer',
+                      fontSize: '12px'
+                    }}
+                  >
+                    삭제
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
 
-        <div style={{ marginBottom: '20px' }}>
-          <h4 style={{ marginBottom: '10px', color: '#495057', fontSize: '14px' }}>이미지 업로드</h4>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
-            {[0, 1, 2, 3].map((index) => (
-              <div key={index} style={{ 
-                border: '2px dashed #ddd', 
-                borderRadius: '6px', 
-                padding: '8px',
-                textAlign: 'center',
-                background: '#fff'
-              }}>
-                <div style={{ 
-                  width: '100%', 
-                  height: '60px', 
-                  background: '#f8f9fa',
-                  borderRadius: '4px',
-                  marginBottom: '6px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  overflow: 'hidden'
-                }}>
-                  {formData.images && formData.images[index] ? (
-                    <img 
-                      src={formData.images[index]} 
-                      alt={`이미지 ${index + 1}`}
-                      style={{ 
-                        maxWidth: '100%', 
-                        maxHeight: '100%', 
-                        objectFit: 'cover' 
-                      }}
-                    />
-                  ) : (
-                    <span style={{ color: '#999', fontSize: '10px' }}>이미지 없음</span>
-                  )}
-                </div>
+        {/* 제품 전용 필드들 */}
+        {mode === 'product' && (
+          <>
+            <div style={{ marginBottom: '20px', borderTop: '2px solid #dee2e6', paddingTop: '20px' }}>
+              <h4 style={{ marginBottom: '15px', color: '#495057' }}>제품 상세 정보</h4>
+              
+
+
+              <div style={{ marginBottom: '15px' }}>
+                <label style={{ display: 'block', marginBottom: '8px', fontSize: '14px', color: '#495057', fontWeight: 'bold', textAlign: 'left' }}>
+                  주요 기능 이미지
+                </label>
                 <input
                   type="file"
+                  multiple
                   accept="image/*"
-                  onChange={(e) => handleImageChange(index, e.target.files[0])}
-                  style={{ 
-                    width: '100%', 
-                    fontSize: '10px',
-                    cursor: 'pointer'
+                  onChange={async (e) => {
+                    if (e.target.files && e.target.files.length > 0) {
+                      try {
+                        const fileArray = Array.from(e.target.files);
+                        const imageUrls = await Promise.all(fileArray.map(async file => {
+                          validateImageFile(file, 5);
+                          try {
+                            return await uploadImage(file);
+                          } catch (uploadError) {
+                            console.warn('Storage 업로드 실패, Base64로 대체:', uploadError);
+                            // Storage 업로드 실패 시 Base64로 대체
+                            return await new Promise((resolve, reject) => {
+                              const reader = new FileReader();
+                              reader.onload = (e) => resolve(e.target.result);
+                              reader.onerror = (e) => reject(new Error('파일 읽기 실패'));
+                              reader.readAsDataURL(file);
+                            });
+                          }
+                        }));
+                        
+                        const newImageObjects = imageUrls.map(url => ({ url, caption: '' }));
+                        setFormData(prev => ({
+                          ...prev,
+                          keyFeatures: {
+                            ...prev.keyFeatures,
+                            images: [...(prev.keyFeatures.images || []), ...newImageObjects]
+                          }
+                        }));
+                      } catch (error) {
+                        console.error('이미지 처리 실패:', error);
+                        alert('이미지 처리 중 오류가 발생했습니다: ' + error.message);
+                      }
+                    }
+                  }}
+                  style={{
+                    width: '100%',
+                    padding: '10px',
+                    border: '1px solid #ddd',
+                    borderRadius: '4px',
+                    fontSize: '14px'
                   }}
                 />
-                <div style={{ fontSize: '9px', color: '#666', marginTop: '2px' }}>
-                  이미지 {index + 1}
+                {formData.keyFeatures.images && formData.keyFeatures.images.length > 0 && (
+                  <div style={{ marginTop: '10px' }}>
+                    <h5>업로드된 이미지:</h5>
+                    {formData.keyFeatures.images.map((imageObj, index) => (
+                      <div key={index} style={{ marginBottom: '15px', padding: '10px', border: '1px solid #eee', borderRadius: '4px' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px' }}>
+                          <img 
+                            src={imageObj.url} 
+                            alt={`주요 기능 이미지 ${index + 1}`} 
+                            style={{ width: '60px', height: '60px', objectFit: 'cover', borderRadius: '4px' }} 
+                          />
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const newImages = formData.keyFeatures.images.filter((_, i) => i !== index);
+                              setFormData(prev => ({
+                                ...prev,
+                                keyFeatures: { ...prev.keyFeatures, images: newImages }
+                              }));
+                            }}
+                            style={{
+                              padding: '5px 10px',
+                              background: '#dc3545',
+                              color: 'white',
+                              border: 'none',
+                              borderRadius: '4px',
+                              cursor: 'pointer',
+                              fontSize: '12px'
+                            }}
+                          >
+                            삭제
+                          </button>
+                        </div>
+                        <input
+                          type="text"
+                          placeholder="이미지 설명을 입력하세요 (class='iwc-caption iwc-pos-top-left' 형태로 표시됩니다)"
+                          value={imageObj.caption || ''}
+                          onChange={(e) => {
+                            const newImages = [...formData.keyFeatures.images];
+                            newImages[index] = { ...newImages[index], caption: e.target.value };
+                            setFormData(prev => ({
+                              ...prev,
+                              keyFeatures: { ...prev.keyFeatures, images: newImages }
+                            }));
+                          }}
+                          style={{
+                            width: '100%',
+                            padding: '8px',
+                            border: '1px solid #ddd',
+                            borderRadius: '4px',
+                            fontSize: '14px'
+                          }}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+
+
+              <div style={{ marginBottom: '15px' }}>
+                <label style={{ display: 'block', marginBottom: '8px', fontSize: '14px', color: '#495057', fontWeight: 'bold', textAlign: 'left' }}>
+                  사양 이미지
+                </label>
+                <input
+                  type="file"
+                  multiple
+                  accept="image/*"
+                  onChange={async (e) => {
+                    if (e.target.files && e.target.files.length > 0) {
+                      try {
+                        const fileArray = Array.from(e.target.files);
+                        const imageUrls = await Promise.all(fileArray.map(async file => {
+                          validateImageFile(file, 5);
+                          try {
+                            return await uploadImage(file);
+                          } catch (uploadError) {
+                            console.warn('Storage 업로드 실패, Base64로 대체:', uploadError);
+                            // Storage 업로드 실패 시 Base64로 대체
+                            return await new Promise((resolve, reject) => {
+                              const reader = new FileReader();
+                              reader.onload = (e) => resolve(e.target.result);
+                              reader.onerror = (e) => reject(new Error('파일 읽기 실패'));
+                              reader.readAsDataURL(file);
+                            });
+                          }
+                        }));
+                        
+                        const newImageObjects = imageUrls.map(url => ({ url, caption: '' }));
+                        setFormData(prev => ({
+                          ...prev,
+                          specifications: [...(prev.specifications || []), ...newImageObjects]
+                        }));
+                      } catch (error) {
+                        console.error('이미지 처리 실패:', error);
+                        alert('이미지 처리 중 오류가 발생했습니다: ' + error.message);
+                      }
+                    }
+                  }}
+                  style={{
+                    width: '100%',
+                    padding: '10px',
+                    border: '1px solid #ddd',
+                    borderRadius: '4px',
+                    fontSize: '14px'
+                  }}
+                />
+                {formData.specifications && formData.specifications.length > 0 && (
+                  <div style={{ marginTop: '10px' }}>
+                    <h5>업로드된 사양 이미지:</h5>
+                    {formData.specifications.map((imageObj, index) => (
+                      <div key={index} style={{ marginBottom: '15px', padding: '10px', border: '1px solid #eee', borderRadius: '4px' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px' }}>
+                          <img 
+                            src={imageObj.url} 
+                            alt={`사양 이미지 ${index + 1}`} 
+                            style={{ width: '60px', height: '60px', objectFit: 'cover', borderRadius: '4px' }} 
+                          />
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const newImages = formData.specifications.filter((_, i) => i !== index);
+                              setFormData(prev => ({
+                                ...prev,
+                                specifications: newImages
+                              }));
+                            }}
+                            style={{
+                              padding: '5px 10px',
+                              background: '#dc3545',
+                              color: 'white',
+                              border: 'none',
+                              borderRadius: '4px',
+                              cursor: 'pointer',
+                              fontSize: '12px'
+                            }}
+                          >
+                            삭제
+                          </button>
+                        </div>
+                        <input
+                          type="text"
+                          placeholder="이미지 설명을 입력하세요 (class='iwc-caption iwc-pos-top-left' 형태로 표시됩니다)"
+                          value={imageObj.caption || ''}
+                          onChange={(e) => {
+                            const newImages = [...formData.specifications];
+                            newImages[index] = { ...newImages[index], caption: e.target.value };
+                            setFormData(prev => ({
+                              ...prev,
+                              specifications: newImages
+                            }));
+                          }}
+                          style={{
+                            width: '100%',
+                            padding: '8px',
+                            border: '1px solid #ddd',
+                            borderRadius: '4px',
+                            fontSize: '14px'
+                          }}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              <div style={{ marginBottom: '15px' }}>
+                <label style={{ display: 'block', marginBottom: '8px', fontSize: '14px', color: '#495057', fontWeight: 'bold', textAlign: 'left' }}>
+                  인증 이미지
+                </label>
+                <input
+                  type="file"
+                  multiple
+                  accept="image/*"
+                  onChange={async (e) => {
+                    if (e.target.files && e.target.files.length > 0) {
+                      try {
+                        const fileArray = Array.from(e.target.files);
+                        const imageUrls = await Promise.all(fileArray.map(async file => {
+                          validateImageFile(file, 5);
+                          try {
+                            return await uploadImage(file);
+                          } catch (uploadError) {
+                            console.warn('Storage 업로드 실패, Base64로 대체:', uploadError);
+                            // Storage 업로드 실패 시 Base64로 대체
+                            return await new Promise((resolve, reject) => {
+                              const reader = new FileReader();
+                              reader.onload = (e) => resolve(e.target.result);
+                              reader.onerror = (e) => reject(new Error('파일 읽기 실패'));
+                              reader.readAsDataURL(file);
+                            });
+                          }
+                        }));
+                        
+                        const newImageObjects = imageUrls.map(url => ({ url, caption: '' }));
+                        setFormData(prev => ({
+                          ...prev,
+                          certifications: [...(prev.certifications || []), ...newImageObjects]
+                        }));
+                      } catch (error) {
+                        console.error('이미지 처리 실패:', error);
+                        alert('이미지 처리 중 오류가 발생했습니다: ' + error.message);
+                      }
+                    }
+                  }}
+                  style={{
+                    width: '100%',
+                    padding: '10px',
+                    border: '1px solid #ddd',
+                    borderRadius: '4px',
+                    fontSize: '14px'
+                  }}
+                />
+                {formData.certifications && formData.certifications.length > 0 && (
+                  <div style={{ marginTop: '10px' }}>
+                    <h5>업로드된 인증 이미지:</h5>
+                    {formData.certifications.map((imageObj, index) => (
+                      <div key={index} style={{ marginBottom: '15px', padding: '10px', border: '1px solid #eee', borderRadius: '4px' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px' }}>
+                          <img 
+                            src={imageObj.url} 
+                            alt={`인증 이미지 ${index + 1}`} 
+                            style={{ width: '60px', height: '60px', objectFit: 'cover', borderRadius: '4px' }} 
+                          />
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const newImages = formData.certifications.filter((_, i) => i !== index);
+                              setFormData(prev => ({
+                                ...prev,
+                                certifications: newImages
+                              }));
+                            }}
+                            style={{
+                              padding: '5px 10px',
+                              background: '#dc3545',
+                              color: 'white',
+                              border: 'none',
+                              borderRadius: '4px',
+                              cursor: 'pointer',
+                              fontSize: '12px'
+                            }}
+                          >
+                            삭제
+                          </button>
+                        </div>
+                        <input
+                          type="text"
+                          placeholder="이미지 설명을 입력하세요 (class='iwc-caption iwc-pos-top-left' 형태로 표시됩니다)"
+                          value={imageObj.caption || ''}
+                          onChange={(e) => {
+                            const newImages = [...formData.certifications];
+                            newImages[index] = { ...newImages[index], caption: e.target.value };
+                            setFormData(prev => ({
+                              ...prev,
+                              certifications: newImages
+                            }));
+                          }}
+                          style={{
+                            width: '100%',
+                            padding: '8px',
+                            border: '1px solid #ddd',
+                            borderRadius: '4px',
+                            fontSize: '14px'
+                          }}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              <div style={{ marginBottom: '15px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                  <label style={{ fontSize: '14px', color: '#495057', fontWeight: 'bold', textAlign: 'left' }}>
+                    다운로드
+                  </label>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setFormData(prev => ({
+                        ...prev,
+                        downloads: [...prev.downloads, { title: '', description: '', link: '' }]
+                      }));
+                    }}
+                    style={{
+                      padding: '4px 8px',
+                      background: '#28a745',
+                      color: 'white',
+                      border: 'none',
+                      borderRadius: '4px',
+                      cursor: 'pointer',
+                      fontSize: '12px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '4px'
+                    }}
+                  >
+                    <span style={{ fontSize: '14px' }}>+</span> 추가
+                  </button>
+                </div>
+                {formData.downloads.map((download, index) => (
+                  <div key={index} style={{ marginBottom: '10px', padding: '10px', border: '1px solid #eee', borderRadius: '4px', position: 'relative' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                      <span style={{ fontSize: '12px', color: '#666' }}>다운로드 {index + 1}</span>
+                      {formData.downloads.length > 1 && (
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const newDownloads = formData.downloads.filter((_, i) => i !== index);
+                            setFormData(prev => ({ ...prev, downloads: newDownloads }));
+                          }}
+                          style={{
+                            padding: '2px 6px',
+                            background: '#dc3545',
+                            color: 'white',
+                            border: 'none',
+                            borderRadius: '3px',
+                            cursor: 'pointer',
+                            fontSize: '10px'
+                          }}
+                        >
+                          삭제
+                        </button>
+                      )}
+                    </div>
+                    <input
+                      type="text"
+                      placeholder="제목"
+                      value={download.title || ''}
+                      onChange={(e) => {
+                        const newDownloads = [...formData.downloads];
+                        newDownloads[index] = { ...newDownloads[index], title: e.target.value };
+                        setFormData(prev => ({ ...prev, downloads: newDownloads }));
+                      }}
+                      style={{
+                        width: '100%',
+                        padding: '6px',
+                        border: '1px solid #ddd',
+                        borderRadius: '4px',
+                        fontSize: '14px',
+                        marginBottom: '5px'
+                      }}
+                    />
+                    <input
+                      type="text"
+                      placeholder="설명"
+                      value={download.description || ''}
+                      onChange={(e) => {
+                        const newDownloads = [...formData.downloads];
+                        newDownloads[index] = { ...newDownloads[index], description: e.target.value };
+                        setFormData(prev => ({ ...prev, downloads: newDownloads }));
+                      }}
+                      style={{
+                        width: '100%',
+                        padding: '6px',
+                        border: '1px solid #ddd',
+                        borderRadius: '4px',
+                        fontSize: '14px',
+                        marginBottom: '5px'
+                      }}
+                    />
+
+                    <input
+                      type="text"
+                      placeholder="다운로드 링크 (URL)"
+                      value={download.link || ''}
+                      onChange={(e) => {
+                        const newDownloads = [...formData.downloads];
+                        newDownloads[index] = { ...newDownloads[index], link: e.target.value };
+                        setFormData(prev => ({ ...prev, downloads: newDownloads }));
+                      }}
+                      style={{
+                        width: '100%',
+                        padding: '6px',
+                        border: '1px solid #ddd',
+                        borderRadius: '4px',
+                        fontSize: '14px'
+                      }}
+                    />
+                  </div>
+                ))}
+              </div>
+
+              <div style={{ marginBottom: '15px' }}>
+                <label style={{ display: 'block', marginBottom: '8px', fontSize: '14px', color: '#495057', fontWeight: 'bold', textAlign: 'left' }}>
+                  동영상 링크
+                </label>
+                <div style={{ marginBottom: '10px' }}>
+                  <input
+                    type="text"
+                    placeholder="동영상 링크를 입력하세요 (YouTube, Vimeo 등)"
+                    value={formData.videos.join('\n')}
+                    onChange={(e) => {
+                      const links = e.target.value.split('\n').filter(link => link.trim() !== '');
+                      setFormData(prev => ({ ...prev, videos: links }));
+                    }}
+                    style={{
+                      width: '100%',
+                      padding: '10px',
+                      border: '1px solid #ddd',
+                      borderRadius: '4px',
+                      fontSize: '14px',
+                      minHeight: '100px',
+                      resize: 'vertical'
+                    }}
+                    as="textarea"
+                  />
+                </div>
+                <div style={{ fontSize: '12px', color: '#666', marginTop: '5px' }}>
+                  여러 링크를 입력하려면 줄바꿈으로 구분하세요.
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
+            </div>
+          </>
+        )}
 
         <div style={{ 
           display: 'flex', 
@@ -405,7 +961,9 @@ const RecordEditor = ({
             padding: '20px',
             borderBottom: '1px solid #eee'
           }}>
-            <h2 style={{ margin: 0, fontSize: '24px', color: '#333' }}>실적 편집</h2>
+            <h2 style={{ margin: 0, fontSize: '24px', color: '#333' }}>
+              {editData ? `${modeConfig.title} 편집` : `${modeConfig.title} 추가`}
+            </h2>
             <button
               onClick={handleCancel}
               style={{

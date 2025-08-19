@@ -45,7 +45,27 @@ const ImageWithCaption = ({
 
   return (
     <div className={containerClasses} {...rest}>
-      <img className={imgClasses} src={src} alt={alt} />
+      {src && src !== 'undefined' ? (
+        <img className={imgClasses} src={src} alt={alt} />
+      ) : (
+        <div 
+          style={{
+            width: '100%',
+            height: '100%',
+            backgroundColor: '#f8f9fa',
+            border: '2px dashed #dee2e6',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: '#6c757d',
+            fontSize: '24px',
+            fontWeight: 'bold',
+            minHeight: '200px'
+          }}
+        >
+          ✕
+        </div>
+      )}
       {caption ? <div className={captionClasses}>{caption}</div> : null}
     </div>
   );

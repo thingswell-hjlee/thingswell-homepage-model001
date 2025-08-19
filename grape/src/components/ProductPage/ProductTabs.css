@@ -6,6 +6,15 @@
   opacity: 0.5;
 }
 
+/* 실적 페이지에서 탭 헤더 숨기기 */
+.product-tabs.record-page {
+  margin: 0;
+}
+
+.product-tabs.record-page .tabs-header {
+  display: none;
+}
+
 .tabs-header {
   display: flex;
   border-bottom: 2px solid #e5e7eb;

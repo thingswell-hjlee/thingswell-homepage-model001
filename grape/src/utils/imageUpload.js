@@ -21,8 +21,8 @@ export const validateImageFile = (file, maxSizeMB = 5) => {
 
 // Supabase Storage에 이미지 업로드
 export const uploadImage = async (file, folder = 'track_record') => {
-  // 개발 중 임시로 Base64 사용 (Storage 설정 전까지)
-  if (process.env.NODE_ENV === 'development') {
+  // 개발 중이거나 Storage 설정이 안된 경우 Base64 사용
+  if (process.env.NODE_ENV === 'development' || !process.env.REACT_APP_USE_STORAGE) {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.onload = (e) => resolve(e.target.result);

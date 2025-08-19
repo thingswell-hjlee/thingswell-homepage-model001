@@ -49,9 +49,9 @@ const ProductTabs = ({
   };
 
   return (
-    <div className={`product-tabs${!isEnabled ? ' disabled' : ''}`}>
+    <div className={`product-tabs${!isEnabled ? ' disabled' : ''}${isRecordPage ? ' record-page' : ''}`}>
       <div className="tabs-header">
-        {isEnabled ? (
+        {isEnabled && !isRecordPage ? (
           visibleTabs.map((tab) => (
             <button
               key={tab.id}
@@ -63,6 +63,9 @@ const ProductTabs = ({
               {tab.label}
             </button>
           ))
+        ) : isEnabled && isRecordPage ? (
+          // 실적 페이지에서는 탭 버튼을 표시하지 않음
+          null
         ) : (
           <button
             type="button"
@@ -74,8 +77,8 @@ const ProductTabs = ({
             탭 없음
           </button>
         )}
-        {/* 제품 페이지에서만 +/- 아이콘 표시 */}
-        {isEnabled && currentTab === 'overview' && !isRecordPage && (
+        {/* 제품 페이지에서만 +/- 아이콘 표시 (개요 탭이 활성화되어 있고, 다른 탭들이 있을 때) */}
+        {isEnabled && currentTab === 'overview' && !isRecordPage && visibleTabs.filter(tab => tab.id !== 'overview').length > 0 && (
         <button
           type="button"
           className={`tab-toggle-button${isCollapsed ? ' collapsed' : ''}`}

@@ -32,16 +32,48 @@ const Case_main = () => {
   const cases = [
     {
       id: 1,
-      category: "제조업",
-      company: "서울시",
-      title: "서울시 중구 40개 IP 카메라의 AI 안전 피플 카운팅 및 쓰러짐 감지 시스템 공급",
-      description: "서울시 중구 40개 IP 카메라의 AI 안전 피플 카운팅 및 쓰러짐 감지 시스템 공급",
+      category: "스마트안전장비",
+      company: "싱스웰",
+      title: "스마트안전장비 실적",
+      description: "스마트안전장비 관련 실적들을 확인하실 수 있습니다.",
       image: manufacturing,
-      link: "/cases/overview",
-      industry: "보행자 안전",
-      btnText: "사례 연구 보기"
+      link: "/cases/smart-safety",
+      industry: "스마트안전장비",
+      btnText: "실적 보기"
     },
-    
+    {
+      id: 2,
+      category: "AI",
+      company: "싱스웰",
+      title: "AI 실적",
+      description: "AI 관련 실적들을 확인하실 수 있습니다.",
+      image: construction,
+      link: "/cases/ai",
+      industry: "AI",
+      btnText: "실적 보기"
+    },
+    {
+      id: 3,
+      category: "통합제어",
+      company: "싱스웰",
+      title: "통합제어 실적",
+      description: "통합제어 관련 실적들을 확인하실 수 있습니다.",
+      image: welding,
+      link: "/cases/integrated-control",
+      industry: "통합제어",
+      btnText: "실적 보기"
+    },
+    {
+      id: 4,
+      category: "정보통신",
+      company: "싱스웰",
+      title: "정보통신 실적",
+      description: "정보통신 관련 실적들을 확인하실 수 있습니다.",
+      image: grinding,
+      link: "/cases/information-communication",
+      industry: "정보통신",
+      btnText: "실적 보기"
+    }
   ];
 
   return (
@@ -52,8 +84,8 @@ const Case_main = () => {
             <div className="solutions-section">
               <SolutionCard
                 subtitle="Cases"
-                title="도입사례"
-                description="싱스웰 안전 솔루션 도입 사례를 확인하세요"
+                title="실적"
+                description="싱스웰의 다양한 실적들을 확인하세요"
                 showButton={false}
                 link="/cases"
                 className="custom-solution-left"

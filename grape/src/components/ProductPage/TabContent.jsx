@@ -59,23 +59,47 @@ const TabContent = ({ tabId, productData, featureClickToOpen = false, onFeatureI
       case 'features':
         return (
           <div className="tab-features">
-            {(() => {
-              const isTextOnly = Boolean(productData?.features_text_only);
-              if (isTextOnly) {
-                const unifiedFeatures = Array.isArray(productData?.features_media)
-                  ? productData.features_media
-                  : productData?.features || [];
-                const items = Array.isArray(unifiedFeatures) ? unifiedFeatures : [];
-                return (
-                  <ul className="feature-text-list">
-                    {items.map((item, index) => (
-                      <li key={index}>{item?.title || item?.caption || String(item)}</li>
-                    ))}
-                  </ul>
-                );
-              }
-            })()}
-            {!productData?.features_text_only && (
+            {/* 주요 기능 목록 */}
+            {productData?.keyFeatures && productData.keyFeatures.length > 0 && (
+              <div className="key-features-description" style={{ marginBottom: '30px' }}>
+                <h3 style={{ marginBottom: '15px', color: '#495057' }}>주요 기능</h3>
+                <ul className="feature-text-list">
+                  {productData.keyFeatures.map((feature, index) => (
+                    <li key={index} style={{ marginBottom: '8px', fontSize: '16px', lineHeight: '1.5' }}>
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            
+            {/* 주요 기능 이미지들 */}
+            {productData?.keyFeaturesImages && productData.keyFeaturesImages.length > 0 && (
+              <div className="key-features-images">
+                <ThreeColumnGrid>
+                  {productData.keyFeaturesImages.map((imageObj, index) => (
+                    <div key={index} className="feature-card">
+                      <ImageWithCaption
+                        className="feature-media"
+                        imgClassName="feature-image"
+                        src={imageObj.url}
+                        alt={`주요 기능 ${index + 1}`}
+                        caption={imageObj.caption}
+                        position="top-left"
+                        onClick={() => {
+                          if (onFeatureImageClick) {
+                            onFeatureImageClick(imageObj.url, imageObj.caption, `주요 기능 ${index + 1}`);
+                          }
+                        }}
+                      />
+                    </div>
+                  ))}
+                </ThreeColumnGrid>
+              </div>
+            )}
+            
+            {/* 기존 기능 카드들 (keyFeaturesImages가 없을 때) */}
+            {(!productData?.keyFeaturesImages || productData.keyFeaturesImages.length === 0) && (
               <ThreeColumnGrid>
                 {(() => {
                 const fallbackImages = [featureImg1, featureImg2, featureImg3, featureImg4];
@@ -85,32 +109,7 @@ const TabContent = ({ tabId, productData, featureClickToOpen = false, onFeatureI
                 const sourceFeatures = unifiedFeatures || productData?.features;
                 const baseFeatures = (sourceFeatures && sourceFeatures.length > 0)
                   ? sourceFeatures
-                  : [
-                      {
-                        image: featureImg1,
-                        title: '통합 제어 시스템',
-                        description:
-                          '다양한 장비와 시스템을 통합하여 효율적으로 제어할 수 있습니다.',
-                      },
-                      {
-                        image: featureImg2,
-                        title: '실시간 모니터링',
-                        description:
-                          '실시간으로 시스템 상태를 모니터링하고 분석합니다.',
-                      },
-                      {
-                        image: featureImg3,
-                        title: '보안 기능',
-                        description:
-                          '강력한 보안 기능으로 시스템을 안전하게 보호합니다.',
-                      },
-                      {
-                        image: featureImg4,
-                        title: '고성능 처리',
-                        description:
-                          '고성능 프로세서로 빠른 응답 속도를 제공합니다.',
-                      },
-                    ];
+                  : [];
                 const featuresWithImages = baseFeatures.map((f, idx) => ({
                   ...f,
                   image: f.image || fallbackImages[idx % fallbackImages.length],
@@ -167,194 +166,229 @@ const TabContent = ({ tabId, productData, featureClickToOpen = false, onFeatureI
       case 'specs':
         return (
           <div className="tab-specs">
-            {(() => {
-              const fallbackImages = [featureImg1, featureImg2, featureImg3, featureImg4];
-              const galleryImages = Array.isArray(productData?.images) && productData.images.length > 0
-                ? productData.images
-                : fallbackImages;
+            {/* 사양 이미지들 */}
+            {productData?.specifications && productData.specifications.length > 0 && (
+              <div className="specs-images">
+                <ThreeColumnGrid>
+                  {productData.specifications.map((imageObj, index) => (
+                    <div key={index} className="spec-card">
+                      <ImageWithCaption
+                        className="spec-media"
+                        imgClassName="spec-image"
+                        src={imageObj.url}
+                        alt={`사양 ${index + 1}`}
+                        caption={imageObj.caption}
+                        position="top-left"
+                        onClick={() => {
+                          if (onFeatureImageClick) {
+                            onFeatureImageClick(imageObj.url, imageObj.caption, `사양 ${index + 1}`);
+                          }
+                        }}
+                      />
+                    </div>
+                  ))}
+                </ThreeColumnGrid>
+              </div>
+            )}
+            
+            {/* 기존 사양 표시 (specifications가 없을 때) */}
+            {(!productData?.specifications || productData.specifications.length === 0) && (
+              <div>
+                {(() => {
+                  const fallbackImages = [featureImg1, featureImg2, featureImg3, featureImg4];
+                  const galleryImages = Array.isArray(productData?.images) && productData.images.length > 0
+                    ? productData.images
+                    : fallbackImages;
 
-              // 통합 포맷: productData.specs_media
-              const specsMedia = productData?.specs_media;
-              if (Array.isArray(specsMedia) && specsMedia.length === 1) {
-                const onlyItem = specsMedia[0];
-                const onlyImage = onlyItem?.image || onlyItem?.src || galleryImages[0];
-                const onlyCaption = onlyItem?.title || onlyItem?.caption;
-                return (
-                  <div className="specs-media-grid single">
-                    <ImageWithCaption
-                      className="specs-media-box single"
-                      src={onlyImage}
-                      alt={onlyCaption || 'specs-single'}
-                      caption={onlyCaption}
-                      position="top-left"
-                    />
-                  </div>
-                );
-              }
-              let leftItem = null;
-              let rightTopItem = null;
-              let rightBottomItem = null;
+                  // 통합 포맷: productData.specs_media
+                  const specsMedia = productData?.specs_media;
+                  if (Array.isArray(specsMedia) && specsMedia.length === 1) {
+                    const onlyItem = specsMedia[0];
+                    const onlyImage = onlyItem?.image || onlyItem?.src || galleryImages[0];
+                    const onlyCaption = onlyItem?.title || onlyItem?.caption;
+                    return (
+                      <div className="specs-media-grid single">
+                        <ImageWithCaption
+                          className="specs-media-box single"
+                          src={onlyImage}
+                          alt={onlyCaption || 'specs-single'}
+                          caption={onlyCaption}
+                          position="top-left"
+                        />
+                      </div>
+                    );
+                  }
+                  let leftItem = null;
+                  let rightTopItem = null;
+                  let rightBottomItem = null;
 
-              if (Array.isArray(specsMedia)) {
-                leftItem = specsMedia[0] || null;
-                rightTopItem = specsMedia[1] || null;
-                rightBottomItem = specsMedia[2] || null;
-              } else if (specsMedia && typeof specsMedia === 'object') {
-                leftItem = specsMedia.left || null;
-                rightTopItem = specsMedia.rightTop || null;
-                rightBottomItem = specsMedia.rightBottom || null;
-              }
+                  if (Array.isArray(specsMedia)) {
+                    leftItem = specsMedia[0] || null;
+                    rightTopItem = specsMedia[1] || null;
+                    rightBottomItem = specsMedia[2] || null;
+                  } else if (specsMedia && typeof specsMedia === 'object') {
+                    leftItem = specsMedia.left || null;
+                    rightTopItem = specsMedia.rightTop || null;
+                    rightBottomItem = specsMedia.rightBottom || null;
+                  }
 
-              // 하위 호환: 분리 포맷
-              const legacyImages = productData?.specs_images;
-              const legacyCaptions = productData?.specs_captions;
+                  // 하위 호환: 분리 포맷
+                  const legacyImages = productData?.specs_images;
+                  const legacyCaptions = productData?.specs_captions;
 
-              const leftImage = (leftItem?.image || leftItem?.src)
-                || (Array.isArray(legacyImages) ? legacyImages[0] : legacyImages?.left)
-                || galleryImages[0]
-                || fallbackImages[0];
-              const rightTopImage = (rightTopItem?.image || rightTopItem?.src)
-                || (Array.isArray(legacyImages) ? legacyImages[1] : legacyImages?.rightTop)
-                || galleryImages[1]
-                || fallbackImages[1];
-              const rightBottomImage = (rightBottomItem?.image || rightBottomItem?.src)
-                || (Array.isArray(legacyImages) ? legacyImages[2] : legacyImages?.rightBottom)
-                || galleryImages[2]
-                || fallbackImages[2];
+                  const leftImage = (leftItem?.image || leftItem?.src)
+                    || (Array.isArray(legacyImages) ? legacyImages[0] : legacyImages?.left)
+                    || galleryImages[0];
+                  const rightTopImage = (rightTopItem?.image || rightTopItem?.src)
+                    || (Array.isArray(legacyImages) ? legacyImages[1] : legacyImages?.rightTop)
+                    || galleryImages[1];
+                  const rightBottomImage = (rightBottomItem?.image || rightBottomItem?.src)
+                    || (Array.isArray(legacyImages) ? legacyImages[2] : legacyImages?.rightBottom)
+                    || galleryImages[2];
 
-              const leftCaption = (leftItem?.caption || leftItem?.title)
-                || (Array.isArray(legacyCaptions) ? legacyCaptions[0] : legacyCaptions?.left);
-              const rightTopCaption = (rightTopItem?.caption || rightTopItem?.title)
-                || (Array.isArray(legacyCaptions) ? legacyCaptions[1] : legacyCaptions?.rightTop);
-              const rightBottomCaption = (rightBottomItem?.caption || rightBottomItem?.title)
-                || (Array.isArray(legacyCaptions) ? legacyCaptions[2] : legacyCaptions?.rightBottom);
+                  const leftCaption = (leftItem?.caption || leftItem?.title)
+                    || (Array.isArray(legacyCaptions) ? legacyCaptions[0] : legacyCaptions?.left);
+                  const rightTopCaption = (rightTopItem?.caption || rightTopItem?.title)
+                    || (Array.isArray(legacyCaptions) ? legacyCaptions[1] : legacyCaptions?.rightTop);
+                  const rightBottomCaption = (rightBottomItem?.caption || rightBottomItem?.title)
+                    || (Array.isArray(legacyCaptions) ? legacyCaptions[2] : legacyCaptions?.rightBottom);
 
-              return (
-                <div className="specs-media-grid">
-                  <ImageWithCaption
-                    className="specs-media-left"
-                    src={leftImage}
-                    alt="specs-left"
-                    caption={leftCaption}
-                    position="top-left"
-                  />
-                  <div className="specs-media-right">
-                    <ImageWithCaption
-                      className="specs-media-right-item"
-                      src={rightTopImage}
-                      alt="specs-right-top"
-                      caption={rightTopCaption}
-                      position="top-left"
-                    />
-                    <ImageWithCaption
-                      className="specs-media-right-item"
-                      src={rightBottomImage}
-                      alt="specs-right-bottom"
-                      caption={rightBottomCaption}
-                      position="top-left"
-                    />
-                  </div>
-                </div>
-              );
-            })()}
-            {/** 스펙 표 주석 처리
-            <div className="specs-table">
-              {productData?.specifications?.map((spec, index) => (
-                <div key={index} className="spec-row">
-                  <div className="spec-label">{spec.label}</div>
-                  <div className="spec-value">{spec.value}</div>
-                </div>
-              )) || [
-                { label: "프로세서", value: "Intel Core i7" },
-                { label: "메모리", value: "16GB DDR4" },
-                { label: "저장공간", value: "512GB SSD" },
-                { label: "네트워크", value: "Gigabit Ethernet" },
-                { label: "전원", value: "100-240V AC" },
-                { label: "작동온도", value: "-10°C ~ 50°C" }
-              ].map((spec, index) => (
-                <div key={index} className="spec-row">
-                  <div className="spec-label">{spec.label}</div>
-                  <div className="spec-value">{spec.value}</div>
-                </div>
-              ))}
-            </div>
-            */}
+                  return (
+                    <div className="specs-media-grid">
+                      <ImageWithCaption
+                        className="specs-media-left"
+                        src={leftImage}
+                        alt="specs-left"
+                        caption={leftCaption}
+                        position="top-left"
+                      />
+                      <div className="specs-media-right">
+                        <ImageWithCaption
+                          className="specs-media-right-item"
+                          src={rightTopImage}
+                          alt="specs-right-top"
+                          caption={rightTopCaption}
+                          position="top-left"
+                        />
+                        <ImageWithCaption
+                          className="specs-media-right-item"
+                          src={rightBottomImage}
+                          alt="specs-right-bottom"
+                          caption={rightBottomCaption}
+                          position="top-left"
+                        />
+                      </div>
+                    </div>
+                  );
+                })()}
+              </div>
+            )}
           </div>
         );
         
       case 'certifications':
         return (
           <div className="tab-certifications">
-            {(() => {
-              const fallbackImages = [featureImg1, featureImg2, featureImg3, featureImg4];
-              const unifiedCerts = Array.isArray(productData?.certifications_media)
-                ? productData.certifications_media
-                : null;
-              const certs = (Array.isArray(unifiedCerts) && unifiedCerts.length > 0)
-                ? unifiedCerts
-                : (Array.isArray(productData?.certifications) && productData.certifications.length > 0)
-                  ? productData.certifications
-                  : [];
-
-              if (!certs || certs.length === 0) {
-                return null;
-              }
-
-              const leftCert = certs[0];
-              const rightTopCert = certs[1];
-              const rightBottomCert = certs[2];
-
-              return (
-                <div className="specs-media-grid">
-                  {leftCert ? (
-                    <div className="media-with-description">
+            {/* 인증 이미지들 */}
+            {productData?.certifications && productData.certifications.length > 0 && (
+              <div className="certifications-images">
+                <ThreeColumnGrid>
+                  {productData.certifications.map((imageObj, index) => (
+                    <div key={index} className="cert-card">
                       <ImageWithCaption
-                        className="specs-media-box"
-                        src={leftCert?.image || fallbackImages[0]}
-                        alt={leftCert?.title || leftCert?.name || 'cert-left'}
-                        caption={leftCert?.title || leftCert?.name}
+                        className="cert-media"
+                        imgClassName="cert-image"
+                        src={imageObj.url}
+                        alt={`인증 ${index + 1}`}
+                        caption={imageObj.caption}
                         position="top-left"
+                        onClick={() => {
+                          if (onFeatureImageClick) {
+                            onFeatureImageClick(imageObj.url, imageObj.caption, `인증 ${index + 1}`);
+                          }
+                        }}
                       />
-                      {leftCert?.description ? (
-                        <p className="media-description">{leftCert.description}</p>
-                      ) : null}
                     </div>
-                  ) : null}
-                  {(rightTopCert || rightBottomCert) ? (
-                    <div className="specs-media-right">
-                      {rightTopCert ? (
+                  ))}
+                </ThreeColumnGrid>
+              </div>
+            )}
+            
+            {/* 기존 인증 표시 (certifications가 없을 때) */}
+            {(!productData?.certifications || productData.certifications.length === 0) && (
+              <div>
+                {(() => {
+                  const fallbackImages = [featureImg1, featureImg2, featureImg3, featureImg4];
+                  const unifiedCerts = Array.isArray(productData?.certifications_media)
+                    ? productData.certifications_media
+                    : null;
+                  const certs = (Array.isArray(unifiedCerts) && unifiedCerts.length > 0)
+                    ? unifiedCerts
+                    : (Array.isArray(productData?.certifications) && productData.certifications.length > 0)
+                      ? productData.certifications
+                      : [];
+
+                  if (!certs || certs.length === 0) {
+                    return null;
+                  }
+
+                  const leftCert = certs[0];
+                  const rightTopCert = certs[1];
+                  const rightBottomCert = certs[2];
+
+                  return (
+                    <div className="specs-media-grid">
+                      {leftCert ? (
                         <div className="media-with-description">
                           <ImageWithCaption
                             className="specs-media-box"
-                            src={rightTopCert?.image || fallbackImages[1]}
-                            alt={rightTopCert?.title || rightTopCert?.name || 'cert-right-top'}
-                            caption={rightTopCert?.title || rightTopCert?.name}
+                            src={leftCert?.image}
+                            alt={leftCert?.title || leftCert?.name || 'cert-left'}
+                            caption={leftCert?.title || leftCert?.name}
                             position="top-left"
                           />
-                          {rightTopCert?.description ? (
-                            <p className="media-description">{rightTopCert.description}</p>
+                          {leftCert?.description ? (
+                            <p className="media-description">{leftCert.description}</p>
                           ) : null}
                         </div>
                       ) : null}
-                      {rightBottomCert ? (
-                        <div className="media-with-description">
-                          <ImageWithCaption
-                            className="specs-media-box"
-                            src={rightBottomCert?.image || fallbackImages[2]}
-                            alt={rightBottomCert?.title || rightBottomCert?.name || 'cert-right-bottom'}
-                            caption={rightBottomCert?.title || rightBottomCert?.name}
-                            position="top-left"
-                          />
-                          {rightBottomCert?.description ? (
-                            <p className="media-description">{rightBottomCert.description}</p>
+                      {(rightTopCert || rightBottomCert) ? (
+                        <div className="specs-media-right">
+                          {rightTopCert ? (
+                            <div className="media-with-description">
+                              <ImageWithCaption
+                                className="specs-media-box"
+                                src={rightTopCert?.image}
+                                alt={rightTopCert?.title || rightTopCert?.name || 'cert-right-top'}
+                                caption={rightTopCert?.title || rightTopCert?.name}
+                                position="top-left"
+                              />
+                              {rightTopCert?.description ? (
+                                <p className="media-description">{rightTopCert.description}</p>
+                              ) : null}
+                            </div>
+                          ) : null}
+                          {rightBottomCert ? (
+                            <div className="media-with-description">
+                              <ImageWithCaption
+                                className="specs-media-box"
+                                src={rightBottomCert?.image}
+                                alt={rightBottomCert?.title || rightBottomCert?.name || 'cert-right-bottom'}
+                                caption={rightBottomCert?.title || rightBottomCert?.name}
+                                position="top-left"
+                              />
+                              {rightBottomCert?.description ? (
+                                <p className="media-description">{rightBottomCert.description}</p>
+                              ) : null}
+                            </div>
                           ) : null}
                         </div>
                       ) : null}
                     </div>
-                  ) : null}
-                </div>
-              );
-            })()}
+                  );
+                })()}
+              </div>
+            )}
           </div>
         );
         
@@ -362,41 +396,27 @@ const TabContent = ({ tabId, productData, featureClickToOpen = false, onFeatureI
         return (
           <div className="tab-downloads">
             <div className="downloads-list">
-              {productData?.downloads?.map((download, index) => (
+              {productData?.downloads?.filter(download => 
+                download.title && download.title.trim() !== '' && 
+                download.description && download.description.trim() !== '' && 
+                download.link && download.link.trim() !== ''
+              ).map((download, index) => (
                 <div key={index} className="download-item">
                   <div className="download-info">
                     <h3>{download.title}</h3>
                     <p className="media-description">{download.description}</p>
-                    <span className="download-size">{download.size}</span>
                   </div>
-                  <button className="download-button">다운로드</button>
+                  <a 
+                    href={download.link} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="download-button"
+                    style={{ textDecoration: 'none', display: 'inline-block' }}
+                  >
+                    다운로드
+                  </a>
                 </div>
-              )) || [
-                {
-                  title: "제품 매뉴얼",
-                  description: "XCN-3000 사용자 매뉴얼",
-                  size: "2.5MB"
-                },
-                {
-                  title: "기술 사양서",
-                  description: "상세 기술 사양 및 데이터시트",
-                  size: "1.8MB"
-                },
-                {
-                  title: "설치 가이드",
-                  description: "설치 및 설정 가이드",
-                  size: "3.2MB"
-                }
-              ].map((download, index) => (
-                <div key={index} className="download-item">
-                  <div className="download-info">
-                    <h3>{download.title}</h3>
-                    <p className="media-description">{download.description}</p>
-                    <span className="download-size">{download.size}</span>
-                  </div>
-                  <button className="download-button">다운로드</button>
-                </div>
-              ))}
+              )) || []}
             </div>
           </div>
         );
@@ -404,19 +424,59 @@ const TabContent = ({ tabId, productData, featureClickToOpen = false, onFeatureI
       case 'videos':
         return (
           <div className="tab-videos">
-            <div className="video-embed">
-              <iframe
-                src="https://www.youtube.com/embed/LGLkdzIt4Jo?si=rD4ovuspBYJcM_U3"
-                title="YouTube video player"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerPolicy="strict-origin-when-cross-origin"
-                allowFullScreen
-              />
-            </div>
-            {productData?.videos && productData.videos[0]?.description ? (
-              <p className="media-description">{productData.videos[0].description}</p>
-            ) : null}
+            {/* 동영상 링크들 */}
+            {productData?.videos && productData.videos.length > 0 ? (
+              <div className="videos-list">
+                {productData.videos.map((videoUrl, index) => {
+                  // YouTube 링크를 임베드 링크로 변환
+                  const getEmbedUrl = (url) => {
+                    if (url.includes('youtube.com/watch?v=')) {
+                      const videoId = url.split('v=')[1]?.split('&')[0];
+                      return videoId ? `https://www.youtube.com/embed/${videoId}` : url;
+                    } else if (url.includes('youtu.be/')) {
+                      const videoId = url.split('youtu.be/')[1]?.split('?')[0];
+                      return videoId ? `https://www.youtube.com/embed/${videoId}` : url;
+                    } else if (url.includes('vimeo.com/')) {
+                      const videoId = url.split('vimeo.com/')[1]?.split('?')[0];
+                      return videoId ? `https://player.vimeo.com/video/${videoId}` : url;
+                    }
+                    return url;
+                  };
+
+                  const embedUrl = getEmbedUrl(videoUrl);
+                  
+                  return (
+                    <div key={index} className="video-item" style={{ marginBottom: '30px' }}>
+                      <div className="video-embed" style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden' }}>
+                        <iframe
+                          src={embedUrl}
+                          title={`동영상 ${index + 1}`}
+                          frameBorder="0"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                          referrerPolicy="strict-origin-when-cross-origin"
+                          allowFullScreen
+                          style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
+                        />
+                      </div>
+                      <div style={{ marginTop: '10px', textAlign: 'center' }}>
+                        <a 
+                          href={videoUrl} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          style={{ color: '#007bff', textDecoration: 'none' }}
+                        >
+                          원본 링크 보기
+                        </a>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            ) : (
+              <div style={{ textAlign: 'center', padding: '40px', color: '#666' }}>
+                <p>등록된 동영상이 없습니다.</p>
+              </div>
+            )}
           </div>
         );
         

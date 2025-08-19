@@ -83,6 +83,7 @@ import Product_list_control from "./pages/Products/Product_list_control.jsx";
 import Product_control from "./pages/Products/Product_control.jsx";
 import Product_safety_1 from "./pages/Products/Product_TWEDG_01.jsx";
 import Product_list_safety from "./pages/Products/Product_list_safety.jsx";
+import Product_list_monitoring from "./pages/Products/Product_list_monitoring.jsx";
 import Product_TWEDG_04 from "./pages/Products/Product_TWEDG_04.jsx";
 import logo from "./assets/main_image.jpg";
 import manufacturing from "./assets/manufacturing.jpg";
@@ -97,6 +98,10 @@ import Downloads from "./pages/Customer_Service/Downloads.jsx";
 import Contact from "./pages/Customer_Service/Contact.jsx";
 import Case from "./pages/Cases/Case.jsx";
 import Case_main from "./pages/Cases/Case_main.jsx";
+import CaseSmartSafety from "./pages/Cases/Case_SmartSafety.jsx";
+import CaseAI from "./pages/Cases/Case_AI.jsx";
+import CaseIntegratedControl from "./pages/Cases/Case_IntegratedControl.jsx";
+import CaseInformationCommunication from "./pages/Cases/Case_InformationCommunication.jsx";
 import About from "./pages/About/About.jsx";
 import Login from "./pages/Login/Login.jsx";
 import { AuthProvider } from "./contexts/AuthContext.jsx";
@@ -366,6 +371,7 @@ function App() {
             <Route path="/products/control" element={<Product_control />} />
             <Route path="/products/control/list" element={<Product_list_control />} />
             <Route path="/products/safety" element={<Product_list_safety />} />
+            <Route path="/products/monitoring" element={<Product_list_monitoring />} />
             <Route path="/products/twmob-01" element={<Product_safety_1/>} />
             <Route path="/products/twedg-04" element={<Product_TWEDG_04 />} />
 
@@ -384,8 +390,12 @@ function App() {
 
             {/* 납품사례 라우팅 */}
             <Route path="/cases" element={<Case_main />} />
-            <Route path="/cases/overview" element={<Case />} />
-            <Route path="/cases/bus-seoul" element={<Case_Bus_Seoul />} />
+<Route path="/cases/overview" element={<Case />} />
+<Route path="/cases/smart-safety" element={<CaseSmartSafety />} />
+<Route path="/cases/ai" element={<CaseAI />} />
+<Route path="/cases/integrated-control" element={<CaseIntegratedControl />} />
+<Route path="/cases/information-communication" element={<CaseInformationCommunication />} />
+<Route path="/cases/bus-seoul" element={<Case_Bus_Seoul />} />
 
             {/* 회사소개 라우팅 */} 
             <Route path="/about" element={<About />} />

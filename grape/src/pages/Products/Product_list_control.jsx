@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import welding from '../../assets/welding.jpg';
 import grinding from '../../assets/grinding.jpg';
 import construction from '../../assets/construction.jpg';
@@ -10,28 +10,341 @@ import collision from '../../assets/collision.jpg';
 import collapse from '../../assets/collapse.jpg';
 import ProductList from './ProductList';
 import controlHeaderImage from '../../assets/header_image/product.jpg';
-
-const products = [
-  { name: 'XCN-3000', title: '어드밴스드 통합제어기 - 산업용 통합 제어 시스템', img: welding, link: '/products/safety/1', category: '통합제어', organization: '싱스웰', date: '2024-12-01' },
-  { name: 'XCN-2000', title: '스마트 제어 시스템 - 중소형 공장용 제어 시스템', img: grinding, link: '/product-list/2', category: '통합제어', organization: '싱스웰', date: '2024-11-15' },
-  { name: 'XCN-1000', title: '기본 제어 모듈 - 소형 장비용 제어 모듈', img: construction, link: '/product-list/3', category: '센서', organization: '싱스웰', date: '2024-10-20' },
-  { name: 'AIB-TS2-08', title: 'AI 브릿지 제어 모듈 - 영상 분석 통합 제어', img: manufacturing, link: '/product-list/4', category: '센서', organization: '싱스웰', date: '2024-09-30' },
-  { name: 'Safety-XCN-500', title: '안전 제어 시스템 - 화재 감지 및 예방 제어', img: fire, link: '/product-list/5', category: '안전장비', organization: '싱스웰', date: '2024-08-25' },
-  { name: 'Safety-XCN-400', title: '위험 감지 제어기 - 위험 상황 감지 및 대응', img: dangerous, link: '/product-list/6', category: '안전장비', organization: '싱스웰', date: '2024-07-10' },
-  { name: 'Safety-XCN-300', title: '낙하 감지 제어기 - 낙하 사고 감지 및 알림', img: falldown, link: '/product-list/7', category: '안전장비', organization: '싱스웰', date: '2024-06-15' },
-  { name: 'Monitor-XCN-200', title: '충돌 감지 모니터링 시스템 - 충돌 사고 감지 및 분석', img: collision, link: '/product-list/8', category: '모니터링', organization: '싱스웰', date: '2024-05-20' },
-  { name: 'Monitor-XCN-100', title: '붕괴 감지 모니터링 시스템 - 구조물 안전 모니터링', img: collapse, link: '/product-list/9', category: '모니터링', organization: '싱스웰', date: '2024-04-30' },
-  { name: 'Safety-XCN-200', title: '종합 안전 제어 시스템 - 다중 위험 요소 통합 제어', img: collision, link: '/product-list/10', category: '안전장비', organization: '싱스웰', date: '2024-03-15' },
-];
+import { supabase } from '../../lib/supabase';
+import { useAuth } from '../../contexts/AuthContext';
+import { setupTrackRecordRLS, createTrackRecordPolicies, checkUserAuthStatus, checkAndCreateMissingPolicies } from '../../utils/supabaseRLS';
+import ProductPage from '../../components/ProductPage/ProductPage';
+import RecordEditor from '../../components/RecordEditor';
 
 export default function ProductListControlPage() {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [showAddModal, setShowAddModal] = useState(false);
+  const [selectedRecord, setSelectedRecord] = useState(null);
+  const [viewMode, setViewMode] = useState('list');
+  const [editingExistingRecord, setEditingExistingRecord] = useState(null);
+  const [newRecord, setNewRecord] = useState({
+    title: '',
+    desc: '',
+    overview_title: '',
+    date: '',
+    orderer: '',
+    type: '',
+    kind: '통합제어',
+    images: []
+  });
+  const [submitting, setSubmitting] = useState(false);
+  
+  const { user, isAuthenticated, canEditContent } = useAuth();
+
+  useEffect(() => {
+    fetchProducts();
+    setupTrackRecordRLS();
+    checkUserAuthStatus();
+    checkAndCreateMissingPolicies();
+  }, []);
+
+  const fetchProducts = async () => {
+    try {
+      setLoading(true);
+      let query = supabase
+        .from('Product')
+        .select('*')
+        .order('date', { ascending: false });
+      
+      query = query.eq('kind', '통합제어');
+      
+      const { data, error } = await query;
+
+      if (error) {
+        throw error;
+      }
+
+      const formattedProducts = data.map(product => {
+        let imageUrl = null;
+        if (product.images) {
+          try {
+            const images = JSON.parse(product.images);
+            if (images && images.length > 0 && images[0]) {
+              imageUrl = images[0];
+            }
+          } catch (error) {
+            console.error('이미지 파싱 오류:', error);
+          }
+        }
+        
+        return {
+          name: product.title,
+          title: product.overview_title || product.desc,
+          img: imageUrl,
+          onClick: () => handleRecordClick(product),
+          category: product.type,
+          organization: product.orderer,
+          date: product.date,
+          rawData: product
+        };
+      });
+
+      setProducts(formattedProducts);
+    } catch (err) {
+      console.error('Product 데이터를 가져오는 중 오류 발생:', err);
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleAddRecord = async (formData) => {
+    const { isAuthenticated } = await checkUserAuthStatus();
+    if (!isAuthenticated) {
+      alert('제품을 추가하려면 로그인이 필요합니다.');
+      return;
+    }
+    
+    if (editingExistingRecord) {
+      try {
+        setSubmitting(true);
+        
+        const { data, error } = await supabase
+          .from('Product')
+          .update({
+            title: formData.title,
+            desc: formData.desc,
+            overview_title: formData.overview_title,
+            date: formData.date,
+            orderer: formData.orderer,
+            type: formData.type,
+            kind: formData.kind,
+            images: formData.images && formData.images.length > 0 ? JSON.stringify(formData.images) : null,
+            keyFeatures: formData.keyFeatures ? JSON.stringify(formData.keyFeatures) : null,
+            specifications: formData.specifications && formData.specifications.length > 0 ? JSON.stringify(formData.specifications) : null,
+            certifications: formData.certifications && formData.certifications.length > 0 ? JSON.stringify(formData.certifications) : null,
+            downloads: formData.downloads && formData.downloads.length > 0 ? JSON.stringify(formData.downloads) : null,
+            videos: formData.videos && formData.videos.length > 0 ? JSON.stringify(formData.videos) : null
+          })
+          .eq('id', editingExistingRecord.id)
+          .select();
+
+        if (error) {
+          throw error;
+        }
+
+        alert('제품이 성공적으로 수정되었습니다!');
+        setShowAddModal(false);
+        setEditingExistingRecord(null);
+        setNewRecord({ title: '', desc: '', overview_title: '', date: '', orderer: '', type: '', kind: '통합제어', images: [] });
+        fetchProducts();
+        
+      } catch (error) {
+        console.error('제품 수정 중 오류 발생:', error);
+        alert('제품 수정 중 오류가 발생했습니다: ' + error.message);
+      } finally {
+        setSubmitting(false);
+      }
+    } else {
+      if (!formData.title || !formData.overview_title || !formData.desc || !formData.date || !formData.orderer || !formData.type || !formData.kind) {
+        alert('모든 필드를 입력해주세요.');
+        return;
+      }
+
+      try {
+        setSubmitting(true);
+        
+        const { data, error } = await supabase
+          .from('Product')
+          .insert({
+            title: formData.title,
+            desc: formData.desc,
+            overview_title: formData.overview_title,
+            date: formData.date,
+            orderer: formData.orderer,
+            type: formData.type,
+            kind: formData.kind,
+            images: formData.images && formData.images.length > 0 ? JSON.stringify(formData.images) : null,
+            keyFeatures: formData.keyFeatures ? JSON.stringify(formData.keyFeatures) : null,
+            specifications: formData.specifications && formData.specifications.length > 0 ? JSON.stringify(formData.specifications) : null,
+            certifications: formData.certifications && formData.certifications.length > 0 ? JSON.stringify(formData.certifications) : null,
+            downloads: formData.downloads && formData.downloads.length > 0 ? JSON.stringify(formData.downloads) : null,
+            videos: formData.videos && formData.videos.length > 0 ? JSON.stringify(formData.videos) : null
+          })
+          .select();
+
+        if (error) {
+          throw error;
+        }
+
+        alert('제품이 성공적으로 추가되었습니다!');
+        setShowAddModal(false);
+        setNewRecord({ title: '', desc: '', overview_title: '', date: '', orderer: '', type: '', kind: '통합제어', images: [] });
+        fetchProducts();
+        
+      } catch (error) {
+        console.error('제품 추가 중 오류 발생:', error);
+        alert('제품 추가 중 오류가 발생했습니다: ' + error.message);
+      } finally {
+        setSubmitting(false);
+      }
+    }
+  };
+
+  const handleRecordClick = (record) => {
+    setSelectedRecord(record);
+    setViewMode('detail');
+  };
+
+  const handleBackToList = () => {
+    setViewMode('list');
+    setSelectedRecord(null);
+  };
+
+  const handleEditRecord = async (record) => {
+    const { isAuthenticated } = await checkUserAuthStatus();
+    if (!isAuthenticated) {
+      alert('제품을 편집하려면 로그인이 필요합니다.');
+      return;
+    }
+    
+    setEditingExistingRecord(record);
+    setShowAddModal(true);
+  };
+
+  if (loading) {
+    return <div>데이터를 불러오는 중...</div>;
+  }
+
+  if (error) {
+    return <div>오류가 발생했습니다: {error}</div>;
+  }
+
+  if (viewMode === 'detail' && selectedRecord) {
+    return (
+      <div>
+        <div style={{
+          padding: '20px',
+          background: '#f8f9fa',
+          borderBottom: '1px solid #dee2e6',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center'
+        }}>
+          <h2 style={{ margin: 0, color: '#495057' }}>제품 상세</h2>
+          <div style={{ display: 'flex', gap: '10px' }}>
+            {canEditContent() && (
+              <button
+                onClick={() => handleEditRecord(selectedRecord)}
+                style={{
+                  padding: '10px 20px',
+                  background: '#007bff',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '4px',
+                  cursor: 'pointer',
+                  fontSize: '14px'
+                }}
+              >
+                편집
+              </button>
+            )}
+            <button
+              onClick={handleBackToList}
+              style={{
+                padding: '10px 20px',
+                background: '#6c757d',
+                color: 'white',
+                border: 'none',
+                borderRadius: '4px',
+                cursor: 'pointer',
+                fontSize: '14px'
+              }}
+            >
+              목록으로 돌아가기
+            </button>
+          </div>
+        </div>
+        <div style={{ padding: '20px' }}>
+          <ProductPage
+            productData={{
+              name: selectedRecord.title || '제목 없음',
+              title: selectedRecord.overview_title || selectedRecord.desc || '개요 없음',
+              overview_title: selectedRecord.overview_title || selectedRecord.desc || '개요 없음',
+              overview: selectedRecord.overview || selectedRecord.desc || '내용 없음',
+              images: selectedRecord.images ? JSON.parse(selectedRecord.images) : [],
+              keyFeatures: selectedRecord.keyFeatures ? JSON.parse(selectedRecord.keyFeatures).features.filter(f => f.trim() !== '') : [],
+              keyFeaturesImages: selectedRecord.keyFeatures ? JSON.parse(selectedRecord.keyFeatures).images || [] : [],
+              specifications: selectedRecord.specifications ? JSON.parse(selectedRecord.specifications) : [],
+              certifications: selectedRecord.certifications ? JSON.parse(selectedRecord.certifications) : [],
+              downloads: selectedRecord.downloads ? JSON.parse(selectedRecord.downloads) : [],
+              videos: selectedRecord.videos ? JSON.parse(selectedRecord.videos) : [],
+              breadcrumbs: ["Home", "제품"]
+            }}
+            isRecordPage={false}
+          />
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <ProductList
-      products={products}
-      title="관제시스템"
-      subtitle="산업용 통합 제어 시스템 제품들을 확인하세요"
-      breadcrumbs={["Home", "Products", "관제시스템"]}
-      headerImage={controlHeaderImage}
-    />
+    <div>
+      {showAddModal && (
+        <RecordEditor
+          isModal={true}
+          mode="product"
+          tableName="Product"
+          editData={editingExistingRecord}
+          submitting={submitting}
+          onSave={handleAddRecord}
+          onCancel={() => {
+            setShowAddModal(false);
+            setEditingExistingRecord(null);
+          }}
+        />
+      )}
+
+      <ProductList
+        products={products}
+        title="통합제어"
+        subtitle="통합제어 제품들을 확인하세요"
+        breadcrumbs={["Home", "Products", "Control"]}
+        longVertical
+        headerImage={controlHeaderImage}
+        onEditRecord={handleEditRecord}
+        canEdit={canEditContent()}
+        addButton={canEditContent() && (
+          <button
+            onClick={() => setShowAddModal(true)}
+            style={{
+              padding: 'var(--spacing-sm) var(--spacing-md)',
+              backgroundColor: 'var(--color-primary)',
+              color: 'white',
+              border: 'none',
+              outline: 'none',
+              borderRadius: 'var(--border-radius-md)',
+              fontSize: 'var(--font-size-sm)',
+              fontWeight: 'var(--font-weight-medium)',
+              cursor: 'pointer',
+              transition: 'background-color var(--transition-slow)',
+              whiteSpace: 'nowrap',
+              height: '40px',
+              minWidth: '80px',
+              boxSizing: 'border-box',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              textAlign: 'center'
+            }}
+            onMouseEnter={(e) => {
+              e.target.style.backgroundColor = '#0056b3';
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.backgroundColor = 'var(--color-primary)';
+            }}
+          >
+            + 제품 추가
+          </button>
+        )}
+      />
+    </div>
   );
 }

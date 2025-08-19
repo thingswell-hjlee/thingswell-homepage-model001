@@ -2,20 +2,21 @@ import React, { useState, useEffect } from 'react';
 import welding from '../../assets/welding.jpg';
 import grinding from '../../assets/grinding.jpg';
 import construction from '../../assets/construction.jpg';
+import manufacturing from '../../assets/manufacturing.jpg';
+import fire from '../../assets/fire.jpg';
+import dangerous from '../../assets/dangerous.jpg';
+import falldown from '../../assets/falldown.jpg';
+import collision from '../../assets/collision.jpg';
+import collapse from '../../assets/collapse.jpg';
 import ProductList from './ProductList';
-import main1 from '../../assets/product_safety/main.jpg';
-import main2 from '../../assets/main_3.png';
-import main3 from '../../assets/product_twedg_04/main.png';
-import safetyHeaderImage from '../../assets/header_image/product.jpg';
+import controlHeaderImage from '../../assets/header_image/product.jpg';
 import { supabase } from '../../lib/supabase';
 import { useAuth } from '../../contexts/AuthContext';
-
 import { setupTrackRecordRLS, createTrackRecordPolicies, checkUserAuthStatus, checkAndCreateMissingPolicies } from '../../utils/supabaseRLS';
 import ProductPage from '../../components/ProductPage/ProductPage';
 import RecordEditor from '../../components/RecordEditor';
 
-
-export default function ProductListSafetyPage() {
+export default function ProductListMonitoringPage() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -30,7 +31,7 @@ export default function ProductListSafetyPage() {
     date: '',
     orderer: '',
     type: '',
-    kind: '스마트안전장비',
+    kind: '관제시스템',
     images: []
   });
   const [submitting, setSubmitting] = useState(false);
@@ -52,7 +53,7 @@ export default function ProductListSafetyPage() {
         .select('*')
         .order('date', { ascending: false });
       
-      query = query.eq('kind', '스마트안전장비');
+      query = query.eq('kind', '관제시스템');
       
       const { data, error } = await query;
 
@@ -132,7 +133,7 @@ export default function ProductListSafetyPage() {
         alert('제품이 성공적으로 수정되었습니다!');
         setShowAddModal(false);
         setEditingExistingRecord(null);
-        setNewRecord({ title: '', desc: '', overview_title: '', date: '', orderer: '', type: '', kind: '스마트안전장비', images: [] });
+        setNewRecord({ title: '', desc: '', overview_title: '', date: '', orderer: '', type: '', kind: '관제시스템', images: [] });
         fetchProducts();
         
       } catch (error) {
@@ -175,7 +176,7 @@ export default function ProductListSafetyPage() {
 
         alert('제품이 성공적으로 추가되었습니다!');
         setShowAddModal(false);
-        setNewRecord({ title: '', desc: '', overview_title: '', date: '', orderer: '', type: '', kind: '스마트안전장비', images: [] });
+        setNewRecord({ title: '', desc: '', overview_title: '', date: '', orderer: '', type: '', kind: '관제시스템', images: [] });
         fetchProducts();
         
       } catch (error) {
@@ -186,8 +187,6 @@ export default function ProductListSafetyPage() {
       }
     }
   };
-
-
 
   const handleRecordClick = (record) => {
     setSelectedRecord(record);
@@ -305,11 +304,11 @@ export default function ProductListSafetyPage() {
 
       <ProductList
         products={products}
-        title="스마트안전장비"
-        subtitle="스마트 안전장비 제품들을 확인하세요"
-        breadcrumbs={["Home", "Products", "Safety"]}
+        title="관제시스템"
+        subtitle="관제시스템 제품들을 확인하세요"
+        breadcrumbs={["Home", "Products", "Monitoring"]}
         longVertical
-        headerImage={safetyHeaderImage}
+        headerImage={controlHeaderImage}
         onEditRecord={handleEditRecord}
         canEdit={canEditContent()}
         addButton={canEditContent() && (

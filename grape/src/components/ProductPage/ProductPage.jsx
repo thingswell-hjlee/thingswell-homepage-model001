@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ProductHeader from './ProductHeader';
 import ProductInfo from './ProductInfo';
 import ProductGallery from './ProductGallery';
@@ -146,93 +146,12 @@ const ProductPage = ({
     breadcrumbs: ["Home", "Products", "Control system"],
     images: [],
     overview: "XCN-3000은 산업용 통합 제어 시스템으로, 다양한 센서와 장비를 연결하여 실시간 모니터링 및 제어를 제공합니다.",
-    keyFeatures: [
-      "고성능 멀티코어 프로세서",
-      "실시간 데이터 처리",
-      "다양한 통신 프로토콜 지원",
-      "확장 가능한 모듈식 구조"
-    ],
-    features: [
-      {
-        icon: "🔧",
-        title: "통합 제어 시스템",
-        description: "다양한 장비와 시스템을 통합하여 효율적으로 제어할 수 있습니다."
-      },
-      {
-        icon: "📊",
-        title: "실시간 모니터링",
-        description: "실시간으로 시스템 상태를 모니터링하고 분석합니다."
-      },
-      {
-        icon: "🛡️",
-        title: "보안 기능",
-        description: "강력한 보안 기능으로 시스템을 안전하게 보호합니다."
-      },
-      {
-        icon: "⚡",
-        title: "고성능 처리",
-        description: "고성능 프로세서로 빠른 응답 속도를 제공합니다."
-      }
-    ],
-    specifications: [
-      { label: "프로세서", value: "Intel Core i7" },
-      { label: "메모리", value: "16GB DDR4" },
-      { label: "저장공간", value: "512GB SSD" },
-      { label: "네트워크", value: "Gigabit Ethernet" },
-      { label: "전원", value: "100-240V AC" },
-      { label: "작동온도", value: "-10°C ~ 50°C" }
-    ],
-    certifications: [
-      {
-        name: "ISO 9001",
-        description: "품질 관리 시스템 인증",
-        image: "/placeholder-cert.png"
-      },
-      {
-        name: "CE 인증",
-        description: "유럽 안전 표준 인증",
-        image: "/placeholder-cert.png"
-      },
-      {
-        name: "FCC 인증",
-        description: "미국 연방 통신 위원회 인증",
-        image: "/placeholder-cert.png"
-      }
-    ],
-    downloads: [
-      {
-        title: "제품 매뉴얼",
-        description: "XCN-3000 사용자 매뉴얼",
-        size: "2.5MB"
-      },
-      {
-        title: "기술 사양서",
-        description: "상세 기술 사양 및 데이터시트",
-        size: "1.8MB"
-      },
-      {
-        title: "설치 가이드",
-        description: "설치 및 설정 가이드",
-        size: "3.2MB"
-      }
-    ],
-    videos: [
-      {
-        title: "제품 소개 영상",
-        description: "XCN-3000의 주요 기능과 특징을 소개합니다.",
-        thumbnail: "/placeholder-video.png"
-      },
-      {
-        title: "설치 및 설정 가이드",
-        description: "단계별 설치 및 설정 방법을 보여줍니다.",
-        thumbnail: "/placeholder-video.png"
-      },
-      {
-        title: "문제 해결 가이드",
-        description: "일반적인 문제와 해결 방법을 안내합니다.",
-        thumbnail: "/placeholder-video.png"
-      }
-    ]
+    keyFeatures: [],
+    features: [],
+    specifications: [],
+    certifications: [],
+    downloads: [],
+    videos: []
   },
   isEditMode = false,
   onDataChange = null,
@@ -261,8 +180,34 @@ const ProductPage = ({
     setActiveTab(tabId);
   };
 
-  // 탭 구성 - 제품 페이지와 실적 페이지 구분
-  const tabs = isRecordPage ? [
+  // 탭별 데이터 존재 여부 확인 함수
+  const hasTabData = (tabId) => {
+    switch (tabId) {
+      case 'overview':
+        return true; // 개요는 항상 표시
+      case 'features':
+        return (productData?.keyFeatures && productData.keyFeatures.length > 0) ||
+               (productData?.keyFeaturesImages && productData.keyFeaturesImages.length > 0) ||
+               (productData?.features && productData.features.length > 0);
+      case 'specs':
+        return productData?.specifications && productData.specifications.length > 0;
+      case 'certifications':
+        return productData?.certifications && productData.certifications.length > 0;
+      case 'downloads':
+        return productData?.downloads && productData.downloads.some(download => 
+          download.title && download.title.trim() !== '' && 
+          download.description && download.description.trim() !== '' && 
+          download.link && download.link.trim() !== ''
+        );
+      case 'videos':
+        return productData?.videos && productData.videos.length > 0;
+      default:
+        return false;
+    }
+  };
+
+  // 탭 구성 - 제품 페이지와 실적 페이지 구분, 데이터가 있는 탭만 표시
+  const allTabs = isRecordPage ? [
     { id: 'overview', label: '개요', icon: '📋' }
   ] : [
     { id: 'overview', label: '개요', icon: '📋' },
@@ -272,6 +217,15 @@ const ProductPage = ({
     { id: 'downloads', label: '다운로드', icon: '📥' },
     { id: 'videos', label: '동영상', icon: '🎥' }
   ];
+
+  const tabs = allTabs.filter(tab => hasTabData(tab.id));
+
+  // 활성 탭이 필터링된 탭 목록에 없으면 첫 번째 탭으로 변경
+  useEffect(() => {
+    if (tabs.length > 0 && !tabs.find(tab => tab.id === activeTab)) {
+      setActiveTab(tabs[0].id);
+    }
+  }, [tabs, activeTab]);
 
   // 탭별 허용 설정
   const allowedTabIdsConfig = isRecordPage ? {
@@ -285,8 +239,8 @@ const ProductPage = ({
     videos: true
   };
 
-  // 최대 표시 탭 수 설정
-  const maxVisibleTabsConfig = isRecordPage ? 1 : 6;
+  // 최대 표시 탭 수 설정 (필터링된 탭 수에 맞춤)
+  const maxVisibleTabsConfig = isRecordPage ? 1 : tabs.length;
 
   // 하단 박스 콘텐츠 존재 여부 (실적 페이지에서는 제목 제외)
   const hasBottomBoxContent = isRecordPage ? 
@@ -393,6 +347,35 @@ const ProductPage = ({
                     featureClickToOpen={true}
                     onFeatureImageClick={openLightbox}
                   />
+                </div>
+              )}
+
+              {/* Collapsed 상태일 때 다른 탭들의 콘텐츠를 하단에 표시 */}
+              {tabsCollapsed && !isRecordPage && tabs.filter(tab => tab.id !== 'overview').length > 0 && (
+                <div className="collapsed-content-strip">
+                  {tabs.filter(tab => tab.id !== 'overview').map(tab => {
+                    if (!hasTabData(tab.id)) return null;
+                    return (
+                      <div key={tab.id} className="collapsed-item">
+                        <h3 style={{ 
+                          marginBottom: '15px', 
+                          color: '#495057', 
+                          fontSize: '18px',
+                          fontWeight: 'bold',
+                          borderBottom: '2px solid #e5e7eb',
+                          paddingBottom: '10px'
+                        }}>
+                          {tab.label}
+                        </h3>
+                        <TabContent 
+                          tabId={tab.id}
+                          productData={productData}
+                          featureClickToOpen={true}
+                          onFeatureImageClick={openLightbox}
+                        />
+                      </div>
+                    );
+                  })}
                 </div>
               )}
 

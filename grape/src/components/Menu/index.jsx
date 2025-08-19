@@ -65,7 +65,7 @@ const defaultMenuItems = [
         path: '/products',
         submenu: [
           { label: '스마트안전장비', path: '/products/safety' }, 
-          { label: '관제시스템', path: '/products/new/remote-monitoring' },
+          { label: '관제시스템', path: '/products/monitoring' },
           { label: '통합제어', path: '/products/control/list' }, 
       
     ] 
@@ -84,10 +84,10 @@ const defaultMenuItems = [
     label: '실적', 
     path: '/cases',
     submenu: [ 
-      { label: '스마트안전장비', path: '/cases/overview' }, 
-      { label: '인공지능 AI', path: '/cases/case-1' }, 
-      { label: '통합제어', path: '/cases/case-2' }, 
-      { label: '정보통신공사', path: '/cases/case-3' } 
+      { label: '스마트안전장비', path: '/cases/smart-safety' }, 
+      { label: 'AI', path: '/cases/ai' }, 
+      { label: '통합제어', path: '/cases/integrated-control' }, 
+      { label: '정보통신', path: '/cases/information-communication' } 
     ] 
   },
   { 

@@ -24,38 +24,24 @@ const Product_main = () => {
   const productItems = [
     {
       image: welding,
-      imageAlt: "용접 제품",
+      imageAlt: "스마트안전장비",
+      label: "스마트안전장비",
+      title: "스마트안전장비",
+      link: "/products/safety"
+    },
+    {
+      image: welding,
+      imageAlt: "관제시스템",
+      label: "관제시스템",
+      title: "관제시스템",
+      link: "/products/monitoring"
+    },
+    {
+      image: welding,
+      imageAlt: "통합제어",
       label: "통합제어",
       title: "통합제어",
-      link: "/product-list/control"
-    },
-    {
-      image: welding,
-      imageAlt: "용접 제품",
-      label: "영상분석 디바이스",
-      title: "영상분석 디바이스",
-      link: "/product/2"
-    },
-    {
-      image: welding,
-      imageAlt: "원격 모니터링 시스템",
-      label: "원격 모니터링 시스템",
-      title: "원격 모니터링 시스템",
-      link: "/product/3"
-    },
-    {
-      image: welding,
-      imageAlt: "용접 제품",
-      label: "용접 제품",
-      title: "용접 안전장비",
-      link: "/product/4"
-    },
-    {
-      image: welding,
-      imageAlt: "안전장비",
-      label: "안전장비",
-      title: "개인보호장비",
-      link: "/product/5"
+      link: "/products/control/list"
     },
   ];
     
