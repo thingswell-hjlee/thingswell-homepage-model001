@@ -51,6 +51,77 @@ const MarqueeTitle = ({ text }) => {
   );
 };
 
+// 페이징 컴포넌트
+const Pagination = ({ currentPage, totalPages, onPageChange }) => {
+  const getPageNumbers = () => {
+    const pages = [];
+    const maxVisiblePages = 5;
+    
+    if (totalPages <= maxVisiblePages) {
+      for (let i = 1; i <= totalPages; i++) {
+        pages.push(i);
+      }
+    } else {
+      if (currentPage <= 3) {
+        for (let i = 1; i <= 4; i++) {
+          pages.push(i);
+        }
+        pages.push('...');
+        pages.push(totalPages);
+      } else if (currentPage >= totalPages - 2) {
+        pages.push(1);
+        pages.push('...');
+        for (let i = totalPages - 3; i <= totalPages; i++) {
+          pages.push(i);
+        }
+      } else {
+        pages.push(1);
+        pages.push('...');
+        for (let i = currentPage - 1; i <= currentPage + 1; i++) {
+          pages.push(i);
+        }
+        pages.push('...');
+        pages.push(totalPages);
+      }
+    }
+    
+    return pages;
+  };
+
+  return (
+    <div className="pagination-container">
+      <div className="pagination">
+        <button
+          className="pagination-btn"
+          onClick={() => onPageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+        >
+          이전
+        </button>
+        
+        {getPageNumbers().map((page, index) => (
+          <button
+            key={index}
+            className={`pagination-btn ${page === currentPage ? 'active' : ''} ${page === '...' ? 'disabled' : ''}`}
+            onClick={() => page !== '...' && onPageChange(page)}
+            disabled={page === '...'}
+          >
+            {page}
+          </button>
+        ))}
+        
+        <button
+          className="pagination-btn"
+          onClick={() => onPageChange(currentPage + 1)}
+          disabled={currentPage === totalPages}
+        >
+          다음
+        </button>
+      </div>
+    </div>
+  );
+};
+
 const ProductList = ({
   products = [],
   title = 'Products',
@@ -62,11 +133,14 @@ const ProductList = ({
   hideSearchAndView = false,
   hideSearch = false,
   headerImage = null,
+  addButton = null,
 }) => {
   const [selectedCategory, setSelectedCategory] = useState('전체');
   const [searchTerm, setSearchTerm] = useState('');
   const [viewMode, setViewMode] = useState('card');
   const [previewImage, setPreviewImage] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 9;
 
   useEffect(() => {
     if (!previewImage) return;
@@ -78,6 +152,11 @@ const ProductList = ({
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
   }, [previewImage]);
+
+  // 필터나 검색어가 변경되면 첫 페이지로 이동
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [selectedCategory, searchTerm]);
 
   const categories = useMemo(() => {
     const unique = new Set(products.map((p) => p.category).filter(Boolean));
@@ -106,8 +185,27 @@ const ProductList = ({
     });
   }, [products, selectedCategory, searchTerm]);
 
+  // 페이징 처리
+  const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentProducts = filteredProducts.slice(startIndex, endIndex);
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+    // 페이지 변경 시 스크롤을 맨 위로 이동
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const content = (
     <div className="product-list-content">
+      {/* 추가 버튼 영역 */}
+      {addButton && (
+        <div className="product-list-add-button">
+          {addButton}
+        </div>
+      )}
+      
       {!hideToolbar && (
         <div className="product-list-toolbar">
           <div className="product-list-filter">
@@ -168,8 +266,8 @@ const ProductList = ({
 
       <div className="product-list-grid-container">
         <ThreeColumnGrid listView={viewMode === 'list'} longVertical={longVertical}>
-          {filteredProducts.length > 0 ? (
-            filteredProducts.map((product, idx) => {
+          {currentProducts.length > 0 ? (
+            currentProducts.map((product, idx) => {
               const Card = (
                 <div className={`product-card ${viewMode === 'list' ? 'list-item' : ''}`}>
                   {viewMode === 'list' ? (
@@ -227,6 +325,15 @@ const ProductList = ({
           )}
         </ThreeColumnGrid>
       </div>
+
+      {/* 페이징 처리 - 9개 이상일 때만 표시 */}
+      {filteredProducts.length > itemsPerPage && (
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+        />
+      )}
     </div>
   );
 

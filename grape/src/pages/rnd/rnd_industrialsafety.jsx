@@ -7,10 +7,10 @@ import ProductHeader from '../../components/ProductPage/ProductHeader';
 import ProductInfo from '../../components/ProductPage/ProductInfo';
 import rnd from '../../assets/header_image/rnd.jpg';
 
-const BREADCRUMBS = ["Home", "연구개발", "산업 안전 솔루션"];
+const BREADCRUMBS = ["Home", "연구개발", "산업 안전"];
 
 const SOLUTION_DATA = {
-  title: "산업 안전 솔루션",
+  title: "산업 안전",
   description:
     "AI 기반 멀티모달 산업안전 솔루션은 RAG(Retrieval-Augmented Generation) 기술을 적용한 대규모 비전 모델(LVM)과 언어 모델(LLM), 그리고 다양한 실시간 센싱 시스템에서 수집되는 데이터를 통합 분석하여 작업자 안전을 극대화하는 혁신적인 솔루션입니다. 이 솔루션은 제조 현장의 안전 매뉴얼 정보를 기반으로 카메라, 레이더, 음향 센서 등 여러 센서로부터 들어오는 멀티모달 데이터를 실시간으로 융합 및 분석합니다. 이를 통해 작업자의 위험 행동을 정확하게 감지하고, 유해한 환경 요인을 미리 예측하여 사고를 예방하는 통합적인 데이터 처리 엔진을 제공합니다.",
 };

@@ -7,10 +7,10 @@ import ProductHeader from '../../components/ProductPage/ProductHeader';
 import ProductInfo from '../../components/ProductPage/ProductInfo';
 import rnd from '../../assets/header_image/rnd.jpg';
 
-const BREADCRUMBS = ["Home", "연구개발", "통합제어 솔루션"];
+const BREADCRUMBS = ["Home", "연구개발", "통합제어"];
 
 const SOLUTION_DATA = {
-  title: "통합제어 솔루션",
+  title: "통합제어",
   description:
     "AI 기반 통합제어 솔루션은 다양한 산업 장비와 시스템을 하나의 플랫폼에서 통합 관리하고 제어하는 혁신적인 기술입니다. IoT 센서, PLC, SCADA 시스템 등 다양한 제어 장치의 데이터를 수집하고, AI 알고리즘을 통해 최적화된 제어 로직을 실시간으로 생성합니다. 이를 통해 생산성 향상, 에너지 효율성 증대, 안전성 강화를 동시에 달성하는 스마트 팩토리 솔루션을 제공합니다.",
 };

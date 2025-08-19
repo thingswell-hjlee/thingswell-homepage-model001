@@ -25,9 +25,21 @@ import { Link } from 'react-router-dom';
 import './ApplicationCard.css';
 
 const ApplicationCard = ({ image, imageAlt, label, title, link, desc, desc2, fullWidthImage = false }) => {
+  const [isTitleExpanded, setIsTitleExpanded] = React.useState(false);
+  const [isOverflowing, setIsOverflowing] = React.useState(false);
+  const titleRef = React.useRef(null);
+  
   const descriptions = Array.isArray(desc)
     ? desc.filter(Boolean)
     : [desc, desc2].filter(Boolean);
+
+  React.useEffect(() => {
+    if (titleRef.current) {
+      const element = titleRef.current;
+      const isOverflow = element.scrollHeight > element.clientHeight;
+      setIsOverflowing(isOverflow);
+    }
+  }, [title]);
 
   const HIGHLIGHT_TERMS = ["입력 소스", "데이터 정규화"]; 
 
@@ -108,7 +120,16 @@ const ApplicationCard = ({ image, imageAlt, label, title, link, desc, desc2, ful
   };
   const cardContent = (
     <>
-      {title && <div className="application-card-title">{title}</div>}
+      {title && (
+        <div 
+          ref={titleRef}
+          className={`application-card-title ${isTitleExpanded ? 'expanded' : ''} ${isOverflowing ? 'overflowing' : ''}`}
+          onMouseEnter={() => isOverflowing && setIsTitleExpanded(true)}
+          onMouseLeave={() => isOverflowing && setIsTitleExpanded(false)}
+        >
+          {title}
+        </div>
+      )}
       {image && (
         <div className={`application-card-image-container ${fullWidthImage ? 'fullwidth' : ''}`}>
           <img src={image} alt={imageAlt} />

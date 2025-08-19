@@ -34,8 +34,8 @@ const defaultMenuItems = [
       { label: '회사소개', path: '/about#greeting' },
       { label: '연혁', path: '/about#history' },
       { label: '면허인증특허', path: '/about#certificate' },
-      { label: '게시판', path: '/customer-service/announcement' },
       { label: '오시는 길', path: '/about#location' },
+      { label: '게시판', path: '/customer-service/announcement' },
       // { label: '문의하기', path: '/contact' },
 
     ] 
@@ -45,8 +45,8 @@ const defaultMenuItems = [
     label: '사업분야', 
     path: '/solutions',
     submenu: [ 
-      { label: '산업 안전 솔루션', path: '/solutions/overview' }, 
-      { label: '노인 장애인 안전 솔루션', path: '/solutions/chemical' },
+      { label: '산업안전 솔루션', path: '/solutions/overview' }, 
+      { label: '노인장애인안전 솔루션', path: '/solutions/chemical' },
       { label: '통합제어 솔루션', path: '/solutions/manufacturing' },
     ] 
   },
@@ -55,9 +55,9 @@ const defaultMenuItems = [
     label: '연구개발', 
     path: '/rnd',
     submenu: [ 
-      { label: '산업 안전 솔루션', path: '/rnd/industrial-safety' }, 
-      { label: '노인 장애인 안전 솔루션', path: '/rnd/elderly-disabled' },
-      { label: '통합제어 솔루션', path: '/rnd/integrated-control' },
+      { label: '산업안전', path: '/rnd/industrial-safety' }, 
+      { label: '노인장애인안전', path: '/rnd/elderly-disabled' },
+      { label: '통합제어 ', path: '/rnd/integrated-control' },
     ] 
   },
       { 
@@ -94,7 +94,7 @@ const defaultMenuItems = [
     label: '정부지원사업', 
     path: '/government-support',
     submenu: [ 
-      { label: '스마트 안전장비지원사업', path: '/government-support-detail' }, 
+      { label: '스마트안전장비 지원사업', path: '/government-support-detail' }, 
       // { label: '건강일터 조성지원사업', path: '/government-support-detail' }, 
       // { label: '소공인 클린제조환경조성', path: '/government-support-detail' }, 
     ] 

@@ -28,9 +28,9 @@ export default function ProductListControlPage() {
   return (
     <ProductList
       products={products}
-      title="통합제어"
+      title="관제시스템"
       subtitle="산업용 통합 제어 시스템 제품들을 확인하세요"
-      breadcrumbs={["Home", "Products", "통합제어"]}
+      breadcrumbs={["Home", "Products", "관제시스템"]}
       headerImage={controlHeaderImage}
     />
   );

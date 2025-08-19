@@ -7,10 +7,10 @@ import ProductHeader from '../../components/ProductPage/ProductHeader';
 import ProductInfo from '../../components/ProductPage/ProductInfo';
 import rnd from '../../assets/header_image/rnd.jpg';
 
-const BREADCRUMBS = ["Home", "연구개발", "노인 장애인 안전 솔루션"];
+const BREADCRUMBS = ["Home", "연구개발", "노인 장애인 안전"];
 
 const SOLUTION_DATA = {
-  title: "노인 장애인 안전 솔루션",
+  title: "노인 장애인 안전",
   description:
     "AI 기반의 상황/행동 인지 홈케어 솔루션은 인지장애를 가진 노인 및 장애인의 안전과 편의를 향상하기 위해 개발된 비접촉식 스마트 모니터링 시스템입니다. 사생활 침해 우려 없이 위험상황을 조기에 감지하고, 단계별 알림을 통해 신속한 대응을 돕습니다. 또한, 사용자의 일상생활 패턴을 학습하여 개개인에게 최적화된 맞춤형 케어를 제공합니다.",
 };
