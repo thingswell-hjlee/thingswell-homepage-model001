@@ -836,6 +836,12 @@
   }
 }
 
+/* Certificate 섹션: 리스트 뷰일 때 한 열씩 배치 */
+.about-page #certificate .product-grid.list-view {
+  grid-template-columns: 1fr;
+  gap: var(--spacing-md);
+}
+
 /* Certificate 섹션: 이미지 확대(hover scale) 효과 제거 */
 .about-page #certificate .application-card:hover img {
   transform: none;
