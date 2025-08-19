@@ -134,6 +134,8 @@ const ProductList = ({
   hideSearch = false,
   headerImage = null,
   addButton = null,
+  onEditRecord = null,
+  canEdit = false,
 }) => {
   const [selectedCategory, setSelectedCategory] = useState('전체');
   const [searchTerm, setSearchTerm] = useState('');
@@ -309,13 +311,55 @@ const ProductList = ({
                   )}
                 </div>
               );
-              return product.link ? (
-                <Link to={product.link} key={idx}>
-                  {Card}
-                </Link>
-              ) : (
-                <div key={idx}>{Card}</div>
+              const cardWithEdit = (
+                <div key={idx} style={{ position: 'relative' }}>
+                  {product.onClick ? (
+                    <div onClick={product.onClick} style={{ cursor: 'pointer' }}>
+                      {Card}
+                    </div>
+                  ) : product.link ? (
+                    <Link to={product.link}>
+                      {Card}
+                    </Link>
+                  ) : (
+                    <div>{Card}</div>
+                  )}
+                  
+                  {/* 편집 버튼 */}
+                  {canEdit && onEditRecord && product.rawData && (
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onEditRecord(product.rawData);
+                      }}
+                      style={{
+                        position: 'absolute',
+                        top: '10px',
+                        right: '10px',
+                        background: 'rgba(0, 123, 255, 0.9)',
+                        color: 'white',
+                        border: 'none',
+                        borderRadius: '4px',
+                        padding: '5px 10px',
+                        fontSize: '12px',
+                        cursor: 'pointer',
+                        zIndex: 10,
+                        backdropFilter: 'blur(4px)'
+                      }}
+                      onMouseEnter={(e) => {
+                        e.target.style.background = 'rgba(0, 123, 255, 1)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.target.style.background = 'rgba(0, 123, 255, 0.9)';
+                      }}
+                    >
+                      편집
+                    </button>
+                  )}
+                </div>
               );
+              
+              return cardWithEdit;
             })
           ) : (
             <div className="no-products-message">

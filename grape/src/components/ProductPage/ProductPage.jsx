@@ -6,7 +6,137 @@ import ProductTabs from './ProductTabs';
 import Lightbox from '../Common/Lightbox';
 import TabContent from './TabContent';
 import ContentBottomBox from './ContentBottomBox';
+import { marked } from 'marked';
 import './ProductPage.css';
+
+// 인라인 편집 컴포넌트
+const EditableText = ({ field, value, placeholder, multiline = false, style = {}, onSave }) => {
+  const [isEditing, setIsEditing] = useState(false);
+  const [tempValue, setTempValue] = useState(value || '');
+
+  const startEditing = () => {
+    setIsEditing(true);
+    setTempValue(value || '');
+  };
+
+  const saveEdit = () => {
+    if (onSave && tempValue !== value) {
+      onSave(field, tempValue);
+    }
+    setIsEditing(false);
+  };
+
+  const cancelEdit = () => {
+    setTempValue(value || '');
+    setIsEditing(false);
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      saveEdit();
+    } else if (e.key === 'Escape') {
+      cancelEdit();
+    }
+  };
+
+  if (isEditing) {
+    const Component = multiline ? 'textarea' : 'input';
+    return (
+      <Component
+        value={tempValue}
+        onChange={(e) => setTempValue(e.target.value)}
+        onBlur={saveEdit}
+        onKeyDown={handleKeyDown}
+        placeholder={placeholder}
+        style={{
+          ...style,
+          border: '2px solid #007bff',
+          borderRadius: '4px',
+          padding: '8px',
+          fontSize: 'inherit',
+          fontFamily: 'inherit',
+          background: 'white',
+          outline: 'none',
+          resize: multiline ? 'vertical' : 'none',
+          minHeight: multiline ? '60px' : 'auto',
+          width: '100%',
+          boxSizing: 'border-box',
+          textAlign: 'left'
+        }}
+        autoFocus
+        lang="ko"
+        inputMode="text"
+        onCompositionStart={(e) => {
+          e.target.style.imeMode = 'active';
+          e.target.setAttribute('data-composing', 'true');
+        }}
+        onCompositionEnd={(e) => {
+          e.target.style.imeMode = 'auto';
+          e.target.removeAttribute('data-composing');
+          // 한글 입력 완료 시 최종 값 설정
+          setTempValue(e.target.value);
+        }}
+        onChange={(e) => {
+          // 한글 입력 중이 아닐 때만 값 업데이트
+          if (!e.target.getAttribute('data-composing')) {
+            setTempValue(e.target.value);
+          }
+        }}
+      />
+    );
+  }
+
+  return (
+    <div
+      onClick={startEditing}
+      style={{
+        ...style,
+        cursor: 'pointer',
+        border: '2px solid transparent',
+        borderRadius: '4px',
+        padding: '8px',
+        transition: 'all 0.2s ease',
+        minHeight: multiline ? '60px' : 'auto',
+        display: 'flex',
+        alignItems: multiline ? 'flex-start' : 'center',
+        justifyContent: 'flex-start',
+        textAlign: 'left'
+      }}
+      onMouseEnter={(e) => {
+        e.target.style.borderColor = '#e9ecef';
+        e.target.style.backgroundColor = '#f8f9fa';
+      }}
+      onMouseLeave={(e) => {
+        e.target.style.borderColor = 'transparent';
+        e.target.style.backgroundColor = 'transparent';
+      }}
+    >
+      {value || placeholder}
+    </div>
+  );
+};
+
+// 마크다운을 HTML로 렌더링하는 컴포넌트
+const MarkdownRenderer = ({ content }) => {
+  if (!content) return null;
+  
+  try {
+    const htmlContent = marked(content);
+    return (
+      <div 
+        dangerouslySetInnerHTML={{ __html: htmlContent }}
+        style={{
+          lineHeight: '1.6',
+          fontSize: '14px'
+        }}
+      />
+    );
+  } catch (error) {
+    console.error('마크다운 파싱 오류:', error);
+    return <div>{content}</div>;
+  }
+};
 
 const ProductPage = ({ 
   productData = {
@@ -98,59 +228,79 @@ const ProductPage = ({
         thumbnail: "/placeholder-video.png"
       },
       {
-        title: "사용법 데모",
-        description: "실제 사용 사례와 데모를 제공합니다.",
+        title: "문제 해결 가이드",
+        description: "일반적인 문제와 해결 방법을 안내합니다.",
         thumbnail: "/placeholder-video.png"
       }
     ]
-  }
+  },
+  isEditMode = false,
+  onDataChange = null,
+  hideHeader = false,
+  isRecordPage = false
 }) => {
   const [activeTab, setActiveTab] = useState('overview');
-  const [lightbox, setLightbox] = useState({ open: false, src: null, caption: null, alt: '' });
-  const [tabsCollapsed, setTabsCollapsed] = useState(true);
-  const hasBottomBoxContent = Boolean(
-    productData?.bottom_box_title ||
-    productData?.bottom_box_description ||
-    productData?.bottom_box_photo ||
-    (productData?.bottom_box_photos && productData.bottom_box_photos.length > 0)
-  );
+  const [tabsCollapsed, setTabsCollapsed] = useState(false);
+  const [lightbox, setLightbox] = useState({ open: false, src: '', caption: '', alt: '' });
 
-  const tabs = [
-    { id: 'overview', label: '소개', content: 'overview' },
-    { id: 'features', label: '주요기능', content: 'features' },
-    { id: 'specs', label: '제품스펙', content: 'specs' },
-    { id: 'certifications', label: '인증', content: 'certifications' },
-    { id: 'downloads', label: '자료 다운로드', content: 'downloads' },
-    { id: 'videos', label: '관련영상', content: 'videos' }
-  ];
-
-  // 페이지별 탭 제한 설정 (없으면 전체 노출)
-  const tabConfig = productData?.tab_config || {};
-  const allowedTabIdsConfig = Array.isArray(productData?.allowedTabIds)
-    ? productData.allowedTabIds
-    : (Array.isArray(tabConfig?.allowedTabIds) ? tabConfig.allowedTabIds : undefined);
-  const maxVisibleTabsConfig = Number.isFinite(productData?.maxVisibleTabs)
-    ? productData.maxVisibleTabs
-    : (Number.isFinite(tabConfig?.maxVisibleTabs) ? tabConfig.maxVisibleTabs : undefined);
-
-  const handleTabChange = (tabId) => {
-    setActiveTab(tabId);
-    if (tabId !== 'overview') {
-      setTabsCollapsed(true);
+  const handleDataChange = (field, value) => {
+    if (onDataChange) {
+      onDataChange(field, value);
     }
   };
 
-  const openLightbox = (src, caption, alt = '') => {
+  const openLightbox = (src, caption = '', alt = '') => {
     setLightbox({ open: true, src, caption, alt });
   };
 
   const closeLightbox = () => {
-    setLightbox({ open: false, src: null, caption: null, alt: '' });
+    setLightbox({ open: false, src: '', caption: '', alt: '' });
   };
+
+  const handleTabChange = (tabId) => {
+    setActiveTab(tabId);
+  };
+
+  // 탭 구성 - 제품 페이지와 실적 페이지 구분
+  const tabs = isRecordPage ? [
+    { id: 'overview', label: '개요', icon: '📋' }
+  ] : [
+    { id: 'overview', label: '개요', icon: '📋' },
+    { id: 'features', label: '주요 기능', icon: '⚡' },
+    { id: 'specs', label: '사양', icon: '📊' },
+    { id: 'certifications', label: '인증', icon: '🏆' },
+    { id: 'downloads', label: '다운로드', icon: '📥' },
+    { id: 'videos', label: '동영상', icon: '🎥' }
+  ];
+
+  // 탭별 허용 설정
+  const allowedTabIdsConfig = isRecordPage ? {
+    overview: true
+  } : {
+    overview: true,
+    features: true,
+    specs: true,
+    certifications: true,
+    downloads: true,
+    videos: true
+  };
+
+  // 최대 표시 탭 수 설정
+  const maxVisibleTabsConfig = isRecordPage ? 1 : 6;
+
+  // 하단 박스 콘텐츠 존재 여부 (실적 페이지에서는 제목 제외)
+  const hasBottomBoxContent = isRecordPage ? 
+    (productData?.bottom_box_description || 
+     productData?.bottom_box_photo || 
+     productData?.bottom_box_photos?.length) :
+    (productData?.bottom_box_title || 
+     productData?.bottom_box_description || 
+     productData?.bottom_box_photo || 
+     productData?.bottom_box_photos?.length);
 
   return (
     <div className="product-page">
-      <ProductHeader />
+      {!hideHeader && <ProductHeader />}
       
       <div className="product-page-content">
         <div className="container">
@@ -159,6 +309,8 @@ const ProductPage = ({
             productTitle={productData.title}
             description={productData.description}
             breadcrumbs={productData.breadcrumbs}
+            isEditMode={isEditMode}
+            onDataChange={handleDataChange}
           />
           
           <div className="product-main-section">
@@ -172,6 +324,7 @@ const ProductPage = ({
                 onTabChange={handleTabChange}
                 collapsed={tabsCollapsed}
                 onToggleChange={setTabsCollapsed}
+                isRecordPage={isRecordPage}
               />
               {activeTab === 'overview' ? (
                 <div className="product-content-section">
@@ -184,12 +337,39 @@ const ProductPage = ({
                     />
                   </div>
                   <div className="tab-content-area">
-                     <TabContent 
-                      tabId={activeTab}
-                      productData={productData}
-                      featureClickToOpen={true}
-                       onFeatureImageClick={openLightbox}
-                    />
+                    {isEditMode ? (
+                      <div style={{ padding: '20px', background: '#fff', borderRadius: '8px', marginBottom: '20px' }}>
+                        <h3 style={{ marginBottom: '15px', color: '#495057' }}>개요 편집</h3>
+                        <div style={{ marginBottom: '20px' }}>
+                          <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold', color: '#6c757d' }}>개요 제목</label>
+                          <EditableText
+                            field="overview_title"
+                            value={productData.overview_title}
+                            placeholder="개요 제목을 입력하세요"
+                            style={{ fontSize: '18px', fontWeight: 'bold' }}
+                            onSave={handleDataChange}
+                          />
+                        </div>
+                        <div>
+                          <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold', color: '#6c757d' }}>개요 내용</label>
+                          <EditableText
+                            field="overview"
+                            value={productData.overview}
+                            placeholder="개요 내용을 입력하세요"
+                            multiline={true}
+                            style={{ fontSize: '14px', lineHeight: '1.6' }}
+                            onSave={handleDataChange}
+                          />
+                        </div>
+                      </div>
+                    ) : (
+                      <TabContent 
+                        tabId={activeTab}
+                        productData={productData}
+                        featureClickToOpen={true}
+                        onFeatureImageClick={openLightbox}
+                      />
+                    )}
                   </div>
                   {hasBottomBoxContent && (
                     <ContentBottomBox
@@ -199,6 +379,9 @@ const ProductPage = ({
                       photos={productData?.bottom_box_photos}
                       photoCaption={productData?.bottom_box_photo_caption}
                       photoCaptions={productData?.bottom_box_photo_captions}
+                      isEditMode={isEditMode}
+                      onDataChange={handleDataChange}
+                      isRecordPage={isRecordPage}
                     />
                   )}
                 </div>
@@ -208,28 +391,12 @@ const ProductPage = ({
                     tabId={activeTab}
                     productData={productData}
                     featureClickToOpen={true}
-                     onFeatureImageClick={openLightbox}
-                    
+                    onFeatureImageClick={openLightbox}
                   />
                 </div>
               )}
 
-              {!tabsCollapsed && activeTab === 'overview' && (
-                <div className="collapsed-content-strip">
-                  {tabs.filter(t => t.id !== 'overview').map(t => (
-                    <div key={t.id} className="collapsed-item">
-                      <TabContent 
-                        tabId={t.id}
-                        productData={productData}
-                        featureClickToOpen={true}
-                        onFeatureImageClick={openLightbox}
-                      />
-                    </div>
-                  ))}
-                </div>
-              )}
-            
-            
+
             </div>
           </div>
         </div>

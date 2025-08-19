@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import ProductPage from '../../components/ProductPage/ProductPage';
 import './Product_safety.css';
+import { supabase } from '../../lib/supabase';
+import { uploadImage, validateImageFile } from '../../utils/imageUpload';
 
 // product_safety 폴더의 이미지들을 불러옵니다
 import mainImg from '../../assets/product_safety/main.jpg';
@@ -21,8 +23,8 @@ import sub11Img from '../../assets/product_safety/sub_11.png';
 import sub12Img from '../../assets/product_safety/sub_12.png';
 
 const Product_safety_1 = () => {
-  // AI 브릿지 제품 데이터 정의
-  const productData = {
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [productData, setProductData] = useState({
     name: "TWMOB-01",
     title: "TWMOB-01",
     // description: "XCN-3000",
@@ -88,13 +90,130 @@ const Product_safety_1 = () => {
         thumbnail: "/placeholder-video.png"
       }
     ]
+  });
+
+  const [submitting, setSubmitting] = useState(false);
+
+  // 데이터 변경 핸들러
+  const handleDataChange = (field, value) => {
+    setProductData(prev => ({
+      ...prev,
+      [field]: value
+    }));
   };
 
-  
+  // 편집 모드 토글
+  const toggleEditMode = () => {
+    setIsEditMode(!isEditMode);
+  };
+
+  // 저장 함수
+  const handleSave = async () => {
+    setSubmitting(true);
+    try {
+      // 여기에 Supabase 저장 로직 추가 (필요시)
+      console.log('저장된 데이터:', productData);
+      alert('저장되었습니다!');
+      setIsEditMode(false);
+    } catch (error) {
+      console.error('저장 오류:', error);
+      alert('저장 중 오류가 발생했습니다.');
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  // 편집 취소
+  const handleCancel = () => {
+    setIsEditMode(false);
+    // 원본 데이터로 복원 (필요시)
+  };
 
   return (
     <div className="product-detail-page">
-      <ProductPage productData={productData} />
+      {/* 편집 모드 전환 버튼 */}
+      <div style={{ 
+        position: 'fixed', 
+        top: '20px', 
+        right: '20px', 
+        zIndex: 1000,
+        display: 'flex',
+        gap: '10px'
+      }}>
+        <button
+          onClick={toggleEditMode}
+          style={{
+            padding: '10px 20px',
+            border: 'none',
+            borderRadius: '5px',
+            background: isEditMode ? '#dc3545' : '#007bff',
+            color: 'white',
+            cursor: 'pointer',
+            fontSize: '14px',
+            fontWeight: 'bold'
+          }}
+        >
+          {isEditMode ? '편집 종료' : '편집 모드'}
+        </button>
+        
+        {isEditMode && (
+          <>
+            <button
+              onClick={handleSave}
+              disabled={submitting}
+              style={{
+                padding: '10px 20px',
+                border: 'none',
+                borderRadius: '5px',
+                background: submitting ? '#6c757d' : '#28a745',
+                color: 'white',
+                cursor: submitting ? 'not-allowed' : 'pointer',
+                fontSize: '14px',
+                fontWeight: 'bold'
+              }}
+            >
+              {submitting ? '저장 중...' : '저장'}
+            </button>
+            <button
+              onClick={handleCancel}
+              style={{
+                padding: '10px 20px',
+                border: '1px solid #6c757d',
+                borderRadius: '5px',
+                background: 'white',
+                color: '#6c757d',
+                cursor: 'pointer',
+                fontSize: '14px',
+                fontWeight: 'bold'
+              }}
+            >
+              취소
+            </button>
+          </>
+        )}
+      </div>
+
+      {/* 편집 모드 안내 */}
+      {isEditMode && (
+        <div style={{
+          background: '#d4edda',
+          border: '1px solid #c3e6cb',
+          borderRadius: '5px',
+          padding: '15px',
+          margin: '20px',
+          color: '#155724',
+          fontSize: '14px'
+        }}>
+          <strong>편집 모드:</strong> 텍스트 영역을 클릭하여 직접 편집할 수 있습니다. 
+          Enter 키로 저장, Escape 키로 취소할 수 있습니다.
+        </div>
+      )}
+
+      <ProductPage 
+        productData={productData} 
+        isEditMode={isEditMode}
+        onDataChange={handleDataChange}
+      />
       
       {/* <ProductCardGroup 
         products={productGroupData}

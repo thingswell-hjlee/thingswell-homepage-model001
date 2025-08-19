@@ -9,7 +9,8 @@ const ProductTabs = ({
   collapsed = false,
   onToggleChange,
   allowedTabIds,
-  maxVisibleTabs
+  maxVisibleTabs,
+  isRecordPage = false
 }) => {
   const [currentTab, setCurrentTab] = useState(null);
   const [isCollapsed, setIsCollapsed] = useState(collapsed);
@@ -73,7 +74,8 @@ const ProductTabs = ({
             탭 없음
           </button>
         )}
-        {isEnabled && currentTab === 'overview' && (
+        {/* 제품 페이지에서만 +/- 아이콘 표시 */}
+        {isEnabled && currentTab === 'overview' && !isRecordPage && (
         <button
           type="button"
           className={`tab-toggle-button${isCollapsed ? ' collapsed' : ''}`}
