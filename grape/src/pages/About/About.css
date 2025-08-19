@@ -818,14 +818,36 @@
   margin: 0;
 }
 
-/* Certificate 섹션: product-grid cols-3 패딩 제거 */
+/* Certificate 섹션: product-grid cols-4로 변경 */
 .about-page #certificate .product-grid.cols-3 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   padding: 0;
+}
+
+@media (max-width: 1024px) {
+  .about-page #certificate .product-grid.cols-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .about-page #certificate .product-grid.cols-3 {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* Certificate 섹션: 이미지 확대(hover scale) 효과 제거 */
 .about-page #certificate .application-card:hover img {
   transform: none;
+}
+
+/* Certificate 섹션: product-info 전체 숨기기 */
+.about-page #certificate .product-info,
+.about-page #certificate .product-info_desc,
+.about-page #certificate .product-info p,
+.about-page #certificate .product-info_title,
+.about-page #certificate .product-info_title h3 {
+  display: none;
 }
 
 /* 연혁 타임라인 스타일 */

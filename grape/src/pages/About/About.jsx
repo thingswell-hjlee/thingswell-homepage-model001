@@ -32,7 +32,6 @@ const About = () => {
   const applicationCardsData = [
     {
       title: "벤처기업 확인서",
-      label: "확인서",
       image: ventureEnterpriseCertificate,
       imageAlt: "벤처기업 확인서",
       category: "기업인증",
@@ -41,7 +40,6 @@ const About = () => {
     },
     {
       title: "기업부설연구소 인증서",
-      label: "인증서",
       image: corporateResearchInstituteCertificate,
       imageAlt: "기업부설연구소 인증서",
       category: "기업인증",
@@ -50,7 +48,6 @@ const About = () => {
     },
     {
       title: "정보통신공사업등록증",
-      label: "등록증",
       image: informationCommunicationBusinessCertificate,
       imageAlt: "정보통신공사업등록증",
       category: "사업등록",
@@ -59,7 +56,6 @@ const About = () => {
     },
     {
       title: "공장등록증명서",
-      label: "증명서",
       image: factoryRegistrationCertificate,
       imageAlt: "공장등록증명서",
       category: "사업등록",
@@ -68,7 +64,6 @@ const About = () => {
     },
     {
       title: "SW사업자 일반현황관리확인서",
-      label: "확인서",
       image: softwareBusinessOperatorCertificate,
       imageAlt: "SW사업자 일반현황관리확인서",
       category: "사업등록",
@@ -77,7 +72,6 @@ const About = () => {
     },
     {
       title: "실내외 센서 모듈을 이용한 공기질 관리 방법 및 장치",
-      label: "특허증",
       image: patentCertificate1,
       imageAlt: "특허증 - 실내외 센서 모듈을 이용한 공기질 관리 방법 및 장치",
       category: "특허",
@@ -86,7 +80,6 @@ const About = () => {
     },      
     {
       title: "AI 기반의 캡슐형 스마트 쉘터",
-      label: "특허증",
       image: patentCertificate2,
       imageAlt: "특허증 - AI 기반의 캡슐형 스마트 쉘터",
       category: "특허",
@@ -95,7 +88,6 @@ const About = () => {
     },
     {
       title: "사용자 맞춤형 서비스를 제공하는 캡슐형 스마트 쉘터",
-      label: "특허증",
       image: patentCertificate3,
       imageAlt: "특허증 - 사용자 맞춤형 서비스를 제공하는 캡슐형 스마트 쉘터",
       category: "특허",
@@ -104,7 +96,6 @@ const About = () => {
     },
     {
       title: "레이더와 카메라를 이용한 위급 상황 알람 장치",
-      label: "특허증",
       image: patentCertificate4,
       imageAlt: "특허증 - 레이더와 카메라를 이용한 위급 상황 알람 장치",
       category: "특허",
