@@ -31,6 +31,37 @@ export default function ProductListControlPage({ kindFilter = null }) {
   
   const { user, isAuthenticated, canEditContent } = useAuth();
 
+  // kindFilter에 따른 제목과 설명 매핑
+  const getPageInfo = (kind) => {
+    const pageInfoMap = {
+      'AI': {
+        title: 'AI 솔루션 실적',
+        subtitle: 'AI 기반 솔루션의 다양한 실적들을 확인하세요'
+      },
+      '버스 쉼터': {
+        title: '버스 쉼터 실적',
+        subtitle: '버스 쉼터 관련 프로젝트 실적들을 확인하세요'
+      },
+      '정보통신': {
+        title: '정보통신 실적',
+        subtitle: '정보통신 시스템 구축 실적들을 확인하세요'
+      },
+      '통합제어': {
+        title: '통합제어 실적',
+        subtitle: '통합제어 시스템 구축 실적들을 확인하세요'
+      },
+      '스마트 안전': {
+        title: '스마트 안전 실적',
+        subtitle: '스마트 안전 솔루션 실적들을 확인하세요'
+      }
+    };
+    
+    return pageInfoMap[kind] || {
+      title: '실적',
+      subtitle: '실적들을 확인하세요'
+    };
+  };
+
   useEffect(() => {
     fetchTrackRecords();
     // RLS 정책 및 인증 상태 확인
@@ -300,7 +331,7 @@ export default function ProductListControlPage({ kindFilter = null }) {
               overview_title: selectedRecord.overview_title || selectedRecord.desc || '개요 없음',
               overview: selectedRecord.overview || selectedRecord.desc || '내용 없음',
               images: selectedRecord.images ? JSON.parse(selectedRecord.images) : [],
-              breadcrumbs: ["Home", "실적"]
+              breadcrumbs: ["Home", "실적", selectedRecord.kind || "상세"]
             }}
             isRecordPage={true}
           />
@@ -330,8 +361,8 @@ export default function ProductListControlPage({ kindFilter = null }) {
 
       <ProductList
         products={products}
-        title="실적"
-        subtitle="실적들을 확인하세요"
+        title={getPageInfo(kindFilter).title}
+        subtitle={getPageInfo(kindFilter).subtitle}
         breadcrumbs={["Home", "Cases"]}
         longVertical
         headerImage={headerImage}

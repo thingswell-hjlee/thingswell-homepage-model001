@@ -116,7 +116,8 @@
 .about-section-title-image img {
   width: 100%;
   height: 100%;
-  /* object-fit: cover; */
+  object-fit: fill; /* 꽉 채우면서 안 짤리게 */
+  object-position: center;
   user-select: text; /* 드래그 방지 */
   -webkit-user-select: text;
   -moz-user-select: text;
@@ -358,7 +359,8 @@
 .about-content-image img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: fill; /* 꽉 채우면서 안 짤리게 */
+  object-position: center;
   user-select: text; /* 드래그 방지 */
   -webkit-user-select: text;
   -moz-user-select: text;
@@ -674,7 +676,8 @@
   .about-section-title-image img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: fill;
+    object-position: center;
   }
 
   .about-section-title-image-description {
@@ -708,7 +711,8 @@
   .about-content-image img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: fill;
+    object-position: center;
   }
 
   .about-content-text {
@@ -1510,8 +1514,10 @@
 }
 
 .product-card img{
-  object-fit: fit; /* 원본 크기 유지 (확대/축소 없음) */
+  object-fit: fill; /* 꽉 채우면서 안 짤리게 */
   object-position: top center; /* 상단부터 보이도록 정렬 */
+  height: 100%;
+  width: 100%;
 }
 
 .contact-section-title{
