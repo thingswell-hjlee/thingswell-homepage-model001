@@ -18,29 +18,28 @@ const SOLUTION_DATA = {
 const WORKER_SAFETY_CARDS = [
   {
     image: Collision,
-    imageAlt: "낙상 감지 기술",
     title: "인지장애 노인 및 장애인을 위한 스마트 보조 기술",
-    link: "/rnd/smart-assistive-technology",
-    desc:"AI 기반 비전 분석을 통해 노인과 장애인의 낙상레이더 및 카메라를 활용한 위험 상황 조기 감지용 임베디드 시스템",
+    description: [
+      "AI 기반 비전 분석을 통해 노인과 장애인의 낙상레이더 및 카메라를 활용한 위험 상황 조기 감지용 임베디드 시스템"
+    ],
+    link: "/rnd/smart-assistive-technology"
   },
   {
     image: fire,
-    imageAlt: "인지장애 노인 및 장애인을 위한 스마트 보조 기술",
     title: "위험상황 조기감지용 임베디드 시스템 기술",
-    link: "/rnd/rag-llm",
-    desc: [
+    description: [
       "자동 응급 신고 시스템:",
       "낙상이나 이상 상황 감지 시 자동으로 응급 서비스에 신고하는 기술을 개발합니다.",
       "보호자 연락 시스템: 긴급 상황 발생 시 보호자에게 즉시 알림을 보내는 기술을 연구합니다."
-    ]
+    ],
+    link: "/rnd/embedding-system"
   },
 ];
 
 const BLOCKS = [
   {
-    type: 'applicationCards',
+    type: 'features',
     data: WORKER_SAFETY_CARDS,
-    props: { boxName: '핵심 기술' },
   },
 ];
 
@@ -52,14 +51,25 @@ const ElderlyDisabledSolution = () => {
         <div className="container">
           <ProductInfo
             productName={SOLUTION_DATA.title}
+            productTitle={SOLUTION_DATA.title}
+            description={SOLUTION_DATA.description}
             breadcrumbs={BREADCRUMBS}
           />
-           <SolutionDetailPage
-        solutionVariant="default"
-        blocks={BLOCKS}
-        />
+          <div className="section-title-container" style={{ textAlign: 'center', marginBottom: 'var(--spacing-2xl)' }}>
+            <h2 style={{ 
+              fontSize: 'var(--font-size-4xl)', 
+              fontWeight: 'var(--font-weight-bold)', 
+              color: 'var(--color-text-primary)',
+              margin: 0
+            }}>
+              핵심 기술
+            </h2>
+          </div>
+          <SolutionDetailPage
+            solutionVariant="default"
+            blocks={BLOCKS}
+          />
 
-        
         </div>
       </div>
      

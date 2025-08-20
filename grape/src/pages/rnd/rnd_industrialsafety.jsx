@@ -18,39 +18,37 @@ const SOLUTION_DATA = {
 const WORKER_SAFETY_CARDS = [
   {
     image: Collision,
-    imageAlt: "멀티모달 센서 기술",
     title: "멀티모달 센서 기술",
-    link: "/rnd/multimodal-awareness",
-    desc:"다양한 센서(카메라, ToF, 레이더, 마이크, 공기질, 모션)의 데이터를 통합 수집하고 전처리하는 기술을 연구합니다",
-    desc2:"실시간 데이터 정규화 및 표준화 기술을 개발하여 분석 준비를 완료합니다"
+    description: [
+      "다양한 센서(카메라, ToF, 레이더, 마이크, 공기질, 모션)의 데이터를 통합 수집하고 전처리하는 기술을 연구합니다",
+      "실시간 데이터 정규화 및 표준화 기술을 개발하여 분석 준비를 완료합니다"
+    ],
+    link: "/rnd/multimodal-awareness"
   },
   {
     image: fire,
-    imageAlt: "AI 융합 추론 기술",
     title: "AI 융합 추론 기술",
-    link: "/rnd/rag-llm",
-    desc: [
+    description: [
       "RAG-LVM/LLM 통합 기술:",
       "LVM: 대규모 비전 모델을 활용한 객체 인식, 장면 이해, 공간 추론 기술을 개발합니다.",
       "LLM: 실시간 데이터와 안전 매뉴얼을 결합한 지능형 추론 시스템을 연구합니다."
-    ]
+    ],
+    link: "/rnd/rag-llm"
   },
   {
     image: server,
-    imageAlt: "자동화 의사결정 기술",
     title: "온디바이스 AI 기술",
-    link: "/rnd/on-device-ai",
-    desc: [
+    description: [
       "통신이 불안정하거나 제한된 환경에서도 실시간으로 위험을 감지하고 즉각적으로 대응할 수 있는 기술을 개발합니다"
-    ]
+    ],
+    link: "/rnd/on-device-ai"
   },
 ];
 
 const BLOCKS = [
   {
-    type: 'applicationCards',
+    type: 'features',
     data: WORKER_SAFETY_CARDS,
-    props: { boxName: '핵심 기술' },
   },
 ];
 
@@ -66,10 +64,20 @@ const IndustrialSafetySolution = () => {
             description={SOLUTION_DATA.description}
             breadcrumbs={BREADCRUMBS}
           />
-           <SolutionDetailPage
-        solutionVariant="default"
-        blocks={BLOCKS}
-        />
+          <div className="section-title-container" style={{ textAlign: 'center', marginBottom: 'var(--spacing-2xl)' }}>
+            <h2 style={{ 
+              fontSize: 'var(--font-size-4xl)', 
+              fontWeight: 'var(--font-weight-bold)', 
+              color: 'var(--color-text-primary)',
+              margin: 0
+            }}>
+              핵심 기술
+            </h2>
+          </div>
+          <SolutionDetailPage
+            solutionVariant="default"
+            blocks={BLOCKS}
+          />
 
         </div>
       </div>

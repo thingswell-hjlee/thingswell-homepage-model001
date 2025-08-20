@@ -37,7 +37,6 @@ export default function SolutionDetailPage({
                     <FeatureDescription
                       key={`${idx}-${fIdx}`}
                       {...feature}
-                      reverse={fIdx % 2 === 1}
                     />
                   ));
                 }

@@ -18,20 +18,19 @@ const SOLUTION_DATA = {
 const WORKER_SAFETY_CARDS = [
   {
     image: Collision,
-    imageAlt: "AI 기반 공기질 관리 기술",
     title: "AI 기반 공기질 관리 기술",
-    link: "/rnd/air-quality-management",
-    desc:"다양한 IoT 센서와 제어 장치의 데이터를 통합 수집하고 표준화하는 기술을 연구합니다",
-    desc2:"실시간 데이터 수집 및 전처리 시스템을 개발하여 제어 시스템에 최적화된 데이터를 제공합니다"
+    description: [
+      "다양한 IoT 센서와 제어 장치의 데이터를 통합 수집하고 표준화하는 기술을 연구합니다",
+      "실시간 데이터 수집 및 전처리 시스템을 개발하여 제어 시스템에 최적화된 데이터를 제공합니다"
+    ],
+    link: "/rnd/air-quality-management"
   },
-
 ];
 
 const BLOCKS = [
   {
-    type: 'applicationCards',
+    type: 'features',
     data: WORKER_SAFETY_CARDS,
-    props: { boxName: '핵심 기술' },
   },
 ];
 
@@ -44,15 +43,24 @@ const IntegratedControlSolution = () => {
           <ProductInfo
             productName={SOLUTION_DATA.title}
             productTitle={SOLUTION_DATA.title}
-              description={SOLUTION_DATA.description}
+            description={SOLUTION_DATA.description}
             breadcrumbs={BREADCRUMBS}
           />
-           <SolutionDetailPage
-        solutionVariant="default"
-        blocks={BLOCKS}
-        />
+          <div className="section-title-container" style={{ textAlign: 'center', marginBottom: 'var(--spacing-2xl)' }}>
+            <h2 style={{ 
+              fontSize: 'var(--font-size-4xl)', 
+              fontWeight: 'var(--font-weight-bold)', 
+              color: 'var(--color-text-primary)',
+              margin: 0
+            }}>
+              핵심 기술
+            </h2>
+          </div>
+          <SolutionDetailPage
+            solutionVariant="default"
+            blocks={BLOCKS}
+          />
 
-        
         </div>
       </div>
      
