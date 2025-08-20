@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import ProductPage from '../ProductPage/ProductPage';
-import { uploadImage, validateImageFile } from '../../utils/imageUpload';
+import { uploadImage, validateImageFile, checkStorageBucket } from '../../utils/imageUpload';
+import { setupStoragePolicies } from '../../utils/supabaseRLS';
 
 const RecordEditor = ({ 
   isEditMode = false, 
@@ -39,6 +40,15 @@ const RecordEditor = ({
   });
 
   useEffect(() => {
+    // Storage 버킷 확인
+    checkStorageBucket().then(bucketExists => {
+      if (!bucketExists) {
+        console.warn('track_record Storage 버킷이 존재하지 않습니다.');
+        console.log('Storage 설정을 위해 다음 단계를 따라주세요:');
+        setupStoragePolicies();
+      }
+    });
+
     if (editData) {
       setFormData({
         title: editData.title || '',
@@ -87,22 +97,18 @@ const RecordEditor = ({
             const imageUrl = await uploadImage(file);
             uploadedImages.push(imageUrl);
           } catch (uploadError) {
-            console.warn('Storage 업로드 실패, Base64로 대체:', uploadError);
-            // Storage 업로드 실패 시 Base64로 대체
-            const base64Url = await new Promise((resolve, reject) => {
-              const reader = new FileReader();
-              reader.onload = (e) => resolve(e.target.result);
-              reader.onerror = (e) => reject(new Error('파일 읽기 실패'));
-              reader.readAsDataURL(file);
-            });
-            uploadedImages.push(base64Url);
+            console.error('Storage 업로드 실패:', uploadError);
+            alert(`이미지 업로드 실패: ${file.name}. Storage 서버를 확인해주세요.`);
+            continue; // 실패한 이미지는 건너뛰고 다음 이미지 처리
           }
         }
         
-        setFormData(prev => ({
-          ...prev,
-          images: [...prev.images, ...uploadedImages]
-        }));
+        if (uploadedImages.length > 0) {
+          setFormData(prev => ({
+            ...prev,
+            images: [...prev.images, ...uploadedImages]
+          }));
+        }
         
       } catch (error) {
         console.error('이미지 처리 실패:', error);
@@ -215,10 +221,57 @@ const RecordEditor = ({
         minWidth: '300px'
       }}>
         <h3 style={{ marginBottom: '20px', color: '#495057' }}>{modeConfig.title} 편집 도구</h3>
+        <div style={{ marginBottom: '20px' }}>
+          <label style={{ display: 'block', marginBottom: '8px', fontSize: '14px', color: '#495057', fontWeight: 'bold', textAlign: 'left' }}>
+            사업분야 *
+          </label>
+          <select
+            name="kind"
+            value={formData.kind}
+            onChange={handleInputChange}
+            required
+            style={{
+              width: '100%',
+              padding: '10px',
+              border: '1px solid #ddd',
+              borderRadius: '4px',
+              fontSize: '14px',
+              textAlign: 'left'
+            }}
+          >
+            <option value="">사업분야를 선택하세요</option>
+            {modeConfig.kindOptions.map(option => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div style={{ marginBottom: '20px' }}>
+          <label style={{ display: 'block', marginBottom: '8px', fontSize: '14px', color: '#495057', fontWeight: 'bold', textAlign: 'left' }}>
+            소분류 *
+          </label>
+          <input
+            type="text"
+            name="type"
+            value={formData.type}
+            onChange={handleInputChange}
+            required
+            style={{
+              width: '100%',
+              padding: '10px',
+              border: '1px solid #ddd',
+              borderRadius: '4px',
+              fontSize: '14px',
+              textAlign: 'left'
+            }}
+          />
+        </div>
         
         <div style={{ marginBottom: '20px' }}>
           <label style={{ display: 'block', marginBottom: '8px', fontSize: '14px', color: '#495057', fontWeight: 'bold', textAlign: 'left' }}>
-            제목 *
+            사업명 *
           </label>
           <input
             type="text"
@@ -239,7 +292,7 @@ const RecordEditor = ({
 
         <div style={{ marginBottom: '20px' }}>
           <label style={{ display: 'block', marginBottom: '8px', fontSize: '14px', color: '#495057', fontWeight: 'bold', textAlign: 'left' }}>
-            개요 제목 *
+            주요품목 *
           </label>
           <input
             type="text"
@@ -260,13 +313,28 @@ const RecordEditor = ({
 
         <div style={{ marginBottom: '20px' }}>
           <label style={{ display: 'block', marginBottom: '8px', fontSize: '14px', color: '#495057', fontWeight: 'bold', textAlign: 'left' }}>
-            내용 *
+            사업 설명 *
           </label>
+          <div style={{ marginBottom: '8px', fontSize: '12px', color: '#6c757d', fontStyle: 'italic' }}>
+            💡 팁: Enter로 줄바꿈, • 또는 - 로 리스트 작성 가능
+          </div>
           <textarea
             name="desc"
             value={formData.desc}
             onChange={handleInputChange}
             required
+            placeholder="내용을 입력하세요...
+
+예시:
+• 첫 번째 항목
+• 두 번째 항목
+• 세 번째 항목
+
+또는
+
+- 첫 번째 항목
+- 두 번째 항목
+- 세 번째 항목"
             style={{
               width: '100%',
               padding: '10px',
@@ -274,8 +342,10 @@ const RecordEditor = ({
               borderRadius: '4px',
               fontSize: '14px',
               textAlign: 'left',
-              minHeight: '100px',
-              resize: 'vertical'
+              minHeight: '150px',
+              resize: 'vertical',
+              fontFamily: 'inherit',
+              lineHeight: '1.5'
             }}
           />
         </div>
@@ -322,53 +392,9 @@ const RecordEditor = ({
           />
         </div>
 
-        <div style={{ marginBottom: '20px' }}>
-          <label style={{ display: 'block', marginBottom: '8px', fontSize: '14px', color: '#495057', fontWeight: 'bold', textAlign: 'left' }}>
-            카테고리 *
-          </label>
-          <input
-            type="text"
-            name="type"
-            value={formData.type}
-            onChange={handleInputChange}
-            required
-            style={{
-              width: '100%',
-              padding: '10px',
-              border: '1px solid #ddd',
-              borderRadius: '4px',
-              fontSize: '14px',
-              textAlign: 'left'
-            }}
-          />
-        </div>
+        
 
-        <div style={{ marginBottom: '20px' }}>
-          <label style={{ display: 'block', marginBottom: '8px', fontSize: '14px', color: '#495057', fontWeight: 'bold', textAlign: 'left' }}>
-            유형 *
-          </label>
-          <select
-            name="kind"
-            value={formData.kind}
-            onChange={handleInputChange}
-            required
-            style={{
-              width: '100%',
-              padding: '10px',
-              border: '1px solid #ddd',
-              borderRadius: '4px',
-              fontSize: '14px',
-              textAlign: 'left'
-            }}
-          >
-            <option value="">유형을 선택하세요</option>
-            {modeConfig.kindOptions.map(option => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
-        </div>
+
 
         <div style={{ marginBottom: '20px' }}>
           <label style={{ display: 'block', marginBottom: '8px', fontSize: '14px', color: '#495057', fontWeight: 'bold', textAlign: 'left' }}>

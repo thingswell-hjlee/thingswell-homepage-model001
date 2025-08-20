@@ -9,7 +9,23 @@ import ProductPage from '../../components/ProductPage/ProductPage';
 import { setupTrackRecordRLS, createTrackRecordPolicies, checkUserAuthStatus, checkAndCreateMissingPolicies } from '../../utils/supabaseRLS';
 import RecordEditor from '../../components/RecordEditor';
 
-export default function ProductListControlPage({ kindFilter = null }) {
+/**
+ * TrackRecordPage 컴포넌트
+ * 
+ * 실적 데이터를 표시하고 관리하는 공통 컴포넌트입니다.
+ * kindFilter prop을 통해 특정 카테고리의 실적만 필터링할 수 있습니다.
+ * 
+ * @param {Object} props - 컴포넌트 props
+ * @param {string} props.kindFilter - 필터링할 실적 카테고리 (예: "스마트안전", "정보통신", "통합제어")
+ * 
+ * 사용법:
+ * <TrackRecordPage kindFilter="스마트안전" />
+ * <TrackRecordPage kindFilter="정보통신" />
+ * <TrackRecordPage kindFilter="통합제어" />
+ * <TrackRecordPage /> // 모든 실적 표시
+ */
+
+export default function TrackRecordPage({ kindFilter = null }) {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -45,6 +61,10 @@ export default function ProductListControlPage({ kindFilter = null }) {
       '스마트안전': {
         title: '스마트안전 실적',
         subtitle: '스마트안전 솔루션 실적들을 확인하세요'
+      },
+      'AI': {
+        title: 'AI 실적',
+        subtitle: 'AI 관련 실적들을 확인하세요'
       }
     };
     
@@ -361,8 +381,8 @@ export default function ProductListControlPage({ kindFilter = null }) {
         headerImage={headerImage}
         onEditRecord={handleEditRecord}
         canEdit={canEditContent()}
-        hideToolbar={true}
-        hideSearchAndView={true}
+        hideToolbar={false}
+        hideSearchAndView={false}
         itemsPerPage={9999}
         addButton={canEditContent() && (
           <button

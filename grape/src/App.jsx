@@ -96,7 +96,6 @@ import Customer_service from "./pages/Customer_Service/Customer_service.jsx";
 import Downloads from "./pages/Customer_Service/Downloads.jsx";
 import Contact from "./pages/Customer_Service/Contact.jsx";
 import Case from "./pages/Cases/Case.jsx";
-import Case_main from "./pages/Cases/Case_main.jsx";
 import CaseSmartSafety from "./pages/Cases/Case_SmartSafety.jsx";
 import CaseAI from "./pages/Cases/Case_AI.jsx";
 import CaseIntegratedControl from "./pages/Cases/Case_IntegratedControl.jsx";
@@ -386,8 +385,7 @@ function App() {
             <Route path="/application-field/field-3" element={<Application_filed_4 />} /> */}
 
             {/* 납품사례 라우팅 */}
-            <Route path="/cases" element={<Case_main />} />
-<Route path="/cases/overview" element={<Case />} />
+            <Route path="/cases" element={<Case />} />
 <Route path="/cases/smart-safety" element={<CaseSmartSafety />} />
 <Route path="/cases/ai" element={<CaseAI />} />
 <Route path="/cases/integrated-control" element={<CaseIntegratedControl />} />

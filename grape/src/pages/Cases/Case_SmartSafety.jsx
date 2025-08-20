@@ -1,8 +1,8 @@
 import React from 'react';
-import ProductListControlPage from './Case.jsx';
+import TrackRecordPage from './Case.jsx';
 
 export default function CaseSmartSafetyPage() {
   return (
-      <ProductListControlPage kindFilter="스마트안전" />
+    <TrackRecordPage kindFilter="스마트안전" />
   );
 }

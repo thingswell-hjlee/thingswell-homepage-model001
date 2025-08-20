@@ -1,8 +1,8 @@
 import React from 'react';
-import ProductListControlPage from './Case.jsx';
+import TrackRecordPage from './Case.jsx';
 
 export default function CaseInformationCommunicationPage() {
   return (
-    <ProductListControlPage kindFilter="정보통신" />
+    <TrackRecordPage kindFilter="정보통신" />
   );
 }

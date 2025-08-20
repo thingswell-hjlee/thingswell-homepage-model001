@@ -1,11 +1,6 @@
 import React from 'react';
-import SolutionDetailPage from './SolutionDetailPage';
-import fire from '../../assets/fire.jpg';
-import Collision from '../../assets/collision.jpg';
-import server from '../../assets/server.jpg';
-import ProductHeader from '../../components/ProductPage/ProductHeader';
-import ProductInfo from '../../components/ProductPage/ProductInfo';
-import rnd from '../../assets/header_image/rnd.jpg';
+import RndSolutionPage from '../../components/RndSolutionPage';
+import air from '../../assets/rnd_main/AI_air.png';
 
 const BREADCRUMBS = ["Home", "연구개발", "통합제어"];
 
@@ -17,7 +12,7 @@ const SOLUTION_DATA = {
 
 const WORKER_SAFETY_CARDS = [
   {
-    image: Collision,
+    image: air,
     title: "AI 기반 공기질 관리 기술",
     description: [
       "다양한 IoT 센서와 제어 장치의 데이터를 통합 수집하고 표준화하는 기술을 연구합니다",
@@ -36,35 +31,11 @@ const BLOCKS = [
 
 const IntegratedControlSolution = () => {
   return (
-    <>
-      <ProductHeader image={rnd} alt="연구개발" />
-      <div className="product-page-content">
-        <div className="container">
-          <ProductInfo
-            productName={SOLUTION_DATA.title}
-            productTitle={SOLUTION_DATA.title}
-            description={SOLUTION_DATA.description}
-            breadcrumbs={BREADCRUMBS}
-          />
-          <div className="section-title-container" style={{ textAlign: 'center', marginBottom: 'var(--spacing-2xl)' }}>
-            <h2 style={{ 
-              fontSize: 'var(--font-size-4xl)', 
-              fontWeight: 'var(--font-weight-bold)', 
-              color: 'var(--color-text-primary)',
-              margin: 0
-            }}>
-              핵심 기술
-            </h2>
-          </div>
-          <SolutionDetailPage
-            solutionVariant="default"
-            blocks={BLOCKS}
-          />
-
-        </div>
-      </div>
-     
-    </>
+    <RndSolutionPage
+      breadcrumbs={BREADCRUMBS}
+      solutionData={SOLUTION_DATA}
+      blocks={BLOCKS}
+    />
   );
 };
 

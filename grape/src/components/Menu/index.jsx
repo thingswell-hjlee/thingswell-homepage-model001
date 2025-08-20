@@ -64,7 +64,7 @@ const defaultMenuItems = [
         label: '제품', 
         path: '/products',
         submenu: [
-          { label: '스마트안전장비', path: '/products/safety' }, 
+          { label: '스마트안전', path: '/products/safety' }, 
           { label: '관제시스템', path: '/products/monitoring' },
           { label: '통합제어', path: '/products/control/list' }, 
       

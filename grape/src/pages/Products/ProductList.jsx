@@ -302,14 +302,6 @@ const ProductList = ({
                           }}
                         />
                       ) : null}
-                      {product.title && (
-                        <div className="product-info_title">
-                          <h3>{product.title}</h3>
-                        </div>
-                      )}
-                      <div className={product.title ? 'product-info_desc' : 'product-info'}>
-                        <p>{product.desc}</p>
-                      </div>
                     </>
                   )}
                 </div>

@@ -1,8 +1,8 @@
 import React from 'react';
-import ProductListControlPage from './Case.jsx';
+import TrackRecordPage from './Case.jsx';
 
 export default function CaseAIPage() {
   return (
-      <ProductListControlPage kindFilter="AI" />
+    <TrackRecordPage kindFilter="AI" />
   );
 }

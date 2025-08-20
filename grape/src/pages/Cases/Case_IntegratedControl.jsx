@@ -1,8 +1,8 @@
 import React from 'react';
-import ProductListControlPage from './Case.jsx';
+import TrackRecordPage from './Case.jsx';
 
 export default function CaseIntegratedControlPage() {
   return (
-    <ProductListControlPage kindFilter="통합제어" />
+    <TrackRecordPage kindFilter="통합제어" />
   );
 }

@@ -98,10 +98,12 @@ const EditableText = ({ field, value, placeholder, multiline = false, style = {}
         padding: '8px',
         transition: 'all 0.2s ease',
         minHeight: multiline ? '60px' : 'auto',
-        display: 'flex',
+        display: multiline ? 'block' : 'flex',
         alignItems: multiline ? 'flex-start' : 'center',
         justifyContent: 'flex-start',
-        textAlign: 'left'
+        textAlign: 'left',
+        whiteSpace: multiline ? 'pre-wrap' : 'normal',
+        lineHeight: multiline ? '1.5' : 'normal'
       }}
       onMouseEnter={(e) => {
         e.target.style.borderColor = '#e9ecef';
