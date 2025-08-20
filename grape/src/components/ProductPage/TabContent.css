@@ -221,6 +221,19 @@
   padding: 1rem 0;
 }
 
+/* 사양 이미지를 세로로 한 줄로 배치하는 스타일 */
+.specs-images-row {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.specs-images-row .spec-card {
+  width: 100%;
+  max-width: 100%;
+}
+
 .specs-media-grid {
   display: grid;
   grid-template-columns: 2fr 1fr;
@@ -300,6 +313,16 @@
   .specs-media-right {
     grid-template-rows: auto;
     grid-auto-rows: 1fr;
+  }
+  
+  /* 모바일에서도 사양 이미지를 세로로 한 줄로 유지 */
+  .specs-images-row {
+    flex-direction: column;
+  }
+  
+  .specs-images-row .spec-card {
+    width: 100%;
+    max-width: 100%;
   }
 }
 

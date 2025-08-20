@@ -169,7 +169,7 @@ const TabContent = ({ tabId, productData, featureClickToOpen = false, onFeatureI
             {/* 사양 이미지들 */}
             {productData?.specifications && productData.specifications.length > 0 && (
               <div className="specs-images">
-                <ThreeColumnGrid>
+                <div className="specs-images-row">
                   {productData.specifications.map((imageObj, index) => (
                     <div key={index} className="spec-card">
                       <ImageWithCaption
@@ -187,7 +187,7 @@ const TabContent = ({ tabId, productData, featureClickToOpen = false, onFeatureI
                       />
                     </div>
                   ))}
-                </ThreeColumnGrid>
+                </div>
               </div>
             )}
             

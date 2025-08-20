@@ -352,61 +352,52 @@ export default function ProductListControlPage({ kindFilter = null }) {
         />
       )}
 
-      <div>
-        <ProductList
-          products={products}
-          title={getPageInfo(kindFilter).title}
-          subtitle={getPageInfo(kindFilter).subtitle}
-          breadcrumbs={["Home", "Cases"]}
-          longVertical
-          headerImage={headerImage}
-          onEditRecord={handleEditRecord}
-          canEdit={canEditContent()}
-          hideToolbar={true}
-          hideSearchAndView={true}
-          itemsPerPage={9999}
-        />
-        {canEditContent() && (
-          <div style={{
-            display: 'flex',
-            justifyContent: 'center',
-            padding: '40px 20px',
-            borderTop: '1px solid #e9ecef'
-          }}>
-            <button
-              onClick={() => setShowAddModal(true)}
-              style={{
-                padding: 'var(--spacing-sm) var(--spacing-md)',
-                backgroundColor: 'var(--color-primary)',
-                color: 'white',
-                border: 'none',
-                outline: 'none',
-                borderRadius: 'var(--border-radius-md)',
-                fontSize: 'var(--font-size-sm)',
-                fontWeight: 'var(--font-weight-medium)',
-                cursor: 'pointer',
-                transition: 'background-color var(--transition-slow)',
-                whiteSpace: 'nowrap',
-                height: '40px',
-                minWidth: '80px',
-                boxSizing: 'border-box',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                textAlign: 'center'
-              }}
-              onMouseEnter={(e) => {
-                e.target.style.backgroundColor = '#0056b3';
-              }}
-              onMouseLeave={(e) => {
-                e.target.style.backgroundColor = 'var(--color-primary)';
-              }}
-            >
-              + 실적 추가
-            </button>
-          </div>
+      <ProductList
+        products={products}
+        title={getPageInfo(kindFilter).title}
+        subtitle={getPageInfo(kindFilter).subtitle}
+        breadcrumbs={["Home", "Cases"]}
+        longVertical
+        headerImage={headerImage}
+        onEditRecord={handleEditRecord}
+        canEdit={canEditContent()}
+        hideToolbar={true}
+        hideSearchAndView={true}
+        itemsPerPage={9999}
+        addButton={canEditContent() && (
+          <button
+            onClick={() => setShowAddModal(true)}
+            style={{
+              padding: 'var(--spacing-sm) var(--spacing-md)',
+              backgroundColor: 'var(--color-primary)',
+              color: 'white',
+              border: 'none',
+              outline: 'none',
+              borderRadius: 'var(--border-radius-md)',
+              fontSize: 'var(--font-size-sm)',
+              fontWeight: 'var(--font-weight-medium)',
+              cursor: 'pointer',
+              transition: 'background-color var(--transition-slow)',
+              whiteSpace: 'nowrap',
+              height: '40px',
+              minWidth: '80px',
+              boxSizing: 'border-box',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              textAlign: 'center'
+            }}
+            onMouseEnter={(e) => {
+              e.target.style.backgroundColor = '#0056b3';
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.backgroundColor = 'var(--color-primary)';
+            }}
+          >
+            + 실적 추가
+          </button>
         )}
-      </div>
+      />
     </div>
   );
 }

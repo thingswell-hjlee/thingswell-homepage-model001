@@ -260,13 +260,6 @@ const ProductList = ({
         </div>
       )}
 
-      {/* 추가 버튼 영역 */}
-      {addButton && (
-        <div className="product-list-add-button" style={{ marginBottom: '20px', textAlign: 'right' }}>
-          {addButton}
-        </div>
-      )}
-
       <div className="product-list-grid-container">
         {currentProducts.length > 0 ? (
           (() => {
@@ -413,6 +406,13 @@ const ProductList = ({
           totalPages={totalPages}
           onPageChange={handlePageChange}
         />
+      )}
+
+      {/* 추가 버튼 영역 - 맨 아래에 배치 */}
+      {addButton && (
+        <div className="product-list-add-button" style={{ marginTop: '30px', textAlign: 'right' }}>
+          {addButton}
+        </div>
       )}
     </div>
   );

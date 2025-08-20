@@ -30,7 +30,7 @@ export default function ProductListSafetyPage() {
     date: '',
     orderer: '',
     type: '',
-    kind: '스마트안전장비',
+    kind: '스마트안전',
     images: []
   });
   const [submitting, setSubmitting] = useState(false);
@@ -52,7 +52,7 @@ export default function ProductListSafetyPage() {
         .select('*')
         .order('date', { ascending: false });
       
-      query = query.eq('kind', '스마트안전장비');
+      query = query.eq('kind', '스마트안전');
       
       const { data, error } = await query;
 

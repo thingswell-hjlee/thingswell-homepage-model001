@@ -78,7 +78,6 @@ import IntegratedControlSolution from "./pages/rnd/rnd_Integratedcontrol.jsx";
 import Embeddedsystem from "./pages/rnd/Embeddedsystem .jsx";
 import SmartAssistiveTechnology from "./pages/rnd/SmartAssistiveTechnology.jsx";
 import AirQualityManagement from "./pages/rnd/AirQualityManagement.jsx";
-import Product_main from "./pages/Products/Product_main.jsx";
 import Product_list_control from "./pages/Products/Product_list_control.jsx";
 import Product_control from "./pages/Products/Product_control.jsx";
 import Product_safety_1 from "./pages/Products/Product_TWEDG_01.jsx";
@@ -366,7 +365,6 @@ function App() {
             <Route path="/rnd/smart-assistive-technology" element={<SmartAssistiveTechnology />} />
             <Route path="/rnd/air-quality-management" element={<AirQualityManagement />} />
             {/* 제품 라우팅 */}
-            <Route path="/products" element={<Product_main />} />
             <Route path="/products/control" element={<Product_control />} />
             <Route path="/products/control/list" element={<Product_list_control />} />
             <Route path="/products/safety" element={<Product_list_safety />} />
