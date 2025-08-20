@@ -24,7 +24,6 @@ const WORKER_SAFETY_CARDS = [
   {
     image: Collision,
     imageAlt: "전방 위협 요소 감지",
-    // label: "Forward threat detection",
     title: "멀티모달 데이터 수집 및 전처리",
     link: "/solutions/multimodal-awareness",
     desc:"입력 소스: 카메라(객체 감지, 행동 분석), ToF(깊이 매핑), 레이더(움직임 추적), 마이크(알람 감지), 공기질 센서, 모션 센서 등 다양한 센서에서 데이터를 실시간으로 수집합니다",
@@ -33,7 +32,6 @@ const WORKER_SAFETY_CARDS = [
   {
     image: fire,
     imageAlt: "후방 위협 요소 감지",
-    // label: "Backward threat detection",
     title: "지능형 데이터 융합 및 추론",
     link: "/solutions/rag-llm",
     desc: [
@@ -46,7 +44,6 @@ const WORKER_SAFETY_CARDS = [
   {
     image: server,
     imageAlt: "원격관리시스템",
-    // label: "Remote management system",
     title: "자동화된 의사결정 및 조치",
     link: "/solutions/overview",
     desc: [
@@ -56,8 +53,7 @@ const WORKER_SAFETY_CARDS = [
   },
   {
     image: server,
-    imageAlt: "원격관리시스템",
-    // label: "Remote management system",
+    imageAlt: "엣지-클라우드 연동",
     title: "엣지-클라우드 연동 처리",
     link: "/solutions/on-device-ai",
     desc: [
@@ -72,8 +68,7 @@ const WORKER_SAFETY_CARDS = [
 //     image: manufacturing,
 //     title: "RAG 기반 멀티모달 데이터 통합 처리",
 //     description:
-//       "RAG 기반의 대규모 비전 모델(LVM), 대규모 언어 모델(LLM), 실시간 센싱 시스템의 멀티모달 데이터를 통합하여 작업자 안전 솔루션을 구축합니다.",
-//     subtitle: "Real-time monitoring",
+//       "RAG 기반의 대규모 비전 모델(LVM), 대규모 언어 모reversE
     
 //   },
 //   {
@@ -165,12 +160,12 @@ const BLOCKS = [
   {
     type: 'applicationCards',
     data: APPLICATION_FIELD_CARDS,
-    props: { boxName: '서비스 특징' },
+    props: { boxName: '서비스 특징', columnsPerRow: 4 },
   },
   {
     type: 'applicationCards',
     data: WORKER_SAFETY_CARDS,
-    props: { boxName: '주요 기능' },
+    props: { boxName: '주요 기능', columnsPerRow: 3 },
   },
     // {
     //   type: 'applicationCards',

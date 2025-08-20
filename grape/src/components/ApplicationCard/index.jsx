@@ -27,6 +27,7 @@ import './ApplicationCard.css';
 const ApplicationCard = ({ image, imageAlt, label, title, link, desc, desc2, fullWidthImage = false }) => {
   const [isTitleExpanded, setIsTitleExpanded] = React.useState(false);
   const [isOverflowing, setIsOverflowing] = React.useState(false);
+  const [isTextLong, setIsTextLong] = React.useState(false);
   const titleRef = React.useRef(null);
   
   const descriptions = Array.isArray(desc)
@@ -38,6 +39,13 @@ const ApplicationCard = ({ image, imageAlt, label, title, link, desc, desc2, ful
       const element = titleRef.current;
       const isOverflow = element.scrollHeight > element.clientHeight;
       setIsOverflowing(isOverflow);
+      
+      // 텍스트가 컨테이너보다 긴지 확인
+      const containerWidth = element.offsetWidth;
+      const textWidth = element.scrollWidth;
+      const isLong = textWidth > containerWidth;
+      console.log('Container width:', containerWidth, 'Text width:', textWidth, 'Is long:', isLong, 'Title:', title);
+      setIsTextLong(isLong);
     }
   }, [title]);
 
@@ -123,11 +131,11 @@ const ApplicationCard = ({ image, imageAlt, label, title, link, desc, desc2, ful
       {title && (
         <div 
           ref={titleRef}
-          className={`application-card-title ${isTitleExpanded ? 'expanded' : ''} ${isOverflowing ? 'overflowing' : ''}`}
+          className={`application-card-title ${isTitleExpanded ? 'expanded' : ''} ${isOverflowing ? 'overflowing' : ''} ${isTextLong ? 'long-text' : ''}`}
           onMouseEnter={() => isOverflowing && setIsTitleExpanded(true)}
           onMouseLeave={() => isOverflowing && setIsTitleExpanded(false)}
         >
-          {title}
+          <span>{isTextLong ? `${title} • ${title} • ${title}` : title}</span>
         </div>
       )}
       {image && (
