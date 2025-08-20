@@ -294,49 +294,7 @@ export default function TrackRecordPage({ kindFilter = null }) {
   if (viewMode === 'detail' && selectedRecord) {
     return (
       <div>
-        <div style={{
-          padding: '20px',
-          background: '#f8f9fa',
-          borderBottom: '1px solid #dee2e6',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center'
-        }}>
-          <h2 style={{ margin: 0, color: '#495057' }}>실적 상세</h2>
-          <div style={{ display: 'flex', gap: '10px' }}>
-            {canEditContent() && (
-              <button
-                onClick={() => handleEditRecord(selectedRecord)}
-                style={{
-                  padding: '10px 20px',
-                  background: '#007bff',
-                  color: 'white',
-                  border: 'none',
-                  borderRadius: '4px',
-                  cursor: 'pointer',
-                  fontSize: '14px'
-                }}
-              >
-                편집
-              </button>
-            )}
-            <button
-              onClick={handleBackToList}
-              style={{
-                padding: '10px 20px',
-                background: '#6c757d',
-                color: 'white',
-                border: 'none',
-                borderRadius: '4px',
-                cursor: 'pointer',
-                fontSize: '14px'
-              }}
-            >
-              목록으로 돌아가기
-            </button>
-          </div>
-        </div>
-        <div style={{ padding: '20px' }}>
+        <div>
           <ProductPage
             productData={{
               name: selectedRecord.title || '제목 없음',
@@ -382,7 +340,7 @@ export default function TrackRecordPage({ kindFilter = null }) {
         onEditRecord={handleEditRecord}
         canEdit={canEditContent()}
         hideToolbar={false}
-        hideSearchAndView={false}
+        hideSearchAndView={true}
         itemsPerPage={9999}
         addButton={canEditContent() && (
           <button

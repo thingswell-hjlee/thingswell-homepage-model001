@@ -99,6 +99,10 @@ export const setupStoragePolicies = () => {
     `-- Storage 버킷 생성 (Supabase 대시보드 > Storage에서 실행)
     INSERT INTO storage.buckets (id, name, public)
     VALUES ('track_record', 'track_record', true)
+    ON CONFLICT (id) DO NOTHING;
+    
+    INSERT INTO storage.buckets (id, name, public)
+    VALUES ('product', 'product', true)
     ON CONFLICT (id) DO NOTHING;`,
     
     // Storage RLS 비활성화 (개발용 - 간단한 해결책)
@@ -109,7 +113,7 @@ export const setupStoragePolicies = () => {
     `-- 모든 사용자가 모든 작업 가능 (주의: 보안상 위험할 수 있음)
     DROP POLICY IF EXISTS "Public Access" ON storage.objects;
     CREATE POLICY "Public Access" ON storage.objects
-     FOR ALL USING (bucket_id = 'track_record');`
+     FOR ALL USING (bucket_id IN ('track_record', 'product'));`
   ];
 
   console.log('=== Storage 설정 단계별 가이드 ===');
@@ -118,17 +122,21 @@ export const setupStoragePolicies = () => {
   console.log('3. Bucket name: "track_record" 입력');
   console.log('4. "Public bucket" 체크');
   console.log('5. "Create bucket" 클릭');
+  console.log('6. 다시 "New bucket" 클릭');
+  console.log('7. Bucket name: "product" 입력');
+  console.log('8. "Public bucket" 체크');
+  console.log('9. "Create bucket" 클릭');
   console.log('');
-  console.log('6. Supabase 대시보드 > SQL Editor로 이동');
-  console.log('7. 기존 정책 삭제 후 새로운 정책 생성:');
+  console.log('10. Supabase 대시보드 > SQL Editor로 이동');
+  console.log('11. 기존 정책 삭제 후 새로운 정책 생성:');
   console.log('');
   console.log('-- 기존 정책 삭제');
   console.log('DROP POLICY IF EXISTS "Public Access" ON storage.objects;');
   console.log('DROP POLICY IF EXISTS "Authenticated users can upload" ON storage.objects;');
   console.log('');
-  console.log('-- 모든 사용자가 track_record 버킷에 업로드 가능');
-  console.log('CREATE POLICY "Allow all operations on track_record" ON storage.objects');
-  console.log('FOR ALL USING (bucket_id = \'track_record\');');
+  console.log('-- 모든 사용자가 track_record와 product 버킷에 업로드 가능');
+  console.log('CREATE POLICY "Allow all operations on track_record and product" ON storage.objects');
+  console.log('FOR ALL USING (bucket_id IN (\'track_record\', \'product\'));');
   console.log('');
   console.log('-- 또는 RLS를 완전히 비활성화 (가장 간단한 방법)');
   console.log('ALTER TABLE storage.objects DISABLE ROW LEVEL SECURITY;');

@@ -263,7 +263,7 @@ const About = () => {
                     <div className="timeline-item">
                         <div className="timeline-marker"></div>
                         <div className="timeline-content">
-                          <div className="timeline-date">2024</div>
+                          <div className="timeline-date">2025</div>
                           <div className="timeline-title">
                             AI 기반 솔루션 및 플랫폼 출시
                           </div>

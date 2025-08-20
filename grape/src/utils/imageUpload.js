@@ -20,7 +20,7 @@ export const validateImageFile = (file, maxSizeMB = 5) => {
 };
 
 // Supabase Storage에 이미지 업로드
-export const uploadImage = async (file, folder = 'track_record') => {
+export const uploadImage = async (file, folder = 'track_record', bucket = 'track_record') => {
   try {
     // 파일 검증
     validateImageFile(file);
@@ -39,10 +39,11 @@ export const uploadImage = async (file, folder = 'track_record') => {
     const filePath = `${folder}/${fileName}`;
     
     console.log('업로드 경로:', filePath);
+    console.log('사용 버킷:', bucket);
     
     // Supabase Storage에 업로드
     const { data, error } = await supabase.storage
-      .from('track_record')
+      .from(bucket)
       .upload(filePath, file, {
         cacheControl: '3600',
         upsert: false
@@ -73,7 +74,7 @@ export const uploadImage = async (file, folder = 'track_record') => {
     
     // 공개 URL 생성
     const { data: { publicUrl } } = supabase.storage
-      .from('track_record')
+      .from(bucket)
       .getPublicUrl(filePath);
     
     console.log('공개 URL:', publicUrl);

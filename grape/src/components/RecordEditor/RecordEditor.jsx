@@ -88,13 +88,15 @@ const RecordEditor = ({
     if (files && files.length > 0) {
       try {
         const uploadedImages = [];
+        const bucket = mode === 'product' ? 'product' : 'track_record';
         
         for (let i = 0; i < files.length; i++) {
           const file = files[i];
           validateImageFile(file, 5);
           
           try {
-            const imageUrl = await uploadImage(file);
+            const folder = mode === 'product' ? 'product' : 'track_record';
+            const imageUrl = await uploadImage(file, folder, bucket);
             uploadedImages.push(imageUrl);
           } catch (uploadError) {
             console.error('Storage 업로드 실패:', uploadError);
@@ -463,7 +465,7 @@ const RecordEditor = ({
                         const imageUrls = await Promise.all(fileArray.map(async file => {
                           validateImageFile(file, 5);
                           try {
-                            return await uploadImage(file);
+                            return await uploadImage(file, 'product', 'product');
                           } catch (uploadError) {
                             console.warn('Storage 업로드 실패, Base64로 대체:', uploadError);
                             // Storage 업로드 실패 시 Base64로 대체
@@ -574,7 +576,7 @@ const RecordEditor = ({
                         const imageUrls = await Promise.all(fileArray.map(async file => {
                           validateImageFile(file, 5);
                           try {
-                            return await uploadImage(file);
+                            return await uploadImage(file, 'product', 'product');
                           } catch (uploadError) {
                             console.warn('Storage 업로드 실패, Base64로 대체:', uploadError);
                             // Storage 업로드 실패 시 Base64로 대체
@@ -680,7 +682,7 @@ const RecordEditor = ({
                         const imageUrls = await Promise.all(fileArray.map(async file => {
                           validateImageFile(file, 5);
                           try {
-                            return await uploadImage(file);
+                            return await uploadImage(file, 'product', 'product');
                           } catch (uploadError) {
                             console.warn('Storage 업로드 실패, Base64로 대체:', uploadError);
                             // Storage 업로드 실패 시 Base64로 대체

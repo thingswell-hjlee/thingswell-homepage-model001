@@ -63,21 +63,21 @@ import Government_support from "./pages/Government_support/Government_support.js
 import AiManufacturingSupport from "./pages/Government_support/AiManufacturingSupport.jsx";
 import GreenEnergySupport from "./pages/Government_support/GreenEnergySupport.jsx";
 import DigitalTransformationSupport from "./pages/Government_support/DigitalTransformationSupport.jsx";
-import Soulution_main from "./pages/Solutions/Soulution_main.jsx";
 import Soulution from "./pages/Solutions/Soulution.jsx";
+import Soulution_main from "./pages/Solutions/Soulution_main.jsx";
 import ChemicalSolution from "./pages/Solutions/ChemicalSolution.jsx";
 import ManufacturingSolution from "./pages/Solutions/ManufacturingSolution.jsx";
 import ConstructionSolution from "./pages/Solutions/ConstructionSolution.jsx";
 import MultimodalAwareness from "./pages/rnd/MultimodalAwareness.jsx";
 import RAGLLMTech from "./pages/rnd/RAGLLMTech.jsx";
 import OnDeviceAI from "./pages/rnd/OnDeviceAI.jsx";
-import RndSoulution from "./pages/rnd/Soulution_main.jsx";
 import ElderlyDisabledSolution from "./pages/rnd/rnd_elderlydisabled.jsx";
 import IndustrialSafetySolution from "./pages/rnd/rnd_industrialsafety.jsx";
 import IntegratedControlSolution from "./pages/rnd/rnd_Integratedcontrol.jsx";
 import Embeddedsystem from "./pages/rnd/Embeddedsystem .jsx";
 import SmartAssistiveTechnology from "./pages/rnd/SmartAssistiveTechnology.jsx";
 import AirQualityManagement from "./pages/rnd/AirQualityManagement.jsx";
+import SolutionDetailPage from "./pages/rnd/SolutionDetailPage.jsx";
 import Product_list_control from "./pages/Products/Product_list_control.jsx";
 import Product_control from "./pages/Products/Product_control.jsx";
 import Product_safety_1 from "./pages/Products/Product_TWEDG_01.jsx";
@@ -353,7 +353,7 @@ function App() {
             <Route path="/solutions/construction" element={<ConstructionSolution />} />
 
             {/* 연구개발 라우팅 */}
-            <Route path="/rnd" element={<RndSoulution />} />
+            <Route path="/rnd" element={<SolutionDetailPage />} />
             <Route path="/rnd/elderly-disabled" element={<ElderlyDisabledSolution />} />
             <Route path="/rnd/industrial-safety" element={<IndustrialSafetySolution />} />
             <Route path="/rnd/integrated-control" element={<IntegratedControlSolution />} />
