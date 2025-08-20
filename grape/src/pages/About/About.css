@@ -116,7 +116,7 @@
 .about-section-title-image img {
   width: 100%;
   height: 100%;
-  object-fit: fill; /* 꽉 채우면서 안 짤리게 */
+  object-fit: cover; /* 꽉 채우면서 안 짤리게 */
   object-position: center;
   user-select: text; /* 드래그 방지 */
   -webkit-user-select: text;

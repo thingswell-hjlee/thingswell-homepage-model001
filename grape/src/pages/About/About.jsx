@@ -3,7 +3,6 @@ import { useLocation } from "react-router-dom";
 import SolutionCard from "../../components/SolutionCard";
 import ApplicationCardsSection from "../../components/ApplicationCardsSection";
 import "./About.css";
-import ceo from "../../assets/ceo.jpg";
 import manufacturing from "../../assets/manufacturing.jpg";
 import construction from "../../assets/construction.jpg";
 import logo from "../../assets/logo.png";
@@ -23,13 +22,28 @@ import corporateResearchInstituteCertificate from "../../assets/corporate_resear
 import ventureEnterpriseCertificate from "../../assets/venture_enterprise_certificate.png";
 import informationCommunicationBusinessCertificate from "../../assets/information_communication_business_certificate.png"; 
 import ContactInfo from "../../components/ContactInfo";
+import ceo from "../../assets/about/ceo.png";
+
+import copyright1 from "../../assets/about/copyright1.png";
+import copyright2 from "../../assets/about/copyright2.png";
+import copyright3 from "../../assets/about/copyright3.png";
+import copyright4 from "../../assets/about/copyright4.png";
+import copyright5 from "../../assets/about/copyright5.png";
+import copyright6 from "../../assets/about/copyright6.png";
+import copyright7 from "../../assets/about/copyright7.png";
+import copyright8 from "../../assets/about/copyright8.png";
+import copyright9 from "../../assets/about/copyright9.png";
+import copyright10 from "../../assets/about/10.png";
+import copyright11 from "../../assets/about/11.png";
 
 const About = () => {
   const location = useLocation();
   const applicationRef = useRef(null);
 
   // applicationCardsData를 useEffect 밖으로 이동
+
   const applicationCardsData = [
+    // 기업인증
     {
       title: "벤처기업 확인서",
       image: ventureEnterpriseCertificate,
@@ -46,11 +60,13 @@ const About = () => {
       organization: "한국산업기술진흥협회",
       date: "2023-08-30"
     },
+    
+    // 사업등록
     {
       title: "정보통신공사업등록증",
       image: informationCommunicationBusinessCertificate,
       imageAlt: "정보통신공사업등록증",
-      category: "사업등록",
+      category: "등록증",
       organization: "경기도",
       date: "2023-09-14"
     },
@@ -58,7 +74,7 @@ const About = () => {
       title: "공장등록증명서",
       image: factoryRegistrationCertificate,
       imageAlt: "공장등록증명서",
-      category: "사업등록",
+      category: "등록증",
       organization: "한국산업단지공단",
       date: "2025-06-23"
     },
@@ -66,17 +82,36 @@ const About = () => {
       title: "SW사업자 일반현황관리확인서",
       image: softwareBusinessOperatorCertificate,
       imageAlt: "SW사업자 일반현황관리확인서",
-      category: "사업등록",
+      category: "등록증",
       organization: "한국소프트웨어산업협회",
       date: "2024-05-30"
     },
+    {
+      title: "상표등록증",
+      image: copyright10,
+      imageAlt: "SW사업자 일반현황관리확인서",
+      category: "등록증",
+      organization: "특허청",
+      date: "2020-03-27"
+    },
+    {
+      title: "디자인등록증",
+      image: copyright11,
+      imageAlt: "SW사업자 일반현황관리확인서",
+      category: "등록증",
+      organization: "특허청",
+      date: "2024-07-16"
+    },
+    
+    
+    // 특허
     {
       title: "실내외 센서 모듈을 이용한 공기질 관리 방법 및 장치",
       image: patentCertificate1,
       imageAlt: "특허증 - 실내외 센서 모듈을 이용한 공기질 관리 방법 및 장치",
       category: "특허",
       organization: "특허청",
-      date: "2022-05-27 "
+      date: "2022-05-27"
     },      
     {
       title: "AI 기반의 캡슐형 스마트 쉘터",
@@ -102,7 +137,81 @@ const About = () => {
       organization: "특허청",
       date: "2025-06-20"
     },
-  ];
+    
+    // 저작권
+    {
+      title: "티웨스웰 게이트웨이 서버",
+      image: copyright9,
+      imageAlt: "저작권 등록증 - 티웨스웰 게이트웨이 서버",
+      category: "저작권",
+      organization: "한국저작권위원회",
+      date: "2023-06-14"
+    },
+    {
+      title: "티웨스웰 토스 서버",
+      image: copyright8,
+      imageAlt: "저작권 등록증 - 티웨스웰 토스 서버",
+      category: "저작권",
+      organization: "한국저작권위원회",
+      date: "2023-06-14"
+    },
+    {
+      title: "다중 동영상 원격제어 소프트웨어",
+      image: copyright1,
+      imageAlt: "저작권 등록증 - 다중 동영상 원격제어 소프트웨어",
+      category: "저작권",
+      organization: "한국저작권위원회",
+      date: "2024-09-24"
+    },
+    {
+      title: "애니스페이스매니저프로그램",
+      image: copyright4,
+      imageAlt: "저작권 등록증 - 애니스페이스매니저프로그램",
+      category: "저작권",
+      organization: "한국저작권위원회",
+      date: "2024-01-30"
+    },
+    {
+      title: "레이더 기반 안전 감지 시스템",
+      image: copyright2,
+      imageAlt: "저작권 등록증 - 레이더 기반 안전 감지 시스템",
+      category: "저작권",
+      organization: "한국저작권위원회",
+      date: "2024-07-31"
+    },
+    {
+      title: "홈케어를 위한 AI 대화 프로그램",
+      image: copyright6,
+      imageAlt: "저작권 등록증 - 홈케어를 위한 AI 대화 프로그램",
+      category: "저작권",
+      organization: "한국저작권위원회",
+      date: "2024-11-20"
+    },
+    {
+      title: "홈케어용 QnA 쿼리 관리 시스템 프로그램",
+      image: copyright7,
+      imageAlt: "저작권 등록증 - 홈케어용 QnA 쿼리 관리 시스템 프로그램",
+      category: "저작권",
+      organization: "한국저작권위원회",
+      date: "2024-11-20"
+    },
+    {
+      title: "음성인식을 통한 산업현장 안전사고 대처 프로그램",
+      image: copyright5,
+      imageAlt: "저작권 등록증 - 음성인식을 통한 산업현장 안전사고 대처 프로그램",
+      category: "저작권",
+      organization: "한국저작권위원회",
+      date: "2025-05-27"
+    },
+    {
+      title: "센서 시험 프로그램",
+      image: copyright3,
+      imageAlt: "저작권 등록증 - 센서 시험 프로그램",
+      category: "저작권",
+      organization: "한국저작권위원회",
+      date: "2025-05-27"
+    }
+  ]
 
   // URL 해시에 따라 해당 섹션으로 스크롤
   useEffect(() => {
@@ -167,15 +276,37 @@ const About = () => {
                   </div>
                   <div className="about-section-content-container">
                     <div className="about-section-title-image">
-                      <img src={logo} alt="ceo" />
+                      <img src={ceo} alt="ceo" />
                     </div>
                     <div className="about-section-title-image-description">
                       <div className="about-intro" style={{marginBottom: 'var(--spacing-xl)'}}>
                       <p>
-                        (주)싱스웰(Thingswell Co., Ltd.)은 AI 에이전트를 활용한 멀티모달 상황 인지를 기반으로, 근로자와 노인, 장애인을 위한 안전·자동화 플랫폼 솔루션에 특화된 기업입니다. 다양한 센서(음향·영상·동작 등)와 무선 통신, 빅데이터 분석 기술을 결합하여 실시간으로 주변 환경을 모니터링하고 이상 상태를 조기에 감지함으로써, 사고를 예방하고 긴급 상황에서 즉각적인 대응이 가능하도록 지원합니다,  Thingswell은 멀티모달 AI 인지 기술과 자동화 플랫폼을 융합하여, “보다 안전하고 스마트한 미래 사회”를 실현하는 데 기여하고자 합니다. 끊임없는 기술 혁신과 협력 네트워크를 통해 한층 발전된 솔루션을 선보이며, 근로자, 노인, 장애인을 비롯한 모든 이들의 안전과 편의성을 향상하는 데 최선을 다하겠습니다.
+                      싱스웰은 풍부한 연구개발 실적과 제품화 경험을 바탕으로, 산업안전과 생활안전의 혁신을 선도하는 온디바이스 AI 공간 컴퓨팅 기업으로 성장하고 있습니다.
+
+저희가 추구하는 것은 단순한 기술이 아니라, 극한 환경에서도 사람의 생명을 지키고 신뢰를 드리는 안전 솔루션입니다.
+
+앞으로도 끊임없는 연구와 도전을 통해 고객과 사회가 필요로 하는 가치 있는 혁신을 실현해 나가겠습니다
+<br />
+감사합니다.
                       </p>
                       <h2 style={{marginTop: 'var(--spacing-md)'}}>(주) 싱스웰 대표이사</h2>
                       <h3>이학준</h3>
+                      <p style={{marginTop: 'var(--spacing-md)', lineHeight: '1.6', fontSize: '14px'}}>
+                        경북대학교 전자공학 석사<br />
+                        전 LG전자 중앙연구소 주임연구원<br />
+                        KAIST 테크노경영대학원 KVM 과정 수료<br />
+                        GOOD Design 조달청장상 수상<br /><br />
+                        <strong>주요 개발 실적</strong><br />
+                        고성능 GPU 기반 비디오 프린트 메인보드 개발<br />
+                        그래픽 카드 개발 (LG 전자)<br />
+                        DSP 활용 머신비전 장치 개발 (현대전자)<br />
+                        ARM 기반 웹비디오폰 메인보드 개발 (삼성전자)<br />
+                        ARM 디지털 앨범 (삼성전자)<br />
+                        월패드 (현대통신)<br />
+                        월패드, 모바일패드 (서울통신)<br />
+                        네트윅 컴퓨터 (LG전자, 한솔, 현대)<br />
+                        터치스크린 통합 컨트롤러 (자사브랜드,프랑스 수출)
+                      </p>
                       </div>
 
 
@@ -532,6 +663,7 @@ const About = () => {
                       subtitle="회사 보유 인증서와 특허"
                       breadcrumbs={["Home", "About", "Certificates"]}
                       hideSearch={true}
+                      disableScrollOnPageChange={true}
                       products={applicationCardsData.map((c, idx) => ({
                         name: c.title,
                         title: c.label,

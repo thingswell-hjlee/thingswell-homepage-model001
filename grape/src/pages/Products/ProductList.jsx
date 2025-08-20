@@ -137,6 +137,7 @@ const ProductList = ({
   onEditRecord = null,
   canEdit = false,
   itemsPerPage: customItemsPerPage = 9,
+  disableScrollOnPageChange = false,
 }) => {
   const [selectedCategory, setSelectedCategory] = useState('전체');
   const [searchTerm, setSearchTerm] = useState('');
@@ -196,8 +197,10 @@ const ProductList = ({
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
-    // 페이지 변경 시 스크롤을 맨 위로 이동
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // 페이지 변경 시 스크롤을 맨 위로 이동 (disableScrollOnPageChange가 false일 때만)
+    if (!disableScrollOnPageChange) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   };
 
   const content = (
