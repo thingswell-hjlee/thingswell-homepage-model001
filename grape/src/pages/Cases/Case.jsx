@@ -34,14 +34,6 @@ export default function ProductListControlPage({ kindFilter = null }) {
   // kindFilter에 따른 제목과 설명 매핑
   const getPageInfo = (kind) => {
     const pageInfoMap = {
-      'AI': {
-        title: 'AI 솔루션 실적',
-        subtitle: 'AI 기반 솔루션의 다양한 실적들을 확인하세요'
-      },
-      '버스 쉼터': {
-        title: '버스 쉼터 실적',
-        subtitle: '버스 쉼터 관련 프로젝트 실적들을 확인하세요'
-      },
       '정보통신': {
         title: '정보통신 실적',
         subtitle: '정보통신 시스템 구축 실적들을 확인하세요'
@@ -50,9 +42,9 @@ export default function ProductListControlPage({ kindFilter = null }) {
         title: '통합제어 실적',
         subtitle: '통합제어 시스템 구축 실적들을 확인하세요'
       },
-      '스마트 안전': {
-        title: '스마트 안전 실적',
-        subtitle: '스마트 안전 솔루션 실적들을 확인하세요'
+      '스마트안전': {
+        title: '스마트안전 실적',
+        subtitle: '스마트안전 솔루션 실적들을 확인하세요'
       }
     };
     
@@ -115,7 +107,8 @@ export default function ProductListControlPage({ kindFilter = null }) {
           category: record.type,
           organization: record.orderer,
           date: record.date,
-          rawData: record // 원본 데이터 보존
+          rawData: record, // 원본 데이터 보존
+          hasImage: !!imageUrl // 이미지 유무 플래그 추가
         };
       });
 
@@ -359,49 +352,61 @@ export default function ProductListControlPage({ kindFilter = null }) {
         />
       )}
 
-      <ProductList
-        products={products}
-        title={getPageInfo(kindFilter).title}
-        subtitle={getPageInfo(kindFilter).subtitle}
-        breadcrumbs={["Home", "Cases"]}
-        longVertical
-        headerImage={headerImage}
-        onEditRecord={handleEditRecord}
-        canEdit={canEditContent()}
-        addButton={canEditContent() && (
-          <button
-            onClick={() => setShowAddModal(true)}
-            style={{
-              padding: 'var(--spacing-sm) var(--spacing-md)',
-              backgroundColor: 'var(--color-primary)',
-              color: 'white',
-              border: 'none',
-              outline: 'none',
-              borderRadius: 'var(--border-radius-md)',
-              fontSize: 'var(--font-size-sm)',
-              fontWeight: 'var(--font-weight-medium)',
-              cursor: 'pointer',
-              transition: 'background-color var(--transition-slow)',
-              whiteSpace: 'nowrap',
-              height: '40px',
-              minWidth: '80px',
-              boxSizing: 'border-box',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              textAlign: 'center'
-            }}
-            onMouseEnter={(e) => {
-              e.target.style.backgroundColor = '#0056b3';
-            }}
-            onMouseLeave={(e) => {
-              e.target.style.backgroundColor = 'var(--color-primary)';
-            }}
-          >
-            + 실적 추가
-          </button>
+      <div>
+        <ProductList
+          products={products}
+          title={getPageInfo(kindFilter).title}
+          subtitle={getPageInfo(kindFilter).subtitle}
+          breadcrumbs={["Home", "Cases"]}
+          longVertical
+          headerImage={headerImage}
+          onEditRecord={handleEditRecord}
+          canEdit={canEditContent()}
+          hideToolbar={true}
+          hideSearchAndView={true}
+          itemsPerPage={9999}
+        />
+        {canEditContent() && (
+          <div style={{
+            display: 'flex',
+            justifyContent: 'center',
+            padding: '40px 20px',
+            borderTop: '1px solid #e9ecef'
+          }}>
+            <button
+              onClick={() => setShowAddModal(true)}
+              style={{
+                padding: 'var(--spacing-sm) var(--spacing-md)',
+                backgroundColor: 'var(--color-primary)',
+                color: 'white',
+                border: 'none',
+                outline: 'none',
+                borderRadius: 'var(--border-radius-md)',
+                fontSize: 'var(--font-size-sm)',
+                fontWeight: 'var(--font-weight-medium)',
+                cursor: 'pointer',
+                transition: 'background-color var(--transition-slow)',
+                whiteSpace: 'nowrap',
+                height: '40px',
+                minWidth: '80px',
+                boxSizing: 'border-box',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                textAlign: 'center'
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.backgroundColor = '#0056b3';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.backgroundColor = 'var(--color-primary)';
+              }}
+            >
+              + 실적 추가
+            </button>
+          </div>
         )}
-      />
+      </div>
     </div>
   );
 }

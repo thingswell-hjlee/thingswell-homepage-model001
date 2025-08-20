@@ -260,6 +260,27 @@ const About = () => {
                   </div>
                   <div className="timeline-container">
                     <div className="timeline">
+                    <div className="timeline-item">
+                        <div className="timeline-marker"></div>
+                        <div className="timeline-content">
+                          <div className="timeline-date">2024</div>
+                          <div className="timeline-title">
+                            AI 기반 솔루션 및 플랫폼 출시
+                          </div>
+                          <div className="timeline-description">
+                            <ul>
+                              <li>
+                                2025. 서울시 중구 20개소 버스 쉼터 원격관리
+                                시스템 공급
+                              </li>
+                              <li>
+                                2025. 서울시 강남구 20개소 버스 쉼터 원격관리
+                                시스템 공급
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
                       <div className="timeline-item">
                         <div className="timeline-marker"></div>
                         <div className="timeline-content">

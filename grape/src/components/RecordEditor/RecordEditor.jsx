@@ -148,9 +148,9 @@ const RecordEditor = ({
       return {
         title: '실적',
         kindOptions: [
-          { value: 'AI제조지원', label: 'AI제조지원' },
-          { value: '디지털전환지원', label: '디지털전환지원' },
-          { value: '그린에너지지원', label: '그린에너지지원' }
+          { value: '스마트안전', label: '스마트안전' },
+          { value: '통합제어', label: '통합제어' },
+          { value: '정보통신', label: '정보통신' }
         ],
         breadcrumbs: ["Home", "실적", "미리보기"]
       };

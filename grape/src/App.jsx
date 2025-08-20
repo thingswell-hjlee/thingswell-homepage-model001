@@ -105,7 +105,6 @@ import CaseInformationCommunication from "./pages/Cases/Case_InformationCommunic
 import About from "./pages/About/About.jsx";
 import Login from "./pages/Login/Login.jsx";
 import { AuthProvider } from "./contexts/AuthContext.jsx";
-import Case_Bus_Seoul from "./pages/Cases/Case_Bus_Seoul.jsx";
 import { supabase } from "./lib/supabase";
 
 
@@ -395,7 +394,6 @@ function App() {
 <Route path="/cases/ai" element={<CaseAI />} />
 <Route path="/cases/integrated-control" element={<CaseIntegratedControl />} />
 <Route path="/cases/information-communication" element={<CaseInformationCommunication />} />
-<Route path="/cases/bus-seoul" element={<Case_Bus_Seoul />} />
 
             {/* 회사소개 라우팅 */} 
             <Route path="/about" element={<About />} />

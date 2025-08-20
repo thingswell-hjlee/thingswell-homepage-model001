@@ -136,13 +136,14 @@ const ProductList = ({
   addButton = null,
   onEditRecord = null,
   canEdit = false,
+  itemsPerPage: customItemsPerPage = 9,
 }) => {
   const [selectedCategory, setSelectedCategory] = useState('전체');
   const [searchTerm, setSearchTerm] = useState('');
   const [viewMode, setViewMode] = useState('card');
   const [previewImage, setPreviewImage] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 9;
+  const itemsPerPage = customItemsPerPage;
 
   useEffect(() => {
     if (!previewImage) return;
@@ -187,7 +188,7 @@ const ProductList = ({
     });
   }, [products, selectedCategory, searchTerm]);
 
-  // 페이징 처리
+  // 페이징 처리 - 전체 데이터를 페이징 처리
   const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
@@ -267,12 +268,19 @@ const ProductList = ({
       )}
 
       <div className="product-list-grid-container">
-        <ThreeColumnGrid listView={viewMode === 'list'} longVertical={longVertical}>
-          {currentProducts.length > 0 ? (
-            currentProducts.map((product, idx) => {
+        {currentProducts.length > 0 ? (
+          (() => {
+            // 리스트 뷰와 카드 뷰를 분리
+            const listItems = [];
+            const cardItems = [];
+            
+            currentProducts.forEach((product, idx) => {
+              // 이미지가 없는 경우 자동으로 리스트 뷰로 표시
+              const shouldShowAsList = viewMode === 'list' || (!product.img || product.img === 'undefined' || product.img === null);
+              
               const Card = (
-                <div className={`product-card ${viewMode === 'list' ? 'list-item' : ''}`}>
-                  {viewMode === 'list' ? (
+                <div className={`product-card ${shouldShowAsList ? 'list-item' : ''}`} style={shouldShowAsList ? { width: '100%', marginBottom: '10px' } : {}}>
+                  {shouldShowAsList ? (
                     // 리스트 뷰: 제목(왼쪽), 기관/날짜(오른쪽) 배치
                     <>
                       <div className="product-list-title">
@@ -288,10 +296,10 @@ const ProductList = ({
                       </div>
                     </>
                   ) : (
-                    // 카드 뷰: 기존 레이아웃 유지
+                    // 카드 뷰: 기존 레이아웃 유지 (이미지가 있는 경우만)
                     <>
                       <MarqueeTitle text={product.name} />
-                      {product.img && product.img !== 'undefined' ? (
+                      {product.img && product.img !== 'undefined' && product.img !== null ? (
                         <img
                           src={product.img}
                           alt={product.name}
@@ -300,24 +308,7 @@ const ProductList = ({
                             if (embedded) setPreviewImage(product.img);
                           }}
                         />
-                      ) : (
-                        <div 
-                          style={{
-                            width: '100%',
-                            height: '200px',
-                            backgroundColor: '#f8f9fa',
-                            border: '2px dashed #dee2e6',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            color: '#6c757d',
-                            fontSize: '48px',
-                            fontWeight: 'bold'
-                          }}
-                        >
-                          ✕
-                        </div>
-                      )}
+                      ) : null}
                       {product.title && (
                         <div className="product-info_title">
                           <h3>{product.title}</h3>
@@ -330,6 +321,7 @@ const ProductList = ({
                   )}
                 </div>
               );
+              
               const cardWithEdit = (
                 <div key={idx} style={{ position: 'relative' }}>
                   {product.onClick ? (
@@ -378,15 +370,40 @@ const ProductList = ({
                 </div>
               );
               
-              return cardWithEdit;
-            })
+              // 리스트 뷰와 카드 뷰를 분리하여 저장
+              if (shouldShowAsList) {
+                listItems.push(cardWithEdit);
+              } else {
+                cardItems.push(cardWithEdit);
+              }
+            });
+            
+            return (
+              <>
+                {/* 카드 뷰 항목들 (이미지 있는 항목) - 위쪽에 배치 */}
+                {cardItems.length > 0 && (
+                  <div style={{ marginBottom: 'var(--spacing-xl)' }}>
+                    <ThreeColumnGrid listView={false} longVertical={longVertical}>
+                      {cardItems}
+                    </ThreeColumnGrid>
+                  </div>
+                )}
+                
+                {/* 리스트 뷰 항목들 (이미지 없는 항목) - 아래쪽에 배치 */}
+                {listItems.length > 0 && (
+                  <div>
+                    {listItems}
+                  </div>
+                )}
+              </>
+            );
+          })()
           ) : (
             <div className="no-products-message">
               <p>선택한 조건에 맞는 제품이 없습니다.</p>
               <p>다른 카테고리나 검색어를 시도해보세요.</p>
             </div>
           )}
-        </ThreeColumnGrid>
       </div>
 
       {/* 페이징 처리 - 9개 이상일 때만 표시 */}
