@@ -143,8 +143,13 @@ function CardRotator({ cards, className = "", onCardChange, currentIndex: extern
         style={maxCardHeight ? { minHeight: `${maxCardHeight}px` } : undefined}
       >
         <p className="hero-eyebrow">{cards[currentIndex].eyebrow}</p>
-        <h1 className="hero-title">{cards[currentIndex].title}</h1>
-        <p className="hero-desc">{cards[currentIndex].description}</p>
+        <div className="hero-desc-container">
+          <h1 className="hero-title">{cards[currentIndex].title}</h1>
+          <p className="hero-desc">{cards[currentIndex].description}</p>
+          {cards[currentIndex].descriptionEng && (
+            <p className="hero-desc-eng">{cards[currentIndex].descriptionEng}</p>
+          )}
+        </div>
         <div className="hero-cta-row">
           <Link to={cards[currentIndex].ctaHref}>
             <button className="hero-cta">{cards[currentIndex].ctaText}</button>
@@ -162,8 +167,13 @@ function CardRotator({ cards, className = "", onCardChange, currentIndex: extern
         {cards.map((card, index) => (
           <article key={index} className="hero-card">
             <p className="hero-eyebrow">{card.eyebrow}</p>
+            <div className="hero-desc-container">
             <h1 className="hero-title">{card.title}</h1>
-            <p className="hero-desc">{card.description}</p>
+              <p className="hero-desc">{card.description}</p>
+              {card.descriptionEng && (
+                <p className="hero-desc-eng">{card.descriptionEng}</p>
+              )}
+            </div>
             <div className="hero-cta-row">
               <button className="hero-cta" type="button">{card.ctaText}</button>
               <span className="hero-caption">{card.caption}</span>

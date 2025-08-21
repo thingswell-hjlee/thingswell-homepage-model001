@@ -81,10 +81,9 @@ import Product_safety_1 from "./pages/Products/Product_TWEDG_01.jsx";
 import Product_list_safety from "./pages/Products/Product_list_safety.jsx";
 import Product_list_monitoring from "./pages/Products/Product_list_monitoring.jsx";
 import Product_TWEDG_04 from "./pages/Products/Product_TWEDG_04.jsx";
-import logo from "./assets/main_image.jpg";
-import manufacturing from "./assets/manufacturing.jpg";
-import construction from "./assets/construction.jpg";
-import fire from "./assets/fire.jpg";
+import aiImage from "./assets/main/AI.jpg";
+import humanImage from "./assets/main/human.jpg";
+import ondeviceImage from "./assets/main/ondevice.jpeg";
 import welding from "./assets/welding.jpg";
 import grinding from "./assets/grinding.jpg";
 import noticeBg from "./assets/1.png";
@@ -112,64 +111,44 @@ function HomePage() {
   
   const cards = [
     {
-      eyebrow: "THE NEW STANDARD IN WORKPLACE SAFETY",
-      title: "Industrial safety",
-      description:
-        "24/7 detection and resolution of potential SIFs—scores risk in real time, recommends action, and prevents life-altering injuries before they happen.",
+      eyebrow: "Safety Secured with AI, a Future Opened with Technology",
+      title: "AI로 지키는 안전, 기술로 여는 미래",
+      description: "AI 기반의 솔루션으로 위험을 예측하고, 혁신적인 기술로 더 안전한 미래를 만들어갑니다.",
+      descriptionEng: "We predict risks with AI-based solutions and create a safer future with innovative technology.",
       ctaText: "Learn more",
       ctaHref: "/contact",
-      caption: "Advanced AI Detection",
-      backgroundImage: logo,
+      caption: "AI Safety Solutions",
+      backgroundImage: aiImage,
     },
     {
-      eyebrow: "AI-POWERED MANUFACTURING SAFETY",
-      title: "Smart Manufacturing",
-      description:
-        "Advanced AI technology monitors manufacturing processes in real-time, detecting potential hazards and ensuring worker safety across all production lines.",
+      eyebrow: "On-Device AI: Safety in Severe Environments",
+      title: "온디바이스 AI, 극한 환경에서도 안전을",
+      description: "외부 네트워크 연결 없이도 기기 자체적으로 위험을 감지하고 대응하여, 어떤 환경에서도 안전을 보장합니다.",
+      descriptionEng: "By detecting and responding to risks directly on the device without an external network connection, we ensure safety in any environment.",
       ctaText: "Learn more",
       ctaHref: "/contact",
-      caption: "Real-time Monitoring",
-      backgroundImage: manufacturing,
+      caption: "On-Device AI",
+      backgroundImage: ondeviceImage,
     },
     {
-      eyebrow: "CONSTRUCTION SITE PROTECTION",
-      title: "Construction Safety",
-      description:
-        "Comprehensive safety monitoring for construction sites, preventing accidents through intelligent detection and real-time alerts for hazardous conditions.",
+      eyebrow: "Innovation for People, Technology for Safety",
+      title: "사람을 위한 혁신, 안전을 위한 기술",
+      description: "인간의 삶을 더 풍요롭게 하는 혁신을 추구하며, 모든 기술은 오직 사람의 안전을 최우선으로 합니다.",
+      descriptionEng: "We pursue innovation that enriches human lives, and all our technology prioritizes the safety of people above all else.",
       ctaText: "Learn more",
       ctaHref: "/contact",
-      caption: "Site Protection",
-      backgroundImage: construction,
+      caption: "Human-Centered Innovation",
+      backgroundImage: humanImage,
     },
     {
-      eyebrow: "FIRE PREVENTION & DETECTION",
-      title: "Fire Safety",
-      description:
-        "Early fire detection and prevention systems that monitor industrial environments, providing instant alerts and automated safety responses.",
+      eyebrow: "Your Safety, Everywhere. With ThingsWell",
+      title: "산업안전에서 생활안전까지, 싱스웰이 함께합니다",
+      description: "공장의 위험 작업 환경부터 일상생활의 작은 사고까지, 싱스웰의 기술은 모든 곳에서 당신을 지켜줍니다.",
+      descriptionEng: "From hazardous work environments in factories to small accidents in daily life, Singswell's technology protects you everywhere.",
       ctaText: "Learn more",
       ctaHref: "/contact",
-      caption: "Prevention System",
-      backgroundImage: fire,
-    },
-    {
-      eyebrow: "WELDING OPERATION SAFETY",
-      title: "Welding Protection",
-      description:
-        "Specialized safety monitoring for welding operations, ensuring proper protective equipment usage and safe work practices.",
-      ctaText: "Learn more",
-      ctaHref: "/contact",
-      caption: "Operation Safety",
-      backgroundImage: welding,
-    },
-    {
-      eyebrow: "GRINDING & MACHINING SAFETY",
-      title: "Machining Safety",
-      description:
-        "Real-time monitoring of grinding and machining operations, detecting unsafe conditions and ensuring proper safety protocols.",
-      ctaText: "Learn more",
-      ctaHref: "/contact",
-      caption: "Protocol Management",
-      backgroundImage: grinding,
+      caption: "Comprehensive Safety",
+      backgroundImage: aiImage,
     },
   ];
 
