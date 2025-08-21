@@ -35,6 +35,7 @@ import copyright8 from "../../assets/about/copyright8.png";
 import copyright9 from "../../assets/about/copyright9.png";
 import copyright10 from "../../assets/about/10.png";
 import copyright11 from "../../assets/about/11.png";
+import copyright12 from "../../assets/about/copyright12.png";
 
 const About = () => {
   const location = useLocation();
@@ -48,17 +49,17 @@ const About = () => {
       title: "벤처기업 확인서",
       image: ventureEnterpriseCertificate,
       imageAlt: "벤처기업 확인서",
-      category: "기업인증",
+      category: "인정서",
       organization: "벤처기업확인기관",
-      date: "2022-08-25"
+      date: "2025-08-13"
     },
     {
       title: "기업부설연구소 인증서",
       image: corporateResearchInstituteCertificate,
       imageAlt: "기업부설연구소 인증서",
-      category: "기업인증",
+      category: "인정서",
       organization: "한국산업기술진흥협회",
-      date: "2023-08-30"
+      date: "2025-08-20"
     },
     
     // 사업등록
@@ -66,7 +67,7 @@ const About = () => {
       title: "정보통신공사업등록증",
       image: informationCommunicationBusinessCertificate,
       imageAlt: "정보통신공사업등록증",
-      category: "등록증",
+      category: "면허등록증",
       organization: "경기도",
       date: "2023-09-14"
     },
@@ -74,7 +75,7 @@ const About = () => {
       title: "공장등록증명서",
       image: factoryRegistrationCertificate,
       imageAlt: "공장등록증명서",
-      category: "등록증",
+      category: "면허등록증",
       organization: "한국산업단지공단",
       date: "2025-06-23"
     },
@@ -82,7 +83,7 @@ const About = () => {
       title: "SW사업자 일반현황관리확인서",
       image: softwareBusinessOperatorCertificate,
       imageAlt: "SW사업자 일반현황관리확인서",
-      category: "등록증",
+      category: "면허등록증",
       organization: "한국소프트웨어산업협회",
       date: "2024-05-30"
     },
@@ -90,7 +91,7 @@ const About = () => {
       title: "상표등록증",
       image: copyright10,
       imageAlt: "SW사업자 일반현황관리확인서",
-      category: "등록증",
+      category: "면허등록증",
       organization: "특허청",
       date: "2020-03-27"
     },
@@ -98,11 +99,18 @@ const About = () => {
       title: "디자인등록증",
       image: copyright11,
       imageAlt: "SW사업자 일반현황관리확인서",
-      category: "등록증",
+      category: "면허등록증",
       organization: "특허청",
       date: "2024-07-16"
     },
-    
+    {
+      title: "사업자등록증",
+      image: copyright12,
+      imageAlt: "SW사업자 일반현황관리확인서",
+      category: "면허등록증",
+      organization: "국세청",
+      date: "2025-04-28"
+    },
     
     // 특허
     {
@@ -143,7 +151,7 @@ const About = () => {
       title: "티웨스웰 게이트웨이 서버",
       image: copyright9,
       imageAlt: "저작권 등록증 - 티웨스웰 게이트웨이 서버",
-      category: "저작권",
+      category: "지적재산권",
       organization: "한국저작권위원회",
       date: "2023-06-14"
     },
@@ -151,7 +159,7 @@ const About = () => {
       title: "티웨스웰 토스 서버",
       image: copyright8,
       imageAlt: "저작권 등록증 - 티웨스웰 토스 서버",
-      category: "저작권",
+      category: "지적재산권",
       organization: "한국저작권위원회",
       date: "2023-06-14"
     },
@@ -159,7 +167,7 @@ const About = () => {
       title: "다중 동영상 원격제어 소프트웨어",
       image: copyright1,
       imageAlt: "저작권 등록증 - 다중 동영상 원격제어 소프트웨어",
-      category: "저작권",
+      category: "지적재산권",
       organization: "한국저작권위원회",
       date: "2024-09-24"
     },
@@ -167,7 +175,7 @@ const About = () => {
       title: "애니스페이스매니저프로그램",
       image: copyright4,
       imageAlt: "저작권 등록증 - 애니스페이스매니저프로그램",
-      category: "저작권",
+      category: "지적재산권",
       organization: "한국저작권위원회",
       date: "2024-01-30"
     },
@@ -175,7 +183,7 @@ const About = () => {
       title: "레이더 기반 안전 감지 시스템",
       image: copyright2,
       imageAlt: "저작권 등록증 - 레이더 기반 안전 감지 시스템",
-      category: "저작권",
+      category: "지적재산권",
       organization: "한국저작권위원회",
       date: "2024-07-31"
     },
@@ -183,7 +191,7 @@ const About = () => {
       title: "홈케어를 위한 AI 대화 프로그램",
       image: copyright6,
       imageAlt: "저작권 등록증 - 홈케어를 위한 AI 대화 프로그램",
-      category: "저작권",
+      category: "지적재산권",
       organization: "한국저작권위원회",
       date: "2024-11-20"
     },
@@ -191,7 +199,7 @@ const About = () => {
       title: "홈케어용 QnA 쿼리 관리 시스템 프로그램",
       image: copyright7,
       imageAlt: "저작권 등록증 - 홈케어용 QnA 쿼리 관리 시스템 프로그램",
-      category: "저작권",
+      category: "지적재산권",
       organization: "한국저작권위원회",
       date: "2024-11-20"
     },
@@ -199,7 +207,7 @@ const About = () => {
       title: "음성인식을 통한 산업현장 안전사고 대처 프로그램",
       image: copyright5,
       imageAlt: "저작권 등록증 - 음성인식을 통한 산업현장 안전사고 대처 프로그램",
-      category: "저작권",
+      category: "지적재산권",
       organization: "한국저작권위원회",
       date: "2025-05-27"
     },
@@ -207,7 +215,7 @@ const About = () => {
       title: "센서 시험 프로그램",
       image: copyright3,
       imageAlt: "저작권 등록증 - 센서 시험 프로그램",
-      category: "저작권",
+      category: "지적재산권",
       organization: "한국저작권위원회",
       date: "2025-05-27"
     }
@@ -402,7 +410,7 @@ const About = () => {
                         <div className="timeline-content">
                           <div className="timeline-date">2025</div>
                           <div className="timeline-title">
-                            AI 기반 솔루션 및 플랫폼 출시
+                            산업안전 솔루션 출시
                           </div>
                           <div className="timeline-description">
                             <ul>
