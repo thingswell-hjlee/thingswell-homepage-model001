@@ -270,49 +270,55 @@ const About = () => {
               </div>
             <div className="solutions-section">
               <div id="greeting" className="about-section">
-                <div className="about-section-title-image-container">
-                  <div className="about-section-title">
-                    <h1 className="about-section-content-title">회사소개</h1>
+                <div className="ceo-container">
+                  
+                  <div className="ceo-content">
+                    
+                    <div className="about-section-title-image-description">
+                    <div className="about-section-title">
+                    <img className="ceo-logo" src={logo} alt="logo" />
+                    <h1>"AI로 지키는 안전, 기술로 여는 미래"</h1>
                   </div>
-                  <div className="about-section-content-container">
-                    <div className="about-section-title-image">
+                      <div className="about-intro">
+                      <p>
+                        싱스웰은 풍부한 연구개발 실적과 제품화 경험을 바탕으로, 산업안전과 생활안전의
+                        혁신을 선도하는 온디바이스 AI 공간 컴퓨팅 기업으로 성장하고 있습니다.
+                        저희가 추구하는 것은 단순한 기술이 아니라, 극한 환경에서도 사람의 생명을 지키고
+                        신뢰를 드리는 안전 솔루션입니다.
+                        앞으로도 끊임없는 연구와 도전을 통해 고객과 사회가 필요로 하는 가치 있는 혁신을
+                        실현해 나가겠습니다.
+                      </p>
+                      <p className="thank-you-text">감사합니다.</p>
+                      </div>
+                    </div>
+                    <div className="ceo-info-section">
+                      <div className="about-section-title-image">
                       <img src={ceo} alt="ceo" />
                     </div>
-                    <div className="about-section-title-image-description">
-                      <div className="about-intro" style={{marginBottom: 'var(--spacing-xl)'}}>
-                      <p>
-                      싱스웰은 풍부한 연구개발 실적과 제품화 경험을 바탕으로, 산업안전과 생활안전의 혁신을 선도하는 온디바이스 AI 공간 컴퓨팅 기업으로 성장하고 있습니다.
-
-저희가 추구하는 것은 단순한 기술이 아니라, 극한 환경에서도 사람의 생명을 지키고 신뢰를 드리는 안전 솔루션입니다.
-
-앞으로도 끊임없는 연구와 도전을 통해 고객과 사회가 필요로 하는 가치 있는 혁신을 실현해 나가겠습니다
-<br />
-감사합니다.
-                      </p>
-                      <h2 style={{marginTop: 'var(--spacing-md)'}}>(주) 싱스웰 대표이사</h2>
-                      <h3>이학준</h3>
-                      <p style={{marginTop: 'var(--spacing-md)', lineHeight: '1.6', fontSize: '14px'}}>
-                        경북대학교 전자공학 석사<br />
-                        전 LG전자 중앙연구소 주임연구원<br />
-                        KAIST 테크노경영대학원 KVM 과정 수료<br />
-                        GOOD Design 조달청장상 수상<br /><br />
-                        <strong>주요 개발 실적</strong><br />
-                        고성능 GPU 기반 비디오 프린트 메인보드 개발<br />
-                        그래픽 카드 개발 (LG 전자)<br />
-                        DSP 활용 머신비전 장치 개발 (현대전자)<br />
-                        ARM 기반 웹비디오폰 메인보드 개발 (삼성전자)<br />
-                        ARM 디지털 앨범 (삼성전자)<br />
-                        월패드 (현대통신)<br />
-                        월패드, 모바일패드 (서울통신)<br />
-                        네트윅 컴퓨터 (LG전자, 한솔, 현대)<br />
-                        터치스크린 통합 컨트롤러 (자사브랜드,프랑스 수출)
-                      </p>
-                      </div>
-
-
-                      
+                    <div className="ceo-info-section-content">
+                    <h1>이학준</h1>
+                      <h2>대표이사</h2>
+                      <p>경북대학교 전자공학 석사</p>
+                      <p>전 LG전자 중앙연구소 주임연구원</p>
+                      <p>KAIST 테크노경영대학원 KVM 과정 수료</p>
+                      <p>GOOD Design 조달청장상 수상</p>
+                    </div>
+                    {/* <div className="ceo-info-section-content">
+                    <h1>주요 경력</h1>
+                        <p>고성능 GPU 기반 비디오 프린프 메인보드 개발 (LG전자)</p>
+                        <p>그래픽 카드 개발 (LG전자)</p>
+                        <p>DSP 활용 머신비전 장비 개발 (현대전자)</p>
+                        <p>ARM 기반 웹비디오폰 메인보드 개발 (삼성전자)</p>
+                        <p>ARM 디지털 앨범 (삼성전자)</p>
+                        <p>월패드 (현대통신)</p>
+                        <p>월패드, 모바일패드 (서울통신)</p>
+                        <p>네트웍 컴퓨터 (LG전자, 한솔, 현대)</p>
+                        <p>터치스크린 통합 컨트롤러 (자사브랜드, 프랑스수출)</p>
+                    </div> */}
                     </div>
                   </div>
+            
+                </div>
                   <div className="about-section-value-container">
                   <div className="core-value-section">
                         <div className="about-section-title">
@@ -664,6 +670,8 @@ const About = () => {
                       breadcrumbs={["Home", "About", "Certificates"]}
                       hideSearch={true}
                       disableScrollOnPageChange={true}
+                      hidePagination={true}
+                      itemsPerPage={999}
                       products={applicationCardsData.map((c, idx) => ({
                         name: c.title,
                         title: c.label,
@@ -698,7 +706,6 @@ const About = () => {
           </div>
         </div>
       </div>
-    </div>
     </div>
   );
 };
