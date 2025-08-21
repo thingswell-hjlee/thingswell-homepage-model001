@@ -331,19 +331,44 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
   // 메뉴 클릭 핸들러
   const handleItemClick = useCallback((item, index) => {
     if (item.submenu && item.submenu.length > 0) {
-      if (isMobile) {
-        // 모바일: 클릭으로 토글
-        if (openSubmenu === index) {
-          setOpenSubmenu(null);
+      // 서브메뉴가 있는 메뉴 클릭 시 첫 번째 세부메뉴로 이동
+      const firstSubmenu = item.submenu[0];
+      if (firstSubmenu && firstSubmenu.path) {
+        if (firstSubmenu.path.includes('#')) {
+          // 해시가 포함된 경로인 경우
+          const [basePath, hash] = firstSubmenu.path.split('#');
+          navigate(basePath);
+          
+          // 해시가 있는 경우 약간의 지연 후 스크롤 처리
+          setTimeout(() => {
+            if (window.location.hash !== `#${hash}`) {
+              window.location.hash = hash;
+            }
+            
+            const element = document.querySelector(`#${hash}`);
+            if (element) {
+              const headerOffset = 100;
+              const elementPosition = element.getBoundingClientRect().top;
+              const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+              window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+              });
+            }
+          }, 300);
         } else {
-          setOpenSubmenu(index);
+          navigate(firstSubmenu.path);
         }
-      } else {
-        // 데스크톱: 클릭 시에도 열린 상태 유지 (호버 우선)
-        setOpenSubmenu(index);
       }
+      
+      // 메뉴 활성화 상태 설정
       setActiveMenuIndex(index);
-      setActiveSubmenuIndex(null);
+      setActiveSubmenuIndex(0); // 첫 번째 서브메뉴 활성화
+      
+      // 모바일에서 메뉴 닫기
+      if (isMobile) {
+        setIsMobileMenuOpen(false);
+      }
     } else {
       // 서브메뉴가 없는 메뉴 클릭 시
       if (item.path) {
