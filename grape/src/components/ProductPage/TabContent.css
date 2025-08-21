@@ -161,7 +161,11 @@
   grid-template-columns: repeat(2, 1fr);
   gap: 1.5rem;
   word-break: keep-all;
-  
+}
+
+/* 기존 3열 그리드 스타일 (ThreeColumnGrid 컴포넌트용) */
+.features-grid.three-column {
+  grid-template-columns: repeat(3, 1fr);
 }
 
 .feature-card {
@@ -194,7 +198,7 @@
   align-items: center;
   justify-content: center;
   background: #f8fafc;
-  min-height: 260px;
+  min-height: 400px;
   border: 1px solid #e5e7eb;
   border-radius: 8px;
   overflow: hidden;
@@ -202,8 +206,7 @@
 
 .feature-image {
   width: 100%;
-  height: auto;
-  max-height: 260px;
+  height: 100%;
   object-fit: cover;
   display: block;
 }
@@ -227,6 +230,21 @@
   flex-direction: column;
   gap: 1rem;
   margin-bottom: 1.25rem;
+}
+
+/* 주요 기능 이미지를 세로로 한 줄로 배치하는 스타일 */
+.key-features-images-row,
+.features-images-row {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.key-features-images-row .feature-card,
+.features-images-row .feature-card {
+  width: 100%;
+  max-width: 100%;
 }
 
 .specs-images-row .spec-card {
@@ -321,6 +339,18 @@
   }
   
   .specs-images-row .spec-card {
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  /* 모바일에서도 주요 기능 이미지를 세로로 한 줄로 유지 */
+  .key-features-images-row,
+  .features-images-row {
+    flex-direction: column;
+  }
+  
+  .key-features-images-row .feature-card,
+  .features-images-row .feature-card {
     width: 100%;
     max-width: 100%;
   }

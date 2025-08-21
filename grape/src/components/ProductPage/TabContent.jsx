@@ -76,7 +76,7 @@ const TabContent = ({ tabId, productData, featureClickToOpen = false, onFeatureI
             {/* 주요 기능 이미지들 */}
             {productData?.keyFeaturesImages && productData.keyFeaturesImages.length > 0 && (
               <div className="key-features-images">
-                <ThreeColumnGrid>
+                <div className="key-features-images-row">
                   {productData.keyFeaturesImages.map((imageObj, index) => (
                     <div key={index} className="feature-card">
                       <ImageWithCaption
@@ -94,13 +94,13 @@ const TabContent = ({ tabId, productData, featureClickToOpen = false, onFeatureI
                       />
                     </div>
                   ))}
-                </ThreeColumnGrid>
+                </div>
               </div>
             )}
             
             {/* 기존 기능 카드들 (keyFeaturesImages가 없을 때) */}
             {(!productData?.keyFeaturesImages || productData.keyFeaturesImages.length === 0) && (
-              <ThreeColumnGrid>
+              <div className="features-images-row">
                 {(() => {
                 const fallbackImages = [featureImg1, featureImg2, featureImg3, featureImg4];
                 const unifiedFeatures = Array.isArray(productData?.features_media)
@@ -158,7 +158,7 @@ const TabContent = ({ tabId, productData, featureClickToOpen = false, onFeatureI
                     </div>
                   );
                 })}
-              </ThreeColumnGrid>
+              </div>
             )}
           </div>
         );
