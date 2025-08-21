@@ -1,225 +1,18 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import SolutionCard from "../../components/SolutionCard";
-import ApplicationCardsSection from "../../components/ApplicationCardsSection";
 import "./About.css";
 import manufacturing from "../../assets/manufacturing.jpg";
 import construction from "../../assets/construction.jpg";
 import logo from "../../assets/logo.png";
-import ProductList from '../../pages/Products/ProductList';
 import ProductHeader from '../../components/ProductPage/ProductHeader';
 import ProductInfo from '../../components/ProductPage/ProductInfo';
 import company from "../../assets/header_image/company.jpg";
-
-// Certificate imports
-import patentCertificate1 from "../../assets/patent_certificate_10-2404374.png";
-import patentCertificate2 from "../../assets/patent_certificate_10-2424407.png";
-import patentCertificate3 from "../../assets/patent_certificate_10-2529240.png";
-import patentCertificate4 from "../../assets/patent_certificate_10-2825255.png";
-import softwareBusinessOperatorCertificate from "../../assets/software_business_operator_certificate.png";
-import factoryRegistrationCertificate from "../../assets/factory_registration_certificate.png";
-import corporateResearchInstituteCertificate from "../../assets/corporate_research_institute_certificate.png";
-import ventureEnterpriseCertificate from "../../assets/venture_enterprise_certificate.png";
-import informationCommunicationBusinessCertificate from "../../assets/information_communication_business_certificate.png"; 
 import ContactInfo from "../../components/ContactInfo";
 import ceo from "../../assets/about/ceo.png";
-
-import copyright1 from "../../assets/about/copyright1.png";
-import copyright2 from "../../assets/about/copyright2.png";
-import copyright3 from "../../assets/about/copyright3.png";
-import copyright4 from "../../assets/about/copyright4.png";
-import copyright5 from "../../assets/about/copyright5.png";
-import copyright6 from "../../assets/about/copyright6.png";
-import copyright7 from "../../assets/about/copyright7.png";
-import copyright8 from "../../assets/about/copyright8.png";
-import copyright9 from "../../assets/about/copyright9.png";
-import copyright10 from "../../assets/about/10.png";
-import copyright11 from "../../assets/about/11.png";
-import copyright12 from "../../assets/about/copyright12.png";
+import CertificateSection from "../../components/CertificateSection";
 
 const About = () => {
   const location = useLocation();
-  const applicationRef = useRef(null);
-
-  // applicationCardsData를 useEffect 밖으로 이동
-
-  const applicationCardsData = [
-    // 기업인증
-    {
-      title: "벤처기업 확인서",
-      image: ventureEnterpriseCertificate,
-      imageAlt: "벤처기업 확인서",
-      category: "인정서",
-      organization: "벤처기업확인기관",
-      date: "2025-08-13"
-    },
-    {
-      title: "기업부설연구소 인증서",
-      image: corporateResearchInstituteCertificate,
-      imageAlt: "기업부설연구소 인증서",
-      category: "인정서",
-      organization: "한국산업기술진흥협회",
-      date: "2025-08-20"
-    },
-    
-    // 사업등록
-    {
-      title: "정보통신공사업등록증",
-      image: informationCommunicationBusinessCertificate,
-      imageAlt: "정보통신공사업등록증",
-      category: "면허등록증",
-      organization: "경기도",
-      date: "2023-09-14"
-    },
-    {
-      title: "공장등록증명서",
-      image: factoryRegistrationCertificate,
-      imageAlt: "공장등록증명서",
-      category: "면허등록증",
-      organization: "한국산업단지공단",
-      date: "2025-06-23"
-    },
-    {
-      title: "SW사업자 일반현황관리확인서",
-      image: softwareBusinessOperatorCertificate,
-      imageAlt: "SW사업자 일반현황관리확인서",
-      category: "면허등록증",
-      organization: "한국소프트웨어산업협회",
-      date: "2024-05-30"
-    },
-    {
-      title: "상표등록증",
-      image: copyright10,
-      imageAlt: "SW사업자 일반현황관리확인서",
-      category: "면허등록증",
-      organization: "특허청",
-      date: "2020-03-27"
-    },
-    {
-      title: "디자인등록증",
-      image: copyright11,
-      imageAlt: "SW사업자 일반현황관리확인서",
-      category: "면허등록증",
-      organization: "특허청",
-      date: "2024-07-16"
-    },
-    {
-      title: "사업자등록증",
-      image: copyright12,
-      imageAlt: "SW사업자 일반현황관리확인서",
-      category: "면허등록증",
-      organization: "국세청",
-      date: "2025-04-28"
-    },
-    
-    // 특허
-    {
-      title: "실내외 센서 모듈을 이용한 공기질 관리 방법 및 장치",
-      image: patentCertificate1,
-      imageAlt: "특허증 - 실내외 센서 모듈을 이용한 공기질 관리 방법 및 장치",
-      category: "특허",
-      organization: "특허청",
-      date: "2022-05-27"
-    },      
-    {
-      title: "AI 기반의 캡슐형 스마트 쉘터",
-      image: patentCertificate2,
-      imageAlt: "특허증 - AI 기반의 캡슐형 스마트 쉘터",
-      category: "특허",
-      organization: "특허청",
-      date: "2022-07-19"
-    },
-    {
-      title: "사용자 맞춤형 서비스를 제공하는 캡슐형 스마트 쉘터",
-      image: patentCertificate3,
-      imageAlt: "특허증 - 사용자 맞춤형 서비스를 제공하는 캡슐형 스마트 쉘터",
-      category: "특허",
-      organization: "특허청",
-      date: "2023-04-28"
-    },
-    {
-      title: "레이더와 카메라를 이용한 위급 상황 알람 장치",
-      image: patentCertificate4,
-      imageAlt: "특허증 - 레이더와 카메라를 이용한 위급 상황 알람 장치",
-      category: "특허",
-      organization: "특허청",
-      date: "2025-06-20"
-    },
-    
-    // 저작권
-    {
-      title: "티웨스웰 게이트웨이 서버",
-      image: copyright9,
-      imageAlt: "저작권 등록증 - 티웨스웰 게이트웨이 서버",
-      category: "지적재산권",
-      organization: "한국저작권위원회",
-      date: "2023-06-14"
-    },
-    {
-      title: "티웨스웰 토스 서버",
-      image: copyright8,
-      imageAlt: "저작권 등록증 - 티웨스웰 토스 서버",
-      category: "지적재산권",
-      organization: "한국저작권위원회",
-      date: "2023-06-14"
-    },
-    {
-      title: "다중 동영상 원격제어 소프트웨어",
-      image: copyright1,
-      imageAlt: "저작권 등록증 - 다중 동영상 원격제어 소프트웨어",
-      category: "지적재산권",
-      organization: "한국저작권위원회",
-      date: "2024-09-24"
-    },
-    {
-      title: "애니스페이스매니저프로그램",
-      image: copyright4,
-      imageAlt: "저작권 등록증 - 애니스페이스매니저프로그램",
-      category: "지적재산권",
-      organization: "한국저작권위원회",
-      date: "2024-01-30"
-    },
-    {
-      title: "레이더 기반 안전 감지 시스템",
-      image: copyright2,
-      imageAlt: "저작권 등록증 - 레이더 기반 안전 감지 시스템",
-      category: "지적재산권",
-      organization: "한국저작권위원회",
-      date: "2024-07-31"
-    },
-    {
-      title: "홈케어를 위한 AI 대화 프로그램",
-      image: copyright6,
-      imageAlt: "저작권 등록증 - 홈케어를 위한 AI 대화 프로그램",
-      category: "지적재산권",
-      organization: "한국저작권위원회",
-      date: "2024-11-20"
-    },
-    {
-      title: "홈케어용 QnA 쿼리 관리 시스템 프로그램",
-      image: copyright7,
-      imageAlt: "저작권 등록증 - 홈케어용 QnA 쿼리 관리 시스템 프로그램",
-      category: "지적재산권",
-      organization: "한국저작권위원회",
-      date: "2024-11-20"
-    },
-    {
-      title: "음성인식을 통한 산업현장 안전사고 대처 프로그램",
-      image: copyright5,
-      imageAlt: "저작권 등록증 - 음성인식을 통한 산업현장 안전사고 대처 프로그램",
-      category: "지적재산권",
-      organization: "한국저작권위원회",
-      date: "2025-05-27"
-    },
-    {
-      title: "센서 시험 프로그램",
-      image: copyright3,
-      imageAlt: "저작권 등록증 - 센서 시험 프로그램",
-      category: "지적재산권",
-      organization: "한국저작권위원회",
-      date: "2025-05-27"
-    }
-  ]
 
   // URL 해시에 따라 해당 섹션으로 스크롤
   useEffect(() => {
@@ -278,7 +71,9 @@ const About = () => {
               </div>
             <div className="solutions-section">
               <div id="greeting" className="about-section">
-                <div className="ceo-container">
+               
+                  <div className="about-section-value-container">
+                  <div className="ceo-container">
                   
                   <div className="ceo-content">
                     
@@ -300,35 +95,38 @@ const About = () => {
                       </div>
                     </div>
                     <div className="ceo-info-section">
-                      <div className="about-section-title-image">
-                      <img src={ceo} alt="ceo" />
-                    </div>
+                      <div 
+                        className="about-section-title-image"
+                        style={{ backgroundImage: `url(${ceo})` }}
+                      ></div>
                     <div className="ceo-info-section-content">
-                    <h1>이학준</h1>
+                    <h1>이  학  준</h1>
                       <h2>대표이사</h2>
                       <p>경북대학교 전자공학 석사</p>
                       <p>전 LG전자 중앙연구소 주임연구원</p>
                       <p>KAIST 테크노경영대학원 KVM 과정 수료</p>
-                      <p>GOOD Design 조달청장상 수상</p>
                     </div>
-                    {/* <div className="ceo-info-section-content">
-                    <h1>주요 경력</h1>
-                        <p>고성능 GPU 기반 비디오 프린프 메인보드 개발 (LG전자)</p>
-                        <p>그래픽 카드 개발 (LG전자)</p>
+                    <div className="ceo-info-section-content">
+                    <p>GOOD Design 조달청장상 수상</p>
+                    <p>터치스크린 통합 컨트롤러 (자사브랜드, 프랑스수출)</p>
+                      <p>고성능 GPU 기반 비디오 프린프 메인보드 개발 (LG전자)</p>
+                      <p>그래픽 카드 개발 (LG전자)</p>
                         <p>DSP 활용 머신비전 장비 개발 (현대전자)</p>
-                        <p>ARM 기반 웹비디오폰 메인보드 개발 (삼성전자)</p>
+                        
+                    </div>
+                    <div className="ceo-info-section-content">
+                    <p>ARM 기반 웹비디오폰 메인보드 개발 (삼성전자)</p>
                         <p>ARM 디지털 앨범 (삼성전자)</p>
                         <p>월패드 (현대통신)</p>
                         <p>월패드, 모바일패드 (서울통신)</p>
                         <p>네트웍 컴퓨터 (LG전자, 한솔, 현대)</p>
-                        <p>터치스크린 통합 컨트롤러 (자사브랜드, 프랑스수출)</p>
-                    </div> */}
+                    </div>
                     </div>
                   </div>
             
                 </div>
-                  <div className="about-section-value-container">
                   <div className="core-value-section">
+                    
                         <div className="about-section-title">
                           <p className="about-section-title-subtitle">Mission </p>
                           <h1 className="about-section-content-title">미션</h1>
@@ -664,36 +462,7 @@ const About = () => {
                   </div>
                 </div>
               </div>
-              <div id="certificate" className="application-section-responsive">
-                <div className="cards-container">
-                  <div className="application-card-section-title-container">
-                    <div className="solution-card-subtitle">Certificate</div>
-                    <div className="application-card-section-title">면허인증특허</div>
-                  </div>
-                  <div className="application-cards no-line responsive-cards">
-                    <ProductList
-                      embedded
-                      title="인증 및 특허"
-                      subtitle="회사 보유 인증서와 특허"
-                      breadcrumbs={["Home", "About", "Certificates"]}
-                      hideSearch={true}
-                      disableScrollOnPageChange={true}
-                      hidePagination={true}
-                      itemsPerPage={999}
-                      products={applicationCardsData.map((c, idx) => ({
-                        name: c.title,
-                        title: c.label,
-                        img: c.image,
-                        desc: c.imageAlt,
-                        category: c.category,
-                        link: undefined,
-                        organization: c.organization,
-                        date: c.date
-                      }))}
-                    />
-                  </div>
-                </div>
-              </div>
+              <CertificateSection />
               <div id="location" className="about-section">
                 <div className="about-section-title-image-container">
                   <div className="about-section-title">

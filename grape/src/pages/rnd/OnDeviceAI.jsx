@@ -2,6 +2,21 @@ import React from 'react';
 import ProductHeader from '../../components/ProductPage/ProductHeader';
 import './Soulution.css';
 import ProductInfo from '../../components/ProductPage/ProductInfo';
+import FeatureDescription from '../../components/FeatureDescription';
+import ai from '../../assets/rnd_main/AI.png';
+
+const ON_DEVICE_AI_CARDS = [
+  {
+    image: ai,
+    subtitle: "현장 사고 예방의 신속한 보디가드",
+    description: [
+      "첨단 기술이 안전을 책임지는 시대, 산업 현장의 패러다임을 바꿀 '온디바이스 AI'가 등장했습니다. 이 기술은 마치 현장 작업자의 든든한 보디가드처럼, 위험을 즉각적으로 감지하고 사고를 미연에 방지합니다.",
+      "온디바이스 AI의 가장 큰 매력은 바로 '신속함'입니다. 기존의 클라우드 기반 AI는 데이터를 서버로 보낸 후 분석하는 과정을 거치기에 필연적으로 지연이 발생했지만, 온디바이스 AI는 장비 자체에서 모든 것을 처리합니다. 추락, 충돌 등 순간적인 사고가 발생하는 현장에서 수 밀리초(ms) 단위의 빠른 판단은 생명을 살리는 결정적 차이를 만듭니다.",
+      "또한, 이 기술은 다양한 환경에 완벽하게 적응합니다. RGB 카메라의 시각적 정보에 ToF(거리 측정)와 레이더(움직임 감지) 센서 데이터를 융합하여 어두운 환경이나 통신이 두절된 지하, 터널에서도 빈틈없이 위험을 탐지합니다. 작업자가 쓰러지거나 금지 구역에 진입하는 순간, 음성이나 시각적 경고를 즉시 전달해 위험을 알립니다.",
+      "온디바이스 AI는 단순한 기술을 넘어, 안전을 최우선으로 하는 산업 현장의 새로운 기준을 제시하고 있습니다. 이제 기술의 힘으로 더 안전하고 효율적인 작업 환경을 구축할 수 있습니다."
+    ],
+  }
+];
 
 const OnDeviceAI = () => {
   return (
@@ -9,7 +24,23 @@ const OnDeviceAI = () => {
       <ProductHeader />
       <div className="product-page-content">
           <div className="container">
-            <ProductInfo productName="온디바이스 AI 기술" productTitle="온디바이스 AI 기술" breadcrumbs={["Home", "솔루션", "온디바이스 AI 기술"]} />
+            <ProductInfo productName="온디바이스 AI" productTitle="온디바이스 AI" breadcrumbs={["Home", "연구개발", "온디바이스 AI"]} />
+          </div>
+
+          {/* FeatureDescription 카드 섹션 */}
+          <div className="container">
+            <div className="feature-cards-section">
+              {ON_DEVICE_AI_CARDS.map((card, index) => (
+                <FeatureDescription
+                  key={index}
+                  image={card.image}
+                  title={card.title}
+                  subtitle={card.subtitle}
+                  description={card.description}
+                  link={card.link}
+                />
+              ))}
+            </div>
           </div>
         <div className="gs-container">
 

@@ -55,9 +55,12 @@ const defaultMenuItems = [
     label: '연구개발', 
     path: '/rnd',
     submenu: [ 
-      { label: '산업안전', path: '/rnd/industrial-safety' }, 
-      { label: '노인장애인안전', path: '/rnd/elderly-disabled' },
-      { label: '통합제어 ', path: '/rnd/integrated-control' },
+      { label: '멀티모달 상황인지', path: '/rnd/multimodal-awareness' },
+      { label: 'RAG 기반 LLM', path: '/rnd/rag-llm' },
+      { label: '온디바이스 AI', path: '/rnd/on-device-ai' },
+      { label: '위험상황 조기감지', path: '/rnd/embedded-system' },
+      { label: '인지장애 보조기술', path: '/rnd/smart-assistive-technology' },
+      { label: 'AI 공기질 관리', path: '/rnd/air-quality-management' }, 
     ] 
   },
       { 

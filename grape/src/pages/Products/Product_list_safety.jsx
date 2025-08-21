@@ -132,7 +132,7 @@ export default function ProductListSafetyPage() {
         alert('제품이 성공적으로 수정되었습니다!');
         setShowAddModal(false);
         setEditingExistingRecord(null);
-        setNewRecord({ title: '', desc: '', overview_title: '', date: '', orderer: '', type: '', kind: '스마트안전장비', images: [] });
+        setNewRecord({ title: '', desc: '', overview_title: '', date: '', orderer: '', type: '', kind: '스마트안전', images: [] });
         fetchProducts();
         
       } catch (error) {

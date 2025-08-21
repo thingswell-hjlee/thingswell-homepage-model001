@@ -3,6 +3,22 @@ import ProductHeader from '../../components/ProductPage/ProductHeader';
 import './Soulution.css';
 import server from '../../assets/server.jpg';
 import ProductInfo from '../../components/ProductPage/ProductInfo';
+import test from '../../assets/test.png';
+import FeatureDescription from '../../components/FeatureDescription';
+import multimodal from '../../assets/rnd_main/multimodal.png';
+
+const MULTIMODAL_CARDS = [
+  {
+    image: multimodal,
+    subtitle: "산업 현장의 든든한 안전 지킴이",
+    description: [
+      "'멀티모달 상황인지 기술'은 산업 현장의 안전을 한 차원 높여줄 혁신적인 시스템입니다. 이 기술은 마치 사람의 눈과 귀처럼 RGB 카메라, ToF(거리 측정) 센서, UWB(초광대역) 레이더 센서 등 다양한 정보를 종합적으로 인지하고 융합합니다.",
+      "기존 카메라만으로는 어려웠던 조도 변화, 먼지, 가려짐 같은 환경에서도 빛의 영향을 받지 않고 정확하게 감지할 수 있어 강력한 적응성을 자랑합니다.",
+      "이 기술의 핵심은 '온디바이스 AI'에 있습니다. 현장에서 실시간으로 작업자의 쓰러짐이나 추락 같은 이상 행동을 즉시 감지하고, 중장비의 위험 접근을 정밀하게 파악해 충돌 사고를 예방합니다. 특히 레이더를 활용해 눈에 보이지 않는 사각지대까지 감지하여 안전 사각지대를 최소화하는 데 큰 역할을 합니다.",
+      "위험 상황 발생 시 작업자에게 음성, 화면, 모바일 앱 등으로 즉시 경고 알림을 전달하며, 스마트 PPE(개인 보호 장비)와 연동하여 유해가스나 온도 변화까지 모니터링해 작업자들을 더욱 안전하게 보호합니다. 단일 센서의 한계를 넘어선 멀티모달 융합 기술은 산업 현장의 안전을 한 차원 끌어올릴 것으로 기대됩니다."
+    ],
+  }
+];
 
 const MultimodalAwareness = () => {
   return (
@@ -10,7 +26,23 @@ const MultimodalAwareness = () => {
       <ProductHeader />
       <div className="product-page-content">
           <div className="container">
-            <ProductInfo productName="멀티모달 상황인지 기술" productTitle="멀티모달 상황인지 기술" breadcrumbs={["Home", "솔루션", "멀티모달 상황인지 기술"]} />
+            <ProductInfo productName="멀티모달 상황인지" productTitle="멀티모달 상황인지" breadcrumbs={["Home", "연구개발", "멀티모달 상황인지"]} />
+          </div>
+
+          {/* FeatureDescription 카드 섹션 */}
+          <div className="container">
+            <div className="feature-cards-section">
+              {MULTIMODAL_CARDS.map((card, index) => (
+                <FeatureDescription
+                  key={index}
+                  image={card.image}
+                  title={card.title}
+                  subtitle={card.subtitle}
+                  description={card.description}
+                  link={card.link}
+                />
+              ))}
+            </div>
           </div>
         <div className="gs-container">
         <section className="gs-section">

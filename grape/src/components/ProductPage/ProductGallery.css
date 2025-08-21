@@ -10,7 +10,7 @@
   min-height: 300px;
   border: 1px solid #e5e7eb;  
   border-radius: 8px;
-  overflow: visible;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -22,6 +22,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
   transition: transform 0.3s ease;
   z-index: 2;
 }
@@ -29,6 +30,20 @@
 /* 모듈 CSS 로딩 순서에 따른 우선순위 충돌 방지 */
 .product-gallery .main-image-container .gallery-main-image {
   height: 100%;
+}
+
+/* ImageWithCaption 컴포넌트가 main-image-container에서 사용될 때 이미지가 꽉 채워지도록 설정 */
+.product-gallery .main-image-container .image-with-caption {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 16 / 9;
+}
+
+.product-gallery .main-image-container .image-with-caption .iwc-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 
 .gallery-main-image:hover {

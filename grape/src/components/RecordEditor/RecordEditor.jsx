@@ -15,6 +15,8 @@ const RecordEditor = ({
 }) => {
   const [editingField, setEditingField] = useState(null);
   const [tempValue, setTempValue] = useState('');
+  const [draggedIndex, setDraggedIndex] = useState(null);
+  const [dragOverIndex, setDragOverIndex] = useState(null);
   const [formData, setFormData] = useState({
     title: '',
     desc: '',
@@ -22,7 +24,7 @@ const RecordEditor = ({
     date: '',
     orderer: '',
     type: '',
-    kind: mode === 'product' ? '스마트안전장비' : '',
+    kind: mode === 'product' ? '스마트안전' : '',
     images: [],
     // 제품 전용 필드들
     keyFeatures: {
@@ -38,6 +40,122 @@ const RecordEditor = ({
     ],
     videos: [] // 링크 배열로 변경
   });
+
+  // 드래그 앤 드롭 유틸리티 함수들
+  const handleDragStart = (e, index) => {
+    setDraggedIndex(index);
+    e.dataTransfer.effectAllowed = 'move';
+  };
+
+  const handleDragOver = (e, index) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+    setDragOverIndex(index);
+  };
+
+  const handleDragLeave = () => {
+    setDragOverIndex(null);
+  };
+
+  const handleDrop = (e, dropIndex) => {
+    e.preventDefault();
+    if (draggedIndex === null || draggedIndex === dropIndex) {
+      setDraggedIndex(null);
+      setDragOverIndex(null);
+      return;
+    }
+
+    // 이미지 배열 재정렬
+    const reorderImages = (images) => {
+      const newImages = [...images];
+      const [draggedItem] = newImages.splice(draggedIndex, 1);
+      newImages.splice(dropIndex, 0, draggedItem);
+      return newImages;
+    };
+
+    setFormData(prev => ({
+      ...prev,
+      images: reorderImages(prev.images)
+    }));
+
+    setDraggedIndex(null);
+    setDragOverIndex(null);
+  };
+
+  const handleKeyFeaturesImageDrop = (e, dropIndex) => {
+    e.preventDefault();
+    if (draggedIndex === null || draggedIndex === dropIndex) {
+      setDraggedIndex(null);
+      setDragOverIndex(null);
+      return;
+    }
+
+    const reorderImages = (images) => {
+      const newImages = [...images];
+      const [draggedItem] = newImages.splice(draggedIndex, 1);
+      newImages.splice(dropIndex, 0, draggedItem);
+      return newImages;
+    };
+
+    setFormData(prev => ({
+      ...prev,
+      keyFeatures: {
+        ...prev.keyFeatures,
+        images: reorderImages(prev.keyFeatures.images)
+      }
+    }));
+
+    setDraggedIndex(null);
+    setDragOverIndex(null);
+  };
+
+  const handleSpecificationsImageDrop = (e, dropIndex) => {
+    e.preventDefault();
+    if (draggedIndex === null || draggedIndex === dropIndex) {
+      setDraggedIndex(null);
+      setDragOverIndex(null);
+      return;
+    }
+
+    const reorderImages = (images) => {
+      const newImages = [...images];
+      const [draggedItem] = newImages.splice(draggedIndex, 1);
+      newImages.splice(dropIndex, 0, draggedItem);
+      return newImages;
+    };
+
+    setFormData(prev => ({
+      ...prev,
+      specifications: reorderImages(prev.specifications)
+    }));
+
+    setDraggedIndex(null);
+    setDragOverIndex(null);
+  };
+
+  const handleCertificationsImageDrop = (e, dropIndex) => {
+    e.preventDefault();
+    if (draggedIndex === null || draggedIndex === dropIndex) {
+      setDraggedIndex(null);
+      setDragOverIndex(null);
+      return;
+    }
+
+    const reorderImages = (images) => {
+      const newImages = [...images];
+      const [draggedItem] = newImages.splice(draggedIndex, 1);
+      newImages.splice(dropIndex, 0, draggedItem);
+      return newImages;
+    };
+
+    setFormData(prev => ({
+      ...prev,
+      certifications: reorderImages(prev.certifications)
+    }));
+
+    setDraggedIndex(null);
+    setDragOverIndex(null);
+  };
 
   useEffect(() => {
     // Storage 버킷 확인
@@ -57,7 +175,7 @@ const RecordEditor = ({
         date: editData.date || '',
         orderer: editData.orderer || '',
         type: editData.type || '',
-        kind: editData.kind || (mode === 'product' ? '스마트안전장비' : ''),
+        kind: editData.kind || (mode === 'product' ? '스마트안전' : ''),
         images: editData.images ? JSON.parse(editData.images) : [],
         // 제품 전용 필드들
         keyFeatures: editData.keyFeatures ? JSON.parse(editData.keyFeatures) : { 
@@ -146,7 +264,7 @@ const RecordEditor = ({
       return {
         title: '제품',
         kindOptions: [
-          { value: '스마트안전장비', label: '스마트안전장비' },
+          { value: '스마트안전', label: '스마트안전' },
           { value: '관제시스템', label: '관제시스템' },
           { value: '통합제어', label: '통합제어' }
         ],
@@ -418,9 +536,47 @@ const RecordEditor = ({
           {formData.images.length > 0 && (
             <div style={{ marginTop: '10px' }}>
               <h4>업로드된 이미지:</h4>
+              <p style={{ fontSize: '12px', color: '#666', marginBottom: '10px' }}>
+                💡 이미지를 드래그하여 순서를 변경할 수 있습니다.
+              </p>
               {formData.images.map((image, index) => (
-                <div key={index} style={{ marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '10px' }}>
-                  <img src={image} alt={`이미지 ${index + 1}`} style={{ width: '50px', height: '50px', objectFit: 'cover' }} />
+                <div
+                  key={index}
+                  draggable
+                  style={{
+                    marginBottom: '10px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '10px',
+                    background: index === draggedIndex ? '#e0f7fa' : index === dragOverIndex ? '#f0f8ff' : 'transparent',
+                    border: index === draggedIndex ? '2px dashed #00bcd4' : index === dragOverIndex ? '2px dashed #2196f3' : '1px solid #eee',
+                    borderRadius: '4px',
+                    padding: '10px',
+                    cursor: 'grab',
+                    transition: 'all 0.2s ease'
+                  }}
+                  onDragStart={(e) => handleDragStart(e, index)}
+                  onDragOver={(e) => handleDragOver(e, index)}
+                  onDragLeave={handleDragLeave}
+                  onDrop={(e) => handleDrop(e, index)}
+                  onDragEnd={() => {
+                    setDraggedIndex(null);
+                    setDragOverIndex(null);
+                  }}
+                >
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                    <span style={{ fontSize: '12px', color: '#666', fontWeight: 'bold' }}>{index + 1}</span>
+                    <img 
+                      src={image} 
+                      alt={`이미지 ${index + 1}`} 
+                      style={{ 
+                        width: '50px', 
+                        height: '50px', 
+                        objectFit: 'cover',
+                        borderRadius: '4px'
+                      }} 
+                    />
+                  </div>
                   <button
                     type="button"
                     onClick={() => removeImage(index)}
@@ -503,9 +659,34 @@ const RecordEditor = ({
                 {formData.keyFeatures.images && formData.keyFeatures.images.length > 0 && (
                   <div style={{ marginTop: '10px' }}>
                     <h5>업로드된 이미지:</h5>
+                    <p style={{ fontSize: '12px', color: '#666', marginBottom: '10px' }}>
+                      💡 이미지를 드래그하여 순서를 변경할 수 있습니다.
+                    </p>
                     {formData.keyFeatures.images.map((imageObj, index) => (
-                      <div key={index} style={{ marginBottom: '15px', padding: '10px', border: '1px solid #eee', borderRadius: '4px' }}>
+                      <div
+                        key={index}
+                        draggable
+                        style={{
+                          marginBottom: '15px',
+                          padding: '10px',
+                          border: '1px solid #eee',
+                          borderRadius: '4px',
+                          background: index === draggedIndex ? '#e0f7fa' : index === dragOverIndex ? '#f0f8ff' : 'transparent',
+                          border: index === draggedIndex ? '2px dashed #00bcd4' : index === dragOverIndex ? '2px dashed #2196f3' : '1px solid #eee',
+                          cursor: 'grab',
+                          transition: 'all 0.2s ease'
+                        }}
+                        onDragStart={(e) => handleDragStart(e, index)}
+                        onDragOver={(e) => handleDragOver(e, index)}
+                        onDragLeave={handleDragLeave}
+                        onDrop={(e) => handleKeyFeaturesImageDrop(e, index)}
+                        onDragEnd={() => {
+                          setDraggedIndex(null);
+                          setDragOverIndex(null);
+                        }}
+                      >
                         <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px' }}>
+                          <span style={{ fontSize: '12px', color: '#666', fontWeight: 'bold', minWidth: '20px' }}>{index + 1}</span>
                           <img 
                             src={imageObj.url} 
                             alt={`주요 기능 이미지 ${index + 1}`} 
@@ -611,9 +792,34 @@ const RecordEditor = ({
                 {formData.specifications && formData.specifications.length > 0 && (
                   <div style={{ marginTop: '10px' }}>
                     <h5>업로드된 사양 이미지:</h5>
+                    <p style={{ fontSize: '12px', color: '#666', marginBottom: '10px' }}>
+                      💡 이미지를 드래그하여 순서를 변경할 수 있습니다.
+                    </p>
                     {formData.specifications.map((imageObj, index) => (
-                      <div key={index} style={{ marginBottom: '15px', padding: '10px', border: '1px solid #eee', borderRadius: '4px' }}>
+                      <div
+                        key={index}
+                        draggable
+                        style={{
+                          marginBottom: '15px',
+                          padding: '10px',
+                          border: '1px solid #eee',
+                          borderRadius: '4px',
+                          background: index === draggedIndex ? '#e0f7fa' : index === dragOverIndex ? '#f0f8ff' : 'transparent',
+                          border: index === draggedIndex ? '2px dashed #00bcd4' : index === dragOverIndex ? '2px dashed #2196f3' : '1px solid #eee',
+                          cursor: 'grab',
+                          transition: 'all 0.2s ease'
+                        }}
+                        onDragStart={(e) => handleDragStart(e, index)}
+                        onDragOver={(e) => handleDragOver(e, index)}
+                        onDragLeave={handleDragLeave}
+                        onDrop={(e) => handleSpecificationsImageDrop(e, index)}
+                        onDragEnd={() => {
+                          setDraggedIndex(null);
+                          setDragOverIndex(null);
+                        }}
+                      >
                         <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px' }}>
+                          <span style={{ fontSize: '12px', color: '#666', fontWeight: 'bold', minWidth: '20px' }}>{index + 1}</span>
                           <img 
                             src={imageObj.url} 
                             alt={`사양 이미지 ${index + 1}`} 
@@ -717,9 +923,34 @@ const RecordEditor = ({
                 {formData.certifications && formData.certifications.length > 0 && (
                   <div style={{ marginTop: '10px' }}>
                     <h5>업로드된 인증 이미지:</h5>
+                    <p style={{ fontSize: '12px', color: '#666', marginBottom: '10px' }}>
+                      💡 이미지를 드래그하여 순서를 변경할 수 있습니다.
+                    </p>
                     {formData.certifications.map((imageObj, index) => (
-                      <div key={index} style={{ marginBottom: '15px', padding: '10px', border: '1px solid #eee', borderRadius: '4px' }}>
+                      <div
+                        key={index}
+                        draggable
+                        style={{
+                          marginBottom: '15px',
+                          padding: '10px',
+                          border: '1px solid #eee',
+                          borderRadius: '4px',
+                          background: index === draggedIndex ? '#e0f7fa' : index === dragOverIndex ? '#f0f8ff' : 'transparent',
+                          border: index === draggedIndex ? '2px dashed #00bcd4' : index === dragOverIndex ? '2px dashed #2196f3' : '1px solid #eee',
+                          cursor: 'grab',
+                          transition: 'all 0.2s ease'
+                        }}
+                        onDragStart={(e) => handleDragStart(e, index)}
+                        onDragOver={(e) => handleDragOver(e, index)}
+                        onDragLeave={handleDragLeave}
+                        onDrop={(e) => handleCertificationsImageDrop(e, index)}
+                        onDragEnd={() => {
+                          setDraggedIndex(null);
+                          setDragOverIndex(null);
+                        }}
+                      >
                         <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px' }}>
+                          <span style={{ fontSize: '12px', color: '#666', fontWeight: 'bold', minWidth: '20px' }}>{index + 1}</span>
                           <img 
                             src={imageObj.url} 
                             alt={`인증 이미지 ${index + 1}`} 
@@ -1013,7 +1244,46 @@ const RecordEditor = ({
     );
   }
 
-  return content;
+  return (
+    <div style={{
+      maxWidth: '800px',
+      margin: '0 auto',
+      padding: '20px',
+      backgroundColor: '#fff',
+      borderRadius: '8px',
+      boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
+      fontFamily: 'Arial, sans-serif'
+    }}>
+      <style>
+        {`
+          .drag-item {
+            transition: all 0.2s ease;
+          }
+          
+          .drag-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+          }
+          
+          .drag-item:active {
+            cursor: grabbing;
+          }
+          
+          .drag-over {
+            background-color: #f0f8ff !important;
+            border: 2px dashed #2196f3 !important;
+            transform: scale(1.02);
+          }
+          
+          .drag-dragging {
+            opacity: 0.5;
+            transform: rotate(5deg);
+          }
+        `}
+      </style>
+      {content}
+    </div>
+  );
 };
 
 export default RecordEditor;

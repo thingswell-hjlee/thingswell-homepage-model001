@@ -8,6 +8,13 @@ import { useAuth } from '../../contexts/AuthContext';
 import ProductPage from '../../components/ProductPage/ProductPage';
 import { setupTrackRecordRLS, createTrackRecordPolicies, checkUserAuthStatus, checkAndCreateMissingPolicies } from '../../utils/supabaseRLS';
 import RecordEditor from '../../components/RecordEditor';
+import TrackRecordGrid from '../../components/TrackRecordGrid';
+import ProductHeader from '../../components/ProductPage/ProductHeader';
+import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
+import { BaseLayout } from '../../components/Layout';
+import SearchComponent from '../../components/SearchComponent';
+import ProductFilter from '../../components/ProductFilter';
+import '../Products/ProductsCommon.css';
 
 /**
  * TrackRecordPage 컴포넌트
@@ -313,38 +320,287 @@ export default function TrackRecordPage({ kindFilter = null }) {
 
   // 목록 보기 모드
   return (
-    <div>
-      {/* 추가 모달 */}
-      {showAddModal && (
-        <RecordEditor
-          isModal={true}
-          mode="record"
-          tableName="Track_record"
-          editData={editingExistingRecord}
-          submitting={submitting}
-          onSave={handleAddRecord}
-          onCancel={() => {
-            setShowAddModal(false);
-            setEditingExistingRecord(null);
-          }}
-        />
-      )}
+    <BaseLayout
+      header={() => <ProductHeader image={headerImage} />}
+      breadcrumbs={<Breadcrumbs breadcrumbs={["Home", "Cases"]} />}
+      title={getPageInfo(kindFilter).title}
+      subtitle={getPageInfo(kindFilter).subtitle}
+    >
+      <div>
+        {/* 추가 모달 */}
+        {showAddModal && (
+          <RecordEditor
+            isModal={true}
+            mode="record"
+            tableName="Track_record"
+            editData={editingExistingRecord}
+            submitting={submitting}
+            onSave={handleAddRecord}
+            onCancel={() => {
+              setShowAddModal(false);
+              setEditingExistingRecord(null);
+            }}
+          />
+        )}
 
-      <ProductList
-        products={products}
-        title={getPageInfo(kindFilter).title}
-        subtitle={getPageInfo(kindFilter).subtitle}
-        breadcrumbs={["Home", "Cases"]}
-        longVertical
-        headerImage={headerImage}
-        onEditRecord={handleEditRecord}
-        canEdit={canEditContent()}
-        hideToolbar={false}
-        hideSearchAndView={true}
-        itemsPerPage={9999}
-        addButton={canEditContent() && (
+        <TrackRecordList
+          products={products}
+          onEditRecord={handleEditRecord}
+          canEdit={canEditContent()}
+          onAddRecord={() => setShowAddModal(true)}
+        />
+      </div>
+    </BaseLayout>
+  );
+}
+
+// TrackRecordList 컴포넌트
+const TrackRecordList = ({ products, onEditRecord, canEdit, onAddRecord }) => {
+  const [selectedCategory, setSelectedCategory] = useState('전체');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [viewMode, setViewMode] = useState('card');
+
+  const categories = React.useMemo(() => {
+    const unique = new Set(products.map((p) => p.category).filter(Boolean));
+    return Array.from(unique);
+  }, [products]);
+
+  const filteredProducts = React.useMemo(() => {
+    return products.filter((product) => {
+      const term = searchTerm.trim().toLowerCase();
+      const matchesSearch =
+        !term ||
+        product.name.toLowerCase().includes(term) ||
+        (product.desc || '').toLowerCase().includes(term) ||
+        (product.title || '').toLowerCase().includes(term);
+
+      if (selectedCategory === '전체') {
+        return matchesSearch;
+      }
+
+      const selectedList = selectedCategory
+        .split(',')
+        .map((c) => c.trim())
+        .filter(Boolean);
+      const matchesCategory = selectedList.includes(product.category);
+      return matchesCategory && matchesSearch;
+    });
+  }, [products, selectedCategory, searchTerm]);
+
+  const MarqueeTitle = ({ text }) => {
+    const containerRef = React.useRef(null);
+    const textRef = React.useRef(null);
+    const [needsMarquee, setNeedsMarquee] = React.useState(false);
+
+    React.useEffect(() => {
+      const update = () => {
+        if (!containerRef.current || !textRef.current) return;
+        const containerWidth = containerRef.current.clientWidth;
+        const textWidth = textRef.current.scrollWidth;
+        setNeedsMarquee(textWidth > containerWidth);
+      };
+      update();
+      window.addEventListener('resize', update);
+      const id = setTimeout(update, 0);
+      return () => {
+        window.removeEventListener('resize', update);
+        clearTimeout(id);
+      };
+    }, [text]);
+
+    if (needsMarquee) {
+      return (
+        <div className="product-info-title" ref={containerRef}>
+          <div className="marquee">
+            <span className="marquee-text" ref={textRef}>{text}</span>
+            <span className="marquee-text" aria-hidden="true">{text}</span>
+          </div>
+        </div>
+      );
+    }
+    return (
+      <div className="product-info-title" ref={containerRef}>
+        <h3 ref={textRef}>{text}</h3>
+      </div>
+    );
+  };
+
+  return (
+    <div className="product-list-content">
+      <div className="product-list-toolbar">
+        <div className="product-list-filter">
+          <ProductFilter
+            selectedCategory={selectedCategory}
+            setSelectedCategory={setSelectedCategory}
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+            categories={categories}
+            filteredProductsCount={filteredProducts.length}
+          />
+        </div>
+        <div className="product-list-actions">
+          <div className="product-list-search">
+            <SearchComponent
+              placeholder="검색어를 입력하세요"
+              onSearch={(value) => setSearchTerm(value)}
+              noPadding={false}
+              searchTerm={searchTerm}
+              setSearchTerm={setSearchTerm}
+            />
+          </div>
+          <div className="view-mode-toggle">
+            <button
+              className={`view-mode-btn ${viewMode === 'card' ? 'active' : ''}`}
+              onClick={() => setViewMode('card')}
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <rect x="3" y="3" width="7" height="7"></rect>
+                <rect x="14" y="3" width="7" height="7"></rect>
+                <rect x="14" y="14" width="7" height="7"></rect>
+                <rect x="3" y="14" width="7" height="7"></rect>
+              </svg>
+              카드 보기
+            </button>
+            <button
+              className={`view-mode-btn ${viewMode === 'list' ? 'active' : ''}`}
+              onClick={() => setViewMode('list')}
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <line x1="8" y1="6" x2="21" y2="6"></line>
+                <line x1="8" y1="12" x2="21" y2="12"></line>
+                <line x1="8" y1="18" x2="21" y2="18"></line>
+                <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                <line x1="3" y1="18" x2="3.01" y2="18"></line>
+              </svg>
+              리스트 보기
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div className="product-list-grid-container">
+        {filteredProducts.length > 0 ? (
+          (() => {
+            const listItems = [];
+            const cardItems = [];
+            
+            filteredProducts.forEach((product, idx) => {
+              const shouldShowAsList = viewMode === 'list' || (!product.img || product.img === 'undefined' || product.img === null);
+              
+              const Card = (
+                <div className={`product-card ${shouldShowAsList ? 'list-item' : ''}`} style={shouldShowAsList ? { width: '100%', marginBottom: '10px' } : {}}>
+                  {shouldShowAsList ? (
+                    <>
+                      <div className="product-list-title">
+                        <h3>{product.name}</h3>
+                      </div>
+                      <div className="product-list-info">
+                        <div className="product-list-organization">
+                          <span>{product.organization || '기관명'}</span>
+                        </div>
+                        <div className="product-list-date">
+                          <span>{product.date || '날짜'}</span>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <MarqueeTitle text={product.name} />
+                      {product.img && product.img !== 'undefined' && product.img !== null ? (
+                        <div className="image-container">
+                          <img
+                            src={product.img}
+                            alt={product.name}
+                            onClick={product.onClick}
+                          />
+                        </div>
+                      ) : null}
+                    </>
+                  )}
+                </div>
+              );
+              
+              const cardWithEdit = (
+                <div key={idx} style={{ position: 'relative' }}>
+                  {product.onClick ? (
+                    <div onClick={product.onClick} style={{ cursor: 'pointer' }}>
+                      {Card}
+                    </div>
+                  ) : (
+                    <div>{Card}</div>
+                  )}
+                  
+                  {canEdit && onEditRecord && product.rawData && (
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onEditRecord(product.rawData);
+                      }}
+                      style={{
+                        position: 'absolute',
+                        top: '10px',
+                        right: '10px',
+                        background: 'rgba(0, 123, 255, 0.9)',
+                        color: 'white',
+                        border: 'none',
+                        borderRadius: '4px',
+                        padding: '5px 10px',
+                        fontSize: '12px',
+                        cursor: 'pointer',
+                        zIndex: 10,
+                        backdropFilter: 'blur(4px)'
+                      }}
+                      onMouseEnter={(e) => {
+                        e.target.style.background = 'rgba(0, 123, 255, 1)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.target.style.background = 'rgba(0, 123, 255, 0.9)';
+                      }}
+                    >
+                      편집
+                    </button>
+                  )}
+                </div>
+              );
+              
+              if (shouldShowAsList) {
+                listItems.push(cardWithEdit);
+              } else {
+                cardItems.push(cardWithEdit);
+              }
+            });
+            
+            return (
+              <>
+                {cardItems.length > 0 && (
+                  <div style={{ marginBottom: 'var(--spacing-xl)' }}>
+                    <TrackRecordGrid>
+                      {cardItems}
+                    </TrackRecordGrid>
+                  </div>
+                )}
+                
+                {listItems.length > 0 && (
+                  <div>
+                    {listItems}
+                  </div>
+                )}
+              </>
+            );
+          })()
+        ) : (
+          <div className="no-products-message">
+            <p>선택한 조건에 맞는 실적이 없습니다.</p>
+            <p>다른 카테고리나 검색어를 시도해보세요.</p>
+          </div>
+        )}
+      </div>
+
+      {canEdit && (
+        <div className="product-list-add-button" style={{ marginTop: '30px', textAlign: 'right' }}>
           <button
-            onClick={() => setShowAddModal(true)}
+            onClick={onAddRecord}
             style={{
               padding: 'var(--spacing-sm) var(--spacing-md)',
               backgroundColor: 'var(--color-primary)',
@@ -374,8 +630,8 @@ export default function TrackRecordPage({ kindFilter = null }) {
           >
             + 실적 추가
           </button>
-        )}
-      />
+        </div>
+      )}
     </div>
   );
-}
+};

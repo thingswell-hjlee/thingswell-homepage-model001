@@ -1,0 +1,123 @@
+/* Certificate Section 스타일 */
+.certificate-section {
+  max-width: 1400px;
+  margin: 0 auto;
+  margin-top: var(--spacing-3xl);
+  margin-bottom: var(--spacing-3xl);
+}
+
+.certificate-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.certificate-section-title-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: var(--spacing-2xl);
+}
+
+.certificate-subtitle {
+  font-size: var(--font-size-md);
+  font-weight: 400;
+  color: var(--color-text-secondary);
+  text-align: center;
+  margin: 0;
+  margin-bottom: var(--spacing-sm);
+}
+
+.certificate-title {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+  text-align: center;
+  margin: 0;
+}
+
+.certificate-cards {
+  width: 100%;
+}
+
+/* Certificate 섹션: ApplicationCardsSection 그리드 해제 */
+.certificate-section .application-cards,
+.certificate-section .responsive-cards {
+  display: block;
+}
+
+/* Certificate 섹션: 페이징 숨기기 */
+.certificate-section .pagination,
+.certificate-section .pagination-container,
+.certificate-section .pagination-wrapper {
+  display: none !important;
+}
+
+/* Certificate 섹션: ProductList 임베디드 여백 제거 */
+.certificate-section .product-list-embedded .product-list-content {
+  padding-bottom: 0;
+  margin-top: 0;
+  min-height: auto;
+}
+
+.certificate-section .product-list-embedded .product-list-grid-container {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/* Certificate 섹션: 인증서 영역 마진 제거 */
+.certificate-section .application-cards,
+.certificate-section .responsive-cards {
+  margin: 0;
+}
+
+
+
+/* Certificate 섹션: 리스트 뷰일 때 한 열씩 배치 */
+.certificate-section .product-grid.list-view {
+  grid-template-columns: 1fr;
+  gap: var(--spacing-md);
+}
+
+/* Certificate 섹션: 이미지 확대(hover scale) 효과 제거 */
+.certificate-section .application-card:hover img {
+  transform: none;
+}
+
+/* Certificate 섹션: product-info 전체 숨기기 */
+.certificate-section .product-info,
+.certificate-section .product-info_desc,
+.certificate-section .product-info p,
+.certificate-section .product-info_title,
+.certificate-section .product-info_title h3 {
+  display: none;
+}
+
+/* Certificate 섹션: 카드 스타일 */
+.certificate-section .product-card {
+  background: #f0f0f0;
+}
+
+.certificate-section .product-card img {
+  object-fit: fill; /* 꽉 채우면서 안 짤리게 */
+  object-position: top center; /* 상단부터 보이도록 정렬 */
+  height: 100%;
+  width: 100%;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .certificate-section {
+    margin-top: var(--spacing-2xl);
+    margin-bottom: var(--spacing-2xl);
+  }
+  
+  .certificate-title {
+    font-size: var(--font-size-2xl);
+  }
+  
+  .certificate-subtitle {
+    font-size: var(--font-size-sm);
+  }
+}

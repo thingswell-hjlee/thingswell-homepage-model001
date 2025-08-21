@@ -58,6 +58,8 @@ const FeatureDescription = forwardRef(({ image, youtubeUrl, title, description, 
     }
   };
 
+
+
   const containerClass = `feature-description-container ${link ? 'clickable' : ''}`;
 
   return (
@@ -79,17 +81,28 @@ const FeatureDescription = forwardRef(({ image, youtubeUrl, title, description, 
         </div>
       )}
       <div className="feature-description-text-section">
-        {hasSubtitle && <div className="solution-card-subtitle">{subtitle}</div>}
         {hasTitle && <h2 className="feature-description-title">{title}</h2>}
         {hasDescription && (
           Array.isArray(description) ? (
-            <ul className="feature-description-list">
+            <div className="feature-description-list">
+              {hasSubtitle && (
+                <p className="feature-description-subtitle">
+                  {subtitle}
+                </p>
+              )}
               {description.map((item, idx) => (
-                <li key={idx} className="feature-description-list-item">{item}</li>
+                <p key={idx} className="feature-description-list-item">{item}</p>
               ))}
-            </ul>
+            </div>
           ) : (
-            <p className="feature-description-desc">{description}</p>
+            <div className="feature-description-list">
+              {hasSubtitle && (
+                <p className="feature-description-subtitle">
+                  {subtitle}
+                </p>
+              )}
+              <p className="feature-description-desc">{description}</p>
+            </div>
           )
         )}
       </div>

@@ -2,6 +2,23 @@ import React from 'react';
 import ProductHeader from '../../components/ProductPage/ProductHeader';
 import './Soulution.css';
 import ProductInfo from '../../components/ProductPage/ProductInfo';
+import FeatureDescription from '../../components/FeatureDescription';
+import rag from '../../assets/rnd_main/RAG_LLM.png';
+
+const RAG_CARDS = [
+  {
+    image: rag,
+    subtitle: "현장의 지능형 안전 파트너",
+    description: [
+      "오늘날 산업 현장의 안전은 단순 감시를 넘어 '상황을 이해하고 판단하는 지능'이 요구됩니다.",
+      "기존 안전 시스템은 정해진 규칙에 따라 경고만 제공했지만, 이제는 작업자의 질문을 이해하고 복잡한 상황에 대한 해결책을 제시하는 '대화형 안전 인지 시스템'이 필요합니다.",
+      "이 혁신의 중심에는 RAG(Retrieve-Augment-Generate) 기반 LLM(대형 언어 모델) 기술이 있습니다. 이 기술은 방대한 지침서, 매뉴얼, 실시간 센서 데이터를 결합해 '왜(Why)'라는 질문에도 답할 수 있습니다.",
+      "예를 들어, '기계가 이상한 소리를 내요'라는 작업자의 질문에 '모터 과열 가능성이 있으니 즉시 전원을 차단하세요'와 같이 신속하고 정확하게 대응할 수 있습니다.",
+      "특히, 통신이 끊기는 지하 작업장이나 터널에서도 독립적으로 작동하는 온디바이스 추론 기능으로 안전의 사각지대를 해소합니다.",
+      "RAG 기반 LLM은 단순 감시자가 아니라, 위험을 예측하고 소통하며 현장 지식을 실시간으로 제공하는 '지능형 안전 파트너'로 산업 안전의 새로운 패러다임을 제시합니다."
+    ],
+  }
+];
 
 const RAGLLMTech = () => {
   return (
@@ -9,7 +26,23 @@ const RAGLLMTech = () => {
       <ProductHeader />
       <div className="product-page-content">
           <div className="container">
-            <ProductInfo productName="RAG 기반 LLM 기술" productTitle="RAG 기반 LLM 기술" breadcrumbs={["Home", "솔루션", "RAG 기반 LLM 기술"]} />
+            <ProductInfo productName="RAG 기반 LLM" productTitle="RAG 기반 LLM" breadcrumbs={["Home", "연구개발", "RAG 기반 LLM"]} />
+          </div>
+
+          {/* FeatureDescription 카드 섹션 */}
+          <div className="container">
+            <div className="feature-cards-section">
+              {RAG_CARDS.map((card, index) => (
+                <FeatureDescription
+                  key={index}
+                  image={card.image}
+                  title={card.title}
+                  subtitle={card.subtitle}
+                  description={card.description}
+                  link={card.link}
+                />
+              ))}
+            </div>
           </div>
         <div className="gs-container">
 

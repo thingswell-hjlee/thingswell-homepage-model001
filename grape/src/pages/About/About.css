@@ -116,11 +116,14 @@
 }
 
 .about-section-title-image {
-  width: 300px;
-  height: 300px;
+  width: 200px;
+  height: 200px;
   border-radius: var(--border-radius-lg);
   overflow: hidden;
   flex-shrink: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   user-select: text; /* 드래그 방지 */
   -webkit-user-select: text;
   -moz-user-select: text;
@@ -140,16 +143,17 @@
   -ms-user-select: text;
 }
 
-.about-section-title-image img {
+/* img 태그 대신 background-image 사용 */
+/* .about-section-title-image img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* 꽉 채우면서 안 짤리게 */
+  object-fit: cover;
   object-position: center;
-  user-select: text; /* 드래그 방지 */
+  user-select: text;
   -webkit-user-select: text;
   -moz-user-select: text;
   -ms-user-select: text;
-}
+} */
 
 .about-section-title-image-description {
   display: flex;
@@ -214,16 +218,16 @@
 }
 
 #greeting .about-section-title-image {
-  width: 250px;
-  height: 250px;
+  
   overflow: hidden;
 }
 
-#greeting .about-section-title-image img {
-  width: 100%;
-  height: 100%;
+/* img 태그 대신 background-image 사용 */
+/* #greeting .about-section-title-image img {
+  width: 90%;
+  height: 90%;
   object-fit: cover;
-}
+} */
 
 #greeting .about-section-title-image-description p:first-of-type {
   font-size: var(--font-size-xl);
@@ -291,16 +295,16 @@
   margin: 0 auto;
   text-align: center;
   gap: var(--spacing-2xl);
-  margin-bottom: var(--spacing-4xl);
   background-color: var(--color-surface);
   padding: var(--spacing-xl);
+  border-radius: var(--border-radius-lg);
 }
 
 .ceo-content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--spacing-xl);
+  gap: var(--spacing-sm);
   width: 100%;
   justify-content: center;
 }
@@ -315,7 +319,7 @@
   display: flex;
   flex-direction: row;
   gap: var(--spacing-2xl);
-  padding: var(--spacing-xl);
+  padding:  0 var(--spacing-xl) var(--spacing-md) var(--spacing-xl);
   text-align: left;
 }
 
@@ -344,7 +348,7 @@
 }
 
 .ceo-info-section p {
-  font-size: var(--font-size-md);
+  font-size: var(--font-size-xs);
   line-height: 1.6;
   color: var(--color-text-secondary);
   text-align: left;
@@ -373,6 +377,7 @@
 .about-intro p {
   text-align: left;
   font-size: var(--font-size-lg)!important;
+  font-weight: var(--font-weight-bold);
 }
 
 @media (max-width: 768px) {
@@ -549,11 +554,12 @@
   -ms-user-select: text;
 }
 
+
 .mission-card,
 .vision-card {
   flex: 1;
   position: relative;
-  height: 150px;
+  height: 100px;
   border-radius: var(--border-radius-lg);
   overflow: hidden;
   cursor: pointer;
@@ -592,32 +598,6 @@
   -ms-user-select: text;
 }
 
-.mission-card::after,
-.vision-card::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(
-    45deg,
-    var(--color-primary) 0%,
-    var(--color-hover) 100%
-  );
-  opacity: 0;
-  z-index: 1;
-  transition: opacity var(--transition-slow);
-  user-select: text; /* 드래그 방지 */
-  -webkit-user-select: text;
-  -moz-user-select: text;
-  -ms-user-select: text;
-}
-
-.mission-card:hover::after,
-.vision-card:hover::after {
-  opacity: 0.8;
-}
 
 .mission-background,
 .vision-background {
@@ -726,22 +706,12 @@
   display: none;
 }
 
-.vision-card::before,
-.vision-card::after {
-  display: none;
-}
-
 .vision-card .vision-overlay {
   background: #3c9166;
 }
 
 /* Mission: 단색 배경, 사진 미사용 */
 .mission-card .mission-background {
-  display: none;
-}
-
-.mission-card::before,
-.mission-card::after {
   display: none;
 }
 
@@ -794,12 +764,13 @@
     align-self: center;
   }
 
-  .about-section-title-image img {
+  /* img 태그 대신 background-image 사용 */
+  /* .about-section-title-image img {
     width: 100%;
     height: 100%;
     object-fit: fill;
     object-position: center;
-  }
+  } */
 
   .about-section-title-image-description {
     width: 100%;
@@ -858,7 +829,7 @@
   .vision-card {
     width: 300%;
     max-width: 100%;
-    height: 100px!important;
+    height: 50px!important;
   }
 
   .mission-background,
@@ -876,8 +847,8 @@
   }
   
   .about-section-title-image {
-    width: 250px;
-    height: 250px;
+    width: 175px;
+    height: 175px;
   }
 
   .about-content-image {
@@ -919,87 +890,7 @@
   }
 }
 
-/* Certificate 섹션: ApplicationCardsSection 그리드 해제 */
-.about-page #certificate .application-cards,
-.about-page #certificate .responsive-cards {
-  display: block;
-}
 
-/* Certificate 섹션: 1400px 제한 적용 */
-.about-page #certificate.application-section-responsive {
-  max-width: 1400px;
-  margin: 0 auto;
-  margin-top: var(--spacing-3xl);
-  margin-bottom: var(--spacing-3xl);
-}
-
-.about-page #certificate .cards-container {
-  max-width: 1400px;
-  margin: 0 auto;
-}
-
-/* Certificate 섹션: 페이징 숨기기 */
-.about-page #certificate .pagination,
-.about-page #certificate .pagination-container,
-.about-page #certificate .pagination-wrapper {
-  display: none !important;
-}
-
-/* Certificate 섹션: ProductList 임베디드 여백 제거 */
-.about-page #certificate .product-list-embedded .product-list-content {
-  padding-bottom: 0;
-  margin-top: 0;
-  min-height: auto;
-}
-
-.about-page #certificate .product-list-embedded .product-list-grid-container {
-  margin-top: 0;
-  margin-bottom: 0;
-}
-
-/* Certificate 섹션: 인증서 영역 마진 제거 */
-.about-page #certificate .application-cards,
-.about-page #certificate .responsive-cards {
-  margin: 0;
-}
-
-/* Certificate 섹션: product-grid cols-5로 변경 */
-.about-page #certificate .product-grid.cols-3 {
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  padding: 0;
-}
-
-@media (max-width: 1024px) {
-  .about-page #certificate .product-grid.cols-3 {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (max-width: 640px) {
-  .about-page #certificate .product-grid.cols-3 {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* Certificate 섹션: 리스트 뷰일 때 한 열씩 배치 */
-.about-page #certificate .product-grid.list-view {
-  grid-template-columns: 1fr;
-  gap: var(--spacing-md);
-}
-
-/* Certificate 섹션: 이미지 확대(hover scale) 효과 제거 */
-.about-page #certificate .application-card:hover img {
-  transform: none;
-}
-
-/* Certificate 섹션: product-info 전체 숨기기 */
-.about-page #certificate .product-info,
-.about-page #certificate .product-info_desc,
-.about-page #certificate .product-info p,
-.about-page #certificate .product-info_title,
-.about-page #certificate .product-info_title h3 {
-  display: none;
-}
 
 /* 연혁 타임라인 스타일 */
 .timeline-container {
@@ -1608,6 +1499,7 @@
   word-break: keep-all;
   transition: background-color var(--transition-slow), border-color var(--transition-slow), box-shadow var(--transition-slow);
   overflow: hidden;
+  
 }
 
 /* Core Value 안에서 미션/비전 비주얼 카드가 그리드 전체를 차지하도록 */
@@ -1656,16 +1548,7 @@
   user-select: text;
 }
 
-.product-card {
-  background: #f0f0f0;
-}
 
-.product-card img{
-  object-fit: fill; /* 꽉 채우면서 안 짤리게 */
-  object-position: top center; /* 상단부터 보이도록 정렬 */
-  height: 100%;
-  width: 100%;
-}
 
 .contact-section-title{
   text-align: center;

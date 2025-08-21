@@ -71,9 +71,6 @@ import ConstructionSolution from "./pages/Solutions/ConstructionSolution.jsx";
 import MultimodalAwareness from "./pages/rnd/MultimodalAwareness.jsx";
 import RAGLLMTech from "./pages/rnd/RAGLLMTech.jsx";
 import OnDeviceAI from "./pages/rnd/OnDeviceAI.jsx";
-import ElderlyDisabledSolution from "./pages/rnd/rnd_elderlydisabled.jsx";
-import IndustrialSafetySolution from "./pages/rnd/rnd_industrialsafety.jsx";
-import IntegratedControlSolution from "./pages/rnd/rnd_Integratedcontrol.jsx";
 import Embeddedsystem from "./pages/rnd/Embeddedsystem .jsx";
 import SmartAssistiveTechnology from "./pages/rnd/SmartAssistiveTechnology.jsx";
 import AirQualityManagement from "./pages/rnd/AirQualityManagement.jsx";
@@ -354,9 +351,7 @@ function App() {
 
             {/* 연구개발 라우팅 */}
             <Route path="/rnd" element={<SolutionDetailPage />} />
-            <Route path="/rnd/elderly-disabled" element={<ElderlyDisabledSolution />} />
-            <Route path="/rnd/industrial-safety" element={<IndustrialSafetySolution />} />
-            <Route path="/rnd/integrated-control" element={<IntegratedControlSolution />} />
+
             <Route path="/rnd/multimodal-awareness" element={<MultimodalAwareness />} />
             <Route path="/rnd/rag-llm" element={<RAGLLMTech />} />
             <Route path="/rnd/on-device-ai" element={<OnDeviceAI />} />

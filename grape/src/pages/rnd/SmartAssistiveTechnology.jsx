@@ -2,6 +2,18 @@ import React from 'react';
 import ProductHeader from '../../components/ProductPage/ProductHeader';
 import './Soulution.css';
 import ProductInfo from '../../components/ProductPage/ProductInfo';
+import FeatureDescription from '../../components/FeatureDescription';
+import old from '../../assets/rnd_main/old.png';
+
+const WORKER_SAFETY_CARDS = [
+  {
+    image: old,
+    subtitle: "존엄하고 안전한 돌봄의 미래",
+    description: [
+      "'인지장애 노인 및 장애인을 위한 스마트 보조 기술'은 현대 돌봄 시스템의 한계를 극복하는 혁신적인 해법입니다. 이 기술은 인지장애를 가진 분들이 겪을 수 있는 낙상, 배회와 같은 위험 상황을 조기에 감지하여 안전을 향상시킵니다. 특히, CCTV가 설치되기 어려운 침실이나 화장실 등 사생활이 중요한 공간에서도 비접촉식 멀티모달 센싱 기술을 활용해 개인의 존엄성을 지키면서도 빈틈없는 모니터링이 가능하도록 설계되었습니다.\n\n이 시스템은 단순히 위험을 감지하는 데 그치지 않습니다. 사용자의 행동 패턴을 정밀하게 학습하여 평소와 다른 이상 행동을 예측하고, 돌봄 인력에게 즉시 알림을 전달합니다. 이는 24시간 내내 대기하기 어려운 돌봄 인력의 업무 부담을 크게 줄여주고, 돌발 상황에 대한 신속한 대응을 가능하게 합니다. 궁극적으로 이 기술은 인지장애를 가진 분들에게는 안전하고 존엄한 삶을, 보호자와 관리자에게는 효율적이고 체계적인 돌봄 환경을 제공하여 우리 사회의 복지 수준을 한 단계 끌어올리는 데 기여할 것입니다."
+    ],
+  }
+];
 
 const SmartAssistiveTechnology = () => {
   return (
@@ -9,9 +21,24 @@ const SmartAssistiveTechnology = () => {
       <ProductHeader />
       <div className="product-page-content">
           <div className="container">
-            <ProductInfo productName="인지장애 노인 및 장애인을 위한 스마트 보조 기술" productTitle="인지장애 노인 및 장애인을 위한 스마트 보조 기술" breadcrumbs={["Home", "솔루션", "인지장애 노인 및 장애인을 위한 스마트 보조 기술"]} />
+            <ProductInfo productName="인지장애 노인 및 장애인을 위한 스마트 보조 기술" productTitle="인지장애 노인 및 장애인을 위한 스마트 보조 기술" breadcrumbs={["Home", "연구개발", "인지장애 노인 및 장애인을 위한 스마트 보조 기술"]} />
           </div>
+
+            {/* FeatureDescription 카드 섹션 */}
+      <div className="container">
+        <div className="feature-cards-section">
+          {WORKER_SAFETY_CARDS.map((card, index) => (
+            <FeatureDescription
+              key={index}
+              image={card.image}
+              title={card.title}
+              subtitle={card.subtitle}
+              description={card.description}
+              link={card.link}
+            />
+          ))}
         <div className="gs-container">
+          
 
         <section className="gs-section">
           <h3><span className="num">1</span> 기술 개요</h3>
@@ -93,6 +120,10 @@ const SmartAssistiveTechnology = () => {
             </li>
           </ul>
         </section>
+      </div>
+      
+    
+        </div>
       </div>
       </div>
     </div>

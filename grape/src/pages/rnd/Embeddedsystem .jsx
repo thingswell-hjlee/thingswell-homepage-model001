@@ -2,6 +2,21 @@ import React from 'react';
 import ProductHeader from '../../components/ProductPage/ProductHeader';
 import './Soulution.css';
 import ProductInfo from '../../components/ProductPage/ProductInfo';
+import FeatureDescription from '../../components/FeatureDescription';
+import danger from '../../assets/rnd_main/danger.png';
+
+const EMBEDDED_SYSTEM_CARDS = [
+  {
+    image: danger,
+    subtitle: "의료 현장의 환자 안전 강화",
+    description: [
+      "병원과 요양 시설에 최적화된 이 솔루션은 '레이더와 카메라를 융합한 복합 센서 모듈'을 통해 환자의 상태를 실시간으로 정밀하게 분석합니다. 단순한 동작 감지를 넘어, 'AI 기반 추론 엔진'이 낙상, 이상 행동, 심지어 생체 신호 변화까지 스스로 감지하고 분류하여 의료진에게 즉시 알림을 전달합니다.",
+      "가장 중요한 가치는 '환자의 프라이버시를 보호'하면서도 안전 관리가 가능하다는 점입니다. 비접촉식 레이더 기술은 환자의 신체 노출 없이도 위험을 감지하여 CCTV 설치가 부적절한 공간에서도 안심하고 사용할 수 있습니다.",
+      "또한, 초소형, 저전력으로 설계된 'SW-SoC 기반 임베디드 시스템'은 통신망에 의존하지 않고 현장에서 즉각적인 분석 및 경고를 수행하므로, 응급 상황에 대한 신속한 대처를 가능하게 합니다. 이 기술은 의료진의 업무 부담을 줄여주는 동시에, 환자 안전 관리의 새로운 표준을 제시하며 의료 환경의 질을 높이는 데 기여할 것입니다."
+    ],
+    link: "/rnd/embedded-system"
+  }
+];
 
 const Embeddedsystem = () => {
   return (
@@ -9,7 +24,23 @@ const Embeddedsystem = () => {
       <ProductHeader />
       <div className="product-page-content">
           <div className="container">
-            <ProductInfo productName="위험상황 조기감지용 임베디드 시스템 기술" productTitle="위험상황 조기감지용 임베디드 시스템 기술" breadcrumbs={["Home", "솔루션", "위험상황 조기감지용 임베디드 시스템 기술"]} />
+            <ProductInfo productName="위험상황 조기감지" productTitle="위험상황 조기감지" breadcrumbs={["Home", "연구개발", "위험상황 조기감지"]} />
+          </div>
+
+          {/* FeatureDescription 카드 섹션 */}
+          <div className="container">
+            <div className="feature-cards-section">
+              {EMBEDDED_SYSTEM_CARDS.map((card, index) => (
+                <FeatureDescription
+                  key={index}
+                  image={card.image}
+                  title={card.title}
+                  subtitle={card.subtitle}
+                  description={card.description}
+                  link={card.link}
+                />
+              ))}
+            </div>
           </div>
         <div className="gs-container">
 

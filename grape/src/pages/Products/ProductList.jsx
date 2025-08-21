@@ -5,6 +5,7 @@ import ProductHeader from '../../components/ProductPage/ProductHeader';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 import { BaseLayout } from '../../components/Layout';
 import ThreeColumnGrid from '../../components/ThreeColumnGrid';
+import ProductGrid from '../../components/ProductGrid';
 import { Link } from 'react-router-dom';
 import './ProductsCommon.css';
 
@@ -138,6 +139,7 @@ const ProductList = ({
   canEdit = false,
   itemsPerPage: customItemsPerPage = 9,
   disableScrollOnPageChange = false,
+  cols = 4,
 }) => {
   const [selectedCategory, setSelectedCategory] = useState('전체');
   const [searchTerm, setSearchTerm] = useState('');
@@ -296,14 +298,16 @@ const ProductList = ({
                     <>
                       <MarqueeTitle text={product.name} />
                       {product.img && product.img !== 'undefined' && product.img !== null ? (
-                        <img
-                          src={product.img}
-                          alt={product.name}
-                          className={embedded ? 'clickable' : ''}
-                          onClick={() => {
-                            if (embedded) setPreviewImage(product.img);
-                          }}
-                        />
+                        <div className="image-container">
+                          <img
+                            src={product.img}
+                            alt={product.name}
+                            className={embedded ? 'clickable' : ''}
+                            onClick={() => {
+                              if (embedded) setPreviewImage(product.img);
+                            }}
+                          />
+                        </div>
                       ) : null}
                     </>
                   )}
@@ -371,9 +375,9 @@ const ProductList = ({
                 {/* 카드 뷰 항목들 (이미지 있는 항목) - 위쪽에 배치 */}
                 {cardItems.length > 0 && (
                   <div style={{ marginBottom: 'var(--spacing-xl)' }}>
-                    <ThreeColumnGrid listView={false} longVertical={longVertical}>
+                    <ProductGrid cols={cols}>
                       {cardItems}
-                    </ThreeColumnGrid>
+                    </ProductGrid>
                   </div>
                 )}
                 
