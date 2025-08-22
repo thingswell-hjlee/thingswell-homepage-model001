@@ -104,6 +104,8 @@ const FEATURE_DESCRIPTIONS = [
       "통합 엔진단계: 수집된 데이터를 융합하고, RAG-LVM/LLM을 활용해 지능적으로 추론하여 의사결정을 수행합니다.",
       "조치 및 피드백단계: 작업자 피드백(시각/청각/촉각), 경고 알람, 자동 제어, 클라우드 서버 연동을 통해 조치 및 피드백을 제공합니다."
     ],
+    // Enable large image display for the service architecture diagram
+    largeImage: true
   },
 ];
 

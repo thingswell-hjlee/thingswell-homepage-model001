@@ -133,7 +133,7 @@
   margin: 0 var(--menu-item-gap);
   background-color: transparent;
   border: none;
-  padding: var(--menu-button-padding);
+  padding: var(--spacing-sm) var(--menu-button-padding) var(--spacing-sm) var(--menu-button-padding);
   cursor: pointer;
   display: flex;
   align-items: center;

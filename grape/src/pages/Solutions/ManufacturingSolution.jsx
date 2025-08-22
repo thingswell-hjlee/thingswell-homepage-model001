@@ -73,6 +73,8 @@ const FEATURE_DESCRIPTIONS = [
       "중앙 제어 시스템: 통합 제어기(Advanced Integrated Controller XCN-3000)와 관리 서버(ThingsEye)를 통해 모든 장비의 정보를 취합하고 제어 명령을 전달하며, 원격 모니터링, 데이터 수집 및 분석, 자동화 스케줄링 등을 담당합니다.",
       "제어 대상 설비: 영상 설비(DID/LED 비디오월, 비디오 매트릭스, 화상회의 카메라), 음향 설비(무선 마이크, 오디오 믹서 및 DSP, 입체 음향 시스템), 조명 설비(DMX512 기반 감성 조명, 스팟 조명, 룸 조명), 환경 설비(룸 에어컨, 전등, 공조 시스템), 센서(공기질, 카메라, 레이더, 모션 센서) 등 통합 제어 시스템으로부터 명령을 받아 작동하는 모든 장비들입니다."
     ],
+    // Enable large image for the service architecture diagram
+    largeImage: true,
   },
 ];
 

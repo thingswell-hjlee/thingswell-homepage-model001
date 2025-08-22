@@ -32,7 +32,7 @@
 import React, { forwardRef } from "react";
 import "./FeatureDescription.css";
 
-const FeatureDescription = forwardRef(({ image, youtubeUrl, title, description, subtitle, link }, ref) => {
+const FeatureDescription = forwardRef(({ image, youtubeUrl, title, description, subtitle, link, largeImage = false }, ref) => {
   // 유튜브 URL에서 비디오 ID 추출하는 함수
   const getYoutubeVideoId = (url) => {
     if (!url) return null;
@@ -60,7 +60,7 @@ const FeatureDescription = forwardRef(({ image, youtubeUrl, title, description, 
 
 
 
-  const containerClass = `feature-description-container ${link ? 'clickable' : ''}`;
+  const containerClass = `feature-description-container ${link ? 'clickable' : ''} ${largeImage ? 'large-image' : ''}`;
 
   return (
     <div ref={ref} className={containerClass} onClick={handleClick}>
@@ -76,7 +76,7 @@ const FeatureDescription = forwardRef(({ image, youtubeUrl, title, description, 
               className="feature-description-video"
             />
           ) : (
-            image && <img src={image} alt="feature" className="feature-description-image" />
+            image && <img src={image} alt="feature" className={largeImage ? 'feature-description-image-large' : 'feature-description-image'} />
           )}
         </div>
       )}

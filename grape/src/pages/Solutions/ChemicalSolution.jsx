@@ -74,6 +74,8 @@ const FEATURE_DESCRIPTIONS = [
       "데이터 분석 단계: 융합형 멀티모달 모듈, AI 상황 추론 엔진, 클라우드 서버를 통해 수집된 데이터를 통합 분석하고 위험 상황을 실시간으로 판단합니다.",
       "서비스 제공 단계: 스마트폰 앱, 단계별 알림, 홈 기기 통합 제어를 통해 실시간 상황 알림과 자동화된 환경 제어를 제공합니다."
     ],
+    // Enable large image for the service architecture diagram
+    largeImage: true
   },
 ];
 
