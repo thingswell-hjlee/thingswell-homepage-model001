@@ -209,6 +209,26 @@ export default function ProductListControlPage() {
     setShowAddModal(true);
   };
 
+  const handleDeleteRecord = async (record) => {
+    const { isAuthenticated } = await checkUserAuthStatus();
+    if (!isAuthenticated) {
+      alert('제품을 삭제하려면 로그인이 필요합니다.');
+      return;
+    }
+
+    if (!window.confirm('이 제품을 삭제하시겠습니까?')) return;
+
+    try {
+      const { error } = await supabase.from('Product').delete().eq('id', record.id);
+      if (error) throw error;
+      alert('제품이 삭제되었습니다.');
+      fetchProducts();
+    } catch (err) {
+      console.error('삭제 중 오류 발생:', err);
+      alert('삭제 중 오류가 발생했습니다: ' + err.message);
+    }
+  };
+
   if (loading) {
     return <div>데이터를 불러오는 중...</div>;
   }
@@ -269,6 +289,8 @@ export default function ProductListControlPage() {
         headerImage={controlHeaderImage}
         onEditRecord={handleEditRecord}
         canEdit={canEditContent()}
+        canDelete={canEditContent()}
+        onDeleteRecord={handleDeleteRecord}
         hideSearchAndView={true}
         addButton={canEditContent() && (
           <button

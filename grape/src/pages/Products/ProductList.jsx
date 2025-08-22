@@ -137,6 +137,9 @@ const ProductList = ({
   addButton = null,
   onEditRecord = null,
   canEdit = false,
+  // 추가: 삭제 관련 props
+  onDeleteRecord = null,
+  canDelete = false,
   itemsPerPage: customItemsPerPage = 9,
   disableScrollOnPageChange = false,
   cols = 4,
@@ -329,17 +332,68 @@ const ProductList = ({
                   )}
                   
                   {/* 편집 버튼 */}
-                  {canEdit && onEditRecord && product.rawData && (
+                  {product.rawData && (canEdit || canDelete) && (
+                    <div style={{ position: 'absolute', top: '10px', right: '10px', zIndex: 20, display: 'flex', gap: '8px' }}>
+                      {canEdit && onEditRecord && (
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            onEditRecord(product.rawData);
+                          }}
+                          style={{
+                            background: 'rgba(0, 123, 255, 0.9)',
+                            color: 'white',
+                            border: 'none',
+                            borderRadius: '4px',
+                            padding: '5px 10px',
+                            fontSize: '12px',
+                            cursor: 'pointer',
+                            backdropFilter: 'blur(4px)'
+                          }}
+                          onMouseEnter={(e) => { e.target.style.background = 'rgba(0, 123, 255, 1)'; }}
+                          onMouseLeave={(e) => { e.target.style.background = 'rgba(0, 123, 255, 0.9)'; }}
+                        >
+                          편집
+                        </button>
+                      )}
+
+                      {canDelete && onDeleteRecord && (
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            onDeleteRecord(product.rawData);
+                          }}
+                          style={{
+                            background: 'rgba(255, 0, 0, 0.9)',
+                            color: 'white',
+                            border: 'none',
+                            borderRadius: '4px',
+                            padding: '5px 10px',
+                            fontSize: '12px',
+                            cursor: 'pointer',
+                            backdropFilter: 'blur(4px)'
+                          }}
+                          onMouseEnter={(e) => { e.target.style.background = 'rgba(255, 0, 0, 1)'; }}
+                          onMouseLeave={(e) => { e.target.style.background = 'rgba(255, 0, 0, 0.9)'; }}
+                        >
+                          삭제
+                        </button>
+                      )}
+                    </div>
+                  )}
+
+                   {/* 삭제 버튼 */}
+                  {canDelete && onDeleteRecord && product.rawData && (
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
-                        onEditRecord(product.rawData);
+                        onDeleteRecord(product.rawData);
                       }}
                       style={{
                         position: 'absolute',
                         top: '10px',
                         right: '10px',
-                        background: 'rgba(0, 123, 255, 0.9)',
+                        background: 'rgba(255, 0, 0, 0.9)',
                         color: 'white',
                         border: 'none',
                         borderRadius: '4px',
@@ -350,13 +404,13 @@ const ProductList = ({
                         backdropFilter: 'blur(4px)'
                       }}
                       onMouseEnter={(e) => {
-                        e.target.style.background = 'rgba(0, 123, 255, 1)';
+                        e.target.style.background = 'rgba(255, 0, 0, 1)';
                       }}
                       onMouseLeave={(e) => {
-                        e.target.style.background = 'rgba(0, 123, 255, 0.9)';
+                        e.target.style.background = 'rgba(255, 0, 0, 0.9)';
                       }}
                     >
-                      편집
+                      삭제
                     </button>
                   )}
                 </div>

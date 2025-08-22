@@ -148,6 +148,26 @@ export default function TrackRecordPage({ kindFilter = null }) {
     }
   };
 
+  const handleDeleteRecord = async (record) => {
+    const { isAuthenticated } = await checkUserAuthStatus();
+    if (!isAuthenticated) {
+      alert('삭제하려면 로그인이 필요합니다.');
+      return;
+    }
+
+    if (!window.confirm('이 실적을 삭제하시겠습니까?')) return;
+
+    try {
+      const { error } = await supabase.from('Track_record').delete().eq('id', record.id);
+      if (error) throw error;
+      alert('실적이 삭제되었습니다.');
+      fetchTrackRecords();
+    } catch (err) {
+      console.error('삭제 중 오류 발생:', err);
+      alert('삭제 중 오류가 발생했습니다: ' + err.message);
+    }
+  };
+
   const handleAddRecord = async (formData) => {
     // 인증 상태 확인
     const { isAuthenticated } = await checkUserAuthStatus();
@@ -348,6 +368,8 @@ export default function TrackRecordPage({ kindFilter = null }) {
           onEditRecord={handleEditRecord}
           canEdit={canEditContent()}
           onAddRecord={() => setShowAddModal(true)}
+          canDelete={canEditContent()}
+          onDeleteRecord={handleDeleteRecord}
         />
       </div>
     </BaseLayout>
@@ -355,7 +377,7 @@ export default function TrackRecordPage({ kindFilter = null }) {
 }
 
 // TrackRecordList 컴포넌트
-const TrackRecordList = ({ products, onEditRecord, canEdit, onAddRecord }) => {
+const TrackRecordList = ({ products, onEditRecord, canEdit, onAddRecord, canDelete, onDeleteRecord }) => {
   const [selectedCategory, setSelectedCategory] = useState('전체');
   const [searchTerm, setSearchTerm] = useState('');
   const [viewMode, setViewMode] = useState('card');
@@ -531,35 +553,54 @@ const TrackRecordList = ({ products, onEditRecord, canEdit, onAddRecord }) => {
                     <div>{Card}</div>
                   )}
                   
-                  {canEdit && onEditRecord && product.rawData && (
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        onEditRecord(product.rawData);
-                      }}
-                      style={{
-                        position: 'absolute',
-                        top: '10px',
-                        right: '10px',
-                        background: 'rgba(0, 123, 255, 0.9)',
-                        color: 'white',
-                        border: 'none',
-                        borderRadius: '4px',
-                        padding: '5px 10px',
-                        fontSize: '12px',
-                        cursor: 'pointer',
-                        zIndex: 10,
-                        backdropFilter: 'blur(4px)'
-                      }}
-                      onMouseEnter={(e) => {
-                        e.target.style.background = 'rgba(0, 123, 255, 1)';
-                      }}
-                      onMouseLeave={(e) => {
-                        e.target.style.background = 'rgba(0, 123, 255, 0.9)';
-                      }}
-                    >
-                      편집
-                    </button>
+                  {product.rawData && (canEdit || canDelete) && (
+                    <div style={{ position: 'absolute', top: '10px', right: '10px', zIndex: 20, display: 'flex', gap: '8px' }}>
+                      {canEdit && onEditRecord && (
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            onEditRecord(product.rawData);
+                          }}
+                          style={{
+                            background: 'rgba(0, 123, 255, 0.9)',
+                            color: 'white',
+                            border: 'none',
+                            borderRadius: '4px',
+                            padding: '5px 10px',
+                            fontSize: '12px',
+                            cursor: 'pointer',
+                            backdropFilter: 'blur(4px)'
+                          }}
+                          onMouseEnter={(e) => { e.target.style.background = 'rgba(0, 123, 255, 1)'; }}
+                          onMouseLeave={(e) => { e.target.style.background = 'rgba(0, 123, 255, 0.9)'; }}
+                        >
+                          편집
+                        </button>
+                      )}
+
+                      {canDelete && onDeleteRecord && (
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            onDeleteRecord(product.rawData);
+                          }}
+                          style={{
+                            background: 'rgba(255, 0, 0, 0.9)',
+                            color: 'white',
+                            border: 'none',
+                            borderRadius: '4px',
+                            padding: '5px 10px',
+                            fontSize: '12px',
+                            cursor: 'pointer',
+                            backdropFilter: 'blur(4px)'
+                          }}
+                          onMouseEnter={(e) => { e.target.style.background = 'rgba(255, 0, 0, 1)'; }}
+                          onMouseLeave={(e) => { e.target.style.background = 'rgba(255, 0, 0, 0.9)'; }}
+                        >
+                          삭제
+                        </button>
+                      )}
+                    </div>
                   )}
                 </div>
               );
