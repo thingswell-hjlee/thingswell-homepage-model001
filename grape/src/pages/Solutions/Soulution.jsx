@@ -9,8 +9,11 @@ import server from '../../assets/server.jpg';
 import main from '../../assets/solution_1/main.png';
 import ProductHeader from '../../components/ProductPage/ProductHeader';
 import ProductInfo from '../../components/ProductPage/ProductInfo';
-import ContactInfo from '../../components/ContactInfo';
 import solution from '../../assets/header_image/Solution.jpg';
+import service_1 from '../../assets/service/batch_1-1.png';
+import service_2 from '../../assets/service/batch_1-2.png';
+import service_3 from '../../assets/service/batch_1-3.png';
+import service_4 from '../../assets/service/batch_1-4.png';
 
 const BREADCRUMBS = ["Home", "Solutions", "산업 안전 솔루션"];
 
@@ -111,50 +114,29 @@ const FEATURE_DESCRIPTIONS = [
 
 const APPLICATION_FIELD_CARDS = [
   {
-    image: manufacturing,
+    image: service_1,
     imageAlt: "제조업 공장",
     // label: "Manufacturing",
     title: "실시간 위험 예측 및 예방",
     desc:"단순히 위험을 감지하는 것을 넘어, 과거 데이터를 학습하여 위험 행동 패턴과 환경 변화를 사전에 예측하고 선제적 조치를 제안합니다"
   },
   {
-    image: construction,
+    image: service_2,
     imageAlt: "건설 현장",
     title: "통합 멀티모달 데이터 분석",
     desc:"시각(카메라), 공간(TOF/레이더), 음향(마이크), 환경(공기질), 동작(모션 센서) 등 다양한 센서 데이터를 융합하여 단일 센서로는 불가능했던 복잡하고 미묘한 상황까지 정확하게 인지합니다"
   },
   {
-    image: grinding,
+    image: service_3,
     imageAlt: "위험작업 현장",
     title: "지능형 RAG 기반 추론",
     desc:'작업자 및 환경 데이터를 안전 매뉴얼과 실시간으로 교차 분석하여, "작업자가 장비 X에 너무 가까이 있다" 와 같은 상황에 대한 컨텍스트 기반의 지능적인 판단을 내립니다'
   },
   {
-    image: grinding,
+    image: service_4,
     imageAlt: "위험작업 현장",
     title: "모듈형 및 확장성 높은 설계",
     desc:"다양한 산업 환경과 규제에 맞춰 유연하게 시스템을 구성할 수 있는 모듈형으로 설계되어 있어, 높은 확장성을 보장합니다"
-  },
-  {
-    image: grinding,
-    imageAlt: "위험작업 현장",
-    title: "포용적이고 직관적인 피드백",
-    desc:"시각, 음향, 촉각 등 다양한 방식으로 작업자에게 위험을 알려 인지적/신체적 장애가 있는 사용자도 안전하게 활용할 수 있도록 돕습니다"
-  },
-];
-
-const SERVICE_ARCHITECTURE_CARDS = [
-  {
-    image: main,
-    imageAlt: "서비스 구성도",
-    // title: "서비스 구성도",
-    desc: [
-      "데이터 수집단계: 카메라, ToF/레이더, 마이크, 공기질 센서, 모션 센서 등에서 데이터를 실시간으로 수집·전처리합니다.",
-      "통합 엔진단계: 수집된 데이터를 융합하고, RAG-LVM/LLM을 활용해 지능적으로 추론하여 의사결정을 수행합니다.",
-      "조치 및 피드백단계: 작업자 피드백(시각/청각/촉각), 경고 알람, 자동 제어, 클라우드 서버 연동을 통해 조치 및 피드백을 제공합니다."
-    ],
-    fullWidthImage: true,
-    reverse: true,
   },
 ];
 
@@ -169,11 +151,6 @@ const BLOCKS = [
     data: WORKER_SAFETY_CARDS,
     props: { boxName: '주요 기능', columnsPerRow: 3 },
   },
-    // {
-    //   type: 'applicationCards',
-    //   data: SERVICE_ARCHITECTURE_CARDS,
-    //   props: { boxName: '서비스 구성도', columnsPerRow: 1 },
-    // },
     {
       type: 'features',
       data: FEATURE_DESCRIPTIONS,

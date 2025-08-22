@@ -12,6 +12,11 @@ import ProductInfo from '../../components/ProductPage/ProductInfo';
 import ContactInfo from '../../components/ContactInfo';
 import solution from '../../assets/header_image/Solution.jpg';
 import control from '../../assets/control.png';
+import service_1 from '../../assets/service/batch_3-1.png';
+import service_2 from '../../assets/service/batch_3-2.png';
+import service_3 from '../../assets/service/batch_3-3.png';
+import service_4 from '../../assets/service/batch_3-4.png';
+
 
 const BREADCRUMBS = ["Home", "Solutions", "스마트 통합제어 솔루션"];
 
@@ -80,25 +85,25 @@ const FEATURE_DESCRIPTIONS = [
 
 const APPLICATION_FIELD_CARDS = [
   {
-    image: manufacturing,
+    image: service_1,
     imageAlt: "스마트 공간 통합 제어",
     title: "스마트 공간 통합 제어",
     desc: "방송, 음향, 조명, 냉난방, 환경설비 등 다양한 종류의 설비를 하나의 시스템으로 통합하여 제어할 수 있습니다. 이를 통해 복잡한 장비 조작의 어려움을 해소하고 운영을 간소화합니다."
   },
   {
-    image: construction,
+    image: service_2,
     imageAlt: "환경 맞춤형 UI/UX 디자인",
     title: "환경 맞춤형 UI/UX 디자인",
     desc: "회의실, 강의실, 전시장 등 각 공간의 특성과 사용자 요구사항에 최적화된 맞춤형 인터페이스를 제공하여 사용 편의성을 극대화합니다."
   },
   {
-    image: grinding,
+    image: service_3,
     imageAlt: "원격 및 자동화 관리",
     title: "원격 및 자동화 관리",
     desc: "'ThingsEye' 솔루션을 통해 다중 공간의 설비 상태를 원격으로 모니터링하고 제어할 수 있습니다. 또한, 스케줄링 및 매크로 기능을 활용한 자동화 운영으로 에너지 절감과 운영 효율을 극대화합니다."
   },
   {
-    image: grinding,
+    image: service_4,
     imageAlt: "확장성 및 안정성",
     title: "뛰어난 확장성 및 안정성",
     desc: "'Advanced Integrated Controller XCN-3000'은 RS232/485, TCP/IP, IR, 릴레이 등 다양한 프로토콜 및 인터페이스를 지원하여 여러 장치를 유연하게 연결하고 시스템을 확장할 수 있습니다. 안정적인 네트워크 연결성을 기반으로 시스템 다운타임을 최소화합니다."
@@ -123,18 +128,18 @@ const BLOCKS = [
   {
     type: 'applicationCards',
     data: APPLICATION_FIELD_CARDS,
-    props: { boxName: '서비스 특징' },
+    props: { boxName: '서비스 특징', columnsPerRow: 4 },
   },
   {
     type: 'applicationCards',
     data: WORKER_SAFETY_CARDS,
-    props: { boxName: '주요 기능' },
+    props: { boxName: '주요 기능', columnsPerRow: 3 },
   },
-  {
-    type: 'features',
-    data: FEATURE_DESCRIPTIONS,
-    props: { boxName: '서비스 구성도', columnsPerRow: 1 },
-  },
+    {
+      type: 'features',
+      data: FEATURE_DESCRIPTIONS,
+      props: { boxName: '서비스 구성도', columnsPerRow: 1 },
+    },
 ];
 
 const ManufacturingSolution = () => {

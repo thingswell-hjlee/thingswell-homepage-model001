@@ -23,7 +23,9 @@
  * />
  */
 import React, { forwardRef } from 'react';
+// 솔루션 전용 카드 사용을 위해 SolutionApplicationCard로 교체
 import ApplicationCard from '../ApplicationCard';
+import SolutionApplicationCard from '../ApplicationCard/SolutionApplicationCard';
 import './ApplicationCardsSection.css';
 
 const ApplicationCardsSection = forwardRef((props, ref) => {
@@ -43,9 +45,10 @@ const ApplicationCardsSection = forwardRef((props, ref) => {
           <div className="application-card-section-title">{boxName}</div>
         </div>
         <div className={`application-cards no-line responsive-cards ${getGridClass()}`}>
-          {applicationCardsData.map((card, index) => (
-            <ApplicationCard key={index} {...card} />
-          ))}
+          {applicationCardsData.map((card, index) => {
+            const CardComponent = boxName === '주요 기능' ? ApplicationCard : SolutionApplicationCard;
+            return <CardComponent key={index} {...card} />;
+          })}
         </div>
       </div>
     </div>

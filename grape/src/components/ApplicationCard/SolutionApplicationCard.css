@@ -1,0 +1,51 @@
+.solution-application-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  color: var(--color-text-white);
+  width: 100%;
+}
+
+.solution-application-card-title {
+  font-size: clamp(var(--font-size-xl), 3vw, var(--font-size-2xl));
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-md);
+}
+
+.solution-application-card-image-container {
+  width: 100%;
+  /* 고정 비율을 유지하기 위한 스타일 */
+  aspect-ratio: 1/1;
+  max-height: 400px;
+  overflow: hidden;
+  border-radius: var(--border-radius-md);
+  background: var(--color-surface-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--spacing-lg);
+}
+
+.solution-application-card-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 정배율 유지 */
+  display: block;
+}
+
+.solution-application-card-label {
+  font-size: clamp(var(--font-size-sm), 2vw, var(--font-size-base));
+  color: var(--color-text-muted);
+}
+
+.solution-application-card-desc {
+  color: var(--color-text-secondary);
+  margin-top: var(--spacing-sm);
+}
+
+@media (max-width: 768px) {
+  .solution-application-card-image-container { max-height: 300px; }
+}
+
+

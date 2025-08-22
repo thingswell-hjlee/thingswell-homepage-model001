@@ -12,6 +12,11 @@ import ProductInfo from '../../components/ProductPage/ProductInfo';
 import ContactInfo from '../../components/ContactInfo';
 import solution from '../../assets/header_image/Solution.jpg';
 import care from '../../assets/care.png';
+import service_1 from '../../assets/service/batch_2-1.png';
+import service_2 from '../../assets/service/batch_2-2.png';
+import service_3 from '../../assets/service/batch_2-3.png';
+import service_4 from '../../assets/service/batch_2-4.png';
+
 
 const BREADCRUMBS = ["Home", "Solutions", "노인 및 장애인 홈케어 솔루션"];
 
@@ -81,25 +86,25 @@ const FEATURE_DESCRIPTIONS = [
 
 const APPLICATION_FIELD_CARDS = [
   {
-    image: manufacturing,
+    image: service_1,
     imageAlt: "프라이버시 보호",
     title: "프라이버시를 지키는 안전 모니터링",
     desc: "침실, 화장실 등 사생활 공간에서도 CCTV 없이 AI 카메라, 레이더, 복합 센서를 활용해 낙상이나 이상 행동을 감지합니다. 사용자의 모습이 아닌 행동 패턴만을 분석하여 개인 정보를 보호합니다."
   },
   {
-    image: construction,
+    image: service_2,
     imageAlt: "3단계 알림 시스템",
     title: "3단계 스마트 알림 시스템",
     desc: "위험 상황 감지 시, 음성 안내 → 강력한 경고음 → 보호자 및 유관기관 알림 순으로 상황의 심각성에 맞는 알림을 제공해 골든타임을 확보합니다."
   },
   {
-    image: grinding,
+    image: service_3,
     imageAlt: "맞춤형 서비스",
     title: "개인 맞춤형 솔루션",
     desc: "사용자의 생활 패턴을 학습하여 투약 시간 알림, 건강 관리 스케줄 관리 등 인지장애 유형과 개인 특성을 고려한 맞춤형 서비스를 제공합니다."
   },
   {
-    image: grinding,
+    image: service_4,
     imageAlt: "지속적 관리",
     title: "지속 가능한 관리 및 지원",
     desc: "솔루션의 지속적인 업그레이드와 사용성 평가를 통해, 항상 최신 기술을 접목한 서비스를 제공하며 장애인·노인 삶의 질 제고에 기여합니다."
@@ -112,18 +117,18 @@ const BLOCKS = [
   {
     type: 'applicationCards',
     data: APPLICATION_FIELD_CARDS,
-    props: { boxName: '서비스 특징' },
+    props: { boxName: '서비스 특징', columnsPerRow: 4 },
   },
   {
     type: 'applicationCards',
     data: WORKER_SAFETY_CARDS,
-    props: { boxName: '주요 기능' },
+    props: { boxName: '주요 기능', columnsPerRow: 3 },
   },
-  {
-    type: 'features',
-    data: FEATURE_DESCRIPTIONS,
-    props: { boxName: '서비스 구성도', columnsPerRow: 1 },
-  },
+    {
+      type: 'features',
+      data: FEATURE_DESCRIPTIONS,
+      props: { boxName: '서비스 구성도', columnsPerRow: 1 },
+    },
 ];
 
 const ChemicalSolution = () => {
