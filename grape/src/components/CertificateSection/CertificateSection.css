@@ -66,6 +66,78 @@
   margin-bottom: 0;
 }
 
+/* Prevent embedded certificate grid from overflowing its container */
+.certificate-section .product-list-embedded .product-list-content {
+  padding-left: 0;
+  padding-right: 0;
+  min-height: auto;
+}
+
+.certificate-section .product-list-embedded .product-list-grid-container {
+  /* ensure children are clipped and respect container bounds */
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.certificate-section .product-list-embedded .product-grid {
+  /* reduce internal padding for embedded view to avoid horizontal overflow */
+  padding: var(--spacing-md);
+  box-sizing: border-box;
+}
+
+/* Force embedded certificate grid to always show 5 columns and normalize images */
+.certificate-section .product-list-embedded .product-grid {
+  grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+  gap: var(--spacing-md) !important;
+}
+
+.certificate-section .product-list-embedded .product-grid .product-card {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.certificate-section .product-list-embedded .product-grid .product-card .image-container {
+  width: 100%;
+  aspect-ratio: 1 / 1; /* enforce square image box */
+  overflow: hidden;
+  display: block;
+  background: #fff;
+}
+
+.certificate-section .product-list-embedded .product-grid .product-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* keep image aspect but fit inside box */
+  object-position: center;
+  display: block;
+}
+
+/* Responsive: reduce columns on smaller screens */
+@media (max-width: 1200px) {
+  .certificate-section .product-list-embedded .product-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 900px) {
+  .certificate-section .product-list-embedded .product-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .certificate-section .product-list-embedded .product-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .certificate-section .product-list-embedded .product-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
 /* Certificate 섹션: 인증서 영역 마진 제거 */
 .certificate-section .application-cards,
 .certificate-section .responsive-cards {

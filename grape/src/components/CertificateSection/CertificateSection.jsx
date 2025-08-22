@@ -222,7 +222,7 @@ const CertificateSection = () => {
             disableScrollOnPageChange={true}
             hidePagination={true}
             itemsPerPage={999}
-            cols={3}
+            cols={5}
             products={certificateData.map((c, idx) => ({
               name: c.title,
               title: c.label,

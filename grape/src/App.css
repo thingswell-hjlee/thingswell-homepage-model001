@@ -47,7 +47,7 @@ body {
 .content-container {
   position: relative;
   display: block;
-  background-color: var(--color-background-primary);
+  background-color: #000;
   margin: 0 auto;
   text-align: center;
   width: 100%;
@@ -207,7 +207,7 @@ body {
   flex: 1 1 0;
   min-width: 0;
   align-items: center;
-  border: 3px solid rgb(110, 110, 110);
+  border: 3px solid #fff;
 }
 
 .hero-content-card-title {

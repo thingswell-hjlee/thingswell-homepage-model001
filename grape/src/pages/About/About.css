@@ -1044,24 +1044,6 @@
   -ms-user-select: text;
 }
 
-.timeline-content::before {
-  content: "";
-  position: absolute;
-  top: 20px;
-  width: 0;
-  height: 0;
-  border: 10px solid transparent;
-  user-select: text; /* 드래그 방지 */
-  -webkit-user-select: text;
-  -moz-user-select: text;
-  -ms-user-select: text;
-}
-
-.timeline-content:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-lg);
-}
-
 .timeline-date {
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-bold);
@@ -1084,18 +1066,6 @@
   -ms-user-select: text;
 }
 
-.timeline-title::after {
-  content: "";
-  display: block;
-  width: 50px;
-  height: 3px;
-  background: var(--color-primary);
-  margin-top: var(--spacing-sm);
-  user-select: text; /* 드래그 방지 */
-  -webkit-user-select: text;
-  -moz-user-select: text;
-  -ms-user-select: text;
-}
 
 .timeline-item:nth-child(odd) .timeline-title::after {
   margin-left: auto;
@@ -1130,39 +1100,6 @@
   -ms-user-select: text;
 }
 
-.timeline-description li:hover {
-  color: var(--color-primary);
-}
-
-.timeline-item:nth-child(odd) .timeline-content::after {
-  content: "";
-  position: absolute;
-  top: 20px;
-  right: -10px;
-  width: 0;
-  height: 0;
-  border: 10px solid transparent;
-  border-left-color: var(--color-surface);
-  user-select: text; /* 드래그 방지 */
-  -webkit-user-select: text;
-  -moz-user-select: text;
-  -ms-user-select: text;
-}
-
-.timeline-item:nth-child(even) .timeline-content::after {
-  content: "";
-  position: absolute;
-  top: 20px;
-  left: -10px;
-  width: 0;
-  height: 0;
-  border: 10px solid transparent;
-  border-right-color: var(--color-surface);
-  user-select: text; /* 드래그 방지 */
-  -webkit-user-select: text;
-  -moz-user-select: text;
-  -ms-user-select: text;
-}
 
 @media (max-width: 768px) {
   .timeline::before {

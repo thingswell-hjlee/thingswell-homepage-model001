@@ -20,6 +20,7 @@
   -o-user-drag: none; /* Opera */
   user-drag: none; /* Standard */
   word-break: keep-all;
+  text-align: left;
 }
 
 /* 이미지 컨테이너 추가 */
