@@ -166,9 +166,12 @@ function CardRotator({ cards, className = "", onCardChange, currentIndex: extern
       >
         {cards.map((card, index) => (
           <article key={index} className="hero-card">
+            <div>
             <p className="hero-eyebrow">{card.eyebrow}</p>
-            <div className="hero-desc-container">
             <h1 className="hero-title">{card.title}</h1>
+            </div>
+            <div className="hero-desc-container">
+
               <p className="hero-desc">{card.description}</p>
               {card.descriptionEng && (
                 <p className="hero-desc-eng">{card.descriptionEng}</p>

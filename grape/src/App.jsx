@@ -116,7 +116,7 @@ function HomePage() {
       description: "AI 기반의 솔루션으로 위험을 예측하고, 혁신적인 기술로 더 안전한 미래를 만들어갑니다.",
       descriptionEng: "We predict risks with AI-based solutions and create a safer future with innovative technology.",
       ctaText: "Learn more",
-      ctaHref: "/contact",
+      ctaHref: "/solutions/overview",
       caption: "AI Safety Solutions",
       backgroundImage: aiImage,
     },
@@ -126,7 +126,7 @@ function HomePage() {
       description: "외부 네트워크 연결 없이도 기기 자체적으로 위험을 감지하고 대응하여, 어떤 환경에서도 안전을 보장합니다.",
       descriptionEng: "By detecting and responding to risks directly on the device without an external network connection, we ensure safety in any environment.",
       ctaText: "Learn more",
-      ctaHref: "/contact",
+      ctaHref: "/solutions/overview",
       caption: "On-Device AI",
       backgroundImage: ondeviceImage,
     },
@@ -136,7 +136,7 @@ function HomePage() {
       description: "인간의 삶을 더 풍요롭게 하는 혁신을 추구하며, 모든 기술은 오직 사람의 안전을 최우선으로 합니다.",
       descriptionEng: "We pursue innovation that enriches human lives, and all our technology prioritizes the safety of people above all else.",
       ctaText: "Learn more",
-      ctaHref: "/contact",
+      ctaHref: "/solutions/overview",
       caption: "Human-Centered Innovation",
       backgroundImage: humanImage,
     },
@@ -146,7 +146,7 @@ function HomePage() {
       description: "공장의 위험 작업 환경부터 일상생활의 작은 사고까지, 싱스웰의 기술은 모든 곳에서 당신을 지켜줍니다.",
       descriptionEng: "From hazardous work environments in factories to small accidents in daily life, Singswell's technology protects you everywhere.",
       ctaText: "Learn more",
-      ctaHref: "/contact",
+      ctaHref: "/solutions/overview",
       caption: "Comprehensive Safety",
       backgroundImage: aiImage,
     },
@@ -230,14 +230,8 @@ function HomePage() {
             </div>
              {/* 오버레이 아래 일반 흐름 영역: 히어로 카드들 */}
         <section className="hero-content-section">
-          <div className="hero-content-card">
-            <a
-              className="hero-content-card-title"
-              href="/products/twmob-01/"
-              style={{ textDecoration: "none", color: "inherit", cursor: "pointer", fontWeight: "bold" }}
-            >
-              TWMOB-01 2륜 카트 이동식 태양광 80W 무선CCTV 30배 줌 PTZ 5백만 화소 IP CCTV 세트
-            </a>
+        <div className="hero-content-card_1" onClick={() => window.location.href = '/products/twmob-01'}>
+            <h1 className="hero-content-card-title">정부지원사업 상담</h1>
           </div>
 
           <div className="hero-content-card" style={{ backgroundImage: `linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.35)), url(${noticeBg})` }}>
@@ -248,9 +242,8 @@ function HomePage() {
             </ul>
           </div>
 
-          <div className="hero-content-card">
+          <div className="hero-content-card_2">
             <h1 className="hero-content-card-title">정부지원사업 상담</h1>
-            <button className="hero-content-card-button" onClick={() => window.location.href = '/contact'}>상담하기</button>
           </div>
         </section>
       </div>

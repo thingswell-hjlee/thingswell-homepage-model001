@@ -210,11 +210,50 @@ body {
   border: 3px solid #fff;
 }
 
+.hero-content-card_1 {
+  padding: var(--spacing-xl);
+  text-align: left;
+  background-image: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url('./assets/product_safety/main.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 15px;
+  height: 300px;
+  min-height: 200px;
+  word-break: keep-all;
+  flex: 1 1 0;
+  min-width: 0;
+  align-items: center;
+  border: 3px solid #fff;
+}
+
+.hero-content-card_2 {
+  padding: var(--spacing-xl);
+  text-align: left;
+  background-image: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url('./assets/buildings.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 15px;
+  height: 300px;
+  min-height: 200px;
+  word-break: keep-all;
+  flex: 1 1 0;
+  min-width: 0;
+  align-items: center;
+  border: 3px solid #fff;
+}
+
+
 .hero-content-card-title {
-  font-size: var(--font-size-2xl) !important;
-  color: #fff !important;
+  font-size: var(--font-size-md) !important;
+  color: #292929 !important;
   margin-top: 0;
   margin-bottom: var(--spacing-md);
+  background-color: #BFBFBF;
+  padding:var(--spacing-xs);
+  border-radius: var(--border-radius-md);
+  text-align: center;
 }
 
 .hero-content-card-description {
