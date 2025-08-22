@@ -104,9 +104,6 @@
   line-height: 1.6;
 }
 
-.footer-bottom {
-  margin-top: var(--spacing-2xl);
-}
 
 .footer-divider {
   height: var(--border-width-thin);
