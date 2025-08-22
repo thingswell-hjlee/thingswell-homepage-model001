@@ -87,14 +87,15 @@
 }
 
 .overview-media-box {
-  background: #f8fafc;
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
-  overflow: hidden;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  overflow: visible;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 320px;
+  min-height: auto;
+  width: 100%;
 }
 
 .overview-media-box img {
@@ -197,16 +198,19 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #f8fafc;
-  min-height: 400px;
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
-  overflow: hidden;
+  background: transparent;
+  min-height: auto;
+  border: none;
+  border-radius: 0;
+  overflow: visible;
+  width: 100%;
 }
 
 .feature-image {
-  width: 100%;
-  height: 100%;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
   object-fit: cover;
   display: block;
 }

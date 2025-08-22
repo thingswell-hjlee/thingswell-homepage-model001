@@ -171,7 +171,7 @@ const TabContent = ({ tabId, productData, featureClickToOpen = false, onFeatureI
               <div className="specs-images">
                 <div className="specs-images-row">
                   {productData.specifications.map((imageObj, index) => (
-                    <div key={index} className="spec-card">
+                    <div key={index} className="feature-card">
                       <ImageWithCaption
                         className="spec-media"
                         imgClassName="spec-image"
