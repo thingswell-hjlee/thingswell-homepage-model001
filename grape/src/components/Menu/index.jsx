@@ -56,10 +56,10 @@ const defaultMenuItems = [
     path: '/rnd',
     submenu: [ 
       { label: '멀티모달 상황인지', path: '/rnd/multimodal-awareness' },
-      { label: 'RAG 기반 LLM', path: '/rnd/rag-llm' },
       { label: '온디바이스 AI', path: '/rnd/on-device-ai' },
+      { label: 'RAG 기반 LLM', path: '/rnd/rag-llm' },
       { label: '위험상황 조기감지', path: '/rnd/embedded-system' },
-      { label: '인지장애 보조기술', path: '/rnd/smart-assistive-technology' },
+      { label: '인지장애 보조', path: '/rnd/smart-assistive-technology' },
       { label: 'AI 공기질 관리', path: '/rnd/air-quality-management' }, 
     ] 
   },
@@ -84,7 +84,7 @@ const defaultMenuItems = [
   //   ] 
   // },
   {   
-    label: '실적', 
+    label: '고객사례', 
     path: '/cases',
     submenu: [ 
       { label: '스마트안전', path: '/cases/smart-safety' }, 
