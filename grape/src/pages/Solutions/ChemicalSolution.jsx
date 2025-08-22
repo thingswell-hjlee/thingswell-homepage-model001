@@ -16,7 +16,10 @@ import service_1 from '../../assets/service/batch_2-1.png';
 import service_2 from '../../assets/service/batch_2-2.png';
 import service_3 from '../../assets/service/batch_2-3.png';
 import service_4 from '../../assets/service/batch_2-4.png';
-
+import service_5 from '../../assets/service_2/2-1.png';
+import service_6 from '../../assets/service_2/2-2.png';
+import service_7 from '../../assets/service_2/2-3.png';
+import service_8 from '../../assets/service_2/2-4.png'; 
 
 const BREADCRUMBS = ["Home", "Solutions", "노인 및 장애인 홈케어 솔루션"];
 
@@ -28,10 +31,9 @@ const SOLUTION_DATA = {
 
 const WORKER_SAFETY_CARDS = [
   {
-    image: Collision,
+    image: service_5,
     imageAlt: "위험 상황 감지",
     title: "위험 상황 감지 및 알림",
-    link: "/solutions/multimodal-awareness",
     desc: [
       "낙상 감지: 침대, 거실, 화장실 등에서 넘어지거나 쓰러지는 상황을 즉시 감지하여 알림을 보냅니다.",
       "이상 행동 감지: 자해, 폭행 등 위험 행동이나 과도한 흥분, 과몰입, 배회 등 비정상적인 행동을 파악해 경고합니다.",
@@ -39,30 +41,27 @@ const WORKER_SAFETY_CARDS = [
     ]
   },
   {
-    image: fire,
+    image: service_6,
     imageAlt: "스마트 환경 제어",
     title: "스마트 환경 제어",
-    link: "/solutions/rag-llm",
     desc: [
       "다양한 센서 데이터(영상, 음향, 공기질, 모션)를 분석하여 사용자의 상태에 따라 조명, 음향, 환기 등 스마트 홈 기기를 자동으로 제어합니다.",
       "사용자의 심리 상태를 안정시키기 위한 테라피 콘텐츠(에어케어, 사운드, 비주얼)를 제공하여 정서적 안정에 도움을 줍니다."
     ]
   },
   {
-    image: server,
+    image: service_7,
     imageAlt: "IoT 연동",
     title: "스마트폰 및 IoT 연동",
-    link: "/solutions/overview",
     desc: [
       "스마트밴드, 스마트폰 등 IoT 기기와 연동하여 사용자의 움직임, 위치 등 다양한 데이터를 수집합니다.",
       "수집된 데이터를 기반으로 개인화된 대화 및 알림 서비스를 제공합니다."
     ]
   },
   {
-    image: server,
+    image: service_8,
     imageAlt: "개인 맞춤형 서비스",
     title: "개인 맞춤형 솔루션",
-    link: "/solutions/on-device-ai",
     desc: [
       "사용자의 생활 패턴을 학습하여 투약 시간 알림, 건강 관리 스케줄 관리 등 인지장애 유형과 개인 특성을 고려한 맞춤형 서비스를 제공합니다.",
       "지속적인 업그레이드와 사용성 평가를 통해 항상 최신 기술을 접목한 서비스를 제공합니다."
@@ -88,7 +87,7 @@ const APPLICATION_FIELD_CARDS = [
   {
     image: service_1,
     imageAlt: "프라이버시 보호",
-    title: "프라이버시를 지키는 안전 모니터링",
+    title: "프라이버시를 고려한 모니터링",
     desc: "침실, 화장실 등 사생활 공간에서도 CCTV 없이 AI 카메라, 레이더, 복합 센서를 활용해 낙상이나 이상 행동을 감지합니다. 사용자의 모습이 아닌 행동 패턴만을 분석하여 개인 정보를 보호합니다."
   },
   {

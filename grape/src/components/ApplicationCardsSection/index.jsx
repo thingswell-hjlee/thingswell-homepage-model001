@@ -30,6 +30,7 @@ import './ApplicationCardsSection.css';
 
 const ApplicationCardsSection = forwardRef((props, ref) => {
   const { applicationCardsData, boxName, subtitle, columnsPerRow = 3 } = props;
+  const isServiceFeatures = boxName === '서비스 특징';
   
   // columnsPerRow 값이 1-6 범위 내에 있는지 확인하고, 그리드 클래스 생성
   const getGridClass = () => {
@@ -44,7 +45,7 @@ const ApplicationCardsSection = forwardRef((props, ref) => {
           {subtitle && <div className="solution-card-subtitle">{subtitle}</div>}
           <div className="application-card-section-title">{boxName}</div>
         </div>
-        <div className={`application-cards no-line responsive-cards ${getGridClass()}`}>
+        <div className={`application-cards no-line responsive-cards ${getGridClass()} ${isServiceFeatures ? 'service-features' : ''}`}>
           {applicationCardsData.map((card, index) => {
             const CardComponent = boxName === '주요 기능' ? ApplicationCard : SolutionApplicationCard;
             return <CardComponent key={index} {...card} />;

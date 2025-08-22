@@ -1101,6 +1101,7 @@
 }
 
 
+
 @media (max-width: 768px) {
   .timeline::before {
     left: 20px;

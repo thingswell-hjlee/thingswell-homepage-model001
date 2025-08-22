@@ -3,6 +3,8 @@
   word-break: keep-all;
 }
 
+
+
 .gs-container {
   max-width: var(--container-max-width);
   margin: 0 auto;

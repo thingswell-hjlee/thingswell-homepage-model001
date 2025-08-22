@@ -60,6 +60,11 @@
   margin-bottom: 0;
 }
 
+/* 서비스 특징(서비스-피처)에서 grid-4의 상단 마진 제거 */
+.application-cards.no-line.responsive-cards.grid-4.service-features {
+  margin-top: 0;
+}
+
 /* 그리드 레이아웃 클래스들 */
 .grid-1 {
   grid-template-columns: 1fr;

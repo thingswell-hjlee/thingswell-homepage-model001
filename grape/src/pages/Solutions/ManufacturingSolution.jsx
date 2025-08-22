@@ -16,52 +16,52 @@ import service_1 from '../../assets/service/batch_3-1.png';
 import service_2 from '../../assets/service/batch_3-2.png';
 import service_3 from '../../assets/service/batch_3-3.png';
 import service_4 from '../../assets/service/batch_3-4.png';
+import service_5 from '../../assets/service_2/3-1.png';
+import service_6 from '../../assets/service_2/3-2.png';
+import service_7 from '../../assets/service_2/3-3.png';
+import service_8 from '../../assets/service_2/3-4.png';
 
 
-const BREADCRUMBS = ["Home", "Solutions", "스마트 통합제어 솔루션"];
+const BREADCRUMBS = ["Home", "Solutions", "통합제어 솔루션"];
 
 const SOLUTION_DATA = {
-  title: "스마트 통합제어 솔루션",
+  title: "통합제어 솔루션",
   description:
-    "스마트 통합제어 솔루션은 대회의실, 강당, 강의실, 컨벤션홀 등 다양한 공간에 분산된 영상, 음향, 조명, 냉난방, 공조 등 여러 설비들을 하나의 스마트 인터페이스(스마트패드, PC 등)로 통합하여 원격 제어 및 관리하는 혁신적인 시스템입니다. 다중 센서 기술(카메라, 레이더, 공기질 센서 등)과 멀티모달 상황인지 기반의 자동화 제어를 통해 공간의 효율성을 극대화하며, 유지관리 비용 절감 및 운영의 편리성을 제공하는 것을 목표로 합니다.",
+    "통합제어 솔루션은 대회의실, 강당, 강의실, 컨벤션홀 등 다양한 공간에 분산된 영상, 음향, 조명, 냉난방, 공조 등 여러 설비들을 하나의 스마트 인터페이스(스마트패드, PC 등)로 통합하여 원격 제어 및 관리하는 혁신적인 시스템입니다. 다중 센서 기술(카메라, 레이더, 공기질 센서 등)과 멀티모달 상황인지 기반의 자동화 제어를 통해 공간의 효율성을 극대화하며, 유지관리 비용 절감 및 운영의 편리성을 제공하는 것을 목표로 합니다.",
 };
 
 const WORKER_SAFETY_CARDS = [
   {
-    image: Collision,
+    image: service_5,
     imageAlt: "통합 제어 기능",
     title: "통합 제어 기능",
-    link: "/solutions/multimodal-awareness",
     desc: [
       "영상(비디오월, 매트릭스), 음향(마이크, 믹서, DSP), 조명(DMX512 제어, 스팟 조명), 환경 설비(냉난방, 전등) 등 모든 장비를 단일 인터페이스로 제어합니다.",
       "복잡한 장비 조작의 어려움을 해소하고 운영을 간소화합니다."
     ]
   },
   { 
-    image: fire,
+    image: service_6,
     imageAlt: "상황 인지 기반 자동화",
     title: "상황 인지 기반 자동화",
-    link: "/solutions/rag-llm",
     desc: [
       "공기질, 모션, 카메라 등 멀티모달 센서 데이터를 활용하여 공간의 상황을 인지하고 자동으로 설비를 제어하는 기능을 제공합니다.",
       "다중 센서 기술을 통해 공간의 효율성을 극대화합니다."
     ]
   },
   {
-    image: server,
+    image: service_7,
     imageAlt: "화상회의 및 발표 지원",
     title: "화상회의 및 발표 지원",
-    link: "/solutions/overview",
     desc: [
       "화자 추적 시스템, 화상회의 시스템 연동, 하울링 제거, 카메라 프리셋 기반 위치 추적 제어 등 최적의 비즈니스 환경을 제공합니다.",
       "회의실, 강의실, 전시장 등 각 공간의 특성에 최적화된 서비스를 제공합니다."
     ]
   },
   {
-    image: server,
+    image: service_8,
     imageAlt: "매크로 및 스케줄링",
     title: "매크로 및 스케줄링",
-    link: "/solutions/on-device-ai",
     desc: [
       "자주 사용하는 설비 조합을 '프리셋'으로 저장하여 한 번의 터치로 실행하거나, 특정 시간에 자동으로 설비를 제어하는 '스케줄링' 기능을 제공합니다.",
       "자동화 운영으로 에너지 절감과 운영 효율을 극대화합니다."

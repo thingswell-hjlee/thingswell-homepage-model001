@@ -14,6 +14,10 @@ import service_1 from '../../assets/service/batch_1-1.png';
 import service_2 from '../../assets/service/batch_1-2.png';
 import service_3 from '../../assets/service/batch_1-3.png';
 import service_4 from '../../assets/service/batch_1-4.png';
+import service_5 from '../../assets/service_2/1-1.png';
+import service_6 from '../../assets/service_2/1-2.png';
+import service_7 from '../../assets/service_2/1-3.png';
+import service_8 from '../../assets/service_2/1-4.png';
 
 const BREADCRUMBS = ["Home", "Solutions", "산업 안전 솔루션"];
 
@@ -25,7 +29,7 @@ const SOLUTION_DATA = {
 
 const WORKER_SAFETY_CARDS = [
   {
-    image: Collision,
+    image: service_5,
     imageAlt: "전방 위협 요소 감지",
     title: "멀티모달 데이터 수집 및 전처리",
     link: "/solutions/multimodal-awareness",
@@ -33,7 +37,7 @@ const WORKER_SAFETY_CARDS = [
     desc2:"데이터 정규화: 다양한 형식의 센서 데이터를 표준화하여 분석 준비를 완료합니다"
   },
   {
-    image: fire,
+    image: service_6,
     imageAlt: "후방 위협 요소 감지",
     title: "지능형 데이터 융합 및 추론",
     link: "/solutions/rag-llm",
@@ -45,7 +49,7 @@ const WORKER_SAFETY_CARDS = [
     ]
   },
   {
-    image: server,
+    image: service_7,
     imageAlt: "원격관리시스템",
     title: "자동화된 의사결정 및 조치",
     link: "/solutions/overview",
@@ -55,7 +59,7 @@ const WORKER_SAFETY_CARDS = [
     ]
   },
   {
-    image: server,
+    image: service_8,
     imageAlt: "엣지-클라우드 연동",
     title: "엣지-클라우드 연동 처리",
     link: "/solutions/on-device-ai",

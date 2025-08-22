@@ -11,6 +11,19 @@
   font-weight: var(--font-weight-medium);
   color: var(--color-text-primary);
   margin-bottom: var(--spacing-md);
+  position: relative;
+  overflow: hidden;
+  line-height: 1.2;
+  max-height: calc(1.2em * 2); /* 두 줄까지만 표시 */
+}
+
+.solution-application-card-title span { display: inline-block; white-space: nowrap; }
+
+.solution-application-card-title.long-text span { animation: text-scroll 20s linear infinite; }
+
+@keyframes text-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-200%); }
 }
 
 .solution-application-card-image-container {
