@@ -1,5 +1,6 @@
 import React from 'react';
 import ProductHeader from '../../components/ProductPage/ProductHeader';
+import rndHeader from '../../assets/header_image/rnd.jpg';
 import './Soulution.css';
 import ProductInfo from '../../components/ProductPage/ProductInfo';
 import FeatureDescription from '../../components/FeatureDescription';
@@ -21,7 +22,7 @@ const EMBEDDED_SYSTEM_CARDS = [
 const Embeddedsystem = () => {
   return (
     <div className="gs-page">
-      <ProductHeader />
+      <ProductHeader image={rndHeader} />
       <div className="product-page-content">
           <div className="container">
             <ProductInfo productName="위험상황 조기감지" productTitle="위험상황 조기감지" breadcrumbs={["Home", "연구개발", "위험상황 조기감지"]} />

@@ -1,5 +1,7 @@
 import React from 'react';
 import SolutionCard from '../../components/SolutionCard';
+import ProductHeader from '../../components/ProductPage/ProductHeader';
+import rndHeader from '../../assets/header_image/rnd.jpg';
 import ApplicationCardsSection from '../../components/ApplicationCardsSection';
 import FeatureDescription from '../../components/FeatureDescription';
 import ContactInfo from '../../components/ContactInfo';
@@ -14,6 +16,7 @@ export default function SolutionDetailPage({
 }) {
   return (
     <div className="page-container">
+      <ProductHeader image={rndHeader} />
       <div className="page-content">
         <div className="page-layout">
           <div className="main-content">

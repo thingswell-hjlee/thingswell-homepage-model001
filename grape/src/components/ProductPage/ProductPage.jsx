@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ProductHeader from './ProductHeader';
+import performanceHeader from '../../assets/header_image/performance.jpg';
+import productHeader from '../../assets/header_image/product.jpg';
 import ProductInfo from './ProductInfo';
 import ProductGallery from './ProductGallery';
 import ProductTabs from './ProductTabs';
@@ -45,7 +47,6 @@ const EditableText = ({ field, value, placeholder, multiline = false, style = {}
     return (
       <Component
         value={tempValue}
-        onChange={(e) => setTempValue(e.target.value)}
         onBlur={saveEdit}
         onKeyDown={handleKeyDown}
         placeholder={placeholder}
@@ -256,7 +257,7 @@ const ProductPage = ({
 
   return (
     <div className="product-page">
-      {!hideHeader && <ProductHeader />}
+      {!hideHeader && <ProductHeader image={isRecordPage ? performanceHeader : productHeader} />}
       
       <div className="product-page-content">
         <div className="container">

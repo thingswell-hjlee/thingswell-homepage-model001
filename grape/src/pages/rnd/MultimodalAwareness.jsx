@@ -1,5 +1,6 @@
 import React from 'react';
 import ProductHeader from '../../components/ProductPage/ProductHeader';
+import rndHeader from '../../assets/header_image/rnd.jpg';
 import './Soulution.css';
 import server from '../../assets/server.jpg';
 import ProductInfo from '../../components/ProductPage/ProductInfo';
@@ -23,7 +24,7 @@ const MULTIMODAL_CARDS = [
 const MultimodalAwareness = () => {
   return (
     <div className="gs-page">
-      <ProductHeader />
+      <ProductHeader image={rndHeader} />
       <div className="product-page-content">
           <div className="container">
             <ProductInfo productName="멀티모달 상황인지" productTitle="멀티모달 상황인지" breadcrumbs={["Home", "연구개발", "멀티모달 상황인지"]} />

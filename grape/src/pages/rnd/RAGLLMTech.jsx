@@ -1,5 +1,6 @@
 import React from 'react';
 import ProductHeader from '../../components/ProductPage/ProductHeader';
+import rndHeader from '../../assets/header_image/rnd.jpg';
 import './Soulution.css';
 import ProductInfo from '../../components/ProductPage/ProductInfo';
 import FeatureDescription from '../../components/FeatureDescription';
@@ -23,7 +24,7 @@ const RAG_CARDS = [
 const RAGLLMTech = () => {
   return (
     <div className="gs-page">
-      <ProductHeader />
+      <ProductHeader image={rndHeader} />
       <div className="product-page-content">
           <div className="container">
             <ProductInfo productName="RAG 기반 LLM" productTitle="RAG 기반 LLM" breadcrumbs={["Home", "연구개발", "RAG 기반 LLM"]} />

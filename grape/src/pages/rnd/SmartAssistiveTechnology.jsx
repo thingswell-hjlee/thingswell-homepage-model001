@@ -1,5 +1,6 @@
 import React from 'react';
 import ProductHeader from '../../components/ProductPage/ProductHeader';
+import rndHeader from '../../assets/header_image/rnd.jpg';
 import './Soulution.css';
 import ProductInfo from '../../components/ProductPage/ProductInfo';
 import FeatureDescription from '../../components/FeatureDescription';
@@ -18,7 +19,7 @@ const WORKER_SAFETY_CARDS = [
 const SmartAssistiveTechnology = () => {
   return (
     <div className="gs-page">
-      <ProductHeader />
+      <ProductHeader image={rndHeader} />
       <div className="product-page-content">
           <div className="container">
             <ProductInfo productName="인지장애 노인 및 장애인을 위한 스마트 보조 기술" productTitle="인지장애 노인 및 장애인을 위한 스마트 보조 기술" breadcrumbs={["Home", "연구개발", "인지장애 노인 및 장애인을 위한 스마트 보조 기술"]} />
