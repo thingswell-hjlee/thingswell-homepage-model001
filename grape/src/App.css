@@ -230,7 +230,7 @@ body {
 .hero-content-card_2 {
   padding: var(--spacing-xl);
   text-align: left;
-  background-image: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url('./assets/buildings.jpg');
+  background-image: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url('./assets/case_bus_seoul/main_4.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

@@ -50,8 +50,6 @@
   font-size: var(--font-size-4xl);
   margin: 0;
   display: inline-block; /* 텍스트 너비에 맞춰 박스 크기 조정 */
-  /* background-color: #000; */
-  padding: var(--spacing-xs) var(--spacing-sm); 좌우 패딩 축소
   border-radius: var(--border-radius-md);
   width: auto; /* 글자 너비에 따라 자동으로 크기 결정 */
   max-width: max-content;

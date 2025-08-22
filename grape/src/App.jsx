@@ -52,7 +52,7 @@
  * - 각 솔루션 상세 페이지들
  */
 import { useState, useEffect } from "react";
-import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
+import { Routes, Route, useLocation, useNavigate, Link } from "react-router-dom";
 import "./App.css";
 import Menu from "./components/Menu";
 import "./components/Layout/BaseLayout.css";
@@ -79,6 +79,7 @@ import Product_list_control from "./pages/Products/Product_list_control.jsx";
 import Product_control from "./pages/Products/Product_control.jsx";
 import Product_safety_1 from "./pages/Products/Product_TWEDG_01.jsx";
 import Product_list_safety from "./pages/Products/Product_list_safety.jsx";
+import Product_detail_safety from "./pages/Products/Product_detail_safety.jsx";
 import Product_list_monitoring from "./pages/Products/Product_list_monitoring.jsx";
 import Product_TWEDG_04 from "./pages/Products/Product_TWEDG_04.jsx";
 import aiImage from "./assets/main/AI.jpg";
@@ -98,6 +99,7 @@ import CaseIntegratedControl from "./pages/Cases/Case_IntegratedControl.jsx";
 import CaseInformationCommunication from "./pages/Cases/Case_InformationCommunication.jsx";
 import About from "./pages/About/About.jsx";
 import Login from "./pages/Login/Login.jsx";
+import Case_detail from "./pages/Cases/Case_detail.jsx";
 import { AuthProvider } from "./contexts/AuthContext.jsx";
 import { supabase } from "./lib/supabase";
 
@@ -230,9 +232,9 @@ function HomePage() {
             </div>
              {/* 오버레이 아래 일반 흐름 영역: 히어로 카드들 */}
         <section className="hero-content-section">
-        <div className="hero-content-card_1" onClick={() => window.location.href = '/products/twmob-01'}>
-            <h1 className="hero-content-card-title">정부지원사업 상담</h1>
-          </div>
+        <Link to={`/products/safety/24`} className="hero-content-card_1">
+            <h1 className="hero-content-card-title">AI인체감지시스템(이동식)</h1>
+          </Link>
 
           <div className="hero-content-card" style={{ backgroundImage: `linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.35)), url(${noticeBg})` }}>
             <ul className="hero-content-card-list">
@@ -242,9 +244,9 @@ function HomePage() {
             </ul>
           </div>
 
-          <div className="hero-content-card_2">
-            <h1 className="hero-content-card-title">정부지원사업 상담</h1>
-          </div>
+          <Link to={`/cases/detail/571`} className="hero-content-card_2">
+            <h1 className="hero-content-card-title">서울 버스 스마트쉼터 원격관리 솔루션</h1>
+          </Link>
         </section>
       </div>
     </div>
@@ -334,6 +336,7 @@ function App() {
             <Route path="/products/control" element={<Product_control />} />
             <Route path="/products/control/list" element={<Product_list_control />} />
             <Route path="/products/safety" element={<Product_list_safety />} />
+            <Route path="/products/safety/:id" element={<Product_detail_safety />} />
             <Route path="/products/monitoring" element={<Product_list_monitoring />} />
             <Route path="/products/twmob-01" element={<Product_safety_1/>} />
             <Route path="/products/twedg-04" element={<Product_TWEDG_04 />} />
@@ -357,7 +360,7 @@ function App() {
 <Route path="/cases/ai" element={<CaseAI />} />
 <Route path="/cases/integrated-control" element={<CaseIntegratedControl />} />
 <Route path="/cases/information-communication" element={<CaseInformationCommunication />} />
-
+<Route path="/cases/detail/:id" element={<Case_detail />} />
             {/* 회사소개 라우팅 */} 
             <Route path="/about" element={<About />} />
 
