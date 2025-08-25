@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import ProductPage from '../ProductPage/ProductPage';
 import { uploadImage, validateImageFile, checkStorageBucket } from '../../utils/imageUpload';
 import { setupStoragePolicies } from '../../utils/supabaseRLS';
+import './RecordEditor.css';
 
 const RecordEditor = ({ 
   isEditMode = false, 
@@ -286,27 +287,10 @@ const RecordEditor = ({
   const modeConfig = getModeConfig();
 
   const content = (
-    <div style={{ 
-      display: 'flex', 
-      gap: '20px', 
-      height: '100%',
-      maxHeight: isModal ? '80vh' : '100vh'
-    }}>
+    <div className={`record-editor-container ${isModal ? 'record-editor-container-modal' : ''}`}>
       {/* 미리보기 (왼쪽) */}
-      <div style={{ 
-        flex: '2', 
-        padding: '20px',
-        overflow: 'auto',
-        background: '#fff',
-        borderRadius: '8px',
-        border: '1px solid #ddd'
-      }}>
-        <div style={{ 
-          transform: 'scale(0.8)', 
-          width: '125%', 
-          transformOrigin: 'top left',
-          minHeight: '400px'
-        }}>
+      <div className="record-editor-preview">
+        <div className="record-editor-preview-content">
                       <ProductPage
               productData={{
                 name: formData.title || '제목을 입력하세요',
@@ -332,17 +316,10 @@ const RecordEditor = ({
       </div>
 
       {/* 편집 패널 (오른쪽) */}
-      <div style={{ 
-        flex: '1', 
-        padding: '20px',
-        overflow: 'auto',
-        background: '#f8f9fa',
-        borderRadius: '8px',
-        minWidth: '300px'
-      }}>
-        <h3 style={{ marginBottom: '20px', color: '#495057' }}>{modeConfig.title} 편집 도구</h3>
-        <div style={{ marginBottom: '20px' }}>
-          <label style={{ display: 'block', marginBottom: '8px', fontSize: '14px', color: '#495057', fontWeight: 'bold', textAlign: 'left' }}>
+      <div className="record-editor-panel">
+        <div className="record-editor-panel-header">
+        <div className="record-editor-form-group">
+          <label className="record-editor-label">
             사업분야 *
           </label>
           <select
@@ -350,14 +327,7 @@ const RecordEditor = ({
             value={formData.kind}
             onChange={handleInputChange}
             required
-            style={{
-              width: '100%',
-              padding: '10px',
-              border: '1px solid #ddd',
-              borderRadius: '4px',
-              fontSize: '14px',
-              textAlign: 'left'
-            }}
+            className="record-editor-input"
           >
             <option value="">사업분야를 선택하세요</option>
             {modeConfig.kindOptions.map(option => (
@@ -368,8 +338,8 @@ const RecordEditor = ({
           </select>
         </div>
 
-        <div style={{ marginBottom: '20px' }}>
-          <label style={{ display: 'block', marginBottom: '8px', fontSize: '14px', color: '#495057', fontWeight: 'bold', textAlign: 'left' }}>
+        <div className="record-editor-form-group">
+          <label className="record-editor-label">
             소분류 *
           </label>
           <input
@@ -378,19 +348,12 @@ const RecordEditor = ({
             value={formData.type}
             onChange={handleInputChange}
             required
-            style={{
-              width: '100%',
-              padding: '10px',
-              border: '1px solid #ddd',
-              borderRadius: '4px',
-              fontSize: '14px',
-              textAlign: 'left'
-            }}
+            className="record-editor-input"
           />
         </div>
         
-        <div style={{ marginBottom: '20px' }}>
-          <label style={{ display: 'block', marginBottom: '8px', fontSize: '14px', color: '#495057', fontWeight: 'bold', textAlign: 'left' }}>
+        <div className="record-editor-form-group">
+          <label className="record-editor-label">
             사업명 *
           </label>
           <input
@@ -399,19 +362,12 @@ const RecordEditor = ({
             value={formData.title}
             onChange={handleInputChange}
             required
-            style={{
-              width: '100%',
-              padding: '10px',
-              border: '1px solid #ddd',
-              borderRadius: '4px',
-              fontSize: '14px',
-              textAlign: 'left'
-            }}
+            className="record-editor-input"
           />
         </div>
 
-        <div style={{ marginBottom: '20px' }}>
-          <label style={{ display: 'block', marginBottom: '8px', fontSize: '14px', color: '#495057', fontWeight: 'bold', textAlign: 'left' }}>
+        <div className="record-editor-form-group">
+          <label className="record-editor-label">
             주요품목 *
           </label>
           <input
@@ -420,22 +376,15 @@ const RecordEditor = ({
             value={formData.overview_title}
             onChange={handleInputChange}
             required
-            style={{
-              width: '100%',
-              padding: '10px',
-              border: '1px solid #ddd',
-              borderRadius: '4px',
-              fontSize: '14px',
-              textAlign: 'left'
-            }}
+            className="record-editor-input"
           />
         </div>
 
-        <div style={{ marginBottom: '20px' }}>
-          <label style={{ display: 'block', marginBottom: '8px', fontSize: '14px', color: '#495057', fontWeight: 'bold', textAlign: 'left' }}>
+        <div className="record-editor-form-group">
+          <label className="record-editor-label">
             사업 설명 *
           </label>
-          <div style={{ marginBottom: '8px', fontSize: '12px', color: '#6c757d', fontStyle: 'italic' }}>
+          <div className="record-editor-tip">
             💡 팁: Enter로 줄바꿈, • 또는 - 로 리스트 작성 가능
           </div>
           <textarea
@@ -455,23 +404,12 @@ const RecordEditor = ({
 - 첫 번째 항목
 - 두 번째 항목
 - 세 번째 항목"
-            style={{
-              width: '100%',
-              padding: '10px',
-              border: '1px solid #ddd',
-              borderRadius: '4px',
-              fontSize: '14px',
-              textAlign: 'left',
-              minHeight: '150px',
-              resize: 'vertical',
-              fontFamily: 'inherit',
-              lineHeight: '1.5'
-            }}
+            className="record-editor-textarea"
           />
         </div>
 
-        <div style={{ marginBottom: '20px' }}>
-          <label style={{ display: 'block', marginBottom: '8px', fontSize: '14px', color: '#495057', fontWeight: 'bold', textAlign: 'left' }}>
+        <div className="record-editor-form-group">
+          <label className="record-editor-label">
             날짜 *
           </label>
           <input
@@ -480,19 +418,12 @@ const RecordEditor = ({
             value={formData.date}
             onChange={handleInputChange}
             required
-            style={{
-              width: '100%',
-              padding: '10px',
-              border: '1px solid #ddd',
-              borderRadius: '4px',
-              fontSize: '14px',
-              textAlign: 'left'
-            }}
+            className="record-editor-input"
           />
         </div>
 
-        <div style={{ marginBottom: '20px' }}>
-          <label style={{ display: 'block', marginBottom: '8px', fontSize: '14px', color: '#495057', fontWeight: 'bold', textAlign: 'left' }}>
+        <div className="record-editor-form-group">
+          <label className="record-editor-label">
             {mode === 'product' ? '제조사' : '발주처'} *
           </label>
           <input
@@ -501,14 +432,7 @@ const RecordEditor = ({
             value={formData.orderer}
             onChange={handleInputChange}
             required
-            style={{
-              width: '100%',
-              padding: '10px',
-              border: '1px solid #ddd',
-              borderRadius: '4px',
-              fontSize: '14px',
-              textAlign: 'left'
-            }}
+            className="record-editor-input"
           />
         </div>
 
@@ -516,8 +440,8 @@ const RecordEditor = ({
 
 
 
-        <div style={{ marginBottom: '20px' }}>
-          <label style={{ display: 'block', marginBottom: '8px', fontSize: '14px', color: '#495057', fontWeight: 'bold', textAlign: 'left' }}>
+        <div className="record-editor-form-group">
+          <label className="record-editor-label">
             이미지 업로드
           </label>
           <input
@@ -525,36 +449,19 @@ const RecordEditor = ({
             multiple
             accept="image/*"
             onChange={(e) => handleImageChange(e.target.files)}
-            style={{
-              width: '100%',
-              padding: '10px',
-              border: '1px solid #ddd',
-              borderRadius: '4px',
-              fontSize: '14px'
-            }}
+            className="record-editor-image-upload"
           />
           {formData.images.length > 0 && (
-            <div style={{ marginTop: '10px' }}>
+            <div className="record-editor-image-list">
               <h4>업로드된 이미지:</h4>
-              <p style={{ fontSize: '12px', color: '#666', marginBottom: '10px' }}>
+              <p className="record-editor-tip">
                 💡 이미지를 드래그하여 순서를 변경할 수 있습니다.
               </p>
               {formData.images.map((image, index) => (
                 <div
                   key={index}
                   draggable
-                  style={{
-                    marginBottom: '10px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '10px',
-                    background: index === draggedIndex ? '#e0f7fa' : index === dragOverIndex ? '#f0f8ff' : 'transparent',
-                    border: index === draggedIndex ? '2px dashed #00bcd4' : index === dragOverIndex ? '2px dashed #2196f3' : '1px solid #eee',
-                    borderRadius: '4px',
-                    padding: '10px',
-                    cursor: 'grab',
-                    transition: 'all 0.2s ease'
-                  }}
+                  className={`record-editor-image-item ${index === draggedIndex ? 'dragging' : ''} ${index === dragOverIndex ? 'drag-over' : ''}`}
                   onDragStart={(e) => handleDragStart(e, index)}
                   onDragOver={(e) => handleDragOver(e, index)}
                   onDragLeave={handleDragLeave}
@@ -565,30 +472,17 @@ const RecordEditor = ({
                   }}
                 >
                   <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-                    <span style={{ fontSize: '12px', color: '#666', fontWeight: 'bold' }}>{index + 1}</span>
+                    <span className="record-editor-image-number">{index + 1}</span>
                     <img 
                       src={image} 
                       alt={`이미지 ${index + 1}`} 
-                      style={{ 
-                        width: '50px', 
-                        height: '50px', 
-                        objectFit: 'cover',
-                        borderRadius: '4px'
-                      }} 
+                      className="record-editor-image-thumbnail"
                     />
                   </div>
                   <button
                     type="button"
                     onClick={() => removeImage(index)}
-                    style={{
-                      padding: '5px 10px',
-                      background: '#dc3545',
-                      color: 'white',
-                      border: 'none',
-                      borderRadius: '4px',
-                      cursor: 'pointer',
-                      fontSize: '12px'
-                    }}
+                    className="record-editor-delete-btn"
                   >
                     삭제
                   </button>
@@ -597,17 +491,19 @@ const RecordEditor = ({
             </div>
           )}
         </div>
+        </div>
+
 
         {/* 제품 전용 필드들 */}
         {mode === 'product' && (
           <>
-            <div style={{ marginBottom: '20px', borderTop: '2px solid #dee2e6', paddingTop: '20px' }}>
-              <h4 style={{ marginBottom: '15px', color: '#495057' }}>제품 상세 정보</h4>
+            <div className="record-editor-product-section">
+              <h4 className="record-editor-product-title">제품 상세 정보</h4>
               
 
 
-              <div style={{ marginBottom: '15px' }}>
-                <label style={{ display: 'block', marginBottom: '8px', fontSize: '14px', color: '#495057', fontWeight: 'bold', textAlign: 'left' }}>
+              <div className="record-editor-form-group">
+                <label className="record-editor-label">
                   주요 기능 이미지
                 </label>
                 <input
@@ -648,34 +544,19 @@ const RecordEditor = ({
                       }
                     }
                   }}
-                  style={{
-                    width: '100%',
-                    padding: '10px',
-                    border: '1px solid #ddd',
-                    borderRadius: '4px',
-                    fontSize: '14px'
-                  }}
+                  className="record-editor-image-upload"
                 />
                 {formData.keyFeatures.images && formData.keyFeatures.images.length > 0 && (
-                  <div style={{ marginTop: '10px' }}>
+                  <div className="record-editor-image-list">
                     <h5>업로드된 이미지:</h5>
-                    <p style={{ fontSize: '12px', color: '#666', marginBottom: '10px' }}>
+                    <p className="record-editor-tip">
                       💡 이미지를 드래그하여 순서를 변경할 수 있습니다.
                     </p>
                     {formData.keyFeatures.images.map((imageObj, index) => (
                       <div
                         key={index}
                         draggable
-                        style={{
-                          marginBottom: '15px',
-                          padding: '10px',
-                          border: '1px solid #eee',
-                          borderRadius: '4px',
-                          background: index === draggedIndex ? '#e0f7fa' : index === dragOverIndex ? '#f0f8ff' : 'transparent',
-                          border: index === draggedIndex ? '2px dashed #00bcd4' : index === dragOverIndex ? '2px dashed #2196f3' : '1px solid #eee',
-                          cursor: 'grab',
-                          transition: 'all 0.2s ease'
-                        }}
+                        className={`record-editor-image-item-large ${index === draggedIndex ? 'dragging' : ''} ${index === dragOverIndex ? 'drag-over' : ''}`}
                         onDragStart={(e) => handleDragStart(e, index)}
                         onDragOver={(e) => handleDragOver(e, index)}
                         onDragLeave={handleDragLeave}
@@ -685,12 +566,12 @@ const RecordEditor = ({
                           setDragOverIndex(null);
                         }}
                       >
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px' }}>
-                          <span style={{ fontSize: '12px', color: '#666', fontWeight: 'bold', minWidth: '20px' }}>{index + 1}</span>
+                        <div className="record-editor-image-header">
+                          <span className="record-editor-image-number-large">{index + 1}</span>
                           <img 
                             src={imageObj.url} 
                             alt={`주요 기능 이미지 ${index + 1}`} 
-                            style={{ width: '60px', height: '60px', objectFit: 'cover', borderRadius: '4px' }} 
+                            className="record-editor-image-thumbnail-large"
                           />
                           <button
                             type="button"
@@ -701,15 +582,7 @@ const RecordEditor = ({
                                 keyFeatures: { ...prev.keyFeatures, images: newImages }
                               }));
                             }}
-                            style={{
-                              padding: '5px 10px',
-                              background: '#dc3545',
-                              color: 'white',
-                              border: 'none',
-                              borderRadius: '4px',
-                              cursor: 'pointer',
-                              fontSize: '12px'
-                            }}
+                            className="record-editor-delete-btn"
                           >
                             삭제
                           </button>
@@ -726,13 +599,7 @@ const RecordEditor = ({
                               keyFeatures: { ...prev.keyFeatures, images: newImages }
                             }));
                           }}
-                          style={{
-                            width: '100%',
-                            padding: '8px',
-                            border: '1px solid #ddd',
-                            borderRadius: '4px',
-                            fontSize: '14px'
-                          }}
+                          className="record-editor-image-caption-input"
                         />
                       </div>
                     ))}
@@ -742,8 +609,8 @@ const RecordEditor = ({
 
 
 
-              <div style={{ marginBottom: '15px' }}>
-                <label style={{ display: 'block', marginBottom: '8px', fontSize: '14px', color: '#495057', fontWeight: 'bold', textAlign: 'left' }}>
+              <div className="record-editor-form-group">
+                <label className="record-editor-label">
                   사양 이미지
                 </label>
                 <input
@@ -781,34 +648,19 @@ const RecordEditor = ({
                       }
                     }
                   }}
-                  style={{
-                    width: '100%',
-                    padding: '10px',
-                    border: '1px solid #ddd',
-                    borderRadius: '4px',
-                    fontSize: '14px'
-                  }}
+                  className="record-editor-image-upload"
                 />
                 {formData.specifications && formData.specifications.length > 0 && (
-                  <div style={{ marginTop: '10px' }}>
+                  <div className="record-editor-image-list">
                     <h5>업로드된 사양 이미지:</h5>
-                    <p style={{ fontSize: '12px', color: '#666', marginBottom: '10px' }}>
+                    <p className="record-editor-tip">
                       💡 이미지를 드래그하여 순서를 변경할 수 있습니다.
                     </p>
                     {formData.specifications.map((imageObj, index) => (
                       <div
                         key={index}
                         draggable
-                        style={{
-                          marginBottom: '15px',
-                          padding: '10px',
-                          border: '1px solid #eee',
-                          borderRadius: '4px',
-                          background: index === draggedIndex ? '#e0f7fa' : index === dragOverIndex ? '#f0f8ff' : 'transparent',
-                          border: index === draggedIndex ? '2px dashed #00bcd4' : index === dragOverIndex ? '2px dashed #2196f3' : '1px solid #eee',
-                          cursor: 'grab',
-                          transition: 'all 0.2s ease'
-                        }}
+                        className={`record-editor-image-item-large ${index === draggedIndex ? 'dragging' : ''} ${index === dragOverIndex ? 'drag-over' : ''}`}
                         onDragStart={(e) => handleDragStart(e, index)}
                         onDragOver={(e) => handleDragOver(e, index)}
                         onDragLeave={handleDragLeave}
@@ -818,12 +670,12 @@ const RecordEditor = ({
                           setDragOverIndex(null);
                         }}
                       >
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px' }}>
-                          <span style={{ fontSize: '12px', color: '#666', fontWeight: 'bold', minWidth: '20px' }}>{index + 1}</span>
+                        <div className="record-editor-image-header">
+                          <span className="record-editor-image-number-large">{index + 1}</span>
                           <img 
                             src={imageObj.url} 
                             alt={`사양 이미지 ${index + 1}`} 
-                            style={{ width: '60px', height: '60px', objectFit: 'cover', borderRadius: '4px' }} 
+                            className="record-editor-image-thumbnail-large"
                           />
                           <button
                             type="button"
@@ -834,15 +686,7 @@ const RecordEditor = ({
                                 specifications: newImages
                               }));
                             }}
-                            style={{
-                              padding: '5px 10px',
-                              background: '#dc3545',
-                              color: 'white',
-                              border: 'none',
-                              borderRadius: '4px',
-                              cursor: 'pointer',
-                              fontSize: '12px'
-                            }}
+                            className="record-editor-delete-btn"
                           >
                             삭제
                           </button>
@@ -859,13 +703,7 @@ const RecordEditor = ({
                               specifications: newImages
                             }));
                           }}
-                          style={{
-                            width: '100%',
-                            padding: '8px',
-                            border: '1px solid #ddd',
-                            borderRadius: '4px',
-                            fontSize: '14px'
-                          }}
+                          className="record-editor-image-caption-input"
                         />
                       </div>
                     ))}
@@ -873,8 +711,8 @@ const RecordEditor = ({
                 )}
               </div>
 
-              <div style={{ marginBottom: '15px' }}>
-                <label style={{ display: 'block', marginBottom: '8px', fontSize: '14px', color: '#495057', fontWeight: 'bold', textAlign: 'left' }}>
+              <div className="record-editor-form-group">
+                <label className="record-editor-label">
                   인증 이미지
                 </label>
                 <input
@@ -912,34 +750,19 @@ const RecordEditor = ({
                       }
                     }
                   }}
-                  style={{
-                    width: '100%',
-                    padding: '10px',
-                    border: '1px solid #ddd',
-                    borderRadius: '4px',
-                    fontSize: '14px'
-                  }}
+                  className="record-editor-image-upload"
                 />
                 {formData.certifications && formData.certifications.length > 0 && (
-                  <div style={{ marginTop: '10px' }}>
+                  <div className="record-editor-image-list">
                     <h5>업로드된 인증 이미지:</h5>
-                    <p style={{ fontSize: '12px', color: '#666', marginBottom: '10px' }}>
+                    <p className="record-editor-tip">
                       💡 이미지를 드래그하여 순서를 변경할 수 있습니다.
                     </p>
                     {formData.certifications.map((imageObj, index) => (
                       <div
                         key={index}
                         draggable
-                        style={{
-                          marginBottom: '15px',
-                          padding: '10px',
-                          border: '1px solid #eee',
-                          borderRadius: '4px',
-                          background: index === draggedIndex ? '#e0f7fa' : index === dragOverIndex ? '#f0f8ff' : 'transparent',
-                          border: index === draggedIndex ? '2px dashed #00bcd4' : index === dragOverIndex ? '2px dashed #2196f3' : '1px solid #eee',
-                          cursor: 'grab',
-                          transition: 'all 0.2s ease'
-                        }}
+                        className={`record-editor-image-item-large ${index === draggedIndex ? 'dragging' : ''} ${index === dragOverIndex ? 'drag-over' : ''}`}
                         onDragStart={(e) => handleDragStart(e, index)}
                         onDragOver={(e) => handleDragOver(e, index)}
                         onDragLeave={handleDragLeave}
@@ -949,12 +772,12 @@ const RecordEditor = ({
                           setDragOverIndex(null);
                         }}
                       >
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px' }}>
-                          <span style={{ fontSize: '12px', color: '#666', fontWeight: 'bold', minWidth: '20px' }}>{index + 1}</span>
+                        <div className="record-editor-image-header">
+                          <span className="record-editor-image-number-large">{index + 1}</span>
                           <img 
                             src={imageObj.url} 
                             alt={`인증 이미지 ${index + 1}`} 
-                            style={{ width: '60px', height: '60px', objectFit: 'cover', borderRadius: '4px' }} 
+                            className="record-editor-image-thumbnail-large"
                           />
                           <button
                             type="button"
@@ -965,15 +788,7 @@ const RecordEditor = ({
                                 certifications: newImages
                               }));
                             }}
-                            style={{
-                              padding: '5px 10px',
-                              background: '#dc3545',
-                              color: 'white',
-                              border: 'none',
-                              borderRadius: '4px',
-                              cursor: 'pointer',
-                              fontSize: '12px'
-                            }}
+                            className="record-editor-delete-btn"
                           >
                             삭제
                           </button>
@@ -990,13 +805,7 @@ const RecordEditor = ({
                               certifications: newImages
                             }));
                           }}
-                          style={{
-                            width: '100%',
-                            padding: '8px',
-                            border: '1px solid #ddd',
-                            borderRadius: '4px',
-                            fontSize: '14px'
-                          }}
+                          className="record-editor-image-caption-input"
                         />
                       </div>
                     ))}
@@ -1004,9 +813,9 @@ const RecordEditor = ({
                 )}
               </div>
 
-              <div style={{ marginBottom: '15px' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-                  <label style={{ fontSize: '14px', color: '#495057', fontWeight: 'bold', textAlign: 'left' }}>
+              <div className="record-editor-form-group">
+                <div className="record-editor-download-header">
+                  <label className="record-editor-label">
                     다운로드
                   </label>
                   <button
@@ -1017,26 +826,15 @@ const RecordEditor = ({
                         downloads: [...prev.downloads, { title: '', description: '', link: '' }]
                       }));
                     }}
-                    style={{
-                      padding: '4px 8px',
-                      background: '#28a745',
-                      color: 'white',
-                      border: 'none',
-                      borderRadius: '4px',
-                      cursor: 'pointer',
-                      fontSize: '12px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '4px'
-                    }}
+                    className="record-editor-add-btn"
                   >
                     <span style={{ fontSize: '14px' }}>+</span> 추가
                   </button>
                 </div>
                 {formData.downloads.map((download, index) => (
-                  <div key={index} style={{ marginBottom: '10px', padding: '10px', border: '1px solid #eee', borderRadius: '4px', position: 'relative' }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-                      <span style={{ fontSize: '12px', color: '#666' }}>다운로드 {index + 1}</span>
+                  <div key={index} className="record-editor-download-item">
+                    <div className="record-editor-download-header">
+                      <span className="record-editor-download-number">다운로드 {index + 1}</span>
                       {formData.downloads.length > 1 && (
                         <button
                           type="button"
@@ -1044,15 +842,8 @@ const RecordEditor = ({
                             const newDownloads = formData.downloads.filter((_, i) => i !== index);
                             setFormData(prev => ({ ...prev, downloads: newDownloads }));
                           }}
-                          style={{
-                            padding: '2px 6px',
-                            background: '#dc3545',
-                            color: 'white',
-                            border: 'none',
-                            borderRadius: '3px',
-                            cursor: 'pointer',
-                            fontSize: '10px'
-                          }}
+                          className="record-editor-delete-btn"
+                          style={{ padding: '2px 6px', fontSize: '10px' }}
                         >
                           삭제
                         </button>
@@ -1067,14 +858,7 @@ const RecordEditor = ({
                         newDownloads[index] = { ...newDownloads[index], title: e.target.value };
                         setFormData(prev => ({ ...prev, downloads: newDownloads }));
                       }}
-                      style={{
-                        width: '100%',
-                        padding: '6px',
-                        border: '1px solid #ddd',
-                        borderRadius: '4px',
-                        fontSize: '14px',
-                        marginBottom: '5px'
-                      }}
+                      className="record-editor-download-input"
                     />
                     <input
                       type="text"
@@ -1085,14 +869,7 @@ const RecordEditor = ({
                         newDownloads[index] = { ...newDownloads[index], description: e.target.value };
                         setFormData(prev => ({ ...prev, downloads: newDownloads }));
                       }}
-                      style={{
-                        width: '100%',
-                        padding: '6px',
-                        border: '1px solid #ddd',
-                        borderRadius: '4px',
-                        fontSize: '14px',
-                        marginBottom: '5px'
-                      }}
+                      className="record-editor-download-input"
                     />
 
                     <input
@@ -1104,44 +881,28 @@ const RecordEditor = ({
                         newDownloads[index] = { ...newDownloads[index], link: e.target.value };
                         setFormData(prev => ({ ...prev, downloads: newDownloads }));
                       }}
-                      style={{
-                        width: '100%',
-                        padding: '6px',
-                        border: '1px solid #ddd',
-                        borderRadius: '4px',
-                        fontSize: '14px'
-                      }}
+                      className="record-editor-download-input"
                     />
                   </div>
                 ))}
               </div>
 
-              <div style={{ marginBottom: '15px' }}>
-                <label style={{ display: 'block', marginBottom: '8px', fontSize: '14px', color: '#495057', fontWeight: 'bold', textAlign: 'left' }}>
+              <div className="record-editor-form-group">
+                <label className="record-editor-label">
                   동영상 링크
                 </label>
                 <div style={{ marginBottom: '10px' }}>
-                  <input
-                    type="text"
+                  <textarea
                     placeholder="동영상 링크를 입력하세요 (YouTube, Vimeo 등)"
                     value={formData.videos.join('\n')}
                     onChange={(e) => {
                       const links = e.target.value.split('\n').filter(link => link.trim() !== '');
                       setFormData(prev => ({ ...prev, videos: links }));
                     }}
-                    style={{
-                      width: '100%',
-                      padding: '10px',
-                      border: '1px solid #ddd',
-                      borderRadius: '4px',
-                      fontSize: '14px',
-                      minHeight: '100px',
-                      resize: 'vertical'
-                    }}
-                    as="textarea"
+                    className="record-editor-video-textarea"
                   />
                 </div>
-                <div style={{ fontSize: '12px', color: '#666', marginTop: '5px' }}>
+                <div className="record-editor-video-tip">
                   여러 링크를 입력하려면 줄바꿈으로 구분하세요.
                 </div>
               </div>
@@ -1149,39 +910,18 @@ const RecordEditor = ({
           </>
         )}
 
-        <div style={{ 
-          display: 'flex', 
-          gap: '10px', 
-          justifyContent: 'flex-end',
-          marginTop: '20px'
-        }}>
+        <div className="record-editor-button-group">
           <button
             onClick={handleCancel}
             disabled={submitting}
-            style={{
-              padding: '10px 20px',
-              border: '1px solid #ddd',
-              borderRadius: '4px',
-              background: '#fff',
-              color: '#666',
-              cursor: 'pointer',
-              fontSize: '14px'
-            }}
+            className="record-editor-cancel-btn"
           >
             취소
           </button>
           <button
             onClick={handleSave}
             disabled={submitting}
-            style={{
-              padding: '10px 20px',
-              border: 'none',
-              borderRadius: '4px',
-              background: submitting ? '#ccc' : '#007bff',
-              color: '#fff',
-              cursor: submitting ? 'not-allowed' : 'pointer',
-              fontSize: '14px'
-            }}
+            className="record-editor-save-btn"
           >
             {submitting ? '저장 중...' : '저장'}
           </button>
@@ -1192,51 +932,20 @@ const RecordEditor = ({
 
   if (isModal) {
     return (
-      <div style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        background: 'rgba(0,0,0,0.5)',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        zIndex: 1000,
-        padding: '20px'
-      }}>
-        <div style={{
-          background: 'white',
-          borderRadius: '10px',
-          width: '95vw',
-          maxWidth: '1400px',
-          maxHeight: '95vh',
-          overflow: 'auto'
-        }}>
-          <div style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            padding: '20px',
-            borderBottom: '1px solid #eee'
-          }}>
-            <h2 style={{ margin: 0, fontSize: '24px', color: '#333' }}>
+      <div className="record-editor-modal-overlay">
+        <div className="record-editor-modal">
+          <div className="record-editor-modal-header">
+            <h2 className="record-editor-modal-title">
               {editData ? `${modeConfig.title} 편집` : `${modeConfig.title} 추가`}
             </h2>
             <button
               onClick={handleCancel}
-              style={{
-                background: 'none',
-                border: 'none',
-                fontSize: '24px',
-                cursor: 'pointer',
-                color: '#666'
-              }}
+              className="record-editor-modal-close"
             >
               ×
             </button>
           </div>
-          <div style={{ display: 'flex', gap: '20px', padding: '20px' }}>
+          <div className="record-editor-modal-content">
             {content}
           </div>
         </div>
@@ -1245,42 +954,7 @@ const RecordEditor = ({
   }
 
   return (
-    <div style={{
-      maxWidth: '800px',
-      margin: '0 auto',
-      padding: '20px',
-      backgroundColor: '#fff',
-      borderRadius: '8px',
-      boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
-      fontFamily: 'Arial, sans-serif'
-    }}>
-      <style>
-        {`
-          .drag-item {
-            transition: all 0.2s ease;
-          }
-          
-          .drag-item:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-          }
-          
-          .drag-item:active {
-            cursor: grabbing;
-          }
-          
-          .drag-over {
-            background-color: #f0f8ff !important;
-            border: 2px dashed #2196f3 !important;
-            transform: scale(1.02);
-          }
-          
-          .drag-dragging {
-            opacity: 0.5;
-            transform: rotate(5deg);
-          }
-        `}
-      </style>
+    <div className="record-editor-page-container">
       {content}
     </div>
   );

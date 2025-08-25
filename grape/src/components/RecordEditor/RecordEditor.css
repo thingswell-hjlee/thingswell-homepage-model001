@@ -1,0 +1,404 @@
+.record-editor-container {
+  display: flex;
+  gap: 20px;
+  height: 100%;
+  max-height: 80vh;
+}
+
+.record-editor-container-modal {
+  max-height: 80vh;
+}
+
+.record-editor-preview {
+  flex: 2;
+  overflow: auto;
+  background: #fff;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.record-editor-preview-content {
+  transform: scale(0.8);
+  width: 125%;
+  transform-origin: top left;
+  min-height: 400px;
+}
+
+.record-editor-panel {
+  flex: 1;
+  flex-direction: column;
+  padding: 20px;
+  overflow: auto;
+  background: #f8f9fa;
+  border-radius: 8px;
+  min-width: 300px;
+  
+}
+
+.record-editor-title {
+  margin-bottom: 20px;
+  color: #495057;
+}
+
+.record-editor-form-group {
+  margin-bottom: 20px;
+}
+
+.record-editor-label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #495057;
+  font-weight: bold;
+  text-align: left;
+}
+
+.record-editor-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  text-align: left;
+}
+
+.record-editor-textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  text-align: left;
+  min-height: 150px;
+  resize: vertical;
+  font-family: inherit;
+  line-height: 1.5;
+}
+
+.record-editor-tip {
+  margin-bottom: 8px;
+  font-size: 12px;
+  color: #6c757d;
+  font-style: italic;
+}
+
+.record-editor-image-upload {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.record-editor-image-list {
+  margin-top: 10px;
+}
+
+.record-editor-image-item {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  padding: 10px;
+  cursor: grab;
+  transition: all 0.2s ease;
+}
+
+.record-editor-image-item.dragging {
+  background: #e0f7fa;
+  border: 2px dashed #00bcd4;
+}
+
+.record-editor-image-item.drag-over {
+  background: #f0f8ff;
+  border: 2px dashed #2196f3;
+}
+
+.record-editor-image-number {
+  font-size: 12px;
+  color: #666;
+  font-weight: bold;
+}
+
+.record-editor-image-thumbnail {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.record-editor-delete-btn {
+  padding: 5px 10px;
+  background: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.record-editor-product-section {
+  margin-bottom: 20px;
+  border-top: 2px solid #dee2e6;
+  padding-top: 20px;
+}
+
+.record-editor-product-title {
+  margin-bottom: 15px;
+  color: #495057;
+}
+
+.record-editor-add-btn {
+  padding: 4px 8px;
+  background: #28a745;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.record-editor-download-item {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  position: relative;
+}
+
+.record-editor-download-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.record-editor-download-number {
+  font-size: 12px;
+  color: #666;
+}
+
+.record-editor-download-input {
+  width: 100%;
+  padding: 6px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.record-editor-download-input:last-child {
+  margin-bottom: 0;
+}
+
+.record-editor-video-textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  min-height: 100px;
+  resize: vertical;
+}
+
+.record-editor-video-tip {
+  font-size: 12px;
+  color: #666;
+  margin-top: 5px;
+}
+
+.record-editor-button-group {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.record-editor-cancel-btn {
+  padding: 10px 20px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: #fff;
+  color: #666;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.record-editor-save-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  background: #007bff;
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.record-editor-save-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.record-editor-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.record-editor-modal {
+  background: white;
+  border-radius: 10px;
+  width: 95vw;
+  max-width: 1400px;
+  max-height: 95vh;
+  overflow: auto;
+}
+
+.record-editor-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.record-editor-modal-title {
+  margin: 0;
+  font-size: 24px;
+  color: #333;
+}
+
+.record-editor-modal-close {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #666;
+}
+
+.record-editor-modal-content {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+}
+
+.record-editor-page-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  font-family: Arial, sans-serif;
+}
+
+.record-editor-drag-item {
+  transition: all 0.2s ease;
+}
+
+.record-editor-drag-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.record-editor-drag-item:active {
+  cursor: grabbing;
+}
+
+.record-editor-drag-over {
+  background-color: #f0f8ff !important;
+  border: 2px dashed #2196f3 !important;
+  transform: scale(1.02);
+}
+
+.record-editor-drag-dragging {
+  opacity: 0.5;
+  transform: rotate(5deg);
+}
+
+.record-editor-image-caption-input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.record-editor-image-item-large {
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  cursor: grab;
+  transition: all 0.2s ease;
+}
+
+.record-editor-image-item-large.dragging {
+  background: #e0f7fa;
+  border: 2px dashed #00bcd4;
+}
+
+.record-editor-image-item-large.drag-over {
+  background: #f0f8ff;
+  border: 2px dashed #2196f3;
+}
+
+.record-editor-image-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.record-editor-image-number-large {
+  font-size: 12px;
+  color: #666;
+  font-weight: bold;
+  min-width: 20px;
+}
+
+.record-editor-image-thumbnail-large {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+/* 드래그 관련 스타일 */
+.record-editor-drag-item {
+  transition: all 0.2s ease;
+}
+
+.record-editor-drag-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.record-editor-drag-item:active {
+  cursor: grabbing;
+}
+
+.record-editor-drag-over {
+  background-color: #f0f8ff !important;
+  border: 2px dashed #2196f3 !important;
+  transform: scale(1.02);
+}
+
+.record-editor-drag-dragging {
+  opacity: 0.5;
+  transform: rotate(5deg);
+}
