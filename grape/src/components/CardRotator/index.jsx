@@ -142,9 +142,11 @@ function CardRotator({ cards, className = "", onCardChange, currentIndex: extern
         className={`hero-card ${isFading ? "card-enter" : "card-leave"}`}
         style={maxCardHeight ? { minHeight: `${maxCardHeight}px` } : undefined}
       >
-        <p className="hero-eyebrow">{cards[currentIndex].eyebrow}</p>
-        <div className="hero-desc-container">
+        <div className="hero-title-container">
+          <p className="hero-eyebrow">{cards[currentIndex].eyebrow}</p>
           <h1 className="hero-title">{cards[currentIndex].title}</h1>
+        </div>
+        <div className="hero-desc-container">
           <p className="hero-desc">{cards[currentIndex].description}</p>
           {cards[currentIndex].descriptionEng && (
             <p className="hero-desc-eng">{cards[currentIndex].descriptionEng}</p>
@@ -156,6 +158,18 @@ function CardRotator({ cards, className = "", onCardChange, currentIndex: extern
           </Link>
           <span className="hero-caption">{cards[currentIndex].caption}</span>
         </div>
+        <div className="dot-pagination" role="tablist" aria-label="hero pagination">
+        {cards.map((_, index) => (
+          <button
+            key={index}
+            className={`dot ${currentIndex === index ? "active" : ""}`}
+            aria-label={`Go to slide ${index + 1}`}
+            aria-selected={currentIndex === index}
+            role="tab"
+            onClick={() => handleDotClick(index)}
+          />
+        ))}
+      </div>
       </article>
       
       {/* 측정용 숨김 카드들: 레이아웃에 영향 없음 */}
@@ -185,18 +199,7 @@ function CardRotator({ cards, className = "", onCardChange, currentIndex: extern
         ))}
       </div>
       
-      <div className="dot-pagination" role="tablist" aria-label="hero pagination">
-        {cards.map((_, index) => (
-          <button
-            key={index}
-            className={`dot ${currentIndex === index ? "active" : ""}`}
-            aria-label={`Go to slide ${index + 1}`}
-            aria-selected={currentIndex === index}
-            role="tab"
-            onClick={() => handleDotClick(index)}
-          />
-        ))}
-      </div>
+     
     </div>
   );
 }

@@ -2,11 +2,8 @@
 
 .card-rotator {
   position: relative;
-  width: min(92vw, 1400px);
+  width: min(80vw, 1400px);
   margin: 0 auto 24px auto;
-  height: 380px; /* 높이를 늘려서 텍스트 공간 확보 */
-  min-height: 380px; /* 최소 높이 고정 */
-  max-height: 380px; /* 최대 높이 제한 */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -18,7 +15,6 @@
 .hero-card {
   position: relative;
   display: grid;
-  gap: var(--spacing-md);
   text-align: left;
   border-radius: 15px;
   background: rgba(10, 10, 10, 0.85);
@@ -26,11 +22,11 @@
   border: 1px solid rgba(255, 255, 255, 0.14);
   color: var(--color-text-light);
   box-shadow: 0 20px 60px rgba(0,0,0,0.45);
-  padding: clamp(16px, 3vw, 28px);
+  padding: clamp(12px, 2.5vw, 24px);
   width: 100%;
   height: 100%; /* 부모 container의 전체 높이 사용 */
-  max-height: 340px; /* 최대 높이를 늘려서 텍스트 공간 확보 */
-  min-height: 340px; /* 최소 높이도 늘림 */
+  max-height: 280px; /* 최대 높이를 줄임 */
+  min-height: 280px; /* 최소 높이도 줄임 */
   box-sizing: border-box;
   overflow: visible; /* 오버플로우를 visible로 변경 */
   z-index: 10;
@@ -59,7 +55,6 @@
 .hero-desc-container {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-md);
 }
 
 .hero-desc {
@@ -106,27 +101,23 @@
   pointer-events: auto;
 }
 
-.hero-cta:hover { 
-  background: #ff5f43; 
-  transform: translateY(-1px); 
-}
-
-.hero-cta:active { 
-  transform: translateY(0); 
-}
-
-.hero-caption {
-  font-size: var(--font-size-xs);
-  color: rgba(255,255,255,0.7);
+.hero-cta:hover {
+  background: #ff5f43;
+  transform: translateY(-1px);
 }
 
 /* 히어로 카드 아래 점 페이지네이션 */
-.dot-pagination {
-  margin-top: var(--spacing-xs);
+.hero-card .dot-pagination {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 10px;
+  width: auto; /* 가변 너비로 중앙 정렬이 정확하게 동작하도록 함 */
+  position: absolute;
+  bottom: 16px; /* 박스 내부 하단에 위치시키기 위해 내부 여백 설정 */
+  left: 50%;
+  transform: translateX(-50%); /* 박스 내부 수평 중앙 정렬 */
+  z-index: 20; /* 카드 텍스트 위에 표시되도록 z-index 설정 */
 }
 
 .dot {
@@ -191,58 +182,58 @@
 /* 반응형 디자인 */
 @media screen and (min-width: 1024px) and (max-width: 1279px) {
   .card-rotator {
-    width: min(95vw, 1200px);
-    height: 360px; /* 높이 증가 */
-    min-height: 360px;
-    max-height: 360px;
-  }
-
-  .hero-card {
-    max-height: 320px; /* 높이 증가 */
-    min-height: 320px;
-  }
-}
-
-@media screen and (min-width: 769px) and (max-width: 1023px) {
-  .card-rotator {
-    width: min(95vw, 900px);
-    height: 340px; /* 높이 증가 */
-    min-height: 340px;
-    max-height: 340px;
-  }
-
-  .hero-card {
-    max-height: 300px; /* 높이 증가 */
-    min-height: 300px;
-  }
-}
-
-@media screen and (min-width: 480px) and (max-width: 767px) {
-  .card-rotator {
-    width: min(95vw, 600px);
-    height: 320px; /* 높이 증가 */
-    min-height: 320px;
-    max-height: 320px;
-  }
-
-  .hero-card {
-    max-height: 280px; /* 높이 증가 */
-    min-height: 280px;
-  }
-}
-
-@media screen and (max-width: 479px) {
-  .card-rotator {
-    width: min(95vw, 400px);
-    height: 300px; /* 높이 증가 */
+    width: min(85vw, 900px);
+    height: 300px; /* 높이 감소 */
     min-height: 300px;
     max-height: 300px;
   }
 
   .hero-card {
-    max-height: 260px; /* 높이 증가 */
+    max-height: 260px; /* 높이 감소 */
     min-height: 260px;
-    padding: clamp(12px, 2vw, 20px);
+  }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1023px) {
+  .card-rotator {
+    width: min(85vw, 700px);
+    height: 280px; /* 높이 감소 */
+    min-height: 280px;
+    max-height: 280px;
+  }
+
+  .hero-card {
+    max-height: 240px; /* 높이 감소 */
+    min-height: 240px;
+  }
+}
+
+@media screen and (min-width: 480px) and (max-width: 767px) {
+  .card-rotator {
+    width: min(85vw, 500px);
+    height: 260px; /* 높이 감소 */
+    min-height: 260px;
+    max-height: 260px;
+  }
+
+  .hero-card {
+    max-height: 220px; /* 높이 감소 */
+    min-height: 220px;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .card-rotator {
+    width: min(85vw, 350px);
+    height: 240px; /* 높이 감소 */
+    min-height: 240px;
+    max-height: 240px;
+  }
+
+  .hero-card {
+    max-height: 200px; /* 높이 감소 */
+    min-height: 200px;
+    padding: clamp(10px, 1.5vw, 16px);
   }
 
   .hero-title {
