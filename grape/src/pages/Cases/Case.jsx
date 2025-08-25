@@ -194,22 +194,7 @@ export default function TrackRecordPage({ kindFilter = null }) {
           images: formData.images && formData.images.length > 0 ? JSON.stringify(formData.images) : null
         };
 
-        // 제품 전용 필드들이 있는 경우 추가
-        if (formData.keyFeatures) {
-          updateData.keyFeatures = JSON.stringify(formData.keyFeatures);
-        }
-        if (formData.specifications) {
-          updateData.specifications = JSON.stringify(formData.specifications);
-        }
-        if (formData.certifications) {
-          updateData.certifications = JSON.stringify(formData.certifications);
-        }
-        if (formData.downloads) {
-          updateData.downloads = JSON.stringify(formData.downloads);
-        }
-        if (formData.videos) {
-          updateData.videos = JSON.stringify(formData.videos);
-        }
+        // 실적 모드에서는 제품 전용 필드들(keyFeatures, specifications, certifications, downloads, videos)을 저장하지 않음
         
         const { data, error } = await supabase
           .from('Track_record')
@@ -270,22 +255,7 @@ export default function TrackRecordPage({ kindFilter = null }) {
           images: formData.images && formData.images.length > 0 ? JSON.stringify(formData.images) : null
         };
 
-        // 제품 전용 필드들이 있는 경우 추가
-        if (formData.keyFeatures) {
-          insertData.keyFeatures = JSON.stringify(formData.keyFeatures);
-        }
-        if (formData.specifications) {
-          insertData.specifications = JSON.stringify(formData.specifications);
-        }
-        if (formData.certifications) {
-          insertData.certifications = JSON.stringify(formData.certifications);
-        }
-        if (formData.downloads) {
-          insertData.downloads = JSON.stringify(formData.downloads);
-        }
-        if (formData.videos) {
-          insertData.videos = JSON.stringify(formData.videos);
-        }
+        // 실적 모드에서는 제품 전용 필드들(keyFeatures, specifications, certifications, downloads, videos)을 저장하지 않음
         
         // 데이터베이스에 저장
         const { data, error } = await supabase

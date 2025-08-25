@@ -5,6 +5,7 @@
   overflow-x: hidden;
   position: relative;
   z-index: 1;
+  text-align: left;
 }
 
 .product-page-content {
@@ -52,6 +53,7 @@
 .tab-content-area {
   display: flex;
   flex-direction: column;
+  text-align: left;
 }
 
 /* moved .content-bottom-box styles to ContentBottomBox.css */

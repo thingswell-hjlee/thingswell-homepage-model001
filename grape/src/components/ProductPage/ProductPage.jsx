@@ -268,6 +268,7 @@ const ProductPage = ({
             breadcrumbs={productData.breadcrumbs}
             isEditMode={isEditMode}
             onDataChange={handleDataChange}
+            isRecordPage={isRecordPage}
           />
           
           <div className="product-main-section">
@@ -296,23 +297,26 @@ const ProductPage = ({
                   <div className="tab-content-area">
                     {isEditMode ? (
                       <div style={{ padding: '20px', background: '#fff', borderRadius: '8px', marginBottom: '20px' }}>
-                        <h3 style={{ marginBottom: '15px', color: '#495057' }}>개요 편집</h3>
                         <div style={{ marginBottom: '20px' }}>
-                          <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold', color: '#6c757d' }}>개요 제목</label>
+                          <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold', color: '#6c757d' }}>
+                            {isRecordPage ? '실적명' : '제품명'}
+                          </label>
                           <EditableText
                             field="overview_title"
                             value={productData.overview_title}
-                            placeholder="개요 제목을 입력하세요"
+                            placeholder={isRecordPage ? "실적명을 입력하세요" : "제품명을 입력하세요"}
                             style={{ fontSize: '18px', fontWeight: 'bold' }}
                             onSave={handleDataChange}
                           />
                         </div>
                         <div>
-                          <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold', color: '#6c757d' }}>개요 내용</label>
+                          <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold', color: '#6c757d' }}>
+                            {isRecordPage ? '실적 설명' : '제품 설명'}
+                          </label>
                           <EditableText
                             field="overview"
                             value={productData.overview}
-                            placeholder="개요 내용을 입력하세요"
+                            placeholder={isRecordPage ? "실적 설명을 입력하세요" : "제품 설명을 입력하세요"}
                             multiline={true}
                             style={{ fontSize: '14px', lineHeight: '1.6' }}
                             onSave={handleDataChange}

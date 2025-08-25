@@ -293,9 +293,9 @@ const RecordEditor = ({
         <div className="record-editor-preview-content">
                       <ProductPage
               productData={{
-                name: formData.title || '제목을 입력하세요',
-                title: formData.overview_title || '개요 제목을 입력하세요',
-                overview_title: formData.overview_title || '개요 제목을 입력하세요',
+                name: formData.title || (mode === 'record' ? '실적명을 입력하세요' : '제품명을 입력하세요'),
+                title: formData.overview_title || (mode === 'record' ? '실적명을 입력하세요' : '제품명을 입력하세요'),
+                overview_title: formData.overview_title || (mode === 'record' ? '실적명을 입력하세요' : '제품명을 입력하세요'),
                 overview: formData.desc || '내용을 입력하세요',
                 images: formData.images || [],
                 breadcrumbs: modeConfig.breadcrumbs,
@@ -354,7 +354,7 @@ const RecordEditor = ({
         
         <div className="record-editor-form-group">
           <label className="record-editor-label">
-            제목 *
+          {mode === 'record' ? '실적명' : '모델명'} *
           </label>
           <input
             type="text"
@@ -368,7 +368,7 @@ const RecordEditor = ({
 
         <div className="record-editor-form-group">
           <label className="record-editor-label">
-            제품명 *
+            {mode === 'record' ? '소제목' : '제품명'} *
           </label>
           <input
             type="text"
@@ -382,7 +382,7 @@ const RecordEditor = ({
 
         <div className="record-editor-form-group">
           <label className="record-editor-label">
-            제품 설명 *
+            {mode === 'record' ? '실적 설명' : '제품 설명'} *
           </label>
           <div className="record-editor-tip">
             💡 팁: Enter로 줄바꿈, • 또는 - 로 리스트 작성 가능
@@ -392,18 +392,10 @@ const RecordEditor = ({
             value={formData.desc}
             onChange={handleInputChange}
             required
-            placeholder="내용을 입력하세요...
-
-예시:
-• 첫 번째 항목
-• 두 번째 항목
-• 세 번째 항목
-
-또는
-
-- 첫 번째 항목
-- 두 번째 항목
-- 세 번째 항목"
+            placeholder={mode === 'record' ? 
+              "실적 설명을 입력하세요...\n\n예시:\n• 첫 번째 항목\n• 두 번째 항목\n• 세 번째 항목\n\n또는\n\n- 첫 번째 항목\n- 두 번째 항목\n- 세 번째 항목" : 
+              "내용을 입력하세요...\n\n예시:\n• 첫 번째 항목\n• 두 번째 항목\n• 세 번째 항목\n\n또는\n\n- 첫 번째 항목\n- 두 번째 항목\n- 세 번째 항목"
+            }
             className="record-editor-textarea"
           />
         </div>
@@ -727,10 +719,11 @@ const RecordEditor = ({
                 )}
               </div>
 
-              <div className="record-editor-form-group">
-                <label className="record-editor-label">
-                  인증 이미지
-                </label>
+              {mode === 'product' && (
+                <div className="record-editor-form-group">
+                  <label className="record-editor-label">
+                    인증 이미지
+                  </label>
                 <input
                   type="file"
                   multiple
@@ -828,6 +821,7 @@ const RecordEditor = ({
                   </div>
                 )}
               </div>
+              )}
 
               <div className="record-editor-form-group">
                 <div className="record-editor-download-header">
