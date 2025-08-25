@@ -518,9 +518,9 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
   // 관리자 권한에 따라 메뉴 아이템 필터링
   const filteredMenuItems = useMemo(() => {
     return defaultMenuItems.filter(item => {
-      // 관리자가 아닌 경우 정부지원사업과 고객사례 메뉴 숨김
+      // 관리자가 아닌 경우 정부지원사업과 쇼핑몰 메뉴 숨김
       if (!isAdmin()) {
-        if (item.label === '정부지원사업' || item.label === '고객사례') {
+        if (item.label === '정부지원사업' || item.label === '쇼핑몰') {
           return false;
         }
       }
