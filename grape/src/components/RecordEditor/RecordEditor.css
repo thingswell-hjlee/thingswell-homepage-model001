@@ -5,8 +5,18 @@
   max-height: 80vh;
 }
 
+.record-editor-container > * {
+  flex: 1;
+}
+
 .record-editor-container-modal {
   max-height: 80vh;
+  display: flex;
+  gap: 20px;
+}
+
+.record-editor-container-modal > * {
+  flex: 1;
 }
 
 .record-editor-preview {
@@ -15,6 +25,7 @@
   background: #fff;
   border-radius: 8px;
   border: 1px solid #ddd;
+  scrollbar-width: none;    
 }
 
 .record-editor-preview-content {
@@ -25,14 +36,25 @@
 }
 
 .record-editor-panel {
-  flex: 1;
-  flex-direction: column;
+  display: flex;
+  flex-direction: row;
   padding: 20px;
   overflow: auto;
   background: #f8f9fa;
   border-radius: 8px;
   min-width: 300px;
-  
+  gap:var(--spacing-xl);
+}
+
+.record-editor-panel-header {
+  display: flex !important;
+  flex-direction: column !important;
+  width: 100%;
+}
+
+.record-editor-panel > * {
+  display: block !important;
+  width: 100% !important;
 }
 
 .record-editor-title {
@@ -140,11 +162,6 @@
   font-size: 12px;
 }
 
-.record-editor-product-section {
-  margin-bottom: 20px;
-  border-top: 2px solid #dee2e6;
-  padding-top: 20px;
-}
 
 .record-editor-product-title {
   margin-bottom: 15px;
@@ -262,9 +279,9 @@
 .record-editor-modal {
   background: white;
   border-radius: 10px;
-  width: 95vw;
-  max-width: 1400px;
-  max-height: 95vh;
+  width: 98vw;
+  max-width: 1800px;
+  max-height: 98vh;
   overflow: auto;
 }
 

@@ -340,7 +340,7 @@ const RecordEditor = ({
 
         <div className="record-editor-form-group">
           <label className="record-editor-label">
-            소분류 *
+            카테고리 *
           </label>
           <input
             type="text"
@@ -354,7 +354,7 @@ const RecordEditor = ({
         
         <div className="record-editor-form-group">
           <label className="record-editor-label">
-            사업명 *
+            제목 *
           </label>
           <input
             type="text"
@@ -368,7 +368,7 @@ const RecordEditor = ({
 
         <div className="record-editor-form-group">
           <label className="record-editor-label">
-            주요품목 *
+            제품명 *
           </label>
           <input
             type="text"
@@ -382,7 +382,7 @@ const RecordEditor = ({
 
         <div className="record-editor-form-group">
           <label className="record-editor-label">
-            사업 설명 *
+            제품 설명 *
           </label>
           <div className="record-editor-tip">
             💡 팁: Enter로 줄바꿈, • 또는 - 로 리스트 작성 가능
@@ -498,10 +498,6 @@ const RecordEditor = ({
         {mode === 'product' && (
           <>
             <div className="record-editor-product-section">
-              <h4 className="record-editor-product-title">제품 상세 정보</h4>
-              
-
-
               <div className="record-editor-form-group">
                 <label className="record-editor-label">
                   주요 기능 이미지
@@ -906,11 +902,7 @@ const RecordEditor = ({
                   여러 링크를 입력하려면 줄바꿈으로 구분하세요.
                 </div>
               </div>
-            </div>
-          </>
-        )}
-
-        <div className="record-editor-button-group">
+              <div className="record-editor-button-group">
           <button
             onClick={handleCancel}
             disabled={submitting}
@@ -926,6 +918,11 @@ const RecordEditor = ({
             {submitting ? '저장 중...' : '저장'}
           </button>
         </div>
+            </div>
+          </>
+        )}
+
+
       </div>
     </div>
   );
