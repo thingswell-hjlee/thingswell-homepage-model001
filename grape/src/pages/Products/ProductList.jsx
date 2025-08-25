@@ -140,6 +140,8 @@ const ProductList = ({
   // 추가: 삭제 관련 props
   onDeleteRecord = null,
   canDelete = false,
+  // 추가: 활성화 토글 관련 props
+  onToggleActive = null,
   itemsPerPage: customItemsPerPage = 9,
   disableScrollOnPageChange = false,
   cols = 4,
@@ -174,6 +176,11 @@ const ProductList = ({
 
   const filteredProducts = useMemo(() => {
     return products.filter((product) => {
+      // 관리자가 아닌 경우 비활성화된 항목은 보이지 않게 함
+      if (!canEdit && product.rawData && product.rawData.is_active === false) {
+        return false;
+      }
+
       const term = searchTerm.trim().toLowerCase();
       const matchesSearch =
         !term ||
@@ -192,7 +199,7 @@ const ProductList = ({
       const matchesCategory = selectedList.includes(product.category);
       return matchesCategory && matchesSearch;
     });
-  }, [products, selectedCategory, searchTerm]);
+  }, [products, selectedCategory, searchTerm, canEdit]);
 
   // 페이징 처리 - 전체 데이터를 페이징 처리
   const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
@@ -331,7 +338,7 @@ const ProductList = ({
                     <div>{Card}</div>
                   )}
                   
-                  {/* 편집 버튼 */}
+                  {/* 편집 및 활성화 토글 버튼 */}
                   {product.rawData && (canEdit || canDelete) && (
                     <div style={{ position: 'absolute', top: '10px', right: '10px', zIndex: 20, display: 'flex', gap: '8px' }}>
                       {canEdit && onEditRecord && (
@@ -354,6 +361,36 @@ const ProductList = ({
                           onMouseLeave={(e) => { e.target.style.background = 'rgba(0, 123, 255, 0.9)'; }}
                         >
                           편집
+                        </button>
+                      )}
+
+                      {/* 활성화 토글 버튼 */}
+                      {canEdit && (
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            const newActiveStatus = !product.rawData.is_active;
+                            onToggleActive && onToggleActive(product.rawData, newActiveStatus);
+                          }}
+                          style={{
+                            background: product.rawData.is_active ? 'rgba(40, 167, 69, 0.9)' : 'rgba(108, 117, 125, 0.9)',
+                            color: 'white',
+                            border: 'none',
+                            borderRadius: '4px',
+                            padding: '5px 10px',
+                            fontSize: '12px',
+                            cursor: 'pointer',
+                            backdropFilter: 'blur(4px)'
+                          }}
+                          onMouseEnter={(e) => { 
+                            e.target.style.background = product.rawData.is_active ? 'rgba(40, 167, 69, 1)' : 'rgba(108, 117, 125, 1)'; 
+                          }}
+                          onMouseLeave={(e) => { 
+                            e.target.style.background = product.rawData.is_active ? 'rgba(40, 167, 69, 0.9)' : 'rgba(108, 117, 125, 0.9)'; 
+                          }}
+                          title={product.rawData.is_active ? '비활성화' : '활성화'}
+                        >
+                          {product.rawData.is_active ? '활성' : '비활성'}
                         </button>
                       )}
 

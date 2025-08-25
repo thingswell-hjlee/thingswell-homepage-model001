@@ -324,6 +324,39 @@ export default function TrackRecordPage({ kindFilter = null }) {
     setShowAddModal(true);
   };
 
+  const handleToggleActive = async (record, newActiveStatus) => {
+    try {
+      // 인증 상태 확인
+      const { isAuthenticated } = await checkUserAuthStatus();
+      if (!isAuthenticated) {
+        alert('활성화 상태를 변경하려면 로그인이 필요합니다.');
+        return;
+      }
+
+      // 데이터베이스 업데이트
+      const { error } = await supabase
+        .from('Track_record')
+        .update({ is_active: newActiveStatus })
+        .eq('id', record.id);
+
+      if (error) {
+        console.error('활성화 상태 변경 오류:', error);
+        alert('활성화 상태 변경 중 오류가 발생했습니다: ' + error.message);
+        return;
+      }
+
+      console.log('활성화 상태 변경 성공:', { id: record.id, is_active: newActiveStatus });
+      alert(`항목이 ${newActiveStatus ? '활성화' : '비활성화'}되었습니다.`);
+      
+      // 실적 목록 새로고침
+      fetchTrackRecords();
+      
+    } catch (error) {
+      console.error('활성화 상태 변경 중 오류 발생:', error);
+      alert('활성화 상태 변경 중 오류가 발생했습니다: ' + error.message);
+    }
+  };
+
   if (loading) {
     return <div>데이터를 불러오는 중...</div>;
   }
@@ -422,6 +455,7 @@ export default function TrackRecordPage({ kindFilter = null }) {
           canDelete={canEditContent()}
           onDeleteRecord={handleDeleteRecord}
           canViewDetail={canEditContent()}
+          onToggleActive={handleToggleActive}
         />
       </div>
     </BaseLayout>
@@ -429,7 +463,7 @@ export default function TrackRecordPage({ kindFilter = null }) {
 }
 
 // TrackRecordList 컴포넌트
-const TrackRecordList = ({ products, onEditRecord, canEdit, onAddRecord, canDelete, onDeleteRecord, canViewDetail }) => {
+const TrackRecordList = ({ products, onEditRecord, canEdit, onAddRecord, canDelete, onDeleteRecord, canViewDetail, onToggleActive }) => {
   const [selectedCategory, setSelectedCategory] = useState('전체');
   const [searchTerm, setSearchTerm] = useState('');
   const [viewMode, setViewMode] = useState('card');
@@ -441,6 +475,11 @@ const TrackRecordList = ({ products, onEditRecord, canEdit, onAddRecord, canDele
 
   const filteredProducts = React.useMemo(() => {
     return products.filter((product) => {
+      // 관리자가 아닌 경우 비활성화된 항목은 보이지 않게 함
+      if (!canEdit && product.rawData && product.rawData.is_active === false) {
+        return false;
+      }
+
       const term = searchTerm.trim().toLowerCase();
       const matchesSearch =
         !term ||
@@ -459,7 +498,7 @@ const TrackRecordList = ({ products, onEditRecord, canEdit, onAddRecord, canDele
       const matchesCategory = selectedList.includes(product.category);
       return matchesCategory && matchesSearch;
     });
-  }, [products, selectedCategory, searchTerm]);
+  }, [products, selectedCategory, searchTerm, canEdit]);
 
   const MarqueeTitle = ({ text }) => {
     const containerRef = React.useRef(null);
@@ -632,6 +671,36 @@ const TrackRecordList = ({ products, onEditRecord, canEdit, onAddRecord, canDele
                           onMouseLeave={(e) => { e.target.style.background = 'rgba(0, 123, 255, 0.9)'; }}
                         >
                           편집
+                        </button>
+                      )}
+
+                      {/* 활성화 토글 버튼 */}
+                      {canEdit && (
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            const newActiveStatus = !product.rawData.is_active;
+                            onToggleActive && onToggleActive(product.rawData, newActiveStatus);
+                          }}
+                          style={{
+                            background: product.rawData.is_active ? 'rgba(40, 167, 69, 0.9)' : 'rgba(108, 117, 125, 0.9)',
+                            color: 'white',
+                            border: 'none',
+                            borderRadius: '4px',
+                            padding: '5px 10px',
+                            fontSize: '12px',
+                            cursor: 'pointer',
+                            backdropFilter: 'blur(4px)'
+                          }}
+                          onMouseEnter={(e) => { 
+                            e.target.style.background = product.rawData.is_active ? 'rgba(40, 167, 69, 1)' : 'rgba(108, 117, 125, 1)'; 
+                          }}
+                          onMouseLeave={(e) => { 
+                            e.target.style.background = product.rawData.is_active ? 'rgba(40, 167, 69, 0.9)' : 'rgba(108, 117, 125, 0.9)'; 
+                          }}
+                          title={product.rawData.is_active ? '비활성화' : '활성화'}
+                        >
+                          {product.rawData.is_active ? '활성' : '비활성'}
                         </button>
                       )}
 

@@ -229,6 +229,39 @@ export default function ProductListControlPage() {
     }
   };
 
+  const handleToggleActive = async (record, newActiveStatus) => {
+    try {
+      // 인증 상태 확인
+      const { isAuthenticated } = await checkUserAuthStatus();
+      if (!isAuthenticated) {
+        alert('활성화 상태를 변경하려면 로그인이 필요합니다.');
+        return;
+      }
+
+      // 데이터베이스 업데이트
+      const { error } = await supabase
+        .from('Product')
+        .update({ is_active: newActiveStatus })
+        .eq('id', record.id);
+
+      if (error) {
+        console.error('활성화 상태 변경 오류:', error);
+        alert('활성화 상태 변경 중 오류가 발생했습니다: ' + error.message);
+        return;
+      }
+
+      console.log('활성화 상태 변경 성공:', { id: record.id, is_active: newActiveStatus });
+      alert(`제품이 ${newActiveStatus ? '활성화' : '비활성화'}되었습니다.`);
+      
+      // 제품 목록 새로고침
+      fetchProducts();
+      
+    } catch (error) {
+      console.error('활성화 상태 변경 중 오류 발생:', error);
+      alert('활성화 상태 변경 중 오류가 발생했습니다: ' + error.message);
+    }
+  };
+
   if (loading) {
     return <div>데이터를 불러오는 중...</div>;
   }
@@ -291,6 +324,7 @@ export default function ProductListControlPage() {
         canEdit={canEditContent()}
         canDelete={canEditContent()}
         onDeleteRecord={handleDeleteRecord}
+        onToggleActive={handleToggleActive}
         hideSearchAndView={true}
         addButton={canEditContent() && (
           <button
