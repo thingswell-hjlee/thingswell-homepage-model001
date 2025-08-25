@@ -325,7 +325,8 @@ export default function ProductListMonitoringPage() {
         canDelete={canEditContent()}
         onDeleteRecord={handleDeleteRecord}
         onToggleActive={handleToggleActive}
-        hideSearchAndView={true}
+        hideSearchAndView={false}
+        hideViewToggle={true}
         addButton={canEditContent() && (
           <button
             onClick={() => setShowAddModal(true)}
