@@ -67,7 +67,6 @@ import Soulution from "./pages/Solutions/Soulution.jsx";
 import Soulution_main from "./pages/Solutions/Soulution_main.jsx";
 import ChemicalSolution from "./pages/Solutions/ChemicalSolution.jsx";
 import ManufacturingSolution from "./pages/Solutions/ManufacturingSolution.jsx";
-import ConstructionSolution from "./pages/Solutions/ConstructionSolution.jsx";
 import MultimodalAwareness from "./pages/rnd/MultimodalAwareness.jsx";
 import RAGLLMTech from "./pages/rnd/RAGLLMTech.jsx";
 import OnDeviceAI from "./pages/rnd/OnDeviceAI.jsx";
@@ -77,17 +76,13 @@ import AirQualityManagement from "./pages/rnd/AirQualityManagement.jsx";
 import SolutionDetailPage from "./pages/rnd/SolutionDetailPage.jsx";
 import Product_list_control from "./pages/Products/Product_list_control.jsx";
 import Product_control from "./pages/Products/Product_control.jsx";
-import Product_safety_1 from "./pages/Products/Product_TWEDG_01.jsx";
 import Product_list_safety from "./pages/Products/Product_list_safety.jsx";
 import Product_detail_safety from "./pages/Products/Product_detail_safety.jsx";
 import Product_list_monitoring from "./pages/Products/Product_list_monitoring.jsx";
-import Product_TWEDG_04 from "./pages/Products/Product_TWEDG_04.jsx";
 import aiImage from "./assets/main/AI.jpg";
 import humanImage from "./assets/main/human.jpg";
 import ondeviceImage from "./assets/main/ondevice.jpeg";
 import familyImage from "./assets/main/family.jpg";
-import welding from "./assets/welding.jpg";
-import grinding from "./assets/grinding.jpg";
 import noticeBg from "./assets/1.png";
 import Announcement from "./pages/Customer_Service/Announcement.jsx";
 import Customer_service from "./pages/Customer_Service/Customer_service.jsx";
@@ -267,7 +262,7 @@ function App() {
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth <= 768);
-    };
+    };  
 
     checkMobile();
     window.addEventListener("resize", checkMobile);
@@ -322,7 +317,6 @@ function App() {
             <Route path="/solutions/overview" element={<Soulution />} />
             <Route path="/solutions/chemical" element={<ChemicalSolution />} />
             <Route path="/solutions/manufacturing" element={<ManufacturingSolution />} />
-            <Route path="/solutions/construction" element={<ConstructionSolution />} />
 
             {/* 연구개발 라우팅 */}
             <Route path="/rnd" element={<SolutionDetailPage />} />
@@ -339,8 +333,6 @@ function App() {
             <Route path="/products/safety" element={<Product_list_safety />} />
             <Route path="/products/safety/:id" element={<Product_detail_safety />} />
             <Route path="/products/monitoring" element={<Product_list_monitoring />} />
-            <Route path="/products/twmob-01" element={<Product_safety_1/>} />
-            <Route path="/products/twedg-04" element={<Product_TWEDG_04 />} />
 
             {/* 고객서비스 라우팅 */}
             <Route path="/customer-service" element={<Customer_service />} />
