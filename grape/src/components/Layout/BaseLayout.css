@@ -12,7 +12,7 @@
   width: 100vw;
   margin-left: calc(-50vw + 50%);
   position: relative;
-  z-index: 10;
+  z-index: 1;
 }
 
 .base-layout-content {

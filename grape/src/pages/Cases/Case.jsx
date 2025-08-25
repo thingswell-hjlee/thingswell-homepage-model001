@@ -182,18 +182,38 @@ export default function TrackRecordPage({ kindFilter = null }) {
       try {
         setSubmitting(true);
         
+        // 제품 전용 필드들 처리
+        const updateData = {
+          title: formData.title,
+          desc: formData.desc,
+          overview_title: formData.overview_title,
+          date: formData.date,
+          orderer: formData.orderer,
+          type: formData.type,
+          kind: formData.kind,
+          images: formData.images && formData.images.length > 0 ? JSON.stringify(formData.images) : null
+        };
+
+        // 제품 전용 필드들이 있는 경우 추가
+        if (formData.keyFeatures) {
+          updateData.keyFeatures = JSON.stringify(formData.keyFeatures);
+        }
+        if (formData.specifications) {
+          updateData.specifications = JSON.stringify(formData.specifications);
+        }
+        if (formData.certifications) {
+          updateData.certifications = JSON.stringify(formData.certifications);
+        }
+        if (formData.downloads) {
+          updateData.downloads = JSON.stringify(formData.downloads);
+        }
+        if (formData.videos) {
+          updateData.videos = JSON.stringify(formData.videos);
+        }
+        
         const { data, error } = await supabase
           .from('Track_record')
-          .update({
-            title: formData.title,
-            desc: formData.desc,
-            overview_title: formData.overview_title,
-            date: formData.date,
-            orderer: formData.orderer,
-            type: formData.type,
-            kind: formData.kind,
-            images: formData.images && formData.images.length > 0 ? JSON.stringify(formData.images) : null
-          })
+          .update(updateData)
           .eq('id', editingExistingRecord.id)
           .select();
 
@@ -238,19 +258,39 @@ export default function TrackRecordPage({ kindFilter = null }) {
       try {
         setSubmitting(true);
         
+        // 제품 전용 필드들 처리
+        const insertData = {
+          title: formData.title,
+          desc: formData.desc,
+          overview_title: formData.overview_title,
+          date: formData.date,
+          orderer: formData.orderer,
+          type: formData.type,
+          kind: formData.kind,
+          images: formData.images && formData.images.length > 0 ? JSON.stringify(formData.images) : null
+        };
+
+        // 제품 전용 필드들이 있는 경우 추가
+        if (formData.keyFeatures) {
+          insertData.keyFeatures = JSON.stringify(formData.keyFeatures);
+        }
+        if (formData.specifications) {
+          insertData.specifications = JSON.stringify(formData.specifications);
+        }
+        if (formData.certifications) {
+          insertData.certifications = JSON.stringify(formData.certifications);
+        }
+        if (formData.downloads) {
+          insertData.downloads = JSON.stringify(formData.downloads);
+        }
+        if (formData.videos) {
+          insertData.videos = JSON.stringify(formData.videos);
+        }
+        
         // 데이터베이스에 저장
         const { data, error } = await supabase
           .from('Track_record')
-          .insert({
-            title: formData.title,
-            desc: formData.desc,
-            overview_title: formData.overview_title,
-            date: formData.date,
-            orderer: formData.orderer,
-            type: formData.type,
-            kind: formData.kind,
-            images: formData.images && formData.images.length > 0 ? JSON.stringify(formData.images) : null
-          })
+          .insert(insertData)
           .select();
 
         if (error) {
@@ -319,6 +359,36 @@ export default function TrackRecordPage({ kindFilter = null }) {
   }
 
   if (viewMode === 'detail' && selectedRecord) {
+    // 제품 전용 필드들 파싱
+    let keyFeatures = [];
+    let keyFeaturesImages = [];
+    let specifications = [];
+    let certifications = [];
+    let downloads = [];
+    let videos = [];
+
+    try {
+      if (selectedRecord.keyFeatures) {
+        const keyFeaturesData = JSON.parse(selectedRecord.keyFeatures);
+        keyFeatures = keyFeaturesData.features ? keyFeaturesData.features.filter(f => f.trim() !== '') : [];
+        keyFeaturesImages = keyFeaturesData.images || [];
+      }
+      if (selectedRecord.specifications) {
+        specifications = JSON.parse(selectedRecord.specifications);
+      }
+      if (selectedRecord.certifications) {
+        certifications = JSON.parse(selectedRecord.certifications);
+      }
+      if (selectedRecord.downloads) {
+        downloads = JSON.parse(selectedRecord.downloads);
+      }
+      if (selectedRecord.videos) {
+        videos = JSON.parse(selectedRecord.videos);
+      }
+    } catch (error) {
+      console.error('제품 전용 필드 파싱 오류:', error);
+    }
+
     return (
       <div>
         <div>
@@ -329,7 +399,14 @@ export default function TrackRecordPage({ kindFilter = null }) {
               overview_title: selectedRecord.overview_title || selectedRecord.desc || '개요 없음',
               overview: selectedRecord.overview || selectedRecord.desc || '내용 없음',
               images: selectedRecord.images ? JSON.parse(selectedRecord.images) : [],
-              breadcrumbs: ["Home", "고객사례", selectedRecord.kind, selectedRecord.title || "상세"]
+              breadcrumbs: ["Home", "고객사례", selectedRecord.kind, selectedRecord.title || "상세"],
+              // 제품 전용 필드들
+              keyFeatures: keyFeatures,
+              keyFeaturesImages: keyFeaturesImages,
+              specifications: specifications,
+              certifications: certifications,
+              downloads: downloads,
+              videos: videos
             }}
             isRecordPage={true}
           />

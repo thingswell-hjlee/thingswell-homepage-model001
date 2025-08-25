@@ -491,6 +491,26 @@ const RecordEditor = ({
             </div>
           )}
         </div>
+
+        {/* 실적 모드일 때 버튼을 panel-header 안에 배치 */}
+        {mode === 'record' && (
+          <div className="record-editor-button-group" style={{ marginTop: '20px', display: 'flex', gap: '10px', justifyContent: 'flex-end' }}>
+            <button
+              onClick={handleCancel}
+              disabled={submitting}
+              className="record-editor-cancel-btn"
+            >
+              취소
+            </button>
+            <button
+              onClick={handleSave}
+              disabled={submitting}
+              className="record-editor-save-btn"
+            >
+              {submitting ? '저장 중...' : '저장'}
+            </button>
+          </div>
+        )}
         </div>
 
 
@@ -921,6 +941,7 @@ const RecordEditor = ({
             </div>
           </>
         )}
+
 
 
       </div>
