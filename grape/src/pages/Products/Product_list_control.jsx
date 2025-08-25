@@ -283,7 +283,7 @@ export default function ProductListControlPage() {
       <ProductList
         products={products}
         title="통합제어"
-        subtitle="통합제어 제품들을 확인하세요"
+        // subtitle="통합제어 제품들을 확인하세요"
         breadcrumbs={["Home", "제품", "통합제어"]}
         longVertical
         headerImage={controlHeaderImage}

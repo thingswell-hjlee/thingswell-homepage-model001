@@ -283,7 +283,7 @@ export default function ProductListMonitoringPage() {
       <ProductList
         products={products}
         title="관제시스템"
-        subtitle="관제시스템 제품들을 확인하세요"
+        // subtitle="관제시스템 제품들을 확인하세요"
         breadcrumbs={["Home", "제품", "관제시스템"]}
         longVertical
         headerImage={controlHeaderImage}
