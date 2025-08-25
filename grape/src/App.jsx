@@ -258,6 +258,9 @@ function HomePage() {
 function App() {
   const [isMobile, setIsMobile] = useState(false);
   const location = useLocation();
+  
+  // Debug logging
+  console.log('App component - current location:', location.pathname);
 
   useEffect(() => {
     const checkMobile = () => {
