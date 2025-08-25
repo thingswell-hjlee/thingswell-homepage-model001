@@ -293,7 +293,7 @@ const RecordEditor = ({
         <div className="record-editor-preview-content">
                       <ProductPage
               productData={{
-                name: formData.title || (mode === 'record' ? '실적명을 입력하세요' : '제품명을 입력하세요'),
+                name: formData.title || (mode === 'record' ? '실적명을 입력하세요' : '모델명을 입력하세요'),
                 title: formData.overview_title || (mode === 'record' ? '실적명을 입력하세요' : '제품명을 입력하세요'),
                 overview_title: formData.overview_title || (mode === 'record' ? '실적명을 입력하세요' : '제품명을 입력하세요'),
                 overview: formData.desc || '내용을 입력하세요',
