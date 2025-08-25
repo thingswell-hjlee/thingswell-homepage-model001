@@ -132,7 +132,7 @@ const ProductInfo = ({
       {isEditMode ? (
         <div style={{ marginBottom: '20px' }}>
           <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold', color: '#6c757d' }}>
-            {isRecordPage ? '실적명' : '제품명'}
+            {isRecordPage ? '실적명' : '모델명'}
           </label>
           <EditableText
             field="name"
