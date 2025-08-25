@@ -67,7 +67,7 @@ export default function Product_detail_safety() {
     certifications,
     downloads,
     videos,
-    breadcrumbs: ['Home', 'Products', 'Safety']
+    breadcrumbs: ['Home', '제품']
   };
 
   return (
