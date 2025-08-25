@@ -59,19 +59,19 @@ export default function TrackRecordPage({ kindFilter = null }) {
     const pageInfoMap = {
       '정보통신': {
         title: '정보통신 실적',
-        subtitle: '정보통신 시스템 구축 실적들을 확인하세요'
+        // subtitle: '정보통신 시스템 구축 실적들을 확인하세요'
       },
       '통합제어': {
         title: '통합제어 실적',
-        subtitle: '통합제어 시스템 구축 실적들을 확인하세요'
+        // subtitle: '통합제어 시스템 구축 실적들을 확인하세요'
       },
       '스마트안전': {
         title: '스마트안전 실적',
-        subtitle: '스마트안전 솔루션 실적들을 확인하세요'
+        // subtitle: '스마트안전 솔루션 실적들을 확인하세요'
       },
       'AI': {
         title: 'AI 실적',
-        subtitle: 'AI 관련 실적들을 확인하세요'
+        // subtitle: 'AI 관련 실적들을 확인하세요'
       }
     };
     
@@ -297,6 +297,10 @@ export default function TrackRecordPage({ kindFilter = null }) {
   };
 
   const handleRecordClick = (record) => {
+    // 관리자가 아닌 경우 클릭을 막음
+    if (!canEditContent()) {
+      return;
+    }
     setSelectedRecord(record);
     setViewMode('detail');
   };
@@ -417,6 +421,7 @@ export default function TrackRecordPage({ kindFilter = null }) {
           onAddRecord={() => setShowAddModal(true)}
           canDelete={canEditContent()}
           onDeleteRecord={handleDeleteRecord}
+          canViewDetail={canEditContent()}
         />
       </div>
     </BaseLayout>
@@ -424,7 +429,7 @@ export default function TrackRecordPage({ kindFilter = null }) {
 }
 
 // TrackRecordList 컴포넌트
-const TrackRecordList = ({ products, onEditRecord, canEdit, onAddRecord, canDelete, onDeleteRecord }) => {
+const TrackRecordList = ({ products, onEditRecord, canEdit, onAddRecord, canDelete, onDeleteRecord, canViewDetail }) => {
   const [selectedCategory, setSelectedCategory] = useState('전체');
   const [searchTerm, setSearchTerm] = useState('');
   const [viewMode, setViewMode] = useState('card');
@@ -593,7 +598,12 @@ const TrackRecordList = ({ products, onEditRecord, canEdit, onAddRecord, canDele
               const cardWithEdit = (
                 <div key={idx} style={{ position: 'relative' }}>
                   {product.onClick ? (
-                    <div onClick={product.onClick} style={{ cursor: 'pointer' }}>
+                    <div 
+                      onClick={product.onClick} 
+                      style={{ 
+                        cursor: canEdit ? 'pointer' : 'default'
+                      }}
+                    >
                       {Card}
                     </div>
                   ) : (
