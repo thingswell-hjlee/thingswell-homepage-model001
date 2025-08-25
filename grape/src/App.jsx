@@ -85,6 +85,7 @@ import Product_TWEDG_04 from "./pages/Products/Product_TWEDG_04.jsx";
 import aiImage from "./assets/main/AI.jpg";
 import humanImage from "./assets/main/human.jpg";
 import ondeviceImage from "./assets/main/ondevice.jpeg";
+import familyImage from "./assets/main/family.jpg";
 import welding from "./assets/welding.jpg";
 import grinding from "./assets/grinding.jpg";
 import noticeBg from "./assets/1.png";
@@ -150,7 +151,7 @@ function HomePage() {
       ctaText: "Learn more",
       ctaHref: "/solutions/overview",
       caption: "Comprehensive Safety",
-      backgroundImage: aiImage,
+      backgroundImage: familyImage,
     },
   ];
 
