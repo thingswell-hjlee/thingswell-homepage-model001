@@ -458,16 +458,6 @@ const TabContent = ({ tabId, productData, featureClickToOpen = false, onFeatureI
                           style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
                         />
                       </div>
-                      <div style={{ marginTop: '10px', textAlign: 'center' }}>
-                        <a 
-                          href={videoUrl} 
-                          target="_blank" 
-                          rel="noopener noreferrer"
-                          style={{ color: '#007bff', textDecoration: 'none' }}
-                        >
-                          원본 링크 보기
-                        </a>
-                      </div>
                     </div>
                   );
                 })}
