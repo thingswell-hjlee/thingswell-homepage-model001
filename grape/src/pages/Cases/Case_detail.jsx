@@ -67,7 +67,7 @@ export default function Case_detail() {
     certifications,
     downloads,
     videos,
-    breadcrumbs: ['Home', 'Products', 'Safety']
+    breadcrumbs: ['Home', '고객사례', product.kind, product.title || '상세']
   };
 
   return (

@@ -285,7 +285,7 @@ export default function ProductListSafetyPage() {
         products={products}
         title="스마트안전장비"
         subtitle="스마트 안전장비 제품들을 확인하세요"
-        breadcrumbs={["Home", "Products", "Safety"]}
+        breadcrumbs={["Home", "제품", "스마트안전장비"]}
         longVertical
         headerImage={safetyHeaderImage}
         onEditRecord={handleEditRecord}

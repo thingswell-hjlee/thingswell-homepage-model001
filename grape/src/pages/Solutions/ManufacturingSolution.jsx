@@ -22,7 +22,7 @@ import service_7 from '../../assets/service_2/3-3.png';
 import service_8 from '../../assets/service_2/3-4.png';
 
 
-const BREADCRUMBS = ["Home", "Solutions", "통합제어 솔루션"];
+const BREADCRUMBS = ["Home", "사업분야", "통합제어 솔루션"];
 
 const SOLUTION_DATA = {
   title: "통합제어 솔루션",

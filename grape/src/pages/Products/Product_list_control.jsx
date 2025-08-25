@@ -284,7 +284,7 @@ export default function ProductListControlPage() {
         products={products}
         title="통합제어"
         subtitle="통합제어 제품들을 확인하세요"
-        breadcrumbs={["Home", "Products", "Control"]}
+        breadcrumbs={["Home", "제품", "통합제어"]}
         longVertical
         headerImage={controlHeaderImage}
         onEditRecord={handleEditRecord}

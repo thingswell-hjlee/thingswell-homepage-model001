@@ -19,7 +19,7 @@ import service_6 from '../../assets/service_2/1-2.png';
 import service_7 from '../../assets/service_2/1-3.png';
 import service_8 from '../../assets/service_2/1-4.png';
 
-const BREADCRUMBS = ["Home", "Solutions", "산업 안전 솔루션"];
+const BREADCRUMBS = ["Home", "사업분야", "산업 안전 솔루션"];
 
 const SOLUTION_DATA = {
   title: "산업 안전 솔루션",

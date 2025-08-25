@@ -329,7 +329,7 @@ export default function TrackRecordPage({ kindFilter = null }) {
               overview_title: selectedRecord.overview_title || selectedRecord.desc || '개요 없음',
               overview: selectedRecord.overview || selectedRecord.desc || '내용 없음',
               images: selectedRecord.images ? JSON.parse(selectedRecord.images) : [],
-              breadcrumbs: ["Home", "실적", selectedRecord.kind || "상세"]
+              breadcrumbs: ["Home", "고객사례", selectedRecord.kind, selectedRecord.title || "상세"]
             }}
             isRecordPage={true}
           />
@@ -342,7 +342,7 @@ export default function TrackRecordPage({ kindFilter = null }) {
   return (
     <BaseLayout
       header={() => <ProductHeader image={headerImage} />}
-      breadcrumbs={<Breadcrumbs breadcrumbs={["Home", "Cases"]} />}
+      breadcrumbs={<Breadcrumbs breadcrumbs={kindFilter ? ["Home", "고객사례", kindFilter] : ["Home", "고객사례"]} />}
       title={getPageInfo(kindFilter).title}
       subtitle={getPageInfo(kindFilter).subtitle}
     >

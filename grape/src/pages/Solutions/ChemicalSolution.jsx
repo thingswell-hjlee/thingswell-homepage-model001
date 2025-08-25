@@ -21,7 +21,7 @@ import service_6 from '../../assets/service_2/2-2.png';
 import service_7 from '../../assets/service_2/2-3.png';
 import service_8 from '../../assets/service_2/2-4.png'; 
 
-const BREADCRUMBS = ["Home", "Solutions", "노인 및 장애인 홈케어 솔루션"];
+const BREADCRUMBS = ["Home", "사업분야", "노인 및 장애인 홈케어 솔루션"];
 
 const SOLUTION_DATA = {
   title: "노인 및 장애인을 위한 홈케어 솔루션",
