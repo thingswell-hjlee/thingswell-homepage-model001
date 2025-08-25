@@ -228,8 +228,8 @@ function HomePage() {
             </div>
              {/* 오버레이 아래 일반 흐름 영역: 히어로 카드들 */}
         <section className="hero-content-section">
-        <Link to={`/products/safety/24`} className="hero-content-card_1">
-            <h1 className="hero-content-card-title">AI인체감지시스템(이동식)</h1>
+        <Link to={`/products/safety/14`} className="hero-content-card_1">
+            <h1 className="hero-content-card-title">HIKVISION 네트워크 PTZ 카메라</h1>
           </Link>
 
           <div className="hero-content-card" style={{ backgroundImage: `linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.35)), url(${noticeBg})` }}>
@@ -241,7 +241,7 @@ function HomePage() {
           </div>
 
           <Link to={`/cases/detail/571`} className="hero-content-card_2">
-            <h1 className="hero-content-card-title">서울 버스 스마트쉼터 원격관리 솔루션</h1>
+            <h1 className="hero-content-card-title">서울 버스 스마트쉼터 AI 상황인지 시스템</h1>
           </Link>
         </section>
       </div>

@@ -131,19 +131,6 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
   const [isMenuHidden, setIsMenuHidden] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
 
-  // 관리자 권한에 따라 메뉴 아이템 필터링
-  const filteredMenuItems = useMemo(() => {
-    return defaultMenuItems.filter(item => {
-      // 관리자가 아닌 경우 정부지원사업과 고객사례 메뉴 숨김
-      if (!isAdmin()) {
-        if (item.label === '정부지원사업' || item.label === '고객사례') {
-          return false;
-        }
-      }
-      return true;
-    });
-  }, [isAdmin]);
-
   // 화면 크기 감지
   useEffect(() => {
     const checkMobile = () => {
@@ -206,7 +193,7 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
     let menuIndexForSubmenu = null;
     
     // 메인 메뉴에서 현재 페이지에 해당하는 항목 찾기
-    filteredMenuItems.forEach((item, index) => {
+    defaultMenuItems.forEach((item, index) => {
       if (item.submenu) {
         item.submenu.forEach((subItem, subIndex) => {
           // 해시가 포함된 경로인 경우 해시까지 비교
@@ -245,7 +232,7 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
     });
     
     // 메인 메뉴 페이지에 도달했을 때 해당 메뉴에 서브메뉴가 있다면 열어두기
-    filteredMenuItems.forEach((item, index) => {
+    defaultMenuItems.forEach((item, index) => {
       if (item.path === currentPath && item.submenu && item.submenu.length > 0) {
         if (!isMobile) {
           setOpenSubmenu(index);
@@ -260,7 +247,7 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
       setActiveSubmenuIndex(null);
       // 서브메뉴는 수동으로 닫을 때까지 유지
     }
-  }, [location.pathname, location.hash, isMobile, filteredMenuItems]);
+  }, [location.pathname, location.hash, isMobile]);
 
   // 외부 클릭 감지
   useEffect(() => {
@@ -289,8 +276,8 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
   // 메뉴 활성화 상태 확인 함수
   const isMenuActive = useCallback((menuIndex) => {
     // 현재 페이지가 해당 메뉴의 서브메뉴 중 하나와 일치하는 경우
-    if (filteredMenuItems[menuIndex] && filteredMenuItems[menuIndex].submenu) {
-      const hasActiveSubmenu = filteredMenuItems[menuIndex].submenu.some(subItem => {
+    if (defaultMenuItems[menuIndex] && defaultMenuItems[menuIndex].submenu) {
+      const hasActiveSubmenu = defaultMenuItems[menuIndex].submenu.some(subItem => {
         // 해시가 포함된 경로인 경우 해시까지 비교
         if (subItem.path.includes('#')) {
           const [basePath, hash] = subItem.path.split('#');
@@ -306,7 +293,7 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
     }
     
     // 현재 페이지가 해당 메뉴의 메인 페이지와 일치하는 경우
-    const menuItem = filteredMenuItems[menuIndex];
+    const menuItem = defaultMenuItems[menuIndex];
     if (menuItem && menuItem.path === location.pathname) {
       return true;
     }
@@ -317,13 +304,13 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
     }
     
     return false;
-  }, [location.pathname, location.hash, filteredMenuItems]);
+  }, [location.pathname, location.hash]);
 
   // 서브메뉴 활성화 상태 확인 함수
   const isSubmenuActive = useCallback((parentIndex, subIndex) => {
     // 현재 페이지가 해당 서브메뉴의 경로와 일치하는 경우
-    if (filteredMenuItems[parentIndex] && filteredMenuItems[parentIndex].submenu) {
-      const subItem = filteredMenuItems[parentIndex].submenu[subIndex];
+    if (defaultMenuItems[parentIndex] && defaultMenuItems[parentIndex].submenu) {
+      const subItem = defaultMenuItems[parentIndex].submenu[subIndex];
       if (subItem) {
         // 해시가 포함된 경로인 경우 해시까지 비교
         if (subItem.path.includes('#')) {
@@ -341,7 +328,7 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
     }
     
     return false;
-  }, [location.pathname, location.hash, filteredMenuItems]);
+  }, [location.pathname, location.hash]);
 
   // 메뉴 클릭 핸들러
   const handleItemClick = useCallback((item, index) => {
@@ -459,9 +446,9 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
       setActiveSubmenuIndex(null);
     }
     
-    const hasSubmenu = !!(filteredMenuItems[index] && filteredMenuItems[index].submenu && filteredMenuItems[index].submenu.length > 0);
+    const hasSubmenu = !!(defaultMenuItems[index] && defaultMenuItems[index].submenu && defaultMenuItems[index].submenu.length > 0);
     setOpenSubmenu(hasSubmenu ? index : null);
-  }, [isMobile, activeMenuIndex, filteredMenuItems]);
+  }, [isMobile, activeMenuIndex]);
 
   // 메뉴 영역으로 다시 진입 시 닫힘 타이머 취소
   const cancelHoverCloseTimer = useCallback(() => {
@@ -480,16 +467,16 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
       // 대신 현재 페이지 기준으로 서브메뉴 상태를 유지
       if (
         activeMenuIndex !== null &&
-        filteredMenuItems[activeMenuIndex] &&
-        filteredMenuItems[activeMenuIndex].submenu &&
-        filteredMenuItems[activeMenuIndex].submenu.length > 0
+        defaultMenuItems[activeMenuIndex] &&
+        defaultMenuItems[activeMenuIndex].submenu &&
+        defaultMenuItems[activeMenuIndex].submenu.length > 0
       ) {
         setOpenSubmenu(activeMenuIndex);
       }
       // activeMenuIndex가 null이어도 현재 열린 서브메뉴는 유지
       hoverCloseTimerRef.current = null;
     }, 200);
-  }, [isMobile, activeMenuIndex, cancelHoverCloseTimer, filteredMenuItems]);
+  }, [isMobile, activeMenuIndex, cancelHoverCloseTimer]);
 
   // 언마운트 시 타이머 정리
   useEffect(() => {
@@ -527,6 +514,19 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
       setIsMobileMenuOpen(false);
     }
   }, [navigate, isMobile]);
+
+  // 관리자 권한에 따라 메뉴 아이템 필터링
+  const filteredMenuItems = useMemo(() => {
+    return defaultMenuItems.filter(item => {
+      // 관리자가 아닌 경우 정부지원사업과 고객사례 메뉴 숨김
+      if (!isAdmin()) {
+        if (item.label === '정부지원사업' || item.label === '고객사례') {
+          return false;
+        }
+      }
+      return true;
+    });
+  }, [isAdmin]);
 
   // 현재 열린 서브메뉴 데이터
   const currentSubmenu = useMemo(() => {

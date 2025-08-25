@@ -213,7 +213,7 @@ body {
 .hero-content-card_1 {
   padding: var(--spacing-xl);
   text-align: left;
-  background-image: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url('./assets/product_safety/main.jpg');
+  background-image: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url('./assets/main/camera.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
