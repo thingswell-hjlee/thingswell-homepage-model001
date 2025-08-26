@@ -181,7 +181,7 @@ function HomePage() {
       try {
         const { data, error } = await supabase
           .from('Board_Announcement')
-          .select('id, title, created_at')
+          .select('id, title, created_at, images')
           .order('id', { ascending: false })
           .limit(1);
 
@@ -230,7 +230,13 @@ function HomePage() {
             <h1 className="hero-content-card-title">HIKVISION 네트워크 PTZ 카메라</h1>
           </Link>
 
-          <div className="hero-content-card" style={{ backgroundImage: `linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.35)), url(${noticeBg})` }}>
+          <div className="hero-content-card" style={{ 
+            backgroundImage: `linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.35)), url(${
+              latestAnnouncement?.images 
+                ? JSON.parse(latestAnnouncement.images)[0] 
+                : noticeBg
+            })` 
+          }}>
             <ul className="hero-content-card-list">
               <h1 className="hero-content-card-title" onClick={handleAnnouncementClick} style={{ cursor: 'pointer' }}>
                 {latestAnnouncement?.title || '등록된 공지사항이 없습니다.'}
