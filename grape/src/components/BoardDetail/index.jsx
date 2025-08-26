@@ -16,6 +16,8 @@ const BoardDetail = ({ post, onBack, onEdit, onDelete }) => {
   const title = post.title ||'제목 없음';
   const content = post.content ||  '';
   const author = post.author || '작성자';
+  
+  console.log('로드된 게시글 콘텐츠:', content);
   let createdAt = post.created_at || '날짜 없음';
 
   // 날짜 형식을 시간과 분까지만 표시하도록 변환
@@ -41,25 +43,10 @@ const BoardDetail = ({ post, onBack, onEdit, onDelete }) => {
 
   return (
     <div className="board-detail">
-      <div className="detail-header">
-        <button onClick={onBack} className="btn-back">
-          ← 목록으로
-        </button>
-        <div className="detail-actions">
-          {/* <button onClick={() => onEdit(post)} className="btn-edit">
-            수정
-          </button>
-          <button onClick={() => onDelete(post.id)} className="btn-delete">
-            삭제
-          </button> */}
-        </div>
-      </div>
-      
       <div className="post-content">
         <div className="post-header">
           <h1 className="post-title">{title}</h1>
           <div className="post-meta">
-            <span className="author">작성자: {author}</span>
             <span className="date">작성일: {createdAt}</span>
           </div>
         </div>

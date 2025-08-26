@@ -59,6 +59,9 @@ const BoardEditor = ({
       const rawContentState = convertToRaw(editorState.getCurrentContent());
       const htmlContent = draftToHtml(rawContentState);
       
+      console.log('저장할 HTML 콘텐츠:', htmlContent);
+      console.log('Raw Content State:', rawContentState);
+      
       let data, error;
 
       if (isEditMode && existingId) {
