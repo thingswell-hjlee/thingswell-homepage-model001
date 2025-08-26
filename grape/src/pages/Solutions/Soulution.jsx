@@ -22,7 +22,7 @@ import service_8 from '../../assets/service_2/1-4.png';
 const BREADCRUMBS = ["Home", "사업분야", "산업 안전 솔루션"];
 
 const SOLUTION_DATA = {
-  title: "산업 안전 솔루션",
+  title: "산업안전 솔루션",
   description:
     "AI 기반 멀티모달 산업안전 솔루션은 RAG(Retrieval-Augmented Generation) 기술을적용한 대규모 비전 모델(LVM)과 언어 모델(LLM), 그리고 다양한 실시간 센싱시스템에서 수집되는 데이터를 통합 분석하여 작업자 안전을 극대화하는 혁신적인 솔루션입니다.이 솔루션은 제조 현장의 안전 매뉴얼 정보를 기반으로 카메라, 레이더, 음향 센서 등여러 센서로부터 들어오는 멀티모달 데이터를 실시간으로 융합 및 분석합니다. 이를통해 작업자의 위험 행동을 정확하게 감지하고, 유해한 환경 요인을 미리 예측하여 사고를 예방하는 통합적인 데이터 처리 엔진을 제공합니다. 기존의 사후 대응 방식을 넘어, AI 기반의 예측적 위험 완화를 통해 제조 현장의 안전성과 생산성을 동시에 향상시킵니다.",
 };
@@ -32,7 +32,6 @@ const WORKER_SAFETY_CARDS = [
     image: service_5,
     imageAlt: "전방 위협 요소 감지",
     title: "멀티모달 데이터 수집 및 전처리",
-    link: "/solutions/multimodal-awareness",
     desc:"입력 소스: 카메라(객체 감지, 행동 분석), ToF(깊이 매핑), 레이더(움직임 추적), 마이크(알람 감지), 공기질 센서, 모션 센서 등 다양한 센서에서 데이터를 실시간으로 수집합니다",
     desc2:"데이터 정규화: 다양한 형식의 센서 데이터를 표준화하여 분석 준비를 완료합니다"
   },
@@ -40,7 +39,6 @@ const WORKER_SAFETY_CARDS = [
     image: service_6,
     imageAlt: "후방 위협 요소 감지",
     title: "지능형 데이터 융합 및 추론",
-    link: "/solutions/rag-llm",
     desc: [
       "데이터 융합: 수집된 데이터를 시간순으로 정렬하고 상관관계를 분석하여 단일화된 데이터로 융합합니다.",
       "RAG-LVM/LLM 통합:",
@@ -52,7 +50,6 @@ const WORKER_SAFETY_CARDS = [
     image: service_7,
     imageAlt: "원격관리시스템",
     title: "자동화된 의사결정 및 조치",
-    link: "/solutions/overview",
     desc: [
       "위험 평가: 추론된 데이터를 기반으로 위험 수준을 저-중-고로 분류하고, 상황에 맞는 즉각적인 조치를 결정합니다.",
       "조치 생성: 경고 알림 발송, 장비 자동 중단, 작업자에게 수정 조치 제안 등 자동화된 개입을 실행합니다."
@@ -62,7 +59,6 @@ const WORKER_SAFETY_CARDS = [
     image: service_8,
     imageAlt: "엣지-클라우드 연동",
     title: "엣지-클라우드 연동 처리",
-    link: "/solutions/on-device-ai",
     desc: [
       "엣지 처리: 저지연 환경에서 즉각적인 위험 감지와 경고를 위해 디바이스 수준에서 핵심 연산을 수행합니다.",
       "클라우드 통합: 장기적인 데이터 분석, 모델 학습, 시스템 관리 등 비핵심 작업을 클라우드에서 처리하여 시스템의 확장성과 안정성을 확보합니다."

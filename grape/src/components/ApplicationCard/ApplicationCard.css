@@ -168,7 +168,7 @@
   margin-top: var(--spacing-2xs);
   margin-left: 0;
   padding-left: 0;
-  list-style: disc;
+  list-style: none;
 }
 
 /* About 페이지의 인증서 섹션에서만 적용되는 스타일 */
