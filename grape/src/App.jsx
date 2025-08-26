@@ -85,9 +85,6 @@ import ondeviceImage from "./assets/main/ondevice.jpeg";
 import familyImage from "./assets/main/family.jpg";
 import noticeBg from "./assets/1.png";
 import Announcement from "./pages/Customer_Service/Announcement.jsx";
-import Customer_service from "./pages/Customer_Service/Customer_service.jsx";
-import Downloads from "./pages/Customer_Service/Downloads.jsx";
-import Contact from "./pages/Customer_Service/Contact.jsx";
 import Case from "./pages/Cases/Case.jsx";
 import CaseSmartSafety from "./pages/Cases/Case_SmartSafety.jsx";
 import CaseAI from "./pages/Cases/Case_AI.jsx";
@@ -96,6 +93,7 @@ import CaseInformationCommunication from "./pages/Cases/Case_InformationCommunic
 import About from "./pages/About/About.jsx";
 import Login from "./pages/Login/Login.jsx";
 import Case_detail from "./pages/Cases/Case_detail.jsx";
+import Sitemap from "./pages/Sitemap/sitemap.jsx";
 import { AuthProvider } from "./contexts/AuthContext.jsx";
 import { supabase } from "./lib/supabase";
 
@@ -338,11 +336,7 @@ function App() {
             <Route path="/products/monitoring" element={<Product_list_monitoring />} />
 
             {/* 고객서비스 라우팅 */}
-            <Route path="/customer-service" element={<Customer_service />} />
             <Route path="/customer-service/announcement" element={<Announcement />} />
-            <Route path="/customer-service/downloads" element={<Downloads />} />
-            <Route path="/customer-service/contact" element={<Contact />} />
-
             {/* 응용분야 라우팅 */}
             {/* <Route path="/application-field" element={<Application_filed_main />} />
             <Route path="/application-field/overview" element={<Application_filed />} />
@@ -362,6 +356,9 @@ function App() {
 
             {/* 로그인 라우팅 */}
             <Route path="/login" element={<Login />} />
+
+            {/* 사이트맵 라우팅 */}
+            <Route path="/sitemap" element={<Sitemap />} />
           </Routes>
         </main> 
 

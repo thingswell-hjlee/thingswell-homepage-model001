@@ -67,8 +67,7 @@ export default function Product_detail_safety() {
     certifications,
     downloads,
     videos,
-    // 상세 페이지에서는 제품 종류와 제품명을 breadcrumbs에 추가
-    breadcrumbs: ['Home', '제품', product.kind || '스마트안전', product.title || '제목 없음']
+    breadcrumbs: ['Home', '제품']
   };
 
   return (
