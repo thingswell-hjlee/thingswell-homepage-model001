@@ -67,7 +67,6 @@ function Footer() {
                   </p>
                   <p>1833-7758</p>
                   <p>contact@thingswell.co.kr</p>
-                  <a href="/sitemap" style={{ color: 'white', textDecoration: 'none' }}>사이트맵</a>
                 </div>
                 <p>
                   © {currentYear} ThingsWell 본 사이트의 모든 컨텐츠는 저작권의

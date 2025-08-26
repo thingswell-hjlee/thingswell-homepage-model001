@@ -107,6 +107,11 @@ const defaultMenuItems = [
     label: '쇼핑몰', 
     path: 'https://haa741123.cafe24.com/skin-skin1',
     external: true, // 외부 링크임을 명시 (Menu 컴포넌트에서 이 값 활용하여 새창 이동 처리 필요)
+  },
+
+  {
+    label: '사이트맵',
+    path: '/sitemap',
   }
 
 ];
@@ -529,18 +534,18 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
     }
   }, [signOut, navigate, isMobile]);
 
-  // 관리자 권한에 따라 메뉴 아이템 필터링
+  // 로그인 상태에 따라 메뉴 아이템 필터링
   const filteredMenuItems = useMemo(() => {
     return defaultMenuItems.filter(item => {
-      // 관리자가 아닌 경우 정부지원사업과 쇼핑몰 메뉴 숨김
-      if (!isAdmin()) {
+      // 로그인하지 않은 경우 정부지원사업과 쇼핑몰 메뉴 숨김
+      if (!isAuthenticated()) {
         if (item.label === '정부지원사업' || item.label === '쇼핑몰') {
           return false;
         }
       }
       return true;
     });
-  }, [isAdmin]);
+  }, [isAuthenticated]);
 
   // 현재 열린 서브메뉴 데이터
   const currentSubmenu = useMemo(() => {
