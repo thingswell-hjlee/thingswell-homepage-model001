@@ -238,7 +238,7 @@ function HomePage() {
             </ul>
           </div>
 
-          <Link to={`/cases/detail/571`} className="hero-content-card_2">
+          <Link to={`/cases/smart-safety`} className="hero-content-card_2">
             <h1 className="hero-content-card-title">서울 버스 스마트쉼터 AI 상황인지 시스템</h1>
           </Link>
         </section>

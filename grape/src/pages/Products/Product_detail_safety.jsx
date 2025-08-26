@@ -67,12 +67,12 @@ export default function Product_detail_safety() {
     certifications,
     downloads,
     videos,
-    breadcrumbs: ['Home', '제품']
+    breadcrumbs: ['Home', '제품', product.kind || '스마트안전', product.title || '제목 없음']
   };
 
   return (
     <div>
-      <ProductPage productData={productData} isRecordPage={true} />
+      <ProductPage productData={productData} isRecordPage={false} />
     </div>
   );
 }
