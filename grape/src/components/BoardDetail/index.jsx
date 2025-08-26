@@ -18,6 +18,7 @@ const BoardDetail = ({ post, onBack, onEdit, onDelete }) => {
   const author = post.author || '작성자';
   
   console.log('로드된 게시글 콘텐츠:', content);
+  console.log('전체 post 객체:', post);
   let createdAt = post.created_at || '날짜 없음';
 
   // 날짜 형식을 날짜까지만 표시하도록 변환
