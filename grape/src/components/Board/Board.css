@@ -1,5 +1,4 @@
 .board-container {
-  min-height: 100vh;
   background-color: var(--color-background-light);
   padding: 0 var(--spacing-2xl) var(--spacing-2xl) var(--spacing-2xl);
   border-radius: var(--border-radius-xl);

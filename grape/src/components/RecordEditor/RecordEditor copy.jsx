@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import ProductPage from '../ProductPage/ProductPage';
 import { uploadImage, validateImageFile, checkStorageBucket } from '../../utils/imageUpload';
 import { setupStoragePolicies } from '../../utils/supabaseRLS';
 import './RecordEditor.css';
@@ -252,7 +253,12 @@ const RecordEditor = ({
     onCancel();
   };
 
-
+  const handleDataChange = (field, value) => {
+    setFormData(prev => ({
+      ...prev,
+      [field]: value
+    }));
+  };
 
   const getModeConfig = () => {
     if (mode === 'product') {
@@ -263,7 +269,7 @@ const RecordEditor = ({
           { value: '관제시스템', label: '관제시스템' },
           { value: '통합제어', label: '통합제어' }
         ],
-        breadcrumbs: ["Home", "제품"]
+        breadcrumbs: ["Home", "제품", "미리보기"]
       };
     } else {
       return {
@@ -273,7 +279,7 @@ const RecordEditor = ({
           { value: '스마트통합제어', label: '스마트통합제어' },
           { value: '정보통신', label: '정보통신' }
         ],
-        breadcrumbs: ["Home", "실적"]
+        breadcrumbs: ["Home", "실적", "미리보기"]
       };
     }
   };
@@ -282,206 +288,227 @@ const RecordEditor = ({
 
   const content = (
     <div className={`record-editor-container ${isModal ? 'record-editor-container-modal' : ''}`}>
-      {/* 기본 정보 div */}
+      {/* 미리보기 (왼쪽) */}
+      <div className="record-editor-preview">
+        <div className="record-editor-preview-content">
+                      <ProductPage
+              productData={{
+                name: formData.title || (mode === 'record' ? '실적명을 입력하세요' : '모델명을 입력하세요'),
+                title: formData.overview_title || (mode === 'record' ? '실적명을 입력하세요' : '제품명을 입력하세요'),
+                overview_title: formData.overview_title || (mode === 'record' ? '실적명을 입력하세요' : '제품명을 입력하세요'),
+                overview: formData.desc || '내용을 입력하세요',
+                images: formData.images || [],
+                breadcrumbs: modeConfig.breadcrumbs,
+                // 제품 전용 데이터
+                keyFeatures: formData.keyFeatures.features.filter(f => f.trim() !== ''),
+                keyFeaturesImages: formData.keyFeatures.images || [],
+                specifications: formData.specifications || [],
+                certifications: formData.certifications || [],
+                downloads: formData.downloads,
+                videos: formData.videos
+              }}
+              isEditMode={true}
+              hideHeader={true}
+              isRecordPage={mode === 'record'}
+              onDataChange={handleDataChange}
+            />
+        </div>
+      </div>
+
+      {/* 편집 패널 (오른쪽) */}
       <div className="record-editor-panel">
         <div className="record-editor-panel-header">
-          <h3>기본 정보</h3>
-          <div className="record-editor-form-group">
-            <label className="record-editor-label">
-              사업분야 *
-            </label>
-            <select
-              name="kind"
-              value={formData.kind}
-              onChange={handleInputChange}
-              required
-              className="record-editor-input"
-            >
-              <option value="">사업분야를 선택하세요</option>
-              {modeConfig.kindOptions.map(option => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
+        <div className="record-editor-form-group">
+          <label className="record-editor-label">
+            사업분야 *
+          </label>
+          <select
+            name="kind"
+            value={formData.kind}
+            onChange={handleInputChange}
+            required
+            className="record-editor-input"
+          >
+            <option value="">사업분야를 선택하세요</option>
+            {modeConfig.kindOptions.map(option => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="record-editor-form-group">
+          <label className="record-editor-label">
+            카테고리 *
+          </label>
+          <input
+            type="text"
+            name="type"
+            value={formData.type}
+            onChange={handleInputChange}
+            required
+            className="record-editor-input"
+          />
+        </div>
+        
+        <div className="record-editor-form-group">
+          <label className="record-editor-label">
+          {mode === 'record' ? '실적명' : '모델명'} *
+          </label>
+          <input
+            type="text"
+            name="title"
+            value={formData.title}
+            onChange={handleInputChange}
+            required
+            className="record-editor-input"
+          />
+        </div>
+
+        <div className="record-editor-form-group">
+          <label className="record-editor-label">
+            {mode === 'record' ? '소제목' : '제품명'} *
+          </label>
+          <input
+            type="text"
+            name="overview_title"
+            value={formData.overview_title}
+            onChange={handleInputChange}
+            required
+            className="record-editor-input"
+          />
+        </div>
+
+        <div className="record-editor-form-group">
+          <label className="record-editor-label">
+            {mode === 'record' ? '실적 설명' : '제품 설명'} *
+          </label>
+          <div className="record-editor-tip">
+            💡 팁: Enter로 줄바꿈, • 또는 - 로 리스트 작성 가능
+          </div>
+          <textarea
+            name="desc"
+            value={formData.desc}
+            onChange={handleInputChange}
+            required
+            placeholder={mode === 'record' ? 
+              "실적 설명을 입력하세요...\n\n예시:\n• 첫 번째 항목\n• 두 번째 항목\n• 세 번째 항목\n\n또는\n\n- 첫 번째 항목\n- 두 번째 항목\n- 세 번째 항목" : 
+              "내용을 입력하세요...\n\n예시:\n• 첫 번째 항목\n• 두 번째 항목\n• 세 번째 항목\n\n또는\n\n- 첫 번째 항목\n- 두 번째 항목\n- 세 번째 항목"
+            }
+            className="record-editor-textarea"
+          />
+        </div>
+
+        <div className="record-editor-form-group">
+          <label className="record-editor-label">
+            날짜 *
+          </label>
+          <input
+            type="date"
+            name="date"
+            value={formData.date}
+            onChange={handleInputChange}
+            required
+            className="record-editor-input"
+          />
+        </div>
+
+        <div className="record-editor-form-group">
+          <label className="record-editor-label">
+            {mode === 'product' ? '제조사' : '발주처'} *
+          </label>
+          <input
+            type="text"
+            name="orderer"
+            value={formData.orderer}
+            onChange={handleInputChange}
+            required
+            className="record-editor-input"
+          />
+        </div>
+
+        
+
+
+
+        <div className="record-editor-form-group">
+          <label className="record-editor-label">
+            이미지 업로드
+          </label>
+          <input
+            type="file"
+            multiple
+            accept="image/*"
+            onChange={(e) => handleImageChange(e.target.files)}
+            className="record-editor-image-upload"
+          />
+          {formData.images.length > 0 && (
+            <div className="record-editor-image-list">
+              <h4>업로드된 이미지:</h4>
+              <p className="record-editor-tip">
+                💡 이미지를 드래그하여 순서를 변경할 수 있습니다.
+              </p>
+              {formData.images.map((image, index) => (
+                <div
+                  key={index}
+                  draggable
+                  className={`record-editor-image-item ${index === draggedIndex ? 'dragging' : ''} ${index === dragOverIndex ? 'drag-over' : ''}`}
+                  onDragStart={(e) => handleDragStart(e, index)}
+                  onDragOver={(e) => handleDragOver(e, index)}
+                  onDragLeave={handleDragLeave}
+                  onDrop={(e) => handleDrop(e, index)}
+                  onDragEnd={() => {
+                    setDraggedIndex(null);
+                    setDragOverIndex(null);
+                  }}
+                >
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                    <span className="record-editor-image-number">{index + 1}</span>
+                    <img 
+                      src={image} 
+                      alt={`이미지 ${index + 1}`} 
+                      className="record-editor-image-thumbnail"
+                    />
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => removeImage(index)}
+                    className="record-editor-delete-btn"
+                  >
+                    삭제
+                  </button>
+                </div>
               ))}
-            </select>
-          </div>
-
-          <div className="record-editor-form-group">
-            <label className="record-editor-label">
-              카테고리 *
-            </label>
-            <input
-              type="text"
-              name="type"
-              value={formData.type}
-              onChange={handleInputChange}
-              required
-              className="record-editor-input"
-            />
-          </div>
-          
-          <div className="record-editor-form-group">
-            <label className="record-editor-label">
-            {mode === 'record' ? '실적명' : '모델명'} *
-            </label>
-            <input
-              type="text"
-              name="title"
-              value={formData.title}
-              onChange={handleInputChange}
-              required
-              className="record-editor-input"
-            />
-          </div>
-
-          <div className="record-editor-form-group">
-            <label className="record-editor-label">
-              {mode === 'record' ? '소제목' : '제품명'} *
-            </label>
-            <input
-              type="text"
-              name="overview_title"
-              value={formData.overview_title}
-              onChange={handleInputChange}
-              required
-              className="record-editor-input"
-            />
-          </div>
-
-          <div className="record-editor-form-group">
-            <label className="record-editor-label">
-              {mode === 'record' ? '실적 설명' : '제품 설명'} *
-            </label>
-            <div className="record-editor-tip">
-              💡 팁: Enter로 줄바꿈, • 또는 - 로 리스트 작성 가능
-            </div>
-            <textarea
-              name="desc"
-              value={formData.desc}
-              onChange={handleInputChange}
-              required
-              placeholder={mode === 'record' ? 
-                "실적 설명을 입력하세요...\n\n예시:\n• 첫 번째 항목\n• 두 번째 항목\n• 세 번째 항목\n\n또는\n\n- 첫 번째 항목\n- 두 번째 항목\n- 세 번째 항목" : 
-                "내용을 입력하세요...\n\n예시:\n• 첫 번째 항목\n• 두 번째 항목\n• 세 번째 항목\n\n또는\n\n- 첫 번째 항목\n- 두 번째 항목\n- 세 번째 항목"
-              }
-              className="record-editor-textarea"
-            />
-          </div>
-
-          <div className="record-editor-form-group">
-            <label className="record-editor-label">
-              날짜 *
-            </label>
-            <input
-              type="date"
-              name="date"
-              value={formData.date}
-              onChange={handleInputChange}
-              required
-              className="record-editor-input"
-            />
-          </div>
-
-          <div className="record-editor-form-group">
-            <label className="record-editor-label">
-              {mode === 'product' ? '제조사' : '발주처'} *
-            </label>
-            <input
-              type="text"
-              name="orderer"
-              value={formData.orderer}
-              onChange={handleInputChange}
-              required
-              className="record-editor-input"
-            />
-          </div>
-
-          {/* 실적 모드일 때 버튼을 panel-header 안에 배치 */}
-          {mode === 'record' && (
-            <div className="record-editor-button-group" style={{ marginTop: '20px', display: 'flex', gap: '10px', justifyContent: 'flex-end' }}>
-              <button
-                onClick={handleCancel}
-                disabled={submitting}
-                className="record-editor-cancel-btn"
-              >
-                취소
-              </button>
-              <button
-                onClick={handleSave}
-                disabled={submitting}
-                className="record-editor-save-btn"
-              >
-                {submitting ? '저장 중...' : '저장'}
-              </button>
             </div>
           )}
         </div>
-      </div>
 
-      {/* 이미지 업로드 div */}
-      <div className="record-editor-panel">
-        <div className="record-editor-panel-header">
-          <h3>이미지 업로드</h3>
-          <div className="record-editor-form-group">
-            <label className="record-editor-label">
-              이미지 업로드
-            </label>
-            <input
-              type="file"
-              multiple
-              accept="image/*"
-              onChange={(e) => handleImageChange(e.target.files)}
-              className="record-editor-image-upload"
-            />
-            {formData.images.length > 0 && (
-              <div className="record-editor-image-list">
-                <h4>업로드된 이미지:</h4>
-                <p className="record-editor-tip">
-                  💡 이미지를 드래그하여 순서를 변경할 수 있습니다.
-                </p>
-                {formData.images.map((image, index) => (
-                  <div
-                    key={index}
-                    draggable
-                    className={`record-editor-image-item ${index === draggedIndex ? 'dragging' : ''} ${index === dragOverIndex ? 'drag-over' : ''}`}
-                    onDragStart={(e) => handleDragStart(e, index)}
-                    onDragOver={(e) => handleDragOver(e, index)}
-                    onDragLeave={handleDragLeave}
-                    onDrop={(e) => handleDrop(e, index)}
-                    onDragEnd={() => {
-                      setDraggedIndex(null);
-                      setDragOverIndex(null);
-                    }}
-                  >
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-                      <span className="record-editor-image-number">{index + 1}</span>
-                      <img 
-                        src={image} 
-                        alt={`이미지 ${index + 1}`} 
-                        className="record-editor-image-thumbnail"
-                      />
-                    </div>
-                    <button
-                      type="button"
-                      onClick={() => removeImage(index)}
-                      className="record-editor-delete-btn"
-                    >
-                      삭제
-                    </button>
-                  </div>
-                ))}
-              </div>
-            )}
+        {/* 실적 모드일 때 버튼을 panel-header 안에 배치 */}
+        {mode === 'record' && (
+          <div className="record-editor-button-group" style={{ marginTop: '20px', display: 'flex', gap: '10px', justifyContent: 'flex-end' }}>
+            <button
+              onClick={handleCancel}
+              disabled={submitting}
+              className="record-editor-cancel-btn"
+            >
+              취소
+            </button>
+            <button
+              onClick={handleSave}
+              disabled={submitting}
+              className="record-editor-save-btn"
+            >
+              {submitting ? '저장 중...' : '저장'}
+            </button>
           </div>
+        )}
         </div>
-      </div>
 
 
-      {/* 제품 전용 필드 div */}
-      {mode === 'product' && (
-        <div className="record-editor-panel">
-          <div className="record-editor-panel-header">
-            <h3>제품 상세 정보</h3>
+        {/* 제품 전용 필드들 */}
+        {mode === 'product' && (
+          <>
             <div className="record-editor-product-section">
               <div className="record-editor-form-group">
                 <label className="record-editor-label">
@@ -890,25 +917,28 @@ const RecordEditor = ({
                 </div>
               </div>
               <div className="record-editor-button-group">
-                <button
-                  onClick={handleCancel}
-                  disabled={submitting}
-                  className="record-editor-cancel-btn"
-                >
-                  취소
-                </button>
-                <button
-                  onClick={handleSave}
-                  disabled={submitting}
-                  className="record-editor-save-btn"
-                >
-                  {submitting ? '저장 중...' : '저장'}
-                </button>
-              </div>
-            </div>
-          </div>
+          <button
+            onClick={handleCancel}
+            disabled={submitting}
+            className="record-editor-cancel-btn"
+          >
+            취소
+          </button>
+          <button
+            onClick={handleSave}
+            disabled={submitting}
+            className="record-editor-save-btn"
+          >
+            {submitting ? '저장 중...' : '저장'}
+          </button>
         </div>
-      )}
+            </div>
+          </>
+        )}
+
+
+
+      </div>
     </div>
   );
 

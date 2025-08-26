@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import welding from '../../assets/welding.jpg';
 import grinding from '../../assets/grinding.jpg';
 import construction from '../../assets/construction.jpg';
@@ -17,6 +18,8 @@ import ProductPage from '../../components/ProductPage/ProductPage';
 import RecordEditor from '../../components/RecordEditor';
 
 export default function ProductListMonitoringPage() {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -24,7 +27,7 @@ export default function ProductListMonitoringPage() {
   const [selectedRecord, setSelectedRecord] = useState(null);
   const [viewMode, setViewMode] = useState('list');
   const [editingExistingRecord, setEditingExistingRecord] = useState(null);
-  const [newRecord, setNewRecord] = useState({
+  const [newRecord] = useState({
     title: '',
     desc: '',
     overview_title: '',
@@ -44,6 +47,26 @@ export default function ProductListMonitoringPage() {
     checkUserAuthStatus();
     checkAndCreateMissingPolicies();
   }, []);
+
+  // URL 파라미터 확인하여 상세 모드 설정
+  useEffect(() => {
+    console.log('[Monitoring] useEffect location.search ->', location.search, 'products.length=', products.length);
+    const searchParams = new URLSearchParams(location.search);
+    const detailId = searchParams.get('detail');
+    
+    if (detailId) {
+      // URL에 detail 파라미터가 있으면 해당 제품을 찾아서 상세 모드로 설정
+      const record = products.find(p => p.rawData && p.rawData.id === parseInt(detailId));
+      if (record) {
+        setSelectedRecord(record.rawData);
+        setViewMode('detail');
+      }
+    } else {
+      // URL에 detail 파라미터가 없으면 리스트 모드로 설정
+      setViewMode('list');
+      setSelectedRecord(null);
+    }
+  }, [location.search, products]);
 
   const fetchProducts = async () => {
     try {
@@ -189,13 +212,24 @@ export default function ProductListMonitoringPage() {
   };
 
   const handleRecordClick = (record) => {
-    setSelectedRecord(record);
-    setViewMode('detail');
+    // URL에 detail 파라미터를 추가하여 브라우저 히스토리에 기록
+    const currentSearch = new URLSearchParams(location.search);
+    currentSearch.set('detail', record.id);
+    const target = `${location.pathname}?${currentSearch.toString()}`;
+    console.log('[Monitoring] handleRecordClick navigating to', target, 'current=', location.pathname + location.search);
+    // 동일한 위치로의 중복 네비게이션 방지
+    if (location.pathname + location.search === target) {
+      console.log('[Monitoring] handleRecordClick - target equals current, skipping navigate');
+      return;
+    }
+    navigate(target, { replace: false });
   };
 
   const handleBackToList = () => {
-    setViewMode('list');
-    setSelectedRecord(null);
+    // URL에서 detail 파라미터를 제거하여 리스트 모드로 돌아가기
+    const currentSearch = new URLSearchParams(location.search);
+    currentSearch.delete('detail');
+    navigate(`${location.pathname}?${currentSearch.toString()}`, { replace: false });
   };
 
   const handleEditRecord = async (record) => {

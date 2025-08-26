@@ -260,6 +260,28 @@ function App() {
   // Debug logging
   console.log('App component - current location:', location.pathname);
 
+  // Monitor history API usage (for debugging duplicate navigation)
+  useEffect(() => {
+    try {
+      const origPush = window.history.pushState;
+      const origReplace = window.history.replaceState;
+      window.history.pushState = function(state, title, url) {
+        console.log('[history] pushState called ->', url);
+        return origPush.apply(this, arguments);
+      };
+      window.history.replaceState = function(state, title, url) {
+        console.log('[history] replaceState called ->', url);
+        return origReplace.apply(this, arguments);
+      };
+      return () => {
+        window.history.pushState = origPush;
+        window.history.replaceState = origReplace;
+      };
+    } catch (e) {
+      // ignore in non-browser env
+    }
+  }, []);
+
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth <= 768);

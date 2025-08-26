@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import BoardList from '../BoardList';
 import BoardDetail from '../BoardDetail';
 import BoardEditor from '../BoardEditor';
@@ -14,6 +14,7 @@ const Board = ({ tableName, tableNames }) => {
   const [editingPost, setEditingPost] = useState(null);
   const resolvedTableName = tableName || (Array.isArray(tableNames) && tableNames.length > 0 ? tableNames[0] : undefined);
   const location = useLocation();
+  const navigate = useNavigate();
 
   // 샘플 데이터 (실제로는 API에서 가져올 데이터)
   useEffect(() => {
@@ -22,12 +23,15 @@ const Board = ({ tableName, tableNames }) => {
     setPosts(samplePosts);
   }, []);
 
-  // 쿼리스트링으로 들어온 id, t(테이블) 처리 -> 상세로 바로 진입
+  // 쿼리스트링으로 들어온 id, t(테이블), detail 처리 -> 상세로 바로 진입
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const idParam = params.get('id');
     const tableParam = params.get('t');
-    if (idParam) {
+    const detailParam = params.get('detail');
+    
+    if (idParam || detailParam) {
+      const targetId = idParam || detailParam;
       const targetTable = tableParam || resolvedTableName;
       if (targetTable) {
         // Supabase에서 해당 게시물 조회
@@ -36,7 +40,7 @@ const Board = ({ tableName, tableNames }) => {
             const { data, error } = await supabase
               .from(targetTable)
               .select('*')
-              .eq('id', idParam)
+              .eq('id', targetId)
               .single();
             if (!error && data) {
               setSelectedPost({ ...data, tableName: targetTable });
@@ -47,13 +51,28 @@ const Board = ({ tableName, tableNames }) => {
           }
         })();
       }
+    } else {
+      // detail 파라미터가 없으면 리스트 모드로 설정
+      setCurrentView('list');
+      setSelectedPost(null);
+      setEditingPost(null);
     }
   }, [location.search, resolvedTableName]);
 
   const handlePostClick = (post) => {
     console.log('게시물 클릭:', post);
-    setSelectedPost(post);
-    setCurrentView('detail');
+    
+    // URL에 detail 파라미터 추가
+    const currentSearch = new URLSearchParams(location.search);
+    currentSearch.set('detail', post.id);
+    const target = `${location.pathname}?${currentSearch.toString()}`;
+    
+    // 동일한 위치로의 중복 네비게이션 방지
+    if (location.pathname + location.search === target) {
+      console.log('[Board] handlePostClick - target equals current, skipping navigate');
+      return;
+    }
+    navigate(target, { replace: false });
   };
 
   const handleWriteClick = () => {
@@ -67,9 +86,10 @@ const Board = ({ tableName, tableNames }) => {
   };
 
   const handleBackToList = () => {
-    setCurrentView('list');
-    setSelectedPost(null);
-    setEditingPost(null);
+    // URL에서 detail 파라미터를 제거하여 리스트 모드로 돌아가기
+    const currentSearch = new URLSearchParams(location.search);
+    currentSearch.delete('detail');
+    navigate(`${location.pathname}?${currentSearch.toString()}`, { replace: false });
   };
 
   const handleSavePost = (postData) => {

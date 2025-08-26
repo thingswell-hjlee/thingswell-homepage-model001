@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import welding from '../../assets/welding.jpg';
 import ProductList from '../Products/ProductList';
 import main from '../../assets/case_bus_seoul/main_4.jpg';
@@ -33,6 +34,8 @@ import '../Products/ProductsCommon.css';
  */
 
 export default function TrackRecordPage({ kindFilter = null }) {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -84,6 +87,26 @@ export default function TrackRecordPage({ kindFilter = null }) {
     checkUserAuthStatus();
     checkAndCreateMissingPolicies();
   }, []);
+
+  // URL 파라미터 확인하여 상세 모드 설정
+  useEffect(() => {
+    console.log('[Case] useEffect location.search changed ->', location.search, 'products.length=', products.length);
+    const searchParams = new URLSearchParams(location.search);
+    const detailId = searchParams.get('detail');
+    
+    if (detailId && products.length > 0) {
+      // URL에 detail 파라미터가 있으면 해당 제품을 찾아서 상세 모드로 설정
+      const record = products.find(p => p.rawData && p.rawData.id === parseInt(detailId));
+      if (record) {
+        setSelectedRecord(record.rawData);
+        setViewMode('detail');
+      }
+    } else if (!detailId) {
+      // URL에 detail 파라미터가 없으면 리스트 모드로 설정
+      setViewMode('list');
+      setSelectedRecord(null);
+    }
+  }, [location.search, products]);
 
   const fetchTrackRecords = async () => {
     try {
@@ -293,18 +316,39 @@ export default function TrackRecordPage({ kindFilter = null }) {
   };
 
   const handleRecordClick = (record) => {
-    // 관리자가 아닌 경우 클릭을 막음
-    if (!canEditContent()) {
+    // 로그인한 유저만 상세 페이지 보기 가능
+    if (!isAuthenticated) {
+      alert('상세 페이지를 보려면 로그인이 필요합니다.');
       return;
     }
-    setSelectedRecord(record);
-    setViewMode('detail');
+    // 네비게이션 중복 방지
+    if (isNavigatingRef.current) {
+      console.log('[Case] navigation locked, skipping');
+      return;
+    }
+    // URL에 detail 파라미터를 추가하여 브라우저 히스토리에 기록
+    const currentSearch = new URLSearchParams(location.search);
+    currentSearch.set('detail', record.id);
+    const target = `${location.pathname}?${currentSearch.toString()}`;
+    console.log('[Case] handleRecordClick navigating to', target, 'current=', location.pathname + location.search);
+    // 동일한 위치로의 중복 네비게이션 방지 (실제 브라우저 URL 기준)
+    if (window.location.pathname + window.location.search === target) {
+      console.log('[Case] handleRecordClick - target equals current (window), skipping navigate');
+      return;
+    }
+    isNavigatingRef.current = true;
+    navigate(target, { replace: false });
+    // unlock shortly after
+    setTimeout(() => { isNavigatingRef.current = false; }, 500);
   };
 
+  const isNavigatingRef = useRef(false);
+
   const handleBackToList = () => {
-    // 목록 페이지로 돌아가기
-    setViewMode('list');
-    setSelectedRecord(null);
+    // URL에서 detail 파라미터를 제거하여 리스트 모드로 돌아가기
+    const currentSearch = new URLSearchParams(location.search);
+    currentSearch.delete('detail');
+    navigate(`${location.pathname}?${currentSearch.toString()}`, { replace: false });
   };
 
   const handleEditRecord = async (record) => {
