@@ -242,6 +242,8 @@ const BoardEditor = ({
             image: {
               uploadCallback: async (file) => {
                 try {
+                  // 50MB까지 허용하도록 validateImageFile 호출
+                  validateImageFile(file, 50);
                   // Product와 동일한 방식으로 이미지 업로드
                   const imageUrl = await uploadImage(file, 'announcement', 'announcement');
                   return { data: { link: imageUrl } };

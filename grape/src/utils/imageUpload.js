@@ -1,7 +1,7 @@
 import { supabase } from '../lib/supabase';
 
 // 이미지 파일 검증
-export const validateImageFile = (file, maxSizeMB = 5) => {
+export const validateImageFile = (file, maxSizeMB = 50) => {
   const maxSize = maxSizeMB * 1024 * 1024; // MB를 바이트로 변환
   
   if (!file) {
@@ -22,8 +22,8 @@ export const validateImageFile = (file, maxSizeMB = 5) => {
 // Supabase Storage에 이미지 업로드
 export const uploadImage = async (file, folder = 'track_record', bucket = 'track_record') => {
   try {
-    // 파일 검증
-    validateImageFile(file);
+    // 파일 검증 (50MB까지 허용)
+    validateImageFile(file, 50);
     
     // Supabase 클라이언트 확인
     if (!supabase) {

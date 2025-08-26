@@ -101,6 +101,20 @@
   color: #333;
 }
 
+.post-footer {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid #e1e5e9;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.post-actions {
+  display: flex;
+  gap: 10px;
+}
+
 .content-html {
   font-size: 16px;
   line-height: 1.8;
@@ -245,5 +259,11 @@
   .post-meta {
     flex-direction: column;
     gap: 10px;
+  }
+  
+  .post-footer {
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-start;
   }
 } 

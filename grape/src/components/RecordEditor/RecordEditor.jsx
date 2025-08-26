@@ -210,7 +210,7 @@ const RecordEditor = ({
         
         for (let i = 0; i < files.length; i++) {
           const file = files[i];
-          validateImageFile(file, 5);
+          validateImageFile(file, 50);
           
           try {
             const folder = mode === 'product' ? 'product' : 'track_record';
@@ -496,7 +496,7 @@ const RecordEditor = ({
                       try {
                         const fileArray = Array.from(e.target.files);
                         const imageUrls = await Promise.all(fileArray.map(async file => {
-                          validateImageFile(file, 5);
+                          validateImageFile(file, 50);
                           try {
                             return await uploadImage(file, 'product', 'product');
                           } catch (uploadError) {
@@ -603,7 +603,7 @@ const RecordEditor = ({
                       try {
                         const fileArray = Array.from(e.target.files);
                         const imageUrls = await Promise.all(fileArray.map(async file => {
-                          validateImageFile(file, 5);
+                          validateImageFile(file, 50);
                           try {
                             return await uploadImage(file, 'product', 'product');
                           } catch (uploadError) {
@@ -706,7 +706,7 @@ const RecordEditor = ({
                       try {
                         const fileArray = Array.from(e.target.files);
                         const imageUrls = await Promise.all(fileArray.map(async file => {
-                          validateImageFile(file, 5);
+                          validateImageFile(file, 50);
                           try {
                             return await uploadImage(file, 'product', 'product');
                           } catch (uploadError) {

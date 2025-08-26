@@ -20,19 +20,16 @@ const BoardDetail = ({ post, onBack, onEdit, onDelete }) => {
   console.log('로드된 게시글 콘텐츠:', content);
   let createdAt = post.created_at || '날짜 없음';
 
-  // 날짜 형식을 시간과 분까지만 표시하도록 변환
+  // 날짜 형식을 날짜까지만 표시하도록 변환
 
   if (createdAt !== '날짜 없음' && createdAt) {
     try {
       const date = new Date(createdAt);
       if (!isNaN(date.getTime())) {
-        createdAt = date.toLocaleString('ko-KR', {
+        createdAt = date.toLocaleDateString('ko-KR', {
           year: 'numeric',
           month: '2-digit',
-          day: '2-digit',
-          hour: '2-digit',
-          minute: '2-digit',
-          hour12: false
+          day: '2-digit'
         });
       }
     } catch (error) {
@@ -46,9 +43,6 @@ const BoardDetail = ({ post, onBack, onEdit, onDelete }) => {
       <div className="post-content">
         <div className="post-header">
           <h1 className="post-title">{title}</h1>
-          <div className="post-meta">
-            <span className="date">작성일: {createdAt}</span>
-          </div>
         </div>
         
         <div className="post-body">
@@ -58,10 +52,15 @@ const BoardDetail = ({ post, onBack, onEdit, onDelete }) => {
           />
         </div>
         
-        <div className="post-actions">
-          <button onClick={() => onEdit(post)} className="btn-edit">
-            수정
-          </button>
+        <div className="post-footer">
+          <div className="post-meta">
+            <span className="date">작성일: {createdAt}</span>
+          </div>
+          <div className="post-actions">
+            <button onClick={() => onEdit(post)} className="btn-edit">
+              수정
+            </button>
+          </div>
         </div>
       </div>
     </div>
