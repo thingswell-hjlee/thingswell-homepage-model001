@@ -57,6 +57,12 @@ const BoardDetail = ({ post, onBack, onEdit, onDelete }) => {
             dangerouslySetInnerHTML={{ __html: content }}
           />
         </div>
+        
+        <div className="post-actions">
+          <button onClick={() => onEdit(post)} className="btn-edit">
+            수정
+          </button>
+        </div>
       </div>
     </div>
   );

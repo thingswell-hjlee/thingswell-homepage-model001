@@ -22,20 +22,49 @@ const BoardEditor = ({
   const [isSaving, setIsSaving] = useState(false);
   const [saveError, setSaveError] = useState(null);
 
+  console.log('BoardEditor props:', {
+    initialContent: initialContent ? initialContent.substring(0, 100) + '...' : 'empty',
+    title,
+    isEditMode,
+    existingId
+  });
+
   // 초기 콘텐츠 설정
   useEffect(() => {
     if (initialContent) {
       try {
+        console.log('편집 모드 - 초기 콘텐츠:', initialContent);
+        
         // HTML 문자열을 Draft.js ContentState로 변환
         const contentBlock = htmlToDraft(initialContent);
+        console.log('변환된 contentBlock:', contentBlock);
+        
         if (contentBlock) {
           const contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks);
+          console.log('변환된 contentState:', contentState);
           setEditorState(EditorState.createWithContent(contentState));
+        } else {
+          console.warn('contentBlock이 null입니다. 빈 에디터로 설정합니다.');
+          setEditorState(EditorState.createEmpty());
         }
       } catch (error) {
         console.error('초기 콘텐츠 변환 오류:', error);
-        setEditorState(EditorState.createEmpty());
+        console.log('HTML을 텍스트로 변환하여 시도합니다.');
+        
+        // HTML 태그를 제거하고 텍스트만 추출
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = initialContent;
+        const textContent = tempDiv.textContent || tempDiv.innerText || '';
+        
+        console.log('추출된 텍스트:', textContent);
+        
+        // 텍스트로 ContentState 생성
+        const contentState = ContentState.createFromText(textContent);
+        setEditorState(EditorState.createWithContent(contentState));
       }
+    } else {
+      console.log('새 글 작성 모드 - 빈 에디터로 설정');
+      setEditorState(EditorState.createEmpty());
     }
   }, [initialContent]);
 

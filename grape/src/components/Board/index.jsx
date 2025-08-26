@@ -81,8 +81,10 @@ const Board = ({ tableName, tableNames }) => {
   };
 
   const handleEditClick = (post) => {
+    console.log('편집할 게시글:', post);
     setEditingPost(post);
     setCurrentView('edit');
+    console.log('편집 모드로 전환됨, editingPost:', post);
   };
 
   const handleBackToList = () => {
@@ -174,6 +176,7 @@ const Board = ({ tableName, tableNames }) => {
           />
         );
       case 'edit':
+        console.log('편집 모드 렌더링 - editingPost:', editingPost);
         return (
           <BoardEditor
             initialContent={editingPost?.content || ''}
