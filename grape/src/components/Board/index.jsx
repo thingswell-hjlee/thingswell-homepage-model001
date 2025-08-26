@@ -73,21 +73,21 @@ const Board = ({ tableName, tableNames }) => {
   };
 
   const handleSavePost = (postData) => {
-    if (editingPost) {
-      // 수정
+    // BoardEditor에서 이미 Supabase에 저장했으므로, 
+    // 여기서는 UI 상태만 업데이트하면 됩니다
+    if (postData.isEdit) {
+      // 수정된 경우
       const updatedPosts = posts.map(post => 
         post.id === editingPost.id 
-          ? { ...post, ...postData, updatedAt: new Date().toISOString().split('T')[0] }
+          ? { ...post, ...postData.savedData, updatedAt: new Date().toISOString().split('T')[0] }
           : post
       );
       setPosts(updatedPosts);
     } else {
-      // 새 글 작성
+      // 새 글 작성된 경우
       const newPost = {
-        id: Date.now(),
-        ...postData,
+        ...postData.savedData,
         author: '관리자',
-        createdAt: new Date().toISOString().split('T')[0],
         views: 0,
         isNew: true
       };
@@ -161,6 +161,8 @@ const Board = ({ tableName, tableNames }) => {
             onSave={handleSavePost}
             tableName={resolvedTableName}
             onCancel={handleBackToList}
+            existingId={editingPost?.id}
+            isEditMode={true}
           />
         );
       default:

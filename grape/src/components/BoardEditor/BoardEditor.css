@@ -11,6 +11,17 @@
   margin-bottom: 20px;
 }
 
+.editor-mode-indicator {
+  font-size: 14px;
+  font-weight: 600;
+  color: #007bff;
+  margin-bottom: 10px;
+  padding: 8px 12px;
+  background-color: #e3f2fd;
+  border-radius: 4px;
+  border-left: 4px solid #007bff;
+}
+
 .title-input {
   width: 100%;
   padding: 15px;
@@ -29,6 +40,66 @@
   border: 1px solid #e1e5e9;
   border-radius: 6px;
   overflow: hidden;
+  min-height: 400px;
+}
+
+/* Draft.js 편집기 커스텀 스타일 */
+.editor-wrapper {
+  border: none !important;
+}
+
+.editor-content {
+  min-height: 300px !important;
+  padding: 20px !important;
+  font-family: 'Noto Sans KR', sans-serif !important;
+  font-size: 14px !important;
+  line-height: 1.6 !important;
+}
+
+/* 툴바 스타일링 */
+.rdw-editor-toolbar {
+  border-bottom: 1px solid #e1e5e9 !important;
+  background-color: #f8f9fa !important;
+  padding: 10px !important;
+}
+
+.rdw-option-wrapper {
+  border: 1px solid #e1e5e9 !important;
+  border-radius: 4px !important;
+  margin: 0 2px !important;
+}
+
+.rdw-option-wrapper:hover {
+  background-color: #e9ecef !important;
+}
+
+.rdw-option-active {
+  background-color: #007bff !important;
+  color: white !important;
+}
+
+/* 드롭다운 스타일 */
+.rdw-dropdown-wrapper {
+  border: 1px solid #e1e5e9 !important;
+  border-radius: 4px !important;
+}
+
+.rdw-dropdown-optionwrapper {
+  border: 1px solid #e1e5e9 !important;
+  border-radius: 4px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* 색상 피커 스타일 */
+.rdw-colorpicker-wrapper {
+  border: 1px solid #e1e5e9 !important;
+  border-radius: 4px !important;
+}
+
+/* 이모지 피커 스타일 */
+.rdw-emoji-wrapper {
+  border: 1px solid #e1e5e9 !important;
+  border-radius: 4px !important;
 }
 
 .save-error {
@@ -89,15 +160,34 @@
   cursor: not-allowed;
 }
 
-/* 토스트 에디터 커스텀 스타일 */
-.toastui-editor-defaultUI {
-  border: none !important;
-}
-
-.toastui-editor-defaultUI-toolbar {
-  border-bottom: 1px solid #e1e5e9 !important;
-}
-
-.toastui-editor-contents {
-  font-family: 'Noto Sans KR', sans-serif !important;
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .board-editor {
+    padding: 15px;
+  }
+  
+  .editor-mode-indicator {
+    font-size: 13px;
+    padding: 6px 10px;
+  }
+  
+  .title-input {
+    font-size: 16px;
+    padding: 12px;
+  }
+  
+  .editor-content {
+    padding: 15px !important;
+    font-size: 13px !important;
+  }
+  
+  .rdw-editor-toolbar {
+    padding: 8px !important;
+  }
+  
+  .btn-cancel,
+  .btn-save {
+    padding: 10px 20px;
+    font-size: 13px;
+  }
 } 
