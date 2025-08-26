@@ -61,6 +61,31 @@
   margin-right: auto;
 }
 
+/* 로그아웃 버튼 */
+.menu-logout {
+  display: flex;
+  align-items: center;
+  height: var(--menu-height);
+  margin-left: auto;
+}
+
+.logout-button {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  white-space: nowrap;
+}
+
+.logout-button:hover {
+  background-color: #c82333;
+}
+
 .logo-image {
   height: 40%;
   width: auto;

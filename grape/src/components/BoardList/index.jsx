@@ -326,6 +326,18 @@ const BoardList = ({
                     {user && (
                       <td id="board-actions">
                         <button
+                          className="edit-btn"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            if (onEdit) {
+                              onEdit(instrument);
+                            }
+                          }}
+                          aria-label="수정"
+                        >
+                          {isMobile ? "수정" : "수정"}
+                        </button>
+                        <button
                           className="delete-btn"
                           onClick={(e) => {
                             e.stopPropagation();

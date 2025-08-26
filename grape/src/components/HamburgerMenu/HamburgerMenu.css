@@ -219,6 +219,18 @@
   cursor: not-allowed;
 }
 
+/* 모바일 로그아웃 버튼 */
+.hamburger-menu-button.logout-button {
+  background-color: #dc3545;
+  color: white;
+  border-bottom: var(--border-width-thin) solid #c82333;
+}
+
+.hamburger-menu-button.logout-button:hover {
+  background-color: #c82333;
+  color: white;
+}
+
 /* 햄버거 메뉴 애니메이션 제거됨 */
 
 /* ===== 반응형 디자인 ===== */

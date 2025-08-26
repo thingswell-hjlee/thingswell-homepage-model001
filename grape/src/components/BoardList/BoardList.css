@@ -99,6 +99,12 @@
   border-bottom: 1px solid #e1e5e9;
 }
 
+/* 테이블 헤더 정렬 */
+.board-table th#board-number,
+.board-table th#board-date {
+  text-align: center;
+}
+
 .board-table th {
   background-color: #f8f9fa;
   font-weight: 600;
@@ -171,6 +177,23 @@
   background-color: #0056b3;
 }
 
+/* 편집 버튼 스타일 */
+.edit-btn {
+  padding: 6px 12px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.edit-btn:hover {
+  background-color: #218838;
+}
+
 /* 삭제 버튼 스타일 */
 .delete-btn {
   padding: 6px 12px;
@@ -190,7 +213,10 @@
 
 #board-actions {
   text-align: center;
-  width: 80px;
+  width: 160px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
 }
 
 #board-number,
@@ -214,7 +240,7 @@
 
 .board-table tbody td#board-date {
   width: 180px;
-  text-align: right;
+  text-align: center;
   white-space: nowrap;
 }
 

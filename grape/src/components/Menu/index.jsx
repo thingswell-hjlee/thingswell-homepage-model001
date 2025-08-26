@@ -119,7 +119,7 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
   const location = useLocation();
   const menuRef = useRef(null);
   const hoverCloseTimerRef = useRef(null);
-  const { isAdmin } = useAuth();
+  const { isAdmin, isAuthenticated, signOut } = useAuth();
   
   // 상태 관리
   const [openSubmenu, setOpenSubmenu] = useState(null);
@@ -515,6 +515,20 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
     }
   }, [navigate, isMobile]);
 
+  // 로그아웃 핸들러
+  const handleLogout = useCallback(async () => {
+    try {
+      await signOut();
+      navigate('/');
+      // 모바일 메뉴 닫기
+      if (isMobile) {
+        setIsMobileMenuOpen(false);
+      }
+    } catch (error) {
+      console.error('로그아웃 오류:', error);
+    }
+  }, [signOut, navigate, isMobile]);
+
   // 관리자 권한에 따라 메뉴 아이템 필터링
   const filteredMenuItems = useMemo(() => {
     return defaultMenuItems.filter(item => {
@@ -555,6 +569,19 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
                 onClick={handleLogoClick}
               />
             </div>
+            
+            {/* 로그아웃 버튼 */}
+            {isAuthenticated() && (
+              <div className="menu-logout">
+                <button
+                  className="logout-button"
+                  onClick={handleLogout}
+                  aria-label="로그아웃"
+                >
+                  로그아웃
+                </button>
+              </div>
+            )}
             
             <nav className={`menu menu-${orientation} menu-${theme}`}>
               <ul className="menu-list">
@@ -618,6 +645,8 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
           isSubmenuActive={isSubmenuActive}
           openSubmenu={openSubmenu}
           onLogoClick={handleLogoClick}
+          isAuthenticated={isAuthenticated}
+          onLogout={handleLogout}
         />
       )}
     </>

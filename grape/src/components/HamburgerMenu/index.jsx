@@ -36,7 +36,9 @@ const HamburgerMenu = ({
   menuItems,
   onItemClick,
   isMenuActive,
-  onLogoClick
+  onLogoClick,
+  isAuthenticated,
+  onLogout
 }) => {
   return (
     <>
@@ -89,6 +91,18 @@ const HamburgerMenu = ({
                   </button>
                 </li>
               ))}
+              
+              {/* 모바일 로그아웃 버튼 */}
+              {isAuthenticated && isAuthenticated() && (
+                <li className="hamburger-menu-item">
+                  <button
+                    className="hamburger-menu-button logout-button"
+                    onClick={onLogout}
+                  >
+                    <span className="hamburger-menu-text">로그아웃</span>
+                  </button>
+                </li>
+              )}
             </ul>
           </nav>
         </div>

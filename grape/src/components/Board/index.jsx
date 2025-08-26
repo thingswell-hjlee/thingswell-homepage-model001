@@ -130,6 +130,7 @@ const Board = ({ tableName, tableNames }) => {
           <BoardList
             onPostClick={handlePostClick}
             onWriteClick={handleWriteClick}
+            onEdit={handleEditClick}
             onDelete={handleDeletePost}
             tableName={resolvedTableName}
             tableNames={tableNames}
@@ -163,7 +164,7 @@ const Board = ({ tableName, tableNames }) => {
           />
         );
       default:
-        return <BoardList onPostClick={handlePostClick} onWriteClick={handleWriteClick} onDelete={handleDeletePost} tableName={tableName} />;
+        return <BoardList onPostClick={handlePostClick} onWriteClick={handleWriteClick} onEdit={handleEditClick} onDelete={handleDeletePost} tableName={tableName} />;
     }
   };
 
