@@ -27,33 +27,49 @@ function Footer() {
       <footer className="footer">
         
         <div className="footer-container">
-          {/* <div className="footer-content">
+          <div className="footer-content sitemap">
             <div className="footer-section">
-              <a href="/solutions" className="footer-subtitle">
-                솔루션
-              </a>
+              <h3 className="footer-subtitle">Services</h3>
+              <ul className="footer-links">
+                <li><a href="/solutions">솔루션</a></li>
+                <li><a href="/products">제품</a></li>
+                <li><a href="/cases">납품사례</a></li>
+                <li><a href="/customer-service">고객지원</a></li>
+                <li><a href="/about">회사소개</a></li>
+              </ul>
             </div>
+
             <div className="footer-section">
-              <a href="/products" className="footer-subtitle">
-                제품
-              </a>
+              <h3 className="footer-subtitle">Expertise</h3>
+              <ul className="footer-links">
+                <li><a href="#">Local SEO</a></li>
+                <li><a href="#">National SEO</a></li>
+                <li><a href="#">Facebook Ads</a></li>
+                <li><a href="#">LinkedIn Ads</a></li>
+                <li><a href="#">Instagram Ads</a></li>
+              </ul>
             </div>
+
             <div className="footer-section">
-              <a href="/cases" className="footer-subtitle">
-                납품사례
-              </a>
+              <h3 className="footer-subtitle">Useful Tools</h3>
+              <ul className="footer-links">
+                <li><a href="#">GTMetrix</a></li>
+                <li><a href="#">Ubersuggest</a></li>
+                <li><a href="#">SEMRush</a></li>
+                <li><a href="#">ahrefs</a></li>
+                <li><a href="#">Google Search Console</a></li>
+              </ul>
             </div>
-            <div className="footer-section">
-              <a href="/customer-service" className="footer-subtitle">
-                고객지원
-              </a>
+
+            <div className="footer-section contact">
+              <h3 className="footer-subtitle">HEDLEY</h3>
+              <p className="footer-description">Hedley Digital is an industry-leading and top-rated premium digital marketing agency focusing on driving traffic to your website through SEO, PPC and social media ads.</p>
+              <div className="footer-contact">
+                <p><strong>Email:</strong> <a href="mailto:info@hedleyonline.com">info@hedleyonline.com</a></p>
+                <p><strong>Tel:</strong> 02 2097 8120</p>
+              </div>
             </div>
-            <div className="footer-section">
-              <a href="/about" className="footer-subtitle">
-                회사소개
-              </a>
-            </div>
-          </div> */}
+          </div>
 
           <div className="footer-bottom">
             <div className="footer-divider"></div>
@@ -72,14 +88,6 @@ function Footer() {
                   © {currentYear} ThingsWell 본 사이트의 모든 컨텐츠는 저작권의
                   보호를 받으며, 무단 복제, 배포, 사용을 금합니다.
                 </p>
-              </div>
-              <div className="footer-social">
-                <a href="https://thingswell.tistory.com/" className="social-link">
-                  Tstory
-                </a>
-                <a href="https://sites.google.com/thingswell.co.kr/ucontrol/" className="social-link">
-                  Ucontrol
-                </a>
               </div>
             </div>
           </div>
