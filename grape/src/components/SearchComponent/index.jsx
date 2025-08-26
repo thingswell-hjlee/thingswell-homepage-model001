@@ -7,7 +7,9 @@ const SearchComponent = ({
   backgroundColor = "var(--color-surface)",
   noPadding = false,
   searchTerm = "",
-  setSearchTerm
+  setSearchTerm,
+  showWriteButton = false,
+  onWriteClick
 }) => {
   const handleSearch = () => {
     if (onSearch) {
@@ -34,6 +36,11 @@ const SearchComponent = ({
         onKeyPress={handleKeyPress}
       />
       <button onClick={handleSearch}>검색</button>
+      {showWriteButton && onWriteClick && (
+        <button onClick={onWriteClick} className="btn-write">
+          글쓰기
+        </button>
+      )}
     </div>
   );
 };

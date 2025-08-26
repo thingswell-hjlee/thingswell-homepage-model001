@@ -285,13 +285,10 @@ const BoardList = ({
             noPadding={true}
             searchTerm={searchTerm}
             setSearchTerm={setSearchTerm}
+            showWriteButton={user}
+            onWriteClick={onWriteClick}
           />
         </div>
-        {user && (
-          <button onClick={onWriteClick} className="btn-write">
-            {isMobile ? "글쓰기" : "글쓰기"}
-          </button>
-        )}
         </div>
       </div>
 
