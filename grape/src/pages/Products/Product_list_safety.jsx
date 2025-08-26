@@ -288,7 +288,8 @@ export default function ProductListSafetyPage() {
               certifications: selectedRecord.certifications ? JSON.parse(selectedRecord.certifications) : [],
               downloads: selectedRecord.downloads ? JSON.parse(selectedRecord.downloads) : [],
               videos: selectedRecord.videos ? JSON.parse(selectedRecord.videos) : [],
-              breadcrumbs: ["Home", "제품"]
+              // 제품 종류(kind)과 제품명을 breadcrumbs에 포함
+              breadcrumbs: ["Home", "제품", selectedRecord.kind || '스마트안전', selectedRecord.title || '제목 없음']
             }}
             isRecordPage={false}
           />
@@ -316,9 +317,9 @@ export default function ProductListSafetyPage() {
 
       <ProductList
         products={products}
-        title="스마트안전장비"
+        title="스마트안전"
         // subtitle="스마트 안전장비 제품들을 확인하세요"
-        breadcrumbs={["Home", "제품", "스마트안전장비"]}
+        breadcrumbs={["Home", "제품", "스마트안전"]}
         longVertical
         headerImage={safetyHeaderImage}
         onEditRecord={handleEditRecord}

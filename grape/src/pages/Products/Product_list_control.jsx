@@ -287,7 +287,7 @@ export default function ProductListControlPage() {
               certifications: selectedRecord.certifications ? JSON.parse(selectedRecord.certifications) : [],
               downloads: selectedRecord.downloads ? JSON.parse(selectedRecord.downloads) : [],
               videos: selectedRecord.videos ? JSON.parse(selectedRecord.videos) : [],
-              breadcrumbs: ["Home", "제품"]
+              breadcrumbs: ["Home", "제품", selectedRecord.kind || '통합제어', selectedRecord.title || '제목 없음']
             }}
             isRecordPage={false}
           />
