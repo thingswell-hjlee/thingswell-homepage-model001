@@ -3,6 +3,6 @@ import TrackRecordPage from './Case.jsx';
 
 export default function CaseIntegratedControlPage() {
   return (
-    <TrackRecordPage kindFilter="통합제어" />
+    <TrackRecordPage kindFilter="스마트통합제어" />
   );
 }

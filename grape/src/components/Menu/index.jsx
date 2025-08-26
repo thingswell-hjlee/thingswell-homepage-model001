@@ -88,8 +88,8 @@ const defaultMenuItems = [
     label: '고객사례', 
     path: '/cases',
     submenu: [ 
-      { label: '스마트안전', path: '/cases/smart-safety' }, 
-      { label: '통합제어', path: '/cases/integrated-control' }, 
+      { label: '산업안전자동화', path: '/cases/smart-safety' }, 
+      { label: '스마트통합제어', path: '/cases/integrated-control' }, 
       { label: '정보통신', path: '/cases/information-communication' } 
     ] 
   },

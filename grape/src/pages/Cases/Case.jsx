@@ -58,21 +58,17 @@ export default function TrackRecordPage({ kindFilter = null }) {
   const getPageInfo = (kind) => {
     const pageInfoMap = {
       '정보통신': {
-        title: '정보통신 실적',
+        title: '정보통신',
         // subtitle: '정보통신 시스템 구축 실적들을 확인하세요'
       },
-      '통합제어': {
-        title: '통합제어 실적',
+      '스마트통합제어': {
+        title: '스마트통합제어',
         // subtitle: '통합제어 시스템 구축 실적들을 확인하세요'
       },
-      '스마트안전': {
-        title: '스마트안전 실적',
+      '산업안전자동화': {
+        title: '산업안전자동화',
         // subtitle: '스마트안전 솔루션 실적들을 확인하세요'
       },
-      'AI': {
-        title: 'AI 실적',
-        // subtitle: 'AI 관련 실적들을 확인하세요'
-      }
     };
     
     return pageInfoMap[kind] || {
