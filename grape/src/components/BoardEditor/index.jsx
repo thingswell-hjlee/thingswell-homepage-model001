@@ -5,6 +5,7 @@ import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import draftToHtml from 'draftjs-to-html';
 import htmlToDraft from 'html-to-draftjs';
 import { supabase } from '../../lib/supabase';
+import { uploadImage, validateImageFile } from '../../utils/imageUpload';
 import './BoardEditor.css';
 
 const BoardEditor = ({ 
@@ -91,6 +92,15 @@ const BoardEditor = ({
       console.log('저장할 HTML 콘텐츠:', htmlContent);
       console.log('Raw Content State:', rawContentState);
       
+      // HTML에서 이미지 URL 추출
+      const imgRegex = /<img[^>]+src="([^">]+)"/g;
+      const images = [];
+      let match;
+      while ((match = imgRegex.exec(htmlContent)) !== null) {
+        images.push(match[1]);
+      }
+      console.log('추출된 이미지 URL들:', images);
+      
       let data, error;
 
       if (isEditMode && existingId) {
@@ -100,6 +110,7 @@ const BoardEditor = ({
           .update({
             title: currentTitle.trim(),
             content: htmlContent,
+            images: images.length > 0 ? JSON.stringify(images) : null,
             updated_at: new Date().toISOString()
           })
           .eq('id', existingId)
@@ -115,6 +126,7 @@ const BoardEditor = ({
             {
               title: currentTitle.trim(),
               content: htmlContent,
+              images: images.length > 0 ? JSON.stringify(images) : null,
               created_at: new Date().toISOString()
             }
           ])
@@ -164,6 +176,8 @@ const BoardEditor = ({
       console.log('편집 취소');
     }
   };
+
+
 
   const onEditorStateChange = (newEditorState) => {
     setEditorState(newEditorState);
@@ -226,16 +240,16 @@ const BoardEditor = ({
               options: ['😀', '😃', '😄', '😁', '😆', '😅', '😂', '🤣', '😊', '😇', '🙂', '🙃', '😉', '😌', '😍', '🥰', '😘', '😗', '😙', '😚', '😋', '😛', '😝', '😜', '🤪', '🤨', '🧐', '🤓', '😎', '🤩', '🥳', '😏', '😒', '😞', '😔', '😟', '😕', '🙁', '☹️', '😣', '😖', '😫', '😩', '🥺', '😢', '😭', '😤', '😠', '😡', '🤬', '🤯', '😳', '🥵', '🥶', '😱', '😨', '😰', '😥', '😓', '🤗', '🤔', '🤭', '🤫', '🤥', '😶', '😐', '😑', '😯', '😦', '😧', '😮', '😲', '🥱', '😴', '🤤', '😪', '😵', '🤐', '🥴', '🤢', '🤮', '🤧', '😷', '🤒', '🤕', '🤑', '🤠', '💩', '👻', '💀', '☠️', '👽', '👾', '🤖', '😺', '😸', '😹', '😻', '😼', '😽', '🙀', '😿', '😾'],
             },
             image: {
-              uploadCallback: (file) => {
-                return new Promise((resolve, reject) => {
-                  // 이미지 업로드 로직을 여기에 구현할 수 있습니다
-                  const reader = new FileReader();
-                  reader.onload = () => {
-                    resolve({ data: { link: reader.result } });
-                  };
-                  reader.onerror = reject;
-                  reader.readAsDataURL(file);
-                });
+              uploadCallback: async (file) => {
+                try {
+                  // Product와 동일한 방식으로 이미지 업로드
+                  const imageUrl = await uploadImage(file, 'announcement', 'announcement');
+                  return { data: { link: imageUrl } };
+                } catch (error) {
+                  console.error('이미지 업로드 실패:', error);
+                  alert(error.message || '이미지 업로드에 실패했습니다.');
+                  throw error;
+                }
               },
               alt: { present: true, mandatory: false },
             },
