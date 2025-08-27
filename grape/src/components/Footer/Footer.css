@@ -5,7 +5,7 @@
   font-family: var(--font-family-primary);
   width: 100%;
   margin-top: 0; /* Footer와 메인 콘텐츠 사이 마진 제거 */
-  max-height: 200px;
+  max-height: none; /* 사이트맵 추가로 인해 높이 제한 해제 */
 }
 
 /* 홈페이지에서 Footer 오버레이로 사용할 때 */
@@ -17,7 +17,7 @@
 
 .footer-wrapper {
   width: 100%;
-  max-height: 200px;
+  max-height: none; /* 사이트맵 추가로 인해 높이 제한 해제 */
   transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 
@@ -36,6 +36,80 @@
   max-width: 1500px;
   margin: 0 auto;
   padding: 0 var(--spacing-2xl);
+}
+
+/* 사이트맵 스타일 */
+.footer-sitemap {
+  margin-bottom: var(--spacing-2xl);
+  padding-top: var(--spacing-md);
+}
+
+.sitemap-title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-white);
+  margin-bottom: var(--spacing-md);
+  text-align: center;
+}
+
+.sitemap-grid {
+  display: flex;
+  flex-direction: row;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-xl);
+  align-items: flex-start;
+}
+
+.sitemap-category {
+  display: flex;
+  flex-direction: column;
+  padding: 0 var(--spacing-xl);
+}
+
+.sitemap-category:first-child {
+  padding-left: 0;
+}
+
+.category-title {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-white);
+  margin-bottom: var(--spacing-md);
+  border-bottom: 1px solid var(--color-secondary);
+  padding-bottom: var(--spacing-xs);
+}
+
+.category-title a {
+  color: var(--color-text-white);
+  text-decoration: none;
+  transition: color var(--transition-slow);
+}
+
+.category-title a:hover {
+  color: var(--color-secondary);
+}
+
+.category-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.category-item {
+  margin-bottom: var(--spacing-sm);
+}
+
+.category-item a {
+  color: var(--color-text-muted);
+  text-decoration: none;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-regular);
+  transition: color var(--transition-slow);
+  line-height: 1.4;
+}
+
+.category-item a:hover {
+  color: var(--color-text-white);
 }
 
 .footer-content {
@@ -177,6 +251,23 @@
     padding: var(--spacing-2xl) 0 var(--spacing-lg) 0;
   }
 
+  .sitemap-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-xl);
+  }
+
+  .sitemap-title {
+    font-size: var(--font-size-base);
+  }
+
+  .category-title {
+    font-size: var(--font-size-sm);
+  }
+
+  .category-item a {
+    font-size: var(--font-size-xs);
+  }
+
   .footer-content {
     gap: var(--spacing-3xl);
   }
@@ -222,6 +313,24 @@
 
   .footer-container {
     padding: 0 var(--spacing-xl);
+  }
+
+  .sitemap-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-lg);
+  }
+
+  .sitemap-title {
+    font-size: var(--font-size-base);
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .category-title {
+    font-size: var(--font-size-sm);
+  }
+
+  .category-item a {
+    font-size: var(--font-size-xs);
   }
 
   .footer-content {
@@ -290,6 +399,25 @@
     gap: var(--spacing-xl);
     margin-bottom: var(--spacing-xl);
     align-items: flex-start;
+  }
+
+  .sitemap-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+  }
+
+  .sitemap-title {
+    font-size: var(--font-size-base);
+    margin-bottom: var(--spacing-md);
+    text-align: left;
+  }
+
+  .category-title {
+    font-size: var(--font-size-sm);
+  }
+
+  .category-item a {
+    font-size: var(--font-size-xs);
   }
 
   .footer-bottom {
@@ -370,6 +498,25 @@
     margin-bottom: var(--spacing-xl);
     align-items: flex-start;
     
+  }
+
+  .sitemap-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+  }
+
+  .sitemap-title {
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--spacing-sm);
+    text-align: left;
+  }
+
+  .category-title {
+    font-size: var(--font-size-xs);
+  }
+
+  .category-item a {
+    font-size: var(--font-size-xxs);
   }
 
   .footer-bottom {

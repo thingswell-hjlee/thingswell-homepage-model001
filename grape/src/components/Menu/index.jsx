@@ -109,10 +109,10 @@ const defaultMenuItems = [
     external: true, // 외부 링크임을 명시 (Menu 컴포넌트에서 이 값 활용하여 새창 이동 처리 필요)
   },
 
-  {
-    label: '사이트맵',
-    path: '/sitemap',
-  }
+  // {
+  //   label: '사이트맵',
+  //   path: '/sitemap',
+  // }
 
 ];
 
