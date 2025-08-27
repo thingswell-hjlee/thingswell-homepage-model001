@@ -86,7 +86,7 @@ export default function TrackRecordPage({ kindFilter = null }) {
     setupTrackRecordRLS();
     checkUserAuthStatus();
     checkAndCreateMissingPolicies();
-  }, []);
+  }, [user]);
 
   // URL 파라미터 확인하여 상세 모드 설정
   useEffect(() => {
@@ -145,11 +145,13 @@ export default function TrackRecordPage({ kindFilter = null }) {
           }
         }
         
+        console.log('fetchTrackRecords - isAuthenticated:', isAuthenticated());
+        
         return {
           name: record.title,
           title: record.overview_title || record.desc,
           img: imageUrl,
-          onClick: () => handleRecordClick(record),
+          onClick: isAuthenticated() ? () => handleRecordClick(record) : null,
           category: record.type,
           organization: record.orderer,
           date: record.date,
@@ -316,8 +318,9 @@ export default function TrackRecordPage({ kindFilter = null }) {
   };
 
   const handleRecordClick = (record) => {
+    console.log('handleRecordClick called - isAuthenticated:', isAuthenticated());
     // 로그인한 유저만 상세 페이지 보기 가능
-    if (!isAuthenticated) {
+    if (!isAuthenticated()) {
       alert('상세 페이지를 보려면 로그인이 필요합니다.');
       return;
     }
@@ -510,7 +513,7 @@ const TrackRecordList = ({ products, onEditRecord, canEdit, onAddRecord, canDele
   const { isAuthenticated } = useAuth();
   
   // 디버깅용: 인증 상태 확인
-  console.log('TrackRecordList - isAuthenticated:', isAuthenticated);
+  console.log('TrackRecordList - isAuthenticated:', isAuthenticated());
 
   const categories = React.useMemo(() => {
     const unique = new Set(products.map((p) => p.category).filter(Boolean));
@@ -655,17 +658,17 @@ const TrackRecordList = ({ products, onEditRecord, canEdit, onAddRecord, canDele
               
               const cardWithEdit = (
                 <div key={idx} style={{ position: 'relative' }}>
-                  {product.onClick ? (
+                  {product.onClick && isAuthenticated() ? (
                     <div 
                       onClick={product.onClick} 
                       style={{ 
-                        cursor: canEdit ? 'pointer' : 'default'
+                        cursor: 'pointer'
                       }}
                     >
                       {Card}
                     </div>
                   ) : (
-                    <div>{Card}</div>
+                    <div style={{ cursor: 'default' }}>{Card}</div>
                   )}
                   
                   {product.rawData && (canEdit || canDelete) && (
