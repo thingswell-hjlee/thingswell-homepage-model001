@@ -94,6 +94,7 @@ import About from "./pages/About/About.jsx";
 import Login from "./pages/Login/Login.jsx";
 import Case_detail from "./pages/Cases/Case_detail.jsx";
 import Sitemap from "./pages/Sitemap/sitemap.jsx";
+import NotFound from "./pages/NotFound/NotFound.jsx";
 import { AuthProvider } from "./contexts/AuthContext.jsx";
 import { supabase } from "./lib/supabase";
 
@@ -387,10 +388,13 @@ function App() {
 
             {/* 사이트맵 라우팅 */}
             <Route path="/sitemap" element={<Sitemap />} />
+            
+            {/* 404 페이지 - 존재하지 않는 모든 경로에 대해 */}
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </main> 
 
-        {/* Footer - 홈페이지가 아닐 때만 표시 */}
+        {/* Footer - 홈페이지가 아닐 때만 표시 (404 페이지 포함) */}
         {location.pathname !== "/" && <Footer />}
       </div>
     </AuthProvider>
