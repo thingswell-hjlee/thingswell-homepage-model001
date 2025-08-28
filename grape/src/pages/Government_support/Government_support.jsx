@@ -9,7 +9,7 @@ const Government_support = () => {
   return (
     <div className="gs-page">
       <ProductHeader image={government} alt="government" />
-      <div className="product-page-content">
+      <div className="government-support-content">
           <div className="container">
             <ProductInfo productName="스마트안전장비 지원사업 (산업안전보건공단)" productTitle="스마트안전장비 지원사업 (산업안전보건공단)" breadcrumbs={["Home", "정부지원사업", "스마트안전장비 지원사업"]} />
           </div>

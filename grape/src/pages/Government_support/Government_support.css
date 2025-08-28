@@ -1,5 +1,10 @@
 .gs-page {
     background: var(--color-background-light);
+    word-break: keep-all;
+  }
+  
+  .government-support-content {
+    padding: var(--spacing-2xl);
   }
   
   .gs-container {
@@ -91,6 +96,8 @@
     width: 160px;
     background: var(--color-surface);
     font-weight: var(--font-weight-semibold);
+    vertical-align: middle;
+    text-align: center;
   }
   
   .gs-steps {
@@ -131,12 +138,35 @@
     font-weight: var(--font-weight-bold);
   }
   
-  @media (max-width: 960px) {
+  @media (max-width: 1024px) {
+    .government-support-content {
+      padding: var(--spacing-xl);
+    }
     .gs-steps { grid-template-columns: repeat(3, 1fr); }
   }
   
-  @media (max-width: 540px) {
+  @media (max-width: 768px) {
+    .government-support-content {
+      padding: var(--spacing-lg);
+    }
     .gs-steps { grid-template-columns: repeat(2, 1fr); }
+  }
+  
+  @media (max-width: 480px) {
+    .government-support-content {
+      padding: var(--spacing-md);
+    }
+    .gs-steps { grid-template-columns: repeat(1, 1fr); }
+    .gs-table .col-type,
+    .gs-table th.col-type,
+    .gs-table td.col-type {
+      width: 80px !important;
+      font-size: var(--font-size-sm);
+      padding: var(--spacing-xs) var(--spacing-sm)
+    }
+    .gs-table td {
+      text-align: left;
+    }
   }
   
   
