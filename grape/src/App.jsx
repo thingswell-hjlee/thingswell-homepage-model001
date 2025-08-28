@@ -97,6 +97,7 @@ import Sitemap from "./pages/Sitemap/sitemap.jsx";
 import NotFound from "./pages/NotFound/NotFound.jsx";
 import { AuthProvider } from "./contexts/AuthContext.jsx";
 import { supabase } from "./lib/supabase";
+import HTTPSRedirect from "./components/HTTPSRedirect";
 
 
 function HomePage() {
@@ -304,7 +305,8 @@ function App() {
 
   return (
     <AuthProvider>
-      <div className="app-container">
+      <HTTPSRedirect>
+        <div className="app-container">
         {/* 메뉴는 모든 페이지에서 유지 */}
         <div className="menu-overlay-subpage">
           <Menu
@@ -396,7 +398,8 @@ function App() {
 
         {/* Footer - 홈페이지가 아닐 때만 표시 (404 페이지 포함) */}
         {location.pathname !== "/" && <Footer />}
-      </div>
+        </div>
+      </HTTPSRedirect>
     </AuthProvider>
   );
 }

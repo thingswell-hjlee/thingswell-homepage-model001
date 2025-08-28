@@ -12,4 +12,12 @@ export default defineConfig({
       'global': 'globalThis',
     },
   },
+  server: {
+    https: true,
+    host: true,
+  },
+  preview: {
+    https: true,
+    host: true,
+  },
 })
