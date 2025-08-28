@@ -61,7 +61,6 @@ import CardRotator from "./components/CardRotator";
 
 import Government_support from "./pages/Government_support/Government_support.jsx";
 import Soulution from "./pages/Solutions/Soulution.jsx";
-import Soulution_main from "./pages/Solutions/Soulution_main.jsx";
 import ChemicalSolution from "./pages/Solutions/ChemicalSolution.jsx";
 import ManufacturingSolution from "./pages/Solutions/ManufacturingSolution.jsx";
 import MultimodalAwareness from "./pages/rnd/MultimodalAwareness.jsx";
@@ -70,7 +69,6 @@ import OnDeviceAI from "./pages/rnd/OnDeviceAI.jsx";
 import Embeddedsystem from "./pages/rnd/Embeddedsystem .jsx";
 import SmartAssistiveTechnology from "./pages/rnd/SmartAssistiveTechnology.jsx";
 import AirQualityManagement from "./pages/rnd/AirQualityManagement.jsx";
-import SolutionDetailPage from "./pages/rnd/SolutionDetailPage.jsx";
 import Product_list_control from "./pages/Products/Product_list_control.jsx";
 import Product_control from "./pages/Products/Product_control.jsx";
 import Product_list_safety from "./pages/Products/Product_list_safety.jsx";
@@ -84,7 +82,6 @@ import noticeBg from "./assets/1.png";
 import Announcement from "./pages/Customer_Service/Announcement.jsx";
 import Case from "./pages/Cases/Case.jsx";
 import CaseSmartSafety from "./pages/Cases/Case_SmartSafety.jsx";
-import CaseAI from "./pages/Cases/Case_AI.jsx";
 import CaseIntegratedControl from "./pages/Cases/Case_IntegratedControl.jsx";
 import CaseInformationCommunication from "./pages/Cases/Case_InformationCommunication.jsx";
 import About from "./pages/About/About.jsx";
@@ -320,13 +317,9 @@ function App() {
             {/* 정부지원사업 라우팅 */}
             <Route path="/government-support" element={<Government_support />} />
             {/* 솔루션 라우팅 */}
-            <Route path="/solutions" element={<Soulution_main />} />
             <Route path="/solutions/overview" element={<Soulution />} />
             <Route path="/solutions/chemical" element={<ChemicalSolution />} />
             <Route path="/solutions/manufacturing" element={<ManufacturingSolution />} />
-
-            {/* 연구개발 라우팅 */}
-            <Route path="/rnd" element={<SolutionDetailPage />} />
 
             <Route path="/rnd/multimodal-awareness" element={<MultimodalAwareness />} />
             <Route path="/rnd/rag-llm" element={<RAGLLMTech />} />
@@ -353,7 +346,6 @@ function App() {
             {/* 납품사례 라우팅 */}
             <Route path="/cases" element={<Case />} />
 <Route path="/cases/smart-safety" element={<CaseSmartSafety />} />
-<Route path="/cases/ai" element={<CaseAI />} />
 <Route path="/cases/integrated-control" element={<CaseIntegratedControl />} />
 <Route path="/cases/information-communication" element={<CaseInformationCommunication />} />
 <Route path="/cases/detail/:id" element={<Case_detail />} />
