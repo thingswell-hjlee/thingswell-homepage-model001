@@ -58,11 +58,8 @@ import Menu from "./components/Menu";
 import "./components/Layout/BaseLayout.css";
 import Footer from "./components/Footer";
 import CardRotator from "./components/CardRotator";
-import Government_support_main from "./pages/Government_support/Government_support_main.jsx";
+
 import Government_support from "./pages/Government_support/Government_support.jsx";
-import AiManufacturingSupport from "./pages/Government_support/AiManufacturingSupport.jsx";
-import GreenEnergySupport from "./pages/Government_support/GreenEnergySupport.jsx";
-import DigitalTransformationSupport from "./pages/Government_support/DigitalTransformationSupport.jsx";
 import Soulution from "./pages/Solutions/Soulution.jsx";
 import Soulution_main from "./pages/Solutions/Soulution_main.jsx";
 import ChemicalSolution from "./pages/Solutions/ChemicalSolution.jsx";
@@ -321,29 +318,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
 
             {/* 정부지원사업 라우팅 */}
-            <Route
-              path="/government-support"
-              element={<Government_support_main />}
-            />
-
-            {/* 정부지원사업 상세 페이지들 */}
-            <Route
-              path="/government-support-detail"
-              element={<Government_support />}
-            />
-            <Route
-              path="/ai-manufacturing-support"
-              element={<AiManufacturingSupport />}
-            />
-            <Route
-              path="/green-energy-support"
-              element={<GreenEnergySupport />}
-            />
-            <Route
-              path="/digital-transformation-support"
-              element={<DigitalTransformationSupport />}
-            />
-
+            <Route path="/government-support" element={<Government_support />} />
             {/* 솔루션 라우팅 */}
             <Route path="/solutions" element={<Soulution_main />} />
             <Route path="/solutions/overview" element={<Soulution />} />
