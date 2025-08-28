@@ -97,7 +97,7 @@ const defaultMenuItems = [
     label: '정부지원사업', 
     path: '/government-support',
     submenu: [ 
-      { label: '스마트안전장비 지원사업', path: '/government-support-detail' }, 
+      { label: '스마트안전장비 지원사업', path: '/government-support' }, 
       // { label: '건강일터 조성지원사업', path: '/government-support-detail' }, 
       // { label: '소공인 클린제조환경조성', path: '/government-support-detail' }, 
     ] 
