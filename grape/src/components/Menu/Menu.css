@@ -1,5 +1,14 @@
 /* ===== MENU COMPONENT STYLES ===== */
 
+/* 모달이 열렸을 때 메뉴 숨김 */
+body.modal-open .menu-wrapper {
+  display: none !important;
+}
+
+body.modal-open .hamburger-menu-wrapper {
+  display: none !important;
+}
+
 /* 메뉴 래퍼 - 화면 상단 정렬 */
 .menu-wrapper {
   display: flex;

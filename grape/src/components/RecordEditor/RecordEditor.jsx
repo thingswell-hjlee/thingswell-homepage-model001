@@ -13,6 +13,15 @@ const RecordEditor = ({
   mode = 'record', // 'record' 또는 'product'
   tableName = 'Track_record' // 'Track_record' 또는 'Product'
 }) => {
+  // 모달이 열렸을 때 body에 클래스 추가하여 메뉴 숨김
+  useEffect(() => {
+    if (isModal) {
+      document.body.classList.add('modal-open');
+      return () => {
+        document.body.classList.remove('modal-open');
+      };
+    }
+  }, [isModal]);
   const [editingField, setEditingField] = useState(null);
   const [tempValue, setTempValue] = useState('');
   const [draggedIndex, setDraggedIndex] = useState(null);

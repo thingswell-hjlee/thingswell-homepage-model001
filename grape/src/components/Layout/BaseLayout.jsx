@@ -1,4 +1,5 @@
 import React from 'react';
+import Breadcrumbs from '../Breadcrumbs/Breadcrumbs';
 import './BaseLayout.css';
 
 const BaseLayout = ({ 
@@ -21,7 +22,7 @@ const BaseLayout = ({
         <div className="container">
           {breadcrumbs && (
             <div className="breadcrumbs-section">
-              {breadcrumbs}
+              <Breadcrumbs breadcrumbs={breadcrumbs} />
             </div>
           )}
           

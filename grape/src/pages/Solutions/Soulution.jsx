@@ -1,14 +1,8 @@
 import React from 'react';
 import SolutionDetailPage from './SolutionDetailPage';
-import fire from '../../assets/fire.jpg';
-import Collision from '../../assets/collision.jpg';
-import manufacturing from '../../assets/manufacturing.jpg';
-import construction from '../../assets/construction.jpg';
-import grinding from '../../assets/grinding.jpg';
-import server from '../../assets/server.jpg';
-import main from '../../assets/solution_1/main.png';
+import BaseLayout from '../../components/Layout/BaseLayout';
 import ProductHeader from '../../components/ProductPage/ProductHeader';
-import ProductInfo from '../../components/ProductPage/ProductInfo';
+import main from '../../assets/solution_1/main.png';
 import solution from '../../assets/header_image/Solution.jpg';
 import service_1 from '../../assets/service/batch_1-1.png';
 import service_2 from '../../assets/service/batch_1-2.png';
@@ -160,27 +154,17 @@ const BLOCKS = [
 
 const Soulution = () => {
   return (
-    <>
-      <ProductHeader image={solution} alt="solution" />
-      <div className="product-page-content">
-        <div className="container">
-          <ProductInfo
-            productName={SOLUTION_DATA.title}
-            productTitle={SOLUTION_DATA.title}
-            description={SOLUTION_DATA.description}
-            breadcrumbs={BREADCRUMBS}
-          />
-           <SolutionDetailPage
+    <BaseLayout
+      header={() => <ProductHeader image={solution} alt="solution" />}
+      breadcrumbs={BREADCRUMBS}
+      title={SOLUTION_DATA.title}
+    >
+      <SolutionDetailPage
         solutionData={SOLUTION_DATA}
         solutionVariant="default"
         blocks={BLOCKS}
-        />
-
-        
-        </div>
-      </div>
-     
-    </>
+      />
+    </BaseLayout>
   );
 };
 

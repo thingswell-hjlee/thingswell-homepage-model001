@@ -26,7 +26,7 @@
 /* 기본 변형 (기존 스타일) */
 .solution-card-default {
   height: auto;
-  min-height: 300px;
+  min-height: auto;
 }
 
 /* 컴팩트 변형 - 메인 페이지용 */
@@ -114,15 +114,16 @@
   height: auto;
   overflow: visible;
   min-width: 0;
+  text-align: left;
 }
 
 /* 좌우반전 시 텍스트 정렬 조정 */
 .solution-card-reverse .solution-card-text {
-  align-items: flex-end;
+  align-items: flex-start;
 }
 
 .solution-card-reverse .solution-card-desc {
-  text-align: right;
+  text-align: left;
 }
 
 .solution-card-subtitle {
@@ -196,7 +197,7 @@
 
   .solution-card-default {
     height: auto;
-    min-height: 550px;
+    min-height: auto;
   }
 
   .solution-card-compact {
@@ -255,7 +256,7 @@
 
   .solution-card-default {
     height: auto;
-    min-height: 500px;
+    min-height: auto;
   }
 
   .solution-card-compact {
@@ -300,7 +301,7 @@
 
   .solution-card-default {
     height: auto;
-    min-height: 450px;
+    min-height: auto;
   }
 
   .solution-card-compact {
@@ -362,7 +363,7 @@
 
   .solution-card-default {
     height: auto;
-    min-height: 400px;
+    min-height: auto;
   }
 
   .solution-card-compact {

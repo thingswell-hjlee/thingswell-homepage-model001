@@ -285,7 +285,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 99990;
+  z-index: 9999999;
   padding: 20px;
 }
 
@@ -296,6 +296,8 @@
   max-width: 1800px;
   max-height: 98vh;
   overflow: auto;
+  z-index: 9999999;
+  position: relative;
 }
 
 .record-editor-modal-header {

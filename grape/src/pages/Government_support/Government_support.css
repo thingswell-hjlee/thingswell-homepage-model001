@@ -3,9 +3,7 @@
     word-break: keep-all;
   }
   
-  .government-support-content {
-    padding: var(--spacing-2xl);
-  }
+  /* .government-support-content 스타일 제거 - BaseLayout 사용 */
   
   .gs-container {
     max-width: var(--container-max-width);
@@ -139,27 +137,18 @@
   }
   
   @media (max-width: 1024px) {
-    .government-support-content {
-      padding: var(--spacing-xl);
-    }
-    .gs-steps { grid-template-columns: repeat(3, 1fr); }
-  }
+  .gs-steps { grid-template-columns: repeat(3, 1fr); }
+}
   
   @media (max-width: 768px) {
-    .government-support-content {
-      padding: var(--spacing-lg);
-    }
-    .gs-steps { grid-template-columns: repeat(2, 1fr); }
-  }
+  .gs-steps { grid-template-columns: repeat(2, 1fr); }
+}
   
   @media (max-width: 480px) {
-    .government-support-content {
-      padding: var(--spacing-md);
-    }
-    .gs-steps { 
-      grid-template-columns: repeat(1, 1fr) !important;
-      gap: var(--spacing-md);
-    }
+  .gs-steps { 
+    grid-template-columns: repeat(1, 1fr) !important;
+    gap: var(--spacing-md);
+  }
     .gs-table .col-type,
     .gs-table th.col-type,
     .gs-table td.col-type {

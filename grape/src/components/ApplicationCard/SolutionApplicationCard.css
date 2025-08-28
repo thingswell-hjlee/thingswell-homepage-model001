@@ -7,14 +7,17 @@
 }
 
 .solution-application-card-title {
-  font-size: clamp(var(--font-size-xl), 3vw, var(--font-size-2xl));
+  font-size: clamp(var(--font-size-xs), 2vw, var(--font-size-xl));
   font-weight: var(--font-weight-medium);
   color: var(--color-text-primary);
   margin-bottom: var(--spacing-md);
   position: relative;
   overflow: hidden;
   line-height: 1.2;
-  max-height: calc(1.2em * 2); /* 두 줄까지만 표시 */
+  max-height: calc(1.2em * 1); /* 한 줄까지만 표시 */
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  word-break: keep-all;
 }
 
 .solution-application-card-title span { display: inline-block; white-space: nowrap; }
@@ -28,9 +31,7 @@
 
 .solution-application-card-image-container {
   width: 100%;
-  /* 고정 비율을 유지하기 위한 스타일 */
-  aspect-ratio: 1/1;
-  max-height: 400px;
+  height: 300px;
   overflow: hidden;
   border-radius: var(--border-radius-md);
   background: var(--color-surface-secondary);
@@ -38,13 +39,17 @@
   align-items: center;
   justify-content: center;
   margin-bottom: var(--spacing-lg);
+  position: relative;
 }
 
 .solution-application-card-image-container img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* 정배율 유지 */
+  object-fit: cover;
   display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .solution-application-card-label {
@@ -57,8 +62,51 @@
   margin-top: var(--spacing-sm);
 }
 
+/* 반응형 디자인 */
+
+/* 태블릿 가로 : 768px-1024px */
+@media (max-width: 1024px) {
+  .solution-application-card-image-container {
+    height: 250px;
+  }
+  
+  .solution-application-card-title {
+    font-size: clamp(var(--font-size-lg), 2.5vw, var(--font-size-xl));
+  }
+  
+  .solution-application-card-label {
+    font-size: clamp(var(--font-size-xs), 1.8vw, var(--font-size-sm));
+  }
+}
+
+/* 모바일 가로 & 태블릿 세로 : 480px-767px */
 @media (max-width: 768px) {
-  .solution-application-card-image-container { max-height: 300px; }
+  .solution-application-card-image-container {
+    height: 200px;
+  }
+  
+  .solution-application-card-title {
+    font-size: clamp(var(--font-size-base), 2vw, var(--font-size-lg));
+  }
+  
+  .solution-application-card-label {
+    font-size: var(--font-size-xs);
+  }
+}
+
+/* 모바일 : -479px */
+@media (max-width: 480px) {
+  .solution-application-card-image-container {
+    height: 160px;
+  }
+  
+  .solution-application-card-title {
+    font-size: var(--font-size-sm);
+  }
+  
+  .solution-application-card-label {
+    font-size: var(--font-size-xxs);
+  }
 }
 
 

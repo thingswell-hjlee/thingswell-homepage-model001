@@ -510,7 +510,7 @@ const ProductList = ({
   return (
     <BaseLayout
       header={headerImage ? () => <ProductHeader image={headerImage} /> : ProductHeader}
-      breadcrumbs={<Breadcrumbs breadcrumbs={breadcrumbs} />}
+      breadcrumbs={breadcrumbs}
       title={title}
       subtitle={subtitle}
     >

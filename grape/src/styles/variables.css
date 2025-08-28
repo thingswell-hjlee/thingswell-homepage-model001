@@ -151,15 +151,22 @@
   --z-index-modal: 1050;
   --z-index-popover: 1060;
   --z-index-tooltip: 1070;
-  --z-index-menu: 99999;
+  --z-index-menu: 1000;
 
   /* ===== BREAKPOINTS ===== */
 
-  --breakpoint-sm: 480px;
-  --breakpoint-md: 768px;
-  --breakpoint-lg: 1024px;
-  --breakpoint-xl: 1200px;
-  --breakpoint-2xl: 1400px;
+  /* 반응형 기준 */
+  --breakpoint-sm: 480px;    /* 작은 모바일 화면 */
+  --breakpoint-md: 768px;    /* 모바일 화면 */
+  --breakpoint-lg: 1024px;   /* 태블릿 화면 */
+  --breakpoint-xl: 1200px;   /* 데스크톱 화면 */
+  --breakpoint-2xl: 1400px;  /* 큰 데스크톱 화면 */
+
+  /* 반응형 사용 가이드:
+   * @media (max-width: 1024px) - 태블릿 화면
+   * @media (max-width: 768px) - 모바일 화면  
+   * @media (max-width: 480px) - 작은 모바일 화면
+   */
 
   /* ===== RESPONSIVE LAYOUT ===== */
 

@@ -45,16 +45,16 @@
   width: 100%;
   height: 100%;
   border-radius: var(--border-radius-xl);
-  object-fit: contain;
-  background-color: #fff;
+  object-fit: cover;
+  background-color: transparent;
 }
 
 .feature-description-image-large{
   width: 100%;
   height: 100%;
   border-radius: var(--border-radius-xl);
-  object-fit: fit;
-  background-color: #fff;
+  object-fit: cover;
+  background-color: transparent;
 }
 
 .feature-description-container.large-image {
@@ -122,9 +122,11 @@
   gap: var(--spacing-md);
   word-break: keep-all;
   order: 2;
-  flex: 5 1 0%;
-  min-width: 0;
+  flex: 1 1 auto;
+  width: 100%;
+  max-width: 100%;
   margin-top: 0;
+  font-size: var(--font-size-lg);
 }
 
 .feature-description-list-item {

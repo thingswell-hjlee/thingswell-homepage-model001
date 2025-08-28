@@ -2,13 +2,20 @@
 
 .track-record-grid.track-record-grid-4cols {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--spacing-xl);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--spacing-lg);
   align-content: start;
   align-items: stretch;
-  padding: var(--spacing-xl);
+  justify-items: stretch;
+  padding: var(--spacing-lg);
   background-color: #f5f5f5;
   border-radius: var(--border-radius-md);
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  margin: 0;
 }
 
 /* 실적 카드 스타일 */
@@ -23,6 +30,10 @@
   flex-direction: column;
   height: 100%;
   min-height: 0;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .track-record-grid.track-record-grid-4cols .product-card:hover {
@@ -99,16 +110,67 @@
   100% { transform: translateX(-50%); }
 }
 
-/* 반응형 디자인 */
-@media (max-width: 900px) {
+/* 반응형 디자인 - 리스트 디자인 유지 */
+@media (max-width: 1024px) {
   .track-record-grid.track-record-grid-4cols {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: stretch;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+    margin: 0;
+  }
+  
+  .track-record-grid.track-record-grid-4cols .product-info-title h3 {
+    font-size: var(--font-size-base);
+  }
+  
+  .track-record-grid.track-record-grid-4cols .product-info-title .marquee-text {
+    font-size: var(--font-size-sm);
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .track-record-grid.track-record-grid-4cols {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: stretch;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+    margin: 0;
+  }
+  
+  .track-record-grid.track-record-grid-4cols .product-info-title h3 {
+    font-size: var(--font-size-sm);
+  }
+  
+  .track-record-grid.track-record-grid-4cols .product-info-title .marquee-text {
+    font-size: var(--font-size-xs);
+  }
+}
+
+@media (max-width: 480px) {
+  .track-record-grid.track-record-grid-4cols {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: stretch;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+    margin: 0;
+  }
+  
+  .track-record-grid.track-record-grid-4cols .product-info-title h3 {
+    font-size: var(--font-size-xs);
+  }
+  
+  .track-record-grid.track-record-grid-4cols .product-info-title .marquee-text {
+    font-size: var(--font-size-xxs);
   }
 }
 
