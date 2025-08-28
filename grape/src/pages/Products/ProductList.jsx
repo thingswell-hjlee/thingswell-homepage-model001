@@ -343,116 +343,91 @@ const ProductList = ({
                   
                   {/* 편집 및 활성화 토글 버튼 */}
                   {product.rawData && (canEdit || canDelete) && (
-                    <div style={{ position: 'absolute', top: '10px', right: '10px', zIndex: 20, display: 'flex', gap: '8px' }}>
-                      {canEdit && onEditRecord && (
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            onEditRecord(product.rawData);
-                          }}
-                          style={{
-                            background: 'rgba(0, 123, 255, 0.9)',
-                            color: 'white',
-                            border: 'none',
-                            borderRadius: '4px',
-                            padding: '5px 10px',
-                            fontSize: '12px',
-                            cursor: 'pointer',
-                            backdropFilter: 'blur(4px)'
-                          }}
-                          onMouseEnter={(e) => { e.target.style.background = 'rgba(0, 123, 255, 1)'; }}
-                          onMouseLeave={(e) => { e.target.style.background = 'rgba(0, 123, 255, 0.9)'; }}
-                        >
-                          편집
-                        </button>
-                      )}
+                    <div style={{ position: 'absolute', top: '10px', left: '10px', right: '10px', zIndex: 20, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      {/* 왼쪽: 삭제 버튼 */}
+                      <div>
+                        {canDelete && onDeleteRecord && (
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              onDeleteRecord(product.rawData);
+                            }}
+                            style={{
+                              background: 'rgba(255, 0, 0, 0.9)',
+                              color: 'white',
+                              border: 'none',
+                              borderRadius: '4px',
+                              padding: '5px 10px',
+                              fontSize: '12px',
+                              cursor: 'pointer',
+                              backdropFilter: 'blur(4px)'
+                            }}
+                            onMouseEnter={(e) => { e.target.style.background = 'rgba(255, 0, 0, 1)'; }}
+                            onMouseLeave={(e) => { e.target.style.background = 'rgba(255, 0, 0, 0.9)'; }}
+                          >
+                            삭제
+                          </button>
+                        )}
+                      </div>
 
-                      {/* 활성화 토글 버튼 */}
-                      {canEdit && (
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            const newActiveStatus = !product.rawData.is_active;
-                            onToggleActive && onToggleActive(product.rawData, newActiveStatus);
-                          }}
-                          style={{
-                            background: product.rawData.is_active ? 'rgba(40, 167, 69, 0.9)' : 'rgba(108, 117, 125, 0.9)',
-                            color: 'white',
-                            border: 'none',
-                            borderRadius: '4px',
-                            padding: '5px 10px',
-                            fontSize: '12px',
-                            cursor: 'pointer',
-                            backdropFilter: 'blur(4px)'
-                          }}
-                          onMouseEnter={(e) => { 
-                            e.target.style.background = product.rawData.is_active ? 'rgba(40, 167, 69, 1)' : 'rgba(108, 117, 125, 1)'; 
-                          }}
-                          onMouseLeave={(e) => { 
-                            e.target.style.background = product.rawData.is_active ? 'rgba(40, 167, 69, 0.9)' : 'rgba(108, 117, 125, 0.9)'; 
-                          }}
-                          title={product.rawData.is_active ? '비활성화' : '활성화'}
-                        >
-                          {product.rawData.is_active ? '활성' : '비활성'}
-                        </button>
-                      )}
+                      {/* 오른쪽: 편집 및 활성 토글 */}
+                      <div style={{ display: 'flex', gap: '8px' }}>
+                        {canEdit && onEditRecord && (
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              onEditRecord(product.rawData);
+                            }}
+                            style={{
+                              background: 'rgba(0, 123, 255, 0.9)',
+                              color: 'white',
+                              border: 'none',
+                              borderRadius: '4px',
+                              padding: '5px 10px',
+                              fontSize: '12px',
+                              cursor: 'pointer',
+                              backdropFilter: 'blur(4px)'
+                            }}
+                            onMouseEnter={(e) => { e.target.style.background = 'rgba(0, 123, 255, 1)'; }}
+                            onMouseLeave={(e) => { e.target.style.background = 'rgba(0, 123, 255, 0.9)'; }}
+                          >
+                            편집
+                          </button>
+                        )}
 
-                      {canDelete && onDeleteRecord && (
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            onDeleteRecord(product.rawData);
-                          }}
-                          style={{
-                            background: 'rgba(255, 0, 0, 0.9)',
-                            color: 'white',
-                            border: 'none',
-                            borderRadius: '4px',
-                            padding: '5px 10px',
-                            fontSize: '12px',
-                            cursor: 'pointer',
-                            backdropFilter: 'blur(4px)'
-                          }}
-                          onMouseEnter={(e) => { e.target.style.background = 'rgba(255, 0, 0, 1)'; }}
-                          onMouseLeave={(e) => { e.target.style.background = 'rgba(255, 0, 0, 0.9)'; }}
-                        >
-                          삭제
-                        </button>
-                      )}
+                        {canEdit && (
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              const newActiveStatus = !product.rawData.is_active;
+                              onToggleActive && onToggleActive(product.rawData, newActiveStatus);
+                            }}
+                            style={{
+                              background: product.rawData.is_active ? 'rgba(40, 167, 69, 0.9)' : 'rgba(108, 117, 125, 0.9)',
+                              color: 'white',
+                              border: 'none',
+                              borderRadius: '4px',
+                              padding: '5px 10px',
+                              fontSize: '12px',
+                              cursor: 'pointer',
+                              backdropFilter: 'blur(4px)'
+                            }}
+                            onMouseEnter={(e) => { 
+                              e.target.style.background = product.rawData.is_active ? 'rgba(40, 167, 69, 1)' : 'rgba(108, 117, 125, 1)'; 
+                            }}
+                            onMouseLeave={(e) => { 
+                              e.target.style.background = product.rawData.is_active ? 'rgba(40, 167, 69, 0.9)' : 'rgba(108, 117, 125, 0.9)'; 
+                            }}
+                            title={product.rawData.is_active ? '비활성화' : '활성화'}
+                          >
+                            {product.rawData.is_active ? '활성' : '비활성'}
+                          </button>
+                        )}
+                      </div>
                     </div>
                   )}
 
-                   {/* 삭제 버튼 */}
-                  {canDelete && onDeleteRecord && product.rawData && (
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        onDeleteRecord(product.rawData);
-                      }}
-                      style={{
-                        position: 'absolute',
-                        top: '10px',
-                        right: '10px',
-                        background: 'rgba(255, 0, 0, 0.9)',
-                        color: 'white',
-                        border: 'none',
-                        borderRadius: '4px',
-                        padding: '5px 10px',
-                        fontSize: '12px',
-                        cursor: 'pointer',
-                        zIndex: 10,
-                        backdropFilter: 'blur(4px)'
-                      }}
-                      onMouseEnter={(e) => {
-                        e.target.style.background = 'rgba(255, 0, 0, 1)';
-                      }}
-                      onMouseLeave={(e) => {
-                        e.target.style.background = 'rgba(255, 0, 0, 0.9)';
-                      }}
-                    >
-                      삭제
-                    </button>
-                  )}
+                  
                 </div>
               );
               
