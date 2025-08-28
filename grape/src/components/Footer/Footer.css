@@ -481,6 +481,13 @@
   }
 }
 
+/* 768px 이하에서 사이트맵 숨김 */
+@media screen and (max-width: 768px) {
+  .sitemap-grid {
+    display: none;
+  }
+}
+
 /* 모바일 (479px 이하) */
 @media screen and (max-width: 480px) {
   .footer {
