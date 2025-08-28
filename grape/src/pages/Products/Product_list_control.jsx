@@ -27,7 +27,7 @@ export default function ProductListControlPage() {
   const [selectedRecord, setSelectedRecord] = useState(null);
   const [viewMode, setViewMode] = useState('list');
   const [editingExistingRecord, setEditingExistingRecord] = useState(null);
-  const [newRecord] = useState({
+  const [newRecord, setNewRecord] = useState({
     title: '',
     desc: '',
     overview_title: '',

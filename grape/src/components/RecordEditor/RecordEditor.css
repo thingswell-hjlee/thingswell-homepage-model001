@@ -1,40 +1,42 @@
-.record-editor-container {
+.record-editor-container,
+.record-editor-container-modal {
   display: flex;
   gap: 20px;
   height: 100%;
   max-height: 80vh;
   flex-wrap: wrap;
+  align-items: stretch; /* 자식 요소들의 높이를 동일하게 맞춤 */
 }
 
-.record-editor-container > * {
-  min-width: 300px;
-}
-
-.record-editor-container > *:first-child {
-  flex: 2;
-}
-
-.record-editor-container > *:not(:first-child) {
-  flex: 1;
-}
-
-.record-editor-container-modal {
-  max-height: 80vh;
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-
+.record-editor-container > *,
 .record-editor-container-modal > * {
   min-width: 300px;
+  /* 균일한 공간 배분: 모든 direct child가 동일한 flex 비율을 갖도록 설정 */
+  flex: 1 1 0;
+  min-height: 0; /* flex child가 축소될 수 있도록 허용 */
+  box-sizing: border-box;
 }
 
-.record-editor-container-modal > *:first-child {
-  flex: 2;
+/* 중앙(두번째) 컬럼 크기 줄이기 */
+.record-editor-container > *:nth-child(2),
+.record-editor-container-modal > *:nth-child(2) {
+  flex: 0 0 360px; /* 고정 너비 또는 최소 너비 설정 */
+  max-width: 360px;
 }
 
-.record-editor-container-modal > *:not(:first-child) {
-  flex: 1;
+/* 반응형: 작은 화면에서는 세로 스택으로 전환 */
+@media (max-width: 900px) {
+  .record-editor-container,
+  .record-editor-container-modal {
+    flex-direction: column;
+  }
+
+  .record-editor-container > *,
+  .record-editor-container-modal > * {
+    flex: 1 1 auto;
+    width: 100%;
+    max-width: none;
+  }
 }
 
 .record-editor-panel {
@@ -322,6 +324,28 @@
   display: flex;
   gap: 20px;
   padding: 20px;
+}
+
+/* 모달 내부에서 컨테이너가 전체를 채우도록 강제 */
+.record-editor-modal {
+  display: flex;
+  flex-direction: column;
+  height: 98vh; /* 모달 전체 높이 확보 */
+}
+
+.record-editor-modal-content {
+  flex: 1; /* 헤더 아래에서 내용 영역이 남은 공간을 채움 */
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.record-editor-modal-content > .record-editor-container,
+.record-editor-modal-content > .record-editor-container-modal {
+  width: 100%;
+  height: 100%;
+  max-height: none; /* 부모의 flex 높이를 따르도록 제거 */
 }
 
 .record-editor-page-container {
