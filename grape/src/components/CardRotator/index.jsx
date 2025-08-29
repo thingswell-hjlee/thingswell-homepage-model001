@@ -28,19 +28,46 @@ function CardRotator({ cards, className = "", onCardChange, currentIndex: extern
   const [currentIndex, setCurrentIndex] = useState(externalCurrentIndex || 0);
   const [isFading, setIsFading] = useState(true);
   const [maxCardHeight, setMaxCardHeight] = useState(null);
+  const [isMobile, setIsMobile] = useState(false); // 모바일 감지 상태
   const rotatorRef = useRef(null);
   const measurementRef = useRef(null);
   const transitionTimeoutRef = useRef(null); // 전환 타이밍을 일관되게 관리
   
+  // 모바일 감지 및 첫 번째 카드로 고정
+  useEffect(() => {
+    const checkMobile = () => {
+      const mobile = window.innerWidth <= 768;
+      setIsMobile(mobile);
+
+      // 모바일에서는 첫 번째 카드로 고정
+      if (mobile && currentIndex !== 0) {
+        setCurrentIndex(0);
+        if (onCardChange) {
+          onCardChange(0);
+        }
+      }
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
+    return () => window.removeEventListener('resize', checkMobile);
+  }, [currentIndex, onCardChange]);
+
   // 외부에서 전달된 currentIndex가 변경되면 내부 상태도 업데이트
   useEffect(() => {
     if (externalCurrentIndex !== undefined && externalCurrentIndex !== currentIndex) {
+      // 모바일에서는 첫 번째 카드만 허용
+      if (isMobile && externalCurrentIndex !== 0) {
+        return;
+      }
+
       // 이전 전환 타이머가 있다면 정리
       if (transitionTimeoutRef.current) {
         clearTimeout(transitionTimeoutRef.current);
         transitionTimeoutRef.current = null;
       }
-      
+
       setIsFading(false);
       transitionTimeoutRef.current = setTimeout(() => {
         setCurrentIndex(externalCurrentIndex);
@@ -48,16 +75,19 @@ function CardRotator({ cards, className = "", onCardChange, currentIndex: extern
         transitionTimeoutRef.current = null;
       }, 200);
     }
-  }, [externalCurrentIndex]);
+  }, [externalCurrentIndex, isMobile]);
   
   const handleDotClick = (index) => {
     if (index === currentIndex) return;
-    
+
+    // 모바일에서는 첫 번째 카드만 허용
+    if (isMobile && index !== 0) return;
+
     // 이전 전환 타이머가 있다면 정리
     if (transitionTimeoutRef.current) {
       clearTimeout(transitionTimeoutRef.current);
     }
-    
+
     // 부모 컴포넌트에 즉시 카드 변경 알림
     if (onCardChange) {
       onCardChange(index);
@@ -70,16 +100,19 @@ function CardRotator({ cards, className = "", onCardChange, currentIndex: extern
     }, 750); // 애니메이션의 절반 지점에서 새 카드 시작 (겹치는 효과)
   };
 
-  // 자동 회전 효과
+  // 자동 회전 효과 (모바일에서는 비활성화)
   useEffect(() => {
+    // 모바일에서는 자동 회전하지 않음
+    if (isMobile) return;
+
     const intervalId = setInterval(() => {
       const nextIndex = (currentIndex + 1) % cards.length;
-      
+
       // 이전 전환 타이머가 있다면 정리
       if (transitionTimeoutRef.current) {
         clearTimeout(transitionTimeoutRef.current);
       }
-      
+
       // 부모 컴포넌트에 즉시 카드 변경 알림
       if (onCardChange) {
         onCardChange(nextIndex);
@@ -98,7 +131,7 @@ function CardRotator({ cards, className = "", onCardChange, currentIndex: extern
         clearTimeout(transitionTimeoutRef.current);
       }
     };
-  }, [cards.length, currentIndex, onCardChange]);
+  }, [cards.length, currentIndex, onCardChange, isMobile]);
 
   // 카드 중 가장 큰 높이를 계산하여 고정
   useEffect(() => {

@@ -5,7 +5,7 @@ import './Rnd.css';
 import FeatureDescription from '../../components/FeatureDescription';
 import ai from '../../assets/rnd_main/AI.png';
 import { BaseLayout } from '../../components/Layout';
-import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
+// Breadcrumbs는 BaseLayout이 렌더링하므로 여기서는 배열만 전달합니다.
 
 const ON_DEVICE_AI_CARDS = [
   {
@@ -24,7 +24,7 @@ const OnDeviceAI = () => {
   return (
     <BaseLayout
       header={() => <ProductHeader image={rndHeader} />}
-      breadcrumbs={<Breadcrumbs breadcrumbs={["Home", "연구개발", "온디바이스 AI"]} />}
+      breadcrumbs={["Home", "연구개발", "온디바이스 AI"]}
       title="온디바이스 AI"
       subtitle="통신 제약 없는 실시간 위험 감지 및 즉각 대응 시스템"
     >

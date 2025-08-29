@@ -8,6 +8,7 @@ const BaseLayout = ({
   breadcrumbs,
   title,
   subtitle,
+  productName,
   className = ""
 }) => {
   return (
@@ -23,6 +24,7 @@ const BaseLayout = ({
           {breadcrumbs && (
             <div className="breadcrumbs-section">
               <Breadcrumbs breadcrumbs={breadcrumbs} />
+              {productName && <div className="product-name-breadcrumb">{productName}</div>}
             </div>
           )}
           

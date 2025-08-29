@@ -10,6 +10,7 @@ import TabContent from './TabContent';
 import ContentBottomBox from './ContentBottomBox';
 import { marked } from 'marked';
 import './ProductPage.css';
+import { BaseLayout } from '../../components/Layout';
 
 // 인라인 편집 컴포넌트
 const EditableText = ({ field, value, placeholder, multiline = false, style = {}, onSave }) => {
@@ -179,6 +180,9 @@ const ProductPage = ({
     setLightbox({ open: false, src: '', caption: '', alt: '' });
   };
 
+  // Header 컴포넌트를 미리 생성하여 JSX 속성 내 인라인 JSX를 피함
+  const HeaderComponent = !hideHeader ? () => <ProductHeader image={isRecordPage ? performanceHeader : productHeader} /> : null;
+
   const handleTabChange = (tabId) => {
     setActiveTab(tabId);
   };
@@ -257,19 +261,13 @@ const ProductPage = ({
 
   return (
     <div className="product-page">
-      {!hideHeader && <ProductHeader image={isRecordPage ? performanceHeader : productHeader} />}
-      
-      <div className="product-page-content">
-        <div className="container">
-          <ProductInfo 
-            productName={productData.name}
-            productTitle={productData.title}
-            description={productData.description}
-            breadcrumbs={productData.breadcrumbs}
-            isEditMode={isEditMode}
-            onDataChange={handleDataChange}
-            isRecordPage={isRecordPage}
-          />
+      <BaseLayout
+        header={HeaderComponent}
+        breadcrumbs={productData.breadcrumbs}
+        title={productData.overview_title || productData.title || productData.name}
+        className="product-page-layout"
+      >
+        <div className="product-page-content">
           
           <div className="product-main-section">
             <div className="product-tabs-header">
@@ -390,14 +388,14 @@ const ProductPage = ({
             </div>
           </div>
         </div>
-      </div>
-      <Lightbox
-        isOpen={lightbox.open}
-        src={lightbox.src}
-        caption={lightbox.caption}
-        alt={lightbox.alt}
-        onClose={closeLightbox}
-      />
+        <Lightbox
+          isOpen={lightbox.open}
+          src={lightbox.src}
+          caption={lightbox.caption}
+          alt={lightbox.alt}
+          onClose={closeLightbox}
+        />
+      </BaseLayout>
     </div>
   );
 };

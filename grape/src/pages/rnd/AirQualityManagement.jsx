@@ -5,7 +5,7 @@ import './Rnd.css';
 import FeatureDescription from '../../components/FeatureDescription';
 import air from '../../assets/rnd_main/AI_air.png';
 import { BaseLayout } from '../../components/Layout';
-import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
+// Breadcrumbs는 BaseLayout이 렌더링하므로 여기서는 배열만 전달합니다.
 
 const AIR_QUALITY_CARDS = [
   {
@@ -22,7 +22,7 @@ const AirQualityManagement = () => {
   return (
     <BaseLayout
       header={() => <ProductHeader image={rndHeader} />}
-      breadcrumbs={<Breadcrumbs breadcrumbs={["Home", "연구개발", "AI 기반 공기질 관리"]} />}
+      breadcrumbs={["Home", "연구개발", "AI 기반 공기질 관리"]}
       title="AI 기반 공기질 관리"
       subtitle="머신러닝을 활용한 실내외 공기질 데이터 고도화 및 쾌적 환경 능동 제어 시스템"
     >

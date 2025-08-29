@@ -2,7 +2,7 @@
   background: var(--color-background-light);
   overflow-y: auto;
   position: relative;
-  z-index: 1;
+  z-index: 1; /* 메뉴 오버레이(z-index: 1000)보다 낮게 유지 */
   display: flex;
   flex-direction: column;
   /* margin-bottom 제거 - footer 아래 여백 제거 */

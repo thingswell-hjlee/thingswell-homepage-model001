@@ -52,13 +52,12 @@
  * - 각 솔루션 상세 페이지들
  */
 import { useState, useEffect } from "react";
-import { Routes, Route, useLocation, useNavigate, Link } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import "./App.css";
 import Menu from "./components/Menu";
-import "./components/Layout/BaseLayout.css";
 import Footer from "./components/Footer";
-import CardRotator from "./components/CardRotator";
 
+import Home from "./pages/Home/Home.jsx";
 import Government_support from "./pages/Government_support/Government_support.jsx";
 import Soulution from "./pages/Solutions/Soulution.jsx";
 import ChemicalSolution from "./pages/Solutions/ChemicalSolution.jsx";
@@ -74,11 +73,6 @@ import Product_control from "./pages/Products/Product_control.jsx";
 import Product_list_safety from "./pages/Products/Product_list_safety.jsx";
 import Product_detail_safety from "./pages/Products/Product_detail_safety.jsx";
 import Product_list_monitoring from "./pages/Products/Product_list_monitoring.jsx";
-import aiImage from "./assets/main/AI.jpg";
-import humanImage from "./assets/main/human.jpg";
-import ondeviceImage from "./assets/main/ondevice.jpeg";
-import familyImage from "./assets/main/family.jpg";
-import noticeBg from "./assets/1.png";
 import Announcement from "./pages/Customer_Service/Announcement.jsx";
 import Case from "./pages/Cases/Case.jsx";
 import CaseSmartSafety from "./pages/Cases/Case_SmartSafety.jsx";
@@ -90,204 +84,16 @@ import Case_detail from "./pages/Cases/Case_detail.jsx";
 import Sitemap from "./pages/Sitemap/sitemap.jsx";
 import NotFound from "./pages/NotFound/NotFound.jsx";
 import { AuthProvider } from "./contexts/AuthContext.jsx";
-import { supabase } from "./lib/supabase";
 import HTTPSRedirect from "./components/HTTPSRedirect";
-
-
-function HomePage() {
-  const [isMobile, setIsMobile] = useState(false);
-  const [currentCardIndex, setCurrentCardIndex] = useState(0);
-  const [isTransitioning, setIsTransitioning] = useState(false);
-  const [latestAnnouncement, setLatestAnnouncement] = useState(null);
-  const navigate = useNavigate();
-  
-  const cards = [
-    {
-      eyebrow: "Safety Secured with AI, a Future Opened with Technology",
-      title: "AI로 지키는 안전, 기술로 여는 미래",
-      description: "AI 기반의 솔루션으로 위험을 예측하고, 혁신적인 기술로 더 안전한 미래를 만들어갑니다.",
-      descriptionEng: "We predict risks with AI-based solutions and create a safer future with innovative technology.",
-      ctaText: "Learn more",
-      ctaHref: "/solutions/overview",
-      caption: "AI Safety Solutions",
-      backgroundImage: aiImage,
-    },
-    {
-      eyebrow: "On-Device AI: Safety in Severe Environments",
-      title: "온디바이스 AI, 극한 환경에서도 안전을",
-      description: "외부 네트워크 연결 없이도 기기 자체적으로 위험을 감지하고 대응하여, 어떤 환경에서도 안전을 보장합니다.",
-      descriptionEng: "By detecting and responding to risks directly on the device without an external network connection, we ensure safety in any environment.",
-      ctaText: "Learn more",
-      ctaHref: "/solutions/overview",
-      caption: "On-Device AI",
-      backgroundImage: ondeviceImage,
-    },
-    {
-      eyebrow: "Innovation for People, Technology for Safety",
-      title: "사람을 위한 혁신, 안전을 위한 기술",
-      description: "인간의 삶을 더 풍요롭게 하는 혁신을 추구하며, 모든 기술은 오직 사람의 안전을 최우선으로 합니다.",
-      descriptionEng: "We pursue innovation that enriches human lives, and all our technology prioritizes the safety of people above all else.",
-      ctaText: "Learn more",
-      ctaHref: "/solutions/overview",
-      caption: "Human-Centered Innovation",
-      backgroundImage: humanImage,
-    },
-    {
-      eyebrow: "Your Safety, Everywhere. With ThingsWell",
-      title: "산업안전에서 생활안전까지, 싱스웰이 함께합니다",
-      description: "공장의 위험 작업 환경부터 일상생활의 작은 사고까지, 싱스웰의 기술은 모든 곳에서 당신을 지켜줍니다.",
-      descriptionEng: "From hazardous work environments in factories to small accidents in daily life, Singswell's technology protects you everywhere.",
-      ctaText: "Learn more",
-      ctaHref: "/solutions/overview",
-      caption: "Comprehensive Safety",
-      backgroundImage: familyImage,
-    },
-  ];
-
-  const handleCardChange = (index) => {
-    if (index !== currentCardIndex) {
-      setIsTransitioning(true);
-      // 이미지 페이드 아웃 후 새 이미지로 변경
-      setTimeout(() => {
-        setCurrentCardIndex(index);
-      }, 525); // CardRotator 전환의 절반 지점
-      // 전체 전환 완료 후 상태 리셋
-      setTimeout(() => {
-        setIsTransitioning(false);
-      }, 1050); // 전체 전환 시간과 맞춤
-    }
-  };
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-
-    return () => {
-      window.removeEventListener("resize", checkMobile);
-    };
-  }, []);
-
-  // 최신 공지사항 1건 가져오기
-  useEffect(() => {
-    const fetchLatestAnnouncement = async () => {
-      try {
-        const { data, error } = await supabase
-          .from('Board_Announcement')
-          .select('id, title, created_at, images')
-          .order('id', { ascending: false })
-          .limit(1);
-
-        if (error) {
-          console.error('최신 공지 조회 오류:', error);
-          return;
-        }
-        if (data && data.length > 0) {
-          setLatestAnnouncement(data[0]);
-        }
-      } catch (err) {
-        console.error('최신 공지 조회 예외:', err);
-      }
-    };
-    fetchLatestAnnouncement();
-  }, []);
-
-  const handleAnnouncementClick = () => {
-    if (latestAnnouncement && latestAnnouncement.id) {
-      navigate(`/customer-service/announcement?id=${encodeURIComponent(latestAnnouncement.id)}&t=Board_Announcement`);
-    } else {
-      navigate('/customer-service/announcement');
-    }
-  };
-
-  return (
-      <div className="content-container">
-        {/* 상단 히어로: 배경 + 오버레이 */}
-        <img 
-          src={cards[currentCardIndex].backgroundImage} 
-          alt="메인 이미지" 
-          className={`main-image ${isTransitioning ? 'transitioning' : 'transitioned'}`}
-        />
-        <div className="home-overlay">
-          <div className="home-content-wrapper">
-            <div className="card-rotator-section">
-              <CardRotator 
-                cards={cards} 
-                onCardChange={handleCardChange}
-                currentIndex={currentCardIndex}
-              />
-            </div>
-             {/* 오버레이 아래 일반 흐름 영역: 히어로 카드들 */}
-        <section className="hero-content-section">
-        <Link to={`/products/safety/14`} className="hero-content-card_1">
-            <h1 className="hero-content-card-title">HIKVISION 네트워크 PTZ 카메라</h1>
-          </Link>
-
-          <div className="hero-content-card" style={{ 
-            backgroundImage: `linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.35)), url(${
-              latestAnnouncement?.images 
-                ? JSON.parse(latestAnnouncement.images)[0] 
-                : noticeBg
-            })` 
-          }}>
-            <ul className="hero-content-card-list">
-              <h1 className="hero-content-card-title" onClick={handleAnnouncementClick} style={{ cursor: 'pointer' }}>
-                {latestAnnouncement?.title || '등록된 공지사항이 없습니다.'}
-              </h1>
-            </ul>
-          </div>
-
-          <Link to={`/cases/smart-safety`} className="hero-content-card_2">
-            <h1 className="hero-content-card-title">서울 버스 스마트쉼터 AI 상황인지 시스템</h1>
-          </Link>
-        </section>
-      </div>
-    </div>
-        
-        {/* Footer를 사진 위에 오버레이로 배치 */}
-        <div className="home-footer-overlay">
-          <Footer />
-        </div>
-      </div>
-  );
-}
 
 function App() {
   const [isMobile, setIsMobile] = useState(false);
   const location = useLocation();
-  
-  // Debug logging
-  console.log('App component - current location:', location.pathname);
-
-  // Monitor history API usage (for debugging duplicate navigation)
-  useEffect(() => {
-    try {
-      const origPush = window.history.pushState;
-      const origReplace = window.history.replaceState;
-      window.history.pushState = function(state, title, url) {
-        console.log('[history] pushState called ->', url);
-        return origPush.apply(this, arguments);
-      };
-      window.history.replaceState = function(state, title, url) {
-        console.log('[history] replaceState called ->', url);
-        return origReplace.apply(this, arguments);
-      };
-      return () => {
-        window.history.pushState = origPush;
-        window.history.replaceState = origReplace;
-      };
-    } catch (e) {
-      // ignore in non-browser env
-    }
-  }, []);
 
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth <= 768);
-    };  
+    };
 
     checkMobile();
     window.addEventListener("resize", checkMobile);
@@ -301,73 +107,51 @@ function App() {
     <AuthProvider>
       <HTTPSRedirect>
         <div className="app-container">
-        {/* 메뉴는 모든 페이지에서 유지 */}
-        <div className="menu-overlay-subpage">
-          <Menu
-            orientation={isMobile ? "vertical" : "horizontal"}
-            theme="primary"
-          />
-        </div>
+              <div className="menu-overlay-subpage">
+                <Menu orientation={isMobile ? "vertical" : "horizontal"} theme="primary" />
+              </div>
+              <main className="main-content">
+                <div className="page-content">
+                  <Routes>
+                <Route path="/" element={<Home />} />
 
-        {/* 메인 콘텐츠 영역 */}
-        <main className="main-content">
-          <Routes>
-            <Route path="/" element={<HomePage />} />
+                    <Route path="/government-support" element={<Government_support />} />
+                    <Route path="/solutions/overview" element={<Soulution />} />
+                    <Route path="/solutions/chemical" element={<ChemicalSolution />} />
+                    <Route path="/solutions/manufacturing" element={<ManufacturingSolution />} />
 
-            {/* 정부지원사업 라우팅 */}
-            <Route path="/government-support" element={<Government_support />} />
-            {/* 솔루션 라우팅 */}
-            <Route path="/solutions/overview" element={<Soulution />} />
-            <Route path="/solutions/chemical" element={<ChemicalSolution />} />
-            <Route path="/solutions/manufacturing" element={<ManufacturingSolution />} />
+                    <Route path="/rnd/multimodal-awareness" element={<MultimodalAwareness />} />
+                    <Route path="/rnd/rag-llm" element={<RAGLLMTech />} />
+                    <Route path="/rnd/on-device-ai" element={<OnDeviceAI />} />
+                    <Route path="/rnd/embedded-system" element={<Embeddedsystem />} />
+                    <Route path="/rnd/smart-assistive-technology" element={<SmartAssistiveTechnology />} />
+                    <Route path="/rnd/air-quality-management" element={<AirQualityManagement />} />
 
-            <Route path="/rnd/multimodal-awareness" element={<MultimodalAwareness />} />
-            <Route path="/rnd/rag-llm" element={<RAGLLMTech />} />
-            <Route path="/rnd/on-device-ai" element={<OnDeviceAI />} />
-            <Route path="/rnd/embedded-system" element={<Embeddedsystem />} />
-            <Route path="/rnd/smart-assistive-technology" element={<SmartAssistiveTechnology />} />
-            <Route path="/rnd/air-quality-management" element={<AirQualityManagement />} />
-            {/* 제품 라우팅 */}
-            <Route path="/products/control" element={<Product_control />} />
-            <Route path="/products/control/list" element={<Product_list_control />} />
-            <Route path="/products/safety" element={<Product_list_safety />} />
-            <Route path="/products/safety/:id" element={<Product_detail_safety />} />
-            <Route path="/products/monitoring" element={<Product_list_monitoring />} />
+                    <Route path="/products/control" element={<Product_control />} />
+                    <Route path="/products/control/list" element={<Product_list_control />} />
+                    <Route path="/products/safety" element={<Product_list_safety />} />
+                    <Route path="/products/safety/:id" element={<Product_detail_safety />} />
+                    <Route path="/products/monitoring" element={<Product_list_monitoring />} />
 
-            {/* 고객서비스 라우팅 */}
-            <Route path="/customer-service/announcement" element={<Announcement />} />
-            {/* 응용분야 라우팅 */}
-            {/* <Route path="/application-field" element={<Application_filed_main />} />
-            <Route path="/application-field/overview" element={<Application_filed />} />
-            <Route path="/application-field/field-1" element={<Application_filed_2 />} />
-            <Route path="/application-field/field-2" element={<Application_filed_3 />} />
-            <Route path="/application-field/field-3" element={<Application_filed_4 />} /> */}
+                    <Route path="/customer-service/announcement" element={<Announcement />} />
 
-            {/* 납품사례 라우팅 */}
-            <Route path="/cases" element={<Case />} />
-<Route path="/cases/smart-safety" element={<CaseSmartSafety />} />
-<Route path="/cases/integrated-control" element={<CaseIntegratedControl />} />
-<Route path="/cases/information-communication" element={<CaseInformationCommunication />} />
-<Route path="/cases/detail/:id" element={<Case_detail />} />
-            {/* 회사소개 라우팅 */} 
-            <Route path="/about" element={<About />} />
+                    <Route path="/cases" element={<Case />} />
+                    <Route path="/cases/smart-safety" element={<CaseSmartSafety />} />
+                    <Route path="/cases/integrated-control" element={<CaseIntegratedControl />} />
+                    <Route path="/cases/information-communication" element={<CaseInformationCommunication />} />
+                    <Route path="/cases/detail/:id" element={<Case_detail />} />
 
-            {/* 로그인 라우팅 */}
-            <Route path="/login" element={<Login />} />
-
-            {/* 사이트맵 라우팅 */}
-            <Route path="/sitemap" element={<Sitemap />} />
-            
-            {/* 404 페이지 - 존재하지 않는 모든 경로에 대해 */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </main> 
-
-        {/* Footer - 홈페이지가 아닐 때만 표시 (404 페이지 포함) */}
-        {location.pathname !== "/" && <Footer />}
-        </div>
-      </HTTPSRedirect>
-    </AuthProvider>
+                    <Route path="/about" element={<About />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/sitemap" element={<Sitemap />} />
+                    <Route path="*" element={<NotFound />} />
+                  </Routes>
+                </div>
+                <Footer />
+              </main>
+            </div>
+        </HTTPSRedirect>
+      </AuthProvider>
   );
 }
 

@@ -1,95 +1,203 @@
 /* Font Face Definitions - CDN에서 로드됨 */
 
-/* 기본 스타일 */
+/* 기본 스타일 및 CSS Reset 강화 */
 * {
   box-sizing: border-box;
   text-decoration: none;
+  margin: 0;
+  padding: 0;
 }
 
 html {
-  height: 100%;
+  height: 100% !important; /* html 요소 높이 설정 */
+  /* 스크롤 바운스 제거 */
+  overscroll-behavior: none !important;
+  -webkit-overflow-scrolling: touch !important;
 }
 
 body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  font-family: var(--font-family-primary);
-  background-color: var(--color-background-primary);
+  font-family: var(--font-family-primary) !important;
+  background-color: var(--color-background-primary) !important;
+  background-image: none !important; /* 배경 이미지 제거 */
+  overflow-x: hidden !important; /* 좌우 스크롤만 제거 */
+  overflow-y: auto !important; /* 세로 스크롤 허용 */
+  min-height: 100vh !important;
+  background-color: var(--color-footer) !important;
+  /* 스크롤 바운스 완전 제거 */
+  overscroll-behavior: none !important;
+  overscroll-behavior-y: none !important;
+  -webkit-overflow-scrolling: touch !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 #root {
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  text-align: center;
-  box-sizing: border-box;
-  background-color: var(--color-background-primary);
-  -webkit-overflow-scrolling: touch;
-  height: 100%;
+  width: 100% !important;
+  min-height: 100vh !important; /* 최소 높이로 변경하여 콘텐츠에 따라 확장 허용 */
+  margin: 0 !important;
+  padding: 0 !important;
+  text-align: center !important;
+  box-sizing: border-box !important;
+  background-color: var(--color-background-primary) !important;
+  /* 스크롤 바운스 제거 */
+  overscroll-behavior: none !important;
+  -webkit-overflow-scrolling: touch !important;
 }
 
 /* 앱 컨테이너 구조 */
 .app-container {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  min-height: 100%;
+  display: flex !important;
+  flex-direction: column !important;
+  min-height: 100vh !important; /* 뷰포트 높이 사용 */
+  margin: 0 !important;
+  padding: 0 !important;
+  position: relative !important;
+  /* 스크롤 바운스 제거 */
+  overscroll-behavior: none !important;
 }
 
+
+
 .main-content {
+  display: flex; 
+  flex-direction: column;
+  flex: 1; /* 남은 공간을 모두 차지하도록 설정 */
+  min-height: 0; /* flex 아이템이 축소될 수 있도록 허용 */
+}
+
+/* .page-content - 자연스러운 콘텐츠 흐름 허용 */
+
+/* page-content 스크롤 최적화 */
+.page-content {
   flex: 1;
   display: flex;
   flex-direction: column;
+  min-height: 0; /* flex 아이템이 축소될 수 있도록 허용 */
+}
+
+/* Home 페이지의 page-content는 자연스러운 콘텐츠 흐름 허용 */
+.home-layout .page-content {
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+  overflow: visible;
 }
 
 /* 홈페이지의 content-container에 대한 특별한 스타일 */
 .content-container {
   position: relative;
   display: block;
-  background-color: #000;
+  background-color: rgba(0, 0, 0, 0.3); /* 배경을 반투명하게 하여 body 배경이 보이도록 */
   margin: 0 auto;
   text-align: center;
   width: 100%;
-  height: 100vh;
+  min-height: 0; /* BaseLayout과 동일하게 설정하여 Footer 여백 제거 */
   box-sizing: border-box;
-  overflow: hidden;
 }
 
-/* 배경 이미지 */
-.main-image {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  opacity: 0.6;
-  display: block;
-  min-height: 100vh;
-  max-height: 100vh;
-  backface-visibility: hidden;
-  transform: translateZ(0);
-  transition: opacity 1000ms ease;
-  will-change: opacity;
+/* 배경 이미지 - Home 페이지에서 body background로 대체 */
+/* .main-image 관련 스타일은 더 이상 사용하지 않음 */
+
+/* Home 페이지 전용 레이아웃 */
+.home-layout {
+  width: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  min-height: 100vh !important; /* 배경 이미지가 적용될 최소 높이 보장 */
+  margin: 0 !important;
+  padding: var(--spacing-sm) var(--spacing-xl) var(--spacing-2xl) var(--spacing-xl) !important; /* BaseLayout과 동일한 기본 padding */
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-attachment: scroll !important; /* 모바일 호환성을 위해 scroll로 변경 */
+  gap: var(--spacing-2xl) !important;
+  justify-content: flex-start !important;
+  align-items: center !important;
 }
 
-.main-image.transitioning {
-  opacity: 0.15;
-  transform: translateZ(0) scale(1);
+/* 반응형 padding - 다른 페이지들과 동일한 패턴 적용 */
+@media (max-width: 1024px) {
+  .home-layout {
+    padding: var(--spacing-xl) !important;
+  }
 }
 
-.main-image.transitioned {
-  opacity: 0.6;
-  transform: translateZ(0) scale(1);
+@media (max-width: 768px) {
+  .home-layout {
+    padding: var(--spacing-lg) !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-layout {
+    padding: var(--spacing-md) !important;
+    /* 모바일에서 하단 패딩 최소화 */
+    padding-bottom: var(--spacing-sm) !important;
+  }
+}
+
+/* 모바일 스크롤 최적화 */
+@media (max-width: 768px) {
+  html {
+    /* 스크롤 바운스 완전 차단 */
+    overscroll-behavior: none !important;
+    overscroll-behavior-y: none !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+  
+  body {
+    /* 스크롤 바운스 완전 차단 */
+    overscroll-behavior: none !important;
+    overscroll-behavior-y: none !important;
+    -webkit-overflow-scrolling: touch !important;
+    /* iOS에서 추가 터치 동작 제어 */
+    touch-action: pan-y !important;
+    /* 모바일에서 자연스러운 스크롤을 위해 높이 자동 조정 */
+    min-height: 100vh !important;
+    min-height: -webkit-fill-available !important; /* iOS Safari 지원 */
+    height: auto !important;
+    /* iOS 안전 영역 고려 */
+    padding-bottom: env(safe-area-inset-bottom) !important;
+  }
+  
+  #root {
+    /* 모바일에서 스크롤 바운스 방지 */
+    overscroll-behavior: none !important;
+    overscroll-behavior-y: none !important;
+    -webkit-overflow-scrolling: touch !important;
+    /* 콘텐츠에 따라 높이 자동 조정 */
+    min-height: 100vh !important;
+    height: auto !important;
+  }
+  
+  .home-layout {
+    background-attachment: scroll !important; /* 모바일에서 fixed 제거 */
+    -webkit-transform: translateZ(0) !important; /* 하드웨어 가속 */
+    transform: translateZ(0) !important;
+    /* 스크롤 바운스 방지 */
+    overscroll-behavior: none !important;
+  }
+  
+  /* 모바일에서 뷰포트 높이 문제 해결 */
+  .app-container {
+    min-height: 100vh !important;
+    /* 스크롤 바운스 방지 */
+    overscroll-behavior: none !important;
+  }
+}
+
+/* Footer가 항상 보이도록 보장 */
+.main-content > footer,
+.main-content > .footer,
+footer {
+  flex-shrink: 0 !important;
+  margin-top: auto !important;
+  width: 100% !important;
 }
 
 /* 홈페이지 메인 오버레이 컨테이너 */
 .home-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
+  position: relative;
   width: 100%;
   z-index: 2;
   display: flex;
@@ -98,6 +206,7 @@ body {
   align-items: center;
   box-sizing: border-box;
   margin-top: calc(var(--menu-height) + var(--spacing-2xl));
+  padding: 0 var(--spacing-2xl);
 }
 
 /* 홈페이지 Footer 오버레이 */
@@ -117,24 +226,40 @@ body {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  gap: var(--spacing-md);
+  gap: var(--spacing-xl);
+  margin-top: var(--spacing-2xl);
+  padding: 0 var(--spacing-2xl);
+}
+
+/* 홈페이지 콘텐츠 컨테이너 */
+.home-content-container {
+  width: 100%;
+  max-width: 1400px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+  align-items: center;
+  justify-content: center;
+  margin-top: var(--spacing-5xl);
 }
 
 /* 카드 로테이터 섹션 */
 .card-rotator-section {
-  width: min(92vw, 1500px);
+  width: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
 }
+
+
 
 /* 메뉴 오버레이 */
 .menu-overlay-subpage {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  z-index: 11;
+  height: auto; /* 콘텐츠 크기에 맞게 자동 조정 */
+  z-index: 1000; /* 다른 페이지 콘텐츠보다 위에 표시되도록 z-index 높임 */
   width: 100%;
   pointer-events: none;
   display: flex;
@@ -180,80 +305,127 @@ body {
   box-shadow: none;
 }
 
-/* 히어로 콘텐츠 섹션 */
+/* 히어로 콘텐츠 섹션 - 개선된 디자인 */
 .hero-content-section {
-  max-width: 1400px;
   width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: stretch;
-  gap: var(--spacing-2xl);
+  gap: var(--spacing-lg);
   flex-shrink: 0;
-  position: relative;
+  margin-bottom: var(--spacing-xl);
 }
 
+/* 히어로 카드 기본 스타일 - 현대적 디자인 */
 .hero-content-card {
-  padding: var(--spacing-xl);
-  text-align: left;
-  background-image: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.35)), url('./assets/buildings.jpg');
+  position: relative;
+  padding: var(--spacing-2xl);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  border-radius: 15px;
-  height: 300px;
-  min-height: 200px;
+  border-radius: 20px;
+  height: 320px;
+  min-height: 280px;
   word-break: keep-all;
-  flex: 1 1 0;
-  min-width: 0;
-  align-items: center;
-  border: 3px solid #fff;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  border: none;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  cursor: pointer;
 }
 
+/* 카드 호버 효과 */
+.hero-content-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
+}
+
+/* 카드 배경 오버레이 */
+.hero-content-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.2) 0%,
+    rgba(0, 0, 0, 0.4) 50%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+.hero-content-card:hover::before {
+  opacity: 0.8;
+}
+
+/* 개별 카드 배경 이미지 */
 .hero-content-card_1 {
-  padding: var(--spacing-xl);
-  text-align: left;
-  background-image: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url('./assets/main/camera.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  border-radius: 15px;
-  height: 300px;
-  min-height: 200px;
-  word-break: keep-all;
-  flex: 1 1 0;
-  min-width: 0;
-  align-items: center;
-  border: 3px solid #fff;
+  background-image: url('./assets/main/camera.png');
 }
 
 .hero-content-card_2 {
-  padding: var(--spacing-xl);
-  text-align: left;
-  background-image: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url('./assets/case_bus_seoul/main_4.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  border-radius: 15px;
-  height: 300px;
-  min-height: 200px;
-  word-break: keep-all;
-  flex: 1 1 0;
-  min-width: 0;
-  align-items: center;
-  border: 3px solid #fff;
+  background-image: url('./assets/case_bus_seoul/main_4.jpg');
 }
 
+/* 공지사항 카드 특별 스타일 */
+.announcement-card {
+  background-blend-mode: overlay;
+}
 
+/* 카드 내부 콘텐츠 컨테이너 - 개선된 레이아웃 */
+.hero-content-card-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  text-align: left;
+  padding: 0;
+}
+
+/* 카드 제목 - 현대적 타이포그래피 */
 .hero-content-card-title {
   font-size: var(--font-size-md) !important;
-  color: #292929 !important;
-  margin-top: 0;
-  margin-bottom: var(--spacing-md);
-  background-color: #BFBFBF;
-  padding:var(--spacing-xs);
-  border-radius: var(--border-radius-md);
-  text-align: center;
+  font-weight: var(--font-weight-bold) !important;
+  color: #ffffff !important;
+  margin: 0 !important;
+  padding: var(--spacing-md) var(--spacing-lg) !important;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(255, 255, 255, 0.9) 100%
+  ) !important;
+  color: #1a1a1a !important;
+  border-radius: 12px !important;
+  backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1) !important;
+  text-align: center !important;
+  line-height: 1.3 !important;
+  transition: all 0.3s ease !important;
+}
+
+/* 제목 호버 효과 */
+.hero-content-card:hover .hero-content-card-title {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2) !important;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 0.95) 100%
+  ) !important;
 }
 
 .hero-content-card-description {
@@ -301,79 +473,120 @@ body {
   opacity: 1 !important;
 }
 
-/* 반응형 스타일 */
-@media screen and (min-width: 1024px) and (max-width: 1279px) {
-  .home-overlay {
-    margin-top: calc(var(--menu-height) + var(--spacing-lg));
-  }
-
-  .button-text {
-    padding: 0 70px 0 70px;
-    font-size: var(--font-size-base);
-  }
+/* 홈페이지 단일 컨테이너 스타일 */
+.home-container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: var(--spacing-2xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2xl);
+  min-height: 60vh;
+  position: relative;
 }
 
-@media screen and (min-width: 769px) and (max-width: 1023px) {
-  .button-text {
-    padding: 0 70px 0 70px;
-    font-size: var(--font-size-base);
-  }
+/* 홈페이지 히어로 콘텐츠 섹션 */
+.home-container .hero-content-section {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: stretch;
+  gap: var(--spacing-2xl);
+  flex-shrink: 0;
 }
 
-@media screen and (min-width: 480px) and (max-width: 767px) {
-  .button-text {
-    padding: 0 70px 0 70px;
-    font-size: var(--font-size-base);
+/* 반응형 디자인 최적화 */
+@media screen and (max-width: 1024px) {
+  .home-container {
+    padding: var(--spacing-xl);
+    gap: var(--spacing-xl);
   }
-
-  .hero-content-section {
+  
+  .home-container .hero-content-section {
     flex-direction: column;
     gap: var(--spacing-lg);
   }
 
+  .hero-content-card-title {
+    font-size: var(--font-size-lg) !important; /* 태블릿에서 글자 크기 유지 */
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .home-container {
+    padding: var(--spacing-lg);
+    gap: var(--spacing-lg);
+  }
+
+  /* 768px 이하에서 hero-content-section을 1열 배치 유지 */
+  .hero-content-section,
+  .home-container .hero-content-section {
+    flex-direction: column !important;
+    gap: var(--spacing-lg);
+    align-items: stretch;
+  }
+
+  /* 모바일에서 카드 높이 조정 */
   .hero-content-card {
-    min-height: 150px;
-    height: 150px;
+    height: 250px;
+    min-height: 180px;
   }
 
-  .home-overlay {
-    margin-top: calc(var(--menu-height) + var(--spacing-sm));
-    padding: var(--spacing-sm) var(--spacing-md);
+  .hero-content-card-title {
+    font-size: var(--font-size-xs) !important; /* 모바일에서 글자 크기 조정 */
+    padding: var(--spacing-xs) !important;
+    border-radius: 5px !important;
+  }
+  
+  .hero-content-card{
+    padding: var(--spacing-xl);
+  }
+  .hero-content-card-content{
+    font-size: var(--font-size-sm)!important  ;
+  }
+  .home-content-container{
+    margin-top: 0;
+  }
+  .hero-content-card:hover {
+    transform: none !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
   }
 
-  .home-content-wrapper {
-    gap: var(--spacing-lg);
+  .hero-content-card:hover::before {
+    opacity: 1 !important;
+  }
+
+  .hero-content-card:hover .hero-content-card-title {
+    transform: none !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1) !important;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.95) 0%,
+      rgba(255, 255, 255, 0.9) 100%
+    ) !important;
+  }
+
+  .hero-content-card-button:hover {
+    background-color: #ff4d2d !important;
   }
 }
 
-@media screen and (max-width: 479px) {
-  .button-text {
-    padding: 0 70px 0 70px;
-    font-size: 14px !important;
-  }
-
-  .hero-content-section {
-    flex-direction: column;
+/* 작은 모바일(480px 이하) 최적화 */
+@media screen and (max-width: 480px) {
+  .hero-content-section,
+  .home-container .hero-content-section {
     gap: var(--spacing-md);
   }
 
   .hero-content-card {
-    min-height: 120px;
-    height: 120px;
+    height: 200px;
+    min-height: 150px;
     padding: var(--spacing-lg);
   }
 
   .hero-content-card-title {
-    font-size: var(--font-size-lg) !important;
-  }
-
-  .home-overlay {
-    margin-top: calc(var(--menu-height) + var(--spacing-sm));
-    padding: var(--spacing-sm);
-  }
-
-  .home-content-wrapper {
-    gap: var(--spacing-lg);
+    font-size: var(--font-size-xs) !important; /* 작은 모바일에서 더 작은 글자 크기 */
   }
 }
-

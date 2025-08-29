@@ -24,10 +24,9 @@
  *   onLogoClick={handleLogoClick}
  * />
  */
-import React from 'react';
+import React, { useEffect } from 'react';
 import './HamburgerMenu.css';
 import logo from '../../assets/logo.png';
-import hamburgerIcon from '../../assets/hamburger.svg';
 
 const HamburgerMenu = ({
   isOpen,
@@ -40,8 +39,45 @@ const HamburgerMenu = ({
   isAuthenticated,
   onLogout
 }) => {
+  // 메뉴가 열렸을 때 root 스크롤 방지
+  useEffect(() => {
+    const rootElement = document.getElementById('root');
+    if (isOpen && rootElement) {
+      rootElement.style.overflow = 'hidden';
+    } else if (rootElement) {
+      rootElement.style.overflowY = 'auto';
+      rootElement.style.overflowX = 'hidden';
+    }
+
+    // 컴포넌트 언마운트 시 정리
+    return () => {
+      if (rootElement) {
+        rootElement.style.overflowY = 'auto';
+        rootElement.style.overflowX = 'hidden';
+      }
+    };
+  }, [isOpen]);
+
   return (
     <>
+      {/* 햄버거 토글 버튼 - 항상 표시 */}
+      <button 
+        className={`mobile-menu-toggle ${isOpen ? 'active' : ''}`}
+        onClick={onToggle}
+        aria-label={isOpen ? "메뉴 닫기" : "메뉴 열기"}
+        aria-expanded={isOpen}
+        disabled={isAnimating}
+      >
+        <div className="hamburger-icon">
+          <span className="hamburger-line line-1"></span>
+          <span className="hamburger-line line-2"></span>
+          <span className="hamburger-line line-3"></span>
+        </div>
+        <span className="sr-only">
+          {isOpen ? "메뉴 닫기" : "메뉴 열기"}
+        </span>
+      </button>
+
       {/* 메뉴 오버레이 - 메뉴가 열렸을 때만 표시 */}
       {isOpen && (
         <div 
@@ -53,17 +89,6 @@ const HamburgerMenu = ({
       
       <div className={`hamburger-menu-wrapper${isOpen ? ' mobile-open' : ''}`}>
         <div className="hamburger-menu-container">
-          <div className="hamburger-menu-logo">
-            <button 
-              className="mobile-menu-toggle"
-              onClick={onToggle}
-              aria-label="메뉴 열기"
-              disabled={isAnimating}
-            >
-              <img src={hamburgerIcon} alt="메뉴" className="hamburger-icon" />
-            </button>
-          </div>
-          
           <nav className={`hamburger-menu ${isOpen ? 'mobile-visible' : ''}`}>
             <ul className="hamburger-menu-list">
               {isOpen && (
@@ -76,28 +101,44 @@ const HamburgerMenu = ({
                   />
                 </li>
               )}
-              {menuItems.map((item, index) => (
-                <li 
-                  key={index} 
-                  className="hamburger-menu-item"
-                  data-active={isMenuActive(index) ? 'true' : 'false'}
-                >
-                  <button
-                    className={`hamburger-menu-button ${isMenuActive(index) ? 'active' : ''}`}
-                    onClick={() => onItemClick(item, index)}
-                    disabled={item.disabled}
+              {menuItems.map((item, index) => {
+                // 메뉴 타입 결정 (아이콘 표시용)
+                const getMenuType = (label) => {
+                  if (label.includes('회사')) return 'company';
+                  if (label.includes('사업') || label.includes('솔루션')) return 'business';
+                  if (label.includes('제품') || label.includes('상품')) return 'products';
+                  if (label.includes('연구') || label.includes('R&D')) return 'rnd';
+                  if (label.includes('고객') || label.includes('지원')) return 'customer';
+                  return 'default';
+                };
+                
+                return (
+                  <li 
+                    key={index} 
+                    className="hamburger-menu-item"
+                    data-active={isMenuActive(index) ? 'true' : 'false'}
                   >
-                    <span className="hamburger-menu-text">{item.label}</span>
-                  </button>
-                </li>
-              ))}
+                    <button
+                      className={`hamburger-menu-button ${isMenuActive(index) ? 'active' : ''}`}
+                      data-menu={getMenuType(item.label)}
+                      onClick={() => onItemClick(item, index)}
+                      disabled={item.disabled}
+                      aria-current={isMenuActive(index) ? 'page' : undefined}
+                    >
+                      <span className="hamburger-menu-text">{item.label}</span>
+                    </button>
+                  </li>
+                );
+              })}
               
               {/* 모바일 로그아웃 버튼 */}
               {isAuthenticated && isAuthenticated() && (
                 <li className="hamburger-menu-item">
                   <button
                     className="hamburger-menu-button logout-button"
+                    data-menu="logout"
                     onClick={onLogout}
+                    aria-label="로그아웃"
                   >
                     <span className="hamburger-menu-text">로그아웃</span>
                   </button>

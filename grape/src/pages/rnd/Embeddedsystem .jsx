@@ -5,7 +5,7 @@ import './Rnd.css';
 import FeatureDescription from '../../components/FeatureDescription';
 import danger from '../../assets/rnd_main/danger.png';
 import { BaseLayout } from '../../components/Layout';
-import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
+// Breadcrumbs는 BaseLayout이 렌더링하므로 여기서는 배열만 전달합니다.
 
 const EMBEDDED_SYSTEM_CARDS = [
   {
@@ -24,7 +24,7 @@ const Embeddedsystem = () => {
   return (
     <BaseLayout
       header={() => <ProductHeader image={rndHeader} />}
-      breadcrumbs={<Breadcrumbs breadcrumbs={["Home", "연구개발", "위험상황 조기감지"]} />}
+      breadcrumbs={["Home", "연구개발", "위험상황 조기감지"]}
       title="위험상황 조기감지"
       subtitle="레이더 및 카메라를 활용한 환자 안전 보장 임베디드 시스템"
     >

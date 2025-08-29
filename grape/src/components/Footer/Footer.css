@@ -1,11 +1,12 @@
 .footer {
-  background-color: var(--color-footer);
-  color: var(--color-text-white);
-  padding: var(--spacing-sm) 0 var(--spacing-lg) 0;
-  font-family: var(--font-family-primary);
-  width: 100%;
-  margin-top: 0; /* Footer와 메인 콘텐츠 사이 마진 제거 */
-  max-height: none; /* 사이트맵 추가로 인해 높이 제한 해제 */
+  background-color: var(--color-footer) !important;
+  color: var(--color-text-white) !important;
+  padding: var(--spacing-sm) 0 var(--spacing-lg) 0 !important;
+  font-family: var(--font-family-primary) !important;
+  width: 100% !important;
+  max-height: none !important; /* 사이트맵 추가로 인해 높이 제한 해제 */
+  margin: 0 !important; /* 여백 제거 */
+  flex-shrink: 0 !important;
 }
 
 /* 홈페이지에서 Footer 오버레이로 사용할 때 */
@@ -16,9 +17,12 @@
 }
 
 .footer-wrapper {
-  width: 100%;
-  max-height: none; /* 사이트맵 추가로 인해 높이 제한 해제 */
-  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  width: 100% !important;
+  max-height: none !important; /* 사이트맵 추가로 인해 높이 제한 해제 */
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+  flex-shrink: 0 !important;
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out !important;
 }
 
 .footer-visible {
@@ -35,6 +39,7 @@
 .footer-container {
   max-width: 1400px;
   margin: 0 auto;
+  padding: 0;
 }
 
 /* 사이트맵 스타일 */
@@ -390,9 +395,8 @@
   }
 
   .footer-container{
-    padding: 0 var(--spacing-xl);
+    padding: 0 var(--spacing-lg);
     gap: var(--spacing-xl);
-    margin-bottom: var(--spacing-xl);
     align-items: flex-start;
   }
 
@@ -416,7 +420,7 @@
   }
 
   .footer-bottom {
-    margin-top: var(--spacing-xl);
+    margin-top:0;
   }
 
   .footer-content {
@@ -481,9 +485,9 @@
   }
 }
 
-/* 768px 이하에서 사이트맵 숨김 */
+/* 768px 이하에서 사이트맵 완전히 제거 */
 @media screen and (max-width: 768px) {
-  .sitemap-grid {
+  .footer-sitemap {
     display: none;
   }
 }
@@ -495,9 +499,8 @@
   }
 
   .footer-container{
-    padding: 0 var(--spacing-lg);
+    padding: 0 var(--spacing-md);
     gap: var(--spacing-xl);
-    margin-bottom: var(--spacing-xl);
     align-items: flex-start;
     
   }
@@ -522,8 +525,7 @@
   }
 
   .footer-bottom {
-    
-    margin-top: var(--spacing-xl);
+    margin-top:0;
   }
 
   .footer-content {
