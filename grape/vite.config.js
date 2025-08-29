@@ -13,11 +13,13 @@ export default defineConfig({
     },
   },
   server: {
-    https: true,
+    // 로컬 개발에서는 HTTPS 대신 HTTP 사용
+    https: false,
     host: true,
   },
   preview: {
-    https: true,
+    // preview 모드에서도 HTTPS 비활성화
+    https: false,
     host: true,
   },
 })
