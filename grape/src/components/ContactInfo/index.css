@@ -23,6 +23,9 @@
   box-shadow: var(--shadow-md);
   padding: var(--spacing-sm) var(--spacing-xl);
   min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .contact-card-title {
