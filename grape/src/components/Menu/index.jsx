@@ -74,16 +74,6 @@ const defaultMenuItems = [
       
     ] 
   },
-  // { 
-  //   label: '적용분야', 
-  //   path: '/application-field',
-  //   submenu: [ 
-  //     { label: '건물안전 및 자산관리', path: '/application-field/overview' }, 
-  //     { label: '보안 및 감시', path: '/application-field/field-1' }, 
-  //     { label: '제조업 안전 및 자산관리', path: '/application-field/field-2' }, 
-  //     { label: '화학공업 안전 및 자산관리', path: '/application-field/field-3' } 
-  //   ] 
-  // },
   {   
     label: '고객사례', 
     path: '/cases',

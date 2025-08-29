@@ -18,7 +18,8 @@ body.modal-open .hamburger-menu-wrapper {
   position: relative;
   transition: all var(--transition-base);
   background: transparent;
-  max-width: var(--container-max-width);
+  margin: 0 var(--spacing-2xl) !important;
+  max-width: 1400px;
 }
 
 .menu-wrapper.open {

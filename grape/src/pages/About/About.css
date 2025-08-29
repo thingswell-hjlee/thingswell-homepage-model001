@@ -1945,7 +1945,7 @@
 .about-intro-responsive p {
   text-align: left;
   font-size: var(--font-size-lg) !important;
-  font-weight: var(--font-weight-bold);
+  font-weight: var(--font-weight-normal);
 }
 
 /* 미션 및 비전 반응형 */

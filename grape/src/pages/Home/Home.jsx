@@ -167,7 +167,7 @@ export default function Home() {
         <section className="hero-content-section">
           {/* 제품 카드 */}
           <Link
-            to="/products/safety/14"
+            to="/products/safety?detail=1"
             className="hero-content-card hero-content-card_1"
             aria-label="HIKVISION 네트워크 PTZ 카메라 제품 보기"
           >
