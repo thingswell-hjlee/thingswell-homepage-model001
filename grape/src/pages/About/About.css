@@ -571,33 +571,6 @@
   font-weight: var(--font-weight-bold);
 }
 
-.mission-card:hover,
-.vision-card:hover {
-  transform: translateY(-5px);
-}
-
-.mission-card::before,
-.vision-card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(
-    135deg,
-    rgba(0, 0, 0, 0.7) 0%,
-    rgba(0, 0, 0, 0.3) 50%,
-    rgba(0, 0, 0, 0.7) 100%
-  );
-  z-index: 1;
-  transition: opacity var(--transition-slow);
-  user-select: text; /* 드래그 방지 */
-  -webkit-user-select: text;
-  -moz-user-select: text;
-  -ms-user-select: text;
-}
-
 
 .mission-background,
 .vision-background {
@@ -625,12 +598,6 @@
   -moz-user-select: text;
   -ms-user-select: text;
 }
-
-.mission-card:hover .mission-content,
-.vision-card:hover .vision-content {
-  transform: translate(-50%, -50%) scale(1.05);
-}
-
 .mission-icon,
 .vision-icon {
   font-size: 3rem;
@@ -1963,22 +1930,17 @@
 .vision-card-responsive {
   flex: 1;
   position: relative;
+  width: 100% !important;
+  max-width: 100% !important;
   height: 100px;
-  border-radius: var(--border-radius-lg);
-  overflow: hidden;
-  cursor: pointer;
-  transition: transform var(--transition-slow);
-  user-select: text;
-  -webkit-user-select: text;
-  -moz-user-select: text;
-  -ms-user-select: text;
-  font-weight: var(--font-weight-bold);
+  border-radius: var(--border-radius-md);
+  display: flex; /* flex 컨테이너로 만들어서 align-items와 justify-content가 작동하도록 */
+  align-items: center;
+  justify-content: center;
+  overflow: hidden; /* border-radius가 제대로 보이도록 */
 }
 
-.mission-card-responsive:hover,
-.vision-card-responsive:hover {
-  transform: translateY(-5px);
-}
+/* HOVER 효과 삭제 */
 
 .mission-background-responsive,
 .vision-background-responsive {
@@ -1993,18 +1955,26 @@
 
 .mission-content-responsive,
 .vision-content-responsive {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  /* 가로 축소시 자동으로 줄이기 위해 내용 폭을 100%로 설정하고 절대 위치 사용을 제거합니다 */
+  position: absolute !important; /* 절대 위치로 변경해서 카드 내부에서 정확한 위치 지정 */
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important; /* 정확한 중앙 정렬 */
   text-align: center;
   color: white;
-  z-index: 2;
-  width: 80%;
+  z-index: 3 !important; /* 오버레이 위로 표시 */
+  width: 90% !important; /* 약간의 여백을 두고 */
+  padding: var(--spacing-sm);
+  box-sizing: border-box;
+  display: flex !important;
+  align-items: center !important; /* 세로 중앙 정렬 */
+  justify-content: center !important;
+  min-height: auto; /* 자동 높이로 변경 */
   user-select: text;
   -webkit-user-select: text;
   -moz-user-select: text;
   -ms-user-select: text;
+  word-break: keep-all;
 }
 
 .mission-description-responsive {
@@ -2038,16 +2008,18 @@
   bottom: 0;
   background: linear-gradient(
     135deg,
-    rgba(0, 0, 0, 0.8) 0%,
-    rgba(0, 0, 0, 0.4) 50%,
-    rgba(0, 0, 0, 0.8) 100%
+     rgba(0, 0, 0, 0.8) 0%,
+     rgba(0, 0, 0, 0.4) 50%,
+     rgba(0, 0, 0, 0.8) 100%
   );
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   color: white;
-  z-index: 1;
+  z-index: 1; /* 콘텐츠는 z-index 3로 위에 표시 */
+  pointer-events: none; /* 오버레이가 클릭을 막지 않도록 */
+  border-radius: inherit; /* 부모의 border-radius를 상속 */
   user-select: text;
   -webkit-user-select: text;
   -moz-user-select: text;
@@ -2111,18 +2083,33 @@
   overflow: hidden;
 }
 
-.core-value-list-responsive li strong {
-  display: block;
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-text-white);
-  margin: calc(var(--spacing-xl) * -1) calc(var(--spacing-xl) * -1) var(--spacing-md);
-  padding: var(--spacing-sm) var(--spacing-xl);
-  background: linear-gradient(90deg, var(--color-primary), var(--color-primary-light));
-  letter-spacing: 0.02em;
-  text-align: center;
-  border-top-left-radius: var(--border-radius-lg);
-  border-top-right-radius: var(--border-radius-lg);
+/* strong 태그 스타일 제거 - 이제 .core-value-title-container가 직접 스타일링됨 */
+
+.core-value-title-container {
+  display: flex !important;
+  align-items: center !important; /* 세로 중앙 정렬 강제 */
+  justify-content: center !important; /* 가로 중앙 정렬 강제 */
+  width: calc(100% + (var(--spacing-xl) * 2)) !important; /* margin을 고려한 정확한 width */
+  height: 4em !important; /* 고정 높이 설정 */
+  min-height: 4em !important; /* 최소 높이도 동일하게 */
+  max-height: 4em !important; /* 최대 높이도 동일하게 */
+  padding: var(--spacing-sm) var(--spacing-xl) !important;
+  word-break: break-all; /* 강제 줄바꿈으로 높이 보장 */
+  white-space: pre-wrap; /* 공백과 줄바꿈 보존하면서 자동 줄바꿈 */
+  line-height: 1.5 !important; /* 줄 간격 증가 */
+  box-sizing: border-box !important;
+  overflow: hidden; /* 넘치는 텍스트 숨김 */
+  text-align: center !important; /* 텍스트 중앙 정렬 추가 */
+  margin: calc(var(--spacing-xl) * -1) calc(var(--spacing-xl) * -1) var(--spacing-md) !important;
+  position: relative !important; /* 위치 안정성 */
+  /* 이전 strong 태그 스타일 적용 */
+  font-size: var(--font-size-xl) !important;
+  font-weight: var(--font-weight-bold) !important;
+  color: var(--color-text-white) !important;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-primary-light)) !important;
+  letter-spacing: 0.02em !important;
+  border-top-left-radius: var(--border-radius-lg) !important;
+  border-top-right-radius: var(--border-radius-lg) !important;
 }
 
 .core-value-list-responsive li {
@@ -2132,6 +2119,14 @@
   display: flex;
   flex-direction: column;
   gap: var(--spacing-sm);
+}
+
+.core-value-content {
+  color: var(--color-text-secondary);
+  line-height: 1.8;
+  font-size: var(--font-size-lg);
+  padding: var(--spacing-md);
+  text-align: left;
 }
 
 .about-section-value-container-responsive {
@@ -2145,6 +2140,70 @@
   margin: 0 auto;
   overflow-x: hidden;
   user-select: text;
+}
+
+/* 추가 반응형: 미션 / 비전 / 핵심가치 세부 조정 (1024 / 768 / 480) */
+@media (max-width: 1024px) {
+  .mission-vision-container-responsive {
+    flex-direction: row;
+    gap: var(--spacing-lg);
+    align-items: stretch;
+  }
+
+  .mission-card-responsive,
+  .vision-card-responsive {
+    width: calc(50% - (var(--spacing-lg) / 2));
+    max-width: none;
+    height: 140px;
+  }
+
+  .core-value-list-responsive ul {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+  }
+}
+
+@media (max-width: 768px) {
+  .mission-vision-container-responsive {
+    flex-direction: column;
+    gap: var(--spacing-md);
+    align-items: center;
+  }
+
+  .mission-card-responsive,
+  .vision-card-responsive {
+    width: 100%;
+    max-width: 100%;
+    height: 120px;
+  }
+
+  .mission-content-responsive,
+  .vision-content-responsive {
+    width: 90%;
+  }
+
+  .core-value-list-responsive ul {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+  }
+}
+
+@media (max-width: 480px) {
+  .mission-card-responsive,
+  .vision-card-responsive {
+    height: 100px;
+  }
+
+  .mission-description-responsive,
+  .vision-description-responsive {
+    font-size: var(--font-size-sm);
+    line-height: 1.3;
+  }
+
+  .core-value-list-responsive ul {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-sm);
+  }
 }
 
 /* 반응형 미디어 쿼리 */
@@ -2221,8 +2280,23 @@
     padding: var(--spacing-lg);
   }
 
-  .core-value-list-responsive li strong {
-    font-size: var(--font-size-lg);
+  /* strong 태그 스타일 제거됨 - .core-value-title-container 사용 */
+  
+  .core-value-title-container {
+    font-size: var(--font-size-lg) !important;
+    line-height: 1.4 !important;
+    height: 4em !important; /* 태블릿에서 고정 높이 */
+    min-height: 4em !important;
+    max-height: 4em !important;
+    word-break: break-all;
+    white-space: pre-wrap;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    margin: calc(var(--spacing-lg) * -1) calc(var(--spacing-lg) * -1) var(--spacing-md) !important; /* 태블릿 padding에 맞춤 */
+    width: calc(100% + (var(--spacing-lg) * 2)) !important; /* 태블릿 padding에 맞춘 width */
+    position: relative !important; /* 위치 안정성 */
   }
 }
 
@@ -2334,8 +2408,23 @@
     padding: var(--spacing-md);
   }
 
-  .core-value-list-responsive li strong {
-    font-size: var(--font-size-base);
+  /* strong 태그 스타일 제거됨 - .core-value-title-container 사용 */
+  
+  .core-value-title-container {
+    font-size: var(--font-size-base) !important;
+    line-height: 1.3 !important;
+    height: 3.5em !important; /* 모바일에서 고정 높이 */
+    min-height: 3.5em !important;
+    max-height: 3.5em !important;
+    word-break: break-all;
+    white-space: pre-wrap;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    margin: calc(var(--spacing-md) * -1) calc(var(--spacing-md) * -1) var(--spacing-md) !important; /* 모바일 padding에 맞춤 */
+    width: calc(100% + (var(--spacing-md) * 2)) !important; /* 모바일 padding에 맞춘 width */
+    position: relative !important; /* 위치 안정성 */
   }
 
   .about-section-value-container-responsive {
@@ -2413,12 +2502,97 @@
     padding: var(--spacing-sm);
   }
 
-  .core-value-list-responsive li strong {
-    font-size: var(--font-size-sm);
+  /* strong 태그 스타일 제거됨 - .core-value-title-container 사용 */
+  
+  .core-value-title-container {
+    font-size: var(--font-size-sm) !important;
+    line-height: 1.2 !important;
+    height: 3em !important; /* 작은 모바일에서 고정 높이 */
+    min-height: 3em !important;
+    max-height: 3em !important;
+    word-break: break-all;
+    white-space: pre-wrap;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    margin: calc(var(--spacing-sm) * -1) calc(var(--spacing-sm) * -1) var(--spacing-md) !important; /* 작은 모바일 padding에 맞춤 */
+    width: calc(100% + (var(--spacing-sm) * 2)) !important; /* 작은 모바일 padding에 맞춘 width */
+    position: relative !important; /* 위치 안정성 */
   }
 
   .about-section-value-container-responsive {
     gap: var(--spacing-lg);
+  }
+}
+
+/* 모바일에서 미션/비전 영역이 보이지 않는 문제 해결용 강제 스타일 */
+@media (max-width: 768px) {
+  .mission-card-responsive,
+  .vision-card-responsive {
+    display: block !important;
+    position: relative !important;
+    min-height: 120px !important;
+    overflow: visible !important;
+  }
+
+  .mission-overlay-responsive,
+  .vision-overlay-responsive {
+    display: flex !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+
+  .mission-content-responsive,
+  .vision-content-responsive {
+    z-index: 3 !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    transform: translate(-50%, -50%) !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .mission-card-responsive,
+  .vision-card-responsive {
+    min-height: 100px !important;
+  }
+
+  .mission-content-responsive,
+  .vision-content-responsive {
+    width: 92% !important;
+    z-index: 3 !important;
+    font-size: var(--font-size-sm) !important;
+  }
+}
+
+/* 추가 안정화: 가로 축소시 오버레이/콘텐츠가 사라지는 문제 방지 */
+@media (max-width: 1024px) {
+  .mission-card-responsive,
+  .vision-card-responsive {
+    overflow: visible !important;
+    min-height: 120px !important;
+    position: relative !important;
+  }
+
+  .mission-card-responsive .mission-overlay-responsive,
+  .vision-card-responsive .vision-overlay-responsive {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    z-index: 2 !important;
+    pointer-events: auto !important;
+  }
+
+  .mission-content-responsive,
+  .vision-content-responsive {
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    max-width: 95% !important;
+    white-space: normal !important;
+    text-align: center !important;
+    z-index: 3 !important;
   }
 }
 

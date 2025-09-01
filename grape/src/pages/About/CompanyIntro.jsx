@@ -115,13 +115,16 @@ const CompanyIntro = () => {
                 <div className="core-value-list-responsive">
                   <ul>
                     <li>
-                      <strong>도전 (Innovation)</strong>미래지향적 R&D 투자와 핵심기술 내재화를 통한 경쟁력 확보
+                      <div className="core-value-title-container">도전 (Innovation)</div>
+                      <div className="core-value-content">미래지향적 R&D 투자와 핵심기술 내재화를 통한 경쟁력 확보</div>
                     </li>
                     <li>
-                      <strong>전문성 (Expertise)</strong>AI, 임베디드SW, 정보통신공사 등 원스톱 역량 기반의 솔루션 제공
+                      <div className="core-value-title-container">전문성 (Expertise)</div>
+                      <div className="core-value-content">AI, 임베디드SW, 정보통신공사 등 원스톱 역량 기반의 솔루션 제공</div>
                     </li>
                     <li>
-                      <strong>사회적 책임 (Social Impact)</strong>노인·장애인·산업현장 등 안전·복지 향상에 기여하여 공공의 이익 창출
+                      <div className="core-value-title-container">사회적 책임 (Social Impact)</div>
+                      <div className="core-value-content">노인·장애인·산업현장 등 안전·복지 향상에 기여하여 공공의 이익 창출</div>
                     </li>
                   </ul>
                 </div>
