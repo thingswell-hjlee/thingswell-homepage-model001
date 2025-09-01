@@ -950,22 +950,40 @@
     font-size: var(--font-size-base);
   }
 
+  /* 타임라인 모바일 - 데스크톱과 동일한 디자인 유지 */
   .timeline::before {
-    left: 20px;
+    left: 50%; /* 중앙 라인 유지 */
+    transform: translateX(-50%);
   }
 
   .timeline-marker {
-    left: 20px;
+    left: 50%; /* 중앙 마커 유지 */
+    transform: translateX(-50%);
   }
 
-  .timeline-item:nth-child(odd) .timeline-content,
+  /* 홀수 아이템 - 왼쪽 배치 (데스크톱과 동일) */
+  .timeline-item:nth-child(odd) .timeline-content {
+    margin-left: 0;
+    margin-right: 50%;
+    padding-right: var(--spacing-lg);
+    text-align: right;
+    width: calc(50% - var(--spacing-lg));
+    max-width: calc(50% - var(--spacing-lg));
+    overflow-x: hidden;
+  }
+
+  .timeline-item:nth-child(odd) .timeline-description ul {
+    text-align: right;
+  }
+
+  /* 짝수 아이템 - 오른쪽 배치 (데스크톱과 동일) */
   .timeline-item:nth-child(even) .timeline-content {
-    margin-left: 50px;
+    margin-left: 50%;
     margin-right: 0;
-    padding-left: var(--spacing-md);
+    padding-left: var(--spacing-lg);
     text-align: left;
-    width: calc(100% - 50px);
-    max-width: calc(100% - 50px);
+    width: calc(50% - var(--spacing-lg));
+    max-width: calc(50% - var(--spacing-lg));
     overflow-x: hidden;
   }
 
@@ -1082,6 +1100,39 @@
 
   .core-value-list li strong {
     font-size: var(--font-size-sm);
+  }
+
+  /* 작은 모바일에서도 타임라인 데스크톱 디자인 유지 */
+  .timeline::before {
+    left: 50%; /* 중앙 라인 유지 */
+    transform: translateX(-50%);
+  }
+
+  .timeline-marker {
+    left: 50%; /* 중앙 마커 유지 */
+    transform: translateX(-50%);
+  }
+
+  /* 홀수 아이템 - 왼쪽 배치 유지 */
+  .timeline-item:nth-child(odd) .timeline-content {
+    margin-left: 0;
+    margin-right: 50%;
+    padding-right: var(--spacing-md);
+    text-align: right;
+    width: calc(50% - var(--spacing-md));
+    max-width: calc(50% - var(--spacing-md));
+    overflow-x: hidden;
+  }
+
+  /* 짝수 아이템 - 오른쪽 배치 유지 */
+  .timeline-item:nth-child(even) .timeline-content {
+    margin-left: 50%;
+    margin-right: 0;
+    padding-left: var(--spacing-md);
+    text-align: left;
+    width: calc(50% - var(--spacing-md));
+    max-width: calc(50% - var(--spacing-md));
+    overflow-x: hidden;
   }
 
   .timeline-content {
@@ -1448,7 +1499,6 @@
   height: 450px;
   border: 0;
   overflow: hidden;
-  scrolling: no;
   -webkit-overflow-scrolling: touch;
 }
 
