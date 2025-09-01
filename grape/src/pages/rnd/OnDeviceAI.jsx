@@ -2,7 +2,6 @@ import React from 'react';
 import ProductHeader from '../../components/ProductPage/ProductHeader';
 import rndHeader from '../../assets/header_image/rnd.jpg';
 import './Rnd.css';
-import FeatureDescription from '../../components/FeatureDescription';
 import ai from '../../assets/rnd_main/AI.png';
 import { BaseLayout } from '../../components/Layout';
 // Breadcrumbs는 BaseLayout이 렌더링하므로 여기서는 배열만 전달합니다.
@@ -29,18 +28,25 @@ const OnDeviceAI = () => {
       subtitle="통신 제약 없는 실시간 위험 감지 및 즉각 대응 시스템"
     >
       <div className="product-page-content">
-        {/* FeatureDescription 카드 섹션 */}
+        {/* RND 전용 FeatureDescription 카드 섹션 */}
         <div className="container">
-          <div className="feature-cards-section">
+          <div className="rnd-feature-cards-section">
             {ON_DEVICE_AI_CARDS.map((card, index) => (
-              <FeatureDescription
-                key={index}
-                image={card.image}
-                title={card.title}
-                subtitle={card.subtitle}
-                description={card.description}
-                link={card.link}
-              />
+              <div key={index} className="rnd-feature-description-container">
+                <div className="rnd-feature-description-image-section">
+                  <img src={card.image} alt="feature" className="rnd-feature-description-image" />
+                </div>
+                <div className="rnd-feature-description-text-section">
+                  {card.subtitle && (
+                    <h2 className="rnd-feature-description-subtitle">{card.subtitle}</h2>
+                  )}
+                  <div className="rnd-feature-description-list">
+                    {card.description.map((item, idx) => (
+                      <p key={idx} className="rnd-feature-description-list-item">{item}</p>
+                    ))}
+                  </div>
+                </div>
+              </div>
             ))}
           </div>
         </div>

@@ -2,7 +2,6 @@ import React from 'react';
 import ProductHeader from '../../components/ProductPage/ProductHeader';
 import rndHeader from '../../assets/header_image/rnd.jpg';
 import './Rnd.css';
-import FeatureDescription from '../../components/FeatureDescription';
 import air from '../../assets/rnd_main/AI_air.png';
 import { BaseLayout } from '../../components/Layout';
 // Breadcrumbs는 BaseLayout이 렌더링하므로 여기서는 배열만 전달합니다.
@@ -27,18 +26,25 @@ const AirQualityManagement = () => {
       subtitle="머신러닝을 활용한 실내외 공기질 데이터 고도화 및 쾌적 환경 능동 제어 시스템"
     >
       <div className="product-page-content">
-        {/* FeatureDescription 카드 섹션 */}
+        {/* RND 전용 FeatureDescription 카드 섹션 */}
         <div className="container">
-          <div className="feature-cards-section">
+          <div className="rnd-feature-cards-section">
             {AIR_QUALITY_CARDS.map((card, index) => (
-              <FeatureDescription
-                key={index}
-                image={card.image}
-                title={card.title}
-                subtitle={card.subtitle}
-                description={card.description}
-                link={card.link}
-              />
+              <div key={index} className="rnd-feature-description-container">
+                <div className="rnd-feature-description-image-section">
+                  <img src={card.image} alt="feature" className="rnd-feature-description-image" />
+                </div>
+                <div className="rnd-feature-description-text-section">
+                  {card.subtitle && (
+                    <h2 className="rnd-feature-description-subtitle">{card.subtitle}</h2>
+                  )}
+                  <div className="rnd-feature-description-list">
+                    {card.description.map((item, idx) => (
+                      <p key={idx} className="rnd-feature-description-list-item">{item}</p>
+                    ))}
+                  </div>
+                </div>
+              </div>
             ))}
           </div>
         </div>
