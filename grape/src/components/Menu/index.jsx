@@ -32,10 +32,10 @@ const defaultMenuItems = [
     label: '회사', 
     path: '/about',
     submenu: [ 
-      { label: '회사소개', path: '/about#greeting' },
-      { label: '연혁', path: '/about#history' },
-      { label: '면허인증특허', path: '/about#certificate' },
-      { label: '오시는 길', path: '/about#location' },
+      { label: '회사소개', path: '/about/company' },
+      { label: '연혁', path: '/about/history' },
+      { label: '면허인증특허', path: '/about/licenses' },
+      { label: '오시는 길', path: '/about/directions' },
       { label: '게시판', path: '/customer-service/announcement' },
       // { label: '문의하기', path: '/contact' },
 

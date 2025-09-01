@@ -79,6 +79,10 @@ import CaseSmartSafety from "./pages/Cases/Case_SmartSafety.jsx";
 import CaseIntegratedControl from "./pages/Cases/Case_IntegratedControl.jsx";
 import CaseInformationCommunication from "./pages/Cases/Case_InformationCommunication.jsx";
 import About from "./pages/About/About.jsx";
+import CompanyIntro from "./pages/About/CompanyIntro.jsx";
+import History from "./pages/About/History.jsx";
+import Licenses from "./pages/About/Licenses.jsx";
+import Directions from "./pages/About/Directions.jsx";
 import Login from "./pages/Login/Login.jsx";
 import Case_detail from "./pages/Cases/Case_detail.jsx";
 import Sitemap from "./pages/Sitemap/sitemap.jsx";
@@ -142,6 +146,10 @@ function App() {
                     <Route path="/cases/detail/:id" element={<Case_detail />} />
 
                     <Route path="/about" element={<About />} />
+                    <Route path="/about/company" element={<CompanyIntro />} />
+                    <Route path="/about/history" element={<History />} />
+                    <Route path="/about/licenses" element={<Licenses />} />
+                    <Route path="/about/directions" element={<Directions />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/sitemap" element={<Sitemap />} />
                     <Route path="*" element={<NotFound />} />

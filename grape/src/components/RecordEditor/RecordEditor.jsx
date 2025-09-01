@@ -24,109 +24,7 @@ const RecordEditor = ({
     }
   }, [isModal]);
 
-  // 컴포넌트 언마운트 시 업로드된 파일들 정리
-  useEffect(() => {
-    return () => {
-      // 편집 모드가 아닌 경우에만 업로드된 파일들을 삭제
-      if (!editData && (formData.images?.length > 0 || 
-          (mode === 'product' && (
-            formData.keyFeatures?.images?.length > 0 ||
-            formData.specifications?.length > 0 ||
-            formData.certifications?.length > 0 ||
-            formData.downloads?.some(d => d.file)
-          )))) {
-        
-        const cleanupFiles = async () => {
-          try {
-            console.log('컴포넌트 언마운트 시 업로드된 파일들 정리 시작');
-            
-            const bucket = mode === 'product' ? 'product' : 'track_record';
-            const filesToDelete = [];
-
-            // 1. 메인 이미지들 삭제
-            if (formData.images && formData.images.length > 0) {
-              formData.images.forEach(imageUrl => {
-                const filePath = extractFilePathFromUrl(imageUrl);
-                if (filePath) {
-                  filesToDelete.push(filePath);
-                }
-              });
-            }
-
-            // 2. 제품 전용 이미지들 삭제 (Product 모드인 경우)
-            if (mode === 'product') {
-              // 주요 기능 이미지들
-              if (formData.keyFeatures && formData.keyFeatures.images) {
-                formData.keyFeatures.images.forEach(imageObj => {
-                  if (imageObj.url) {
-                    const filePath = extractFilePathFromUrl(imageObj.url);
-                    if (filePath) {
-                      filesToDelete.push(filePath);
-                    }
-                  }
-                });
-              }
-
-              // 사양 이미지들
-              if (formData.specifications) {
-                formData.specifications.forEach(imageObj => {
-                  if (imageObj.url) {
-                    const filePath = extractFilePathFromUrl(imageObj.url);
-                    if (filePath) {
-                      filesToDelete.push(filePath);
-                    }
-                  }
-                });
-              }
-
-              // 인증 이미지들
-              if (formData.certifications) {
-                formData.certifications.forEach(imageObj => {
-                  if (imageObj.url) {
-                    const filePath = extractFilePathFromUrl(imageObj.url);
-                    if (filePath) {
-                      filesToDelete.push(filePath);
-                    }
-                  }
-                });
-              }
-
-              // 다운로드 파일들
-              if (formData.downloads) {
-                formData.downloads.forEach(download => {
-                  if (download.link && download.file) {
-                    const filePath = extractFilePathFromUrl(download.link);
-                    if (filePath) {
-                      filesToDelete.push(filePath);
-                    }
-                  }
-                });
-              }
-            }
-
-            // 3. 실제 파일 삭제 실행
-            if (filesToDelete.length > 0) {
-              console.log(`언마운트 시 삭제할 파일들 (${filesToDelete.length}개):`, filesToDelete);
-              
-              const { error } = await supabase.storage
-                .from(bucket)
-                .remove(filesToDelete);
-              
-              if (error) {
-                console.error('언마운트 시 파일 삭제 중 오류:', error);
-              } else {
-                console.log(`${filesToDelete.length}개의 파일이 언마운트 시 정리되었습니다.`);
-              }
-            }
-          } catch (error) {
-            console.error('언마운트 시 파일 정리 중 오류:', error);
-          }
-        };
-
-        cleanupFiles();
-      }
-    };
-  }, [editData, mode, formData]);
+  // NOTE: 컴포넌트 언마운트 시 업로드된 파일들 정리는 formData 선언 이후에 정의합니다.
   const [editingField, setEditingField] = useState(null);
   const [tempValue, setTempValue] = useState('');
   const [draggedIndex, setDraggedIndex] = useState(null);
@@ -154,6 +52,111 @@ const RecordEditor = ({
     ],
     videos: [] // 링크 배열로 변경
   });
+
+  // 최신 formData 레퍼런스 (언마운트 시 안전하게 접근하기 위함)
+  const latestFormDataRef = useRef(formData);
+  useEffect(() => {
+    latestFormDataRef.current = formData;
+  }, [formData]);
+
+  // 컴포넌트 언마운트 시 업로드된 파일들 정리 (formData가 선언된 이후에 정의)
+  useEffect(() => {
+    return () => {
+      const fd = latestFormDataRef.current;
+      // 편집 모드가 아닌 경우에만 업로드된 파일들을 삭제
+      if (!editData && (fd.images?.length > 0 || 
+          (mode === 'product' && (
+            fd.keyFeatures?.images?.length > 0 ||
+            fd.specifications?.length > 0 ||
+            fd.certifications?.length > 0 ||
+            fd.downloads?.some(d => d.file)
+          )))) {
+        (async () => {
+          try {
+            console.log('컴포넌트 언마운트 시 업로드된 파일들 정리 시작');
+            const bucket = mode === 'product' ? 'product' : 'track_record';
+            const filesToDelete = [];
+
+            // 1. 메인 이미지들 삭제
+            if (fd.images && fd.images.length > 0) {
+              fd.images.forEach(imageUrl => {
+                const filePath = extractFilePathFromUrl(imageUrl);
+                if (filePath) {
+                  filesToDelete.push(filePath);
+                }
+              });
+            }
+
+            // 2. 제품 전용 이미지들 삭제 (Product 모드인 경우)
+            if (mode === 'product') {
+              // 주요 기능 이미지들
+              if (fd.keyFeatures && fd.keyFeatures.images) {
+                fd.keyFeatures.images.forEach(imageObj => {
+                  if (imageObj.url) {
+                    const filePath = extractFilePathFromUrl(imageObj.url);
+                    if (filePath) {
+                      filesToDelete.push(filePath);
+                    }
+                  }
+                });
+              }
+
+              // 사양 이미지들
+              if (fd.specifications) {
+                fd.specifications.forEach(imageObj => {
+                  if (imageObj.url) {
+                    const filePath = extractFilePathFromUrl(imageObj.url);
+                    if (filePath) {
+                      filesToDelete.push(filePath);
+                    }
+                  }
+                });
+              }
+
+              // 인증 이미지들
+              if (fd.certifications) {
+                fd.certifications.forEach(imageObj => {
+                  if (imageObj.url) {
+                    const filePath = extractFilePathFromUrl(imageObj.url);
+                    if (filePath) {
+                      filesToDelete.push(filePath);
+                    }
+                  }
+                });
+              }
+
+              // 다운로드 파일들
+              if (fd.downloads) {
+                fd.downloads.forEach(download => {
+                  if (download.link && download.file) {
+                    const filePath = extractFilePathFromUrl(download.link);
+                    if (filePath) {
+                      filesToDelete.push(filePath);
+                    }
+                  }
+                });
+              }
+            }
+
+            // 3. 실제 파일 삭제 실행
+            if (filesToDelete.length > 0) {
+              console.log(`언마운트 시 삭제할 파일들 (${filesToDelete.length}개):`, filesToDelete);
+              const { error } = await supabase.storage
+                .from(bucket)
+                .remove(filesToDelete);
+              if (error) {
+                console.error('언마운트 시 파일 삭제 중 오류:', error);
+              } else {
+                console.log(`${filesToDelete.length}개의 파일이 언마운트 시 정리되었습니다.`);
+              }
+            }
+          } catch (error) {
+            console.error('언마운트 시 파일 정리 중 오류:', error);
+          }
+        })();
+      }
+    };
+  }, [editData, mode]);
 
   // 드래그 앤 드롭 유틸리티 함수들
   const handleDragStart = (e, index) => {

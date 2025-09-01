@@ -73,10 +73,10 @@ const HamburgerMenu = ({
   // 세부메뉴 데이터 (데스크톱 메뉴와 동일한 주소로 맞춤)
   const subMenuData = {
     '회사': [
-      { label: '회사소개', href: '/about#greeting' },
-      { label: '연혁', href: '/about#history' },
-      { label: '면허인증특허', href: '/about#certificate' },
-      { label: '오시는 길', href: '/about#location' },
+      { label: '회사소개', href: '/about/company' },
+      { label: '연혁', href: '/about/history' },
+      { label: '면허인증특허', href: '/about/licenses' },
+      { label: '오시는 길', href: '/about/directions' },
       { label: '게시판', href: '/customer-service/announcement' }
     ],
     '사업분야': [
