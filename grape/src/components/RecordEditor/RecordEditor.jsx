@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { uploadImage, validateImageFile, checkStorageBucket } from '../../utils/imageUpload';
+import { uploadImage, validateImageFile, checkStorageBucket, uploadDownloadFile, validateDownloadFile } from '../../utils/imageUpload';
 import { setupStoragePolicies } from '../../utils/supabaseRLS';
 import './RecordEditor.css';
 
@@ -45,7 +45,7 @@ const RecordEditor = ({
     specifications: [], // 이미지 배열로 변경
     certifications: [], // 이미지 배열로 변경
     downloads: [
-      { title: '', description: '', link: '' }
+      { title: '', description: '', link: '', file: null }
     ],
     videos: [] // 링크 배열로 변경
   });
@@ -196,7 +196,7 @@ const RecordEditor = ({
         specifications: editData.specifications ? JSON.parse(editData.specifications) : [],
         certifications: editData.certifications ? JSON.parse(editData.certifications) : [],
         downloads: editData.downloads ? JSON.parse(editData.downloads) : [
-          { title: '', description: '', link: '' }
+          { title: '', description: '', link: '', file: null }
         ],
         videos: editData.videos ? JSON.parse(editData.videos) : []
       });
@@ -430,10 +430,10 @@ const RecordEditor = ({
       {/* 이미지 업로드 div */}
       <div className="record-editor-panel">
         <div className="record-editor-panel-header">
-          <h3>이미지 업로드</h3>
+          <h3>메인 이미지 업로드</h3>
           <div className="record-editor-form-group">
             <label className="record-editor-label">
-              이미지 업로드
+              메인 이미지 업로드
             </label>
             <input
               type="file"
@@ -444,7 +444,7 @@ const RecordEditor = ({
             />
             {formData.images.length > 0 && (
               <div className="record-editor-image-list">
-                <h4>업로드된 이미지:</h4>
+                <h4>업로드된 메인 이미지:</h4>
                 <p className="record-editor-tip">
                   💡 이미지를 드래그하여 순서를 변경할 수 있습니다.
                 </p>
@@ -497,7 +497,7 @@ const RecordEditor = ({
                   {mode === 'product' && (
                     <div className="record-editor-form-group">
                       <label className="record-editor-label">
-                        인증 이미지
+                        주요 기능 이미지
                       </label>
                       <input
                         type="file"
@@ -525,7 +525,10 @@ const RecordEditor = ({
                               const newImageObjects = imageUrls.map(url => ({ url, caption: '' }));
                               setFormData(prev => ({
                                 ...prev,
-                                certifications: [...(prev.certifications || []), ...newImageObjects]
+                                keyFeatures: {
+                                  ...prev.keyFeatures,
+                                  images: [...(prev.keyFeatures.images || []), ...newImageObjects]
+                                }
                               }));
                             } catch (error) {
                               console.error('이미지 처리 실패:', error);
@@ -535,14 +538,13 @@ const RecordEditor = ({
                         }}
                         className="record-editor-image-upload"
                       />
-
-                      {formData.certifications && formData.certifications.length > 0 && (
+                      {formData.keyFeatures.images && formData.keyFeatures.images.length > 0 && (
                         <div className="record-editor-image-list">
-                          <h5>업로드된 인증 이미지:</h5>
+                          <h5>업로드된 주요 기능 이미지:</h5>
                           <p className="record-editor-tip">
                             💡 이미지를 드래그하여 순서를 변경할 수 있습니다.
                           </p>
-                          {formData.certifications.map((imageObj, index) => (
+                          {formData.keyFeatures.images.map((imageObj, index) => (
                             <div
                               key={index}
                               draggable
@@ -550,7 +552,7 @@ const RecordEditor = ({
                               onDragStart={(e) => handleDragStart(e, index)}
                               onDragOver={(e) => handleDragOver(e, index)}
                               onDragLeave={handleDragLeave}
-                              onDrop={(e) => handleCertificationsImageDrop(e, index)}
+                              onDrop={(e) => handleKeyFeaturesImageDrop(e, index)}
                               onDragEnd={() => {
                                 setDraggedIndex(null);
                                 setDragOverIndex(null);
@@ -560,16 +562,16 @@ const RecordEditor = ({
                                 <span className="record-editor-image-number-large">{index + 1}</span>
                                 <img 
                                   src={imageObj.url} 
-                                  alt={`인증 이미지 ${index + 1}`} 
+                                  alt={`주요 기능 이미지 ${index + 1}`} 
                                   className="record-editor-image-thumbnail-large"
                                 />
                                 <button
                                   type="button"
                                   onClick={() => {
-                                    const newImages = formData.certifications.filter((_, i) => i !== index);
+                                    const newImages = formData.keyFeatures.images.filter((_, i) => i !== index);
                                     setFormData(prev => ({
                                       ...prev,
-                                      certifications: newImages
+                                      keyFeatures: { ...prev.keyFeatures, images: newImages }
                                     }));
                                   }}
                                   className="record-editor-delete-btn"
@@ -582,11 +584,11 @@ const RecordEditor = ({
                                 placeholder="이미지 설명을 입력하세요 (class='iwc-caption iwc-pos-top-left' 형태로 표시됩니다)"
                                 value={imageObj.caption || ''}
                                 onChange={(e) => {
-                                  const newImages = [...formData.certifications];
+                                  const newImages = [...formData.keyFeatures.images];
                                   newImages[index] = { ...newImages[index], caption: e.target.value };
                                   setFormData(prev => ({
                                     ...prev,
-                                    certifications: newImages
+                                    keyFeatures: { ...prev.keyFeatures, images: newImages }
                                   }));
                                 }}
                                 className="record-editor-image-caption-input"
@@ -595,6 +597,209 @@ const RecordEditor = ({
                           ))}
                         </div>
                       )}
+
+                      <div className="record-editor-form-group">
+                        <label className="record-editor-label">
+                          사양 이미지
+                        </label>
+                        <input
+                          type="file"
+                          multiple
+                          accept="image/*"
+                          onChange={async (e) => {
+                            if (e.target.files && e.target.files.length > 0) {
+                              try {
+                                const fileArray = Array.from(e.target.files);
+                                const imageUrls = await Promise.all(fileArray.map(async file => {
+                                  validateImageFile(file, 50);
+                                  try {
+                                    return await uploadImage(file, 'product', 'product');
+                                  } catch (uploadError) {
+                                    console.warn('Storage 업로드 실패, Base64로 대체:', uploadError);
+                                    return await new Promise((resolve, reject) => {
+                                      const reader = new FileReader();
+                                      reader.onload = (e) => resolve(e.target.result);
+                                      reader.onerror = (e) => reject(new Error('파일 읽기 실패'));
+                                      reader.readAsDataURL(file);
+                                    });
+                                  }
+                                }));
+
+                                const newImageObjects = imageUrls.map(url => ({ url, caption: '' }));
+                                setFormData(prev => ({
+                                  ...prev,
+                                  specifications: [...(prev.specifications || []), ...newImageObjects]
+                                }));
+                              } catch (error) {
+                                console.error('이미지 처리 실패:', error);
+                                alert('이미지 처리 중 오류가 발생했습니다: ' + error.message);
+                              }
+                            }
+                          }}
+                          className="record-editor-image-upload"
+                        />
+                        {formData.specifications && formData.specifications.length > 0 && (
+                          <div className="record-editor-image-list">
+                            <h5>업로드된 사양 이미지:</h5>
+                            <p className="record-editor-tip">
+                              💡 이미지를 드래그하여 순서를 변경할 수 있습니다.
+                            </p>
+                            {formData.specifications.map((imageObj, index) => (
+                              <div
+                                key={index}
+                                draggable
+                                className={`record-editor-image-item-large ${index === draggedIndex ? 'dragging' : ''} ${index === dragOverIndex ? 'drag-over' : ''}`}
+                                onDragStart={(e) => handleDragStart(e, index)}
+                                onDragOver={(e) => handleDragOver(e, index)}
+                                onDragLeave={handleDragLeave}
+                                onDrop={(e) => handleSpecificationsImageDrop(e, index)}
+                                onDragEnd={() => {
+                                  setDraggedIndex(null);
+                                  setDragOverIndex(null);
+                                }}
+                              >
+                                <div className="record-editor-image-header">
+                                  <span className="record-editor-image-number-large">{index + 1}</span>
+                                  <img 
+                                    src={imageObj.url} 
+                                    alt={`사양 이미지 ${index + 1}`} 
+                                    className="record-editor-image-thumbnail-large"
+                                  />
+                                  <button
+                                    type="button"
+                                    onClick={() => {
+                                      const newImages = formData.specifications.filter((_, i) => i !== index);
+                                      setFormData(prev => ({
+                                        ...prev,
+                                        specifications: newImages
+                                      }));
+                                    }}
+                                    className="record-editor-delete-btn"
+                                  >
+                                    삭제
+                                  </button>
+                                </div>
+                                <input
+                                  type="text"
+                                  placeholder="이미지 설명을 입력하세요 (class='iwc-caption iwc-pos-top-left' 형태로 표시됩니다)"
+                                  value={imageObj.caption || ''}
+                                  onChange={(e) => {
+                                    const newImages = [...formData.specifications];
+                                    newImages[index] = { ...newImages[index], caption: e.target.value };
+                                    setFormData(prev => ({
+                                      ...prev,
+                                      specifications: newImages
+                                    }));
+                                  }}
+                                  className="record-editor-image-caption-input"
+                                />
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+
+                      <div className="record-editor-form-group">
+                        <label className="record-editor-label">
+                          인증 이미지
+                        </label>
+                        <input
+                          type="file"
+                          multiple
+                          accept="image/*"
+                          onChange={async (e) => {
+                            if (e.target.files && e.target.files.length > 0) {
+                              try {
+                                const fileArray = Array.from(e.target.files);
+                                const imageUrls = await Promise.all(fileArray.map(async file => {
+                                  validateImageFile(file, 50);
+                                  try {
+                                    return await uploadImage(file, 'product', 'product');
+                                  } catch (uploadError) {
+                                    console.warn('Storage 업로드 실패, Base64로 대체:', uploadError);
+                                    return await new Promise((resolve, reject) => {
+                                      const reader = new FileReader();
+                                      reader.onload = (e) => resolve(e.target.result);
+                                      reader.onerror = (e) => reject(new Error('파일 읽기 실패'));
+                                      reader.readAsDataURL(file);
+                                    });
+                                  }
+                                }));
+
+                                const newImageObjects = imageUrls.map(url => ({ url, caption: '' }));
+                                setFormData(prev => ({
+                                  ...prev,
+                                  certifications: [...(prev.certifications || []), ...newImageObjects]
+                                }));
+                              } catch (error) {
+                                console.error('이미지 처리 실패:', error);
+                                alert('이미지 처리 중 오류가 발생했습니다: ' + error.message);
+                              }
+                            }
+                          }}
+                          className="record-editor-image-upload"
+                        />
+
+                        {formData.certifications && formData.certifications.length > 0 && (
+                          <div className="record-editor-image-list">
+                            <h5>업로드된 인증 이미지:</h5>
+                            <p className="record-editor-tip">
+                              💡 이미지를 드래그하여 순서를 변경할 수 있습니다.
+                            </p>
+                            {formData.certifications.map((imageObj, index) => (
+                              <div
+                                key={index}
+                                draggable
+                                className={`record-editor-image-item-large ${index === draggedIndex ? 'dragging' : ''} ${index === dragOverIndex ? 'drag-over' : ''}`}
+                                onDragStart={(e) => handleDragStart(e, index)}
+                                onDragOver={(e) => handleDragOver(e, index)}
+                                onDragLeave={handleDragLeave}
+                                onDrop={(e) => handleCertificationsImageDrop(e, index)}
+                                onDragEnd={() => {
+                                  setDraggedIndex(null);
+                                  setDragOverIndex(null);
+                                }}
+                              >
+                                <div className="record-editor-image-header">
+                                  <span className="record-editor-image-number-large">{index + 1}</span>
+                                  <img 
+                                    src={imageObj.url} 
+                                    alt={`인증 이미지 ${index + 1}`} 
+                                    className="record-editor-image-thumbnail-large"
+                                  />
+                                  <button
+                                    type="button"
+                                    onClick={() => {
+                                      const newImages = formData.certifications.filter((_, i) => i !== index);
+                                      setFormData(prev => ({
+                                        ...prev,
+                                        certifications: newImages
+                                      }));
+                                    }}
+                                    className="record-editor-delete-btn"
+                                  >
+                                    삭제
+                                  </button>
+                                </div>
+                                <input
+                                  type="text"
+                                  placeholder="이미지 설명을 입력하세요 (class='iwc-caption iwc-pos-top-left' 형태로 표시됩니다)"
+                                  value={imageObj.caption || ''}
+                                  onChange={(e) => {
+                                    const newImages = [...formData.certifications];
+                                    newImages[index] = { ...newImages[index], caption: e.target.value };
+                                    setFormData(prev => ({
+                                      ...prev,
+                                      certifications: newImages
+                                    }));
+                                  }}
+                                  className="record-editor-image-caption-input"
+                                />
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </div>
 
                       <div className="record-editor-form-group">
                         <div className="record-editor-download-header">
@@ -606,7 +811,7 @@ const RecordEditor = ({
                             onClick={() => {
                               setFormData(prev => ({
                                 ...prev,
-                                downloads: [...prev.downloads, { title: '', description: '', link: '' }]
+                                downloads: [...prev.downloads, { title: '', description: '', link: '', file: null }]
                               }));
                             }}
                             className="record-editor-add-btn"
@@ -655,17 +860,74 @@ const RecordEditor = ({
                               className="record-editor-download-input"
                             />
 
-                            <input
-                              type="text"
-                              placeholder="다운로드 링크 (URL)"
-                              value={download.link || ''}
-                              onChange={(e) => {
-                                const newDownloads = [...formData.downloads];
-                                newDownloads[index] = { ...newDownloads[index], link: e.target.value };
-                                setFormData(prev => ({ ...prev, downloads: newDownloads }));
-                              }}
-                              className="record-editor-download-input"
-                            />
+                            <div className="record-editor-download-file-section">
+                              <label className="record-editor-label">
+                                파일 업로드 (선택사항)
+                              </label>
+                              <input
+                                type="file"
+                                accept="*/*"
+                                onChange={async (e) => {
+                                  if (e.target.files && e.target.files[0]) {
+                                    try {
+                                      const file = e.target.files[0];
+                                      validateDownloadFile(file, 100);
+                                      
+                                      const fileUrl = await uploadDownloadFile(file, 'downloads', mode === 'product' ? 'product' : 'track_record');
+                                      
+                                      const newDownloads = [...formData.downloads];
+                                      newDownloads[index] = { 
+                                        ...newDownloads[index], 
+                                        file: file.name,
+                                        link: fileUrl 
+                                      };
+                                      setFormData(prev => ({ ...prev, downloads: newDownloads }));
+                                      
+                                      alert(`파일 "${file.name}"이 성공적으로 업로드되었습니다.`);
+                                    } catch (error) {
+                                      console.error('파일 업로드 실패:', error);
+                                      alert('파일 업로드에 실패했습니다: ' + error.message);
+                                    }
+                                  }
+                                }}
+                                className="record-editor-file-upload"
+                              />
+                              {download.file && (
+                                <div className="record-editor-uploaded-file">
+                                  <span>업로드된 파일: {download.file}</span>
+                                  <button
+                                    type="button"
+                                    onClick={() => {
+                                      const newDownloads = [...formData.downloads];
+                                      newDownloads[index] = { 
+                                        ...newDownloads[index], 
+                                        file: null,
+                                        link: '' 
+                                      };
+                                      setFormData(prev => ({ ...prev, downloads: newDownloads }));
+                                    }}
+                                    className="record-editor-delete-btn"
+                                    style={{ padding: '2px 6px', fontSize: '10px', marginLeft: '10px' }}
+                                  >
+                                    파일 제거
+                                  </button>
+                                </div>
+                              )}
+                            </div>
+
+                            {!download.file && (
+                              <input
+                                type="text"
+                                placeholder="다운로드 링크 (URL) - 파일 업로드 대신 사용"
+                                value={download.link || ''}
+                                onChange={(e) => {
+                                  const newDownloads = [...formData.downloads];
+                                  newDownloads[index] = { ...newDownloads[index], link: e.target.value };
+                                  setFormData(prev => ({ ...prev, downloads: newDownloads }));
+                                }}
+                                className="record-editor-download-input"
+                              />
+                            )}
                           </div>
                         ))}
                       </div>
@@ -694,212 +956,7 @@ const RecordEditor = ({
                 </div>
 
                 <div className="record-editor-product-right" style={{ flex: '1' }}>
-                  <div className="record-editor-form-group">
-                    <label className="record-editor-label">
-                      주요 기능 이미지
-                    </label>
-                    <input
-                      type="file"
-                      multiple
-                      accept="image/*"
-                      onChange={async (e) => {
-                        if (e.target.files && e.target.files.length > 0) {
-                          try {
-                            const fileArray = Array.from(e.target.files);
-                            const imageUrls = await Promise.all(fileArray.map(async file => {
-                              validateImageFile(file, 50);
-                              try {
-                                return await uploadImage(file, 'product', 'product');
-                              } catch (uploadError) {
-                                console.warn('Storage 업로드 실패, Base64로 대체:', uploadError);
-                                // Storage 업로드 실패 시 Base64로 대체
-                                return await new Promise((resolve, reject) => {
-                                  const reader = new FileReader();
-                                  reader.onload = (e) => resolve(e.target.result);
-                                  reader.onerror = (e) => reject(new Error('파일 읽기 실패'));
-                                  reader.readAsDataURL(file);
-                                });
-                              }
-                            }));
-
-                            const newImageObjects = imageUrls.map(url => ({ url, caption: '' }));
-                            setFormData(prev => ({
-                              ...prev,
-                              keyFeatures: {
-                                ...prev.keyFeatures,
-                                images: [...(prev.keyFeatures.images || []), ...newImageObjects]
-                              }
-                            }));
-                          } catch (error) {
-                            console.error('이미지 처리 실패:', error);
-                            alert('이미지 처리 중 오류가 발생했습니다: ' + error.message);
-                          }
-                        }
-                      }}
-                      className="record-editor-image-upload"
-                    />
-                    {formData.keyFeatures.images && formData.keyFeatures.images.length > 0 && (
-                      <div className="record-editor-image-list">
-                        <h5>업로드된 이미지:</h5>
-                        <p className="record-editor-tip">
-                          💡 이미지를 드래그하여 순서를 변경할 수 있습니다.
-                        </p>
-                        {formData.keyFeatures.images.map((imageObj, index) => (
-                          <div
-                            key={index}
-                            draggable
-                            className={`record-editor-image-item-large ${index === draggedIndex ? 'dragging' : ''} ${index === dragOverIndex ? 'drag-over' : ''}`}
-                            onDragStart={(e) => handleDragStart(e, index)}
-                            onDragOver={(e) => handleDragOver(e, index)}
-                            onDragLeave={handleDragLeave}
-                            onDrop={(e) => handleKeyFeaturesImageDrop(e, index)}
-                            onDragEnd={() => {
-                              setDraggedIndex(null);
-                              setDragOverIndex(null);
-                            }}
-                          >
-                            <div className="record-editor-image-header">
-                              <span className="record-editor-image-number-large">{index + 1}</span>
-                              <img 
-                                src={imageObj.url} 
-                                alt={`주요 기능 이미지 ${index + 1}`} 
-                                className="record-editor-image-thumbnail-large"
-                              />
-                              <button
-                                type="button"
-                                onClick={() => {
-                                  const newImages = formData.keyFeatures.images.filter((_, i) => i !== index);
-                                  setFormData(prev => ({
-                                    ...prev,
-                                    keyFeatures: { ...prev.keyFeatures, images: newImages }
-                                  }));
-                                }}
-                                className="record-editor-delete-btn"
-                              >
-                                삭제
-                              </button>
-                            </div>
-                            <input
-                              type="text"
-                              placeholder="이미지 설명을 입력하세요 (class='iwc-caption iwc-pos-top-left' 형태로 표시됩니다)"
-                              value={imageObj.caption || ''}
-                              onChange={(e) => {
-                                const newImages = [...formData.keyFeatures.images];
-                                newImages[index] = { ...newImages[index], caption: e.target.value };
-                                setFormData(prev => ({
-                                  ...prev,
-                                  keyFeatures: { ...prev.keyFeatures, images: newImages }
-                                }));
-                              }}
-                              className="record-editor-image-caption-input"
-                            />
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-
-                  <div className="record-editor-form-group">
-                    <label className="record-editor-label">
-                      사양 이미지
-                    </label>
-                    <input
-                      type="file"
-                      multiple
-                      accept="image/*"
-                      onChange={async (e) => {
-                        if (e.target.files && e.target.files.length > 0) {
-                          try {
-                            const fileArray = Array.from(e.target.files);
-                            const imageUrls = await Promise.all(fileArray.map(async file => {
-                              validateImageFile(file, 50);
-                              try {
-                                return await uploadImage(file, 'product', 'product');
-                              } catch (uploadError) {
-                                console.warn('Storage 업로드 실패, Base64로 대체:', uploadError);
-                                // Storage 업로드 실패 시 Base64로 대체
-                                return await new Promise((resolve, reject) => {
-                                  const reader = new FileReader();
-                                  reader.onload = (e) => resolve(e.target.result);
-                                  reader.onerror = (e) => reject(new Error('파일 읽기 실패'));
-                                  reader.readAsDataURL(file);
-                                });
-                              }
-                            }));
-
-                            const newImageObjects = imageUrls.map(url => ({ url, caption: '' }));
-                            setFormData(prev => ({
-                              ...prev,
-                              specifications: [...(prev.specifications || []), ...newImageObjects]
-                            }));
-                          } catch (error) {
-                            console.error('이미지 처리 실패:', error);
-                            alert('이미지 처리 중 오류가 발생했습니다: ' + error.message);
-                          }
-                        }
-                      }}
-                      className="record-editor-image-upload"
-                    />
-                    {formData.specifications && formData.specifications.length > 0 && (
-                      <div className="record-editor-image-list">
-                        <h5>업로드된 사양 이미지:</h5>
-                        <p className="record-editor-tip">
-                          💡 이미지를 드래그하여 순서를 변경할 수 있습니다.
-                        </p>
-                        {formData.specifications.map((imageObj, index) => (
-                          <div
-                            key={index}
-                            draggable
-                            className={`record-editor-image-item-large ${index === draggedIndex ? 'dragging' : ''} ${index === dragOverIndex ? 'drag-over' : ''}`}
-                            onDragStart={(e) => handleDragStart(e, index)}
-                            onDragOver={(e) => handleDragOver(e, index)}
-                            onDragLeave={handleDragLeave}
-                            onDrop={(e) => handleSpecificationsImageDrop(e, index)}
-                            onDragEnd={() => {
-                              setDraggedIndex(null);
-                              setDragOverIndex(null);
-                            }}
-                          >
-                            <div className="record-editor-image-header">
-                              <span className="record-editor-image-number-large">{index + 1}</span>
-                              <img 
-                                src={imageObj.url} 
-                                alt={`사양 이미지 ${index + 1}`} 
-                                className="record-editor-image-thumbnail-large"
-                              />
-                              <button
-                                type="button"
-                                onClick={() => {
-                                  const newImages = formData.specifications.filter((_, i) => i !== index);
-                                  setFormData(prev => ({
-                                    ...prev,
-                                    specifications: newImages
-                                  }));
-                                }}
-                                className="record-editor-delete-btn"
-                              >
-                                삭제
-                              </button>
-                            </div>
-                            <input
-                              type="text"
-                              placeholder="이미지 설명을 입력하세요 (class='iwc-caption iwc-pos-top-left' 형태로 표시됩니다)"
-                              value={imageObj.caption || ''}
-                              onChange={(e) => {
-                                const newImages = [...formData.specifications];
-                                newImages[index] = { ...newImages[index], caption: e.target.value };
-                                setFormData(prev => ({
-                                  ...prev,
-                                  specifications: newImages
-                                }));
-                              }}
-                              className="record-editor-image-caption-input"
-                            />
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
+                  {/* 오른쪽 컬럼은 비워둠 - 모든 내용을 왼쪽으로 이동 */}
                 </div>
               </div>
             </div>
