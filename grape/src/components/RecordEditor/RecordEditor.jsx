@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { uploadImage, validateImageFile, checkStorageBucket, uploadDownloadFile, validateDownloadFile } from '../../utils/imageUpload';
+import { uploadImage, validateImageFile, checkStorageBucket, uploadDownloadFile, validateDownloadFile, extractFilePathFromUrl } from '../../utils/imageUpload';
 import { setupStoragePolicies } from '../../utils/supabaseRLS';
+import { supabase } from '../../lib/supabase';
 import './RecordEditor.css';
 
 const RecordEditor = ({ 
@@ -246,11 +247,42 @@ const RecordEditor = ({
     }
   };
 
-  const removeImage = (index) => {
-    setFormData(prev => ({
-      ...prev,
-      images: prev.images.filter((_, i) => i !== index)
-    }));
+  const removeImage = async (index) => {
+    try {
+      const imageUrl = formData.images[index];
+      console.log('삭제할 이미지 URL:', imageUrl);
+      
+      // Storage에서 파일 경로 추출
+      const filePath = extractFilePathFromUrl(imageUrl);
+      if (filePath) {
+        const bucket = mode === 'product' ? 'product' : 'track_record';
+        console.log('Storage에서 삭제할 파일 경로:', filePath, '버킷:', bucket);
+        
+        // Storage에서 파일 삭제
+        const { error } = await supabase.storage
+          .from(bucket)
+          .remove([filePath]);
+        
+        if (error) {
+          console.error('Storage 파일 삭제 실패:', error);
+          alert('Storage에서 파일 삭제에 실패했습니다. UI에서는 제거됩니다.');
+        } else {
+          console.log('Storage 파일 삭제 성공:', filePath);
+        }
+      } else {
+        console.warn('파일 경로를 추출할 수 없습니다:', imageUrl);
+      }
+      
+      // UI에서 이미지 제거
+      setFormData(prev => ({
+        ...prev,
+        images: prev.images.filter((_, i) => i !== index)
+      }));
+      
+    } catch (error) {
+      console.error('이미지 삭제 중 오류:', error);
+      alert('이미지 삭제 중 오류가 발생했습니다.');
+    }
   };
 
   const handleSave = () => {
@@ -565,19 +597,48 @@ const RecordEditor = ({
                                   alt={`주요 기능 이미지 ${index + 1}`} 
                                   className="record-editor-image-thumbnail-large"
                                 />
-                                <button
-                                  type="button"
-                                  onClick={() => {
+                                                              <button
+                                type="button"
+                                onClick={async () => {
+                                  try {
+                                    const imageObj = formData.keyFeatures.images[index];
+                                    console.log('삭제할 주요 기능 이미지:', imageObj);
+                                    
+                                    // Storage에서 파일 경로 추출
+                                    const filePath = extractFilePathFromUrl(imageObj.url);
+                                    if (filePath) {
+                                      console.log('Storage에서 삭제할 주요 기능 파일 경로:', filePath);
+                                      
+                                      // Storage에서 파일 삭제
+                                      const { error } = await supabase.storage
+                                        .from('product')
+                                        .remove([filePath]);
+                                      
+                                      if (error) {
+                                        console.error('주요 기능 Storage 파일 삭제 실패:', error);
+                                        alert('Storage에서 파일 삭제에 실패했습니다. UI에서는 제거됩니다.');
+                                      } else {
+                                        console.log('주요 기능 Storage 파일 삭제 성공:', filePath);
+                                      }
+                                    } else {
+                                      console.warn('주요 기능 파일 경로를 추출할 수 없습니다:', imageObj.url);
+                                    }
+                                    
+                                    // UI에서 이미지 제거
                                     const newImages = formData.keyFeatures.images.filter((_, i) => i !== index);
                                     setFormData(prev => ({
                                       ...prev,
                                       keyFeatures: { ...prev.keyFeatures, images: newImages }
                                     }));
-                                  }}
-                                  className="record-editor-delete-btn"
-                                >
-                                  삭제
-                                </button>
+                                  } catch (error) {
+                                    console.error('주요 기능 이미지 삭제 중 오류:', error);
+                                    alert('이미지 삭제 중 오류가 발생했습니다.');
+                                  }
+                                }}
+                                className="record-editor-delete-btn"
+                              >
+                                삭제
+                              </button>
                               </div>
                               <input
                                 type="text"
@@ -667,12 +728,41 @@ const RecordEditor = ({
                                   />
                                   <button
                                     type="button"
-                                    onClick={() => {
-                                      const newImages = formData.specifications.filter((_, i) => i !== index);
-                                      setFormData(prev => ({
-                                        ...prev,
-                                        specifications: newImages
-                                      }));
+                                    onClick={async () => {
+                                      try {
+                                        const imageObj = formData.specifications[index];
+                                        console.log('삭제할 사양 이미지:', imageObj);
+                                        
+                                        // Storage에서 파일 경로 추출
+                                        const filePath = extractFilePathFromUrl(imageObj.url);
+                                        if (filePath) {
+                                          console.log('Storage에서 삭제할 사양 파일 경로:', filePath);
+                                          
+                                          // Storage에서 파일 삭제
+                                          const { error } = await supabase.storage
+                                            .from('product')
+                                            .remove([filePath]);
+                                          
+                                          if (error) {
+                                            console.error('사양 Storage 파일 삭제 실패:', error);
+                                            alert('Storage에서 파일 삭제에 실패했습니다. UI에서는 제거됩니다.');
+                                          } else {
+                                            console.log('사양 Storage 파일 삭제 성공:', filePath);
+                                          }
+                                        } else {
+                                          console.warn('사양 파일 경로를 추출할 수 없습니다:', imageObj.url);
+                                        }
+                                        
+                                        // UI에서 이미지 제거
+                                        const newImages = formData.specifications.filter((_, i) => i !== index);
+                                        setFormData(prev => ({
+                                          ...prev,
+                                          specifications: newImages
+                                        }));
+                                      } catch (error) {
+                                        console.error('사양 이미지 삭제 중 오류:', error);
+                                        alert('이미지 삭제 중 오류가 발생했습니다.');
+                                      }
                                     }}
                                     className="record-editor-delete-btn"
                                   >
@@ -769,12 +859,41 @@ const RecordEditor = ({
                                   />
                                   <button
                                     type="button"
-                                    onClick={() => {
-                                      const newImages = formData.certifications.filter((_, i) => i !== index);
-                                      setFormData(prev => ({
-                                        ...prev,
-                                        certifications: newImages
-                                      }));
+                                    onClick={async () => {
+                                      try {
+                                        const imageObj = formData.certifications[index];
+                                        console.log('삭제할 인증 이미지:', imageObj);
+                                        
+                                        // Storage에서 파일 경로 추출
+                                        const filePath = extractFilePathFromUrl(imageObj.url);
+                                        if (filePath) {
+                                          console.log('Storage에서 삭제할 인증 파일 경로:', filePath);
+                                          
+                                          // Storage에서 파일 삭제
+                                          const { error } = await supabase.storage
+                                            .from('product')
+                                            .remove([filePath]);
+                                          
+                                          if (error) {
+                                            console.error('인증 Storage 파일 삭제 실패:', error);
+                                            alert('Storage에서 파일 삭제에 실패했습니다. UI에서는 제거됩니다.');
+                                          } else {
+                                            console.log('인증 Storage 파일 삭제 성공:', filePath);
+                                          }
+                                        } else {
+                                          console.warn('인증 파일 경로를 추출할 수 없습니다:', imageObj.url);
+                                        }
+                                        
+                                        // UI에서 이미지 제거
+                                        const newImages = formData.certifications.filter((_, i) => i !== index);
+                                        setFormData(prev => ({
+                                          ...prev,
+                                          certifications: newImages
+                                        }));
+                                      } catch (error) {
+                                        console.error('인증 이미지 삭제 중 오류:', error);
+                                        alert('이미지 삭제 중 오류가 발생했습니다.');
+                                      }
                                     }}
                                     className="record-editor-delete-btn"
                                   >
@@ -824,17 +943,48 @@ const RecordEditor = ({
                             <div className="record-editor-download-header">
                               <span className="record-editor-download-number">다운로드 {index + 1}</span>
                               {formData.downloads.length > 1 && (
-                                <button
-                                  type="button"
-                                  onClick={() => {
-                                    const newDownloads = formData.downloads.filter((_, i) => i !== index);
-                                    setFormData(prev => ({ ...prev, downloads: newDownloads }));
-                                  }}
-                                  className="record-editor-delete-btn"
-                                  style={{ padding: '2px 6px', fontSize: '10px' }}
-                                >
-                                  삭제
-                                </button>
+                                                                  <button
+                                    type="button"
+                                    onClick={async () => {
+                                      try {
+                                        const download = formData.downloads[index];
+                                        console.log('삭제할 다운로드:', download);
+                                        
+                                        // 업로드된 파일이 있는 경우 Storage에서 삭제
+                                        if (download.link && download.file) {
+                                          const filePath = extractFilePathFromUrl(download.link);
+                                          if (filePath) {
+                                            console.log('Storage에서 삭제할 다운로드 파일 경로:', filePath);
+                                            
+                                            // Storage에서 파일 삭제
+                                            const { error } = await supabase.storage
+                                              .from('product')
+                                              .remove([filePath]);
+                                            
+                                            if (error) {
+                                              console.error('다운로드 Storage 파일 삭제 실패:', error);
+                                              alert('Storage에서 파일 삭제에 실패했습니다. UI에서는 제거됩니다.');
+                                            } else {
+                                              console.log('다운로드 Storage 파일 삭제 성공:', filePath);
+                                            }
+                                          } else {
+                                            console.warn('다운로드 파일 경로를 추출할 수 없습니다:', download.link);
+                                          }
+                                        }
+                                        
+                                        // UI에서 다운로드 제거
+                                        const newDownloads = formData.downloads.filter((_, i) => i !== index);
+                                        setFormData(prev => ({ ...prev, downloads: newDownloads }));
+                                      } catch (error) {
+                                        console.error('다운로드 삭제 중 오류:', error);
+                                        alert('다운로드 삭제 중 오류가 발생했습니다.');
+                                      }
+                                    }}
+                                    className="record-editor-delete-btn"
+                                    style={{ padding: '2px 6px', fontSize: '10px' }}
+                                  >
+                                    삭제
+                                  </button>
                               )}
                             </div>
                             <input
@@ -897,14 +1047,45 @@ const RecordEditor = ({
                                   <span>업로드된 파일: {download.file}</span>
                                   <button
                                     type="button"
-                                    onClick={() => {
-                                      const newDownloads = [...formData.downloads];
-                                      newDownloads[index] = { 
-                                        ...newDownloads[index], 
-                                        file: null,
-                                        link: '' 
-                                      };
-                                      setFormData(prev => ({ ...prev, downloads: newDownloads }));
+                                    onClick={async () => {
+                                      try {
+                                        const download = formData.downloads[index];
+                                        console.log('파일 제거할 다운로드:', download);
+                                        
+                                        // 업로드된 파일이 있는 경우 Storage에서 삭제
+                                        if (download.link && download.file) {
+                                          const filePath = extractFilePathFromUrl(download.link);
+                                          if (filePath) {
+                                            console.log('Storage에서 삭제할 다운로드 파일 경로:', filePath);
+                                            
+                                            // Storage에서 파일 삭제
+                                            const { error } = await supabase.storage
+                                              .from('product')
+                                              .remove([filePath]);
+                                            
+                                            if (error) {
+                                              console.error('다운로드 Storage 파일 삭제 실패:', error);
+                                              alert('Storage에서 파일 삭제에 실패했습니다. UI에서는 제거됩니다.');
+                                            } else {
+                                              console.log('다운로드 Storage 파일 삭제 성공:', filePath);
+                                            }
+                                          } else {
+                                            console.warn('다운로드 파일 경로를 추출할 수 없습니다:', download.link);
+                                          }
+                                        }
+                                        
+                                        // UI에서 파일 정보만 제거 (다운로드 항목은 유지)
+                                        const newDownloads = [...formData.downloads];
+                                        newDownloads[index] = { 
+                                          ...newDownloads[index], 
+                                          file: null,
+                                          link: '' 
+                                        };
+                                        setFormData(prev => ({ ...prev, downloads: newDownloads }));
+                                      } catch (error) {
+                                        console.error('파일 제거 중 오류:', error);
+                                        alert('파일 제거 중 오류가 발생했습니다.');
+                                      }
                                     }}
                                     className="record-editor-delete-btn"
                                     style={{ padding: '2px 6px', fontSize: '10px', marginLeft: '10px' }}

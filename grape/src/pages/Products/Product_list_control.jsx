@@ -14,6 +14,7 @@ import controlHeaderImage from '../../assets/header_image/product.jpg';
 import { supabase } from '../../lib/supabase';
 import { useAuth } from '../../contexts/AuthContext';
 import { setupTrackRecordRLS, createTrackRecordPolicies, checkUserAuthStatus, checkAndCreateMissingPolicies } from '../../utils/supabaseRLS';
+import { deleteAllPostFiles } from '../../utils/imageUpload';
 import ProductPage from '../../components/ProductPage/ProductPage';
 import RecordEditor from '../../components/RecordEditor';
 
@@ -250,12 +251,17 @@ export default function ProductListControlPage() {
       return;
     }
 
-    if (!window.confirm('이 제품을 삭제하시겠습니까?')) return;
+    if (!window.confirm('이 제품을 삭제하시겠습니까?\n\n⚠️ 주의: 관련된 모든 이미지와 파일도 함께 삭제됩니다.')) return;
 
     try {
+      // 1. 먼저 관련된 모든 이미지와 파일 삭제
+      await deleteAllPostFiles(record, 'Product');
+      
+      // 2. 데이터베이스에서 레코드 삭제
       const { error } = await supabase.from('Product').delete().eq('id', record.id);
       if (error) throw error;
-      alert('제품이 삭제되었습니다.');
+      
+      alert('제품과 관련된 모든 파일이 삭제되었습니다.');
       fetchProducts();
     } catch (err) {
       console.error('삭제 중 오류 발생:', err);

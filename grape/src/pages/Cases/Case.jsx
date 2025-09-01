@@ -8,6 +8,7 @@ import { supabase } from '../../lib/supabase';
 import { useAuth } from '../../contexts/AuthContext';
 import ProductPage from '../../components/ProductPage/ProductPage';
 import { setupTrackRecordRLS, createTrackRecordPolicies, checkUserAuthStatus, checkAndCreateMissingPolicies } from '../../utils/supabaseRLS';
+import { deleteAllPostFiles } from '../../utils/imageUpload';
 import RecordEditor from '../../components/RecordEditor';
 import TrackRecordGrid from '../../components/TrackRecordGrid';
 import ProductHeader from '../../components/ProductPage/ProductHeader';
@@ -176,11 +177,21 @@ export default function TrackRecordPage({ kindFilter = null }) {
       return;
     }
 
-    if (!window.confirm('이 실적을 삭제하시겠습니까?')) return;
+    if (!window.confirm('이 실적을 삭제하시겠습니까?\n\n⚠️ 주의: 관련된 모든 이미지와 파일도 함께 삭제됩니다.')) return;
 
     try {
+      // 1. 먼저 관련된 모든 이미지와 파일 삭제 (실패해도 계속 진행)
+      try {
+        await deleteAllPostFiles(record, 'Track_record');
+        console.log('파일 삭제 완료');
+      } catch (fileError) {
+        console.error('파일 삭제 중 오류 (데이터베이스 삭제는 계속 진행):', fileError);
+      }
+      
+      // 2. 데이터베이스에서 레코드 삭제
       const { error } = await supabase.from('Track_record').delete().eq('id', record.id);
       if (error) throw error;
+      
       alert('실적이 삭제되었습니다.');
       fetchTrackRecords();
     } catch (err) {

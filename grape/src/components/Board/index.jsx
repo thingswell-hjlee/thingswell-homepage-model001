@@ -5,6 +5,7 @@ import BoardDetail from '../BoardDetail';
 import BoardEditor from '../BoardEditor';
 import { supabase } from '../../lib/supabase';
 import { useAuth } from '../../contexts/AuthContext';
+import { deleteAllPostFiles } from '../../utils/imageUpload';
 import './Board.css';
 
 const Board = ({ tableName, tableNames }) => {
@@ -120,10 +121,13 @@ const Board = ({ tableName, tableNames }) => {
   };
 
   const handleDeletePost = async (post) => {
-    if (window.confirm('정말 삭제하시겠습니까?')) {
+    if (window.confirm('정말 삭제하시겠습니까?\n\n⚠️ 주의: 관련된 모든 이미지와 파일도 함께 삭제됩니다.')) {
       try {
-        // Supabase에서 실제 데이터 삭제
+        // 1. 먼저 관련된 모든 이미지와 파일 삭제
         const targetTable = post?.tableName || resolvedTableName;
+        await deleteAllPostFiles(post, targetTable);
+        
+        // 2. Supabase에서 실제 데이터 삭제
         const { error } = await supabase
           .from(targetTable)
           .delete()
@@ -133,8 +137,8 @@ const Board = ({ tableName, tableNames }) => {
           console.error('삭제 오류:', error);
           alert('삭제 중 오류가 발생했습니다: ' + error.message);
         } else {
-          console.log('게시물이 성공적으로 삭제되었습니다.');
-          alert('게시물이 삭제되었습니다.');
+          console.log('게시물과 관련된 모든 파일이 성공적으로 삭제되었습니다.');
+          alert('게시물과 관련된 모든 파일이 삭제되었습니다.');
           // 목록 새로고침을 위해 페이지를 다시 로드하거나 상태를 업데이트
           window.location.reload();
         }

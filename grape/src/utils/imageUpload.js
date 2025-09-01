@@ -134,14 +134,170 @@ export const extractFilePathFromUrl = (url) => {
   try {
     const urlObj = new URL(url);
     const pathParts = urlObj.pathname.split('/');
-    const bucketIndex = pathParts.findIndex(part => part === 'track_record');
+    
+    // track_record 또는 product 버킷 찾기
+    const bucketIndex = pathParts.findIndex(part => part === 'track_record' || part === 'product');
     if (bucketIndex !== -1 && bucketIndex + 1 < pathParts.length) {
       return pathParts.slice(bucketIndex + 1).join('/');
     }
+    
+    // 다른 형태의 URL 패턴도 시도
+    // 예: /storage/v1/object/public/bucket/filepath 형태
+    const storageIndex = pathParts.findIndex(part => part === 'storage');
+    if (storageIndex !== -1 && storageIndex + 5 < pathParts.length) {
+      // /storage/v1/object/public/bucket/filepath 형태에서 filepath 추출
+      return pathParts.slice(storageIndex + 5).join('/');
+    }
+    
+    console.warn('URL에서 파일 경로를 추출할 수 없습니다:', url);
     return null;
   } catch (error) {
-    console.error('URL 파싱 실패:', error);
+    console.error('URL 파싱 실패:', error, 'URL:', url);
     return null;
+  }
+};
+
+// 게시글 삭제 시 관련된 모든 이미지와 파일 삭제
+export const deleteAllPostFiles = async (postData, tableName = 'Track_record') => {
+  try {
+    const bucket = tableName === 'Product' ? 'product' : 'track_record';
+    const filesToDelete = [];
+    
+    console.log('삭제 시작 - 테이블:', tableName, '버킷:', bucket);
+    console.log('삭제할 게시글 데이터:', postData);
+
+    // 1. 메인 이미지들 삭제
+    if (postData.images) {
+      try {
+        const images = typeof postData.images === 'string' ? JSON.parse(postData.images) : postData.images;
+        console.log('메인 이미지들:', images);
+        images.forEach((imageUrl, index) => {
+          console.log(`메인 이미지 ${index + 1}:`, imageUrl);
+          const filePath = extractFilePathFromUrl(imageUrl);
+          console.log(`추출된 파일 경로 ${index + 1}:`, filePath);
+          if (filePath) {
+            filesToDelete.push(filePath);
+          }
+        });
+      } catch (error) {
+        console.warn('메인 이미지 파싱 실패:', error);
+      }
+    }
+
+    // 2. 제품 전용 이미지들 삭제 (Product 테이블인 경우)
+    if (tableName === 'Product') {
+      console.log('제품 전용 이미지 삭제 시작');
+      
+      // 주요 기능 이미지들
+      if (postData.keyFeatures) {
+        try {
+          const keyFeatures = typeof postData.keyFeatures === 'string' ? JSON.parse(postData.keyFeatures) : postData.keyFeatures;
+          console.log('주요 기능 데이터:', keyFeatures);
+          if (keyFeatures.images) {
+            console.log('주요 기능 이미지들:', keyFeatures.images);
+            keyFeatures.images.forEach((imageObj, index) => {
+              console.log(`주요 기능 이미지 ${index + 1}:`, imageObj);
+              if (imageObj.url) {
+                const filePath = extractFilePathFromUrl(imageObj.url);
+                console.log(`주요 기능 파일 경로 ${index + 1}:`, filePath);
+                if (filePath) {
+                  filesToDelete.push(filePath);
+                }
+              }
+            });
+          }
+        } catch (error) {
+          console.warn('주요 기능 이미지 파싱 실패:', error);
+        }
+      }
+
+      // 사양 이미지들
+      if (postData.specifications) {
+        try {
+          const specifications = typeof postData.specifications === 'string' ? JSON.parse(postData.specifications) : postData.specifications;
+          console.log('사양 이미지들:', specifications);
+          specifications.forEach((imageObj, index) => {
+            console.log(`사양 이미지 ${index + 1}:`, imageObj);
+            if (imageObj.url) {
+              const filePath = extractFilePathFromUrl(imageObj.url);
+              console.log(`사양 파일 경로 ${index + 1}:`, filePath);
+              if (filePath) {
+                filesToDelete.push(filePath);
+              }
+            }
+          });
+        } catch (error) {
+          console.warn('사양 이미지 파싱 실패:', error);
+        }
+      }
+
+      // 인증 이미지들
+      if (postData.certifications) {
+        try {
+          const certifications = typeof postData.certifications === 'string' ? JSON.parse(postData.certifications) : postData.certifications;
+          console.log('인증 이미지들:', certifications);
+          certifications.forEach((imageObj, index) => {
+            console.log(`인증 이미지 ${index + 1}:`, imageObj);
+            if (imageObj.url) {
+              const filePath = extractFilePathFromUrl(imageObj.url);
+              console.log(`인증 파일 경로 ${index + 1}:`, filePath);
+              if (filePath) {
+                filesToDelete.push(filePath);
+              }
+            }
+          });
+        } catch (error) {
+          console.warn('인증 이미지 파싱 실패:', error);
+        }
+      }
+
+      // 다운로드 파일들
+      if (postData.downloads) {
+        try {
+          const downloads = typeof postData.downloads === 'string' ? JSON.parse(postData.downloads) : postData.downloads;
+          console.log('다운로드 파일들:', downloads);
+          downloads.forEach((download, index) => {
+            console.log(`다운로드 ${index + 1}:`, download);
+            if (download.link && download.file) {
+              const filePath = extractFilePathFromUrl(download.link);
+              console.log(`다운로드 파일 경로 ${index + 1}:`, filePath);
+              if (filePath) {
+                filesToDelete.push(filePath);
+              }
+            }
+          });
+        } catch (error) {
+          console.warn('다운로드 파일 파싱 실패:', error);
+        }
+      }
+    }
+
+    // 3. 실제 파일 삭제 실행
+    if (filesToDelete.length > 0) {
+      console.log(`삭제할 파일들 (${filesToDelete.length}개):`, filesToDelete);
+      console.log('사용할 버킷:', bucket);
+      
+      const { data, error } = await supabase.storage
+        .from(bucket)
+        .remove(filesToDelete);
+      
+      if (error) {
+        console.error('파일 삭제 중 오류:', error);
+        console.error('삭제 시도한 파일들:', filesToDelete);
+        console.error('사용한 버킷:', bucket);
+        throw new Error(`파일 삭제 중 오류가 발생했습니다: ${error.message}`);
+      }
+      
+      console.log('삭제 결과:', data);
+      console.log(`${filesToDelete.length}개의 파일이 성공적으로 삭제되었습니다.`);
+    } else {
+      console.log('삭제할 파일이 없습니다.');
+    }
+
+    return true;
+  } catch (error) {
+    console.error('게시글 관련 파일 삭제 실패:', error);
+    throw new Error(`게시글 관련 파일 삭제에 실패했습니다: ${error.message}`);
   }
 };
 
@@ -241,4 +397,73 @@ export const deleteDownloadFile = async (filePath) => {
     console.error('다운로드 파일 삭제 실패:', error);
     throw new Error(`다운로드 파일 삭제에 실패했습니다: ${error.message}`);
   }
+};
+
+// 디버깅용: URL에서 파일 경로 추출 테스트
+export const testExtractFilePath = (url) => {
+  console.log('테스트 URL:', url);
+  const result = extractFilePathFromUrl(url);
+  console.log('추출된 파일 경로:', result);
+  return result;
+};
+
+// 디버깅용: 게시글 데이터 분석
+export const analyzePostData = (postData, tableName) => {
+  console.log('=== 게시글 데이터 분석 ===');
+  console.log('테이블명:', tableName);
+  console.log('전체 데이터:', postData);
+  
+  if (postData.images) {
+    console.log('메인 이미지 필드:', postData.images);
+    try {
+      const images = typeof postData.images === 'string' ? JSON.parse(postData.images) : postData.images;
+      console.log('파싱된 메인 이미지들:', images);
+    } catch (error) {
+      console.error('메인 이미지 파싱 실패:', error);
+    }
+  }
+  
+  if (tableName === 'Product') {
+    if (postData.keyFeatures) {
+      console.log('주요 기능 필드:', postData.keyFeatures);
+      try {
+        const keyFeatures = typeof postData.keyFeatures === 'string' ? JSON.parse(postData.keyFeatures) : postData.keyFeatures;
+        console.log('파싱된 주요 기능:', keyFeatures);
+      } catch (error) {
+        console.error('주요 기능 파싱 실패:', error);
+      }
+    }
+    
+    if (postData.specifications) {
+      console.log('사양 필드:', postData.specifications);
+      try {
+        const specifications = typeof postData.specifications === 'string' ? JSON.parse(postData.specifications) : postData.specifications;
+        console.log('파싱된 사양:', specifications);
+      } catch (error) {
+        console.error('사양 파싱 실패:', error);
+      }
+    }
+    
+    if (postData.certifications) {
+      console.log('인증 필드:', postData.certifications);
+      try {
+        const certifications = typeof postData.certifications === 'string' ? JSON.parse(postData.certifications) : postData.certifications;
+        console.log('파싱된 인증:', certifications);
+      } catch (error) {
+        console.error('인증 파싱 실패:', error);
+      }
+    }
+    
+    if (postData.downloads) {
+      console.log('다운로드 필드:', postData.downloads);
+      try {
+        const downloads = typeof postData.downloads === 'string' ? JSON.parse(postData.downloads) : postData.downloads;
+        console.log('파싱된 다운로드:', downloads);
+      } catch (error) {
+        console.error('다운로드 파싱 실패:', error);
+      }
+    }
+  }
+  
+  console.log('=== 분석 완료 ===');
 };
