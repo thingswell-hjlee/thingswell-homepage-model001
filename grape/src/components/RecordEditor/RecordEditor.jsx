@@ -23,6 +23,110 @@ const RecordEditor = ({
       };
     }
   }, [isModal]);
+
+  // 컴포넌트 언마운트 시 업로드된 파일들 정리
+  useEffect(() => {
+    return () => {
+      // 편집 모드가 아닌 경우에만 업로드된 파일들을 삭제
+      if (!editData && (formData.images?.length > 0 || 
+          (mode === 'product' && (
+            formData.keyFeatures?.images?.length > 0 ||
+            formData.specifications?.length > 0 ||
+            formData.certifications?.length > 0 ||
+            formData.downloads?.some(d => d.file)
+          )))) {
+        
+        const cleanupFiles = async () => {
+          try {
+            console.log('컴포넌트 언마운트 시 업로드된 파일들 정리 시작');
+            
+            const bucket = mode === 'product' ? 'product' : 'track_record';
+            const filesToDelete = [];
+
+            // 1. 메인 이미지들 삭제
+            if (formData.images && formData.images.length > 0) {
+              formData.images.forEach(imageUrl => {
+                const filePath = extractFilePathFromUrl(imageUrl);
+                if (filePath) {
+                  filesToDelete.push(filePath);
+                }
+              });
+            }
+
+            // 2. 제품 전용 이미지들 삭제 (Product 모드인 경우)
+            if (mode === 'product') {
+              // 주요 기능 이미지들
+              if (formData.keyFeatures && formData.keyFeatures.images) {
+                formData.keyFeatures.images.forEach(imageObj => {
+                  if (imageObj.url) {
+                    const filePath = extractFilePathFromUrl(imageObj.url);
+                    if (filePath) {
+                      filesToDelete.push(filePath);
+                    }
+                  }
+                });
+              }
+
+              // 사양 이미지들
+              if (formData.specifications) {
+                formData.specifications.forEach(imageObj => {
+                  if (imageObj.url) {
+                    const filePath = extractFilePathFromUrl(imageObj.url);
+                    if (filePath) {
+                      filesToDelete.push(filePath);
+                    }
+                  }
+                });
+              }
+
+              // 인증 이미지들
+              if (formData.certifications) {
+                formData.certifications.forEach(imageObj => {
+                  if (imageObj.url) {
+                    const filePath = extractFilePathFromUrl(imageObj.url);
+                    if (filePath) {
+                      filesToDelete.push(filePath);
+                    }
+                  }
+                });
+              }
+
+              // 다운로드 파일들
+              if (formData.downloads) {
+                formData.downloads.forEach(download => {
+                  if (download.link && download.file) {
+                    const filePath = extractFilePathFromUrl(download.link);
+                    if (filePath) {
+                      filesToDelete.push(filePath);
+                    }
+                  }
+                });
+              }
+            }
+
+            // 3. 실제 파일 삭제 실행
+            if (filesToDelete.length > 0) {
+              console.log(`언마운트 시 삭제할 파일들 (${filesToDelete.length}개):`, filesToDelete);
+              
+              const { error } = await supabase.storage
+                .from(bucket)
+                .remove(filesToDelete);
+              
+              if (error) {
+                console.error('언마운트 시 파일 삭제 중 오류:', error);
+              } else {
+                console.log(`${filesToDelete.length}개의 파일이 언마운트 시 정리되었습니다.`);
+              }
+            }
+          } catch (error) {
+            console.error('언마운트 시 파일 정리 중 오류:', error);
+          }
+        };
+
+        cleanupFiles();
+      }
+    };
+  }, [editData, mode, formData]);
   const [editingField, setEditingField] = useState(null);
   const [tempValue, setTempValue] = useState('');
   const [draggedIndex, setDraggedIndex] = useState(null);
@@ -289,7 +393,95 @@ const RecordEditor = ({
     onSave(formData);
   };
 
-  const handleCancel = () => {
+  const handleCancel = async () => {
+    try {
+      // 편집 모드가 아닌 경우에만 업로드된 파일들을 삭제
+      if (!editData) {
+        console.log('취소 시 업로드된 파일들 정리 시작');
+        
+        const bucket = mode === 'product' ? 'product' : 'track_record';
+        const filesToDelete = [];
+
+        // 1. 메인 이미지들 삭제
+        if (formData.images && formData.images.length > 0) {
+          formData.images.forEach(imageUrl => {
+            const filePath = extractFilePathFromUrl(imageUrl);
+            if (filePath) {
+              filesToDelete.push(filePath);
+            }
+          });
+        }
+
+        // 2. 제품 전용 이미지들 삭제 (Product 모드인 경우)
+        if (mode === 'product') {
+          // 주요 기능 이미지들
+          if (formData.keyFeatures && formData.keyFeatures.images) {
+            formData.keyFeatures.images.forEach(imageObj => {
+              if (imageObj.url) {
+                const filePath = extractFilePathFromUrl(imageObj.url);
+                if (filePath) {
+                  filesToDelete.push(filePath);
+                }
+              }
+            });
+          }
+
+          // 사양 이미지들
+          if (formData.specifications) {
+            formData.specifications.forEach(imageObj => {
+              if (imageObj.url) {
+                const filePath = extractFilePathFromUrl(imageObj.url);
+                if (filePath) {
+                  filesToDelete.push(filePath);
+                }
+              }
+            });
+          }
+
+          // 인증 이미지들
+          if (formData.certifications) {
+            formData.certifications.forEach(imageObj => {
+              if (imageObj.url) {
+                const filePath = extractFilePathFromUrl(imageObj.url);
+                if (filePath) {
+                  filesToDelete.push(filePath);
+                }
+              }
+            });
+          }
+
+          // 다운로드 파일들
+          if (formData.downloads) {
+            formData.downloads.forEach(download => {
+              if (download.link && download.file) {
+                const filePath = extractFilePathFromUrl(download.link);
+                if (filePath) {
+                  filesToDelete.push(filePath);
+                }
+              }
+            });
+          }
+        }
+
+        // 3. 실제 파일 삭제 실행
+        if (filesToDelete.length > 0) {
+          console.log(`취소 시 삭제할 파일들 (${filesToDelete.length}개):`, filesToDelete);
+          
+          const { error } = await supabase.storage
+            .from(bucket)
+            .remove(filesToDelete);
+          
+          if (error) {
+            console.error('취소 시 파일 삭제 중 오류:', error);
+          } else {
+            console.log(`${filesToDelete.length}개의 파일이 취소 시 정리되었습니다.`);
+          }
+        }
+      }
+    } catch (error) {
+      console.error('취소 시 파일 정리 중 오류:', error);
+    }
+    
     onCancel();
   };
 
@@ -363,7 +555,7 @@ const RecordEditor = ({
           
           <div className="record-editor-form-group">
             <label className="record-editor-label">
-            {mode === 'record' ? '실적명' : '모델명'} *
+            {mode === 'record' ? '사업명' : '모델명'} *
             </label>
             <input
               type="text"
@@ -377,7 +569,7 @@ const RecordEditor = ({
 
           <div className="record-editor-form-group">
             <label className="record-editor-label">
-              {mode === 'record' ? '소제목' : '제품명'} *
+              {mode === 'record' ? '공급내용' : '제품명'} *
             </label>
             <input
               type="text"
@@ -444,6 +636,7 @@ const RecordEditor = ({
                 onClick={handleCancel}
                 disabled={submitting}
                 className="record-editor-cancel-btn"
+                title={!editData ? "취소 (업로드된 파일들은 자동으로 삭제됩니다)" : "취소"}
               >
                 취소
               </button>
@@ -791,7 +984,7 @@ const RecordEditor = ({
 
                       <div className="record-editor-form-group">
                         <label className="record-editor-label">
-                          인증 이미지
+                          인증서 이미지
                         </label>
                         <input
                           type="file"
@@ -832,7 +1025,7 @@ const RecordEditor = ({
 
                         {formData.certifications && formData.certifications.length > 0 && (
                           <div className="record-editor-image-list">
-                            <h5>업로드된 인증 이미지:</h5>
+                            <h5>업로드된 인증서 이미지:</h5>
                             <p className="record-editor-tip">
                               💡 이미지를 드래그하여 순서를 변경할 수 있습니다.
                             </p>
@@ -854,7 +1047,7 @@ const RecordEditor = ({
                                   <span className="record-editor-image-number-large">{index + 1}</span>
                                   <img 
                                     src={imageObj.url} 
-                                    alt={`인증 이미지 ${index + 1}`} 
+                                    alt={`인증서 이미지 ${index + 1}`} 
                                     className="record-editor-image-thumbnail-large"
                                   />
                                   <button
@@ -862,12 +1055,12 @@ const RecordEditor = ({
                                     onClick={async () => {
                                       try {
                                         const imageObj = formData.certifications[index];
-                                        console.log('삭제할 인증 이미지:', imageObj);
+                                        console.log('삭제할 인증서 이미지:', imageObj);
                                         
                                         // Storage에서 파일 경로 추출
                                         const filePath = extractFilePathFromUrl(imageObj.url);
                                         if (filePath) {
-                                          console.log('Storage에서 삭제할 인증 파일 경로:', filePath);
+                                          console.log('Storage에서 삭제할 인증서 파일 경로:', filePath);
                                           
                                           // Storage에서 파일 삭제
                                           const { error } = await supabase.storage
@@ -875,13 +1068,13 @@ const RecordEditor = ({
                                             .remove([filePath]);
                                           
                                           if (error) {
-                                            console.error('인증 Storage 파일 삭제 실패:', error);
+                                            console.error('인증서 Storage 파일 삭제 실패:', error);
                                             alert('Storage에서 파일 삭제에 실패했습니다. UI에서는 제거됩니다.');
                                           } else {
-                                            console.log('인증 Storage 파일 삭제 성공:', filePath);
+                                            console.log('인증서 Storage 파일 삭제 성공:', filePath);
                                           }
                                         } else {
-                                          console.warn('인증 파일 경로를 추출할 수 없습니다:', imageObj.url);
+                                          console.warn('인증서 파일 경로를 추출할 수 없습니다:', imageObj.url);
                                         }
                                         
                                         // UI에서 이미지 제거
@@ -891,7 +1084,7 @@ const RecordEditor = ({
                                           certifications: newImages
                                         }));
                                       } catch (error) {
-                                        console.error('인증 이미지 삭제 중 오류:', error);
+                                        console.error('인증서 이미지 삭제 중 오류:', error);
                                         alert('이미지 삭제 중 오류가 발생했습니다.');
                                       }
                                     }}
@@ -920,224 +1113,224 @@ const RecordEditor = ({
                         )}
                       </div>
 
-                      <div className="record-editor-form-group">
-                        <div className="record-editor-download-header">
-                          <label className="record-editor-label">
-                            다운로드
-                          </label>
-                          <button
-                            type="button"
-                            onClick={() => {
-                              setFormData(prev => ({
-                                ...prev,
-                                downloads: [...prev.downloads, { title: '', description: '', link: '', file: null }]
-                              }));
-                            }}
-                            className="record-editor-add-btn"
-                          >
-                            <span style={{ fontSize: '14px' }}>+</span> 추가
-                          </button>
-                        </div>
-                        {formData.downloads.map((download, index) => (
-                          <div key={index} className="record-editor-download-item">
-                            <div className="record-editor-download-header">
-                              <span className="record-editor-download-number">다운로드 {index + 1}</span>
-                              {formData.downloads.length > 1 && (
-                                                                  <button
-                                    type="button"
-                                    onClick={async () => {
-                                      try {
-                                        const download = formData.downloads[index];
-                                        console.log('삭제할 다운로드:', download);
-                                        
-                                        // 업로드된 파일이 있는 경우 Storage에서 삭제
-                                        if (download.link && download.file) {
-                                          const filePath = extractFilePathFromUrl(download.link);
-                                          if (filePath) {
-                                            console.log('Storage에서 삭제할 다운로드 파일 경로:', filePath);
-                                            
-                                            // Storage에서 파일 삭제
-                                            const { error } = await supabase.storage
-                                              .from('product')
-                                              .remove([filePath]);
-                                            
-                                            if (error) {
-                                              console.error('다운로드 Storage 파일 삭제 실패:', error);
-                                              alert('Storage에서 파일 삭제에 실패했습니다. UI에서는 제거됩니다.');
-                                            } else {
-                                              console.log('다운로드 Storage 파일 삭제 성공:', filePath);
-                                            }
-                                          } else {
-                                            console.warn('다운로드 파일 경로를 추출할 수 없습니다:', download.link);
-                                          }
-                                        }
-                                        
-                                        // UI에서 다운로드 제거
-                                        const newDownloads = formData.downloads.filter((_, i) => i !== index);
-                                        setFormData(prev => ({ ...prev, downloads: newDownloads }));
-                                      } catch (error) {
-                                        console.error('다운로드 삭제 중 오류:', error);
-                                        alert('다운로드 삭제 중 오류가 발생했습니다.');
-                                      }
-                                    }}
-                                    className="record-editor-delete-btn"
-                                    style={{ padding: '2px 6px', fontSize: '10px' }}
-                                  >
-                                    삭제
-                                  </button>
-                              )}
-                            </div>
-                            <input
-                              type="text"
-                              placeholder="제목"
-                              value={download.title || ''}
-                              onChange={(e) => {
-                                const newDownloads = [...formData.downloads];
-                                newDownloads[index] = { ...newDownloads[index], title: e.target.value };
-                                setFormData(prev => ({ ...prev, downloads: newDownloads }));
-                              }}
-                              className="record-editor-download-input"
-                            />
-                            <input
-                              type="text"
-                              placeholder="설명"
-                              value={download.description || ''}
-                              onChange={(e) => {
-                                const newDownloads = [...formData.downloads];
-                                newDownloads[index] = { ...newDownloads[index], description: e.target.value };
-                                setFormData(prev => ({ ...prev, downloads: newDownloads }));
-                              }}
-                              className="record-editor-download-input"
-                            />
-
-                            <div className="record-editor-download-file-section">
-                              <label className="record-editor-label">
-                                파일 업로드 (선택사항)
-                              </label>
-                              <input
-                                type="file"
-                                accept="*/*"
-                                onChange={async (e) => {
-                                  if (e.target.files && e.target.files[0]) {
-                                    try {
-                                      const file = e.target.files[0];
-                                      validateDownloadFile(file, 100);
-                                      
-                                      const fileUrl = await uploadDownloadFile(file, 'downloads', mode === 'product' ? 'product' : 'track_record');
-                                      
-                                      const newDownloads = [...formData.downloads];
-                                      newDownloads[index] = { 
-                                        ...newDownloads[index], 
-                                        file: file.name,
-                                        link: fileUrl 
-                                      };
-                                      setFormData(prev => ({ ...prev, downloads: newDownloads }));
-                                      
-                                      alert(`파일 "${file.name}"이 성공적으로 업로드되었습니다.`);
-                                    } catch (error) {
-                                      console.error('파일 업로드 실패:', error);
-                                      alert('파일 업로드에 실패했습니다: ' + error.message);
-                                    }
-                                  }
-                                }}
-                                className="record-editor-file-upload"
-                              />
-                              {download.file && (
-                                <div className="record-editor-uploaded-file">
-                                  <span>업로드된 파일: {download.file}</span>
-                                  <button
-                                    type="button"
-                                    onClick={async () => {
-                                      try {
-                                        const download = formData.downloads[index];
-                                        console.log('파일 제거할 다운로드:', download);
-                                        
-                                        // 업로드된 파일이 있는 경우 Storage에서 삭제
-                                        if (download.link && download.file) {
-                                          const filePath = extractFilePathFromUrl(download.link);
-                                          if (filePath) {
-                                            console.log('Storage에서 삭제할 다운로드 파일 경로:', filePath);
-                                            
-                                            // Storage에서 파일 삭제
-                                            const { error } = await supabase.storage
-                                              .from('product')
-                                              .remove([filePath]);
-                                            
-                                            if (error) {
-                                              console.error('다운로드 Storage 파일 삭제 실패:', error);
-                                              alert('Storage에서 파일 삭제에 실패했습니다. UI에서는 제거됩니다.');
-                                            } else {
-                                              console.log('다운로드 Storage 파일 삭제 성공:', filePath);
-                                            }
-                                          } else {
-                                            console.warn('다운로드 파일 경로를 추출할 수 없습니다:', download.link);
-                                          }
-                                        }
-                                        
-                                        // UI에서 파일 정보만 제거 (다운로드 항목은 유지)
-                                        const newDownloads = [...formData.downloads];
-                                        newDownloads[index] = { 
-                                          ...newDownloads[index], 
-                                          file: null,
-                                          link: '' 
-                                        };
-                                        setFormData(prev => ({ ...prev, downloads: newDownloads }));
-                                      } catch (error) {
-                                        console.error('파일 제거 중 오류:', error);
-                                        alert('파일 제거 중 오류가 발생했습니다.');
-                                      }
-                                    }}
-                                    className="record-editor-delete-btn"
-                                    style={{ padding: '2px 6px', fontSize: '10px', marginLeft: '10px' }}
-                                  >
-                                    파일 제거
-                                  </button>
-                                </div>
-                              )}
-                            </div>
-
-                            {!download.file && (
-                              <input
-                                type="text"
-                                placeholder="다운로드 링크 (URL) - 파일 업로드 대신 사용"
-                                value={download.link || ''}
-                                onChange={(e) => {
-                                  const newDownloads = [...formData.downloads];
-                                  newDownloads[index] = { ...newDownloads[index], link: e.target.value };
-                                  setFormData(prev => ({ ...prev, downloads: newDownloads }));
-                                }}
-                                className="record-editor-download-input"
-                              />
-                            )}
-                          </div>
-                        ))}
-                      </div>
-
-                      <div className="record-editor-form-group">
-                        <label className="record-editor-label">
-                          동영상 링크
-                        </label>
-                        <div style={{ marginBottom: '10px' }}>
-                          <textarea
-                            placeholder="동영상 링크를 입력하세요 (YouTube, Vimeo 등)"
-                            value={formData.videos.join('\n')}
-                            onChange={(e) => {
-                              const links = e.target.value.split('\n').filter(link => link.trim() !== '');
-                              setFormData(prev => ({ ...prev, videos: links }));
-                            }}
-                            className="record-editor-video-textarea"
-                          />
-                        </div>
-                        <div className="record-editor-video-tip">
-                          여러 링크를 입력하려면 줄바꿈으로 구분하세요.
-                        </div>
-                      </div>
+                      
                     </div>
                   )}
                 </div>
 
                 <div className="record-editor-product-right" style={{ flex: '1' }}>
-                  {/* 오른쪽 컬럼은 비워둠 - 모든 내용을 왼쪽으로 이동 */}
+                  <div className="record-editor-form-group">
+                    <div className="record-editor-download-header">
+                      <label className="record-editor-label">
+                        다운로드
+                      </label>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setFormData(prev => ({
+                            ...prev,
+                            downloads: [...prev.downloads, { title: '', description: '', link: '', file: null }]
+                          }));
+                        }}
+                        className="record-editor-add-btn"
+                      >
+                        <span style={{ fontSize: '14px' }}>+</span> 추가
+                      </button>
+                    </div>
+                    {formData.downloads.map((download, index) => (
+                      <div key={index} className="record-editor-download-item">
+                        <div className="record-editor-download-header">
+                          <span className="record-editor-download-number">다운로드 {index + 1}</span>
+                          {formData.downloads.length > 1 && (
+                            <button
+                              type="button"
+                              onClick={async () => {
+                                try {
+                                  const download = formData.downloads[index];
+                                  console.log('삭제할 다운로드:', download);
+                                  
+                                  // 업로드된 파일이 있는 경우 Storage에서 삭제
+                                  if (download.link && download.file) {
+                                    const filePath = extractFilePathFromUrl(download.link);
+                                    if (filePath) {
+                                      console.log('Storage에서 삭제할 다운로드 파일 경로:', filePath);
+                                      
+                                      // Storage에서 파일 삭제
+                                      const { error } = await supabase.storage
+                                        .from('product')
+                                        .remove([filePath]);
+                                      
+                                      if (error) {
+                                        console.error('다운로드 Storage 파일 삭제 실패:', error);
+                                        alert('Storage에서 파일 삭제에 실패했습니다. UI에서는 제거됩니다.');
+                                      } else {
+                                        console.log('다운로드 Storage 파일 삭제 성공:', filePath);
+                                      }
+                                    } else {
+                                      console.warn('다운로드 파일 경로를 추출할 수 없습니다:', download.link);
+                                    }
+                                  }
+                                  
+                                  // UI에서 다운로드 제거
+                                  const newDownloads = formData.downloads.filter((_, i) => i !== index);
+                                  setFormData(prev => ({ ...prev, downloads: newDownloads }));
+                                } catch (error) {
+                                  console.error('다운로드 삭제 중 오류:', error);
+                                  alert('다운로드 삭제 중 오류가 발생했습니다.');
+                                }
+                              }}
+                              className="record-editor-delete-btn"
+                              style={{ padding: '2px 6px', fontSize: '10px' }}
+                            >
+                              삭제
+                            </button>
+                          )}
+                        </div>
+                        <input
+                          type="text"
+                          placeholder="제목"
+                          value={download.title || ''}
+                          onChange={(e) => {
+                            const newDownloads = [...formData.downloads];
+                            newDownloads[index] = { ...newDownloads[index], title: e.target.value };
+                            setFormData(prev => ({ ...prev, downloads: newDownloads }));
+                          }}
+                          className="record-editor-download-input"
+                        />
+                        <input
+                          type="text"
+                          placeholder="설명"
+                          value={download.description || ''}
+                          onChange={(e) => {
+                            const newDownloads = [...formData.downloads];
+                            newDownloads[index] = { ...newDownloads[index], description: e.target.value };
+                            setFormData(prev => ({ ...prev, downloads: newDownloads }));
+                          }}
+                          className="record-editor-download-input"
+                        />
+
+                        <div className="record-editor-download-file-section">
+                          <label className="record-editor-label">
+                            파일 업로드 (선택사항)
+                          </label>
+                          <input
+                            type="file"
+                            accept="*/*"
+                            onChange={async (e) => {
+                              if (e.target.files && e.target.files[0]) {
+                                try {
+                                  const file = e.target.files[0];
+                                  validateDownloadFile(file, 100);
+                                  
+                                  const fileUrl = await uploadDownloadFile(file, 'downloads', mode === 'product' ? 'product' : 'track_record');
+                                  
+                                  const newDownloads = [...formData.downloads];
+                                  newDownloads[index] = { 
+                                    ...newDownloads[index], 
+                                    file: file.name,
+                                    link: fileUrl 
+                                  };
+                                  setFormData(prev => ({ ...prev, downloads: newDownloads }));
+                                  
+                                  alert(`파일 "${file.name}"이 성공적으로 업로드되었습니다.`);
+                                } catch (error) {
+                                  console.error('파일 업로드 실패:', error);
+                                  alert('파일 업로드에 실패했습니다: ' + error.message);
+                                }
+                              }
+                            }}
+                            className="record-editor-file-upload"
+                          />
+                          {download.file && (
+                            <div className="record-editor-uploaded-file">
+                              <span>업로드된 파일: {download.file}</span>
+                              <button
+                                type="button"
+                                onClick={async () => {
+                                  try {
+                                    const download = formData.downloads[index];
+                                    console.log('파일 제거할 다운로드:', download);
+                                    
+                                    // 업로드된 파일이 있는 경우 Storage에서 삭제
+                                    if (download.link && download.file) {
+                                      const filePath = extractFilePathFromUrl(download.link);
+                                      if (filePath) {
+                                        console.log('Storage에서 삭제할 다운로드 파일 경로:', filePath);
+                                        
+                                        // Storage에서 파일 삭제
+                                        const { error } = await supabase.storage
+                                          .from('product')
+                                          .remove([filePath]);
+                                        
+                                        if (error) {
+                                          console.error('다운로드 Storage 파일 삭제 실패:', error);
+                                          alert('Storage에서 파일 삭제에 실패했습니다. UI에서는 제거됩니다.');
+                                        } else {
+                                          console.log('다운로드 Storage 파일 삭제 성공:', filePath);
+                                        }
+                                      } else {
+                                        console.warn('다운로드 파일 경로를 추출할 수 없습니다:', download.link);
+                                      }
+                                    }
+                                    
+                                    // UI에서 파일 정보만 제거 (다운로드 항목은 유지)
+                                    const newDownloads = [...formData.downloads];
+                                    newDownloads[index] = { 
+                                      ...newDownloads[index], 
+                                      file: null,
+                                      link: '' 
+                                    };
+                                    setFormData(prev => ({ ...prev, downloads: newDownloads }));
+                                  } catch (error) {
+                                    console.error('파일 제거 중 오류:', error);
+                                    alert('파일 제거 중 오류가 발생했습니다.');
+                                  }
+                                }}
+                                className="record-editor-delete-btn"
+                                style={{ padding: '2px 6px', fontSize: '10px', marginLeft: '10px' }}
+                              >
+                                파일 제거
+                              </button>
+                            </div>
+                          )}
+                        </div>
+
+                        {!download.file && (
+                          <input
+                            type="text"
+                            placeholder="다운로드 링크 (URL) - 파일 업로드 대신 사용"
+                            value={download.link || ''}
+                            onChange={(e) => {
+                              const newDownloads = [...formData.downloads];
+                              newDownloads[index] = { ...newDownloads[index], link: e.target.value };
+                              setFormData(prev => ({ ...prev, downloads: newDownloads }));
+                            }}
+                            className="record-editor-download-input"
+                          />
+                        )}
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="record-editor-form-group">
+                    <label className="record-editor-label">
+                      동영상 링크
+                    </label>
+                    <div style={{ marginBottom: '10px' }}>
+                      <textarea
+                        placeholder="동영상 링크를 입력하세요 (YouTube, Vimeo 등)"
+                        value={formData.videos.join('\n')}
+                        onChange={(e) => {
+                          const links = e.target.value.split('\n').filter(link => link.trim() !== '');
+                          setFormData(prev => ({ ...prev, videos: links }));
+                        }}
+                        className="record-editor-video-textarea"
+                      />
+                    </div>
+                    <div className="record-editor-video-tip">
+                      여러 링크를 입력하려면 줄바꿈으로 구분하세요.
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1148,6 +1341,7 @@ const RecordEditor = ({
                 onClick={handleCancel}
                 disabled={submitting}
                 className="record-editor-cancel-btn"
+                title={!editData ? "취소 (업로드된 파일들은 자동으로 삭제됩니다)" : "취소"}
               >
                 취소
               </button>
@@ -1176,6 +1370,7 @@ const RecordEditor = ({
             <button
               onClick={handleCancel}
               className="record-editor-modal-close"
+              title="창 닫기 (업로드된 파일들은 자동으로 삭제됩니다)"
             >
               ×
             </button>
