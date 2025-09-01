@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../../lib/supabase.js';
 import { useAuth } from '../../contexts/AuthContext.jsx';
-import SolutionCard from '../../components/SolutionCard';
+import rndHeader from '../../assets/header_image/rnd.jpg';
+import ProductHeader from '../../components/ProductPage/ProductHeader';
+import { BaseLayout } from '../../components/Layout';
 import './Login.css';
 
 const Login = () => {
@@ -50,13 +52,15 @@ const Login = () => {
   };
 
   return (
+    <BaseLayout
+    header={() => <ProductHeader image={rndHeader} />}
+    breadcrumbs={["Home", "로그인"]}
+    title="로그인"
+    >
     <div className="page-container">
       <div className="page-content">
         <div className="page-layout">
           <div className="main-content">
-            <div className="solutions-section" >
-              <SolutionCard subtitle="Login" title="로그인" showButton={false} link="/solutions" className="custom-solution-left" variant="hero" reverse={false} />
-            </div>
             <div className="login-container">
               <div className="login-form">
                 <form onSubmit={handleSubmit}>
@@ -86,16 +90,14 @@ const Login = () => {
                     <button type="submit" disabled={loading}>
                       {loading ? '로그인 중...' : '로그인'}
                     </button>
-                    <div className="login-link">
-                      <p>계정이 없으신가요? <a href="/signup">회원가입</a></p>
-                    </div>
                 </form>
               </div>
             </div>
           </div>
         </div>
+        </div>
       </div>
-    </div>
+    </BaseLayout>
   );
 };
 
