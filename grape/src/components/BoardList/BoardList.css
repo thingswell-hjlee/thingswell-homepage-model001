@@ -6,7 +6,7 @@
 
 .board-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   gap: 20px;
   width: 100%;
@@ -20,6 +20,9 @@
 .board-header-bleed {
   margin-left: calc(var(--spacing-2xl) * -1);
   margin-right: calc(var(--spacing-2xl) * -1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .board-filter-container {

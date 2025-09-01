@@ -4,6 +4,7 @@
   border-radius: 8px;
   /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
   height: fit-content;
+  margin: 0;
 }
 
 .filter-section {
@@ -90,6 +91,7 @@
   .filter-sidebar {
     width: 100%;
     position: static;
+    margin: 0;
   }
   
   .filter-options {
@@ -101,6 +103,7 @@
 @media (max-width: 480px) {
   .filter-sidebar {
     padding: 16px;
+    margin: 0;
   }
   
   .filter-button {
