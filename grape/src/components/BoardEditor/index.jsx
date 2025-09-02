@@ -8,12 +8,12 @@ import { supabase } from '../../lib/supabase';
 import { uploadImage, validateImageFile } from '../../utils/imageUpload';
 import './BoardEditor.css';
 
-const BoardEditor = ({ 
-  onSave, 
-  initialContent = '', 
-  title = '', 
-  onTitleChange, 
-  tableName, 
+const BoardEditor = ({
+  onSave,
+  initialContent = '',
+  title = '',
+  onTitleChange,
+  tableName,
   onCancel,
   existingId = null, // 편집할 게시물의 ID
   isEditMode = false // 편집 모드 여부
@@ -22,6 +22,41 @@ const BoardEditor = ({
   const [currentTitle, setCurrentTitle] = useState(title);
   const [isSaving, setIsSaving] = useState(false);
   const [saveError, setSaveError] = useState(null);
+
+  // 브라우저 뒤로 가기 및 새로고침 방지
+  useEffect(() => {
+    const handleBeforeUnload = (e) => {
+      // 작성 중인 내용이 있으면 경고
+      const hasContent = currentTitle.trim() || editorState.getCurrentContent().hasText();
+      if (hasContent) {
+        e.preventDefault();
+        e.returnValue = '작성 중인 내용이 있습니다. 정말로 나가시겠습니까?';
+        return e.returnValue;
+      }
+    };
+
+    // 브라우저 뒤로 가기 이벤트 처리
+    const handlePopState = (e) => {
+      const hasContent = currentTitle.trim() || editorState.getCurrentContent().hasText();
+      if (hasContent) {
+        const confirmLeave = window.confirm('작성 중인 내용이 있습니다. 정말로 나가시겠습니까?');
+        if (!confirmLeave) {
+          // 뒤로 가기 취소 - 현재 페이지 유지
+          e.preventDefault();
+          // 현재 상태를 다시 push하여 뒤로 가기를 막음
+          window.history.pushState(null, '', window.location.href);
+        }
+      }
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    window.addEventListener('popstate', handlePopState);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+      window.removeEventListener('popstate', handlePopState);
+    };
+  }, [currentTitle, editorState]);
 
   console.log('BoardEditor props:', {
     initialContent: initialContent ? initialContent.substring(0, 100) + '...' : 'empty',
@@ -170,10 +205,27 @@ const BoardEditor = ({
   };
 
   const handleCancel = () => {
+    // 작성 중인 내용이 있는지 확인
+    const hasContent = currentTitle.trim() || editorState.getCurrentContent().hasText();
+
+    if (hasContent) {
+      const confirmCancel = window.confirm('작성 중인 내용이 있습니다. 정말로 취소하시겠습니까?');
+      if (!confirmCancel) {
+        return; // 취소하지 않음
+      }
+    }
+
     if (onCancel) {
       onCancel();
     } else {
-      console.log('편집 취소');
+      console.log('편집 취소 - 게시판으로 돌아감');
+      // onCancel이 없으면 브라우저의 뒤로 가기 사용
+      if (window.history.length > 1) {
+        window.history.back();
+      } else {
+        // 히스토리가 없으면 기본 경로로 이동
+        window.location.href = '/';
+      }
     }
   };
 
