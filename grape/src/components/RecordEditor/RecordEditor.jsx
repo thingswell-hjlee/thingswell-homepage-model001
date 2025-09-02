@@ -11,7 +11,7 @@ const RecordEditor = ({
   onCancel, 
   isModal = false,
   submitting = false,
-  mode = 'record', // 'record' 또는 'product'
+  mode = 'record', // 'record', 'product', 또는 'case'
   tableName = 'Track_record' // 'Track_record' 또는 'Product'
 }) => {
   // 모달이 열렸을 때 body에 클래스 추가하여 메뉴 숨김
@@ -39,7 +39,7 @@ const RecordEditor = ({
     date: '',
     orderer: '',
     type: '',
-    kind: mode === 'product' ? '스마트안전' : '',
+    kind: mode === 'product' ? '스마트안전' : (mode === 'case' ? '케이스' : ''),
     images: [],
     // 제품 전용 필드들
     keyFeatures: {
@@ -67,8 +67,8 @@ const RecordEditor = ({
     return () => {
       const fd = latestFormDataRef.current;
       // 편집 모드가 아닌 경우에만 업로드된 파일들을 삭제
-      if (!editData && (fd.images?.length > 0 || 
-          (mode === 'product' && (
+      if (!editData && (fd.images?.length > 0 ||
+          ((mode === 'product' || mode === 'case') && (
             fd.keyFeatures?.images?.length > 0 ||
             fd.specifications?.length > 0 ||
             fd.certifications?.length > 0 ||
@@ -77,7 +77,7 @@ const RecordEditor = ({
         (async () => {
           try {
             console.log('컴포넌트 언마운트 시 업로드된 파일들 정리 시작');
-            const bucket = mode === 'product' ? 'product' : 'track_record';
+            const bucket = mode === 'product' ? 'product' : 'track_record'; // case도 track_record 사용
             const filesToDelete = [];
 
             // 1. 메인 이미지들 삭제
@@ -292,7 +292,7 @@ const RecordEditor = ({
 
   useEffect(() => {
     // Storage 버킷 확인 (제품 모드일 때는 'product' 버킷, 그 외에는 'track_record' 버킷)
-    const bucketName = mode === 'product' ? 'product' : 'track_record';
+    const bucketName = mode === 'product' ? 'product' : 'track_record'; // case도 track_record 사용
     checkStorageBucket(bucketName).then(bucketExists => {
       if (!bucketExists) {
         console.warn(`${bucketName} Storage 버킷이 존재하지 않습니다.`);
@@ -330,7 +330,7 @@ const RecordEditor = ({
         date: editData.date || '',
         orderer: editData.orderer || '',
         type: editData.type || '',
-        kind: editData.kind || (mode === 'product' ? '스마트안전' : ''),
+        kind: editData.kind || (mode === 'product' ? '스마트안전' : (mode === 'case' ? '케이스' : '')),
         images: editData.images ? JSON.parse(editData.images) : [],
         // 제품 전용 필드들
         keyFeatures: editData.keyFeatures ? JSON.parse(editData.keyFeatures) : { 
@@ -427,8 +427,8 @@ const RecordEditor = ({
           // 신규 모드에서는 즉시 업로드 (기존 동작 유지)
           console.log('신규 모드: 즉시 업로드 수행');
 
-          const folder = mode === 'product' ? 'product' : 'track_record';
-          const bucket = mode === 'product' ? 'product' : 'track_record';
+          const folder = mode === 'product' ? 'product' : 'track_record'; // case도 track_record 사용
+          const bucket = mode === 'product' ? 'product' : 'track_record'; // case도 track_record 사용
           const uploadResult = await uploadMultipleImages(validFiles, folder, bucket);
 
           if (uploadResult.images && uploadResult.images.length > 0) {
@@ -454,6 +454,8 @@ const RecordEditor = ({
       console.log('=== UI에서 이미지 제거 ===');
       console.log('제거할 이미지 URL:', imageUrl);
       console.log('이미지 인덱스:', index);
+      console.log('현재 모드:', mode);
+      console.log('편집 모드 여부:', !!editData);
 
       // 편집 모드에서는 실제 파일 삭제를 저장 시점으로 미룸
       if (editData) {
@@ -492,7 +494,7 @@ const RecordEditor = ({
         console.log('추출된 파일 경로:', filePath);
 
         if (filePath) {
-          const bucket = mode === 'product' ? 'product' : 'track_record';
+          const bucket = mode === 'product' ? 'product' : 'track_record'; // case도 track_record 사용
           console.log('사용할 버킷:', bucket);
           console.log('최종 삭제 경로:', `${bucket}/${filePath}`);
 
@@ -560,28 +562,48 @@ const RecordEditor = ({
   // 편집 모드에서 사용되지 않는 기존 이미지들을 bucket에서 삭제
   const cleanupUnusedImages = async (oldData, newData) => {
     try {
-      const bucket = mode === 'product' ? 'product' : 'track_record';
+      const bucket = mode === 'product' ? 'product' : 'track_record'; // case도 track_record 사용
       const filesToDelete = [];
 
+      console.log('=== cleanupUnusedImages 시작 ===');
+      console.log('현재 모드:', mode);
+      console.log('버킷:', bucket);
+      console.log('기존 데이터 타입:', typeof oldData);
       console.log('기존 데이터:', oldData);
       console.log('새로운 데이터:', newData);
 
       // 1. 메인 이미지들 비교
       if (oldData.images) {
+        console.log('oldData.images 타입:', typeof oldData.images);
+        console.log('oldData.images 값:', oldData.images);
+
         const oldImages = Array.isArray(oldData.images) ? oldData.images : JSON.parse(oldData.images || '[]');
         const newImages = newData.images || [];
 
+        console.log('파싱된 기존 메인 이미지들:', oldImages);
         console.log('기존 메인 이미지들:', oldImages);
         console.log('새로운 메인 이미지들:', newImages);
+        console.log('기존 이미지 개수:', oldImages.length);
+        console.log('새로운 이미지 개수:', newImages.length);
 
         // 기존 이미지 중 새로운 데이터에 없는 것들을 찾아서 삭제
-        oldImages.forEach(oldImageUrl => {
+        oldImages.forEach((oldImageUrl, index) => {
+          console.log(`기존 이미지 ${index + 1}:`, oldImageUrl);
+          console.log(`  새로운 이미지들에 포함되어 있는가?:`, newImages.includes(oldImageUrl));
+
           if (!newImages.includes(oldImageUrl)) {
+            console.log(`  -> 삭제 대상 이미지 발견:`, oldImageUrl);
             const filePath = extractFilePathFromUrl(oldImageUrl);
+            console.log(`  추출된 파일 경로:`, filePath);
+
             if (filePath) {
-              console.log('삭제할 메인 이미지 파일 경로:', filePath);
+              console.log('  삭제할 메인 이미지 파일 경로:', filePath);
               filesToDelete.push(filePath);
+            } else {
+              console.warn('  파일 경로 추출 실패:', oldImageUrl);
             }
+          } else {
+            console.log(`  -> 유지 대상 이미지:`, oldImageUrl);
           }
         });
       }
@@ -676,6 +698,7 @@ const RecordEditor = ({
         console.log(`=== 편집 저장 시 파일 삭제 시작 ===`);
         console.log(`편집 저장 시 삭제할 파일들 (${filesToDelete.length}개):`, filesToDelete);
         console.log('사용할 버킷:', bucket);
+        console.log('현재 모드:', mode);
 
         // 각 파일 존재 여부 확인 후 삭제
         let confirmedFilesToDelete = [];
@@ -765,8 +788,8 @@ const RecordEditor = ({
         console.log('=== 편집 모드 임시 파일 업로드 시작 ===');
         console.log(`업로드할 임시 파일들 (${tempUploadFiles.length}개):`, tempUploadFiles.map(f => f.name));
 
-        const folder = mode === 'product' ? 'product' : 'track_record';
-        const bucket = mode === 'product' ? 'product' : 'track_record';
+        const folder = mode === 'product' ? 'product' : 'track_record'; // case도 track_record 사용
+        const bucket = mode === 'product' ? 'product' : 'track_record'; // case도 track_record 사용
         const isEditMode = !!editData; // 클로저 문제 해결을 위해 미리 저장
         const originalEditData = editData; // 클로저 문제 해결을 위해 미리 저장
 
@@ -852,11 +875,20 @@ const RecordEditor = ({
       } else {
         // 임시 파일이 없는 경우 즉시 저장
         console.log('임시 파일 없음 - 즉시 저장 수행');
+
+        // 편집 모드에서 저장할 때는 사용되지 않는 기존 이미지들을 bucket에서 삭제
+        if (editData) {
+          console.log('편집 모드 저장 - 기존 이미지들 정리 시작');
+          try {
+            await cleanupUnusedImages(editData, formData);
+          } catch (cleanupError) {
+            console.error('기존 이미지 정리 중 오류:', cleanupError);
+            // 정리 실패해도 저장은 계속 진행
+          }
+        }
+
         onSave(formData);
       }
-
-      // 편집 모드에서 저장할 때는 사용되지 않는 기존 이미지들을 bucket에서 삭제
-      // cleanup 작업은 setFormData 콜백 안에서 수행되므로 여기서는 생략
     } catch (error) {
       console.error('저장 중 오류 발생:', error);
       alert('저장 중 오류가 발생했습니다: ' + error.message);
@@ -886,8 +918,8 @@ const RecordEditor = ({
       // 편집 모드가 아닌 경우에만 업로드된 파일들을 삭제
       if (!editData) {
         console.log('취소 시 업로드된 파일들 정리 시작');
-        
-        const bucket = mode === 'product' ? 'product' : 'track_record';
+
+        const bucket = mode === 'product' ? 'product' : 'track_record'; // case도 track_record 사용
         const filesToDelete = [];
 
         // 1. 메인 이미지들 삭제
@@ -988,6 +1020,16 @@ const RecordEditor = ({
         ],
         breadcrumbs: ["Home", "제품"]
       };
+    } else if (mode === 'case') {
+      return {
+        title: '케이스',
+        kindOptions: [
+          { value: '산업안전자동화', label: '산업안전자동화' },
+          { value: '스마트통합제어', label: '스마트통합제어' },
+          { value: '정보통신', label: '정보통신' }
+        ],
+        breadcrumbs: ["Home", "케이스"]
+      };
     } else {
       return {
         title: '실적',
@@ -1045,7 +1087,7 @@ const RecordEditor = ({
           
           <div className="record-editor-form-group">
             <label className="record-editor-label">
-            {mode === 'record' ? '사업명' : '모델명'} *
+            {(mode === 'record' || mode === 'case') ? '사업명' : '모델명'} *
             </label>
             <input
               type="text"
@@ -1059,7 +1101,7 @@ const RecordEditor = ({
 
           <div className="record-editor-form-group">
             <label className="record-editor-label">
-              {mode === 'record' ? '공급내용' : '제품명'} *
+              {(mode === 'record' || mode === 'case') ? '공급내용' : '제품명'} *
             </label>
             <input
               type="text"
@@ -1073,7 +1115,7 @@ const RecordEditor = ({
 
           <div className="record-editor-form-group">
             <label className="record-editor-label">
-              {mode === 'record' ? '실적 설명' : '제품 설명'} *
+              {(mode === 'record' || mode === 'case') ? '실적 설명' : '제품 설명'} *
             </label>
             <div className="record-editor-tip">
               💡 팁: Enter로 줄바꿈, • 또는 - 로 리스트 작성 가능
@@ -1083,8 +1125,8 @@ const RecordEditor = ({
               value={formData.desc}
               onChange={handleInputChange}
               required
-              placeholder={mode === 'record' ? 
-                "실적 설명을 입력하세요...\n\n예시:\n• 첫 번째 항목\n• 두 번째 항목\n• 세 번째 항목\n\n또는\n\n- 첫 번째 항목\n- 두 번째 항목\n- 세 번째 항목" : 
+              placeholder={(mode === 'record' || mode === 'case') ?
+                "실적 설명을 입력하세요...\n\n예시:\n• 첫 번째 항목\n• 두 번째 항목\n• 세 번째 항목\n\n또는\n\n- 첫 번째 항목\n- 두 번째 항목\n- 세 번째 항목" :
                 "내용을 입력하세요...\n\n예시:\n• 첫 번째 항목\n• 두 번째 항목\n• 세 번째 항목\n\n또는\n\n- 첫 번째 항목\n- 두 번째 항목\n- 세 번째 항목"
               }
               className="record-editor-textarea"
@@ -1107,7 +1149,7 @@ const RecordEditor = ({
 
           <div className="record-editor-form-group">
             <label className="record-editor-label">
-              {mode === 'product' ? '제조사' : '발주처'} *
+              {mode === 'product' ? '제조사' : '발주처'} * {/* case도 발주처 사용 */}
             </label>
             <input
               type="text"
@@ -1119,8 +1161,8 @@ const RecordEditor = ({
             />
           </div>
 
-          {/* 실적 모드일 때 버튼을 panel-header 안에 배치 */}
-          {mode === 'record' && (
+          {/* 실적/케이스 모드일 때 버튼을 panel-header 안에 배치 */}
+          {(mode === 'record' || mode === 'case') && (
             <div className="record-editor-button-group" style={{ marginTop: '20px', display: 'flex', gap: '10px', justifyContent: 'flex-end' }}>
               <button
                 onClick={handleCancel}
@@ -1805,7 +1847,7 @@ const RecordEditor = ({
                                   const file = e.target.files[0];
                                   validateDownloadFile(file, 100);
                                   
-                                  const fileUrl = await uploadDownloadFile(file, 'downloads', mode === 'product' ? 'product' : 'track_record');
+                                  const fileUrl = await uploadDownloadFile(file, 'downloads', mode === 'product' ? 'product' : 'track_record'); // case도 track_record 사용
                                   
                                   const newDownloads = [...formData.downloads];
                                   newDownloads[index] = { 

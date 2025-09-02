@@ -503,7 +503,7 @@ export default function TrackRecordPage({ kindFilter = null }) {
         {showAddModal && (
           <RecordEditor
             isModal={true}
-            mode="record"
+            mode="case"
             tableName="Track_record"
             editData={editingExistingRecord}
             submitting={submitting}
