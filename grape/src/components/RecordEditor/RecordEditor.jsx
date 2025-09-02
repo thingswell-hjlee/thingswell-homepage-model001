@@ -767,6 +767,8 @@ const RecordEditor = ({
 
         const folder = mode === 'product' ? 'product' : 'track_record';
         const bucket = mode === 'product' ? 'product' : 'track_record';
+        const isEditMode = !!editData; // 클로저 문제 해결을 위해 미리 저장
+        const originalEditData = editData; // 클로저 문제 해결을 위해 미리 저장
 
         // 임시 파일들을 실제로 업로드
         const uploadResult = await uploadMultipleImages(tempUploadFiles, folder, bucket);
@@ -774,20 +776,23 @@ const RecordEditor = ({
         if (uploadResult.images && uploadResult.images.length > 0) {
           console.log('임시 파일 업로드 성공:', uploadResult.images);
 
-          // formData의 임시 URL들을 실제 업로드된 URL들로 교체
+          // formData의 임시 URL들을 실제 업로드된 URL들로 교체하고 저장
           setFormData(prev => {
             let uploadIndex = 0;
-            const newImages = prev.images.map(imageUrl => {
+            const newImages = prev.images.map((imageUrl, index) => {
               // 임시 URL인 경우 실제 업로드된 URL로 교체
               if (imageUrl && imageUrl.startsWith('blob:') && uploadIndex < uploadResult.images.length) {
                 const newUrl = uploadResult.images[uploadIndex];
-                console.log(`임시 URL 교체: ${imageUrl} -> ${newUrl}`);
+                console.log(`[이미지 ${index + 1}] 임시 URL 교체:`);
+                console.log(`  기존: ${imageUrl}`);
+                console.log(`  새로: ${newUrl}`);
                 // 메모리 정리
                 URL.revokeObjectURL(imageUrl);
                 uploadIndex++;
                 return newUrl;
               }
               // 기존 Supabase URL은 그대로 유지
+              console.log(`[이미지 ${index + 1}] 기존 URL 유지:`, imageUrl);
               return imageUrl;
             });
 
@@ -799,6 +804,12 @@ const RecordEditor = ({
               newThumbnail = uploadResult.thumbnail;
             }
 
+            const updatedFormData = {
+              ...prev,
+              images: newImages,
+              thumbnail: newThumbnail
+            };
+
             console.log('이미지 교체 결과:', {
               기존이미지수: prev.images.length,
               새이미지들: newImages,
@@ -806,11 +817,29 @@ const RecordEditor = ({
               업로드결과: uploadResult.images.length
             });
 
-            return {
-              ...prev,
-              images: newImages,
-              thumbnail: newThumbnail
-            };
+            // 업데이트된 formData로 저장 수행
+            setTimeout(async () => {
+              console.log('업데이트된 formData로 저장 시작');
+              console.log('최종 저장될 데이터:', {
+                images: updatedFormData.images,
+                thumbnail: updatedFormData.thumbnail
+              });
+
+              // 편집 모드에서 저장할 때는 사용되지 않는 기존 이미지들을 bucket에서 삭제
+              if (isEditMode) {
+                console.log('편집 모드 저장 - 기존 이미지들 정리 시작');
+                try {
+                  await cleanupUnusedImages(originalEditData, updatedFormData);
+                } catch (cleanupError) {
+                  console.error('기존 이미지 정리 중 오류:', cleanupError);
+                  // 정리 실패해도 저장은 계속 진행
+                }
+              }
+
+              onSave(updatedFormData);
+            }, 0);
+
+            return updatedFormData;
           });
 
           // 임시 파일들 초기화
@@ -820,16 +849,14 @@ const RecordEditor = ({
         } else {
           throw new Error('임시 파일 업로드에 실패했습니다.');
         }
+      } else {
+        // 임시 파일이 없는 경우 즉시 저장
+        console.log('임시 파일 없음 - 즉시 저장 수행');
+        onSave(formData);
       }
 
       // 편집 모드에서 저장할 때는 사용되지 않는 기존 이미지들을 bucket에서 삭제
-      if (editData) {
-        console.log('편집 모드 저장 - 기존 이미지들 정리 시작');
-        await cleanupUnusedImages(editData, formData);
-      }
-
-      // 데이터 저장
-      onSave(formData);
+      // cleanup 작업은 setFormData 콜백 안에서 수행되므로 여기서는 생략
     } catch (error) {
       console.error('저장 중 오류 발생:', error);
       alert('저장 중 오류가 발생했습니다: ' + error.message);
