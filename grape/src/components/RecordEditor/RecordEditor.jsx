@@ -859,6 +859,7 @@ const RecordEditor = ({
                 }
               }
 
+              console.log('임시 파일 업로드 완료 후 저장 수행');
               onSave(updatedFormData);
             }, 0);
 
@@ -872,12 +873,14 @@ const RecordEditor = ({
         } else {
           throw new Error('임시 파일 업로드에 실패했습니다.');
         }
-      } else {
-        // 임시 파일이 없는 경우 즉시 저장
-        console.log('임시 파일 없음 - 즉시 저장 수행');
+      }
+
+      // 모든 경우에 대해 setTimeout에서 저장 처리
+      setTimeout(async () => {
+        console.log('=== 최종 저장 처리 시작 ===');
 
         // 편집 모드에서 저장할 때는 사용되지 않는 기존 이미지들을 bucket에서 삭제
-        if (editData) {
+        if (editData && tempUploadFiles.length === 0) {
           console.log('편집 모드 저장 - 기존 이미지들 정리 시작');
           try {
             await cleanupUnusedImages(editData, formData);
@@ -887,8 +890,10 @@ const RecordEditor = ({
           }
         }
 
+        console.log('저장 수행');
         onSave(formData);
-      }
+        console.log('=== 최종 저장 처리 완료 ===');
+      }, 0);
     } catch (error) {
       console.error('저장 중 오류 발생:', error);
       alert('저장 중 오류가 발생했습니다: ' + error.message);
