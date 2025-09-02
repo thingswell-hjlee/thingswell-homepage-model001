@@ -13,7 +13,7 @@ import ProductList from './ProductList';
 import controlHeaderImage from '../../assets/header_image/product.jpg';
 import { supabase } from '../../lib/supabase';
 import { useAuth } from '../../contexts/AuthContext';
-import { setupTrackRecordRLS, createTrackRecordPolicies, checkUserAuthStatus, checkAndCreateMissingPolicies } from '../../utils/supabaseRLS';
+import { checkTableExists, createTablePolicies, checkUserAuthStatus } from '../../utils/supabaseRLS';
 import { deleteAllPostFiles } from '../../utils/imageUpload';
 import ProductPage from '../../components/ProductPage/ProductPage';
 import RecordEditor from '../../components/RecordEditor';
@@ -44,9 +44,7 @@ export default function ProductListControlPage() {
 
   useEffect(() => {
     fetchProducts();
-    setupTrackRecordRLS();
     checkUserAuthStatus();
-    checkAndCreateMissingPolicies();
   }, []);
 
   // URL 파라미터 확인하여 상세 모드 설정
@@ -72,16 +70,32 @@ export default function ProductListControlPage() {
   const fetchProducts = async () => {
     try {
       setLoading(true);
+
+      // 먼저 테이블 존재 여부 확인
+      const tableExists = await checkTableExists('Product');
+      if (!tableExists) {
+        console.log('Product 테이블이 존재하지 않습니다. Supabase 대시보드에서 테이블을 생성해주세요.');
+        setLoading(false);
+        return;
+      }
+
       let query = supabase
         .from('Product')
         .select('*')
         .order('date', { ascending: false });
-      
+
       query = query.eq('kind', '통합제어');
-      
+
       const { data, error } = await query;
 
       if (error) {
+        // RLS 정책 오류인 경우 정책 생성 안내
+        if (error.message.includes('row-level security policy')) {
+          console.log('Product 테이블에 RLS 정책이 필요합니다:');
+          createTablePolicies('Product');
+          setLoading(false);
+          return;
+        }
         throw error;
       }
 

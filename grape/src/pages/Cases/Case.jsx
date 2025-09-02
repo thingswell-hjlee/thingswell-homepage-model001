@@ -7,7 +7,7 @@ import headerImage from '../../assets/header_image/performance.jpg';
 import { supabase } from '../../lib/supabase';
 import { useAuth } from '../../contexts/AuthContext';
 import ProductPage from '../../components/ProductPage/ProductPage';
-import { setupTrackRecordRLS, createTrackRecordPolicies, checkUserAuthStatus, checkAndCreateMissingPolicies } from '../../utils/supabaseRLS';
+import { checkTableExists, createTablePolicies, checkUserAuthStatus } from '../../utils/supabaseRLS';
 import { deleteAllPostFiles } from '../../utils/imageUpload';
 import RecordEditor from '../../components/RecordEditor';
 import TrackRecordGrid from '../../components/TrackRecordGrid';
@@ -83,10 +83,8 @@ export default function TrackRecordPage({ kindFilter = null }) {
 
   useEffect(() => {
     fetchTrackRecords();
-    // RLS 정책 및 인증 상태 확인
-    setupTrackRecordRLS();
+    // 인증 상태 확인
     checkUserAuthStatus();
-    checkAndCreateMissingPolicies();
   }, [user]);
 
   // URL 파라미터 확인하여 상세 모드 설정
@@ -112,19 +110,35 @@ export default function TrackRecordPage({ kindFilter = null }) {
   const fetchTrackRecords = async () => {
     try {
       setLoading(true);
+
+      // 먼저 테이블 존재 여부 확인
+      const tableExists = await checkTableExists('Track_record');
+      if (!tableExists) {
+        console.log('Track_record 테이블이 존재하지 않습니다. Supabase 대시보드에서 테이블을 생성해주세요.');
+        setLoading(false);
+        return;
+      }
+
       let query = supabase
         .from('Track_record')
         .select('*')
         .order('date', { ascending: false });
-      
+
       // kindFilter가 있으면 해당 kind만 필터링
       if (kindFilter) {
         query = query.eq('kind', kindFilter);
       }
-      
+
       const { data, error } = await query;
 
       if (error) {
+        // RLS 정책 오류인 경우 정책 생성 안내
+        if (error.message.includes('row-level security policy')) {
+          console.log('Track_record 테이블에 RLS 정책이 필요합니다:');
+          createTablePolicies('Track_record');
+          setLoading(false);
+          return;
+        }
         throw error;
       }
 

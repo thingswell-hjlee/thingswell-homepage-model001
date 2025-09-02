@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { uploadImage, validateImageFile, checkStorageBucket, uploadDownloadFile, validateDownloadFile, extractFilePathFromUrl } from '../../utils/imageUpload';
+import { uploadImage, uploadMultipleImages, validateImageFile, checkStorageBucket, uploadDownloadFile, validateDownloadFile, extractFilePathFromUrl } from '../../utils/imageUpload';
 import { setupStoragePolicies } from '../../utils/supabaseRLS';
 import { supabase } from '../../lib/supabase';
 import './RecordEditor.css';
@@ -29,6 +29,9 @@ const RecordEditor = ({
   const [tempValue, setTempValue] = useState('');
   const [draggedIndex, setDraggedIndex] = useState(null);
   const [dragOverIndex, setDragOverIndex] = useState(null);
+
+  // 임시 업로드 파일들 (실제 업로드는 저장 시점에 수행)
+  const [tempUploadFiles, setTempUploadFiles] = useState([]);
   const [formData, setFormData] = useState({
     title: '',
     desc: '',
@@ -156,7 +159,7 @@ const RecordEditor = ({
         })();
       }
     };
-  }, [editData, mode]);
+  }, [editData, mode, tempUploadFiles, formData.images]);
 
   // 드래그 앤 드롭 유틸리티 함수들
   const handleDragStart = (e, index) => {
@@ -190,10 +193,23 @@ const RecordEditor = ({
       return newImages;
     };
 
-    setFormData(prev => ({
-      ...prev,
-      images: reorderImages(prev.images)
-    }));
+    setFormData(prev => {
+      const newImages = reorderImages(prev.images);
+
+      console.log('이미지 순서 변경 후 thumbnail 업데이트:', {
+        변경전이미지들: prev.images,
+        변경후이미지들: newImages,
+        기존썸네일: prev.thumbnail,
+        새로운썸네일: newImages.length > 0 ? newImages[0] : null
+      });
+
+      return {
+        ...prev,
+        images: newImages,
+        // 순서 변경 후 첫 번째 이미지를 thumbnail로 설정
+        thumbnail: newImages.length > 0 ? newImages[0] : null
+      };
+    });
 
     setDraggedIndex(null);
     setDragOverIndex(null);
@@ -275,14 +291,36 @@ const RecordEditor = ({
   };
 
   useEffect(() => {
-    // Storage 버킷 확인
-    checkStorageBucket().then(bucketExists => {
+    // Storage 버킷 확인 (제품 모드일 때는 'product' 버킷, 그 외에는 'track_record' 버킷)
+    const bucketName = mode === 'product' ? 'product' : 'track_record';
+    checkStorageBucket(bucketName).then(bucketExists => {
       if (!bucketExists) {
-        console.warn('track_record Storage 버킷이 존재하지 않습니다.');
-        console.log('Storage 설정을 위해 다음 단계를 따라주세요:');
+        console.warn(`${bucketName} Storage 버킷이 존재하지 않습니다.`);
+        console.log(`Storage 설정을 위해 다음 단계를 따라주세요:`);
+        console.log(`1. Supabase 대시보드 -> Storage -> Buckets로 이동`);
+        console.log(`2. "${bucketName}" 버킷 생성`);
+        console.log(`3. 버킷 권한 설정 (Authenticated users에게 read/write 권한 부여)`);
         setupStoragePolicies();
+      } else {
+        console.log(`${bucketName} 버킷이 정상적으로 존재합니다.`);
       }
     });
+
+    // URL 파싱 테스트 (개발용)
+    if (editData && editData.images) {
+      console.log('=== URL 파싱 테스트 시작 ===');
+      try {
+        const images = Array.isArray(editData.images) ? editData.images : JSON.parse(editData.images || '[]');
+        images.forEach((imageUrl, index) => {
+          console.log(`이미지 ${index + 1} URL:`, imageUrl);
+          const filePath = extractFilePathFromUrl(imageUrl);
+          console.log(`추출된 파일 경로:`, filePath);
+        });
+      } catch (error) {
+        console.error('URL 파싱 테스트 실패:', error);
+      }
+      console.log('=== URL 파싱 테스트 종료 ===');
+    }
 
     if (editData) {
       setFormData({
@@ -322,31 +360,87 @@ const RecordEditor = ({
   const handleImageChange = async (files) => {
     if (files && files.length > 0) {
       try {
-        const uploadedImages = [];
-        const bucket = mode === 'product' ? 'product' : 'track_record';
-        
+        // 먼저 파일들 검증
+        const validFiles = [];
         for (let i = 0; i < files.length; i++) {
-          const file = files[i];
-          validateImageFile(file, 50);
-          
           try {
-            const folder = mode === 'product' ? 'product' : 'track_record';
-            const imageUrl = await uploadImage(file, folder, bucket);
-            uploadedImages.push(imageUrl);
-          } catch (uploadError) {
-            console.error('Storage 업로드 실패:', uploadError);
-            alert(`이미지 업로드 실패: ${file.name}. Storage 서버를 확인해주세요.`);
-            continue; // 실패한 이미지는 건너뛰고 다음 이미지 처리
+            validateImageFile(files[i], 50);
+            validFiles.push(files[i]);
+          } catch (validationError) {
+            console.warn('파일 검증 실패:', files[i].name, validationError.message);
+            alert(`파일 검증 실패: ${files[i].name}. ${validationError.message}`);
           }
         }
-        
-        if (uploadedImages.length > 0) {
+
+        if (validFiles.length === 0) {
+          alert('업로드할 수 있는 유효한 파일이 없습니다.');
+          return;
+        }
+
+        console.log('=== UI에 임시 이미지 추가 ===');
+        console.log(`추가할 이미지 파일들 (${validFiles.length}개):`, validFiles.map(f => f.name));
+
+        // 편집 모드에서는 실제 업로드를 저장 시점으로 미룸
+        if (editData) {
+          console.log('편집 모드: 저장 시점에 실제 업로드 수행 예정');
+
+          // UI에 임시 URL들로 표시 (실제로는 업로드되지 않음)
+          const tempUrls = validFiles.map((file, index) => {
+            try {
+              // 브라우저에서 임시로 볼 수 있는 URL 생성
+              const tempUrl = URL.createObjectURL(file);
+              console.log(`임시 URL 생성 성공: ${file.name} -> ${tempUrl.substring(0, 50)}...`);
+
+              // 파일 정보도 함께 로깅
+              console.log(`파일 상세 정보:`, {
+                name: file.name,
+                size: file.size,
+                type: file.type,
+                lastModified: file.lastModified
+              });
+
+              return tempUrl;
+            } catch (error) {
+              console.error(`임시 URL 생성 실패: ${file.name}`, error);
+              // 실패 시 빈 문자열 반환 (나중에 필터링)
+              return '';
+            }
+          });
+
+          // 빈 URL들 필터링
+          const validTempUrls = tempUrls.filter(url => url !== '');
+          console.log(`유효한 임시 URL들 생성: ${validTempUrls.length}/${tempUrls.length}`);
+
+          // 임시 파일들을 상태에 추가 (URL 생성에 성공한 파일만)
+          const validFilesForTemp = validFiles.filter((file, index) => tempUrls[index] !== '');
+          setTempUploadFiles(prev => [...prev, ...validFilesForTemp]);
+          console.log(`임시 파일들 상태에 추가: ${validFilesForTemp.length}/${validFiles.length}`);
+
           setFormData(prev => ({
             ...prev,
-            images: [...prev.images, ...uploadedImages]
+            images: [...prev.images, ...validTempUrls],
+            // 첫 번째 이미지를 thumbnail로 설정 (기존 thumbnail이 없거나 첫 번째 이미지인 경우)
+            thumbnail: prev.thumbnail || (validTempUrls.length > 0 ? validTempUrls[0] : null)
           }));
+
+        } else {
+          // 신규 모드에서는 즉시 업로드 (기존 동작 유지)
+          console.log('신규 모드: 즉시 업로드 수행');
+
+          const folder = mode === 'product' ? 'product' : 'track_record';
+          const bucket = mode === 'product' ? 'product' : 'track_record';
+          const uploadResult = await uploadMultipleImages(validFiles, folder, bucket);
+
+          if (uploadResult.images && uploadResult.images.length > 0) {
+            setFormData(prev => ({
+              ...prev,
+              images: [...prev.images, ...uploadResult.images],
+              // 첫 번째 이미지를 thumbnail로 설정 (기존 thumbnail이 없거나 첫 번째 이미지인 경우)
+              thumbnail: prev.thumbnail || uploadResult.thumbnail
+            }));
+          }
         }
-        
+
       } catch (error) {
         console.error('이미지 처리 실패:', error);
         alert('이미지 처리 중 오류가 발생했습니다: ' + error.message);
@@ -357,47 +451,411 @@ const RecordEditor = ({
   const removeImage = async (index) => {
     try {
       const imageUrl = formData.images[index];
-      console.log('삭제할 이미지 URL:', imageUrl);
-      
-      // Storage에서 파일 경로 추출
-      const filePath = extractFilePathFromUrl(imageUrl);
-      if (filePath) {
-        const bucket = mode === 'product' ? 'product' : 'track_record';
-        console.log('Storage에서 삭제할 파일 경로:', filePath, '버킷:', bucket);
-        
-        // Storage에서 파일 삭제
-        const { error } = await supabase.storage
-          .from(bucket)
-          .remove([filePath]);
-        
-        if (error) {
-          console.error('Storage 파일 삭제 실패:', error);
-          alert('Storage에서 파일 삭제에 실패했습니다. UI에서는 제거됩니다.');
+      console.log('=== UI에서 이미지 제거 ===');
+      console.log('제거할 이미지 URL:', imageUrl);
+      console.log('이미지 인덱스:', index);
+
+      // 편집 모드에서는 실제 파일 삭제를 저장 시점으로 미룸
+      if (editData) {
+        console.log('편집 모드: 저장 시점에 실제 파일 삭제 수행 예정');
+
+        // 임시 URL인 경우 해당 파일을 tempUploadFiles에서 제거
+        if (imageUrl && imageUrl.startsWith('blob:')) {
+          console.log('임시 URL 감지됨, tempUploadFiles에서 제거');
+
+          // 해당 임시 URL에 해당하는 파일을 찾아서 제거
+          setTempUploadFiles(prev => {
+            const newTempFiles = prev.filter((file, fileIndex) => {
+              const tempUrl = URL.createObjectURL(file);
+              const shouldKeep = tempUrl !== imageUrl;
+              if (!shouldKeep) {
+                console.log(`임시 파일 제거: ${file.name}`);
+                // 메모리 정리
+                URL.revokeObjectURL(tempUrl);
+              }
+              return shouldKeep;
+            });
+            console.log(`tempUploadFiles 업데이트: ${prev.length} -> ${newTempFiles.length}`);
+            return newTempFiles;
+          });
         } else {
-          console.log('Storage 파일 삭제 성공:', filePath);
+          // 기존 업로드된 이미지인 경우 나중에 삭제할 목록에 추가
+          console.log('기존 업로드된 이미지: 저장 시점에 삭제 예정');
         }
+
       } else {
-        console.warn('파일 경로를 추출할 수 없습니다:', imageUrl);
+        // 신규 생성 모드에서는 즉시 삭제 (업로드된 임시 파일들)
+        console.log('신규 모드: 즉시 파일 삭제 수행');
+
+        // Storage에서 파일 경로 추출
+        const filePath = extractFilePathFromUrl(imageUrl);
+        console.log('추출된 파일 경로:', filePath);
+
+        if (filePath) {
+          const bucket = mode === 'product' ? 'product' : 'track_record';
+          console.log('사용할 버킷:', bucket);
+          console.log('최종 삭제 경로:', `${bucket}/${filePath}`);
+
+          // Storage에서 파일 삭제
+          const { data, error } = await supabase.storage
+            .from(bucket)
+            .remove([filePath]);
+
+          console.log('Storage 삭제 결과:', { data, error });
+
+          if (error) {
+            console.error('Storage 파일 삭제 실패:', error);
+            console.error('에러 상세:', {
+              message: error.message,
+              statusCode: error.statusCode,
+              details: error.details
+            });
+            // 신규 모드에서도 삭제 실패 시 경고만 하고 계속 진행
+            console.warn('⚠️ 파일 삭제에 실패했지만 UI에서는 제거됩니다.');
+          } else {
+            console.log('Storage 파일 삭제 성공:', filePath);
+            console.log('삭제된 파일들:', data);
+          }
+        } else {
+          console.warn('파일 경로를 추출할 수 없습니다:', imageUrl);
+        }
       }
-      
-      // UI에서 이미지 제거
-      setFormData(prev => ({
-        ...prev,
-        images: prev.images.filter((_, i) => i !== index)
-      }));
-      
+
+      // UI에서 이미지 제거 및 thumbnail 업데이트
+      setFormData(prev => {
+        const newImages = prev.images.filter((_, i) => i !== index);
+
+        // thumbnail 업데이트 로직
+        let newThumbnail = prev.thumbnail;
+
+        // 삭제된 이미지가 thumbnail이었다면
+        if (prev.thumbnail === imageUrl) {
+          // 남은 첫 번째 이미지를 새로운 thumbnail로 설정
+          newThumbnail = newImages.length > 0 ? newImages[0] : null;
+        }
+        // 또는 이미지가 하나도 남지 않았다면 thumbnail을 null로 설정
+        else if (newImages.length === 0) {
+          newThumbnail = null;
+        }
+
+        console.log('이미지 제거 후 thumbnail 업데이트:', {
+          제거된이미지: imageUrl,
+          남은이미지들: newImages,
+          새로운썸네일: newThumbnail
+        });
+
+        return {
+          ...prev,
+          images: newImages,
+          thumbnail: newThumbnail
+        };
+      });
+
     } catch (error) {
-      console.error('이미지 삭제 중 오류:', error);
-      alert('이미지 삭제 중 오류가 발생했습니다.');
+      console.error('이미지 제거 중 오류:', error);
+      alert('이미지 제거 중 오류가 발생했습니다.');
     }
   };
 
-  const handleSave = () => {
-    onSave(formData);
+  // 편집 모드에서 사용되지 않는 기존 이미지들을 bucket에서 삭제
+  const cleanupUnusedImages = async (oldData, newData) => {
+    try {
+      const bucket = mode === 'product' ? 'product' : 'track_record';
+      const filesToDelete = [];
+
+      console.log('기존 데이터:', oldData);
+      console.log('새로운 데이터:', newData);
+
+      // 1. 메인 이미지들 비교
+      if (oldData.images) {
+        const oldImages = Array.isArray(oldData.images) ? oldData.images : JSON.parse(oldData.images || '[]');
+        const newImages = newData.images || [];
+
+        console.log('기존 메인 이미지들:', oldImages);
+        console.log('새로운 메인 이미지들:', newImages);
+
+        // 기존 이미지 중 새로운 데이터에 없는 것들을 찾아서 삭제
+        oldImages.forEach(oldImageUrl => {
+          if (!newImages.includes(oldImageUrl)) {
+            const filePath = extractFilePathFromUrl(oldImageUrl);
+            if (filePath) {
+              console.log('삭제할 메인 이미지 파일 경로:', filePath);
+              filesToDelete.push(filePath);
+            }
+          }
+        });
+      }
+
+      // 2. 제품 전용 이미지들 비교 (Product 모드인 경우)
+      if (mode === 'product') {
+        // 주요 기능 이미지들
+        if (oldData.keyFeatures && oldData.keyFeatures.images) {
+          const oldKeyFeatures = Array.isArray(oldData.keyFeatures.images) ? oldData.keyFeatures.images : JSON.parse(oldData.keyFeatures.images || '[]');
+          const newKeyFeatures = newData.keyFeatures?.images || [];
+
+          console.log('기존 주요 기능 이미지들:', oldKeyFeatures);
+          console.log('새로운 주요 기능 이미지들:', newKeyFeatures);
+
+          oldKeyFeatures.forEach(oldImageObj => {
+            const isStillUsed = newKeyFeatures.some(newImageObj => newImageObj.url === oldImageObj.url);
+            if (!isStillUsed && oldImageObj.url) {
+              const filePath = extractFilePathFromUrl(oldImageObj.url);
+              if (filePath) {
+                console.log('삭제할 주요 기능 이미지 파일 경로:', filePath);
+                filesToDelete.push(filePath);
+              }
+            }
+          });
+        }
+
+        // 사양 이미지들
+        if (oldData.specifications) {
+          const oldSpecifications = Array.isArray(oldData.specifications) ? oldData.specifications : JSON.parse(oldData.specifications || '[]');
+          const newSpecifications = newData.specifications || [];
+
+          console.log('기존 사양 이미지들:', oldSpecifications);
+          console.log('새로운 사양 이미지들:', newSpecifications);
+
+          oldSpecifications.forEach(oldImageObj => {
+            const isStillUsed = newSpecifications.some(newImageObj => newImageObj.url === oldImageObj.url);
+            if (!isStillUsed && oldImageObj.url) {
+              const filePath = extractFilePathFromUrl(oldImageObj.url);
+              if (filePath) {
+                console.log('삭제할 사양 이미지 파일 경로:', filePath);
+                filesToDelete.push(filePath);
+              }
+            }
+          });
+        }
+
+        // 인증 이미지들
+        if (oldData.certifications) {
+          const oldCertifications = Array.isArray(oldData.certifications) ? oldData.certifications : JSON.parse(oldData.certifications || '[]');
+          const newCertifications = newData.certifications || [];
+
+          console.log('기존 인증 이미지들:', oldCertifications);
+          console.log('새로운 인증 이미지들:', newCertifications);
+
+          oldCertifications.forEach(oldImageObj => {
+            const isStillUsed = newCertifications.some(newImageObj => newImageObj.url === oldImageObj.url);
+            if (!isStillUsed && oldImageObj.url) {
+              const filePath = extractFilePathFromUrl(oldImageObj.url);
+              if (filePath) {
+                console.log('삭제할 인증 이미지 파일 경로:', filePath);
+                filesToDelete.push(filePath);
+              }
+            }
+          });
+        }
+
+        // 다운로드 파일들
+        if (oldData.downloads) {
+          const oldDownloads = Array.isArray(oldData.downloads) ? oldData.downloads : JSON.parse(oldData.downloads || '[]');
+          const newDownloads = newData.downloads || [];
+
+          console.log('기존 다운로드 파일들:', oldDownloads);
+          console.log('새로운 다운로드 파일들:', newDownloads);
+
+          oldDownloads.forEach(oldDownload => {
+            const isStillUsed = newDownloads.some(newDownload =>
+              newDownload.link === oldDownload.link && newDownload.file === oldDownload.file
+            );
+            if (!isStillUsed && oldDownload.link) {
+              const filePath = extractFilePathFromUrl(oldDownload.link);
+              if (filePath) {
+                console.log('삭제할 다운로드 파일 경로:', filePath);
+                filesToDelete.push(filePath);
+              }
+            }
+          });
+        }
+      }
+
+      // 3. 실제 파일 삭제 실행
+      if (filesToDelete.length > 0) {
+        console.log(`=== 편집 저장 시 파일 삭제 시작 ===`);
+        console.log(`편집 저장 시 삭제할 파일들 (${filesToDelete.length}개):`, filesToDelete);
+        console.log('사용할 버킷:', bucket);
+
+        // 각 파일 존재 여부 확인 후 삭제
+        let confirmedFilesToDelete = [];
+        for (const filePath of filesToDelete) {
+          console.log(`파일 존재 확인: ${filePath}`);
+
+          try {
+            const folderPath = filePath.substring(0, filePath.lastIndexOf('/'));
+            const fileName = filePath.substring(filePath.lastIndexOf('/') + 1);
+
+            const { data: listData, error: listError } = await supabase.storage
+              .from(bucket)
+              .list(folderPath, { search: fileName });
+
+            if (listError) {
+              console.warn(`파일 존재 확인 실패 (${filePath}):`, listError);
+            } else if (!listData || listData.length === 0) {
+              console.warn(`삭제할 파일이 존재하지 않음: ${filePath}`);
+            } else {
+              console.log(`삭제할 파일이 존재함: ${filePath}`, listData[0]);
+              confirmedFilesToDelete.push(filePath);
+            }
+          } catch (err) {
+            console.warn(`파일 존재 확인 중 오류 (${filePath}):`, err);
+          }
+        }
+
+        if (confirmedFilesToDelete.length > 0) {
+          console.log(`실제 삭제할 파일들 (${confirmedFilesToDelete.length}개):`, confirmedFilesToDelete);
+
+          const { data, error } = await supabase.storage
+            .from(bucket)
+            .remove(confirmedFilesToDelete);
+
+          if (error) {
+            console.error('편집 저장 시 파일 삭제 중 오류:', error);
+            console.error('삭제 시도한 파일들:', confirmedFilesToDelete);
+            console.error('사용한 버킷:', bucket);
+            throw new Error(`파일 삭제 중 오류가 발생했습니다: ${error.message}`);
+          }
+
+          console.log('삭제 결과:', data);
+
+          // 삭제 결과 상세 분석
+          let successCount = 0;
+          let failCount = 0;
+          if (data) {
+            data.forEach((result, index) => {
+              if (result.error) {
+                console.error(`파일 삭제 실패 (${confirmedFilesToDelete[index]}):`, result.error);
+                failCount++;
+              } else {
+                console.log(`✅ 파일 삭제 성공: ${confirmedFilesToDelete[index]}`);
+                successCount++;
+              }
+            });
+          }
+
+          console.log(`삭제 결과 요약: 성공 ${successCount}개, 실패 ${failCount}개`);
+
+          if (successCount > 0) {
+            console.log(`${successCount}개의 사용되지 않는 파일이 성공적으로 삭제되었습니다.`);
+          }
+
+          if (failCount > 0) {
+            console.warn(`${failCount}개의 파일 삭제에 실패했습니다.`);
+          }
+        } else {
+          console.log('삭제할 파일이 존재하지 않습니다.');
+        }
+
+        console.log(`=== 편집 저장 시 파일 삭제 완료 ===`);
+      } else {
+        console.log('삭제할 파일이 없습니다.');
+      }
+
+    } catch (error) {
+      console.error('사용되지 않는 이미지 정리 중 오류:', error);
+      throw new Error(`사용되지 않는 이미지 정리 중 오류가 발생했습니다: ${error.message}`);
+    }
+  };
+
+  const handleSave = async () => {
+    try {
+      // 편집 모드에서 저장할 때는 임시 파일들을 실제로 업로드
+      if (editData && tempUploadFiles.length > 0) {
+        console.log('=== 편집 모드 임시 파일 업로드 시작 ===');
+        console.log(`업로드할 임시 파일들 (${tempUploadFiles.length}개):`, tempUploadFiles.map(f => f.name));
+
+        const folder = mode === 'product' ? 'product' : 'track_record';
+        const bucket = mode === 'product' ? 'product' : 'track_record';
+
+        // 임시 파일들을 실제로 업로드
+        const uploadResult = await uploadMultipleImages(tempUploadFiles, folder, bucket);
+
+        if (uploadResult.images && uploadResult.images.length > 0) {
+          console.log('임시 파일 업로드 성공:', uploadResult.images);
+
+          // formData의 임시 URL들을 실제 업로드된 URL들로 교체
+          setFormData(prev => {
+            let uploadIndex = 0;
+            const newImages = prev.images.map(imageUrl => {
+              // 임시 URL인 경우 실제 업로드된 URL로 교체
+              if (imageUrl && imageUrl.startsWith('blob:') && uploadIndex < uploadResult.images.length) {
+                const newUrl = uploadResult.images[uploadIndex];
+                console.log(`임시 URL 교체: ${imageUrl} -> ${newUrl}`);
+                // 메모리 정리
+                URL.revokeObjectURL(imageUrl);
+                uploadIndex++;
+                return newUrl;
+              }
+              // 기존 Supabase URL은 그대로 유지
+              return imageUrl;
+            });
+
+            // thumbnail도 업데이트 (썸네일이 임시 URL인 경우에만)
+            let newThumbnail = prev.thumbnail;
+            if (prev.thumbnail && prev.thumbnail.startsWith('blob:') && uploadResult.thumbnail) {
+              console.log(`썸네일 교체: ${prev.thumbnail} -> ${uploadResult.thumbnail}`);
+              URL.revokeObjectURL(prev.thumbnail);
+              newThumbnail = uploadResult.thumbnail;
+            }
+
+            console.log('이미지 교체 결과:', {
+              기존이미지수: prev.images.length,
+              새이미지들: newImages,
+              임시파일들: tempUploadFiles.length,
+              업로드결과: uploadResult.images.length
+            });
+
+            return {
+              ...prev,
+              images: newImages,
+              thumbnail: newThumbnail
+            };
+          });
+
+          // 임시 파일들 초기화
+          setTempUploadFiles([]);
+          console.log('임시 파일들 초기화 완료');
+
+        } else {
+          throw new Error('임시 파일 업로드에 실패했습니다.');
+        }
+      }
+
+      // 편집 모드에서 저장할 때는 사용되지 않는 기존 이미지들을 bucket에서 삭제
+      if (editData) {
+        console.log('편집 모드 저장 - 기존 이미지들 정리 시작');
+        await cleanupUnusedImages(editData, formData);
+      }
+
+      // 데이터 저장
+      onSave(formData);
+    } catch (error) {
+      console.error('저장 중 오류 발생:', error);
+      alert('저장 중 오류가 발생했습니다: ' + error.message);
+    }
   };
 
   const handleCancel = async () => {
     try {
+      console.log('=== 취소 처리 시작 ===');
+
+      // 편집 모드에서 취소할 때는 임시 파일들을 정리
+      if (editData && tempUploadFiles.length > 0) {
+        console.log(`임시 파일들 정리 (${tempUploadFiles.length}개):`, tempUploadFiles.map(f => f.name));
+
+        // 임시 URL들을 메모리에서 정리
+        formData.images.forEach(imageUrl => {
+          if (imageUrl && imageUrl.startsWith('blob:')) {
+            URL.revokeObjectURL(imageUrl);
+          }
+        });
+
+        // 임시 파일들 초기화
+        setTempUploadFiles([]);
+        console.log('임시 파일들 정리 완료');
+      }
+
       // 편집 모드가 아닌 경우에만 업로드된 파일들을 삭제
       if (!editData) {
         console.log('취소 시 업로드된 파일들 정리 시작');
@@ -484,7 +942,9 @@ const RecordEditor = ({
     } catch (error) {
       console.error('취소 시 파일 정리 중 오류:', error);
     }
-    
+
+    console.log('=== 취소 처리 완료 ===');
+
     onCancel();
   };
 
@@ -676,7 +1136,14 @@ const RecordEditor = ({
                 <p className="record-editor-tip">
                   💡 이미지를 드래그하여 순서를 변경할 수 있습니다.
                 </p>
-                {formData.images.map((image, index) => (
+                {formData.images.map((image, index) => {
+                  // 이미지 렌더링 시 디버깅
+                  console.log(`렌더링 중 이미지 ${index + 1}:`, {
+                    url: image.substring(0, 50) + (image.length > 50 ? '...' : ''),
+                    isBlob: image.startsWith('blob:'),
+                    length: image.length
+                  });
+                  return (
                   <div
                     key={index}
                     draggable
@@ -692,11 +1159,96 @@ const RecordEditor = ({
                   >
                     <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
                       <span className="record-editor-image-number">{index + 1}</span>
-                      <img 
-                        src={image} 
-                        alt={`이미지 ${index + 1}`} 
+                      <img
+                        src={image}
+                        alt={`이미지 ${index + 1}`}
                         className="record-editor-image-thumbnail"
+                        onLoad={(e) => {
+                          console.log(`✅ 이미지 로드 성공: ${image.substring(0, 50)}...`);
+                          console.log(`이미지 크기: ${e.target.naturalWidth}x${e.target.naturalHeight}`);
+                          console.log(`표시 크기: ${e.target.width}x${e.target.height}`);
+                        }}
+                        onError={(e) => {
+                          console.error(`이미지 로드 실패: ${image.substring(0, 50)}...`);
+                          console.error('에러 상세:', e);
+                          // blob URL인 경우 재생성 시도
+                          if (image && image.startsWith('blob:')) {
+                            console.log('blob URL 재생성 시도');
+                            // 여기서는 간단히 에러 표시만 함
+                            e.target.style.display = 'none';
+                            e.target.nextSibling.style.display = 'block';
+                          }
+                        }}
+                        style={{
+                          width: '100px',
+                          height: '100px',
+                          objectFit: 'cover',
+                          borderRadius: '4px',
+                          border: '1px solid #ddd'
+                        }}
                       />
+                      <div style={{
+                        display: 'none',
+                        width: '100px',
+                        height: '100px',
+                        backgroundColor: '#f0f0f0',
+                        border: '2px dashed #ccc',
+                        borderRadius: '4px',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        fontSize: '12px',
+                        color: '#666',
+                        flexDirection: 'column',
+                        position: 'relative'
+                      }}>
+                        <div>미리보기</div>
+                        <div>실패</div>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            // blob URL 재생성 시도
+                            const fileIndex = tempUploadFiles.findIndex(file => {
+                              try {
+                                const tempUrl = URL.createObjectURL(file);
+                                URL.revokeObjectURL(tempUrl);
+                                return tempUrl === image;
+                              } catch (e) {
+                                return false;
+                              }
+                            });
+
+                            if (fileIndex !== -1) {
+                              console.log(`blob URL 재생성 시도 for file: ${tempUploadFiles[fileIndex].name}`);
+                              const newBlobUrl = URL.createObjectURL(tempUploadFiles[fileIndex]);
+
+                              // formData 업데이트
+                              setFormData(prev => ({
+                                ...prev,
+                                images: prev.images.map((img, idx) =>
+                                  idx === index ? newBlobUrl : img
+                                )
+                              }));
+
+                              // 기존 blob URL 정리
+                              URL.revokeObjectURL(image);
+                            }
+                          }}
+                          style={{
+                            position: 'absolute',
+                            bottom: '2px',
+                            right: '2px',
+                            fontSize: '10px',
+                            padding: '2px 4px',
+                            backgroundColor: '#007bff',
+                            color: 'white',
+                            border: 'none',
+                            borderRadius: '2px',
+                            cursor: 'pointer'
+                          }}
+                        >
+                          재시도
+                        </button>
+                      </div>
                     </div>
                     <button
                       type="button"
@@ -706,7 +1258,8 @@ const RecordEditor = ({
                       삭제
                     </button>
                   </div>
-                ))}
+                  );
+                })}
               </div>
             )}
           </div>
@@ -1394,3 +1947,4 @@ const RecordEditor = ({
 };
 
 export default RecordEditor;
+

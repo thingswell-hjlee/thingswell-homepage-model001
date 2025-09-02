@@ -19,8 +19,42 @@ export const validateImageFile = (file, maxSizeMB = 50) => {
   return true;
 };
 
+// 이미지 파일을 WebP로 변환
+export const convertImageToWebP = async (file, quality = 0.8) => {
+  return new Promise((resolve, reject) => {
+    try {
+      const img = new Image();
+      const url = URL.createObjectURL(file);
+      img.onload = () => {
+        try {
+          const canvas = document.createElement('canvas');
+          canvas.width = img.naturalWidth;
+          canvas.height = img.naturalHeight;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0);
+          canvas.toBlob((blob) => {
+            URL.revokeObjectURL(url);
+            if (!blob) return reject(new Error('WebP 변환 실패'));
+            resolve(blob);
+          }, 'image/webp', quality);
+        } catch (err) {
+          URL.revokeObjectURL(url);
+          reject(err);
+        }
+      };
+      img.onerror = (err) => {
+        URL.revokeObjectURL(url);
+        reject(new Error('이미지 로드 실패'));
+      };
+      img.src = url;
+    } catch (err) {
+      reject(err);
+    }
+  });
+};
+
 // Supabase Storage에 이미지 업로드
-export const uploadImage = async (file, folder = 'track_record', bucket = 'track_record') => {
+export const uploadImage = async (file, folder = 'track_record', bucket = 'track_record', token = null) => {
   try {
     // 파일 검증 (50MB까지 허용)
     validateImageFile(file, 50);
@@ -29,12 +63,32 @@ export const uploadImage = async (file, folder = 'track_record', bucket = 'track
     if (!supabase) {
       throw new Error('Supabase 클라이언트가 초기화되지 않았습니다.');
     }
-    
+
+    // 토큰이 제공된 경우 세션 설정
+    if (token) {
+      await supabase.auth.setSession({
+        access_token: token,
+        refresh_token: token // 임시로 같은 토큰 사용
+      });
+    }
+
     console.log('Supabase URL:', import.meta.env.VITE_SUPABASE_URL);
     console.log('파일 정보:', { name: file.name, size: file.size, type: file.type });
     
+    // WebP 변환 시도 (이미 변환된 파일은 그대로 사용)
+    let uploadFile = file;
+    try {
+      const webpBlob = await convertImageToWebP(file, 0.8);
+      const webpName = file.name.replace(/\.[^/.]+$/, '.webp');
+      uploadFile = new File([webpBlob], webpName, { type: 'image/webp' });
+      console.log('이미지 WebP로 변환됨:', webpName);
+    } catch (err) {
+      console.warn('WebP 변환 실패, 원본 파일로 업로드합니다:', err);
+      uploadFile = file;
+    }
+
     // 고유한 파일명 생성
-    const fileExt = file.name.split('.').pop();
+    const fileExt = uploadFile.name.split('.').pop();
     const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`;
     const filePath = `${folder}/${fileName}`;
     
@@ -44,7 +98,7 @@ export const uploadImage = async (file, folder = 'track_record', bucket = 'track
     // Supabase Storage에 업로드
     const { data, error } = await supabase.storage
       .from(bucket)
-      .upload(filePath, file, {
+      .upload(filePath, uploadFile, {
         cacheControl: '3600',
         upsert: false
       });
@@ -85,15 +139,34 @@ export const uploadImage = async (file, folder = 'track_record', bucket = 'track
   }
 };
 
-// 여러 이미지 업로드
-export const uploadMultipleImages = async (files, folder = 'track_record') => {
-  const uploadPromises = files.map(file => uploadImage(file, folder));
-  return Promise.all(uploadPromises);
+// 여러 이미지 업로드 (thumbnail 기능 포함)
+export const uploadMultipleImages = async (files, folder = 'track_record', bucket = 'track_record', token = null) => {
+  const uploadPromises = files.map(file => uploadImage(file, folder, bucket, token));
+  const uploadedUrls = await Promise.all(uploadPromises);
+
+  // 첫 번째 이미지 URL을 thumbnail로 반환
+  const result = {
+    images: uploadedUrls,
+    thumbnail: uploadedUrls.length > 0 ? uploadedUrls[0] : null
+  };
+
+  console.log('업로드된 이미지들:', uploadedUrls);
+  console.log('썸네일로 설정된 이미지:', result.thumbnail);
+
+  return result;
 };
 
 // 이미지 삭제
-export const deleteImage = async (filePath) => {
+export const deleteImage = async (filePath, token = null) => {
   try {
+    // 토큰이 제공된 경우 세션 설정
+    if (token) {
+      await supabase.auth.setSession({
+        access_token: token,
+        refresh_token: token // 임시로 같은 토큰 사용
+      });
+    }
+
     const { error } = await supabase.storage
       .from('track_record')
       .remove([filePath]);
@@ -110,18 +183,18 @@ export const deleteImage = async (filePath) => {
 };
 
 // Storage 버킷 존재 확인
-export const checkStorageBucket = async () => {
+export const checkStorageBucket = async (bucketName = 'track_record') => {
   try {
     const { data, error } = await supabase.storage.listBuckets();
     if (error) {
       console.error('버킷 목록 조회 실패:', error);
       return false;
     }
-    
-    const bucketExists = data.some(bucket => bucket.name === 'track_record');
-    console.log('track_record 버킷 존재:', bucketExists);
+
+    const bucketExists = data.some(bucket => bucket.name === bucketName);
+    console.log(`${bucketName} 버킷 존재:`, bucketExists);
     console.log('사용 가능한 버킷:', data.map(b => b.name));
-    
+
     return bucketExists;
   } catch (error) {
     console.error('버킷 확인 실패:', error);
@@ -132,24 +205,67 @@ export const checkStorageBucket = async () => {
 // URL에서 파일 경로 추출
 export const extractFilePathFromUrl = (url) => {
   try {
+    console.log('URL 파싱 시작:', url);
     const urlObj = new URL(url);
     const pathParts = urlObj.pathname.split('/');
-    
-    // track_record 또는 product 버킷 찾기
+    console.log('파싱된 경로 파트들:', pathParts);
+
+    // Supabase Storage URL 패턴들:
+    // 1. https://xxx.supabase.co/storage/v1/object/public/bucket/folder/filename
+    // 2. https://xxx.supabase.co/bucket/folder/filename
+    // 3. https://xxx.supabase.co/storage/v1/object/public/bucket/folder/filename
+
+    // 첫 번째 패턴: /storage/v1/object/public/bucket/... 형태
+    if (pathParts.includes('storage') && pathParts.includes('v1') && pathParts.includes('object') && pathParts.includes('public')) {
+      const publicIndex = pathParts.indexOf('public');
+      if (publicIndex !== -1 && publicIndex + 1 < pathParts.length) {
+        const result = pathParts.slice(publicIndex + 1).join('/');
+        console.log('Storage URL에서 추출된 파일 경로 (패턴1):', result);
+
+        // 버킷 이름이 중복되는 경우 제거
+        // 예: product/product/1756797917620-d0pzn9g1h98.webp -> product/1756797917620-d0pzn9g1h98.webp
+        const bucketNames = ['track_record', 'product'];
+        for (const bucketName of bucketNames) {
+          if (result.startsWith(`${bucketName}/${bucketName}/`)) {
+            const correctedResult = result.substring(bucketName.length + 1); // bucketName/ 제거
+            console.log('버킷 중복 제거 후 파일 경로:', correctedResult);
+            return correctedResult;
+          }
+        }
+
+        return result;
+      }
+    }
+
+    // 두 번째 패턴: 버킷이 직접 경로에 있는 경우
+    // 예: /track_record/product/12345.jpg 또는 /product/images/abc.jpg
     const bucketIndex = pathParts.findIndex(part => part === 'track_record' || part === 'product');
     if (bucketIndex !== -1 && bucketIndex + 1 < pathParts.length) {
-      return pathParts.slice(bucketIndex + 1).join('/');
+      const result = pathParts.slice(bucketIndex + 1).join('/');
+      console.log('버킷 기반으로 추출된 파일 경로 (패턴2):', result);
+      return result;
     }
-    
-    // 다른 형태의 URL 패턴도 시도
-    // 예: /storage/v1/object/public/bucket/filepath 형태
-    const storageIndex = pathParts.findIndex(part => part === 'storage');
-    if (storageIndex !== -1 && storageIndex + 5 < pathParts.length) {
-      // /storage/v1/object/public/bucket/filepath 형태에서 filepath 추출
-      return pathParts.slice(storageIndex + 5).join('/');
+
+    // 세 번째 패턴: URL에서 마지막 슬래시 이후의 부분을 파일명으로 간주
+    // 예: https://xxx.supabase.co/storage/v1/object/public/bucket/folder/file.jpg
+    const lastPart = pathParts[pathParts.length - 1];
+    if (lastPart && lastPart.includes('.')) {
+      // 파일명이 있는 경우, 전체 경로에서 bucket 다음 부분을 추출
+      const fullPath = pathParts.join('/');
+      const bucketName = 'product'; // 현재 컨텍스트에서 사용하는 버킷
+
+      // URL에서 bucket 이후의 경로 추출
+      if (fullPath.includes(`/${bucketName}/`)) {
+        const result = fullPath.split(`/${bucketName}/`)[1];
+        console.log('파일명 기반으로 추출된 파일 경로 (패턴3):', result);
+        return result;
+      }
     }
-    
-    console.warn('URL에서 파일 경로를 추출할 수 없습니다:', url);
+
+    console.warn('URL에서 파일 경로를 추출할 수 없습니다. URL 형식:', url);
+    console.warn('지원되는 URL 형식:');
+    console.warn('1. /storage/v1/object/public/bucket/folder/filename');
+    console.warn('2. /bucket/folder/filename');
     return null;
   } catch (error) {
     console.error('URL 파싱 실패:', error, 'URL:', url);
@@ -158,7 +274,7 @@ export const extractFilePathFromUrl = (url) => {
 };
 
 // 게시글 삭제 시 관련된 모든 이미지와 파일 삭제
-export const deleteAllPostFiles = async (postData, tableName = 'Track_record') => {
+export const deleteAllPostFiles = async (postData, tableName = 'Track_record', token = null) => {
   try {
     const bucket = tableName === 'Product' ? 'product' : 'track_record';
     const filesToDelete = [];
@@ -276,7 +392,15 @@ export const deleteAllPostFiles = async (postData, tableName = 'Track_record') =
     if (filesToDelete.length > 0) {
       console.log(`삭제할 파일들 (${filesToDelete.length}개):`, filesToDelete);
       console.log('사용할 버킷:', bucket);
-      
+
+      // 토큰이 제공된 경우 세션 설정
+      if (token) {
+        await supabase.auth.setSession({
+          access_token: token,
+          refresh_token: token // 임시로 같은 토큰 사용
+        });
+      }
+
       const { data, error } = await supabase.storage
         .from(bucket)
         .remove(filesToDelete);
@@ -317,7 +441,7 @@ export const validateDownloadFile = (file, maxSizeMB = 100) => {
 };
 
 // Supabase Storage에 다운로드 파일 업로드
-export const uploadDownloadFile = async (file, folder = 'downloads', bucket = 'track_record') => {
+export const uploadDownloadFile = async (file, folder = 'downloads', bucket = 'track_record', token = null) => {
   try {
     // 파일 검증 (100MB까지 허용)
     validateDownloadFile(file, 100);
@@ -326,7 +450,15 @@ export const uploadDownloadFile = async (file, folder = 'downloads', bucket = 't
     if (!supabase) {
       throw new Error('Supabase 클라이언트가 초기화되지 않았습니다.');
     }
-    
+
+    // 토큰이 제공된 경우 세션 설정
+    if (token) {
+      await supabase.auth.setSession({
+        access_token: token,
+        refresh_token: token // 임시로 같은 토큰 사용
+      });
+    }
+
     console.log('다운로드 파일 정보:', { name: file.name, size: file.size, type: file.type });
     
     // 고유한 파일명 생성
@@ -382,8 +514,16 @@ export const uploadDownloadFile = async (file, folder = 'downloads', bucket = 't
 };
 
 // 다운로드 파일 삭제
-export const deleteDownloadFile = async (filePath) => {
+export const deleteDownloadFile = async (filePath, token = null) => {
   try {
+    // 토큰이 제공된 경우 세션 설정
+    if (token) {
+      await supabase.auth.setSession({
+        access_token: token,
+        refresh_token: token // 임시로 같은 토큰 사용
+      });
+    }
+
     const { error } = await supabase.storage
       .from('track_record')
       .remove([filePath]);
