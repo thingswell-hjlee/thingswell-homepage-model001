@@ -89,6 +89,7 @@ import Sitemap from "./pages/Sitemap/sitemap.jsx";
 import NotFound from "./pages/NotFound/NotFound.jsx";
 import { AuthProvider } from "./contexts/AuthContext.jsx";
 import HTTPSRedirect from "./components/HTTPSRedirect";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   const [isMobile, setIsMobile] = useState(false);
@@ -110,6 +111,7 @@ function App() {
   return (
     <AuthProvider>
       <HTTPSRedirect>
+        <ScrollToTop />
         <div className="app-container">
               <div className="menu-overlay-subpage">
                 <Menu orientation={isMobile ? "vertical" : "horizontal"} theme="primary" />

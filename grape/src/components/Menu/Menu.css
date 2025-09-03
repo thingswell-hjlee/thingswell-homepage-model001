@@ -1,5 +1,11 @@
 /* ===== MENU COMPONENT STYLES ===== */
 
+/* 전역 리셋 - ul 태그 기본 margin 제거 */
+ul {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
 /* 모달이 열렸을 때 메뉴 숨김 */
 body.modal-open .menu-wrapper {
   display: none !important;
@@ -270,9 +276,10 @@ body.modal-open .hamburger-menu-wrapper {
 }
 
 /* 서브메뉴 리스트 */
-.submenu-list {
+.submenu-list,
+.submenu-list ul {
   list-style: none;
-  margin: 0;
+  margin: 0 !important;
   padding: 0;
   display: flex;
   flex-wrap: nowrap;
