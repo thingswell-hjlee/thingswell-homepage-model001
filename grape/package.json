@@ -12,7 +12,8 @@
     "preview": "vite preview",
     "preview:https": "vite preview --https",
     "start": "node server.js",
-    "start:prod": "NODE_ENV=production node server.js"
+    "start:prod": "NODE_ENV=production node server.js",
+    "convert:assets": "node ./scripts/convert-assets-to-webp.js"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.50.5",
