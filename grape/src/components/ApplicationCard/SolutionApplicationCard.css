@@ -40,6 +40,8 @@
   justify-content: center;
   margin-bottom: var(--spacing-lg);
   position: relative;
+  flex-shrink: 0;
+  max-width: 100%;
 }
 
 .solution-application-card-image-container img {
@@ -67,7 +69,8 @@
 /* 태블릿 가로 : 768px-1024px */
 @media (max-width: 1024px) {
   .solution-application-card-image-container {
-    height: 250px;
+    height: min(250px, 40vh);
+    width: 100%;
   }
   
   .solution-application-card-title {
@@ -82,7 +85,8 @@
 /* 모바일 가로 & 태블릿 세로 : 480px-767px */
 @media (max-width: 768px) {
   .solution-application-card-image-container {
-    height: 200px;
+    height: min(200px, 35vh);
+    width: 100%;
   }
   
   .solution-application-card-title {
@@ -97,7 +101,8 @@
 /* 모바일 : -479px */
 @media (max-width: 480px) {
   .solution-application-card-image-container {
-    height: 160px;
+    height: min(160px, 30vh);
+    width: 100%;
   }
   
   .solution-application-card-title {

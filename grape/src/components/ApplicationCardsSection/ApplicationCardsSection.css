@@ -5,9 +5,11 @@
   padding: var(--spacing-md) var(--spacing-2xl);
   width: 100%;
   max-width: 100%;
+  min-width: 0;
   overflow: hidden;
   border-radius: var(--border-radius-lg);
   margin: 0;
+  box-sizing: border-box;
 }
 
 .application-card-section-title {
@@ -127,6 +129,10 @@
   
   .application-section-responsive {
     padding: var(--spacing-md) var(--spacing-2xl);
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
   }
 }
 
@@ -147,6 +153,10 @@
   
   .application-section-responsive {
     padding: var(--spacing-md) var(--spacing-xl);
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
   }
 }
 
@@ -167,8 +177,18 @@
     grid-template-columns: repeat(2, 1fr);
   }
   
+  /* 특정 조합에서 모바일 반응형 처리 */
+  .application-cards.no-line.responsive-cards.grid-3 {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: var(--spacing-md);
+  }
+  
   .application-section-responsive {
     padding: var(--spacing-md) var(--spacing-lg);
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
   }
   
   .cards-container {
@@ -192,11 +212,42 @@
     grid-template-columns: 1fr;
   }
   
+  /* 특정 조합에서 작은 모바일 반응형 처리 */
+  .application-cards.no-line.responsive-cards.grid-3 {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: var(--spacing-sm);
+  }
+  
   .application-section-responsive {
     padding: var(--spacing-md) var(--spacing-xl);
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
   }
   
   .cards-container {
     padding: 0 var(--spacing-md);
+  }
+}
+
+/* 매우 작은 모바일 : 360px 이하 */
+@media (max-width: 360px) {
+  /* 특정 조합에서 매우 작은 모바일 반응형 처리 */
+  .application-cards.no-line.responsive-cards.grid-3 {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: var(--spacing-xs);
+  }
+  
+  .application-section-responsive {
+    padding: var(--spacing-sm) var(--spacing-md);
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+  
+  .cards-container {
+    padding: 0 var(--spacing-sm);
   }
 } 

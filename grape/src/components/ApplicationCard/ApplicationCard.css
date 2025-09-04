@@ -21,6 +21,7 @@
   user-drag: none; /* Standard */
   word-break: keep-all;
   text-align: left;
+  flex-shrink: 0;
 }
 
 /* 이미지 컨테이너 추가 */
@@ -32,6 +33,8 @@
   margin-bottom: var(--spacing-lg);
   background: var(--color-surface-secondary);
   position: relative;
+  flex-shrink: 0;
+  max-width: 100%;
 }
 
 .application-card-image-container.fullwidth {
@@ -60,6 +63,10 @@
   object-fit: cover;
   object-position: center;
   transition: all var(--transition-slow);
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 /* About 페이지의 인증서 섹션에서만 적용되는 스타일 */
@@ -189,35 +196,74 @@
 @media (max-width: 1024px) {
   .application-card {
     padding: 0;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
   }
   
   .application-card-image-container {
-    height: 400px;
+    height: min(400px, 50vh);
+    width: 100%;
+    overflow: hidden;
+  }
+  
+  .application-card img {
+    object-position: center center;
   }
 }
 
 @media (max-width: 768px) {
   .application-card {
     padding: 0;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
   }
   
   .application-card-image-container {
-    height: 400px;
+    height: min(350px, 45vh);
+    width: 100%;
+    overflow: hidden;
+  }
+  
+  .application-card img {
+    object-position: center center;
   }
 }
 
 @media (max-width: 480px) {
   .application-card {
     padding: 0;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
   }
   
   .application-card-image-container {
-    height: 400px;
+    height: min(300px, 40vh);
+    width: 100%;
+    overflow: hidden;
+  }
+  
+  .application-card img {
+    object-position: center center;
   }
 }
 
 @media (max-width: 360px) {
+  .application-card {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
+  
   .application-card-image-container {
-    height: 400px;
+    height: min(200px, 30vh);
+    width: 100%;
+    overflow: hidden;
+  }
+  
+  .application-card img {
+    object-position: center center;
   }
 } 
