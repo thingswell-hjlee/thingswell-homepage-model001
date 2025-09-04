@@ -168,6 +168,14 @@ const Board = ({ tableName, tableNames }) => {
       };
       setPosts([newPost, ...posts]);
     }
+    
+    // URL 파라미터를 제거하여 목록 모드로 돌아가기
+    const currentSearch = new URLSearchParams(location.search);
+    currentSearch.delete('detail');
+    currentSearch.delete('edit');
+    currentSearch.delete('write');
+    navigate(`${location.pathname}?${currentSearch.toString()}`, { replace: false });
+    
     setCurrentView('list');
     setEditingPost(null);
   };
