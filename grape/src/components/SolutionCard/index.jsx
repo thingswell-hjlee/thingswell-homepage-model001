@@ -58,7 +58,6 @@ const SolutionCard = forwardRef((props, ref) => {
       <div className="solution-card-inner">
         <div className="solution-card-text">
           <div className="solution-card-subtitle">{subtitle}</div>
-          <div className="solution-card-title">{title}</div>
           <div className="solution-card-desc">{description}</div>
           {showButton && (
             <div className="solution-card-button">
