@@ -224,7 +224,7 @@ const BoardEditor = ({
         window.history.back();
       } else {
         // 히스토리가 없으면 기본 경로로 이동
-        window.location.href = '/';
+        window.location.href = '/customer-service/announcement';
       }
     }
   };

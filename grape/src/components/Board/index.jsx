@@ -24,14 +24,43 @@ const Board = ({ tableName, tableNames }) => {
     setPosts(samplePosts);
   }, []);
 
-  // 쿼리스트링으로 들어온 id, t(테이블), detail 처리 -> 상세로 바로 진입
+  // 쿼리스트링으로 들어온 id, t(테이블), detail, edit, write 처리
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const idParam = params.get('id');
     const tableParam = params.get('t');
     const detailParam = params.get('detail');
+    const editParam = params.get('edit');
+    const writeParam = params.get('write');
     
-    if (idParam || detailParam) {
+    if (editParam) {
+      // 편집 모드
+      const targetTable = tableParam || resolvedTableName;
+      if (targetTable) {
+        // Supabase에서 해당 게시물 조회
+        (async () => {
+          try {
+            const { data, error } = await supabase
+              .from(targetTable)
+              .select('*')
+              .eq('id', editParam)
+              .single();
+            if (!error && data) {
+              setEditingPost({ ...data, tableName: targetTable });
+              setCurrentView('edit');
+            }
+          } catch (e) {
+            console.error('편집 조회 오류:', e);
+          }
+        })();
+      }
+    } else if (writeParam) {
+      // 작성 모드
+      setCurrentView('write');
+      setSelectedPost(null);
+      setEditingPost(null);
+    } else if (idParam || detailParam) {
+      // 상세 모드
       const targetId = idParam || detailParam;
       const targetTable = tableParam || resolvedTableName;
       if (targetTable) {
@@ -53,7 +82,7 @@ const Board = ({ tableName, tableNames }) => {
         })();
       }
     } else {
-      // detail 파라미터가 없으면 리스트 모드로 설정
+      // 파라미터가 없으면 리스트 모드로 설정
       setCurrentView('list');
       setSelectedPost(null);
       setEditingPost(null);
@@ -79,19 +108,42 @@ const Board = ({ tableName, tableNames }) => {
   const handleWriteClick = () => {
     setEditingPost(null);
     setCurrentView('write');
+    
+    // URL에 write 파라미터 추가
+    const currentSearch = new URLSearchParams(location.search);
+    currentSearch.set('write', 'true');
+    const target = `${location.pathname}?${currentSearch.toString()}`;
+    
+    // 동일한 위치로의 중복 네비게이션 방지
+    if (location.pathname + location.search !== target) {
+      navigate(target, { replace: false });
+    }
   };
 
   const handleEditClick = (post) => {
     console.log('편집할 게시글:', post);
     setEditingPost(post);
     setCurrentView('edit');
+    
+    // URL에 edit 파라미터 추가
+    const currentSearch = new URLSearchParams(location.search);
+    currentSearch.set('edit', post.id);
+    const target = `${location.pathname}?${currentSearch.toString()}`;
+    
+    // 동일한 위치로의 중복 네비게이션 방지
+    if (location.pathname + location.search !== target) {
+      navigate(target, { replace: false });
+    }
+    
     console.log('편집 모드로 전환됨, editingPost:', post);
   };
 
   const handleBackToList = () => {
-    // URL에서 detail 파라미터를 제거하여 리스트 모드로 돌아가기
+    // URL에서 detail, edit, write 파라미터를 제거하여 리스트 모드로 돌아가기
     const currentSearch = new URLSearchParams(location.search);
     currentSearch.delete('detail');
+    currentSearch.delete('edit');
+    currentSearch.delete('write');
     navigate(`${location.pathname}?${currentSearch.toString()}`, { replace: false });
   };
 

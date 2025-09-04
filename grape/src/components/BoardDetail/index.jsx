@@ -1,7 +1,10 @@
 import React from 'react';
 import './BoardDetail.css';
+import { useAuth } from '../../contexts/AuthContext';
 
 const BoardDetail = ({ post, onBack, onEdit, onDelete }) => {
+  const { isAuthenticated } = useAuth();
+  
   if (!post) {
     return (
       <div className="board-detail">
@@ -57,11 +60,13 @@ const BoardDetail = ({ post, onBack, onEdit, onDelete }) => {
           <div className="post-meta">
             <span className="date">작성일: {createdAt}</span>
           </div>
-          <div className="post-actions">
-            <button onClick={() => onEdit(post)} className="btn-edit">
-              수정
-            </button>
-          </div>
+          {isAuthenticated() && (
+            <div className="post-actions">
+              <button onClick={() => onEdit(post)} className="btn-edit">
+                수정
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </div>
