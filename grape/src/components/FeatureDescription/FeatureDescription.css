@@ -38,6 +38,7 @@
   order: 1;
   height: 300px;
   width: 300px;
+  flex-shrink: 0;
 }
 
 
@@ -53,7 +54,7 @@
   width: 100%;
   height: 100%;
   border-radius: var(--border-radius-xl);
-  object-fit: cover;
+  object-fit: contain;
   background-color: transparent;
 }
 
@@ -67,11 +68,12 @@
   width: 800px;
   flex: 0 0 800px;
   order: 1;
+  max-width: 100%;
 }
 
 .feature-description-container.large-image .feature-description-image {
-  width: 800px;
-  height: 560px;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
 }
 
@@ -174,9 +176,18 @@
   .feature-description-container {
     width: 100%;
     padding: var(--spacing-2xl);
-  }
-  .feature-description-container {
     gap: 2rem;
+  }
+  
+  .feature-description-container.large-image .feature-description-image-section {
+    width: min(800px, 100%);
+    height: min(560px, 50vh);
+    flex: 0 0 min(800px, 100%);
+  }
+  
+  .feature-description-image-section {
+    width: min(300px, 100%);
+    height: min(300px, 40vh);
   }
 }
 
@@ -202,9 +213,16 @@
   .feature-description-image-section {
     min-width: 100%;
     max-width: 100%;
+    width: 100%;
     height: 200px;
     flex: 1 1 100%;
     order: 1;
+  }
+  
+  .feature-description-container.large-image .feature-description-image-section {
+    width: 100%;
+    height: 250px;
+    flex: 1 1 100%;
   }
   /* 연구개발 페이지 모바일에서도 절반 사이즈 유지 */
   .rnd-page .feature-description-image-section {
@@ -234,5 +252,13 @@
   }
   .feature-description-desc {
     font-size: 0.9rem;
+  }
+  
+  .feature-description-image-section {
+    height: 180px;
+  }
+  
+  .feature-description-container.large-image .feature-description-image-section {
+    height: 200px;
   }
 }
