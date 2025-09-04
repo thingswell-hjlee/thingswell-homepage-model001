@@ -12,7 +12,7 @@ const CompanyIntro = () => {
   return (
     <div className="page-container about-page">
       <ProductHeader image={company} alt="company" />
-      <BaseLayout breadcrumbs={["Home", "About", "회사소개"]} title="회사소개">
+      <BaseLayout breadcrumbs={["Home", "회사소개"]} title="회사소개">
         <div className="solutions-section">
           <div id="greeting" className="about-section-responsive">
             <div className="about-section-value-container-responsive">

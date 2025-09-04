@@ -9,7 +9,7 @@ const Licenses = () => {
   return (
     <div className="page-container about-page">
       <ProductHeader image={company} alt="licenses" />
-      <BaseLayout breadcrumbs={["Home", "About", "면허인증특허"]} title="면허인증특허">
+      <BaseLayout breadcrumbs={["Home", "면허인증특허"]} title="면허인증특허">
         <div className="page-content-inner">
           <CertificateSection />
         </div>

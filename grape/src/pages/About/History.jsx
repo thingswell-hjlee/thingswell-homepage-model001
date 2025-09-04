@@ -10,7 +10,7 @@ const History = () => {
   return (
     <div className="page-container about-page">
       <ProductHeader image={company} alt="history" />
-      <BaseLayout breadcrumbs={["Home", "About", "연혁"]} title="연혁">
+      <BaseLayout breadcrumbs={["Home", "연혁"]} title="연혁">
         <div id="history" className="about-section">
           <div className="about-section-title-image-container">
             <div className="about-section-title">

@@ -12,7 +12,7 @@ const Announcement = () => {
         alt="company"
       />
       <BaseLayout
-        breadcrumbs={["Home", "고객지원", "공지사항"]}
+        breadcrumbs={["Home", "공지사항"]}
         title="공지사항"
       >
         <Board tableNames={["Board_Announcement", "Board_Download"]} />

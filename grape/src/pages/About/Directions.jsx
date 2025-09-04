@@ -9,7 +9,7 @@ const Directions = () => {
   return (
     <div className="page-container about-page">
       <ProductHeader image={company} alt="directions" />
-      <BaseLayout breadcrumbs={["Home", "About", "오시는 길"]} title="오시는 길">
+      <BaseLayout breadcrumbs={["Home", "오시는 길"]} title="오시는 길">
         <div className="about-section">
           <div className="about-section-title-image-container">
             <div className="about-section-title">
