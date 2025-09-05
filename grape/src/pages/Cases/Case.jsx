@@ -660,7 +660,7 @@ const TrackRecordList = ({ products, onEditRecord, canEdit, onAddRecord, canDele
                           <span>{product.organization || '기관명'}</span>
                         </div>
                         <div className="product-list-date">
-                          <span>{product.date || '날짜'}</span>
+                          <span>{product.date ? product.date.toString().slice(0, 4) : '날짜'}</span>
                         </div>
                       </div>
                     </>
