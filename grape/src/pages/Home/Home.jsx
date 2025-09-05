@@ -3,10 +3,10 @@ import { Link, useNavigate } from "react-router-dom";
 import CardRotator from "../../components/CardRotator";
 import Footer from "../../components/Footer";
 import { supabase } from "../../lib/supabase";
-import aiImage from "../../assets/main/AI.jpg";
-import humanImage from "../../assets/main/human.jpg";
-import ondeviceImage from "../../assets/main/ondevice.jpeg";
-import familyImage from "../../assets/main/family.jpg";
+import aiImage from "../../assets/main/AI.webp";
+import humanImage from "../../assets/main/human.webp";
+import ondeviceImage from "../../assets/main/ondevice.webp";
+import familyImage from "../../assets/main/family.webp";
 import noticeBg from "../../assets/1.png";
 
 export default function Home() {
