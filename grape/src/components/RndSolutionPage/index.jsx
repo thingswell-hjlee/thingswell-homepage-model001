@@ -1,8 +1,7 @@
 import React from 'react';
+import SolutionDetailPage from '../../pages/rnd/SolutionDetailPage';
 import ProductHeader from '../ProductPage/ProductHeader';
 import ProductInfo from '../ProductPage/ProductInfo';
-import ApplicationCardsSection from '../ApplicationCardsSection';
-import FeatureDescription from '../FeatureDescription';
 import rnd from '../../assets/header_image/rnd.jpg';
 
 const RndSolutionPage = ({ 
@@ -21,35 +20,10 @@ const RndSolutionPage = ({
             description={solutionData.description}
             breadcrumbs={breadcrumbs}
           />
-          {blocks && blocks.map((block, index) => {
-            switch (block.type) {
-              case 'applicationCards':
-                return (
-                  <ApplicationCardsSection
-                    key={index}
-                    boxName={block.props.boxName}
-                    applicationCardsData={block.data}
-                    columnsPerRow={block.props.columnsPerRow}
-                  />
-                );
-              case 'features':
-                return (
-                  <div key={index}>
-                    {block.data.map((feature, featureIndex) => (
-                      <FeatureDescription
-                        key={featureIndex}
-                        image={feature.image}
-                        title={feature.title}
-                        description={feature.description}
-                        largeImage={feature.largeImage}
-                      />
-                    ))}
-                  </div>
-                );
-              default:
-                return null;
-            }
-          })}
+          <SolutionDetailPage
+            solutionVariant="default"
+            blocks={blocks}
+          />
         </div>
       </div>
     </>
