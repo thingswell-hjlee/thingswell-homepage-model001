@@ -46,6 +46,8 @@ const CompanyIntro = () => {
                       <p>경북대학교 전자공학 석사</p>
                       <p>전 LG전자 중앙연구소 주임연구원</p>
                       <p>KAIST 테크노경영대학원 KVM 과정 수료</p>
+                      <p>(사)행복한동행 이사</p>
+                      <p>(사)한국이엠에스협회 이사</p>
                     </div>
                     <div className="ceo-info-section-content-responsive">
                       <p>GOOD Design 조달청장상 수상</p>
