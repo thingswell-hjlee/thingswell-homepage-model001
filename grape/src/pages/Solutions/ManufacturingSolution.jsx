@@ -1,7 +1,8 @@
 import React from 'react';
-import SolutionDetailPage from './SolutionDetailPage';
 import BaseLayout from '../../components/Layout/BaseLayout';
 import ProductHeader from '../../components/ProductPage/ProductHeader';
+import ApplicationCardsSection from '../../components/ApplicationCardsSection';
+import FeatureDescription from '../../components/FeatureDescription';
 import solution from '../../assets/header_image/Solution.jpg';
 import control from '../../assets/control.png';
 import service_1 from '../../assets/service/batch_3-1.png';
@@ -141,11 +142,41 @@ const ManufacturingSolution = () => {
       breadcrumbs={BREADCRUMBS}
       title={SOLUTION_DATA.title}
     >
-      <SolutionDetailPage
-        solutionData={SOLUTION_DATA}
-        solutionVariant="default"
-        blocks={BLOCKS}
-      />
+      <div className="solution-detail-page">
+        <div className="solution-description">
+          <p>{SOLUTION_DATA.description}</p>
+        </div>
+        
+        {BLOCKS.map((block, index) => {
+          switch (block.type) {
+            case 'applicationCards':
+              return (
+                <ApplicationCardsSection
+                  key={index}
+                  boxName={block.props.boxName}
+                  applicationCardsData={block.data}
+                  columnsPerRow={block.props.columnsPerRow}
+                />
+              );
+            case 'features':
+              return (
+                <div key={index}>
+                  {block.data.map((feature, featureIndex) => (
+                    <FeatureDescription
+                      key={featureIndex}
+                      image={feature.image}
+                      title={feature.title}
+                      description={feature.description}
+                      largeImage={feature.largeImage}
+                    />
+                  ))}
+                </div>
+              );
+            default:
+              return null;
+          }
+        })}
+      </div>
     </BaseLayout>
   );
 };

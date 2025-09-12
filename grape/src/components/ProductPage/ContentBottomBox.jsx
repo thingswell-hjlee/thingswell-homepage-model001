@@ -90,12 +90,12 @@ const ContentBottomBox = ({
             // 한글 입력 완료 시 최종 값 설정
             setTempValue(e.target.value);
           }}
-                  onChange={(e) => {
-          // 한글 입력 중이 아닐 때만 값 업데이트
-          if (!e.target.getAttribute('data-composing')) {
-            setTempValue(e.target.value);
-          }
-        }}
+          onChange={(e) => {
+            // 한글 입력 중이 아닐 때만 값 업데이트
+            if (!e.target.getAttribute('data-composing')) {
+              setTempValue(e.target.value);
+            }
+          }}
         />
       );
     }
