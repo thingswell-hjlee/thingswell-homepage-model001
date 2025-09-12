@@ -33,6 +33,7 @@ const defaultMenuItems = [
     path: '/about',
     submenu: [ 
       { label: '회사소개', path: '/about/company' },
+      { label: '조직도', path: '/about/organization' },
       { label: '연혁', path: '/about/history' },
       { label: '면허인증특허', path: '/about/licenses' },
       { label: '오시는 길', path: '/about/directions' },

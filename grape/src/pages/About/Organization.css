@@ -1,0 +1,227 @@
+.organization-section {
+  padding: 3rem 0;
+}
+
+.organization-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.organization-chart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  position: relative;
+}
+
+.org-level {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  position: relative;
+  margin: 1rem 0;
+}
+
+.departments-level {
+  gap: 0.8rem;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  justify-content: flex-start;
+  padding: 1rem;
+  background-color: #A6A6A6;
+  border-radius: 15px;
+  margin: 1rem 0;
+  scrollbar-width: thin;
+  scrollbar-color: #A6A6A6 #f1f1f1;
+}
+
+.departments-level::-webkit-scrollbar {
+  height: 8px;
+}
+
+.departments-level::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.departments-level::-webkit-scrollbar-thumb {
+  background: #A6A6A6;
+  border-radius: 4px;
+}
+
+.departments-level::-webkit-scrollbar-thumb:hover {
+  background: #8a8a8a;
+}
+
+.org-box {
+  background: #fff;
+  border: 3px solid #e1e5e9;
+  border-radius: 15px;
+  padding: 2rem 2.5rem;
+  text-align: center;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  width: 200px;
+  position: relative;
+}
+
+.department-box {
+  width: 200px;
+  padding: 1.5rem 2rem;
+  flex-shrink: 0;
+}
+
+.org-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+}
+
+.org-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #2c3e50;
+}
+
+.org-subtitle {
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: #6c757d;
+  opacity: 0.8;
+}
+
+/* CEO 스타일 */
+.ceo-box {
+  background: #262626;
+  border-color: #262626;
+  width: 200px;
+  padding: 2.5rem 3rem;
+}
+
+.ceo-box .org-title {
+  color: white;
+  font-size: 1.6rem;
+  font-weight: 800;
+}
+
+.ceo-box .org-subtitle {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1rem;
+}
+
+/* 부서 스타일 (모든 부서 통일) */
+.department-box {
+  background: #404040;
+  border-color: #404040;
+}
+
+.department-box .org-title {
+  color: white;
+  font-size: 0.85rem;
+}
+
+.department-box .org-subtitle {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.65rem;
+}
+
+/* 연결선 스타일 */
+.connector-line {
+  background: #6c757d;
+  position: absolute;
+}
+
+.connector-line.vertical {
+  width: 3px;
+  height: 2rem;
+  background: #6c757d;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 1200px) {
+  .org-level {
+    gap: 1rem;
+  }
+  
+  .org-box {
+    width: 180px;
+    padding: 1.5rem 1.5rem;
+  }
+  
+  .department-box {
+    width: 180px;
+    padding: 1.2rem 1.5rem;
+  }
+  
+  .ceo-box {
+    width: 180px;
+  }
+  
+  .departments-level {
+    gap: 0.6rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .organization-container {
+    padding: 0 1rem;
+  }
+  
+  .org-level {
+    gap: 1rem;
+  }
+  
+  .org-box {
+    width: 150px;
+    padding: 1rem 1.2rem;
+  }
+  
+  .org-title {
+    font-size: 0.7rem;
+  }
+  
+  .org-subtitle {
+    font-size: 0.55rem;
+  }
+  
+  .ceo-box {
+    width: 150px;
+    padding: 1.5rem 2rem;
+  }
+  
+  .ceo-box .org-title {
+    font-size: 1.2rem;
+  }
+  
+  .department-box {
+    width: 150px;
+    padding: 1rem 1rem;
+  }
+  
+  .departments-level {
+    gap: 0.5rem;
+  }
+  
+  .connector-line.vertical {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .org-box {
+    min-width: 200px;
+    padding: 1rem 1.5rem;
+  }
+  
+  .ceo-box {
+    min-width: 220px;
+    padding: 1.5rem 2rem;
+  }
+}

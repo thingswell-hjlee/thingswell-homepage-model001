@@ -81,6 +81,7 @@ import CaseInformationCommunication from "./pages/Cases/Case_InformationCommunic
 import About from "./pages/About/About.jsx";
 import CompanyIntro from "./pages/About/CompanyIntro.jsx";
 import History from "./pages/About/History.jsx";
+import Organization from "./pages/About/Organization.jsx";
 import Licenses from "./pages/About/Licenses.jsx";
 import Directions from "./pages/About/Directions.jsx";
 import Login from "./pages/Login/Login.jsx";
@@ -148,6 +149,7 @@ function App() {
                     <Route path="/cases/detail/:id" element={<Case_detail />} />
 
                     <Route path="/about" element={<About />} />
+                    <Route path="/about/organization" element={<Organization />} />
                     <Route path="/about/company" element={<CompanyIntro />} />
                     <Route path="/about/history" element={<History />} />
                     <Route path="/about/licenses" element={<Licenses />} />
