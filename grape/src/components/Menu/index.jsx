@@ -530,7 +530,7 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
     return defaultMenuItems.filter(item => {
       // 로그인하지 않은 경우 정부지원사업과 쇼핑몰 메뉴 숨김
       if (!isAuthenticated()) {
-        if (item.label === '정부지원사업' || item.label === '쇼핑몰') {
+        if (item.label === '정부지원사업') {
           return false;
         }
       }
