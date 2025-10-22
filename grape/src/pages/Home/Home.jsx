@@ -173,7 +173,7 @@ export default function Home() {
           >
             <div className="hero-content-card-content">
               <h1 className="hero-content-card-title">
-                HIKVISION 네트워크 PTZ 카메라
+                스마트 AI 카메라
               </h1>
             </div>
           </Link>
@@ -182,11 +182,13 @@ export default function Home() {
           <div
             className="hero-content-card announcement-card"
             style={{
-              backgroundImage: `linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.35)), url(${getAnnouncementBackgroundImage()})`
+              backgroundImage: `linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.35)), url(${getAnnouncementBackgroundImage()})`,
+              cursor: "pointer"
             }}
             role="button"
             tabIndex={0}
             aria-label="최신 공지사항 보기"
+            onClick={handleAnnouncementClick}
             onKeyDown={(e) => {
               if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault();
@@ -195,11 +197,7 @@ export default function Home() {
             }}
           >
             <div className="hero-content-card-content">
-              <h1
-                className="hero-content-card-title"
-                onClick={handleAnnouncementClick}
-                style={{ cursor: "pointer" }}
-              >
+              <h1 className="hero-content-card-title">
                 {latestAnnouncement?.title || "등록된 공지사항이 없습니다."}
               </h1>
             </div>
