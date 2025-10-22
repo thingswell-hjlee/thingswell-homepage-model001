@@ -8,7 +8,7 @@ import humanImage from "../../assets/main/human.webp";
 import ondeviceImage from "../../assets/main/ondevice.webp";
 import familyImage from "../../assets/main/family.webp";
 import noticeBg from "../../assets/1.png";
-import cameraImage from "../../assets/main/camera_2.jpg";
+import cameraImage from "../../assets/main/camera_2.png";
 
 export default function Home() {
   const [isMobile, setIsMobile] = useState(false);
