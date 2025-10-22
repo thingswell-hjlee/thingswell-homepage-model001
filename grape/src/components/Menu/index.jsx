@@ -96,7 +96,7 @@ const defaultMenuItems = [
 
   { 
     label: '쇼핑몰', 
-    path: 'https://thingstron.com/',
+    path: 'https://safegai.co.kr',
     external: true, // 외부 링크임을 명시 (Menu 컴포넌트에서 이 값 활용하여 새창 이동 처리 필요)
   },
 
