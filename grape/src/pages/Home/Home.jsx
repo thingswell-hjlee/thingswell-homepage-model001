@@ -8,6 +8,7 @@ import humanImage from "../../assets/main/human.webp";
 import ondeviceImage from "../../assets/main/ondevice.webp";
 import familyImage from "../../assets/main/family.webp";
 import noticeBg from "../../assets/1.png";
+import cameraImage from "../../assets/main/camera_2.jpg";
 
 export default function Home() {
   const [isMobile, setIsMobile] = useState(false);
@@ -170,6 +171,12 @@ export default function Home() {
             to="/products/safety?detail=1"
             className="hero-content-card hero-content-card_1"
             aria-label="HIKVISION 네트워크 PTZ 카메라 제품 보기"
+            style={{
+              backgroundImage: `linear-gradient(rgba(0,0,0,0.20), rgba(0,0,0,0.10)), url(${cameraImage})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat'
+            }}
           >
             <div className="hero-content-card-content">
               <h1 className="hero-content-card-title">
