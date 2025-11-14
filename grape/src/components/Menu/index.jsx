@@ -528,7 +528,7 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
   // 로그인 상태에 따라 메뉴 아이템 필터링
   const filteredMenuItems = useMemo(() => {
     return defaultMenuItems.filter(item => {
-      // 로그인하지 않은 경우 정부지원사업과 쇼핑몰 메뉴 숨김
+      // 로그인하지 않은 경우 정부지원사업 메뉴 숨김
       if (!isAuthenticated()) {
         if (item.label === '정부지원사업') {
           return false;
