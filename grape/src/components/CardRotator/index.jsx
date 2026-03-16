@@ -32,6 +32,13 @@ function CardRotator({ cards, className = "", onCardChange, currentIndex: extern
   const rotatorRef = useRef(null);
   const measurementRef = useRef(null);
   const transitionTimeoutRef = useRef(null); // 전환 타이밍을 일관되게 관리
+  const intervalRef = useRef(null);
+  const onCardChangeRef = useRef(onCardChange);
+  const intervalVersionRef = useRef(0);
+
+  useEffect(() => {
+    onCardChangeRef.current = onCardChange;
+  }, [onCardChange]);
   
   // 모바일 감지 및 첫 번째 카드로 고정
   useEffect(() => {
@@ -42,8 +49,8 @@ function CardRotator({ cards, className = "", onCardChange, currentIndex: extern
       // 모바일에서는 첫 번째 카드로 고정
       if (mobile && currentIndex !== 0) {
         setCurrentIndex(0);
-        if (onCardChange) {
-          onCardChange(0);
+        if (onCardChangeRef.current) {
+          onCardChangeRef.current(0);
         }
       }
     };
@@ -52,7 +59,7 @@ function CardRotator({ cards, className = "", onCardChange, currentIndex: extern
     window.addEventListener('resize', checkMobile);
 
     return () => window.removeEventListener('resize', checkMobile);
-  }, [currentIndex, onCardChange]);
+  }, [currentIndex]);
 
   // 외부에서 전달된 currentIndex가 변경되면 내부 상태도 업데이트
   useEffect(() => {
@@ -62,6 +69,10 @@ function CardRotator({ cards, className = "", onCardChange, currentIndex: extern
         return;
       }
 
+      // #region agent log
+      fetch("http://127.0.0.1:7722/ingest/211aca71-8f49-4870-bd9a-1d1eb97a772b", { method: "POST", headers: { "Content-Type": "application/json", "X-Debug-Session-Id": "139e05" }, body: JSON.stringify({ sessionId: "139e05", runId: `sync-${externalCurrentIndex}-${Date.now()}`, hypothesisId: "H1_H2", location: "src/components/CardRotator/index.jsx:65", message: "CardRotator received external index", data: { externalCurrentIndex, currentIndex, isMobile, isFading }, timestamp: Date.now() }) }).catch(() => {});
+      // #endregion
+
       // 이전 전환 타이머가 있다면 정리
       if (transitionTimeoutRef.current) {
         clearTimeout(transitionTimeoutRef.current);
@@ -70,6 +81,9 @@ function CardRotator({ cards, className = "", onCardChange, currentIndex: extern
 
       setIsFading(false);
       transitionTimeoutRef.current = setTimeout(() => {
+        // #region agent log
+        fetch("http://127.0.0.1:7722/ingest/211aca71-8f49-4870-bd9a-1d1eb97a772b", { method: "POST", headers: { "Content-Type": "application/json", "X-Debug-Session-Id": "139e05" }, body: JSON.stringify({ sessionId: "139e05", runId: `sync-apply-${externalCurrentIndex}-${Date.now()}`, hypothesisId: "H1_H2", location: "src/components/CardRotator/index.jsx:79", message: "CardRotator applied external index after sync timeout", data: { externalCurrentIndex, previousCurrentIndex: currentIndex }, timestamp: Date.now() }) }).catch(() => {});
+        // #endregion
         setCurrentIndex(externalCurrentIndex);
         setIsFading(true);
         transitionTimeoutRef.current = null;
@@ -89,24 +103,47 @@ function CardRotator({ cards, className = "", onCardChange, currentIndex: extern
     }
 
     // 부모 컴포넌트에 즉시 카드 변경 알림
-    if (onCardChange) {
-      onCardChange(index);
+    if (onCardChangeRef.current) {
+      onCardChangeRef.current(index);
     }
     setIsFading(false);
     transitionTimeoutRef.current = setTimeout(() => {
       setCurrentIndex(index);
       setIsFading(true);
       transitionTimeoutRef.current = null;
-    }, 750); // 애니메이션의 절반 지점에서 새 카드 시작 (겹치는 효과)
+    }, 525); // 부모 배경 전환 시점과 동일하게 맞춤
   };
 
   // 자동 회전 효과 (모바일에서는 비활성화)
   useEffect(() => {
     // 모바일에서는 자동 회전하지 않음
-    if (isMobile) return;
+    if (isMobile) {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
+      return;
+    }
 
-    const intervalId = setInterval(() => {
+    if (intervalRef.current) {
+      // #region agent log
+      fetch("http://127.0.0.1:7722/ingest/211aca71-8f49-4870-bd9a-1d1eb97a772b", { method: "POST", headers: { "Content-Type": "application/json", "X-Debug-Session-Id": "139e05" }, body: JSON.stringify({ sessionId: "139e05", runId: `interval-clear-${intervalVersionRef.current}-${Date.now()}`, hypothesisId: "H8", location: "src/components/CardRotator/index.jsx:127", message: "CardRotator cleared previous interval before setup", data: { currentIndex, intervalVersion: intervalVersionRef.current }, timestamp: Date.now() }) }).catch(() => {});
+      // #endregion
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
+
+    intervalVersionRef.current += 1;
+    const intervalVersion = intervalVersionRef.current;
+    // #region agent log
+    fetch("http://127.0.0.1:7722/ingest/211aca71-8f49-4870-bd9a-1d1eb97a772b", { method: "POST", headers: { "Content-Type": "application/json", "X-Debug-Session-Id": "139e05" }, body: JSON.stringify({ sessionId: "139e05", runId: `interval-set-${intervalVersion}-${Date.now()}`, hypothesisId: "H8", location: "src/components/CardRotator/index.jsx:133", message: "CardRotator set auto rotation interval", data: { currentIndex, intervalVersion, cardsLength: cards.length, isMobile }, timestamp: Date.now() }) }).catch(() => {});
+    // #endregion
+    intervalRef.current = setInterval(() => {
       const nextIndex = (currentIndex + 1) % cards.length;
+
+      // #region agent log
+      fetch("http://127.0.0.1:7722/ingest/211aca71-8f49-4870-bd9a-1d1eb97a772b", { method: "POST", headers: { "Content-Type": "application/json", "X-Debug-Session-Id": "139e05" }, body: JSON.stringify({ sessionId: "139e05", runId: `auto-${currentIndex}-${nextIndex}-${Date.now()}`, hypothesisId: "H2_H3", location: "src/components/CardRotator/index.jsx:117", message: "CardRotator auto rotation tick", data: { currentIndex, nextIndex, cardsLength: cards.length, isFading }, timestamp: Date.now() }) }).catch(() => {});
+      // #endregion
 
       // 이전 전환 타이머가 있다면 정리
       if (transitionTimeoutRef.current) {
@@ -114,24 +151,33 @@ function CardRotator({ cards, className = "", onCardChange, currentIndex: extern
       }
 
       // 부모 컴포넌트에 즉시 카드 변경 알림
-      if (onCardChange) {
-        onCardChange(nextIndex);
+      if (onCardChangeRef.current) {
+        onCardChangeRef.current(nextIndex);
       }
       setIsFading(false);
       transitionTimeoutRef.current = setTimeout(() => {
+        // #region agent log
+        fetch("http://127.0.0.1:7722/ingest/211aca71-8f49-4870-bd9a-1d1eb97a772b", { method: "POST", headers: { "Content-Type": "application/json", "X-Debug-Session-Id": "139e05" }, body: JSON.stringify({ sessionId: "139e05", runId: `auto-apply-${currentIndex}-${nextIndex}-${Date.now()}`, hypothesisId: "H1_H2_H3", location: "src/components/CardRotator/index.jsx:130", message: "CardRotator applied auto-rotated index", data: { currentIndex, nextIndex }, timestamp: Date.now() }) }).catch(() => {});
+        // #endregion
         setCurrentIndex(nextIndex);
         setIsFading(true);
         transitionTimeoutRef.current = null;
-      }, 750); // 애니메이션의 절반 지점에서 새 카드 시작 (겹치는 효과)
+      }, 525); // 부모 배경 전환 시점과 동일하게 맞춤
     }, 7000); // 7초로 변경
 
     return () => {
-      clearInterval(intervalId);
+      if (intervalRef.current) {
+        // #region agent log
+        fetch("http://127.0.0.1:7722/ingest/211aca71-8f49-4870-bd9a-1d1eb97a772b", { method: "POST", headers: { "Content-Type": "application/json", "X-Debug-Session-Id": "139e05" }, body: JSON.stringify({ sessionId: "139e05", runId: `interval-cleanup-${intervalVersion}-${Date.now()}`, hypothesisId: "H8", location: "src/components/CardRotator/index.jsx:160", message: "CardRotator cleaned up auto rotation interval", data: { currentIndex, intervalVersion }, timestamp: Date.now() }) }).catch(() => {});
+        // #endregion
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
       if (transitionTimeoutRef.current) {
         clearTimeout(transitionTimeoutRef.current);
       }
     };
-  }, [cards.length, currentIndex, onCardChange, isMobile]);
+  }, [cards.length, currentIndex, isMobile]);
 
   // 카드 중 가장 큰 높이를 계산하여 고정
   useEffect(() => {

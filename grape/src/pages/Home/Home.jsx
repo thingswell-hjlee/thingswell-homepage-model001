@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import CardRotator from "../../components/CardRotator";
 import Footer from "../../components/Footer";
@@ -17,62 +17,80 @@ export default function Home() {
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [latestAnnouncement, setLatestAnnouncement] = useState(null);
   const navigate = useNavigate();
+  const transitionRunIdRef = useRef(0);
+  const [visibleBackgroundIndex, setVisibleBackgroundIndex] = useState(0);
+  const [previousBackgroundIndex, setPreviousBackgroundIndex] = useState(null);
+  const backgroundFadeTimeoutRef = useRef(null);
 
   // 공지사항 배경 이미지 함수
   const getAnnouncementBackgroundImage = () => {
     return noticeBg;
   };
 
-  const cards = [
-    {
-      eyebrow: "Safety Secured with AI, a Future Opened with Technology",
-      title: "AI로 지키는 안전, 기술로 여는 미래",
-      description: "AI 기반의 솔루션으로 위험을 예측하고, 혁신적인 기술로 더 안전한 미래를 만들어갑니다.",
-      descriptionEng: "We predict risks with AI-based solutions and create a safer future with innovative technology.",
-      ctaText: "Learn more",
-      ctaHref: "/solutions/overview",
-      caption: "AI Safety Solutions",
-      backgroundImage: aiImage,
-    },
-    {
-      eyebrow: "On-Device AI: Safety in Severe Environments",
-      title: "온디바이스 AI, 극한 환경에서도 안전을",
-      description: "외부 네트워크 연결 없이도 기기 자체적으로 위험을 감지하고 대응하여, 어떤 환경에서도 안전을 보장합니다.",
-      descriptionEng: "By detecting and responding to risks directly on the device without an external network connection, we ensure safety in any environment.",
-      ctaText: "Learn more",
-      ctaHref: "/solutions/overview",
-      caption: "On-Device AI",
-      backgroundImage: ondeviceImage,
-    },
-    {
-      eyebrow: "Innovation for People, Technology for Safety",
-      title: "사람을 위한 혁신, 안전을 위한 기술",
-      description: "인간의 삶을 더 풍요롭게 하는 혁신을 추구하며, 모든 기술은 오직 사람의 안전을 최우선으로 합니다.",
-      descriptionEng: "We pursue innovation that enriches human lives, and all our technology prioritizes the safety of people above all else.",
-      ctaText: "Learn more",
-      ctaHref: "/solutions/overview",
-      caption: "Human-Centered Innovation",
-      backgroundImage: humanImage,
-    },
-    {
-      eyebrow: "Your Safety, Everywhere. With ThingsWell",
-      title: "산업안전에서 생활안전까지, 싱스웰이 함께합니다",
-      description: "공장의 위험 작업 환경부터 일상생활의 작은 사고까지, 싱스웰의 기술은 모든 곳에서 당신을 지켜줍니다.",
-      descriptionEng: "From hazardous work environments in factories to small accidents in daily life, Singswell's technology protects you everywhere.",
-      ctaText: "Learn more",
-      ctaHref: "/solutions/overview",
-      caption: "Comprehensive Safety",
-      backgroundImage: familyImage,
-    },
-  ];
+  const cards = useMemo(
+    () => [
+      {
+        eyebrow: "Safety Secured with AI, a Future Opened with Technology",
+        title: "AI로 지키는 안전, 기술로 여는 미래",
+        description: "AI 기반의 솔루션으로 위험을 예측하고, 혁신적인 기술로 더 안전한 미래를 만들어갑니다.",
+        descriptionEng: "We predict risks with AI-based solutions and create a safer future with innovative technology.",
+        ctaText: "Learn more",
+        ctaHref: "/solutions/overview",
+        caption: "AI Safety Solutions",
+        backgroundImage: aiImage,
+      },
+      {
+        eyebrow: "On-Device AI: Safety in Severe Environments",
+        title: "온디바이스 AI, 극한 환경에서도 안전을",
+        description: "외부 네트워크 연결 없이도 기기 자체적으로 위험을 감지하고 대응하여, 어떤 환경에서도 안전을 보장합니다.",
+        descriptionEng: "By detecting and responding to risks directly on the device without an external network connection, we ensure safety in any environment.",
+        ctaText: "Learn more",
+        ctaHref: "/solutions/overview",
+        caption: "On-Device AI",
+        backgroundImage: ondeviceImage,
+      },
+      {
+        eyebrow: "Innovation for People, Technology for Safety",
+        title: "사람을 위한 혁신, 안전을 위한 기술",
+        description: "인간의 삶을 더 풍요롭게 하는 혁신을 추구하며, 모든 기술은 오직 사람의 안전을 최우선으로 합니다.",
+        descriptionEng: "We pursue innovation that enriches human lives, and all our technology prioritizes the safety of people above all else.",
+        ctaText: "Learn more",
+        ctaHref: "/solutions/overview",
+        caption: "Human-Centered Innovation",
+        backgroundImage: humanImage,
+      },
+      {
+        eyebrow: "Your Safety, Everywhere. With ThingsWell",
+        title: "산업안전에서 생활안전까지, 싱스웰이 함께합니다",
+        description: "공장의 위험 작업 환경부터 일상생활의 작은 사고까지, 싱스웰의 기술은 모든 곳에서 당신을 지켜줍니다.",
+        descriptionEng: "From hazardous work environments in factories to small accidents in daily life, Singswell's technology protects you everywhere.",
+        ctaText: "Learn more",
+        ctaHref: "/solutions/overview",
+        caption: "Comprehensive Safety",
+        backgroundImage: familyImage,
+      },
+    ],
+    []
+  );
 
   const handleCardChange = (index) => {
     if (index !== currentCardIndex) {
+      transitionRunIdRef.current += 1;
+      const runId = `home-${transitionRunIdRef.current}`;
+      // #region agent log
+      fetch("http://127.0.0.1:7722/ingest/211aca71-8f49-4870-bd9a-1d1eb97a772b", { method: "POST", headers: { "Content-Type": "application/json", "X-Debug-Session-Id": "139e05" }, body: JSON.stringify({ sessionId: "139e05", runId, hypothesisId: "H1_H2", location: "src/pages/Home/Home.jsx:71", message: "Home requested card change", data: { requestedIndex: index, currentCardIndex, isTransitioning }, timestamp: Date.now() }) }).catch(() => {});
+      // #endregion
       setIsTransitioning(true);
       setTimeout(() => {
+        // #region agent log
+        fetch("http://127.0.0.1:7722/ingest/211aca71-8f49-4870-bd9a-1d1eb97a772b", { method: "POST", headers: { "Content-Type": "application/json", "X-Debug-Session-Id": "139e05" }, body: JSON.stringify({ sessionId: "139e05", runId, hypothesisId: "H1_H2", location: "src/pages/Home/Home.jsx:76", message: "Home timeout applied currentCardIndex", data: { requestedIndex: index, previousCardIndex: currentCardIndex }, timestamp: Date.now() }) }).catch(() => {});
+        // #endregion
         setCurrentCardIndex(index);
       }, 525);
       setTimeout(() => {
+        // #region agent log
+        fetch("http://127.0.0.1:7722/ingest/211aca71-8f49-4870-bd9a-1d1eb97a772b", { method: "POST", headers: { "Content-Type": "application/json", "X-Debug-Session-Id": "139e05" }, body: JSON.stringify({ sessionId: "139e05", runId, hypothesisId: "H1_H2", location: "src/pages/Home/Home.jsx:81", message: "Home timeout ended transition", data: { requestedIndex: index }, timestamp: Date.now() }) }).catch(() => {});
+        // #endregion
         setIsTransitioning(false);
       }, 1050);
     }
@@ -122,6 +140,11 @@ export default function Home() {
       // body 대신 .home-layout에 배경 적용
       const homeLayout = document.querySelector('.home-layout');
       if (homeLayout) {
+        const previousBackgroundImage = getComputedStyle(homeLayout).backgroundImage;
+        const nextBackgroundImage = `url("${cards[currentCardIndex].backgroundImage}")`;
+        // #region agent log
+        fetch("http://127.0.0.1:7722/ingest/211aca71-8f49-4870-bd9a-1d1eb97a772b", { method: "POST", headers: { "Content-Type": "application/json", "X-Debug-Session-Id": "139e05" }, body: JSON.stringify({ sessionId: "139e05", runId: `bg-${currentCardIndex}-${Date.now()}`, hypothesisId: "H4_H5_H7", location: "src/pages/Home/Home.jsx:131", message: "Home applying background image", data: { currentCardIndex, title: cards[currentCardIndex]?.title, isMobile: window.innerWidth <= 768, previousBackgroundImage, nextBackgroundImage, sameBackground: previousBackgroundImage.includes(cards[currentCardIndex].backgroundImage), transitionProperty: getComputedStyle(homeLayout).transitionProperty, transitionDuration: getComputedStyle(homeLayout).transitionDuration }, timestamp: Date.now() }) }).catch(() => {});
+        // #endregion
         homeLayout.style.backgroundImage = `url(${cards[currentCardIndex].backgroundImage})`;
         homeLayout.style.backgroundSize = 'cover';
         homeLayout.style.backgroundPosition = 'center';
@@ -149,6 +172,94 @@ export default function Home() {
     };
   }, [currentCardIndex, cards]);
 
+  useEffect(() => {
+    const targetImage = cards[currentCardIndex]?.backgroundImage;
+    if (!targetImage) return;
+
+    const img = new Image();
+    const startedAt = Date.now();
+
+    // #region agent log
+    fetch("http://127.0.0.1:7722/ingest/211aca71-8f49-4870-bd9a-1d1eb97a772b", { method: "POST", headers: { "Content-Type": "application/json", "X-Debug-Session-Id": "139e05" }, body: JSON.stringify({ sessionId: "139e05", runId: `preload-${currentCardIndex}-${startedAt}`, hypothesisId: "H6", location: "src/pages/Home/Home.jsx:154", message: "Home started image preload check", data: { currentCardIndex, targetImage }, timestamp: startedAt }) }).catch(() => {});
+    // #endregion
+
+    img.src = targetImage;
+
+    if (img.complete) {
+      // #region agent log
+      fetch("http://127.0.0.1:7722/ingest/211aca71-8f49-4870-bd9a-1d1eb97a772b", { method: "POST", headers: { "Content-Type": "application/json", "X-Debug-Session-Id": "139e05" }, body: JSON.stringify({ sessionId: "139e05", runId: `preload-${currentCardIndex}-${startedAt}`, hypothesisId: "H6", location: "src/pages/Home/Home.jsx:161", message: "Home preload image already complete", data: { currentCardIndex, elapsedMs: Date.now() - startedAt, width: img.naturalWidth, height: img.naturalHeight }, timestamp: Date.now() }) }).catch(() => {});
+      // #endregion
+    } else {
+      img.onload = () => {
+        // #region agent log
+        fetch("http://127.0.0.1:7722/ingest/211aca71-8f49-4870-bd9a-1d1eb97a772b", { method: "POST", headers: { "Content-Type": "application/json", "X-Debug-Session-Id": "139e05" }, body: JSON.stringify({ sessionId: "139e05", runId: `preload-${currentCardIndex}-${startedAt}`, hypothesisId: "H6", location: "src/pages/Home/Home.jsx:167", message: "Home preload image onload", data: { currentCardIndex, elapsedMs: Date.now() - startedAt, width: img.naturalWidth, height: img.naturalHeight }, timestamp: Date.now() }) }).catch(() => {});
+        // #endregion
+      };
+    }
+  }, [currentCardIndex, cards]);
+
+  useEffect(() => {
+    cards.forEach((card) => {
+      const img = new Image();
+      img.src = card.backgroundImage;
+    });
+  }, [cards]);
+
+  useEffect(() => {
+    if (currentCardIndex === visibleBackgroundIndex) return;
+
+    if (backgroundFadeTimeoutRef.current) {
+      clearTimeout(backgroundFadeTimeoutRef.current);
+      backgroundFadeTimeoutRef.current = null;
+    }
+
+    const leavingIndex = visibleBackgroundIndex;
+    const fadeStartedAt = Date.now();
+
+    setPreviousBackgroundIndex(leavingIndex);
+    setVisibleBackgroundIndex(currentCardIndex);
+
+    // #region agent log
+    fetch("http://127.0.0.1:7722/ingest/211aca71-8f49-4870-bd9a-1d1eb97a772b", { method: "POST", headers: { "Content-Type": "application/json", "X-Debug-Session-Id": "139e05" }, body: JSON.stringify({ sessionId: "139e05", runId: `bg-fade-${currentCardIndex}-${fadeStartedAt}`, hypothesisId: "H4_FIX", location: "src/pages/Home/Home.jsx:204", message: "Home started background crossfade", data: { leavingIndex, enteringIndex: currentCardIndex, durationMs: 525 }, timestamp: fadeStartedAt }) }).catch(() => {});
+    // #endregion
+
+    backgroundFadeTimeoutRef.current = setTimeout(() => {
+      setPreviousBackgroundIndex(null);
+      // #region agent log
+      fetch("http://127.0.0.1:7722/ingest/211aca71-8f49-4870-bd9a-1d1eb97a772b", { method: "POST", headers: { "Content-Type": "application/json", "X-Debug-Session-Id": "139e05" }, body: JSON.stringify({ sessionId: "139e05", runId: `bg-fade-${currentCardIndex}-${fadeStartedAt}`, hypothesisId: "H4_FIX", location: "src/pages/Home/Home.jsx:212", message: "Home finished background crossfade", data: { leavingIndex, enteringIndex: currentCardIndex }, timestamp: Date.now() }) }).catch(() => {});
+      // #endregion
+      backgroundFadeTimeoutRef.current = null;
+    }, 525);
+  }, [currentCardIndex, visibleBackgroundIndex]);
+
+  useEffect(() => {
+    const animationFrameId = requestAnimationFrame(() => {
+      const layers = Array.from(document.querySelectorAll(".home-background-layer")).map((layer, index) => {
+        const computed = getComputedStyle(layer);
+        return {
+          index,
+          className: layer.className,
+          opacity: computed.opacity,
+          backgroundImage: computed.backgroundImage,
+        };
+      });
+
+      // #region agent log
+      fetch("http://127.0.0.1:7722/ingest/211aca71-8f49-4870-bd9a-1d1eb97a772b", { method: "POST", headers: { "Content-Type": "application/json", "X-Debug-Session-Id": "139e05" }, body: JSON.stringify({ sessionId: "139e05", runId: `bg-dom-${Date.now()}`, hypothesisId: "H9_H10_H11", location: "src/pages/Home/Home.jsx:236", message: "Home inspected background layers after render", data: { currentCardIndex, previousBackgroundIndex, visibleBackgroundIndex, layerCount: layers.length, layers, homeLayoutBackgroundColor: getComputedStyle(document.querySelector(".home-layout")).backgroundColor }, timestamp: Date.now() }) }).catch(() => {});
+      // #endregion
+    });
+
+    return () => cancelAnimationFrame(animationFrameId);
+  }, [currentCardIndex, previousBackgroundIndex, visibleBackgroundIndex]);
+
+  useEffect(() => {
+    return () => {
+      if (backgroundFadeTimeoutRef.current) {
+        clearTimeout(backgroundFadeTimeoutRef.current);
+      }
+    };
+  }, []);
+
   const handleAnnouncementClick = () => {
     if (latestAnnouncement && latestAnnouncement.id) {
       navigate(`/customer-service/announcement?id=${encodeURIComponent(latestAnnouncement.id)}&t=Board_Announcement`);
@@ -159,6 +270,22 @@ export default function Home() {
 
   return (
     <div className="home-layout">
+      <div className="home-background-stack" aria-hidden="true">
+        {previousBackgroundIndex !== null && (
+          <div
+            className="home-background-layer is-leaving"
+            style={{
+              backgroundImage: `url(${cards[previousBackgroundIndex].backgroundImage})`,
+            }}
+          />
+        )}
+        <div
+          className={`home-background-layer is-visible${previousBackgroundIndex !== null ? " is-entering" : ""}`}
+          style={{
+            backgroundImage: `url(${cards[visibleBackgroundIndex].backgroundImage})`,
+          }}
+        />
+      </div>
       <HomePopup />
       <div className="home-content-container">
         {/* 카드 로테이터 섹션 */}
