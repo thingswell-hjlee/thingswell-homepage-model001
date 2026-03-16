@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './BoardDetail.css';
 import { useAuth } from '../../contexts/AuthContext';
 
@@ -40,6 +40,14 @@ const BoardDetail = ({ post, onBack, onEdit, onDelete }) => {
       console.error('날짜 변환 오류:', error);
     }
   } 
+
+  useEffect(() => {
+    const contentHtml = document.querySelector('.content-html');
+    const postBody = document.querySelector('.post-body');
+    // #region agent log
+    fetch('http://127.0.0.1:7245/ingest/fad17f9a-a263-4dc1-b203-f05ae309c76a',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({runId:'pre-fix',hypothesisId:'H5',location:'src/components/BoardDetail/index.jsx:detail-layout',message:'board detail computed alignment',data:{postId:post.id??null,contentHtmlTextAlign:contentHtml?window.getComputedStyle(contentHtml).textAlign:null,postBodyTextAlign:postBody?window.getComputedStyle(postBody).textAlign:null,hasCenterAlignMarkup:/text-align:\s*center/i.test(content),hasLeftAlignMarkup:/text-align:\s*left/i.test(content),contentPreview:content.replace(/\s+/g,' ').slice(0,160)},timestamp:Date.now()})}).catch(()=>{});
+    // #endregion
+  }, [content, post]);
 
 
   return (
