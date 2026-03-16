@@ -106,7 +106,7 @@ function Footer() {
               <div className="footer-copyright">
                 <div className="footer-info">
                   <p>
-                    경기 안양시 동안구 학의로 2825 금강펜타리움 IT타워 A동
+                    경기 안양시 동안구 학의로 282 금강펜타리움 IT타워 A동
                     1302호
                   </p>
                   <p>1833-7758</p>

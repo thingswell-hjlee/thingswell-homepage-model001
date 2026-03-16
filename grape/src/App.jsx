@@ -109,6 +109,87 @@ function App() {
     };
   }, []);
 
+  useEffect(() => {
+    if (location.pathname !== "/") {
+      return undefined;
+    }
+
+    let wheelCount = 0;
+    let touchCount = 0;
+
+    const logEvent = (hypothesisId, locationLabel, message, data) => {
+      // #region agent log
+      fetch('http://127.0.0.1:7722/ingest/211aca71-8f49-4870-bd9a-1d1eb97a772b',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'3586ac'},body:JSON.stringify({sessionId:'3586ac',runId:'initial',hypothesisId,location:locationLabel,message,data,timestamp:Date.now()})}).catch(()=>{});
+      // #endregion
+    };
+
+    const describeTarget = (target) => {
+      if (!(target instanceof Element)) {
+        return { tagName: null, className: null };
+      }
+
+      return {
+        tagName: target.tagName,
+        className: typeof target.className === "string" ? target.className : null,
+        inHomePopup: Boolean(target.closest(".home-popup-overlay")),
+        inMenuOverlay: Boolean(target.closest(".menu-overlay-subpage")),
+        inHomeLayout: Boolean(target.closest(".home-layout")),
+      };
+    };
+
+    const handleWheel = (e) => {
+      if (wheelCount >= 3) return;
+      wheelCount += 1;
+      queueMicrotask(() => {
+        logEvent(
+          "H1,H3,H4",
+          "grape/src/App.jsx:143",
+          "Global wheel event observed on home route",
+          {
+            count: wheelCount,
+            deltaY: e.deltaY,
+            cancelable: e.cancelable,
+            defaultPrevented: e.defaultPrevented,
+            windowScrollY: window.scrollY,
+            documentScrollHeight: document.documentElement.scrollHeight,
+            documentClientHeight: document.documentElement.clientHeight,
+            ...describeTarget(e.target),
+          }
+        );
+      });
+    };
+
+    const handleTouchMove = (e) => {
+      if (touchCount >= 3) return;
+      touchCount += 1;
+      queueMicrotask(() => {
+        logEvent(
+          "H1,H3,H4",
+          "grape/src/App.jsx:164",
+          "Global touchmove event observed on home route",
+          {
+            count: touchCount,
+            touches: e.touches.length,
+            cancelable: e.cancelable,
+            defaultPrevented: e.defaultPrevented,
+            windowScrollY: window.scrollY,
+            documentScrollHeight: document.documentElement.scrollHeight,
+            documentClientHeight: document.documentElement.clientHeight,
+            ...describeTarget(e.target),
+          }
+        );
+      });
+    };
+
+    document.addEventListener("wheel", handleWheel, { capture: true, passive: true });
+    document.addEventListener("touchmove", handleTouchMove, { capture: true, passive: true });
+
+    return () => {
+      document.removeEventListener("wheel", handleWheel, { capture: true });
+      document.removeEventListener("touchmove", handleTouchMove, { capture: true });
+    };
+  }, [location.pathname]);
+
   return (
     <AuthProvider>
       <HTTPSRedirect>
