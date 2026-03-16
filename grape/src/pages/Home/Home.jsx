@@ -85,17 +85,6 @@ export default function Home() {
 
     checkMobile();
 
-    const mainContent = document.querySelector(".main-content");
-    const pageContent = document.querySelector(".page-content");
-    const homeLayout = document.querySelector(".home-layout");
-    const mainContentStyle = mainContent ? window.getComputedStyle(mainContent) : null;
-    const pageContentStyle = pageContent ? window.getComputedStyle(pageContent) : null;
-    const homeLayoutStyle = homeLayout ? window.getComputedStyle(homeLayout) : null;
-
-    // #region agent log
-    fetch('http://127.0.0.1:7722/ingest/211aca71-8f49-4870-bd9a-1d1eb97a772b',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'3586ac'},body:JSON.stringify({sessionId:'3586ac',runId:'initial',hypothesisId:'H2,H3',location:'grape/src/pages/Home/Home.jsx:93',message:'Home route scroll containers measured on mount',data:{windowInnerHeight:window.innerHeight,windowScrollY:window.scrollY,documentScrollHeight:document.documentElement.scrollHeight,documentClientHeight:document.documentElement.clientHeight,bodyScrollHeight:document.body.scrollHeight,bodyClientHeight:document.body.clientHeight,bodyOverflowY:window.getComputedStyle(document.body).overflowY,mainContentOverflowY:mainContentStyle?.overflowY ?? null,pageContentOverflowY:pageContentStyle?.overflowY ?? null,homeLayoutOverflowY:homeLayoutStyle?.overflowY ?? null,homeLayoutMinHeight:homeLayoutStyle?.minHeight ?? null,mainContentClientHeight:mainContent?.clientHeight ?? null,pageContentClientHeight:pageContent?.clientHeight ?? null,homeLayoutClientHeight:homeLayout?.clientHeight ?? null,homeLayoutScrollHeight:homeLayout?.scrollHeight ?? null},timestamp:Date.now()})}).catch(()=>{});
-    // #endregion
-
     window.addEventListener("resize", checkMobile);
 
     return () => {
@@ -142,11 +131,6 @@ export default function Home() {
         const isMobileDevice = window.innerWidth <= 768;
         homeLayout.style.backgroundAttachment = isMobileDevice ? 'scroll' : 'scroll'; // 모든 기기에서 scroll 사용
 
-        const homeLayoutStyle = window.getComputedStyle(homeLayout);
-
-        // #region agent log
-        fetch('http://127.0.0.1:7722/ingest/211aca71-8f49-4870-bd9a-1d1eb97a772b',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'3586ac'},body:JSON.stringify({sessionId:'3586ac',runId:'initial',hypothesisId:'H3,H4',location:'grape/src/pages/Home/Home.jsx:145',message:'Home layout style applied for background and scroll state',data:{currentCardIndex,isMobileDevice,backgroundAttachment:homeLayoutStyle.backgroundAttachment,overflowY:homeLayoutStyle.overflowY,transform:homeLayoutStyle.transform,overscrollBehavior:homeLayoutStyle.overscrollBehavior,clientHeight:homeLayout.clientHeight,scrollHeight:homeLayout.scrollHeight,offsetHeight:homeLayout.offsetHeight},timestamp:Date.now()})}).catch(()=>{});
-        // #endregion
       }
     }
 

@@ -66,12 +66,9 @@
 
 html {
   font-size: 16px;
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
-  /* 스크롤 바운스 방지 */
-  overscroll-behavior: none;
-  overscroll-behavior-y: none;
 }
 
 body {
@@ -86,9 +83,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
   max-width: 100vw;
-  /* 스크롤 바운스 방지 */
-  overscroll-behavior: none;
-  overscroll-behavior-y: none;
 }
 
 /* ===== RESPONSIVE VIEWPORT ===== */
@@ -97,16 +91,10 @@ body {
 @media screen and (max-width: 768px) {
   html {
     font-size: 14px;
-    /* 모바일에서 스크롤 바운스 완전 차단 */
-    overscroll-behavior: none !important;
-    overscroll-behavior-y: none !important;
     -webkit-overflow-scrolling: touch;
   }
   
   body {
-    /* 모바일에서 스크롤 바운스 완전 차단 */
-    overscroll-behavior: none !important;
-    overscroll-behavior-y: none !important;
     -webkit-overflow-scrolling: touch;
     /* iOS에서 추가 터치 동작 제어 */
     touch-action: pan-y;

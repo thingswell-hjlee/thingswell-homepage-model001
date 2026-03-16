@@ -10,8 +10,6 @@
 
 html {
   height: 100% !important; /* html 요소 높이 설정 */
-  /* 스크롤 바운스 제거 */
-  overscroll-behavior: none !important;
   -webkit-overflow-scrolling: touch !important;
 }
 
@@ -23,9 +21,6 @@ body {
   overflow-y: auto !important; /* 세로 스크롤 허용 */
   min-height: 100vh !important;
   background-color: var(--color-footer) !important;
-  /* 스크롤 바운스 완전 제거 */
-  overscroll-behavior: none !important;
-  overscroll-behavior-y: none !important;
   -webkit-overflow-scrolling: touch !important;
   margin: 0 !important;
   padding: 0 !important;
@@ -39,8 +34,6 @@ body {
   text-align: center !important;
   box-sizing: border-box !important;
   background-color: var(--color-background-primary) !important;
-  /* 스크롤 바운스 제거 */
-  overscroll-behavior: none !important;
   -webkit-overflow-scrolling: touch !important;
 }
 
@@ -52,8 +45,6 @@ body {
   margin: 0 !important;
   padding: 0 !important;
   position: relative !important;
-  /* 스크롤 바운스 제거 */
-  overscroll-behavior: none !important;
 }
 
 
@@ -140,16 +131,10 @@ body {
 /* 모바일 스크롤 최적화 */
 @media (max-width: 768px) {
   html {
-    /* 스크롤 바운스 완전 차단 */
-    overscroll-behavior: none !important;
-    overscroll-behavior-y: none !important;
     -webkit-overflow-scrolling: touch !important;
   }
   
   body {
-    /* 스크롤 바운스 완전 차단 */
-    overscroll-behavior: none !important;
-    overscroll-behavior-y: none !important;
     -webkit-overflow-scrolling: touch !important;
     /* iOS에서 추가 터치 동작 제어 */
     touch-action: pan-y !important;
@@ -162,9 +147,6 @@ body {
   }
   
   #root {
-    /* 모바일에서 스크롤 바운스 방지 */
-    overscroll-behavior: none !important;
-    overscroll-behavior-y: none !important;
     -webkit-overflow-scrolling: touch !important;
     /* 콘텐츠에 따라 높이 자동 조정 */
     min-height: 100vh !important;
@@ -175,15 +157,11 @@ body {
     background-attachment: scroll !important; /* 모바일에서 fixed 제거 */
     -webkit-transform: translateZ(0) !important; /* 하드웨어 가속 */
     transform: translateZ(0) !important;
-    /* 스크롤 바운스 방지 */
-    overscroll-behavior: none !important;
   }
   
   /* 모바일에서 뷰포트 높이 문제 해결 */
   .app-container {
     min-height: 100vh !important;
-    /* 스크롤 바운스 방지 */
-    overscroll-behavior: none !important;
   }
 }
 
