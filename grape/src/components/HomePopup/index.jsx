@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import "./HomePopup.css";
 import logoSmallKorean from "../../assets/logos/logo_small_korean.png";
 
 const STORAGE_KEY = "homePopupHiddenDate";
+const POPUP_TARGET_URL = "https://thingswell.co.kr/customer-service/announcement?detail=3";
 
 function getTodayString() {
   const d = new Date();
@@ -40,6 +40,11 @@ export default function HomePopup() {
     setVisible(false);
   };
 
+  const handlePopupNavigate = () => {
+    window.open(POPUP_TARGET_URL, "_blank", "noopener,noreferrer");
+    setVisible(false);
+  };
+
   if (!visible) return null;
 
   return (
@@ -50,7 +55,18 @@ export default function HomePopup() {
       aria-labelledby="home-popup-title"
     >
       <div className="home-popup-box" onClick={(e) => e.stopPropagation()}>
-        <div className="home-popup-body">
+        <div
+          className="home-popup-body home-popup-body-link"
+          role="button"
+          tabIndex={0}
+          onClick={handlePopupNavigate}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              handlePopupNavigate();
+            }
+          }}
+        >
           <img
             src={logoSmallKorean}
             alt="㈜ 싱스웰"
@@ -73,13 +89,13 @@ export default function HomePopup() {
             <span className="home-popup-divider">|</span> 매장 현황 분석
           </p>
 
-          <Link
-            to="/government-support"
+          <button
+            type="button"
             className="home-popup-cta"
-            onClick={handleClose}
+            onClick={handlePopupNavigate}
           >
             상세내용 확인하기
-          </Link>
+          </button>
         </div>
 
         <div className="home-popup-actions">
