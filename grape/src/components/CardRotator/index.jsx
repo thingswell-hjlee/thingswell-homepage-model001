@@ -34,7 +34,6 @@ function CardRotator({ cards, className = "", onCardChange, currentIndex: extern
   const transitionTimeoutRef = useRef(null); // 전환 타이밍을 일관되게 관리
   const intervalRef = useRef(null);
   const onCardChangeRef = useRef(onCardChange);
-  const intervalVersionRef = useRef(0);
 
   useEffect(() => {
     onCardChangeRef.current = onCardChange;
@@ -69,10 +68,6 @@ function CardRotator({ cards, className = "", onCardChange, currentIndex: extern
         return;
       }
 
-      // #region agent log
-      fetch("http://127.0.0.1:7722/ingest/211aca71-8f49-4870-bd9a-1d1eb97a772b", { method: "POST", headers: { "Content-Type": "application/json", "X-Debug-Session-Id": "139e05" }, body: JSON.stringify({ sessionId: "139e05", runId: `sync-${externalCurrentIndex}-${Date.now()}`, hypothesisId: "H1_H2", location: "src/components/CardRotator/index.jsx:65", message: "CardRotator received external index", data: { externalCurrentIndex, currentIndex, isMobile, isFading }, timestamp: Date.now() }) }).catch(() => {});
-      // #endregion
-
       // 이전 전환 타이머가 있다면 정리
       if (transitionTimeoutRef.current) {
         clearTimeout(transitionTimeoutRef.current);
@@ -81,9 +76,6 @@ function CardRotator({ cards, className = "", onCardChange, currentIndex: extern
 
       setIsFading(false);
       transitionTimeoutRef.current = setTimeout(() => {
-        // #region agent log
-        fetch("http://127.0.0.1:7722/ingest/211aca71-8f49-4870-bd9a-1d1eb97a772b", { method: "POST", headers: { "Content-Type": "application/json", "X-Debug-Session-Id": "139e05" }, body: JSON.stringify({ sessionId: "139e05", runId: `sync-apply-${externalCurrentIndex}-${Date.now()}`, hypothesisId: "H1_H2", location: "src/components/CardRotator/index.jsx:79", message: "CardRotator applied external index after sync timeout", data: { externalCurrentIndex, previousCurrentIndex: currentIndex }, timestamp: Date.now() }) }).catch(() => {});
-        // #endregion
         setCurrentIndex(externalCurrentIndex);
         setIsFading(true);
         transitionTimeoutRef.current = null;
@@ -126,24 +118,12 @@ function CardRotator({ cards, className = "", onCardChange, currentIndex: extern
     }
 
     if (intervalRef.current) {
-      // #region agent log
-      fetch("http://127.0.0.1:7722/ingest/211aca71-8f49-4870-bd9a-1d1eb97a772b", { method: "POST", headers: { "Content-Type": "application/json", "X-Debug-Session-Id": "139e05" }, body: JSON.stringify({ sessionId: "139e05", runId: `interval-clear-${intervalVersionRef.current}-${Date.now()}`, hypothesisId: "H8", location: "src/components/CardRotator/index.jsx:127", message: "CardRotator cleared previous interval before setup", data: { currentIndex, intervalVersion: intervalVersionRef.current }, timestamp: Date.now() }) }).catch(() => {});
-      // #endregion
       clearInterval(intervalRef.current);
       intervalRef.current = null;
     }
 
-    intervalVersionRef.current += 1;
-    const intervalVersion = intervalVersionRef.current;
-    // #region agent log
-    fetch("http://127.0.0.1:7722/ingest/211aca71-8f49-4870-bd9a-1d1eb97a772b", { method: "POST", headers: { "Content-Type": "application/json", "X-Debug-Session-Id": "139e05" }, body: JSON.stringify({ sessionId: "139e05", runId: `interval-set-${intervalVersion}-${Date.now()}`, hypothesisId: "H8", location: "src/components/CardRotator/index.jsx:133", message: "CardRotator set auto rotation interval", data: { currentIndex, intervalVersion, cardsLength: cards.length, isMobile }, timestamp: Date.now() }) }).catch(() => {});
-    // #endregion
     intervalRef.current = setInterval(() => {
       const nextIndex = (currentIndex + 1) % cards.length;
-
-      // #region agent log
-      fetch("http://127.0.0.1:7722/ingest/211aca71-8f49-4870-bd9a-1d1eb97a772b", { method: "POST", headers: { "Content-Type": "application/json", "X-Debug-Session-Id": "139e05" }, body: JSON.stringify({ sessionId: "139e05", runId: `auto-${currentIndex}-${nextIndex}-${Date.now()}`, hypothesisId: "H2_H3", location: "src/components/CardRotator/index.jsx:117", message: "CardRotator auto rotation tick", data: { currentIndex, nextIndex, cardsLength: cards.length, isFading }, timestamp: Date.now() }) }).catch(() => {});
-      // #endregion
 
       // 이전 전환 타이머가 있다면 정리
       if (transitionTimeoutRef.current) {
@@ -156,9 +136,6 @@ function CardRotator({ cards, className = "", onCardChange, currentIndex: extern
       }
       setIsFading(false);
       transitionTimeoutRef.current = setTimeout(() => {
-        // #region agent log
-        fetch("http://127.0.0.1:7722/ingest/211aca71-8f49-4870-bd9a-1d1eb97a772b", { method: "POST", headers: { "Content-Type": "application/json", "X-Debug-Session-Id": "139e05" }, body: JSON.stringify({ sessionId: "139e05", runId: `auto-apply-${currentIndex}-${nextIndex}-${Date.now()}`, hypothesisId: "H1_H2_H3", location: "src/components/CardRotator/index.jsx:130", message: "CardRotator applied auto-rotated index", data: { currentIndex, nextIndex }, timestamp: Date.now() }) }).catch(() => {});
-        // #endregion
         setCurrentIndex(nextIndex);
         setIsFading(true);
         transitionTimeoutRef.current = null;
@@ -167,9 +144,6 @@ function CardRotator({ cards, className = "", onCardChange, currentIndex: extern
 
     return () => {
       if (intervalRef.current) {
-        // #region agent log
-        fetch("http://127.0.0.1:7722/ingest/211aca71-8f49-4870-bd9a-1d1eb97a772b", { method: "POST", headers: { "Content-Type": "application/json", "X-Debug-Session-Id": "139e05" }, body: JSON.stringify({ sessionId: "139e05", runId: `interval-cleanup-${intervalVersion}-${Date.now()}`, hypothesisId: "H8", location: "src/components/CardRotator/index.jsx:160", message: "CardRotator cleaned up auto rotation interval", data: { currentIndex, intervalVersion }, timestamp: Date.now() }) }).catch(() => {});
-        // #endregion
         clearInterval(intervalRef.current);
         intervalRef.current = null;
       }
