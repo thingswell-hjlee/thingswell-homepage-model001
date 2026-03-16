@@ -92,7 +92,10 @@ export default function HomePopup() {
           <button
             type="button"
             className="home-popup-cta"
-            onClick={handlePopupNavigate}
+            onClick={(e) => {
+              e.stopPropagation();
+              handlePopupNavigate();
+            }}
           >
             상세내용 확인하기
           </button>
