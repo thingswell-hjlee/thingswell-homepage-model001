@@ -43,25 +43,6 @@ const CompanyIntro = () => {
                     <div className="ceo-info-section-content-responsive">
                       <h1>이  학  준</h1>
                       <h2>대표이사</h2>
-                      <p>경북대학교 전자공학 석사</p>
-                      <p>전 LG전자 중앙연구소 주임연구원</p>
-                      <p>KAIST 테크노경영대학원 KVM 과정 수료</p>
-                      <p>(사)행복한동행 이사</p>
-                      <p>(사)한국이엠에스협회 이사</p>
-                    </div>
-                    <div className="ceo-info-section-content-responsive">
-                      <p>GOOD Design 조달청장상 수상</p>
-                      <p>터치스크린 통합 컨트롤러 (자사브랜드, 프랑스수출)</p>
-                      <p>고성능 GPU 기반 비디오 프린프 메인보드 개발 (LG전자)</p>
-                      <p>그래픽 카드 개발 (LG전자)</p>
-                      <p>DSP 활용 머신비전 장비 개발 (현대전자)</p>
-                    </div>
-                    <div className="ceo-info-section-content-responsive">
-                      <p>ARM 기반 웹비디오폰 메인보드 개발 (삼성전자)</p>
-                      <p>ARM 디지털 앨범 (삼성전자)</p>
-                      <p>월패드 (현대통신)</p>
-                      <p>월패드, 모바일패드 (서울통신)</p>
-                      <p>네트웍 컴퓨터 (LG전자, 한솔, 현대)</p>
                     </div>
                   </div>
                 </div>
