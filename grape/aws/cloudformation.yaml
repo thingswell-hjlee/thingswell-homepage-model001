@@ -133,6 +133,9 @@ Resources:
 
   # ============================================
   # S3 Upload Bucket
+  # TODO: 프로덕션 배포 시 PublicAccessBlock을 활성화하고 CloudFront signed URL 또는
+  #       특정 prefix에만 공개 정책을 적용하여 보안 강화할 것.
+  #       현재 설정은 모든 오브젝트를 공개 읽기 허용합니다.
   # ============================================
   UploadBucket:
     Type: AWS::S3::Bucket
@@ -719,6 +722,39 @@ Resources:
         IntegrationHttpMethod: POST
         Uri: !Sub "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${UploadFunction.Arn}/invocations"
 
+  # --- /upload/delete resource (파일 삭제) ---
+  UploadDeleteResource:
+    Type: AWS::ApiGateway::Resource
+    Properties:
+      RestApiId: !Ref ApiGateway
+      ParentId: !Ref UploadResource
+      PathPart: delete
+
+  UploadDeletePostMethod:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      RestApiId: !Ref ApiGateway
+      ResourceId: !Ref UploadDeleteResource
+      HttpMethod: POST
+      AuthorizationType: COGNITO_USER_POOLS
+      AuthorizerId: !Ref CognitoAuthorizer
+      Integration:
+        Type: AWS_PROXY
+        IntegrationHttpMethod: POST
+        Uri: !Sub "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${UploadFunction.Arn}/invocations"
+
+  UploadDeleteOptionsMethod:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      RestApiId: !Ref ApiGateway
+      ResourceId: !Ref UploadDeleteResource
+      HttpMethod: OPTIONS
+      AuthorizationType: NONE
+      Integration:
+        Type: AWS_PROXY
+        IntegrationHttpMethod: POST
+        Uri: !Sub "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${UploadFunction.Arn}/invocations"
+
   # ============================================
   # API Gateway Deployment
   # ============================================
@@ -732,6 +768,7 @@ Resources:
       - TrackRecordsGetMethod
       - TrackRecordsPostMethod
       - UploadPostMethod
+      - UploadDeletePostMethod
     Properties:
       RestApiId: !Ref ApiGateway
 

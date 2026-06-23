@@ -30,6 +30,7 @@ const TABLE_MAP = {
 };
 
 // CORS 헤더
+// TODO: 프로덕션 배포 시 Access-Control-Allow-Origin을 실제 프론트엔드 도메인으로 제한할 것
 const CORS_HEADERS = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'Content-Type,Authorization',
@@ -57,6 +58,25 @@ async function getNextId(tableName) {
     ReturnValues: 'UPDATED_NEW',
   }));
   return result.Attributes.currentId;
+}
+
+/**
+ * DynamoDB Scan 전체 결과 조회 (페이지네이션 처리)
+ * DynamoDB는 1회 Scan에 최대 1MB만 반환하므로 LastEvaluatedKey를 사용하여 반복 조회
+ */
+async function scanAll(params) {
+  const items = [];
+  let lastKey = undefined;
+  do {
+    const command = new ScanCommand({
+      ...params,
+      ExclusiveStartKey: lastKey,
+    });
+    const result = await docClient.send(command);
+    items.push(...(result.Items || []));
+    lastKey = result.LastEvaluatedKey;
+  } while (lastKey);
+  return items;
 }
 
 exports.handler = async (event) => {
@@ -90,11 +110,9 @@ exports.handler = async (event) => {
           }
           return response(200, result.Item);
         } else {
-          // 목록 조회 (전체 스캔 후 id 내림차순 정렬)
-          const result = await docClient.send(new ScanCommand({
-            TableName: dynamoTable,
-          }));
-          const items = (result.Items || []).sort((a, b) => b.id - a.id);
+          // 목록 조회 (전체 스캔 + 페이지네이션 후 id 내림차순 정렬)
+          const items = await scanAll({ TableName: dynamoTable });
+          items.sort((a, b) => b.id - a.id);
           return response(200, items);
         }
       }
@@ -102,6 +120,7 @@ exports.handler = async (event) => {
       case 'POST': {
         const data = JSON.parse(body || '{}');
         const newId = await getNextId(dynamoTable);
+        const now = new Date().toISOString();
         const item = {
           id: newId,
           title: data.title || '',
@@ -109,7 +128,8 @@ exports.handler = async (event) => {
           images: data.images || '[]',
           files: data.files || '[]',
           author: data.author || '',
-          created_at: new Date().toISOString(),
+          created_at: now,
+          updated_at: now,
         };
         await docClient.send(new PutCommand({
           TableName: dynamoTable,
@@ -134,7 +154,13 @@ exports.handler = async (event) => {
           }
         });
 
-        if (updateExpressions.length === 0) {
+        // 서버 측에서 updated_at 설정 (클라이언트 값 무시)
+        updateExpressions.push('#updated_at = :updated_at');
+        expressionValues[':updated_at'] = new Date().toISOString();
+        expressionNames['#updated_at'] = 'updated_at';
+
+        if (updateExpressions.length <= 1) {
+          // updated_at만 있으면 실제 업데이트 필드 없음
           return response(400, { error: 'No fields to update' });
         }
 
@@ -163,6 +189,6 @@ exports.handler = async (event) => {
     }
   } catch (error) {
     console.error('Board Lambda Error:', error);
-    return response(500, { error: 'Internal server error', detail: error.message });
+    return response(500, { error: 'Internal server error' });
   }
 };
