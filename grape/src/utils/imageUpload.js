@@ -1,4 +1,4 @@
-import { supabase } from '../lib/supabase';
+import { uploadFile, getPublicUrl, deleteFile, deleteFiles } from '../lib/storage';
 
 // 이미지 파일 검증
 export const validateImageFile = (file, maxSizeMB = 50) => {
@@ -42,7 +42,7 @@ export const convertImageToWebP = async (file, quality = 0.8) => {
           reject(err);
         }
       };
-      img.onerror = (err) => {
+      img.onerror = () => {
         URL.revokeObjectURL(url);
         reject(new Error('이미지 로드 실패'));
       };
@@ -53,86 +53,43 @@ export const convertImageToWebP = async (file, quality = 0.8) => {
   });
 };
 
-// Supabase Storage에 이미지 업로드
+// S3에 이미지 업로드
 export const uploadImage = async (file, folder = 'track_record', bucket = 'track_record', token = null) => {
   try {
     // 파일 검증 (50MB까지 허용)
     validateImageFile(file, 50);
-    
-    // Supabase 클라이언트 확인
-    if (!supabase) {
-      throw new Error('Supabase 클라이언트가 초기화되지 않았습니다.');
-    }
 
-    // 토큰이 제공된 경우 세션 설정
-    if (token) {
-      await supabase.auth.setSession({
-        access_token: token,
-        refresh_token: token // 임시로 같은 토큰 사용
-      });
-    }
-
-    console.log('Supabase URL:', import.meta.env.VITE_SUPABASE_URL);
     console.log('파일 정보:', { name: file.name, size: file.size, type: file.type });
     
     // WebP 변환 시도 (이미 변환된 파일은 그대로 사용)
-    let uploadFile = file;
+    let fileToUpload = file;
     try {
       const webpBlob = await convertImageToWebP(file, 0.8);
       const webpName = file.name.replace(/\.[^/.]+$/, '.webp');
-      uploadFile = new File([webpBlob], webpName, { type: 'image/webp' });
+      fileToUpload = new File([webpBlob], webpName, { type: 'image/webp' });
       console.log('이미지 WebP로 변환됨:', webpName);
     } catch (err) {
       console.warn('WebP 변환 실패, 원본 파일로 업로드합니다:', err);
-      uploadFile = file;
+      fileToUpload = file;
     }
 
-    // 고유한 파일명 생성
-    const fileExt = uploadFile.name.split('.').pop();
-    const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`;
-    const filePath = `${folder}/${fileName}`;
+    // S3 폴더 경로 결정 (bucket/folder 조합)
+    const s3Folder = `${bucket}/${folder}`;
     
-    console.log('업로드 경로:', filePath);
-    console.log('사용 버킷:', bucket);
+    console.log('업로드 폴더:', s3Folder);
     
-    // Supabase Storage에 업로드
-    const { data, error } = await supabase.storage
-      .from(bucket)
-      .upload(filePath, uploadFile, {
-        cacheControl: '3600',
-        upsert: false
-      });
+    // S3에 업로드 (Presigned URL 방식)
+    const { data, error } = await uploadFile(fileToUpload, s3Folder);
     
     if (error) {
       console.error('Storage 업로드 오류:', error);
-      
-      // 버킷이 없는 경우 안내
-      if (error.message.includes('Bucket not found')) {
-        throw new Error('Storage 버킷이 생성되지 않았습니다. Supabase 대시보드에서 "track_record" 버킷을 생성해주세요.');
-      }
-      
-      // 권한 오류인 경우 안내
-      if (error.message.includes('permission') || error.message.includes('policy')) {
-        throw new Error('Storage 접근 권한이 없습니다. Storage 정책을 설정해주세요.');
-      }
-      
-      // 네트워크 오류인 경우 안내
-      if (error.message.includes('fetch') || error.message.includes('network')) {
-        throw new Error('네트워크 연결을 확인해주세요.');
-      }
-      
-      throw error;
+      throw new Error(error.message || '업로드 실패');
     }
     
     console.log('업로드 성공:', data);
+    console.log('공개 URL:', data.publicUrl);
     
-    // 공개 URL 생성
-    const { data: { publicUrl } } = supabase.storage
-      .from(bucket)
-      .getPublicUrl(filePath);
-    
-    console.log('공개 URL:', publicUrl);
-    return publicUrl;
+    return data.publicUrl;
   } catch (error) {
     console.error('이미지 업로드 실패:', error);
     throw new Error(`이미지 업로드에 실패했습니다: ${error.message}`);
@@ -159,20 +116,10 @@ export const uploadMultipleImages = async (files, folder = 'track_record', bucke
 // 이미지 삭제
 export const deleteImage = async (filePath, token = null) => {
   try {
-    // 토큰이 제공된 경우 세션 설정
-    if (token) {
-      await supabase.auth.setSession({
-        access_token: token,
-        refresh_token: token // 임시로 같은 토큰 사용
-      });
-    }
-
-    const { error } = await supabase.storage
-      .from('track_record')
-      .remove([filePath]);
+    const { error } = await deleteFile(filePath);
     
     if (error) {
-      throw error;
+      throw new Error(error.message || '삭제 실패');
     }
     
     return true;
@@ -182,24 +129,11 @@ export const deleteImage = async (filePath, token = null) => {
   }
 };
 
-// Storage 버킷 존재 확인
+// Storage 버킷 존재 확인 (AWS에서는 항상 true 반환)
 export const checkStorageBucket = async (bucketName = 'track_record') => {
-  try {
-    const { data, error } = await supabase.storage.listBuckets();
-    if (error) {
-      console.error('버킷 목록 조회 실패:', error);
-      return false;
-    }
-
-    const bucketExists = data.some(bucket => bucket.name === bucketName);
-    console.log(`${bucketName} 버킷 존재:`, bucketExists);
-    console.log('사용 가능한 버킷:', data.map(b => b.name));
-
-    return bucketExists;
-  } catch (error) {
-    console.error('버킷 확인 실패:', error);
-    return false;
-  }
+  // AWS S3 버킷은 CloudFormation으로 배포시 항상 존재
+  console.log(`${bucketName} 버킷 확인: AWS S3 사용 중`);
+  return true;
 };
 
 // URL에서 파일 경로 추출
@@ -207,65 +141,39 @@ export const extractFilePathFromUrl = (url) => {
   try {
     console.log('URL 파싱 시작:', url);
     const urlObj = new URL(url);
-    const pathParts = urlObj.pathname.split('/');
-    console.log('파싱된 경로 파트들:', pathParts);
+    
+    // S3 URL 패턴: https://bucket.s3.region.amazonaws.com/key
+    // CloudFront URL 패턴: https://xxxxx.cloudfront.net/key
+    const pathname = urlObj.pathname;
+    
+    // 첫 번째 '/' 제거
+    const key = pathname.startsWith('/') ? pathname.substring(1) : pathname;
+    
+    if (key) {
+      console.log('추출된 파일 키:', key);
+      return key;
+    }
 
-    // Supabase Storage URL 패턴들:
-    // 1. https://xxx.supabase.co/storage/v1/object/public/bucket/folder/filename
-    // 2. https://xxx.supabase.co/bucket/folder/filename
-    // 3. https://xxx.supabase.co/storage/v1/object/public/bucket/folder/filename
-
-    // 첫 번째 패턴: /storage/v1/object/public/bucket/... 형태
-    if (pathParts.includes('storage') && pathParts.includes('v1') && pathParts.includes('object') && pathParts.includes('public')) {
+    // Supabase Storage URL 패턴 (하위호환)
+    const pathParts = pathname.split('/');
+    if (pathParts.includes('storage') && pathParts.includes('public')) {
       const publicIndex = pathParts.indexOf('public');
       if (publicIndex !== -1 && publicIndex + 1 < pathParts.length) {
         const result = pathParts.slice(publicIndex + 1).join('/');
-        console.log('Storage URL에서 추출된 파일 경로 (패턴1):', result);
+        console.log('Supabase URL에서 추출된 파일 경로:', result);
 
-        // 버킷 이름이 중복되는 경우 제거
-        // 예: product/product/1756797917620-d0pzn9g1h98.webp -> product/1756797917620-d0pzn9g1h98.webp
         const bucketNames = ['track_record', 'product'];
         for (const bucketName of bucketNames) {
           if (result.startsWith(`${bucketName}/${bucketName}/`)) {
-            const correctedResult = result.substring(bucketName.length + 1); // bucketName/ 제거
-            console.log('버킷 중복 제거 후 파일 경로:', correctedResult);
+            const correctedResult = result.substring(bucketName.length + 1);
             return correctedResult;
           }
         }
-
         return result;
       }
     }
 
-    // 두 번째 패턴: 버킷이 직접 경로에 있는 경우
-    // 예: /track_record/product/12345.jpg 또는 /product/images/abc.jpg
-    const bucketIndex = pathParts.findIndex(part => part === 'track_record' || part === 'product');
-    if (bucketIndex !== -1 && bucketIndex + 1 < pathParts.length) {
-      const result = pathParts.slice(bucketIndex + 1).join('/');
-      console.log('버킷 기반으로 추출된 파일 경로 (패턴2):', result);
-      return result;
-    }
-
-    // 세 번째 패턴: URL에서 마지막 슬래시 이후의 부분을 파일명으로 간주
-    // 예: https://xxx.supabase.co/storage/v1/object/public/bucket/folder/file.jpg
-    const lastPart = pathParts[pathParts.length - 1];
-    if (lastPart && lastPart.includes('.')) {
-      // 파일명이 있는 경우, 전체 경로에서 bucket 다음 부분을 추출
-      const fullPath = pathParts.join('/');
-      const bucketName = 'product'; // 현재 컨텍스트에서 사용하는 버킷
-
-      // URL에서 bucket 이후의 경로 추출
-      if (fullPath.includes(`/${bucketName}/`)) {
-        const result = fullPath.split(`/${bucketName}/`)[1];
-        console.log('파일명 기반으로 추출된 파일 경로 (패턴3):', result);
-        return result;
-      }
-    }
-
-    console.warn('URL에서 파일 경로를 추출할 수 없습니다. URL 형식:', url);
-    console.warn('지원되는 URL 형식:');
-    console.warn('1. /storage/v1/object/public/bucket/folder/filename');
-    console.warn('2. /bucket/folder/filename');
+    console.warn('URL에서 파일 경로를 추출할 수 없습니다:', url);
     return null;
   } catch (error) {
     console.error('URL 파싱 실패:', error, 'URL:', url);
@@ -276,10 +184,9 @@ export const extractFilePathFromUrl = (url) => {
 // 게시글 삭제 시 관련된 모든 이미지와 파일 삭제
 export const deleteAllPostFiles = async (postData, tableName = 'Track_record', token = null) => {
   try {
-    const bucket = tableName === 'Product' ? 'product' : 'track_record';
     const filesToDelete = [];
     
-    console.log('삭제 시작 - 테이블:', tableName, '버킷:', bucket);
+    console.log('삭제 시작 - 테이블:', tableName);
     console.log('삭제할 게시글 데이터:', postData);
 
     // 1. 메인 이미지들 삭제
@@ -287,10 +194,8 @@ export const deleteAllPostFiles = async (postData, tableName = 'Track_record', t
       try {
         const images = typeof postData.images === 'string' ? JSON.parse(postData.images) : postData.images;
         console.log('메인 이미지들:', images);
-        images.forEach((imageUrl, index) => {
-          console.log(`메인 이미지 ${index + 1}:`, imageUrl);
+        images.forEach((imageUrl) => {
           const filePath = extractFilePathFromUrl(imageUrl);
-          console.log(`추출된 파일 경로 ${index + 1}:`, filePath);
           if (filePath) {
             filesToDelete.push(filePath);
           }
@@ -302,23 +207,15 @@ export const deleteAllPostFiles = async (postData, tableName = 'Track_record', t
 
     // 2. 제품 전용 이미지들 삭제 (Product 테이블인 경우)
     if (tableName === 'Product') {
-      console.log('제품 전용 이미지 삭제 시작');
-      
       // 주요 기능 이미지들
       if (postData.keyFeatures) {
         try {
           const keyFeatures = typeof postData.keyFeatures === 'string' ? JSON.parse(postData.keyFeatures) : postData.keyFeatures;
-          console.log('주요 기능 데이터:', keyFeatures);
           if (keyFeatures.images) {
-            console.log('주요 기능 이미지들:', keyFeatures.images);
-            keyFeatures.images.forEach((imageObj, index) => {
-              console.log(`주요 기능 이미지 ${index + 1}:`, imageObj);
+            keyFeatures.images.forEach((imageObj) => {
               if (imageObj.url) {
                 const filePath = extractFilePathFromUrl(imageObj.url);
-                console.log(`주요 기능 파일 경로 ${index + 1}:`, filePath);
-                if (filePath) {
-                  filesToDelete.push(filePath);
-                }
+                if (filePath) filesToDelete.push(filePath);
               }
             });
           }
@@ -331,15 +228,10 @@ export const deleteAllPostFiles = async (postData, tableName = 'Track_record', t
       if (postData.specifications) {
         try {
           const specifications = typeof postData.specifications === 'string' ? JSON.parse(postData.specifications) : postData.specifications;
-          console.log('사양 이미지들:', specifications);
-          specifications.forEach((imageObj, index) => {
-            console.log(`사양 이미지 ${index + 1}:`, imageObj);
+          specifications.forEach((imageObj) => {
             if (imageObj.url) {
               const filePath = extractFilePathFromUrl(imageObj.url);
-              console.log(`사양 파일 경로 ${index + 1}:`, filePath);
-              if (filePath) {
-                filesToDelete.push(filePath);
-              }
+              if (filePath) filesToDelete.push(filePath);
             }
           });
         } catch (error) {
@@ -351,15 +243,10 @@ export const deleteAllPostFiles = async (postData, tableName = 'Track_record', t
       if (postData.certifications) {
         try {
           const certifications = typeof postData.certifications === 'string' ? JSON.parse(postData.certifications) : postData.certifications;
-          console.log('인증 이미지들:', certifications);
-          certifications.forEach((imageObj, index) => {
-            console.log(`인증 이미지 ${index + 1}:`, imageObj);
+          certifications.forEach((imageObj) => {
             if (imageObj.url) {
               const filePath = extractFilePathFromUrl(imageObj.url);
-              console.log(`인증 파일 경로 ${index + 1}:`, filePath);
-              if (filePath) {
-                filesToDelete.push(filePath);
-              }
+              if (filePath) filesToDelete.push(filePath);
             }
           });
         } catch (error) {
@@ -371,15 +258,10 @@ export const deleteAllPostFiles = async (postData, tableName = 'Track_record', t
       if (postData.downloads) {
         try {
           const downloads = typeof postData.downloads === 'string' ? JSON.parse(postData.downloads) : postData.downloads;
-          console.log('다운로드 파일들:', downloads);
-          downloads.forEach((download, index) => {
-            console.log(`다운로드 ${index + 1}:`, download);
+          downloads.forEach((download) => {
             if (download.link && download.file) {
               const filePath = extractFilePathFromUrl(download.link);
-              console.log(`다운로드 파일 경로 ${index + 1}:`, filePath);
-              if (filePath) {
-                filesToDelete.push(filePath);
-              }
+              if (filePath) filesToDelete.push(filePath);
             }
           });
         } catch (error) {
@@ -391,28 +273,14 @@ export const deleteAllPostFiles = async (postData, tableName = 'Track_record', t
     // 3. 실제 파일 삭제 실행
     if (filesToDelete.length > 0) {
       console.log(`삭제할 파일들 (${filesToDelete.length}개):`, filesToDelete);
-      console.log('사용할 버킷:', bucket);
 
-      // 토큰이 제공된 경우 세션 설정
-      if (token) {
-        await supabase.auth.setSession({
-          access_token: token,
-          refresh_token: token // 임시로 같은 토큰 사용
-        });
-      }
-
-      const { data, error } = await supabase.storage
-        .from(bucket)
-        .remove(filesToDelete);
+      const { error } = await deleteFiles(filesToDelete);
       
       if (error) {
         console.error('파일 삭제 중 오류:', error);
-        console.error('삭제 시도한 파일들:', filesToDelete);
-        console.error('사용한 버킷:', bucket);
         throw new Error(`파일 삭제 중 오류가 발생했습니다: ${error.message}`);
       }
       
-      console.log('삭제 결과:', data);
       console.log(`${filesToDelete.length}개의 파일이 성공적으로 삭제되었습니다.`);
     } else {
       console.log('삭제할 파일이 없습니다.');
@@ -440,73 +308,31 @@ export const validateDownloadFile = (file, maxSizeMB = 100) => {
   return true;
 };
 
-// Supabase Storage에 다운로드 파일 업로드
+// S3에 다운로드 파일 업로드
 export const uploadDownloadFile = async (file, folder = 'downloads', bucket = 'track_record', token = null) => {
   try {
     // 파일 검증 (100MB까지 허용)
     validateDownloadFile(file, 100);
-    
-    // Supabase 클라이언트 확인
-    if (!supabase) {
-      throw new Error('Supabase 클라이언트가 초기화되지 않았습니다.');
-    }
-
-    // 토큰이 제공된 경우 세션 설정
-    if (token) {
-      await supabase.auth.setSession({
-        access_token: token,
-        refresh_token: token // 임시로 같은 토큰 사용
-      });
-    }
 
     console.log('다운로드 파일 정보:', { name: file.name, size: file.size, type: file.type });
     
-    // 고유한 파일명 생성
-    const fileExt = file.name.split('.').pop();
-    const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`;
-    const filePath = `${folder}/${fileName}`;
+    // S3 폴더 경로 결정
+    const s3Folder = `${bucket}/${folder}`;
     
-    console.log('다운로드 파일 업로드 경로:', filePath);
-    console.log('사용 버킷:', bucket);
+    console.log('다운로드 파일 업로드 폴더:', s3Folder);
     
-    // Supabase Storage에 업로드
-    const { data, error } = await supabase.storage
-      .from(bucket)
-      .upload(filePath, file, {
-        cacheControl: '3600',
-        upsert: false
-      });
+    // S3에 업로드 (Presigned URL 방식)
+    const { data, error } = await uploadFile(file, s3Folder);
     
     if (error) {
       console.error('다운로드 파일 업로드 오류:', error);
-      
-      // 버킷이 없는 경우 안내
-      if (error.message.includes('Bucket not found')) {
-        throw new Error('Storage 버킷이 생성되지 않았습니다. Supabase 대시보드에서 "track_record" 버킷을 생성해주세요.');
-      }
-      
-      // 권한 오류인 경우 안내
-      if (error.message.includes('permission') || error.message.includes('policy')) {
-        throw new Error('Storage 접근 권한이 없습니다. Storage 정책을 설정해주세요.');
-      }
-      
-      // 네트워크 오류인 경우 안내
-      if (error.message.includes('fetch') || error.message.includes('network')) {
-        throw new Error('네트워크 연결을 확인해주세요.');
-      }
-      
-      throw error;
+      throw new Error(error.message || '업로드 실패');
     }
     
     console.log('다운로드 파일 업로드 성공:', data);
+    console.log('다운로드 파일 공개 URL:', data.publicUrl);
     
-    // 공개 URL 생성
-    const { data: { publicUrl } } = supabase.storage
-      .from(bucket)
-      .getPublicUrl(filePath);
-    
-    console.log('다운로드 파일 공개 URL:', publicUrl);
-    return publicUrl;
+    return data.publicUrl;
   } catch (error) {
     console.error('다운로드 파일 업로드 실패:', error);
     throw new Error(`다운로드 파일 업로드에 실패했습니다: ${error.message}`);
@@ -516,20 +342,10 @@ export const uploadDownloadFile = async (file, folder = 'downloads', bucket = 't
 // 다운로드 파일 삭제
 export const deleteDownloadFile = async (filePath, token = null) => {
   try {
-    // 토큰이 제공된 경우 세션 설정
-    if (token) {
-      await supabase.auth.setSession({
-        access_token: token,
-        refresh_token: token // 임시로 같은 토큰 사용
-      });
-    }
-
-    const { error } = await supabase.storage
-      .from('track_record')
-      .remove([filePath]);
+    const { error } = await deleteFile(filePath);
     
     if (error) {
-      throw error;
+      throw new Error(error.message || '삭제 실패');
     }
     
     return true;
@@ -566,42 +382,15 @@ export const analyzePostData = (postData, tableName) => {
   if (tableName === 'Product') {
     if (postData.keyFeatures) {
       console.log('주요 기능 필드:', postData.keyFeatures);
-      try {
-        const keyFeatures = typeof postData.keyFeatures === 'string' ? JSON.parse(postData.keyFeatures) : postData.keyFeatures;
-        console.log('파싱된 주요 기능:', keyFeatures);
-      } catch (error) {
-        console.error('주요 기능 파싱 실패:', error);
-      }
     }
-    
     if (postData.specifications) {
       console.log('사양 필드:', postData.specifications);
-      try {
-        const specifications = typeof postData.specifications === 'string' ? JSON.parse(postData.specifications) : postData.specifications;
-        console.log('파싱된 사양:', specifications);
-      } catch (error) {
-        console.error('사양 파싱 실패:', error);
-      }
     }
-    
     if (postData.certifications) {
       console.log('인증 필드:', postData.certifications);
-      try {
-        const certifications = typeof postData.certifications === 'string' ? JSON.parse(postData.certifications) : postData.certifications;
-        console.log('파싱된 인증:', certifications);
-      } catch (error) {
-        console.error('인증 파싱 실패:', error);
-      }
     }
-    
     if (postData.downloads) {
       console.log('다운로드 필드:', postData.downloads);
-      try {
-        const downloads = typeof postData.downloads === 'string' ? JSON.parse(postData.downloads) : postData.downloads;
-        console.log('파싱된 다운로드:', downloads);
-      } catch (error) {
-        console.error('다운로드 파싱 실패:', error);
-      }
     }
   }
   
