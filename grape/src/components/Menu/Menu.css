@@ -42,7 +42,9 @@ body.modal-open .hamburger-menu-wrapper {
   width: 100%;
   max-width: 1500px;
   border-radius: var(--menu-border-radius);
-  background: rgb(255, 255, 255, 0.8);
+  background: rgba(10, 14, 26, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   box-shadow: var(--shadow-menu);
   font-family: var(--font-family-primary);
   position: relative;
@@ -58,7 +60,7 @@ body.modal-open .hamburger-menu-wrapper {
 
 /* 스크롤된 상태의 메뉴 컨테이너 */
 .menu-container.scrolled {
-  background: var(--color-background-light);
+  background: var(--color-surface);
   box-shadow: var(--shadow-lg);
   border: var(--border-width-thin) solid var(--border-color-light);
 }
@@ -247,7 +249,9 @@ body.modal-open .hamburger-menu-wrapper {
   top: 100%;
   left: 0;
   border-radius: 0 0 var(--menu-border-radius) var(--menu-border-radius);
-  background: rgb(255, 255, 255, 0.9);
+  background: rgba(10, 14, 26, 0.9);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   box-shadow: var(--shadow-xl);
   border: var(--border-width-thin) solid var(--border-color-light);
   border-top: none;
@@ -327,7 +331,7 @@ body.modal-open .hamburger-menu-wrapper {
   user-select: text;
   position: relative;
   padding: var(--spacing-xs) 0;
-  background-color: rgb(184, 184, 184,0.3);
+  background-color: rgba(30, 41, 59, 0.5);
 }
 
 

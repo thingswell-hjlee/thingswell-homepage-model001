@@ -4,28 +4,28 @@
   /* ===== COLORS ===== */
 
   /* Primary Colors */
-  --color-primary: #1976d2; /* 메인 블루 - 신뢰, 기술, 안전 */
-  --color-primary-light: #42a5f5; /* Lighter variant of primary */
-  --color-primary-dark: #1565c0; /* Darker variant of primary */
+  --color-primary: #00b4d8; /* 메인 시안/틸 - 기술, 혁신, 미래 */
+  --color-primary-light: #48cae4; /* Lighter variant of primary */
+  --color-primary-dark: #0096c7; /* Darker variant of primary */
 
   /* Secondary Colors */
-  --color-secondary: #212121; /* 서브 다크 그레이 - 현대적, 전문적 */
-  --color-secondary-light: #424242; /* Lighter variant of secondary */
+  --color-secondary: #1e293b; /* 서브 다크 네이비 - 현대적, 전문적 */
+  --color-secondary-light: #334155; /* Lighter variant of secondary */
   --color-secondary-dark: #000000; /* Darker variant of secondary */
 
   /* Background Colors */
-  --color-background: #f5f5f5; /* 배경 라이트 그레이 - 깔끔함, 가독성 */
-  --color-background-light: #ffffff;
-  --color-background-dark: #323232  ; /* Darker variant of background */
-  --color-surface: #f5f5f5;
-  --color-surface-light: #fafafa; /* Lighter variant of surface */
-  --color-surface-dark: #e0e0e0; /* Darker variant of surface */
+  --color-background: #0a0e1a; /* 배경 다크 네이비 - 프리미엄 테크 */
+  --color-background-light: #111827;
+  --color-background-dark: #050709; /* Darker variant of background */
+  --color-surface: #1a1f2e;
+  --color-surface-light: #1f2937; /* Lighter variant of surface */
+  --color-surface-dark: #0d1117; /* Darker variant of surface */
   --color-footer: #1E1E1E;
 
   /* Text Colors */
-  --color-text-primary: #212121; /* 서브 다크 그레이 - 주요 텍스트 */
-  --color-text-secondary: #424242; /* 중간 그레이 - 보조 텍스트 */
-  --color-text-muted: #757575; /* 연한 그레이 - 비활성 텍스트 */
+  --color-text-primary: #e2e8f0; /* 밝은 그레이 - 다크 배경 위 주요 텍스트 */
+  --color-text-secondary: #94a3b8; /* 중간 밝은 그레이 - 보조 텍스트 */
+  --color-text-muted: #64748b; /* 음소거된 그레이 - 비활성 텍스트 */
   --color-text-light: #f5f5f5; /* 라이트 그레이 - 밝은 배경의 텍스트 */
   --color-text-white: #ffffff;
 
@@ -35,10 +35,10 @@
   --color-overlay-dark: rgba(0, 0, 0, 0.8);
 
   /* Interactive Colors */
-  --color-hover: #42a5f5; /* Lighter variant of primary */
-  --color-active: #1565c0; /* Darker variant of primary */
-  --color-focus: #1976d2; /* Primary color */
-  --color-disabled: #bdbdbd; /* Muted gray for disabled state */
+  --color-hover: #48cae4; /* Lighter variant of primary */
+  --color-active: #0096c7; /* Darker variant of primary */
+  --color-focus: #00b4d8; /* Primary color */
+  --color-disabled: #334155; /* Muted dark for disabled state */
 
   /* Accent Colors */
   --color-accent: #ff9800; /* 포인트 오렌지 - 주목성, 경고, 에너지 */
@@ -109,9 +109,9 @@
   --border-width-thick: 4px;
 
   /* Border Colors */
-  --border-color-light: #e0e0e0; /* 연한 그레이 - 가벼운 구분선 */
-  --border-color-normal: #bdbdbd; /* 중간 그레이 - 일반 구분선 */
-  --border-color-dark: #757575; /* 진한 그레이 - 강한 구분선 */
+  --border-color-light: #1e293b; /* 다크 네이비 - 가벼운 구분선 */
+  --border-color-normal: #334155; /* 중간 네이비 - 일반 구분선 */
+  --border-color-dark: #475569; /* 밝은 네이비 - 강한 구분선 */
 
   /* ===== SHADOWS ===== */
 

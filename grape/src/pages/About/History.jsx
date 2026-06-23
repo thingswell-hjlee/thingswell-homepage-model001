@@ -24,6 +24,34 @@ const History = () => {
                 <div className="timeline-item">
                   <div className="timeline-marker"></div>
                   <div className="timeline-content">
+                    <div className="timeline-date">2026</div>
+                    <div className="timeline-title">
+                      AI 안전 플랫폼 확대 및 특허 등록
+                    </div>
+                    <div className="timeline-description">
+                      <ul>
+                        <li>
+                          2026. 스마트 경로당 건강관리시스템 70개소 납품
+                        </li>
+                        <li>
+                          2026. 스마트스토어 안전 및 운영 AI 통합관리시스템 개발
+                        </li>
+                        <li>
+                          2026. SafeGAI AIBOX 시스템 개발
+                        </li>
+                        <li>
+                          2026. NVIDIA, AWS 기반의 스마트 안전 플랫폼 파이프라인 구축
+                        </li>
+                        <li>
+                          2026. 안전 AI 특허 등록
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div className="timeline-item">
+                  <div className="timeline-marker"></div>
+                  <div className="timeline-content">
                     <div className="timeline-date">2025</div>
                     <div className="timeline-title">
                       산업안전 솔루션 출시
