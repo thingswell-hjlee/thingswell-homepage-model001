@@ -12,12 +12,15 @@ export default function SolutionDetailPage({
   solutionData,
   solutionVariant = 'compact',
   blocks = [],
+  customSections = null,
 }) {
   return (
       <div className="solutions-section">
         {solutionData && (
           <SolutionCard {...solutionData} variant={solutionVariant} />
         )}
+
+        {customSections}
 
         {blocks.map((block, idx) => {
           if (block.type === 'applicationCards') {
