@@ -3,10 +3,10 @@
   /* ===== DESIGN TOKENS ===== */
   :root {
     /* Mobile Menu Colors */
-    --mobile-menu-bg: #f5f5f5;
-    --mobile-menu-text-primary: #1a1a1a;
-    --mobile-menu-text-secondary: #666666;
-    --mobile-menu-border: #e0e0e0;
+    --mobile-menu-bg: var(--color-background);
+    --mobile-menu-text-primary: var(--color-text-primary);
+    --mobile-menu-text-secondary: var(--color-text-secondary);
+    --mobile-menu-border: var(--border-color-light);
     --mobile-menu-button-bg: #ff9500;
     --mobile-menu-button-text: #ffffff;
 

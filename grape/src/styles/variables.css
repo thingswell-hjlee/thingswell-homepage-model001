@@ -38,7 +38,7 @@
   --color-hover: #48cae4; /* Lighter variant of primary */
   --color-active: #0096c7; /* Darker variant of primary */
   --color-focus: #00b4d8; /* Primary color */
-  --color-disabled: #334155; /* Muted dark for disabled state */
+  --color-disabled: #475569; /* Muted dark for disabled state - improved contrast */
 
   /* Accent Colors */
   --color-accent: #ff9800; /* 포인트 오렌지 - 주목성, 경고, 에너지 */

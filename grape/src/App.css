@@ -15,12 +15,11 @@ html {
 
 body {
   font-family: var(--font-family-primary) !important;
-  background-color: var(--color-background-primary) !important;
+  background-color: var(--color-background) !important;
   background-image: none !important; /* 배경 이미지 제거 */
   overflow-x: hidden !important; /* 좌우 스크롤만 제거 */
   overflow-y: auto !important; /* 세로 스크롤 허용 */
   min-height: 100vh !important;
-  background-color: var(--color-background) !important;
   -webkit-overflow-scrolling: touch !important;
   margin: 0 !important;
   padding: 0 !important;
@@ -33,7 +32,7 @@ body {
   padding: 0 !important;
   text-align: center !important;
   box-sizing: border-box !important;
-  background-color: var(--color-background-primary) !important;
+  background-color: var(--color-background) !important;
   -webkit-overflow-scrolling: touch !important;
 }
 
