@@ -1,0 +1,389 @@
+/* SafeGAI Solution Page - Premium Dark Tech Design */
+
+.solution-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Hero Section */
+.sol-hero {
+  text-align: center;
+  padding: 3rem 0;
+  margin-bottom: 2rem;
+}
+
+.sol-hero-badge {
+  display: inline-block;
+  padding: 0.4rem 1.2rem;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: #00b4d8;
+  border: 1px solid rgba(0, 180, 216, 0.4);
+  background: rgba(0, 180, 216, 0.08);
+  margin-bottom: 1.5rem;
+}
+
+.sol-hero-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--color-text-light, #f0f0f0);
+  line-height: 1.3;
+  margin-bottom: 1.5rem;
+}
+
+.sol-hero-desc {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--color-text-muted, #94a3b8);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Section */
+.sol-section {
+  margin-bottom: 4rem;
+}
+
+.sol-section-header {
+  margin-bottom: 2rem;
+}
+
+.sol-section-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #00b4d8;
+}
+
+.sol-section-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--color-text-light, #f0f0f0);
+  margin-top: 0.5rem;
+}
+
+/* Tech Stack Cards */
+.sol-tech-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.sol-tech-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.sol-tech-card:hover {
+  border-color: rgba(0, 180, 216, 0.4);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 180, 216, 0.1);
+}
+
+.sol-tech-card-img {
+  position: relative;
+  height: 160px;
+  overflow: hidden;
+}
+
+.sol-tech-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.sol-tech-card:hover .sol-tech-card-img img {
+  transform: scale(1.05);
+}
+
+.sol-tech-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 40%, rgba(10, 14, 26, 0.8));
+}
+
+.sol-tech-card-body {
+  padding: 1.25rem;
+}
+
+.sol-tech-card-subtitle {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #00b4d8;
+}
+
+.sol-tech-card-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-text-light, #f0f0f0);
+  margin: 0.4rem 0 0.6rem;
+}
+
+.sol-tech-card-desc {
+  font-size: 0.8rem;
+  line-height: 1.6;
+  color: var(--color-text-muted, #94a3b8);
+}
+
+/* Domain Cards */
+.sol-domain-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.sol-domain-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.sol-domain-card:hover {
+  border-color: rgba(0, 180, 216, 0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+
+.sol-domain-card-img {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+}
+
+.sol-domain-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.sol-domain-card:hover .sol-domain-card-img img {
+  transform: scale(1.05);
+}
+
+.sol-domain-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(10, 14, 26, 0.9) 20%, rgba(10, 14, 26, 0.2));
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.5rem;
+}
+
+.sol-domain-card-subtitle {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #00b4d8;
+}
+
+.sol-domain-card-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-top: 0.25rem;
+}
+
+.sol-domain-card-list {
+  padding: 1.25rem;
+  margin: 0;
+  list-style: none;
+}
+
+.sol-domain-card-list li {
+  font-size: 0.85rem;
+  color: var(--color-text-muted, #94a3b8);
+  padding: 0.4rem 0;
+  padding-left: 1rem;
+  position: relative;
+  line-height: 1.5;
+}
+
+.sol-domain-card-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #00b4d8;
+  opacity: 0.6;
+}
+
+/* Pipeline Cards */
+.sol-pipeline-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.sol-pipeline-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.sol-pipeline-card:hover {
+  border-color: rgba(0, 180, 216, 0.3);
+  transform: translateY(-3px);
+}
+
+.sol-pipeline-card-img {
+  position: relative;
+  height: 140px;
+  overflow: hidden;
+}
+
+.sol-pipeline-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.7);
+}
+
+.sol-pipeline-card-step {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(0, 180, 216, 0.9);
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sol-pipeline-card-body {
+  padding: 1.25rem;
+}
+
+.sol-pipeline-card-subtitle {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #00b4d8;
+}
+
+.sol-pipeline-card-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-text-light, #f0f0f0);
+  margin: 0.3rem 0 0.75rem;
+}
+
+.sol-pipeline-card-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sol-pipeline-card-list li {
+  font-size: 0.75rem;
+  color: var(--color-text-muted, #94a3b8);
+  padding: 0.3rem 0;
+  padding-left: 0.75rem;
+  position: relative;
+  line-height: 1.5;
+}
+
+.sol-pipeline-card-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #00b4d8;
+  opacity: 0.5;
+}
+
+/* Architecture */
+.sol-architecture {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.sol-architecture-img {
+  width: 100%;
+  max-height: 400px;
+  object-fit: contain;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 1.5rem;
+}
+
+.sol-architecture-layers {
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.sol-architecture-layer {
+  padding: 1rem;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.sol-architecture-layer p {
+  font-size: 0.8rem;
+  line-height: 1.6;
+  color: var(--color-text-muted, #94a3b8);
+  margin-top: 0.5rem;
+}
+
+.sol-layer-badge {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.sol-layer-badge.edge { background: rgba(118, 185, 0, 0.2); color: #76b900; }
+.sol-layer-badge.comm { background: rgba(0, 180, 216, 0.2); color: #00b4d8; }
+.sol-layer-badge.cloud { background: rgba(255, 153, 0, 0.2); color: #ff9900; }
+.sol-layer-badge.ctrl { background: rgba(168, 85, 247, 0.2); color: #a855f7; }
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .sol-tech-grid { grid-template-columns: repeat(2, 1fr); }
+  .sol-pipeline-grid { grid-template-columns: repeat(2, 1fr); }
+  .sol-architecture-layers { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .sol-hero-title { font-size: 1.75rem; }
+  .sol-tech-grid { grid-template-columns: 1fr; }
+  .sol-domain-grid { grid-template-columns: 1fr; }
+  .sol-pipeline-grid { grid-template-columns: 1fr; }
+  .sol-architecture-layers { grid-template-columns: 1fr; }
+  .sol-section-title { font-size: 1.4rem; }
+}
