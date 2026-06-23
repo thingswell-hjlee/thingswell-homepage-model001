@@ -4,7 +4,7 @@ import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import draftToHtml from 'draftjs-to-html';
 import htmlToDraft from 'html-to-draftjs';
-import { supabase } from '../../lib/supabase';
+import { createBoard, updateBoard } from '../../lib/api';
 import { uploadImage, validateImageFile } from '../../utils/imageUpload';
 import './BoardEditor.css';
 
@@ -140,35 +140,26 @@ const BoardEditor = ({
 
       if (isEditMode && existingId) {
         // 편집 모드: 기존 게시물 업데이트
-        const { data: updateData, error: updateError } = await supabase
-          .from(tableName)
-          .update({
-            title: currentTitle.trim(),
-            content: htmlContent,
-            images: images.length > 0 ? JSON.stringify(images) : null,
-            updated_at: new Date().toISOString()
-          })
-          .eq('id', existingId)
-          .select();
+        const result = await updateBoard(tableName, existingId, {
+          title: currentTitle.trim(),
+          content: htmlContent,
+          images: images.length > 0 ? JSON.stringify(images) : null,
+          updated_at: new Date().toISOString()
+        });
 
-        data = updateData;
-        error = updateError;
+        data = result.data;
+        error = result.error;
       } else {
         // 생성 모드: 새 게시물 생성
-        const { data: insertData, error: insertError } = await supabase
-          .from(tableName)
-          .insert([
-            {
-              title: currentTitle.trim(),
-              content: htmlContent,
-              images: images.length > 0 ? JSON.stringify(images) : null,
-              created_at: new Date().toISOString()
-            }
-          ])
-          .select();
+        const result = await createBoard(tableName, {
+          title: currentTitle.trim(),
+          content: htmlContent,
+          images: images.length > 0 ? JSON.stringify(images) : null,
+          created_at: new Date().toISOString()
+        });
 
-        data = insertData;
-        error = insertError;
+        data = result.data;
+        error = result.error;
       }
 
       if (error) {
@@ -186,7 +177,7 @@ const BoardEditor = ({
           title: currentTitle,
           content: htmlContent,
           rawContent: rawContentState,
-          savedData: data[0],
+          savedData: Array.isArray(data) ? data[0] : data,
           isEdit: isEditMode
         });
       }

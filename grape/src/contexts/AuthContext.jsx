@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { supabase } from '../lib/supabase.js';
+import { getSession, onAuthStateChange, signOut as authSignOut } from '../lib/auth.js';
 
 const AuthContext = createContext({});
 
@@ -16,18 +16,19 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     // 현재 세션 확인
-    const getSession = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      setSession(session);
-      setUser(session?.user ?? null);
+    const initSession = async () => {
+      const { data } = await getSession();
+      const currentSession = data?.session || null;
+      setSession(currentSession);
+      setUser(currentSession?.user ?? null);
       setLoading(false);
     };
 
-    getSession();
+    initSession();
 
     // 인증 상태 변경 리스너
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
+    const { data: { subscription } } = onAuthStateChange(
+      (event, session) => {
         console.log('Auth state changed:', event, session?.user?.email);
         setSession(session);
         setUser(session?.user ?? null);
@@ -39,7 +40,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const signOut = async () => {
-    await supabase.auth.signOut();
+    await authSignOut();
   };
 
   // 권한 체크 함수들

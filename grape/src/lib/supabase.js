@@ -1,24 +1,34 @@
 /**
- * @deprecated Supabase 클라이언트 - AWS API Gateway로 마이그레이션 중
+ * @deprecated 이 파일은 더 이상 사용되지 않습니다.
+ * AWS API Gateway + DynamoDB + Cognito로 마이그레이션되었습니다.
  * 
  * 새 코드에서는 다음 모듈을 사용하세요:
  * - API 호출: src/lib/api.js
  * - 인증: src/lib/auth.js
  * - 파일 저장소: src/lib/storage.js
+ * 
+ * 이 파일은 호환성을 위해 유지되지만, 실제 기능은 제공하지 않습니다.
  */
-import { createClient } from "@supabase/supabase-js";
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+console.warn(
+  '[Deprecated] supabase.js는 더 이상 사용되지 않습니다. ' +
+  'src/lib/api.js, src/lib/auth.js, src/lib/storage.js를 사용하세요.'
+);
 
-// 환경 변수가 없는 경우 경고 (AWS 마이그레이션 중에는 정상)
-if (!supabaseUrl || !supabaseAnonKey) {
-  console.warn('[Deprecated] Supabase 환경 변수가 설정되지 않았습니다. AWS API로 마이그레이션되었습니다.');
-  console.warn('아직 Supabase를 사용하는 컴포넌트는 src/lib/api.js로 전환해주세요.');
-}
+// 더미 supabase 객체 - 사용 시 경고 표시
+const createDeprecatedProxy = (path = 'supabase') => {
+  return new Proxy({}, {
+    get(target, prop) {
+      if (prop === 'then' || prop === 'catch' || typeof prop === 'symbol') {
+        return undefined;
+      }
+      console.warn(`[Deprecated] ${path}.${String(prop)} 호출됨. src/lib/api.js를 사용하세요.`);
+      return (...args) => {
+        console.warn(`[Deprecated] ${path}.${String(prop)}() 호출됨. src/lib/api.js를 사용하세요.`);
+        return createDeprecatedProxy(`${path}.${String(prop)}()`);
+      };
+    }
+  });
+};
 
-// Supabase 클라이언트 생성 (환경변수 없으면 더미 URL 사용)
-export const supabase = createClient(
-  supabaseUrl || 'https://placeholder.supabase.co',
-  supabaseAnonKey || 'placeholder-key'
-); 
+export const supabase = createDeprecatedProxy('supabase');

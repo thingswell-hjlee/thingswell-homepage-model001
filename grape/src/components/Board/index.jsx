@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import BoardList from '../BoardList';
 import BoardDetail from '../BoardDetail';
 import BoardEditor from '../BoardEditor';
-import { supabase } from '../../lib/supabase';
+import { getBoardById, deleteBoard } from '../../lib/api';
 import { useAuth } from '../../contexts/AuthContext';
 import { deleteAllPostFiles } from '../../utils/imageUpload';
 import './Board.css';
@@ -37,14 +37,9 @@ const Board = ({ tableName, tableNames }) => {
       // 편집 모드
       const targetTable = tableParam || resolvedTableName;
       if (targetTable) {
-        // Supabase에서 해당 게시물 조회
         (async () => {
           try {
-            const { data, error } = await supabase
-              .from(targetTable)
-              .select('*')
-              .eq('id', editParam)
-              .single();
+            const { data, error } = await getBoardById(targetTable, editParam);
             if (!error && data) {
               setEditingPost({ ...data, tableName: targetTable });
               setCurrentView('edit');
@@ -64,14 +59,9 @@ const Board = ({ tableName, tableNames }) => {
       const targetId = idParam || detailParam;
       const targetTable = tableParam || resolvedTableName;
       if (targetTable) {
-        // Supabase에서 해당 게시물 조회
         (async () => {
           try {
-            const { data, error } = await supabase
-              .from(targetTable)
-              .select('*')
-              .eq('id', targetId)
-              .single();
+            const { data, error } = await getBoardById(targetTable, targetId);
             if (!error && data) {
               setSelectedPost({ ...data, tableName: targetTable });
               setCurrentView('detail');
@@ -187,11 +177,8 @@ const Board = ({ tableName, tableNames }) => {
         const targetTable = post?.tableName || resolvedTableName;
         await deleteAllPostFiles(post, targetTable);
         
-        // 2. Supabase에서 실제 데이터 삭제
-        const { error } = await supabase
-          .from(targetTable)
-          .delete()
-          .eq('id', post.id);
+        // 2. API를 통해 실제 데이터 삭제
+        const { error } = await deleteBoard(targetTable, post.id);
 
         if (error) {
           console.error('삭제 오류:', error);

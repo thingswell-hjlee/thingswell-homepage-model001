@@ -11,9 +11,9 @@ import collision from '../../assets/collision.jpg';
 import collapse from '../../assets/collapse.jpg';
 import ProductList from './ProductList';
 import controlHeaderImage from '../../assets/header_image/product.jpg';
-import { supabase } from '../../lib/supabase';
+import { getProducts, createProduct, updateProduct, deleteProduct, toggleProductActive } from '../../lib/api';
 import { useAuth } from '../../contexts/AuthContext';
-import { checkTableExists, createTablePolicies, checkUserAuthStatus } from '../../utils/supabaseRLS';
+import { checkTableExists, checkUserAuthStatus } from '../../utils/supabaseRLS';
 import { deleteAllPostFiles } from '../../utils/imageUpload';
 import ProductPage from '../../components/ProductPage/ProductPage';
 import RecordEditor from '../../components/RecordEditor';
@@ -54,14 +54,12 @@ export default function ProductListMonitoringPage() {
     const detailId = searchParams.get('detail');
     
     if (detailId) {
-      // URL에 detail 파라미터가 있으면 해당 제품을 찾아서 상세 모드로 설정
       const record = products.find(p => p.rawData && p.rawData.id === parseInt(detailId));
       if (record) {
         setSelectedRecord(record.rawData);
         setViewMode('detail');
       }
     } else {
-      // URL에 detail 파라미터가 없으면 리스트 모드로 설정
       setViewMode('list');
       setSelectedRecord(null);
     }
@@ -71,35 +69,13 @@ export default function ProductListMonitoringPage() {
     try {
       setLoading(true);
 
-      // 먼저 테이블 존재 여부 확인
-      const tableExists = await checkTableExists('Product');
-      if (!tableExists) {
-        console.log('Product 테이블이 존재하지 않습니다. Supabase 대시보드에서 테이블을 생성해주세요.');
-        setLoading(false);
-        return;
-      }
-
-      let query = supabase
-        .from('Product')
-        .select('*')
-        .order('date', { ascending: false });
-
-      query = query.eq('kind', '관제시스템');
-
-      const { data, error } = await query;
+      const { data, error } = await getProducts({ kind: '관제시스템', order: 'date', ascending: false });
 
       if (error) {
-        // RLS 정책 오류인 경우 정책 생성 안내
-        if (error.message.includes('row-level security policy')) {
-          console.log('Product 테이블에 RLS 정책이 필요합니다:');
-          createTablePolicies('Product');
-          setLoading(false);
-          return;
-        }
-        throw error;
+        throw new Error(error.message);
       }
 
-      const formattedProducts = data.map(product => {
+      const formattedProducts = (data || []).map(product => {
         let imageUrl = null;
         if (product.images) {
           try {
@@ -144,28 +120,24 @@ export default function ProductListMonitoringPage() {
       try {
         setSubmitting(true);
         
-        const { data, error } = await supabase
-          .from('Product')
-          .update({
-            title: formData.title,
-            desc: formData.desc,
-            overview_title: formData.overview_title,
-            date: formData.date,
-            orderer: formData.orderer,
-            type: formData.type,
-            kind: formData.kind,
-            images: formData.images && formData.images.length > 0 ? JSON.stringify(formData.images) : null,
-            keyFeatures: formData.keyFeatures ? JSON.stringify(formData.keyFeatures) : null,
-            specifications: formData.specifications && formData.specifications.length > 0 ? JSON.stringify(formData.specifications) : null,
-            certifications: formData.certifications && formData.certifications.length > 0 ? JSON.stringify(formData.certifications) : null,
-            downloads: formData.downloads && formData.downloads.length > 0 ? JSON.stringify(formData.downloads) : null,
-            videos: formData.videos && formData.videos.length > 0 ? JSON.stringify(formData.videos) : null
-          })
-          .eq('id', editingExistingRecord.id)
-          .select();
+        const { data, error } = await updateProduct(editingExistingRecord.id, {
+          title: formData.title,
+          desc: formData.desc,
+          overview_title: formData.overview_title,
+          date: formData.date,
+          orderer: formData.orderer,
+          type: formData.type,
+          kind: formData.kind,
+          images: formData.images && formData.images.length > 0 ? JSON.stringify(formData.images) : null,
+          keyFeatures: formData.keyFeatures ? JSON.stringify(formData.keyFeatures) : null,
+          specifications: formData.specifications && formData.specifications.length > 0 ? JSON.stringify(formData.specifications) : null,
+          certifications: formData.certifications && formData.certifications.length > 0 ? JSON.stringify(formData.certifications) : null,
+          downloads: formData.downloads && formData.downloads.length > 0 ? JSON.stringify(formData.downloads) : null,
+          videos: formData.videos && formData.videos.length > 0 ? JSON.stringify(formData.videos) : null
+        });
 
         if (error) {
-          throw error;
+          throw new Error(error.message);
         }
 
         alert('제품이 성공적으로 수정되었습니다!');
@@ -189,27 +161,24 @@ export default function ProductListMonitoringPage() {
       try {
         setSubmitting(true);
         
-        const { data, error } = await supabase
-          .from('Product')
-          .insert({
-            title: formData.title,
-            desc: formData.desc,
-            overview_title: formData.overview_title,
-            date: formData.date,
-            orderer: formData.orderer,
-            type: formData.type,
-            kind: formData.kind,
-            images: formData.images && formData.images.length > 0 ? JSON.stringify(formData.images) : null,
-            keyFeatures: formData.keyFeatures ? JSON.stringify(formData.keyFeatures) : null,
-            specifications: formData.specifications && formData.specifications.length > 0 ? JSON.stringify(formData.specifications) : null,
-            certifications: formData.certifications && formData.certifications.length > 0 ? JSON.stringify(formData.certifications) : null,
-            downloads: formData.downloads && formData.downloads.length > 0 ? JSON.stringify(formData.downloads) : null,
-            videos: formData.videos && formData.videos.length > 0 ? JSON.stringify(formData.videos) : null
-          })
-          .select();
+        const { data, error } = await createProduct({
+          title: formData.title,
+          desc: formData.desc,
+          overview_title: formData.overview_title,
+          date: formData.date,
+          orderer: formData.orderer,
+          type: formData.type,
+          kind: formData.kind,
+          images: formData.images && formData.images.length > 0 ? JSON.stringify(formData.images) : null,
+          keyFeatures: formData.keyFeatures ? JSON.stringify(formData.keyFeatures) : null,
+          specifications: formData.specifications && formData.specifications.length > 0 ? JSON.stringify(formData.specifications) : null,
+          certifications: formData.certifications && formData.certifications.length > 0 ? JSON.stringify(formData.certifications) : null,
+          downloads: formData.downloads && formData.downloads.length > 0 ? JSON.stringify(formData.downloads) : null,
+          videos: formData.videos && formData.videos.length > 0 ? JSON.stringify(formData.videos) : null
+        });
 
         if (error) {
-          throw error;
+          throw new Error(error.message);
         }
 
         alert('제품이 성공적으로 추가되었습니다!');
@@ -227,12 +196,10 @@ export default function ProductListMonitoringPage() {
   };
 
   const handleRecordClick = (record) => {
-    // URL에 detail 파라미터를 추가하여 브라우저 히스토리에 기록
     const currentSearch = new URLSearchParams(location.search);
     currentSearch.set('detail', record.id);
     const target = `${location.pathname}?${currentSearch.toString()}`;
     console.log('[Monitoring] handleRecordClick navigating to', target, 'current=', location.pathname + location.search);
-    // 동일한 위치로의 중복 네비게이션 방지
     if (location.pathname + location.search === target) {
       console.log('[Monitoring] handleRecordClick - target equals current, skipping navigate');
       return;
@@ -241,7 +208,6 @@ export default function ProductListMonitoringPage() {
   };
 
   const handleBackToList = () => {
-    // URL에서 detail 파라미터를 제거하여 리스트 모드로 돌아가기
     const currentSearch = new URLSearchParams(location.search);
     currentSearch.delete('detail');
     navigate(`${location.pathname}?${currentSearch.toString()}`, { replace: false });
@@ -272,8 +238,8 @@ export default function ProductListMonitoringPage() {
       await deleteAllPostFiles(record, 'Product');
       
       // 2. 데이터베이스에서 레코드 삭제
-      const { error } = await supabase.from('Product').delete().eq('id', record.id);
-      if (error) throw error;
+      const { error } = await deleteProduct(record.id);
+      if (error) throw new Error(error.message);
       
       alert('제품과 관련된 모든 파일이 삭제되었습니다.');
       fetchProducts();
@@ -285,18 +251,13 @@ export default function ProductListMonitoringPage() {
 
   const handleToggleActive = async (record, newActiveStatus) => {
     try {
-      // 인증 상태 확인
       const { isAuthenticated } = await checkUserAuthStatus();
       if (!isAuthenticated) {
         alert('활성화 상태를 변경하려면 로그인이 필요합니다.');
         return;
       }
 
-      // 데이터베이스 업데이트
-      const { error } = await supabase
-        .from('Product')
-        .update({ is_active: newActiveStatus })
-        .eq('id', record.id);
+      const { error } = await toggleProductActive(record.id, newActiveStatus);
 
       if (error) {
         console.error('활성화 상태 변경 오류:', error);
@@ -307,7 +268,6 @@ export default function ProductListMonitoringPage() {
       console.log('활성화 상태 변경 성공:', { id: record.id, is_active: newActiveStatus });
       alert(`제품이 ${newActiveStatus ? '활성화' : '비활성화'}되었습니다.`);
       
-      // 제품 목록 새로고침
       fetchProducts();
       
     } catch (error) {

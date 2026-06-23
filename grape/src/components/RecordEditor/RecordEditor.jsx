@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { uploadImage, uploadMultipleImages, validateImageFile, checkStorageBucket, uploadDownloadFile, validateDownloadFile, extractFilePathFromUrl } from '../../utils/imageUpload';
 import { setupStoragePolicies } from '../../utils/supabaseRLS';
-import { supabase } from '../../lib/supabase';
+import { deleteFile, deleteFiles } from '../../lib/storage';
 import './RecordEditor.css';
 
 const RecordEditor = ({ 
@@ -144,9 +144,7 @@ const RecordEditor = ({
             // 3. 실제 파일 삭제 실행
             if (filesToDelete.length > 0) {
               console.log(`언마운트 시 삭제할 파일들 (${filesToDelete.length}개):`, filesToDelete);
-              const { error } = await supabase.storage
-                .from(bucket)
-                .remove(filesToDelete);
+              const { error } = await deleteFiles(filesToDelete);
               if (error) {
                 console.error('언마운트 시 파일 삭제 중 오류:', error);
               } else {
@@ -297,9 +295,9 @@ const RecordEditor = ({
       if (!bucketExists) {
         console.warn(`${bucketName} Storage 버킷이 존재하지 않습니다.`);
         console.log(`Storage 설정을 위해 다음 단계를 따라주세요:`);
-        console.log(`1. Supabase 대시보드 -> Storage -> Buckets로 이동`);
+        console.log(`1. AWS S3 Storage 설정 확인`);
         console.log(`2. "${bucketName}" 버킷 생성`);
-        console.log(`3. 버킷 권한 설정 (Authenticated users에게 read/write 권한 부여)`);
+        console.log(`3. 버킷 권한 설정 확인`);
         setupStoragePolicies();
       } else {
         console.log(`${bucketName} 버킷이 정상적으로 존재합니다.`);
@@ -499,9 +497,7 @@ const RecordEditor = ({
           console.log('최종 삭제 경로:', `${bucket}/${filePath}`);
 
           // Storage에서 파일 삭제
-          const { data, error } = await supabase.storage
-            .from(bucket)
-            .remove([filePath]);
+          const { data, error } = await deleteFile(filePath);
 
           console.log('Storage 삭제 결과:', { data, error });
 
@@ -509,8 +505,6 @@ const RecordEditor = ({
             console.error('Storage 파일 삭제 실패:', error);
             console.error('에러 상세:', {
               message: error.message,
-              statusCode: error.statusCode,
-              details: error.details
             });
             // 신규 모드에서도 삭제 실패 시 경고만 하고 계속 진행
             console.warn('⚠️ 파일 삭제에 실패했지만 UI에서는 제거됩니다.');
@@ -704,67 +698,25 @@ const RecordEditor = ({
         let confirmedFilesToDelete = [];
         for (const filePath of filesToDelete) {
           console.log(`파일 존재 확인: ${filePath}`);
-
-          try {
-            const folderPath = filePath.substring(0, filePath.lastIndexOf('/'));
-            const fileName = filePath.substring(filePath.lastIndexOf('/') + 1);
-
-            const { data: listData, error: listError } = await supabase.storage
-              .from(bucket)
-              .list(folderPath, { search: fileName });
-
-            if (listError) {
-              console.warn(`파일 존재 확인 실패 (${filePath}):`, listError);
-            } else if (!listData || listData.length === 0) {
-              console.warn(`삭제할 파일이 존재하지 않음: ${filePath}`);
-            } else {
-              console.log(`삭제할 파일이 존재함: ${filePath}`, listData[0]);
-              confirmedFilesToDelete.push(filePath);
-            }
-          } catch (err) {
-            console.warn(`파일 존재 확인 중 오류 (${filePath}):`, err);
-          }
+          // S3에서는 파일 존재 확인 없이 직접 삭제 시도 (존재하지 않아도 오류 아님)
+          confirmedFilesToDelete.push(filePath);
         }
 
         if (confirmedFilesToDelete.length > 0) {
           console.log(`실제 삭제할 파일들 (${confirmedFilesToDelete.length}개):`, confirmedFilesToDelete);
 
-          const { data, error } = await supabase.storage
-            .from(bucket)
-            .remove(confirmedFilesToDelete);
+          const { data, error } = await deleteFiles(confirmedFilesToDelete);
 
           if (error) {
             console.error('편집 저장 시 파일 삭제 중 오류:', error);
             console.error('삭제 시도한 파일들:', confirmedFilesToDelete);
-            console.error('사용한 버킷:', bucket);
             throw new Error(`파일 삭제 중 오류가 발생했습니다: ${error.message}`);
           }
 
           console.log('삭제 결과:', data);
 
-          // 삭제 결과 상세 분석
-          let successCount = 0;
-          let failCount = 0;
           if (data) {
-            data.forEach((result, index) => {
-              if (result.error) {
-                console.error(`파일 삭제 실패 (${confirmedFilesToDelete[index]}):`, result.error);
-                failCount++;
-              } else {
-                console.log(`✅ 파일 삭제 성공: ${confirmedFilesToDelete[index]}`);
-                successCount++;
-              }
-            });
-          }
-
-          console.log(`삭제 결과 요약: 성공 ${successCount}개, 실패 ${failCount}개`);
-
-          if (successCount > 0) {
-            console.log(`${successCount}개의 사용되지 않는 파일이 성공적으로 삭제되었습니다.`);
-          }
-
-          if (failCount > 0) {
-            console.warn(`${failCount}개의 파일 삭제에 실패했습니다.`);
+            console.log(`삭제 결과 요약: 성공 ${data.deleted}개, 실패 ${data.failed}개`);
           }
         } else {
           console.log('삭제할 파일이 존재하지 않습니다.');
@@ -992,9 +944,7 @@ const RecordEditor = ({
         if (filesToDelete.length > 0) {
           console.log(`취소 시 삭제할 파일들 (${filesToDelete.length}개):`, filesToDelete);
           
-          const { error } = await supabase.storage
-            .from(bucket)
-            .remove(filesToDelete);
+          const { error } = await deleteFiles(filesToDelete);
           
           if (error) {
             console.error('취소 시 파일 삭제 중 오류:', error);
@@ -1433,9 +1383,7 @@ const RecordEditor = ({
                                       console.log('Storage에서 삭제할 주요 기능 파일 경로:', filePath);
                                       
                                       // Storage에서 파일 삭제
-                                      const { error } = await supabase.storage
-                                        .from('product')
-                                        .remove([filePath]);
+                                      const { error } = await deleteFile(filePath);
                                       
                                       if (error) {
                                         console.error('주요 기능 Storage 파일 삭제 실패:', error);
@@ -1562,9 +1510,7 @@ const RecordEditor = ({
                                           console.log('Storage에서 삭제할 사양 파일 경로:', filePath);
                                           
                                           // Storage에서 파일 삭제
-                                          const { error } = await supabase.storage
-                                            .from('product')
-                                            .remove([filePath]);
+                                          const { error } = await deleteFile(filePath);
                                           
                                           if (error) {
                                             console.error('사양 Storage 파일 삭제 실패:', error);
@@ -1693,9 +1639,7 @@ const RecordEditor = ({
                                           console.log('Storage에서 삭제할 인증서 파일 경로:', filePath);
                                           
                                           // Storage에서 파일 삭제
-                                          const { error } = await supabase.storage
-                                            .from('product')
-                                            .remove([filePath]);
+                                          const { error } = await deleteFile(filePath);
                                           
                                           if (error) {
                                             console.error('인증서 Storage 파일 삭제 실패:', error);
@@ -1786,9 +1730,7 @@ const RecordEditor = ({
                                       console.log('Storage에서 삭제할 다운로드 파일 경로:', filePath);
                                       
                                       // Storage에서 파일 삭제
-                                      const { error } = await supabase.storage
-                                        .from('product')
-                                        .remove([filePath]);
+                                      const { error } = await deleteFile(filePath);
                                       
                                       if (error) {
                                         console.error('다운로드 Storage 파일 삭제 실패:', error);
@@ -1888,9 +1830,7 @@ const RecordEditor = ({
                                         console.log('Storage에서 삭제할 다운로드 파일 경로:', filePath);
                                         
                                         // Storage에서 파일 삭제
-                                        const { error } = await supabase.storage
-                                          .from('product')
-                                          .remove([filePath]);
+                                        const { error } = await deleteFile(filePath);
                                         
                                         if (error) {
                                           console.error('다운로드 Storage 파일 삭제 실패:', error);

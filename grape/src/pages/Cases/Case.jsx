@@ -4,7 +4,7 @@ import welding from '../../assets/welding.jpg';
 import ProductList from '../Products/ProductList';
 import main from '../../assets/case_bus_seoul/main_4.jpg';
 import headerImage from '../../assets/header_image/performance.jpg';
-import { supabase } from '../../lib/supabase';
+import { getTrackRecords, createTrackRecord, updateTrackRecord, deleteTrackRecord, toggleTrackRecordActive } from '../../lib/api';
 import { useAuth } from '../../contexts/AuthContext';
 import ProductPage from '../../components/ProductPage/ProductPage';
 import { checkTableExists, createTablePolicies, checkUserAuthStatus } from '../../utils/supabaseRLS';
@@ -111,35 +111,15 @@ export default function TrackRecordPage({ kindFilter = null }) {
     try {
       setLoading(true);
 
-      // 먼저 테이블 존재 여부 확인
-      const tableExists = await checkTableExists('Track_record');
-      if (!tableExists) {
-        console.log('Track_record 테이블이 존재하지 않습니다. Supabase 대시보드에서 테이블을 생성해주세요.');
-        setLoading(false);
-        return;
-      }
-
-      let query = supabase
-        .from('Track_record')
-        .select('*')
-        .order('date', { ascending: false });
-
-      // kindFilter가 있으면 해당 kind만 필터링
+      const options = { order: 'date', ascending: false };
       if (kindFilter) {
-        query = query.eq('kind', kindFilter);
+        options.kind = kindFilter;
       }
 
-      const { data, error } = await query;
+      const { data, error } = await getTrackRecords(options);
 
       if (error) {
-        // RLS 정책 오류인 경우 정책 생성 안내
-        if (error.message.includes('row-level security policy')) {
-          console.log('Track_record 테이블에 RLS 정책이 필요합니다:');
-          createTablePolicies('Track_record');
-          setLoading(false);
-          return;
-        }
-        throw error;
+        throw new Error(error.message);
       }
 
       // 원시 데이터 확인을 위한 로깅
@@ -203,8 +183,8 @@ export default function TrackRecordPage({ kindFilter = null }) {
       }
       
       // 2. 데이터베이스에서 레코드 삭제
-      const { error } = await supabase.from('Track_record').delete().eq('id', record.id);
-      if (error) throw error;
+      const { error } = await deleteTrackRecord(record.id);
+      if (error) throw new Error(error.message);
       
       alert('실적이 삭제되었습니다.');
       fetchTrackRecords();
@@ -242,23 +222,11 @@ export default function TrackRecordPage({ kindFilter = null }) {
 
         // 실적 모드에서는 제품 전용 필드들(keyFeatures, specifications, certifications, downloads, videos)을 저장하지 않음
         
-        const { data, error } = await supabase
-          .from('Track_record')
-          .update(updateData)
-          .eq('id', editingExistingRecord.id)
-          .select();
+        const { data, error } = await updateTrackRecord(editingExistingRecord.id, updateData);
 
         if (error) {
-          console.error('Supabase 오류 상세:', error);
-          
-          if (error.message.includes('row-level security policy')) {
-            console.log('RLS 정책이 필요합니다. 다음 정책을 Supabase 대시보드에서 실행하세요:');
-            createTrackRecordPolicies();
-            alert('보안 정책 설정이 필요합니다. 개발자에게 문의하세요.');
-          } else {
-            throw error;
-          }
-          return;
+          console.error('API 오류 상세:', error);
+          throw new Error(error.message);
         }
 
         console.log('실적 수정 성공:', data);
@@ -304,23 +272,11 @@ export default function TrackRecordPage({ kindFilter = null }) {
         // 실적 모드에서는 제품 전용 필드들(keyFeatures, specifications, certifications, downloads, videos)을 저장하지 않음
         
         // 데이터베이스에 저장
-        const { data, error } = await supabase
-          .from('Track_record')
-          .insert(insertData)
-          .select();
+        const { data, error } = await createTrackRecord(insertData);
 
         if (error) {
-          console.error('Supabase 오류 상세:', error);
-          
-          // RLS 오류인 경우 정책 생성 안내
-          if (error.message.includes('row-level security policy')) {
-            console.log('RLS 정책이 필요합니다. 다음 정책을 Supabase 대시보드에서 실행하세요:');
-            createTrackRecordPolicies();
-            alert('보안 정책 설정이 필요합니다. 개발자에게 문의하세요.');
-          } else {
-            throw error;
-          }
-          return;
+          console.error('API 오류 상세:', error);
+          throw new Error(error.message);
         }
 
         console.log('실적 추가 성공:', data);
@@ -402,10 +358,7 @@ export default function TrackRecordPage({ kindFilter = null }) {
       }
 
       // 데이터베이스 업데이트
-      const { error } = await supabase
-        .from('Track_record')
-        .update({ is_active: newActiveStatus })
-        .eq('id', record.id);
+      const { error } = await toggleTrackRecordActive(record.id, newActiveStatus);
 
       if (error) {
         console.error('활성화 상태 변경 오류:', error);

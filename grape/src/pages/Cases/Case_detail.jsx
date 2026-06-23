@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import ProductPage from '../../components/ProductPage/ProductPage';
-import { supabase } from '../../lib/supabase';
+import { getTrackRecordById } from '../../lib/api';
 
 export default function Case_detail() {
   const { id } = useParams(); 
@@ -14,11 +14,7 @@ export default function Case_detail() {
     const fetchProduct = async () => {
       try {
         setLoading(true);
-        const { data, error } = await supabase
-          .from('Track_record')
-          .select('*')
-          .eq('id', id)
-          .single();
+        const { data, error } = await getTrackRecordById(id);
 
         if (error) {
           setError(error.message || '제품을 불러오는 중 오류가 발생했습니다.');
@@ -76,5 +72,3 @@ export default function Case_detail() {
     </div>
   );
 }
-
-
