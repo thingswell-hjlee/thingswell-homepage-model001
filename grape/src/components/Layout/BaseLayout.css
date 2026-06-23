@@ -1,5 +1,5 @@
 .base-layout {
-  background: var(--color-background-light);
+  background: var(--color-background);
   overflow-y: auto;
   position: relative;
   z-index: 1; /* 메뉴 오버레이(z-index: 1000)보다 낮게 유지 */
@@ -44,14 +44,14 @@
 .page-title {
   font-size: 2.5rem;
   font-weight: 700;
-  color: var(--text-primary);
+  color: var(--color-text-primary);
   margin: 0 0 var(--spacing-sm) 0;
   line-height: 1.2;
 }
 
 .page-subtitle {
   font-size: 1.125rem;
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
   margin: 0;
   line-height: 1.6;
 }
@@ -61,11 +61,11 @@
 }
 
 .content-wrapper {
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
+  background: var(--color-surface);
+  border: 1px solid var(--border-color-light);
   border-radius: var(--border-radius-xl);
   padding: 0 var(--spacing-2xl);
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
 }
 
 /* 반응형 디자인 */

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import CardRotator from "../../components/CardRotator";
 import Footer from "../../components/Footer";
-import { supabase } from "../../lib/supabase";
+import { getBoards } from "../../lib/api";
 import { BaseLayout } from "../../components/Layout";
 import aiImage from "../../assets/main/AI.jpg";
 import humanImage from "../../assets/main/human.jpg";
@@ -81,11 +81,11 @@ export default function Home() {
     const fetchLatestAnnouncement = async () => {
       try {
         setLoading(true);
-        const { data, error } = await supabase
-          .from("Board_Announcement")
-          .select("id, title, created_at, images")
-          .order("id", { ascending: false })
-          .limit(1);
+        const { data, error } = await getBoards('Board_Announcement', {
+          order: 'id',
+          ascending: false,
+          limit: 1
+        });
 
         if (error) {
           console.error("최신 공지 조회 오류:", error);

@@ -2,9 +2,9 @@
   max-width: 1500px;
   margin: 0 auto;
   padding: 20px;
-  background: #fff;
+  background: var(--color-surface);
   border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
   text-align: left;
 }
 
@@ -14,7 +14,7 @@
   align-items: center;
   margin-bottom: 30px;
   padding-bottom: 15px;
-  border-bottom: 1px solid #e1e5e9;
+  border-bottom: 1px solid var(--border-color-light);
 }
 
 
@@ -74,21 +74,21 @@
 .post-header {
   margin-bottom: 30px;
   padding-bottom: 20px;
-  border-bottom: 2px solid #e1e5e9;
+  border-bottom: 2px solid var(--border-color-light);
 }
 
 .post-title {
   margin: 0 0 15px 0;
   font-size: 28px;
   font-weight: 600;
-  color: #333;
+  color: var(--color-text-primary);
   line-height: 1.4;
 }
 
 .post-meta {
   display: flex;
   gap: 20px;
-  color: #6c757d;
+  color: var(--color-text-secondary);
   font-size: 14px;
 }
 
@@ -99,14 +99,14 @@
 
 .post-body {
   line-height: 1.8;
-  color: #333;
+  color: var(--color-text-primary);
   text-align: left;
 }
 
 .post-footer {
   margin-top: 40px;
   padding-top: 20px;
-  border-top: 1px solid #e1e5e9;
+  border-top: 1px solid var(--border-color-light);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -154,7 +154,7 @@
   margin-top: 30px;
   margin-bottom: 15px;
   font-weight: 600;
-  color: #333;
+  color: var(--color-text-primary);
 }
 
 .content-html h1 { font-size: 24px; }
@@ -181,13 +181,13 @@
 .content-html blockquote {
   margin: 20px 0;
   padding: 15px 20px;
-  background-color: #f8f9fa;
-  border-left: 4px solid #007bff;
+  background-color: var(--color-surface-dark);
+  border-left: 4px solid var(--color-primary);
   font-style: italic;
 }
 
 .content-html code {
-  background-color: #f8f9fa;
+  background-color: var(--color-surface-dark);
   padding: 2px 6px;
   border-radius: 4px;
   font-family: 'Courier New', monospace;
@@ -195,7 +195,7 @@
 }
 
 .content-html pre {
-  background-color: #f8f9fa;
+  background-color: var(--color-surface-dark);
   padding: 15px;
   border-radius: 6px;
   overflow-x: auto;
@@ -216,12 +216,12 @@
 .content-html th,
 .content-html td {
   padding: 10px;
-  border: 1px solid #e1e5e9;
+  border: 1px solid var(--border-color-light);
   text-align: left;
 }
 
 .content-html th {
-  background-color: #f8f9fa;
+  background-color: var(--color-surface-dark);
   font-weight: 600;
 }
 
@@ -235,7 +235,7 @@
 .empty-state {
   text-align: center;
   padding: 60px 20px;
-  color: #6c757d;
+  color: var(--color-text-secondary);
 }
 
 .empty-state p {

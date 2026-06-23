@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from "react";
 import "./BoardList.css";
-import { supabase } from "../../lib/supabase";
+import { getBoards } from "../../lib/api";
 import { useAuth } from "../../contexts/AuthContext";
 import SearchComponent from "../SearchComponent";
 import ProductFilter from "../ProductFilter";
@@ -111,12 +111,12 @@ const BoardList = ({
       if (tableNames && Array.isArray(tableNames) && tableNames.length > 0) {
         console.log('다중 테이블에서 데이터를 가져오는 중...', tableNames);
         const results = await Promise.all(
-          tableNames.map((t) => supabase.from(t).select('*'))
+          tableNames.map((t) => getBoards(t))
         );
 
         const errors = results.filter((r) => r.error).map((r) => r.error);
         if (errors.length > 0) {
-          console.error('Supabase 오류(다중):', errors[0]);
+          console.error('API 오류(다중):', errors[0]);
           setError(`데이터베이스 오류: ${errors[0].message}`);
           setInstruments([]);
         } else {
@@ -136,11 +136,11 @@ const BoardList = ({
         }
 
         console.log(`테이블 "${tableName}"에서 데이터를 가져오는 중...`);
-        const result = await supabase.from(tableName).select('*');
+        const result = await getBoards(tableName);
         console.log(`${tableName} 쿼리 결과:`, result);
 
         if (result.error) {
-          console.error(`${tableName} Supabase 오류:`, result.error);
+          console.error(`${tableName} API 오류:`, result.error);
           setError(`데이터베이스 오류: ${result.error.message}`);
           setInstruments([]);
         } else {

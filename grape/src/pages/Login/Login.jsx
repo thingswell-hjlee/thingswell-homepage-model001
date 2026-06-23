@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { supabase } from '../../lib/supabase.js';
+import { signIn } from '../../lib/auth.js';
 import { useAuth } from '../../contexts/AuthContext.jsx';
 import rndHeader from '../../assets/header_image/rnd.jpg';
 import ProductHeader from '../../components/ProductPage/ProductHeader';
@@ -33,10 +33,7 @@ const Login = () => {
     setError('');
 
     try {
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email: email,
-        password: password,
-      });
+      const { data, error } = await signIn(email, password);
 
       if (error) {
         setError(error.message);

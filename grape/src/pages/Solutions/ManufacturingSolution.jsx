@@ -1,137 +1,143 @@
 import React from 'react';
-import SolutionDetailPage from './SolutionDetailPage';
 import BaseLayout from '../../components/Layout/BaseLayout';
 import ProductHeader from '../../components/ProductPage/ProductHeader';
 import solution from '../../assets/header_image/Solution.jpg';
-import control from '../../assets/control.png';
-import service_1 from '../../assets/service/batch_3-1.png';
-import service_2 from '../../assets/service/batch_3-2.png';
-import service_3 from '../../assets/service/batch_3-3.png';
-import service_4 from '../../assets/service/batch_3-4.png';
-import service_5 from '../../assets/service_2/3-1.png';
-import service_6 from '../../assets/service_2/3-2.png';
-import service_7 from '../../assets/service_2/3-3.png';
-import service_8 from '../../assets/service_2/3-4.png';
+import './SolutionPage.css';
 
+// 이미지 import
+import conferenceRoom from '../../assets/solutions/control/conference-room.jpg';
+import smartOffice from '../../assets/solutions/control/smart-office.jpg';
+import presentation from '../../assets/solutions/control/presentation.jpg';
+import automation from '../../assets/solutions/control/automation.jpg';
+import building from '../../assets/solutions/control/building.jpg';
+import tabletControl from '../../assets/solutions/control/tablet-control.jpg';
+import lighting from '../../assets/solutions/control/lighting.jpg';
+import auditorium from '../../assets/solutions/control/auditorium.jpg';
 
-const BREADCRUMBS = ["Home", "사업분야", "통합제어 솔루션"];
+const BREADCRUMBS = ["Home", "사업분야", "스마트 통합제어 플랫폼"];
 
-const SOLUTION_DATA = {
-  title: "통합제어 솔루션",
-  description:
-    "통합제어 솔루션은 대회의실, 강당, 강의실, 컨벤션홀 등 다양한 공간에 분산된 영상, 음향, 조명, 냉난방, 공조 등 여러 설비들을 하나의 스마트 인터페이스(스마트패드, PC 등)로 통합하여 원격 제어 및 관리하는 혁신적인 시스템입니다. 다중 센서 기술(카메라, 레이더, 공기질 센서 등)과 멀티모달 상황인지 기반의 자동화 제어를 통해 공간의 효율성을 극대화하며, 유지관리 비용 절감 및 운영의 편리성을 제공하는 것을 목표로 합니다.",
-};
-
-const WORKER_SAFETY_CARDS = [
+// 핵심 기술 스택
+const TECH_STACK = [
   {
-    image: service_5,
-    imageAlt: "통합 제어 기능",
-    title: "통합 제어 기능",
-    desc: [
-      "영상(비디오월, 매트릭스), 음향(마이크, 믹서, DSP), 조명(DMX512 제어, 스팟 조명), 환경 설비(냉난방, 전등) 등 모든 장비를 단일 인터페이스로 제어합니다.",
-      "복잡한 장비 조작의 어려움을 해소하고 운영을 간소화합니다."
-    ]
-  },
-  { 
-    image: service_6,
-    imageAlt: "상황 인지 기반 자동화",
-    title: "상황 인지 기반 자동화",
-    desc: [
-      "공기질, 모션, 카메라 등 멀티모달 센서 데이터를 활용하여 공간의 상황을 인지하고 자동으로 설비를 제어하는 기능을 제공합니다.",
-      "다중 센서 기술을 통해 공간의 효율성을 극대화합니다."
-    ]
+    image: conferenceRoom,
+    title: "통합제어기 (XCN-3000)",
+    subtitle: "Integrated Controller",
+    desc: "Advanced Integrated Controller XCN-3000은 RS232/485, TCP/IP, IR, 릴레이 등 다양한 프로토콜을 지원하여 영상, 음향, 조명, 환경 설비를 단일 인터페이스로 통합 제어합니다.",
   },
   {
-    image: service_7,
-    imageAlt: "화상회의 및 발표 지원",
-    title: "화상회의 및 발표 지원",
-    desc: [
-      "화자 추적 시스템, 화상회의 시스템 연동, 하울링 제거, 카메라 프리셋 기반 위치 추적 제어 등 최적의 비즈니스 환경을 제공합니다.",
-      "회의실, 강의실, 전시장 등 각 공간의 특성에 최적화된 서비스를 제공합니다."
-    ]
+    image: tabletControl,
+    title: "원격관리 (ThingsEye)",
+    subtitle: "Remote Management",
+    desc: "ThingsEye 솔루션을 통해 다중 공간의 설비 상태를 원격으로 모니터링하고 제어합니다. 실시간 데이터 수집, 분석, 스케줄링을 통한 자동화 운영을 지원합니다.",
   },
   {
-    image: service_8,
-    imageAlt: "매크로 및 스케줄링",
-    title: "매크로 및 스케줄링",
-    desc: [
-      "자주 사용하는 설비 조합을 '프리셋'으로 저장하여 한 번의 터치로 실행하거나, 특정 시간에 자동으로 설비를 제어하는 '스케줄링' 기능을 제공합니다.",
-      "자동화 운영으로 에너지 절감과 운영 효율을 극대화합니다."
-    ]
+    image: automation,
+    title: "상황인지 자동화",
+    subtitle: "Context-Aware Automation",
+    desc: "공기질, 모션, 카메라 등 멀티모달 센서 데이터를 활용하여 공간의 상황을 인지하고 자동으로 설비를 최적 제어합니다. 에너지 절감과 공간 효율성을 극대화합니다.",
+  },
+  {
+    image: presentation,
+    title: "화상회의 연동",
+    subtitle: "Video Conference Integration",
+    desc: "화자 추적 시스템, 화상회의 시스템 연동, 하울링 제거, 카메라 프리셋 기반 위치 추적 제어를 통해 최적의 회의 및 발표 환경을 자동으로 구성합니다.",
   },
 ];
 
-const FEATURE_DESCRIPTIONS = [
+// 적용 분야
+const DOMAINS = [
   {
-    image: control,
-    title: "서비스 구성도",
-    description: [
-      "사용자 인터페이스: PC, 태블릿, 스마트폰, 스마트패드 등 사용자가 직접 시스템을 조작하는 모든 기기를 포함하며, 사용자의 편의에 맞춰 맞춤형 앱 및 웹 인터페이스를 제공합니다.",
-      "중앙 제어 시스템: 통합 제어기(Advanced Integrated Controller XCN-3000)와 관리 서버(ThingsEye)를 통해 모든 장비의 정보를 취합하고 제어 명령을 전달하며, 원격 모니터링, 데이터 수집 및 분석, 자동화 스케줄링 등을 담당합니다.",
-      "제어 대상 설비: 영상 설비(DID/LED 비디오월, 비디오 매트릭스, 화상회의 카메라), 음향 설비(무선 마이크, 오디오 믹서 및 DSP, 입체 음향 시스템), 조명 설비(DMX512 기반 감성 조명, 스팟 조명, 룸 조명), 환경 설비(룸 에어컨, 전등, 공조 시스템), 센서(공기질, 카메라, 레이더, 모션 센서) 등 통합 제어 시스템으로부터 명령을 받아 작동하는 모든 장비들입니다."
+    image: auditorium,
+    title: "대회의실/강당",
+    subtitle: "Conference Hall",
+    items: [
+      "비디오월, 매트릭스 영상 시스템 통합 제어",
+      "무선 마이크, 오디오 믹서 음향 자동 설정",
+      "DMX512 기반 감성 조명 및 스팟 조명 제어",
+      "화자 추적 카메라 및 화상회의 시스템 연동",
+      "프리셋 저장으로 원터치 회의 환경 전환",
     ],
-    // Enable large image for the service architecture diagram
-    largeImage: true,
-  },
-];
-
-const APPLICATION_FIELD_CARDS = [
-  {
-    image: service_1,
-    imageAlt: "스마트 공간 통합 제어",
-    title: "스마트 공간 통합 제어",
-    desc: "방송, 음향, 조명, 냉난방, 환경설비 등 다양한 종류의 설비를 하나의 시스템으로 통합하여 제어할 수 있습니다. 이를 통해 복잡한 장비 조작의 어려움을 해소하고 운영을 간소화합니다."
   },
   {
-    image: service_2,
-    imageAlt: "환경 맞춤형 UI/UX 디자인",
-    title: "환경 맞춤형 UI/UX 디자인",
-    desc: "회의실, 강의실, 전시장 등 각 공간의 특성과 사용자 요구사항에 최적화된 맞춤형 인터페이스를 제공하여 사용 편의성을 극대화합니다."
-  },
-  {
-    image: service_3,
-    imageAlt: "원격 및 자동화 관리",
-    title: "원격 및 자동화 관리",
-    desc: "'ThingsEye' 솔루션을 통해 다중 공간의 설비 상태를 원격으로 모니터링하고 제어할 수 있습니다. 또한, 스케줄링 및 매크로 기능을 활용한 자동화 운영으로 에너지 절감과 운영 효율을 극대화합니다."
-  },
-  {
-    image: service_4,
-    imageAlt: "확장성 및 안정성",
-    title: "뛰어난 확장성 및 안정성",
-    desc: "'Advanced Integrated Controller XCN-3000'은 RS232/485, TCP/IP, IR, 릴레이 등 다양한 프로토콜 및 인터페이스를 지원하여 여러 장치를 유연하게 연결하고 시스템을 확장할 수 있습니다. 안정적인 네트워크 연결성을 기반으로 시스템 다운타임을 최소화합니다."
-  },
-];
-
-const SERVICE_ARCHITECTURE_CARDS = [
-  {
-    image: control,
-    imageAlt: "서비스 구성도",
-    desc: [
-      "사용자 인터페이스: PC, 태블릿, 스마트폰, 스마트패드 등 사용자가 직접 시스템을 조작하는 모든 기기를 포함하며, 사용자의 편의에 맞춰 맞춤형 앱 및 웹 인터페이스를 제공합니다.",
-      "중앙 제어 시스템: 통합 제어기(Advanced Integrated Controller XCN-3000)와 관리 서버(ThingsEye)를 통해 모든 장비의 정보를 취합하고 제어 명령을 전달하며, 원격 모니터링, 데이터 수집 및 분석, 자동화 스케줄링 등을 담당합니다.",
-      "제어 대상 설비: 영상 설비(DID/LED 비디오월, 비디오 매트릭스, 화상회의 카메라), 음향 설비(무선 마이크, 오디오 믹서 및 DSP, 입체 음향 시스템), 조명 설비(DMX512 기반 감성 조명, 스팟 조명, 룸 조명), 환경 설비(룸 에어컨, 전등, 공조 시스템), 센서(공기질, 카메라, 레이더, 모션 센서) 등 통합 제어 시스템으로부터 명령을 받아 작동하는 모든 장비들입니다."
+    image: smartOffice,
+    title: "강의실/교육시설",
+    subtitle: "Education Facility",
+    items: [
+      "강의 모드별 조명, 음향, 영상 자동 전환",
+      "화자 추적 기반 카메라 자동 줌/팬 제어",
+      "녹화 시스템 연동 및 원격 수업 지원",
+      "시간표 기반 자동 스케줄링 운영",
+      "에너지 절감형 자동 전원 관리 시스템",
     ],
-    fullWidthImage: true,
-    reverse: true,
+  },
+  {
+    image: building,
+    title: "전시장/컨벤션",
+    subtitle: "Exhibition & Convention",
+    items: [
+      "대규모 공간 다중 구역 독립 제어 지원",
+      "이벤트 시나리오 기반 설비 일괄 전환",
+      "입체 음향 시스템 및 공간 음향 최적화",
+      "실시간 환경 모니터링 및 공조 자동 제어",
+      "원격 관제를 통한 다중 시설 통합 운영",
+    ],
   },
 ];
 
-const BLOCKS = [
+// 서비스 파이프라인
+const PIPELINE = [
   {
-    type: 'applicationCards',
-    data: APPLICATION_FIELD_CARDS,
-    props: { boxName: '서비스 특징', columnsPerRow: 4 },
+    image: lighting,
+    step: "01",
+    title: "센서수집",
+    subtitle: "Sensor Collection",
+    items: [
+      "공기질, 온습도, 조도 환경센서 데이터 수집",
+      "모션, 카메라 기반 재실 인원 감지",
+      "설비 상태 및 에너지 사용량 모니터링",
+      "네트워크 장비 통신 상태 실시간 확인",
+      "시간 동기화 기반 데이터 통합 관리",
+    ],
   },
   {
-    type: 'applicationCards',
-    data: WORKER_SAFETY_CARDS,
-    props: { boxName: '주요 기능', columnsPerRow: 3 },
+    image: smartOffice,
+    step: "02",
+    title: "통합분석",
+    subtitle: "Integrated Analysis",
+    items: [
+      "멀티모달 센서 데이터 융합 분석",
+      "공간 사용 패턴 학습 및 예측",
+      "에너지 효율 최적화 알고리즘 적용",
+      "이상 상황 자동 판단 및 분류",
+      "운영 데이터 기반 인사이트 도출",
+    ],
   },
-    {
-      type: 'features',
-      data: FEATURE_DESCRIPTIONS,
-      props: { boxName: '서비스 구성도', columnsPerRow: 1 },
-    },
+  {
+    image: automation,
+    step: "03",
+    title: "자동제어",
+    subtitle: "Auto Control",
+    items: [
+      "상황 인지 기반 설비 자동 최적 제어",
+      "프리셋/매크로 기반 원터치 환경 전환",
+      "스케줄링 기반 시간대별 자동 운영",
+      "에너지 절감형 자동 전원 관리",
+      "비상 상황 시 안전 모드 자동 전환",
+    ],
+  },
+  {
+    image: tabletControl,
+    step: "04",
+    title: "원격관리",
+    subtitle: "Remote Management",
+    items: [
+      "PC, 태블릿, 모바일 다중 접속 지원",
+      "다중 시설 통합 대시보드 원격 관제",
+      "설비 이상 자동 알림 및 유지보수 요청",
+      "운영 리포트 자동 생성 및 분석",
+      "클라우드 기반 데이터 백업 및 이력 관리",
+    ],
+  },
 ];
 
 const ManufacturingSolution = () => {
@@ -139,15 +145,101 @@ const ManufacturingSolution = () => {
     <BaseLayout
       header={() => <ProductHeader image={solution} alt="solution" />}
       breadcrumbs={BREADCRUMBS}
-      title={SOLUTION_DATA.title}
+      title="스마트 통합제어 플랫폼"
     >
-      <SolutionDetailPage
-        solutionData={SOLUTION_DATA}
-        solutionVariant="default"
-        blocks={BLOCKS}
-      />
+      <div className="solution-page">
+        {/* 히어로 설명 */}
+        <section className="sol-hero">
+          <div className="sol-hero-badge">Smart Control Platform</div>
+          <h1 className="sol-hero-title">
+            하나의 인터페이스로,<br />모든 공간을 제어하다
+          </h1>
+          <p className="sol-hero-desc">
+            영상, 음향, 조명, 냉난방, 공조 등 다양한 설비를 하나의 스마트 인터페이스로
+            통합하여 원격 제어하는 차세대 통합제어 플랫폼입니다.
+            멀티모달 센서 기반 상황인지 자동화와 원격관리를 통해
+            공간 효율성을 극대화하고 운영 비용을 절감합니다.
+          </p>
+        </section>
+
+        {/* 핵심 기술 스택 */}
+        <section className="sol-section">
+          <div className="sol-section-header">
+            <span className="sol-section-label">Core Technology</span>
+            <h2 className="sol-section-title">핵심 기술</h2>
+          </div>
+          <div className="sol-tech-grid">
+            {TECH_STACK.map((tech, i) => (
+              <div key={i} className="sol-tech-card">
+                <div className="sol-tech-card-img">
+                  <img src={tech.image} alt={tech.title} />
+                  <div className="sol-tech-card-overlay" />
+                </div>
+                <div className="sol-tech-card-body">
+                  <span className="sol-tech-card-subtitle">{tech.subtitle}</span>
+                  <h3 className="sol-tech-card-title">{tech.title}</h3>
+                  <p className="sol-tech-card-desc">{tech.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* 적용 분야 */}
+        <section className="sol-section">
+          <div className="sol-section-header">
+            <span className="sol-section-label">Application Areas</span>
+            <h2 className="sol-section-title">적용 분야</h2>
+          </div>
+          <div className="sol-domain-grid">
+            {DOMAINS.map((domain, i) => (
+              <div key={i} className="sol-domain-card">
+                <div className="sol-domain-card-img">
+                  <img src={domain.image} alt={domain.title} />
+                  <div className="sol-domain-card-overlay">
+                    <span className="sol-domain-card-subtitle">{domain.subtitle}</span>
+                    <h3 className="sol-domain-card-title">{domain.title}</h3>
+                  </div>
+                </div>
+                <ul className="sol-domain-card-list">
+                  {domain.items.map((item, j) => (
+                    <li key={j}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* 서비스 파이프라인 */}
+        <section className="sol-section">
+          <div className="sol-section-header">
+            <span className="sol-section-label">Service Pipeline</span>
+            <h2 className="sol-section-title">서비스 파이프라인</h2>
+          </div>
+          <div className="sol-pipeline-grid">
+            {PIPELINE.map((step, i) => (
+              <div key={i} className="sol-pipeline-card">
+                <div className="sol-pipeline-card-img">
+                  <img src={step.image} alt={step.title} />
+                  <div className="sol-pipeline-card-step">{step.step}</div>
+                </div>
+                <div className="sol-pipeline-card-body">
+                  <span className="sol-pipeline-card-subtitle">{step.subtitle}</span>
+                  <h3 className="sol-pipeline-card-title">{step.title}</h3>
+                  <ul className="sol-pipeline-card-list">
+                    {step.items.map((item, j) => (
+                      <li key={j}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      </div>
     </BaseLayout>
   );
 };
 
-export default ManufacturingSolution; 
+export default ManufacturingSolution;
