@@ -1,8 +1,12 @@
-const express = require('express');
-const path = require('path');
-const fs = require('fs');
-const https = require('https');
-const http = require('http');
+import express from 'express';
+import path from 'path';
+import fs from 'fs';
+import https from 'https';
+import http from 'http';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -20,7 +24,7 @@ app.use((req, res, next) => {
 });
 
 // SPA 라우팅을 위한 catch-all 핸들러
-app.get('*', (req, res) => {
+app.get('/{*splat}', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
