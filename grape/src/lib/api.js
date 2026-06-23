@@ -9,6 +9,21 @@ import { getAccessToken } from './auth';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
+// Board 테이블명 매핑: 레거시 Supabase 이름 -> Lambda URL 경로 세그먼트
+const BOARD_TABLE_MAP = {
+  'Board_Announcement': 'announcement',
+  'Board_Download': 'download',
+};
+
+/**
+ * Board 테이블명을 Lambda가 인식하는 경로 세그먼트로 변환
+ * @param {string} tableName - 레거시 테이블명 (예: 'Board_Announcement')
+ * @returns {string} API 경로 세그먼트 (예: 'announcement')
+ */
+const normalizeBoardTableName = (tableName) => {
+  return BOARD_TABLE_MAP[tableName] || tableName;
+};
+
 /**
  * API 요청 헬퍼
  * @param {string} path - API 경로 (예: '/boards/Board_Announcement')
@@ -71,6 +86,7 @@ const apiRequest = async (path, options = {}, requireAuth = false) => {
  * @returns {{ data, error }}
  */
 export const getBoards = async (tableName, options = {}) => {
+  const apiTableName = normalizeBoardTableName(tableName);
   const params = new URLSearchParams();
   if (options.order) params.append('order', options.order);
   if (options.ascending !== undefined) params.append('ascending', options.ascending);
@@ -78,7 +94,7 @@ export const getBoards = async (tableName, options = {}) => {
   if (options.offset) params.append('offset', options.offset);
 
   const queryString = params.toString();
-  const path = `/boards/${tableName}${queryString ? `?${queryString}` : ''}`;
+  const path = `/boards/${apiTableName}${queryString ? `?${queryString}` : ''}`;
   
   return apiRequest(path);
 };
@@ -90,7 +106,8 @@ export const getBoards = async (tableName, options = {}) => {
  * @returns {{ data, error }}
  */
 export const getBoardById = async (tableName, id) => {
-  return apiRequest(`/boards/${tableName}/${id}`);
+  const apiTableName = normalizeBoardTableName(tableName);
+  return apiRequest(`/boards/${apiTableName}/${id}`);
 };
 
 /**
@@ -100,7 +117,8 @@ export const getBoardById = async (tableName, id) => {
  * @returns {{ data, error }}
  */
 export const createBoard = async (tableName, data) => {
-  return apiRequest(`/boards/${tableName}`, {
+  const apiTableName = normalizeBoardTableName(tableName);
+  return apiRequest(`/boards/${apiTableName}`, {
     method: 'POST',
     body: JSON.stringify(data),
   }, true);
@@ -114,7 +132,8 @@ export const createBoard = async (tableName, data) => {
  * @returns {{ data, error }}
  */
 export const updateBoard = async (tableName, id, data) => {
-  return apiRequest(`/boards/${tableName}/${id}`, {
+  const apiTableName = normalizeBoardTableName(tableName);
+  return apiRequest(`/boards/${apiTableName}/${id}`, {
     method: 'PUT',
     body: JSON.stringify(data),
   }, true);
@@ -127,7 +146,8 @@ export const updateBoard = async (tableName, id, data) => {
  * @returns {{ data, error }}
  */
 export const deleteBoard = async (tableName, id) => {
-  return apiRequest(`/boards/${tableName}/${id}`, {
+  const apiTableName = normalizeBoardTableName(tableName);
+  return apiRequest(`/boards/${apiTableName}/${id}`, {
     method: 'DELETE',
   }, true);
 };

@@ -276,13 +276,15 @@ export const getSession = async () => {
 };
 
 /**
- * 현재 액세스 토큰 가져오기 (API 호출용)
+ * API Gateway 인증용 토큰 가져오기
+ * COGNITO_USER_POOLS authorizer는 ID Token의 aud 클레임을 검증하므로
+ * Access Token이 아닌 ID Token을 반환합니다.
  * 만료된 경우 자동으로 갱신을 시도합니다.
  * @returns {string|null}
  */
 export const getAccessToken = async () => {
   const { data } = await getSession();
-  return data?.session?.access_token || null;
+  return data?.session?.id_token || null;
 };
 
 /**
