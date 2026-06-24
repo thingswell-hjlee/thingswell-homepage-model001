@@ -4,6 +4,7 @@ import './AdminLayout.css';
 
 const navItems = [
   { label: '대시보드', path: '/admin/dashboard', icon: '📊' },
+  { label: '프로필', path: '/admin/profile', icon: '👤' },
   { label: 'OG 설정', path: '/admin/og-settings', icon: '🔗' },
   { label: '비밀번호 변경', path: '/admin/change-password', icon: '🔒' },
   { separator: true },

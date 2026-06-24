@@ -2,7 +2,7 @@
   "id": "FEAT-003",
   "type": "feat",
   "description": "Add Profile/Account Settings page and update login page to redirect to admin dashboard after login instead of home page.",
-  "status": "pending",
+  "status": "in_progress",
   "steps": [
     "Create grape/src/pages/Admin/Profile.jsx - a protected page showing account settings: user email (read-only), last login time (from token), and links to change password. Use BaseLayout with AdminLayout wrapper.",
     "Create grape/src/pages/Admin/Profile.css - style the profile page with a clean card layout.",

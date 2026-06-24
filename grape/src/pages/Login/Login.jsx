@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, useSearchParams, Link } from 'react-router-dom';
 import { signIn } from '../../lib/auth.js';
 import { useAuth } from '../../contexts/AuthContext.jsx';
 import rndHeader from '../../assets/header_image/rnd.jpg';
@@ -13,16 +13,19 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const { user } = useAuth();
 
-  // 이미 로그인된 사용자는 홈페이지로 리다이렉트
+  const redirectPath = searchParams.get('redirect') || '/admin/dashboard';
+
+  // 이미 로그인된 사용자는 리다이렉트
   useEffect(() => {
     if (user) {
-      navigate('/');
+      navigate(redirectPath);
     }
-  }, [user, navigate]);
+  }, [user, navigate, redirectPath]);
 
-  // 로그인된 사용자가 접근하면 홈페이지로 리다이렉트
+  // 로그인된 사용자가 접근하면 리다이렉트
   if (user) {
     return null; // 리다이렉트 중에는 아무것도 렌더링하지 않음
   }
@@ -38,8 +41,8 @@ const Login = () => {
       if (error) {
         setError(error.message);
       } else {
-        // 로그인 성공 시 홈페이지로 이동
-        navigate('/');
+        // 로그인 성공 시 리다이렉트
+        navigate(redirectPath);
       }
     } catch (error) {
       setError('로그인 중 오류가 발생했습니다.');
