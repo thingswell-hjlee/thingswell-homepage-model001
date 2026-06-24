@@ -1,0 +1,25 @@
+{
+  "id": "FEAT-003",
+  "type": "feat",
+  "description": "Add Profile/Account Settings page and update login page to redirect to admin dashboard after login instead of home page.",
+  "status": "pending",
+  "steps": [
+    "Create grape/src/pages/Admin/Profile.jsx - a protected page showing account settings: user email (read-only), last login time (from token), and links to change password. Use BaseLayout with AdminLayout wrapper.",
+    "Create grape/src/pages/Admin/Profile.css - style the profile page with a clean card layout.",
+    "Update grape/src/pages/Login/Login.jsx to redirect to /admin/dashboard after successful login instead of '/' (home). Keep the redirect query parameter support - if ?redirect= is present, use that path instead.",
+    "Update grape/src/App.jsx to add route /admin/profile wrapped in ProtectedRoute, import Profile component.",
+    "Update the AdminLayout sidebar (grape/src/components/AdminLayout/index.jsx) to include Profile link (/admin/profile)."
+  ],
+  "acceptance_criteria": [
+    "The /admin/profile page renders showing the user's email and account info",
+    "After login, user is redirected to /admin/dashboard instead of home page",
+    "The ?redirect= query parameter still works when present",
+    "Admin sidebar includes a Profile link",
+    "npm run build succeeds without errors"
+  ],
+  "verification": [
+    "Run `cd /projects/sandbox/thingswell-homepage-model001/grape && npm run build` and confirm it succeeds with exit code 0"
+  ],
+  "blocked_reason": null,
+  "findings": ""
+}

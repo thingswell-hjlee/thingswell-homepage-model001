@@ -1,0 +1,7 @@
+{
+  "task_id": "task-add-essential-admin-menus",
+  "task_description": "Add essential admin/management menus to the website: password change, forgot password, admin dashboard, admin navigation, session timeout handling, and profile/account settings page. These features enable easy ongoing site maintenance without CLI commands.",
+  "status": "in_progress",
+  "feature_order": ["FEAT-001", "FEAT-002", "FEAT-003"],
+  "blocked_reason": null
+}

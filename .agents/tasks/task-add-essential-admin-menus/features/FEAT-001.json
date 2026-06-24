@@ -1,0 +1,27 @@
+{
+  "id": "FEAT-001",
+  "type": "feat",
+  "description": "Add Password Change page and Forgot Password / Reset flow for Cognito users. The auth.js already has a changePassword function. Need to add: (1) a password change page for logged-in users, (2) a forgot-password flow using Cognito ForgotPassword and ConfirmForgotPassword APIs, (3) link from login page to forgot password.",
+  "status": "in_progress",
+  "steps": [
+    "Create grape/src/pages/Admin/ChangePassword.jsx - a protected page that lets a logged-in user change their password using the existing changePassword function from src/lib/auth.js. Use BaseLayout with breadcrumbs. Include current password, new password, confirm password fields with validation (min 8 chars, match check). Show success/error messages.",
+    "Create grape/src/pages/Admin/ChangePassword.css - style the form following the patterns in Login.css (form-group, error-message, success-message classes).",
+    "Add forgotPassword and confirmForgotPassword functions to grape/src/lib/auth.js using Cognito's ForgotPassword and ConfirmForgotPassword API actions (same cognitoRequest pattern as existing signIn). ForgotPassword takes email, ConfirmForgotPassword takes email + code + new password.",
+    "Create grape/src/pages/Login/ForgotPassword.jsx - a two-step page: step 1 asks for email and calls forgotPassword (sends verification code), step 2 asks for verification code + new password and calls confirmForgotPassword. Show success message with link back to login.",
+    "Create grape/src/pages/Login/ForgotPassword.css - style matching Login.css patterns.",
+    "Update grape/src/pages/Login/Login.jsx to add a 'Forgot Password?' link below the login form that navigates to /forgot-password.",
+    "Update grape/src/App.jsx to add routes: /admin/change-password (wrapped in ProtectedRoute) and /forgot-password.",
+    "Import the new page components in App.jsx."
+  ],
+  "acceptance_criteria": [
+    "The /admin/change-password page renders correctly for logged-in users and shows a form with current password, new password, confirm password fields",
+    "The /forgot-password page shows email input initially, then shows code + new password form after submission",
+    "The login page has a visible 'Forgot Password?' link that navigates to /forgot-password",
+    "npm run build succeeds without errors"
+  ],
+  "verification": [
+    "Run `cd /projects/sandbox/thingswell-homepage-model001/grape && npm run build` and confirm it succeeds with exit code 0"
+  ],
+  "blocked_reason": null,
+  "findings": ""
+}

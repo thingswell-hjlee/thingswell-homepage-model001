@@ -1,0 +1,27 @@
+{
+  "id": "FEAT-002",
+  "type": "feat",
+  "description": "Add Admin Dashboard page with overview of all manageable content, quick links to management pages, and session timeout handling. Also add an admin navigation sidebar/menu that provides easy access to all admin functions.",
+  "status": "pending",
+  "steps": [
+    "Create grape/src/pages/Admin/Dashboard.jsx - a protected admin dashboard page using BaseLayout. Include: (1) Welcome section showing logged-in user email, (2) Quick stats cards showing counts of products, track records, board posts (fetch from existing API functions in src/lib/api.js), (3) Quick link cards to all admin/management pages: Product Management (/products/safety), Track Record Management (/cases/smart-safety), Announcements (/customer-service/announcement), OG Settings (/admin/og-settings), Change Password (/admin/change-password), (4) Recent activity section (latest 5 board posts).",
+    "Create grape/src/pages/Admin/Dashboard.css - style the dashboard with a card-based grid layout. Use responsive design (2-3 columns on desktop, 1 on mobile). Follow the project's CSS variable patterns (--spacing-md, --spacing-2xl, etc.).",
+    "Create grape/src/components/AdminLayout/index.jsx - a wrapper layout for admin pages that includes a side navigation with links to: Dashboard (/admin/dashboard), OG Settings (/admin/og-settings), Change Password (/admin/change-password), Products (/products/safety), Announcements (/customer-service/announcement), Cases (/cases/smart-safety). Highlight the current active link based on location.",
+    "Create grape/src/components/AdminLayout/AdminLayout.css - style the admin sidebar (fixed left panel on desktop, collapsible on mobile).",
+    "Update grape/src/contexts/AuthContext.jsx to add session timeout handling: check token expiry every 60 seconds, show a warning notification 5 minutes before expiry, and automatically sign out when expired. Add a sessionExpiringSoon state that components can use.",
+    "Update grape/src/App.jsx to add route /admin/dashboard wrapped in ProtectedRoute, import Dashboard component.",
+    "Update grape/src/components/Menu/index.jsx to add a conditional admin menu item (visible only when isAuthenticated() is true) that links to /admin/dashboard with label '관리자'."
+  ],
+  "acceptance_criteria": [
+    "The /admin/dashboard page renders for logged-in users showing welcome message, quick stats, and quick links",
+    "AdminLayout component provides side navigation on admin pages",
+    "Session timeout handling warns user before token expiry and logs out when expired",
+    "The main navigation menu shows '관리자' link when user is logged in",
+    "npm run build succeeds without errors"
+  ],
+  "verification": [
+    "Run `cd /projects/sandbox/thingswell-homepage-model001/grape && npm run build` and confirm it succeeds with exit code 0"
+  ],
+  "blocked_reason": null,
+  "findings": ""
+}

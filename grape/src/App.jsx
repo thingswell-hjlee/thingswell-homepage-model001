@@ -85,11 +85,14 @@ import Organization from "./pages/About/Organization.jsx";
 import Licenses from "./pages/About/Licenses.jsx";
 import Directions from "./pages/About/Directions.jsx";
 import Login from "./pages/Login/Login.jsx";
+import ForgotPassword from "./pages/Login/ForgotPassword.jsx";
 import OGSettings from "./pages/Admin/OGSettings.jsx";
+import ChangePassword from "./pages/Admin/ChangePassword.jsx";
 import Case_detail from "./pages/Cases/Case_detail.jsx";
 import Sitemap from "./pages/Sitemap/sitemap.jsx";
 import NotFound from "./pages/NotFound/NotFound.jsx";
 import { AuthProvider } from "./contexts/AuthContext.jsx";
+import ProtectedRoute from "./components/ProtectedRoute";
 import HTTPSRedirect from "./components/HTTPSRedirect";
 import ScrollToTop from "./components/ScrollToTop";
 
@@ -156,7 +159,9 @@ function App() {
                     <Route path="/about/licenses" element={<Licenses />} />
                     <Route path="/about/directions" element={<Directions />} />
                     <Route path="/login" element={<Login />} />
+                    <Route path="/forgot-password" element={<ForgotPassword />} />
                     <Route path="/admin/og-settings" element={<OGSettings />} />
+                    <Route path="/admin/change-password" element={<ProtectedRoute><ChangePassword /></ProtectedRoute>} />
                     <Route path="/sitemap" element={<Sitemap />} />
                     <Route path="*" element={<NotFound />} />
                   </Routes>

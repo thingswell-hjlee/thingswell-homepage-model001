@@ -324,6 +324,44 @@ export const onAuthStateChange = (callback) => {
 };
 
 /**
+ * 비밀번호 찾기 (인증 코드 전송)
+ * @param {string} email - 이메일 주소
+ */
+export const forgotPassword = async (email) => {
+  const { data, error } = await cognitoRequest('ForgotPassword', {
+    ClientId: COGNITO_CLIENT_ID,
+    Username: email,
+  });
+
+  if (error) {
+    return { data: null, error };
+  }
+
+  return { data: { message: '인증 코드가 이메일로 전송되었습니다.' }, error: null };
+};
+
+/**
+ * 비밀번호 재설정 (인증 코드 확인 후)
+ * @param {string} email - 이메일 주소
+ * @param {string} code - 인증 코드
+ * @param {string} newPassword - 새 비밀번호
+ */
+export const confirmForgotPassword = async (email, code, newPassword) => {
+  const { data, error } = await cognitoRequest('ConfirmForgotPassword', {
+    ClientId: COGNITO_CLIENT_ID,
+    Username: email,
+    ConfirmationCode: code,
+    Password: newPassword,
+  });
+
+  if (error) {
+    return { data: null, error };
+  }
+
+  return { data: { message: '비밀번호가 재설정되었습니다.' }, error: null };
+};
+
+/**
  * 비밀번호 변경 (로그인 상태에서)
  * @param {string} previousPassword - 이전 비밀번호
  * @param {string} proposedPassword - 새 비밀번호
@@ -358,6 +396,8 @@ const auth = {
   getAccessToken,
   onAuthStateChange,
   changePassword,
+  forgotPassword,
+  confirmForgotPassword,
 };
 
 export default auth;

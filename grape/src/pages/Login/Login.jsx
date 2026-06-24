@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { signIn } from '../../lib/auth.js';
 import { useAuth } from '../../contexts/AuthContext.jsx';
 import rndHeader from '../../assets/header_image/rnd.jpg';
@@ -87,6 +87,9 @@ const Login = () => {
                     <button type="submit" disabled={loading}>
                       {loading ? '로그인 중...' : '로그인'}
                     </button>
+                    <div className="login-link">
+                      <Link to="/forgot-password">비밀번호를 잊으셨나요?</Link>
+                    </div>
                 </form>
               </div>
             </div>
