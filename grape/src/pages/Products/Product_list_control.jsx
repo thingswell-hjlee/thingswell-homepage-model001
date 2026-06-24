@@ -1,388 +1,271 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
-import welding from '../../assets/welding.jpg';
-import grinding from '../../assets/grinding.jpg';
-import construction from '../../assets/construction.jpg';
-import manufacturing from '../../assets/manufacturing.jpg';
-import fire from '../../assets/fire.jpg';
-import dangerous from '../../assets/dangerous.jpg';
-import falldown from '../../assets/falldown.jpg';
-import collision from '../../assets/collision.jpg';
-import collapse from '../../assets/collapse.jpg';
-import ProductList from './ProductList';
-import controlHeaderImage from '../../assets/header_image/product.jpg';
-import { getProducts, createProduct, updateProduct, deleteProduct, toggleProductActive } from '../../lib/api';
-import { useAuth } from '../../contexts/AuthContext';
-import { checkTableExists, checkUserAuthStatus } from '../../utils/supabaseRLS';
-import { deleteAllPostFiles } from '../../utils/imageUpload';
-import ProductPage from '../../components/ProductPage/ProductPage';
-import RecordEditor from '../../components/RecordEditor';
+import React from 'react';
+import BaseLayout from '../../components/Layout/BaseLayout';
+import ProductHeader from '../../components/ProductPage/ProductHeader';
+import headerImage from '../../assets/header_image/product.jpg';
+import '../Solutions/SolutionPage.css';
+
+// 이미지 import
+import integratedControl from '../../assets/products/control/integrated-control.jpg';
+import smartBuilding from '../../assets/products/control/smart-building.jpg';
+import conference from '../../assets/products/control/conference.jpg';
+import technology from '../../assets/products/control/technology.jpg';
+import automation from '../../assets/products/control/automation.jpg';
+import buildingExterior from '../../assets/products/control/building-exterior.jpg';
+import touchPanel from '../../assets/products/control/touch-panel.jpg';
+import remoteControl from '../../assets/products/control/remote-control.jpg';
+
+const BREADCRUMBS = ["Home", "제품", "통합제어"];
+
+// 핵심 제품 라인업
+const PRODUCTS = [
+  {
+    image: integratedControl,
+    title: "통합제어기 XCN-3000",
+    subtitle: "Integrated Controller",
+    desc: "RS232/485, TCP/IP, IR, 릴레이 등 다양한 프로토콜을 지원하는 차세대 통합제어기입니다. 영상, 음향, 조명, 환경 설비를 단일 인터페이스로 통합 제어합니다.",
+  },
+  {
+    image: remoteControl,
+    title: "원격관리 ThingsEye",
+    subtitle: "Remote Management Platform",
+    desc: "다중 공간의 설비 상태를 원격으로 모니터링하고 제어하는 클라우드 플랫폼입니다. 실시간 데이터 수집, 분석, 스케줄링을 통한 자동화 운영을 지원합니다.",
+  },
+  {
+    image: touchPanel,
+    title: "터치패널 컨트롤러",
+    subtitle: "Touch Panel Controller",
+    desc: "직관적인 GUI 기반 10인치/7인치 터치패널로 현장에서 손쉽게 설비를 제어합니다. 프리셋 저장으로 원터치 환경 전환이 가능합니다.",
+  },
+  {
+    image: technology,
+    title: "상황인지 자동화",
+    subtitle: "Context-Aware Automation",
+    desc: "공기질, 모션, 카메라 등 멀티모달 센서 데이터를 활용하여 공간의 상황을 인지하고 설비를 최적 제어합니다. 에너지 절감과 공간 효율성을 극대화합니다.",
+  },
+];
+
+// 적용 분야
+const DOMAINS = [
+  {
+    image: conference,
+    title: "대회의실/강당",
+    subtitle: "Conference Hall",
+    items: [
+      "비디오월, 매트릭스 영상 시스템 통합 제어",
+      "무선 마이크, 오디오 믹서 음향 자동 설정",
+      "DMX512 기반 감성 조명 및 스팟 조명 제어",
+      "화자 추적 카메라 및 화상회의 시스템 연동",
+      "프리셋 저장으로 원터치 회의 환경 전환",
+    ],
+  },
+  {
+    image: smartBuilding,
+    title: "강의실/교육시설",
+    subtitle: "Education Facility",
+    items: [
+      "강의 모드별 조명, 음향, 영상 자동 전환",
+      "화자 추적 기반 카메라 자동 줌/팬 제어",
+      "녹화 시스템 연동 및 원격 수업 지원",
+      "시간표 기반 자동 스케줄링 운영",
+      "에너지 절감형 자동 전원 관리 시스템",
+    ],
+  },
+  {
+    image: buildingExterior,
+    title: "전시장/컨벤션",
+    subtitle: "Exhibition & Convention",
+    items: [
+      "대규모 공간 다중 구역 독립 제어 지원",
+      "이벤트 시나리오 기반 설비 일괄 전환",
+      "입체 음향 시스템 및 공간 음향 최적화",
+      "실시간 환경 모니터링 및 공조 자동 제어",
+      "원격 관제를 통한 다중 시설 통합 운영",
+    ],
+  },
+];
+
+// 서비스 파이프라인
+const PIPELINE = [
+  {
+    image: automation,
+    step: "01",
+    title: "현장 분석",
+    subtitle: "Site Analysis",
+    items: [
+      "공간 구조 및 설비 현황 조사",
+      "기존 제어 시스템 호환성 분석",
+      "사용자 요구사항 및 시나리오 정의",
+      "최적 제어 아키텍처 설계",
+      "프로토콜 및 인터페이스 규격 확인",
+    ],
+  },
+  {
+    image: integratedControl,
+    step: "02",
+    title: "시스템 구축",
+    subtitle: "System Integration",
+    items: [
+      "XCN-3000 통합제어기 설치 및 배선",
+      "영상/음향/조명/환경 설비 연동",
+      "터치패널 GUI 맞춤 개발",
+      "프리셋/매크로 시나리오 프로그래밍",
+      "ThingsEye 클라우드 연동 설정",
+    ],
+  },
+  {
+    image: touchPanel,
+    step: "03",
+    title: "자동화 설정",
+    subtitle: "Automation Setup",
+    items: [
+      "센서 기반 상황인지 자동 제어 설정",
+      "스케줄링 기반 시간대별 운영 프로그램",
+      "에너지 절감 자동화 정책 적용",
+      "비상 상황 안전모드 설정",
+      "사용자별 권한 및 제어 범위 설정",
+    ],
+  },
+  {
+    image: remoteControl,
+    step: "04",
+    title: "원격 운영",
+    subtitle: "Remote Operation",
+    items: [
+      "PC/태블릿/모바일 다중 접속 지원",
+      "다중 시설 통합 대시보드 원격 관제",
+      "설비 이상 자동 알림 및 유지보수 요청",
+      "운영 리포트 자동 생성 및 분석",
+      "클라우드 기반 데이터 백업 관리",
+    ],
+  },
+];
 
 export default function ProductListControlPage() {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [showAddModal, setShowAddModal] = useState(false);
-  const [selectedRecord, setSelectedRecord] = useState(null);
-  const [viewMode, setViewMode] = useState('list');
-  const [editingExistingRecord, setEditingExistingRecord] = useState(null);
-  const [newRecord, setNewRecord] = useState({
-    title: '',
-    desc: '',
-    overview_title: '',
-    date: '',
-    orderer: '',
-    type: '',
-    kind: '통합제어',
-    images: []
-  });
-  const [submitting, setSubmitting] = useState(false);
-  
-  const { user, isAuthenticated, canEditContent } = useAuth();
-
-  useEffect(() => {
-    fetchProducts();
-    checkUserAuthStatus();
-  }, []);
-
-  // URL 파라미터 확인하여 상세 모드 설정
-  useEffect(() => {
-    console.log('[Control] useEffect location.search ->', location.search, 'products.length=', products.length);
-    const searchParams = new URLSearchParams(location.search);
-    const detailId = searchParams.get('detail');
-    
-    if (detailId) {
-      // URL에 detail 파라미터가 있으면 해당 제품을 찾아서 상세 모드로 설정
-      const record = products.find(p => p.rawData && p.rawData.id === parseInt(detailId));
-      if (record) {
-        setSelectedRecord(record.rawData);
-        setViewMode('detail');
-      }
-    } else {
-      // URL에 detail 파라미터가 없으면 리스트 모드로 설정
-      setViewMode('list');
-      setSelectedRecord(null);
-    }
-  }, [location.search, products]);
-
-  const fetchProducts = async () => {
-    try {
-      setLoading(true);
-
-      const { data, error } = await getProducts({ kind: '통합제어', order: 'date', ascending: false });
-
-      if (error) {
-        throw new Error(error.message);
-      }
-
-      const formattedProducts = (data || []).map(product => {
-        let imageUrl = null;
-        if (product.images) {
-          try {
-            const images = JSON.parse(product.images);
-            if (images && images.length > 0 && images[0]) {
-              imageUrl = images[0];
-            }
-          } catch (error) {
-            console.error('이미지 파싱 오류:', error);
-          }
-        }
-        
-        return {
-          name: product.title,
-          title: product.overview_title || product.desc,
-          img: imageUrl,
-          onClick: () => handleRecordClick(product),
-          category: product.type,
-          organization: product.orderer,
-          date: product.date,
-          rawData: product
-        };
-      });
-
-      setProducts(formattedProducts);
-    } catch (err) {
-      console.error('Product 데이터를 가져오는 중 오류 발생:', err);
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleAddRecord = async (formData) => {
-    const { isAuthenticated } = await checkUserAuthStatus();
-    if (!isAuthenticated) {
-      alert('제품을 추가하려면 로그인이 필요합니다.');
-      return;
-    }
-    
-    if (editingExistingRecord) {
-      try {
-        setSubmitting(true);
-        
-        const { data, error } = await updateProduct(editingExistingRecord.id, {
-          title: formData.title,
-          desc: formData.desc,
-          overview_title: formData.overview_title,
-          date: formData.date,
-          orderer: formData.orderer,
-          type: formData.type,
-          kind: formData.kind,
-          images: formData.images && formData.images.length > 0 ? JSON.stringify(formData.images) : null,
-          keyFeatures: formData.keyFeatures ? JSON.stringify(formData.keyFeatures) : null,
-          specifications: formData.specifications && formData.specifications.length > 0 ? JSON.stringify(formData.specifications) : null,
-          certifications: formData.certifications && formData.certifications.length > 0 ? JSON.stringify(formData.certifications) : null,
-          downloads: formData.downloads && formData.downloads.length > 0 ? JSON.stringify(formData.downloads) : null,
-          videos: formData.videos && formData.videos.length > 0 ? JSON.stringify(formData.videos) : null
-        });
-
-        if (error) {
-          throw new Error(error.message);
-        }
-
-        alert('제품이 성공적으로 수정되었습니다!');
-        setShowAddModal(false);
-        setEditingExistingRecord(null);
-        setNewRecord({ title: '', desc: '', overview_title: '', date: '', orderer: '', type: '', kind: '통합제어', images: [] });
-        fetchProducts();
-        
-      } catch (error) {
-        console.error('제품 수정 중 오류 발생:', error);
-        alert('제품 수정 중 오류가 발생했습니다: ' + error.message);
-      } finally {
-        setSubmitting(false);
-      }
-    } else {
-      if (!formData.title || !formData.overview_title || !formData.desc || !formData.date || !formData.orderer || !formData.type || !formData.kind) {
-        alert('모든 필드를 입력해주세요.');
-        return;
-      }
-
-      try {
-        setSubmitting(true);
-        
-        const { data, error } = await createProduct({
-          title: formData.title,
-          desc: formData.desc,
-          overview_title: formData.overview_title,
-          date: formData.date,
-          orderer: formData.orderer,
-          type: formData.type,
-          kind: formData.kind,
-          images: formData.images && formData.images.length > 0 ? JSON.stringify(formData.images) : null,
-          keyFeatures: formData.keyFeatures ? JSON.stringify(formData.keyFeatures) : null,
-          specifications: formData.specifications && formData.specifications.length > 0 ? JSON.stringify(formData.specifications) : null,
-          certifications: formData.certifications && formData.certifications.length > 0 ? JSON.stringify(formData.certifications) : null,
-          downloads: formData.downloads && formData.downloads.length > 0 ? JSON.stringify(formData.downloads) : null,
-          videos: formData.videos && formData.videos.length > 0 ? JSON.stringify(formData.videos) : null
-        });
-
-        if (error) {
-          throw new Error(error.message);
-        }
-
-        alert('제품이 성공적으로 추가되었습니다!');
-        setShowAddModal(false);
-        setNewRecord({ title: '', desc: '', overview_title: '', date: '', orderer: '', type: '', kind: '통합제어', images: [] });
-        fetchProducts();
-        
-      } catch (error) {
-        console.error('제품 추가 중 오류 발생:', error);
-        alert('제품 추가 중 오류가 발생했습니다: ' + error.message);
-      } finally {
-        setSubmitting(false);
-      }
-    }
-  };
-
-  const handleRecordClick = (record) => {
-    // URL에 detail 파라미터를 추가하여 브라우저 히스토리에 기록
-    const currentSearch = new URLSearchParams(location.search);
-    currentSearch.set('detail', record.id);
-    const target = `${location.pathname}?${currentSearch.toString()}`;
-    console.log('[Control] handleRecordClick navigating to', target, 'current=', location.pathname + location.search);
-    // 동일한 위치로의 중복 네비게이션 방지
-    if (location.pathname + location.search === target) {
-      console.log('[Control] handleRecordClick - target equals current, skipping navigate');
-      return;
-    }
-    navigate(target, { replace: false });
-  };
-
-  const handleBackToList = () => {
-    // URL에서 detail 파라미터를 제거하여 리스트 모드로 돌아가기
-    const currentSearch = new URLSearchParams(location.search);
-    currentSearch.delete('detail');
-    navigate(`${location.pathname}?${currentSearch.toString()}`, { replace: false });
-  };
-
-  const handleEditRecord = async (record) => {
-    const { isAuthenticated } = await checkUserAuthStatus();
-    if (!isAuthenticated) {
-      alert('제품을 편집하려면 로그인이 필요합니다.');
-      return;
-    }
-    
-    setEditingExistingRecord(record);
-    setShowAddModal(true);
-  };
-
-  const handleDeleteRecord = async (record) => {
-    const { isAuthenticated } = await checkUserAuthStatus();
-    if (!isAuthenticated) {
-      alert('제품을 삭제하려면 로그인이 필요합니다.');
-      return;
-    }
-
-    if (!window.confirm('이 제품을 삭제하시겠습니까?\n\n⚠️ 주의: 관련된 모든 이미지와 파일도 함께 삭제됩니다.')) return;
-
-    try {
-      // 1. 먼저 관련된 모든 이미지와 파일 삭제
-      await deleteAllPostFiles(record, 'Product');
-      
-      // 2. 데이터베이스에서 레코드 삭제
-      const { error } = await deleteProduct(record.id);
-      if (error) throw new Error(error.message);
-      
-      alert('제품과 관련된 모든 파일이 삭제되었습니다.');
-      fetchProducts();
-    } catch (err) {
-      console.error('삭제 중 오류 발생:', err);
-      alert('삭제 중 오류가 발생했습니다: ' + err.message);
-    }
-  };
-
-  const handleToggleActive = async (record, newActiveStatus) => {
-    try {
-      // 인증 상태 확인
-      const { isAuthenticated } = await checkUserAuthStatus();
-      if (!isAuthenticated) {
-        alert('활성화 상태를 변경하려면 로그인이 필요합니다.');
-        return;
-      }
-
-      // 데이터베이스 업데이트
-      const { error } = await toggleProductActive(record.id, newActiveStatus);
-
-      if (error) {
-        console.error('활성화 상태 변경 오류:', error);
-        alert('활성화 상태 변경 중 오류가 발생했습니다: ' + error.message);
-        return;
-      }
-
-      console.log('활성화 상태 변경 성공:', { id: record.id, is_active: newActiveStatus });
-      alert(`제품이 ${newActiveStatus ? '활성화' : '비활성화'}되었습니다.`);
-      
-      // 제품 목록 새로고침
-      fetchProducts();
-      
-    } catch (error) {
-      console.error('활성화 상태 변경 중 오류 발생:', error);
-      alert('활성화 상태 변경 중 오류가 발생했습니다: ' + error.message);
-    }
-  };
-
-  if (loading) {
-    return <div>데이터를 불러오는 중...</div>;
-  }
-
-  if (error) {
-    return <div>오류가 발생했습니다: {error}</div>;
-  }
-
-  if (viewMode === 'detail' && selectedRecord) {
-    return (
-      <div>
-        <div>
-          <ProductPage
-            productData={{
-              name: selectedRecord.title || '제목 없음',
-              title: selectedRecord.overview_title || selectedRecord.desc || '개요 없음',
-              overview_title: selectedRecord.overview_title || selectedRecord.desc || '개요 없음',
-              overview: selectedRecord.overview || selectedRecord.desc || '내용 없음',
-              images: selectedRecord.images ? JSON.parse(selectedRecord.images) : [],
-              keyFeatures: selectedRecord.keyFeatures ? JSON.parse(selectedRecord.keyFeatures).features.filter(f => f.trim() !== '') : [],
-              keyFeaturesImages: selectedRecord.keyFeatures ? JSON.parse(selectedRecord.keyFeatures).images || [] : [],
-              specifications: selectedRecord.specifications ? JSON.parse(selectedRecord.specifications) : [],
-              certifications: selectedRecord.certifications ? JSON.parse(selectedRecord.certifications) : [],
-              downloads: selectedRecord.downloads ? JSON.parse(selectedRecord.downloads) : [],
-              videos: selectedRecord.videos ? JSON.parse(selectedRecord.videos) : [],
-              breadcrumbs: ["Home", "제품", selectedRecord.kind || '통합제어', selectedRecord.title || '제목 없음']
-            }}
-            isRecordPage={false}
-          />
-        </div>
-      </div>
-    );
-  }
-
   return (
-    <div>
-      {showAddModal && (
-        <RecordEditor
-          isModal={true}
-          mode="product"
-          tableName="Product"
-          editData={editingExistingRecord}
-          submitting={submitting}
-          onSave={handleAddRecord}
-          onCancel={() => {
-            setShowAddModal(false);
-            setEditingExistingRecord(null);
-          }}
-        />
-      )}
+    <BaseLayout
+      header={() => <ProductHeader image={headerImage} alt="control products" />}
+      breadcrumbs={BREADCRUMBS}
+      title="통합제어"
+    >
+      <div className="solution-page">
+        {/* 히어로 섹션 */}
+        <section className="sol-hero">
+          <div className="sol-hero-badge">Integrated Control Products</div>
+          <h1 className="sol-hero-title">
+            하나의 인터페이스로,<br />모든 공간을 제어하다
+          </h1>
+          <p className="sol-hero-desc">
+            영상, 음향, 조명, 냉난방, 공조 등 다양한 설비를 XCN-3000 통합제어기와
+            ThingsEye 원격관리 플랫폼으로 제어하는 차세대 통합제어 시스템입니다.
+            멀티모달 센서 기반 상황인지 자동화와 클라우드 원격관리로
+            공간 효율성을 극대화하고 운영 비용을 절감합니다.
+          </p>
+        </section>
 
-      <ProductList
-        products={products}
-        title="통합제어"
-        // subtitle="통합제어 제품들을 확인하세요"
-        breadcrumbs={["Home", "제품", "통합제어"]}
-        longVertical
-        headerImage={controlHeaderImage}
-        onEditRecord={handleEditRecord}
-        canEdit={canEditContent()}
-        canDelete={canEditContent()}
-        onDeleteRecord={handleDeleteRecord}
-        onToggleActive={handleToggleActive}
-        hideSearchAndView={false}
-        hideViewToggle={true}
-        addButton={canEditContent() && (
-          <button
-            onClick={() => setShowAddModal(true)}
-            style={{
-              padding: 'var(--spacing-sm) var(--spacing-md)',
-              backgroundColor: 'var(--color-primary)',
-              color: 'white',
-              border: 'none',
-              outline: 'none',
-              borderRadius: 'var(--border-radius-md)',
-              fontSize: 'var(--font-size-sm)',
-              fontWeight: 'var(--font-weight-medium)',
-              cursor: 'pointer',
-              transition: 'background-color var(--transition-slow)',
-              whiteSpace: 'nowrap',
-              height: '40px',
-              minWidth: '80px',
-              boxSizing: 'border-box',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              textAlign: 'center'
-            }}
-            onMouseEnter={(e) => {
-              e.target.style.backgroundColor = '#0056b3';
-            }}
-            onMouseLeave={(e) => {
-              e.target.style.backgroundColor = 'var(--color-primary)';
-            }}
-          >
-            + 제품 추가
-          </button>
-        )}
-      />
-    </div>
+        {/* 핵심 제품 라인업 */}
+        <section className="sol-section">
+          <div className="sol-section-header">
+            <span className="sol-section-label">Product Lineup</span>
+            <h2 className="sol-section-title">핵심 제품</h2>
+          </div>
+          <div className="sol-tech-grid">
+            {PRODUCTS.map((product, i) => (
+              <div key={i} className="sol-tech-card">
+                <div className="sol-tech-card-img">
+                  <img src={product.image} alt={product.title} />
+                  <div className="sol-tech-card-overlay" />
+                </div>
+                <div className="sol-tech-card-body">
+                  <span className="sol-tech-card-subtitle">{product.subtitle}</span>
+                  <h3 className="sol-tech-card-title">{product.title}</h3>
+                  <p className="sol-tech-card-desc">{product.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* 적용 분야 */}
+        <section className="sol-section">
+          <div className="sol-section-header">
+            <span className="sol-section-label">Application Areas</span>
+            <h2 className="sol-section-title">적용 분야</h2>
+          </div>
+          <div className="sol-domain-grid">
+            {DOMAINS.map((domain, i) => (
+              <div key={i} className="sol-domain-card">
+                <div className="sol-domain-card-img">
+                  <img src={domain.image} alt={domain.title} />
+                  <div className="sol-domain-card-overlay">
+                    <span className="sol-domain-card-subtitle">{domain.subtitle}</span>
+                    <h3 className="sol-domain-card-title">{domain.title}</h3>
+                  </div>
+                </div>
+                <ul className="sol-domain-card-list">
+                  {domain.items.map((item, j) => (
+                    <li key={j}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* 서비스 파이프라인 */}
+        <section className="sol-section">
+          <div className="sol-section-header">
+            <span className="sol-section-label">Service Pipeline</span>
+            <h2 className="sol-section-title">구축 프로세스</h2>
+          </div>
+          <div className="sol-pipeline-grid">
+            {PIPELINE.map((step, i) => (
+              <div key={i} className="sol-pipeline-card">
+                <div className="sol-pipeline-card-img">
+                  <img src={step.image} alt={step.title} />
+                  <div className="sol-pipeline-card-step">{step.step}</div>
+                </div>
+                <div className="sol-pipeline-card-body">
+                  <span className="sol-pipeline-card-subtitle">{step.subtitle}</span>
+                  <h3 className="sol-pipeline-card-title">{step.title}</h3>
+                  <ul className="sol-pipeline-card-list">
+                    {step.items.map((item, j) => (
+                      <li key={j}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* 시스템 아키텍처 */}
+        <section className="sol-section">
+          <div className="sol-section-header">
+            <span className="sol-section-label">System Architecture</span>
+            <h2 className="sol-section-title">시스템 구성</h2>
+          </div>
+          <div className="sol-architecture">
+            <div className="sol-architecture-layers">
+              <div className="sol-architecture-layer">
+                <span className="sol-layer-badge edge">DEVICE</span>
+                <p>영상(프로젝터, 디스플레이), 음향(앰프, 마이크), 조명(DMX512), 환경(공조, 전동커튼) 설비</p>
+              </div>
+              <div className="sol-architecture-layer">
+                <span className="sol-layer-badge comm">CONTROLLER</span>
+                <p>XCN-3000 통합제어기, RS232/485/TCP/IP/IR/릴레이 멀티 프로토콜, 터치패널 인터페이스</p>
+              </div>
+              <div className="sol-architecture-layer">
+                <span className="sol-layer-badge cloud">CLOUD</span>
+                <p>ThingsEye 원격관리 플랫폼, 데이터 수집·분석, 스케줄링 자동화, 모델 버전 관리</p>
+              </div>
+              <div className="sol-architecture-layer">
+                <span className="sol-layer-badge ctrl">INTERFACE</span>
+                <p>웹/모바일 대시보드, 터치패널 GUI, 벽부형 스위치, 음성제어, 타이머/스케줄 자동 운영</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </BaseLayout>
   );
 }
