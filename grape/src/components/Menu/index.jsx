@@ -100,6 +100,12 @@ const defaultMenuItems = [
     external: true,
   },
 
+  {
+    label: '관리자',
+    path: '/admin/dashboard',
+    requireAuth: true,
+  },
+
   // {
   //   label: '사이트맵',
   //   path: '/sitemap',
@@ -528,6 +534,10 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
   // 로그인 상태에 따라 메뉴 아이템 필터링
   const filteredMenuItems = useMemo(() => {
     return defaultMenuItems.filter(item => {
+      // requireAuth가 true인 항목은 로그인된 경우에만 표시
+      if (item.requireAuth && !isAuthenticated()) {
+        return false;
+      }
       // 로그인하지 않은 경우 정부지원사업 메뉴 숨김
       if (!isAuthenticated()) {
         if (item.label === '정부지원사업') {

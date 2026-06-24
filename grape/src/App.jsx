@@ -88,6 +88,7 @@ import Login from "./pages/Login/Login.jsx";
 import ForgotPassword from "./pages/Login/ForgotPassword.jsx";
 import OGSettings from "./pages/Admin/OGSettings.jsx";
 import ChangePassword from "./pages/Admin/ChangePassword.jsx";
+import Dashboard from "./pages/Admin/Dashboard.jsx";
 import Case_detail from "./pages/Cases/Case_detail.jsx";
 import Sitemap from "./pages/Sitemap/sitemap.jsx";
 import NotFound from "./pages/NotFound/NotFound.jsx";
@@ -162,6 +163,7 @@ function App() {
                     <Route path="/forgot-password" element={<ForgotPassword />} />
                     <Route path="/admin/og-settings" element={<OGSettings />} />
                     <Route path="/admin/change-password" element={<ProtectedRoute><ChangePassword /></ProtectedRoute>} />
+                    <Route path="/admin/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
                     <Route path="/sitemap" element={<Sitemap />} />
                     <Route path="*" element={<NotFound />} />
                   </Routes>
