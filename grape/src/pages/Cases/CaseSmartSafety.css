@@ -259,3 +259,81 @@
     flex-wrap: wrap;
   }
 }
+
+
+
+/* Yearly Case List */
+.case-yearly-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.case-year-group {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  transition: border-color 0.3s ease;
+}
+
+.case-year-group:hover {
+  border-color: rgba(0, 180, 216, 0.2);
+}
+
+.case-year-badge {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #00b4d8;
+  padding-top: 0.2rem;
+}
+
+.case-year-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.case-year-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.case-year-item:last-child {
+  border-bottom: none;
+}
+
+.case-year-item-title {
+  font-size: 0.85rem;
+  color: var(--color-text-light, #f0f0f0);
+  font-weight: 500;
+  flex: 1;
+}
+
+.case-year-item-orderer {
+  font-size: 0.75rem;
+  color: var(--color-text-muted, #94a3b8);
+  margin-left: 1rem;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .case-year-group {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  .case-year-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+  .case-year-item-orderer {
+    margin-left: 0;
+  }
+}
