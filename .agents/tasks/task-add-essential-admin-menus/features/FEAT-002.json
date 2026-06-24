@@ -2,7 +2,7 @@
   "id": "FEAT-002",
   "type": "feat",
   "description": "Add Admin Dashboard page with overview of all manageable content, quick links to management pages, and session timeout handling. Also add an admin navigation sidebar/menu that provides easy access to all admin functions.",
-  "status": "in_progress",
+  "status": "completed",
   "steps": [
     "Create grape/src/pages/Admin/Dashboard.jsx - a protected admin dashboard page using BaseLayout. Include: (1) Welcome section showing logged-in user email, (2) Quick stats cards showing counts of products, track records, board posts (fetch from existing API functions in src/lib/api.js), (3) Quick link cards to all admin/management pages: Product Management (/products/safety), Track Record Management (/cases/smart-safety), Announcements (/customer-service/announcement), OG Settings (/admin/og-settings), Change Password (/admin/change-password), (4) Recent activity section (latest 5 board posts).",
     "Create grape/src/pages/Admin/Dashboard.css - style the dashboard with a card-based grid layout. Use responsive design (2-3 columns on desktop, 1 on mobile). Follow the project's CSS variable patterns (--spacing-md, --spacing-2xl, etc.).",
@@ -23,5 +23,5 @@
     "Run `cd /projects/sandbox/thingswell-homepage-model001/grape && npm run build` and confirm it succeeds with exit code 0"
   ],
   "blocked_reason": null,
-  "findings": ""
+  "findings": "Build succeeds. Dashboard page fetches stats from existing API functions (getProducts, getTrackRecords, getBoards). AdminLayout provides sidebar navigation with active link highlighting. Session timeout checks token expiry every 60s, shows a fixed warning banner 5 min before expiry, and auto-signs-out when expired. Menu shows '관리자' item only when isAuthenticated() returns true via requireAuth filter."
 }
