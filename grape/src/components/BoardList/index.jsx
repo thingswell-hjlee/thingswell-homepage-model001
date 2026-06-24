@@ -117,9 +117,16 @@ const BoardList = ({
           setError('게시글을 불러오지 못했습니다. 잠시 후 다시 시도해주세요.');
           setInstruments([]);
         } else {
-          const merged = results.flatMap((r, idx) =>
-            (r.data || []).map((row) => ({ ...row, tableName: tableNames[idx] }))
-          );
+          const merged = results.flatMap((r, idx) => {
+            // API 응답이 배열이면 그대로, 객체이면 items/data/boards 필드에서 추출
+            const rawData = r.data;
+            const items = Array.isArray(rawData) ? rawData
+              : Array.isArray(rawData?.items) ? rawData.items
+              : Array.isArray(rawData?.data) ? rawData.data
+              : Array.isArray(rawData?.boards) ? rawData.boards
+              : [];
+            return items.map((row) => ({ ...row, tableName: tableNames[idx] }));
+          });
           setInstruments(merged);
         }
       } else {
@@ -138,7 +145,14 @@ const BoardList = ({
           setError('게시글을 불러오지 못했습니다. 잠시 후 다시 시도해주세요.');
           setInstruments([]);
         } else {
-          const data = (result.data || []).map((row) => ({ ...row, tableName }));
+          // API 응답이 배열이면 그대로, 객체이면 items/data/boards 필드에서 추출
+          const rawData = result.data;
+          const items = Array.isArray(rawData) ? rawData
+            : Array.isArray(rawData?.items) ? rawData.items
+            : Array.isArray(rawData?.data) ? rawData.data
+            : Array.isArray(rawData?.boards) ? rawData.boards
+            : [];
+          const data = items.map((row) => ({ ...row, tableName }));
           setInstruments(data);
         }
       }
