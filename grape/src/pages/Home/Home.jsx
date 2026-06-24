@@ -185,16 +185,6 @@ export default function Home() {
         <div className="safegai-cta-content">
           <h2 className="safegai-cta-title">{t('home.cta.title')}</h2>
           <p className="safegai-cta-desc">{t('home.cta.desc')}</p>
-          <Link
-            to={`/${currentLang}/products/monitoring`}
-            className="safegai-cta-domain"
-          >
-            <span className="safegai-cta-domain-url">
-              <span className="safegai-brand safegai-brand-sm">
-                <span className="safe">Safe</span><span className="gai">GAI</span>
-              </span>{' '}Platform
-            </span>
-          </Link>
           <div className="safegai-hero-cta-row">
             <Link
               to={`/${currentLang}/products/monitoring`}

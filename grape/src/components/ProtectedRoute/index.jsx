@@ -1,6 +1,7 @@
 import React from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
+import useTranslation from '../../hooks/useTranslation';
 
 /**
  * ProtectedRoute 컴포넌트
@@ -24,6 +25,7 @@ import { useAuth } from '../../contexts/AuthContext';
 const ProtectedRoute = ({ children, redirectTo = null, requireAdmin = false }) => {
   const { isAuthenticated, isAdmin, loading } = useAuth();
   const location = useLocation();
+  const { t } = useTranslation();
 
   // 현재 경로에서 언어 접두사 감지
   const getLangPrefix = () => {
@@ -43,7 +45,7 @@ const ProtectedRoute = ({ children, redirectTo = null, requireAdmin = false }) =
         height: '100vh',
         fontSize: '18px'
       }}>
-        로딩 중...
+        {t('common.loading')}
       </div>
     );
   }
@@ -69,8 +71,8 @@ const ProtectedRoute = ({ children, redirectTo = null, requireAdmin = false }) =
         color: '#666',
         gap: '16px'
       }}>
-        <p>접근 권한이 없습니다.</p>
-        <a href={`${lang}/`} style={{ color: '#007bff', textDecoration: 'underline' }}>홈으로 돌아가기</a>
+        <p>{t('common.accessDenied')}</p>
+        <a href={`${lang}/`} style={{ color: '#007bff', textDecoration: 'underline' }}>{t('common.backToHome')}</a>
       </div>
     );
   }

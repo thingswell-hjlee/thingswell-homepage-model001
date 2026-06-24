@@ -211,7 +211,14 @@
     "error": "Error",
     "noData": "No data available.",
     "contact": "Contact Us",
-    "back": "Go Back"
+    "back": "Go Back",
+    "backToList": "Back to List",
+    "backToHome": "Back to Home",
+    "accessDenied": "Access denied.",
+    "write": "Write",
+    "search": "Search",
+    "delete": "Delete",
+    "edit": "Edit"
   },
   "seo": {
     "home": {
@@ -862,6 +869,48 @@
     "edit": "Edit",
     "delete": "Delete",
     "loadError": "Failed to load posts. Please try again later.",
-    "loading": "Loading..."
+    "loading": "Loading...",
+    "backToList": "Back to List",
+    "write": "Write",
+    "dateLabel": "Date:",
+    "postNotFound": "Post not found.",
+    "noTitle": "Untitled",
+    "author": "Author",
+    "noDate": "No date",
+    "deleteConfirm": "Are you sure you want to delete this?\n\n⚠️ Warning: All related images and files will also be deleted.",
+    "deleteSuccess": "Post and all related files have been deleted.",
+    "deleteFail": "An error occurred while deleting."
+  },
+  "productPage": {
+    "overview": "Overview",
+    "features": "Key Features",
+    "specs": "Specifications",
+    "certifications": "Certifications",
+    "downloads": "Downloads",
+    "videos": "Videos",
+    "noVideos": "No videos available.",
+    "noContent": "Unable to load content.",
+    "additionalInfo": "Additional Information",
+    "download": "Download",
+    "keyFeatures": "Key Features",
+    "defaultOverview": "Provides a general overview of the product.",
+    "loadError": "An error occurred while loading the product.",
+    "notFound": "Product not found.",
+    "unknownError": "An unknown error occurred.",
+    "product": "Products",
+    "smartSafety": "Smart Safety",
+    "noTitle": "Untitled",
+    "noOverview": "No overview",
+    "emptyOverview": "No content"
+  },
+  "casePage": {
+    "loadError": "An error occurred while loading the case.",
+    "notFound": "Case not found.",
+    "unknownError": "An unknown error occurred.",
+    "cases": "Client Cases",
+    "detail": "Detail",
+    "noTitle": "Untitled",
+    "noOverview": "No overview",
+    "noContent": "No content"
   }
 }
