@@ -23,5 +23,5 @@
     "Run `cd /projects/sandbox/thingswell-homepage-model001/grape && npm run build` and confirm it succeeds with exit code 0"
   ],
   "blocked_reason": null,
-  "findings": "Build succeeds. Used existing patterns from Login.jsx and OGSettings.jsx. ProtectedRoute imported from ./components/ProtectedRoute (default export). BaseLayout imported from ./components/Layout/BaseLayout (default export) or from ./components/Layout (named export). Both work."
+  "findings": "Build succeeds. Used existing patterns from Login.jsx and OGSettings.jsx. ProtectedRoute imported from ./components/ProtectedRoute (default export). BaseLayout imported from ./components/Layout/BaseLayout (default export) or from ./components/Layout (named export). Both work. V2 fix: Added 60-second cooldown after successful code request and resend code button with timer in step 2."
 }

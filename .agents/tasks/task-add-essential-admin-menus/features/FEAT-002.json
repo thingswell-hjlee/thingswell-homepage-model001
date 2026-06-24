@@ -23,5 +23,5 @@
     "Run `cd /projects/sandbox/thingswell-homepage-model001/grape && npm run build` and confirm it succeeds with exit code 0"
   ],
   "blocked_reason": null,
-  "findings": "Build succeeds. Dashboard page fetches stats from existing API functions (getProducts, getTrackRecords, getBoards). AdminLayout provides sidebar navigation with active link highlighting. Session timeout checks token expiry every 60s, shows a fixed warning banner 5 min before expiry, and auto-signs-out when expired. Menu shows '관리자' item only when isAuthenticated() returns true via requireAuth filter."
+  "findings": "Build succeeds. Dashboard page fetches stats from existing API functions (getProducts, getTrackRecords, getBoards). AdminLayout provides sidebar navigation with active link highlighting. Session timeout checks token expiry every 60s using getSessionSync (raw pre-refresh check) with a 10-min warning threshold (before getSession's 5-min auto-refresh), shows a fixed warning banner, and auto-signs-out when expired. Menu shows '관리자' item only when isAuthenticated() returns true via requireAuth filter."
 }

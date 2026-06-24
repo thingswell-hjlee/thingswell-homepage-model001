@@ -9,6 +9,6 @@
     "tests": "pass",
     "test_quality": "skipped",
     "docker_build": "skipped",
-    "summary": "npm run build succeeds (exit code 0). No test framework configured in this project. All 3 features implemented and build-verified successfully. Review issues addressed: AdminLayout consistency, ProtectedRoute for OG settings, session timeout race fix, decodeToken deduplication."
+    "summary": "npm run build succeeds (exit code 0). No test framework configured in this project. All 3 features implemented and build-verified successfully. Review issues addressed: AdminLayout consistency, ProtectedRoute for OG settings, session timeout race fix, decodeToken deduplication. V2 review fixes: expiry warning threshold changed to 10min (before 5-min auto-refresh), ForgotPassword 60s cooldown added."
   }
 }
