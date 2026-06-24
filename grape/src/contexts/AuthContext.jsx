@@ -138,9 +138,14 @@ export const AuthProvider = ({ children }) => {
       if (Array.isArray(groups) && groups.length > 0) {
         return groups.includes('admin');
       }
-      // Fallback: if no groups claim, treat authenticated user as admin
+      // Intentional fail-open fallback: When cognito:groups claim is absent (e.g., Cognito
+      // user pool not yet configured with groups, or users created before group setup),
+      // treat any authenticated user as admin for backward compatibility. This ensures
+      // existing logged-in users are not broken during the transition period until Cognito
+      // groups are properly configured across all environments.
       return isAuthenticated();
     } catch {
+      // Same intentional fallback on token decode errors - preserve existing user access
       return isAuthenticated();
     }
   };

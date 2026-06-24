@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import ProductPage from '../../components/ProductPage/ProductPage';
 import useTranslation from '../../hooks/useTranslation';
 import { getProductById } from '../../lib/api';
@@ -8,6 +8,7 @@ export default function Product_detail_safety() {
   const { t } = useTranslation();
   const { id } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -49,7 +50,7 @@ export default function Product_detail_safety() {
   );
 
   if (error) {
-    const currentLang = t('common.home') === '홈' ? 'ko' : 'en';
+    const currentLang = location.pathname.startsWith('/en') ? 'en' : 'ko';
     return (
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '40vh', padding: '2rem' }}>
         <div style={{ textAlign: 'center', maxWidth: '480px' }}>

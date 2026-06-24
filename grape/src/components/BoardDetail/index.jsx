@@ -4,7 +4,7 @@ import './BoardDetail.css';
 import { useAuth } from '../../contexts/AuthContext';
 
 const BoardDetail = ({ post, onBack, onEdit, onDelete }) => {
-  const { isAuthenticated } = useAuth();
+  const { isAdmin } = useAuth();
   
   if (!post) {
     return (
@@ -62,7 +62,7 @@ const BoardDetail = ({ post, onBack, onEdit, onDelete }) => {
             <button onClick={onBack} className="btn-back">
               목록으로
             </button>
-            {isAuthenticated() && (
+            {isAdmin() && (
               <button onClick={() => onEdit(post)} className="btn-edit">
                 수정
               </button>
