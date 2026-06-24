@@ -4,6 +4,8 @@ import ProductPage from '../../components/ProductPage/ProductPage';
 import useTranslation from '../../hooks/useTranslation';
 import { getTrackRecordById } from '../../lib/api';
 
+// TODO: 제품/사례 데이터의 완전한 영문 지원은 API 데이터에 ko/en 필드 분리 또는 language 컬럼 추가 필요.
+
 export default function Case_detail() {
   const { id } = useParams(); 
   const navigate = useNavigate();
@@ -20,19 +22,19 @@ export default function Case_detail() {
         const { data, error } = await getTrackRecordById(id);
 
         if (error) {
-          setError(error.message || '제품을 불러오는 중 오류가 발생했습니다.');
+          setError(error.message || t('casePage.loadError'));
           return;
         }
 
         if (!data) {
-          setError('해당 제품을 찾을 수 없습니다.');
+          setError(t('casePage.notFound'));
           return;
         }
 
         setProduct(data);
       } catch (err) {
         console.error(err);
-        setError(err.message || '알 수 없는 오류가 발생했습니다.');
+        setError(err.message || t('casePage.unknownError'));
       } finally {
         setLoading(false);
       }
@@ -77,10 +79,10 @@ export default function Case_detail() {
   const videos = product.videos ? (() => { try { return JSON.parse(product.videos); } catch { return []; } })() : [];
 
   const productData = {
-    name: product.title || '제목 없음',
-    title: product.overview_title || product.desc || '개요 없음',
-    overview_title: product.overview_title || product.desc || '개요 없음',
-    overview: product.overview || product.desc || '내용 없음',
+    name: product.title || t('casePage.noTitle'),
+    title: product.overview_title || product.desc || t('casePage.noOverview'),
+    overview_title: product.overview_title || product.desc || t('casePage.noOverview'),
+    overview: product.overview || product.desc || t('casePage.noContent'),
     images,
     keyFeatures,
     keyFeaturesImages,
@@ -88,7 +90,7 @@ export default function Case_detail() {
     certifications,
     downloads,
     videos,
-    breadcrumbs: ['Home', '고객사례', product.kind, product.title || '상세']
+    breadcrumbs: ['Home', t('casePage.cases'), product.kind, product.title || t('casePage.detail')]
   };
 
   return (

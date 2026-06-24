@@ -86,7 +86,7 @@ const HamburgerMenu = ({
       <button 
         className={`mobile-menu-toggle ${isOpen ? 'active' : ''}`}
         onClick={onToggle}
-        aria-label={isOpen ? "메뉴 닫기" : "메뉴 열기"}
+        aria-label={isOpen ? t('common.menuClose') : t('common.menuOpen')}
         aria-expanded={isOpen}
         disabled={isAnimating}
       >
@@ -98,7 +98,7 @@ const HamburgerMenu = ({
           </div>
         )}
         <span className="sr-only">
-          {isOpen ? "메뉴 닫기" : "메뉴 열기"}
+          {isOpen ? t('common.menuClose') : t('common.menuOpen')}
         </span>
       </button>
 
@@ -120,7 +120,7 @@ const HamburgerMenu = ({
               <div className="main-menu-section">
                   <li className="logo-list-item">
                     <a href="/" onClick={(e) => { e.preventDefault(); onLogoClick(); }}>
-                      <img src={logo} alt="logo" />
+                      <img src={logo} alt={t('common.logoAlt')} />
                     </a>
                     {/* KOR/ENG 언어 토글 */}
                     <div className="hamburger-lang-toggle">
@@ -197,9 +197,9 @@ const HamburgerMenu = ({
                   <button
                     className="hamburger-menu-button bottom-menu"
                     onClick={onLogout}
-                    aria-label="로그아웃"
+                    aria-label={t('common.logout')}
                   >
-                    <span className="hamburger-menu-text">로그아웃</span>
+                    <span className="hamburger-menu-text">{t('common.logout')}</span>
                   </button>
                 </li>
               )}

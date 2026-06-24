@@ -211,7 +211,14 @@
     "error": "오류",
     "noData": "데이터가 없습니다.",
     "contact": "문의하기",
-    "back": "돌아가기"
+    "back": "돌아가기",
+    "backToList": "목록으로",
+    "backToHome": "홈으로 돌아가기",
+    "accessDenied": "접근 권한이 없습니다.",
+    "write": "작성",
+    "search": "검색",
+    "delete": "삭제",
+    "edit": "수정"
   },
   "seo": {
     "home": {
@@ -862,6 +869,45 @@
     "edit": "수정",
     "delete": "삭제",
     "loadError": "게시글을 불러오지 못했습니다. 잠시 후 다시 시도해주세요.",
-    "loading": "로딩 중..."
+    "loading": "로딩 중...",
+    "backToList": "목록으로",
+    "write": "작성",
+    "dateLabel": "작성일:",
+    "postNotFound": "게시글을 찾을 수 없습니다.",
+    "deleteConfirm": "정말 삭제하시겠습니까?\n\n⚠️ 주의: 관련된 모든 이미지와 파일도 함께 삭제됩니다.",
+    "deleteSuccess": "게시물과 관련된 모든 파일이 삭제되었습니다.",
+    "deleteFail": "삭제 중 오류가 발생했습니다."
+  },
+  "productPage": {
+    "overview": "개요",
+    "features": "주요 기능",
+    "specs": "사양",
+    "certifications": "인증",
+    "downloads": "다운로드",
+    "videos": "동영상",
+    "noVideos": "등록된 동영상이 없습니다.",
+    "noContent": "콘텐츠를 불러올 수 없습니다.",
+    "additionalInfo": "추가 정보",
+    "download": "다운로드",
+    "keyFeatures": "주요 기능",
+    "defaultOverview": "제품에 대한 전반적인 개요를 제공합니다.",
+    "loadError": "제품을 불러오는 중 오류가 발생했습니다.",
+    "notFound": "해당 제품을 찾을 수 없습니다.",
+    "unknownError": "알 수 없는 오류가 발생했습니다.",
+    "product": "제품",
+    "smartSafety": "스마트안전",
+    "noTitle": "제목 없음",
+    "noOverview": "개요 없음",
+    "noContent2": "내용 없음"
+  },
+  "casePage": {
+    "loadError": "제품을 불러오는 중 오류가 발생했습니다.",
+    "notFound": "해당 제품을 찾을 수 없습니다.",
+    "unknownError": "알 수 없는 오류가 발생했습니다.",
+    "cases": "고객사례",
+    "detail": "상세",
+    "noTitle": "제목 없음",
+    "noOverview": "개요 없음",
+    "noContent": "내용 없음"
   }
 }

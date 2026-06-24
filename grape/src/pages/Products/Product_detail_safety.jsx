@@ -4,6 +4,8 @@ import ProductPage from '../../components/ProductPage/ProductPage';
 import useTranslation from '../../hooks/useTranslation';
 import { getProductById } from '../../lib/api';
 
+// TODO: 제품/사례 데이터의 완전한 영문 지원은 API 데이터에 ko/en 필드 분리 또는 language 컬럼 추가 필요.
+
 export default function Product_detail_safety() {
   const { t } = useTranslation();
   const { id } = useParams();
@@ -20,19 +22,19 @@ export default function Product_detail_safety() {
         const { data, error } = await getProductById(id);
 
         if (error) {
-          setError(error.message || '제품을 불러오는 중 오류가 발생했습니다.');
+          setError(error.message || t('productPage.loadError'));
           return;
         }
 
         if (!data) {
-          setError('해당 제품을 찾을 수 없습니다.');
+          setError(t('productPage.notFound'));
           return;
         }
 
         setProduct(data);
       } catch (err) {
         console.error(err);
-        setError(err.message || '알 수 없는 오류가 발생했습니다.');
+        setError(err.message || t('productPage.unknownError'));
       } finally {
         setLoading(false);
       }
@@ -77,10 +79,10 @@ export default function Product_detail_safety() {
   const videos = product.videos ? (() => { try { return JSON.parse(product.videos); } catch { return []; } })() : [];
 
   const productData = {
-    name: product.title || '제목 없음',
-    title: product.overview_title || product.desc || '개요 없음',
-    overview_title: product.overview_title || product.desc || '개요 없음',
-    overview: product.overview || product.desc || '내용 없음',
+    name: product.title || t('productPage.noTitle'),
+    title: product.overview_title || product.desc || t('productPage.noOverview'),
+    overview_title: product.overview_title || product.desc || t('productPage.noOverview'),
+    overview: product.overview || product.desc || t('productPage.noContent2'),
     images,
     keyFeatures,
     keyFeaturesImages,
@@ -88,7 +90,7 @@ export default function Product_detail_safety() {
     certifications,
     downloads,
     videos,
-    breadcrumbs: ['Home', '제품', product.kind || '스마트안전', product.title || '제목 없음']
+    breadcrumbs: ['Home', t('productPage.product'), product.kind || t('productPage.smartSafety'), product.title || t('productPage.noTitle')]
   };
 
   return (

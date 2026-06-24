@@ -11,6 +11,7 @@ import ContentBottomBox from './ContentBottomBox';
 import { marked } from 'marked';
 import './ProductPage.css';
 import { BaseLayout } from '../../components/Layout';
+import useTranslation from '../../hooks/useTranslation';
 
 // 인라인 편집 컴포넌트
 const EditableText = ({ field, value, placeholder, multiline = false, style = {}, onSave }) => {
@@ -162,6 +163,7 @@ const ProductPage = ({
   hideHeader = false,
   isRecordPage = false
 }) => {
+  const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState('overview');
   const [tabsCollapsed, setTabsCollapsed] = useState(false);
   const [lightbox, setLightbox] = useState({ open: false, src: '', caption: '', alt: '' });
@@ -215,14 +217,14 @@ const ProductPage = ({
 
   // 탭 구성 - 제품 페이지와 실적 페이지 구분, 데이터가 있는 탭만 표시
   const allTabs = isRecordPage ? [
-    { id: 'overview', label: '개요', icon: '📋' }
+    { id: 'overview', label: t('productPage.overview'), icon: '📋' }
   ] : [
-    { id: 'overview', label: '개요', icon: '📋' },
-    { id: 'features', label: '주요 기능', icon: '⚡' },
-    { id: 'specs', label: '사양', icon: '📊' },
-    { id: 'certifications', label: '인증', icon: '🏆' },
-    { id: 'downloads', label: '다운로드', icon: '📥' },
-    { id: 'videos', label: '동영상', icon: '🎥' }
+    { id: 'overview', label: t('productPage.overview'), icon: '📋' },
+    { id: 'features', label: t('productPage.features'), icon: '⚡' },
+    { id: 'specs', label: t('productPage.specs'), icon: '📊' },
+    { id: 'certifications', label: t('productPage.certifications'), icon: '🏆' },
+    { id: 'downloads', label: t('productPage.downloads'), icon: '📥' },
+    { id: 'videos', label: t('productPage.videos'), icon: '🎥' }
   ];
 
   const tabs = allTabs.filter(tab => hasTabData(tab.id));
@@ -332,7 +334,7 @@ const ProductPage = ({
                   </div>
                   {hasBottomBoxContent && (
                     <ContentBottomBox
-                      title={productData?.bottom_box_title || '추가 정보'}
+                      title={productData?.bottom_box_title || t('productPage.additionalInfo')}
                       description={productData?.bottom_box_description}
                       photo={productData?.bottom_box_photo}
                       photos={productData?.bottom_box_photos}

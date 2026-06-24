@@ -5,9 +5,13 @@ import BoardDetail from '../BoardDetail';
 import BoardEditor from '../BoardEditor';
 import { getBoardById, deleteBoard } from '../../lib/api';
 import { deleteAllPostFiles } from '../../utils/imageUpload';
+import useTranslation from '../../hooks/useTranslation';
 import './Board.css';
 
+// TODO: 게시글/자료실 콘텐츠 자체의 다국어 지원은 별도 DB 필드 또는 language 컬럼 기준으로 분리 필요.
+
 const Board = ({ tableName, tableNames }) => {
+  const { t } = useTranslation();
   const [posts, setPosts] = useState([]);
   const [currentView, setCurrentView] = useState('list'); // 'list', 'detail', 'write', 'edit'
   const [selectedPost, setSelectedPost] = useState(null);
@@ -164,7 +168,7 @@ const Board = ({ tableName, tableNames }) => {
   };
 
   const handleDeletePost = async (post) => {
-    if (window.confirm('정말 삭제하시겠습니까?\n\n⚠️ 주의: 관련된 모든 이미지와 파일도 함께 삭제됩니다.')) {
+    if (window.confirm(t('board.deleteConfirm'))) {
       try {
         // 1. 먼저 관련된 모든 이미지와 파일 삭제
         const targetTable = post?.tableName || resolvedTableName;
@@ -175,9 +179,9 @@ const Board = ({ tableName, tableNames }) => {
 
         if (error) {
           console.error('삭제 오류:', error);
-          alert('삭제 중 오류가 발생했습니다: ' + error.message);
+          alert(t('board.deleteFail') + ': ' + error.message);
         } else {
-          alert('게시물과 관련된 모든 파일이 삭제되었습니다.');
+          alert(t('board.deleteSuccess'));
           // 목록으로 돌아가기
           const currentSearch = new URLSearchParams(location.search);
           currentSearch.delete('detail');
@@ -187,7 +191,7 @@ const Board = ({ tableName, tableNames }) => {
         }
       } catch (error) {
         console.error('삭제 중 예외 발생:', error);
-        alert('삭제 중 오류가 발생했습니다.');
+        alert(t('board.deleteFail'));
       }
     }
   };

@@ -2,15 +2,19 @@ import React from 'react';
 import DOMPurify from 'dompurify';
 import './BoardDetail.css';
 import { useAuth } from '../../contexts/AuthContext';
+import useTranslation from '../../hooks/useTranslation';
+
+// TODO: 게시글/자료실 콘텐츠 자체의 다국어 지원은 별도 DB 필드 또는 language 컬럼 기준으로 분리 필요.
 
 const BoardDetail = ({ post, onBack, onEdit, onDelete }) => {
   const { isAdmin } = useAuth();
+  const { t } = useTranslation();
   
   if (!post) {
     return (
       <div className="board-detail">
         <div className="empty-state">
-          <p>게시글을 찾을 수 없습니다.</p>
+          <p>{t('board.postNotFound')}</p>
         </div>
       </div>
     );
@@ -56,15 +60,15 @@ const BoardDetail = ({ post, onBack, onEdit, onDelete }) => {
         
         <div className="post-footer">
           <div className="post-meta">
-            <span className="date">작성일: {createdAt}</span>
+            <span className="date">{t('board.dateLabel')} {createdAt}</span>
           </div>
           <div className="post-actions">
             <button onClick={onBack} className="btn-back">
-              목록으로
+              {t('board.backToList')}
             </button>
             {isAdmin() && (
               <button onClick={() => onEdit(post)} className="btn-edit">
-                수정
+                {t('board.edit')}
               </button>
             )}
           </div>

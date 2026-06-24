@@ -4,12 +4,14 @@ import ThreeColumnGrid from '../ThreeColumnGrid';
 import ImageWithCaption from '../Common/ImageWithCaption';
 import { marked } from 'marked';
 import DOMPurify from 'dompurify';
+import useTranslation from '../../hooks/useTranslation';
 import featureImg1 from '../../assets/server.jpg';
 import featureImg2 from '../../assets/manufacturing.jpg';
 import featureImg3 from '../../assets/construction.jpg';
 import featureImg4 from '../../assets/buildings.jpg';
 
 const TabContent = ({ tabId, productData, featureClickToOpen = false, onFeatureImageClick }) => {
+  const { t } = useTranslation();
   const [openedFeatureIndex, setOpenedFeatureIndex] = useState(null);
   const renderContent = () => {
     switch (tabId) {
@@ -24,7 +26,7 @@ const TabContent = ({ tabId, productData, featureClickToOpen = false, onFeatureI
                 </div>
                 <div 
                   dangerouslySetInnerHTML={{ 
-                    __html: productData?.overview ? DOMPurify.sanitize(marked(productData.overview)) : "제품에 대한 전반적인 개요를 제공합니다." 
+                    __html: productData?.overview ? DOMPurify.sanitize(marked(productData.overview)) : t('productPage.defaultOverview') 
                   }}
                   style={{
                     lineHeight: '1.6',
@@ -63,7 +65,7 @@ const TabContent = ({ tabId, productData, featureClickToOpen = false, onFeatureI
             {/* 주요 기능 목록 */}
             {productData?.keyFeatures && productData.keyFeatures.length > 0 && (
               <div className="key-features-description" style={{ marginBottom: '30px' }}>
-                <h3 style={{ marginBottom: '15px', color: '#495057' }}>주요 기능</h3>
+                <h3 style={{ marginBottom: '15px', color: '#495057' }}>{t('productPage.keyFeatures')}</h3>
                 <ul className="feature-text-list">
                   {productData.keyFeatures.map((feature, index) => (
                     <li key={index} style={{ marginBottom: '8px', fontSize: '16px', lineHeight: '1.5' }}>
@@ -414,7 +416,7 @@ const TabContent = ({ tabId, productData, featureClickToOpen = false, onFeatureI
                     className="download-button"
                     style={{ textDecoration: 'none', display: 'inline-block' }}
                   >
-                    다운로드
+                    {t('productPage.download')}
                   </a>
                 </div>
               )) || []}
@@ -465,14 +467,14 @@ const TabContent = ({ tabId, productData, featureClickToOpen = false, onFeatureI
               </div>
             ) : (
               <div style={{ textAlign: 'center', padding: '40px', color: '#666' }}>
-                <p>등록된 동영상이 없습니다.</p>
+                <p>{t('productPage.noVideos')}</p>
               </div>
             )}
           </div>
         );
         
       default:
-        return <div>콘텐츠를 불러올 수 없습니다.</div>;
+        return <div>{t('productPage.noContent')}</div>;
     }
   };
 
