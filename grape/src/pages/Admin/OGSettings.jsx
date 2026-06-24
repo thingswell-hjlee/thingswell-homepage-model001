@@ -45,7 +45,7 @@ const PLATFORM_SPECS = [
 const DEFAULT_OG = {
   title: '싱스웰 - AI 기반 스마트 안전 솔루션',
   description: 'AI 카메라, 스마트밴드, 환경센서, 통합제어 시스템으로 산업안전을 혁신합니다.',
-  imageUrl: 'https://www.safegai.co.kr/og-image.jpg',
+  imageUrl: '/og-image.jpg',
   siteName: '싱스웰 (ThingsWell)',
   url: 'https://www.safegai.co.kr',
 };
@@ -204,12 +204,17 @@ export default function OGSettings() {
   };
 
   const generateMetaTags = () => {
+    // OG 태그의 이미지 URL은 반드시 절대 경로여야 함
+    const absoluteImageUrl = ogData.imageUrl.startsWith('http')
+      ? ogData.imageUrl
+      : `${ogData.url}${ogData.imageUrl}`;
+
     return `    <!-- Open Graph (Facebook, 카카오톡, 밴드 등) -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="${ogData.siteName}" />
     <meta property="og:title" content="${ogData.title}" />
     <meta property="og:description" content="${ogData.description}" />
-    <meta property="og:image" content="${ogData.imageUrl}" />
+    <meta property="og:image" content="${absoluteImageUrl}" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:url" content="${ogData.url}" />
@@ -219,7 +224,7 @@ export default function OGSettings() {
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="${ogData.title}" />
     <meta name="twitter:description" content="${ogData.description}" />
-    <meta name="twitter:image" content="${ogData.imageUrl}" />`;
+    <meta name="twitter:image" content="${absoluteImageUrl}" />`;
   };
 
   if (!isAuthenticated()) {
