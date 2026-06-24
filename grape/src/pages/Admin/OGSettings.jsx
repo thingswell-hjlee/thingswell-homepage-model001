@@ -135,14 +135,65 @@ export default function OGSettings() {
     }
   };
 
+  const ALLOWED_TYPES = ['image/jpeg', 'image/png'];
+  const ALLOWED_EXTENSIONS = ['.jpg', '.jpeg', '.png'];
+  const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
+  const MIN_WIDTH = 600;
+  const MIN_HEIGHT = 315;
+
   const handleImageChange = (e) => {
     const file = e.target.files[0];
-    if (file) {
-      setImageFile(file);
-      const reader = new FileReader();
-      reader.onload = (e) => setImagePreview(e.target.result);
-      reader.readAsDataURL(file);
+    if (!file) return;
+
+    // 1. MIME 타입 검증
+    if (!ALLOWED_TYPES.includes(file.type)) {
+      setMessage('JPG 또는 PNG 파일만 업로드할 수 있습니다.');
+      e.target.value = '';
+      return;
     }
+
+    // 2. 확장자 검증
+    const ext = '.' + file.name.split('.').pop().toLowerCase();
+    if (!ALLOWED_EXTENSIONS.includes(ext)) {
+      setMessage('JPG 또는 PNG 파일만 업로드할 수 있습니다.');
+      e.target.value = '';
+      return;
+    }
+
+    // 3. 파일 크기 검증
+    if (file.size > MAX_FILE_SIZE) {
+      setMessage(`파일 크기가 ${(file.size / 1024 / 1024).toFixed(1)}MB입니다. 최대 5MB까지 가능합니다.`);
+      e.target.value = '';
+      return;
+    }
+
+    // 4. 이미지 해상도 검증
+    const reader = new FileReader();
+    reader.onload = (readerEvent) => {
+      const img = new Image();
+      img.onload = () => {
+        if (img.width < MIN_WIDTH || img.height < MIN_HEIGHT) {
+          setMessage(`이미지 크기가 ${img.width}x${img.height}px입니다. 최소 ${MIN_WIDTH}x${MIN_HEIGHT}px 이상이어야 합니다. 권장: 1200x630px`);
+          e.target.value = '';
+          return;
+        }
+
+        // 모든 검증 통과
+        setImageFile(file);
+        setImagePreview(readerEvent.target.result);
+        setMessage(`이미지 선택됨: ${file.name} (${img.width}x${img.height}px, ${(file.size / 1024).toFixed(0)}KB)`);
+      };
+      img.onerror = () => {
+        setMessage('이미지 파일을 읽을 수 없습니다. 다른 파일을 선택해주세요.');
+        e.target.value = '';
+      };
+      img.src = readerEvent.target.result;
+    };
+    reader.onerror = () => {
+      setMessage('파일을 읽을 수 없습니다. 다른 파일을 선택해주세요.');
+      e.target.value = '';
+    };
+    reader.readAsDataURL(file);
   };
 
   const handleCopyMetaTags = () => {
@@ -270,13 +321,18 @@ export default function OGSettings() {
               <div className="og-image-upload">
                 <label className="og-upload-btn">
                   이미지 업로드
-                  <input type="file" accept="image/*" onChange={handleImageChange} hidden />
+                  <input type="file" accept=".jpg,.jpeg,.png" onChange={handleImageChange} hidden />
                 </label>
-                <span className="og-upload-hint">권장: 1200 x 630px, 최대 5MB</span>
+                <span className="og-upload-hint">JPG, PNG만 가능 / 권장: 1200 x 630px / 최대 5MB</span>
               </div>
               {(imagePreview || ogData.imageUrl) && (
                 <div className="og-image-preview">
-                  <img src={imagePreview || ogData.imageUrl} alt="OG 이미지 미리보기" />
+                  <img
+                    src={imagePreview || ogData.imageUrl}
+                    alt="OG 이미지 미리보기"
+                    onError={(e) => { e.target.style.display = 'none'; }}
+                    onLoad={(e) => { e.target.style.display = 'block'; }}
+                  />
                 </div>
               )}
             </div>
@@ -324,7 +380,7 @@ export default function OGSettings() {
               <div className="og-preview-kakao">
                 <div className="og-preview-kakao-card">
                   <div className="og-preview-kakao-image">
-                    <img src={imagePreview || ogData.imageUrl} alt="미리보기" />
+                    <img src={imagePreview || ogData.imageUrl} alt="미리보기" onError={(e) => { e.target.src = '/og-image.jpg'; }} />
                   </div>
                   <div className="og-preview-kakao-content">
                     <p className="og-preview-kakao-title">{ogData.title.slice(0, 35)}</p>
@@ -339,7 +395,7 @@ export default function OGSettings() {
               <div className="og-preview-facebook">
                 <div className="og-preview-fb-card">
                   <div className="og-preview-fb-image">
-                    <img src={imagePreview || ogData.imageUrl} alt="미리보기" />
+                    <img src={imagePreview || ogData.imageUrl} alt="미리보기" onError={(e) => { e.target.src = '/og-image.jpg'; }} />
                   </div>
                   <div className="og-preview-fb-content">
                     <p className="og-preview-fb-domain">{ogData.url.replace('https://', '').split('/')[0]}</p>
@@ -354,7 +410,7 @@ export default function OGSettings() {
               <div className="og-preview-twitter">
                 <div className="og-preview-tw-card">
                   <div className="og-preview-tw-image">
-                    <img src={imagePreview || ogData.imageUrl} alt="미리보기" />
+                    <img src={imagePreview || ogData.imageUrl} alt="미리보기" onError={(e) => { e.target.src = '/og-image.jpg'; }} />
                   </div>
                   <div className="og-preview-tw-content">
                     <p className="og-preview-tw-title">{ogData.title.slice(0, 70)}</p>
@@ -369,7 +425,7 @@ export default function OGSettings() {
               <div className="og-preview-band">
                 <div className="og-preview-band-card">
                   <div className="og-preview-band-image">
-                    <img src={imagePreview || ogData.imageUrl} alt="미리보기" />
+                    <img src={imagePreview || ogData.imageUrl} alt="미리보기" onError={(e) => { e.target.src = '/og-image.jpg'; }} />
                   </div>
                   <div className="og-preview-band-content">
                     <p className="og-preview-band-title">{ogData.title.slice(0, 40)}</p>
