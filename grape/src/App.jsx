@@ -11,54 +11,80 @@
  * - 모든 페이지에서 공통 메뉴와 푸터 표시
  * - 다국어 지원 (/ko, /en URL 구조)
  */
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import "./App.css";
 import Menu from "./components/Menu";
 import Footer from "./components/Footer";
 import SEOHead from "./components/SEOHead";
-
-import Home from "./pages/Home/Home.jsx";
-import Government_support from "./pages/Government_support/Government_support.jsx";
-import Soulution from "./pages/Solutions/Soulution.jsx";
-import ChemicalSolution from "./pages/Solutions/ChemicalSolution.jsx";
-import ManufacturingSolution from "./pages/Solutions/ManufacturingSolution.jsx";
-import MultimodalAwareness from "./pages/rnd/MultimodalAwareness.jsx";
-import RAGLLMTech from "./pages/rnd/RAGLLMTech.jsx";
-import OnDeviceAI from "./pages/rnd/OnDeviceAI.jsx";
-import Embeddedsystem from "./pages/rnd/Embeddedsystem .jsx";
-import SmartAssistiveTechnology from "./pages/rnd/SmartAssistiveTechnology.jsx";
-import AirQualityManagement from "./pages/rnd/AirQualityManagement.jsx";
-import Product_list_control from "./pages/Products/Product_list_control.jsx";
-import Product_control from "./pages/Products/Product_control.jsx";
-import Product_list_safety from "./pages/Products/Product_list_safety.jsx";
-import Product_detail_safety from "./pages/Products/Product_detail_safety.jsx";
-import Product_list_monitoring from "./pages/Products/Product_list_monitoring.jsx";
-import Announcement from "./pages/Customer_Service/Announcement.jsx";
-import Case from "./pages/Cases/Case.jsx";
-import CaseSmartSafety from "./pages/Cases/Case_SmartSafety.jsx";
-import CaseIntegratedControl from "./pages/Cases/Case_IntegratedControl.jsx";
-import CaseInformationCommunication from "./pages/Cases/Case_InformationCommunication.jsx";
-import About from "./pages/About/About.jsx";
-import CompanyIntro from "./pages/About/CompanyIntro.jsx";
-import History from "./pages/About/History.jsx";
-import Organization from "./pages/About/Organization.jsx";
-import Licenses from "./pages/About/Licenses.jsx";
-import Directions from "./pages/About/Directions.jsx";
-import Login from "./pages/Login/Login.jsx";
-import ForgotPassword from "./pages/Login/ForgotPassword.jsx";
-import OGSettings from "./pages/Admin/OGSettings.jsx";
-import ChangePassword from "./pages/Admin/ChangePassword.jsx";
-import Dashboard from "./pages/Admin/Dashboard.jsx";
-import Profile from "./pages/Admin/Profile.jsx";
-import Case_detail from "./pages/Cases/Case_detail.jsx";
-import Sitemap from "./pages/Sitemap/sitemap.jsx";
-import NotFound from "./pages/NotFound/NotFound.jsx";
 import { AuthProvider } from "./contexts/AuthContext.jsx";
 import { LanguageProvider } from "./contexts/LanguageContext.jsx";
 import ProtectedRoute from "./components/ProtectedRoute";
 import HTTPSRedirect from "./components/HTTPSRedirect";
 import ScrollToTop from "./components/ScrollToTop";
+
+// Route-based code splitting: 각 페이지를 lazy load하여 초기 번들 크기를 줄입니다.
+const Home = lazy(() => import("./pages/Home/Home.jsx"));
+const Government_support = lazy(() => import("./pages/Government_support/Government_support.jsx"));
+const Soulution = lazy(() => import("./pages/Solutions/Soulution.jsx"));
+const ChemicalSolution = lazy(() => import("./pages/Solutions/ChemicalSolution.jsx"));
+const ManufacturingSolution = lazy(() => import("./pages/Solutions/ManufacturingSolution.jsx"));
+const MultimodalAwareness = lazy(() => import("./pages/rnd/MultimodalAwareness.jsx"));
+const RAGLLMTech = lazy(() => import("./pages/rnd/RAGLLMTech.jsx"));
+const OnDeviceAI = lazy(() => import("./pages/rnd/OnDeviceAI.jsx"));
+const Embeddedsystem = lazy(() => import("./pages/rnd/Embeddedsystem .jsx"));
+const SmartAssistiveTechnology = lazy(() => import("./pages/rnd/SmartAssistiveTechnology.jsx"));
+const AirQualityManagement = lazy(() => import("./pages/rnd/AirQualityManagement.jsx"));
+const Product_list_control = lazy(() => import("./pages/Products/Product_list_control.jsx"));
+const Product_control = lazy(() => import("./pages/Products/Product_control.jsx"));
+const Product_list_safety = lazy(() => import("./pages/Products/Product_list_safety.jsx"));
+const Product_detail_safety = lazy(() => import("./pages/Products/Product_detail_safety.jsx"));
+const Product_list_monitoring = lazy(() => import("./pages/Products/Product_list_monitoring.jsx"));
+const Announcement = lazy(() => import("./pages/Customer_Service/Announcement.jsx"));
+const Case = lazy(() => import("./pages/Cases/Case.jsx"));
+const CaseSmartSafety = lazy(() => import("./pages/Cases/Case_SmartSafety.jsx"));
+const CaseIntegratedControl = lazy(() => import("./pages/Cases/Case_IntegratedControl.jsx"));
+const CaseInformationCommunication = lazy(() => import("./pages/Cases/Case_InformationCommunication.jsx"));
+const About = lazy(() => import("./pages/About/About.jsx"));
+const CompanyIntro = lazy(() => import("./pages/About/CompanyIntro.jsx"));
+const History = lazy(() => import("./pages/About/History.jsx"));
+const Organization = lazy(() => import("./pages/About/Organization.jsx"));
+const Licenses = lazy(() => import("./pages/About/Licenses.jsx"));
+const Directions = lazy(() => import("./pages/About/Directions.jsx"));
+const Login = lazy(() => import("./pages/Login/Login.jsx"));
+const ForgotPassword = lazy(() => import("./pages/Login/ForgotPassword.jsx"));
+const OGSettings = lazy(() => import("./pages/Admin/OGSettings.jsx"));
+const ChangePassword = lazy(() => import("./pages/Admin/ChangePassword.jsx"));
+const Dashboard = lazy(() => import("./pages/Admin/Dashboard.jsx"));
+const Profile = lazy(() => import("./pages/Admin/Profile.jsx"));
+const Case_detail = lazy(() => import("./pages/Cases/Case_detail.jsx"));
+const Sitemap = lazy(() => import("./pages/Sitemap/sitemap.jsx"));
+const NotFound = lazy(() => import("./pages/NotFound/NotFound.jsx"));
+
+/**
+ * PageLoadingFallback - lazy load 중 표시되는 최소한의 로딩 UI
+ */
+function PageLoadingFallback() {
+  return (
+    <div style={{
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      minHeight: '60vh',
+      opacity: 0.5,
+    }}>
+      <div style={{
+        width: '32px',
+        height: '32px',
+        border: '3px solid #e0e0e0',
+        borderTop: '3px solid #333',
+        borderRadius: '50%',
+        animation: 'spin 0.8s linear infinite',
+      }} />
+      <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+    </div>
+  );
+}
 
 /**
  * LanguageRedirect component
@@ -82,6 +108,7 @@ function AppRoutes({ isMobile }) {
       </div>
       <main className="main-content">
         <div className="page-content">
+          <Suspense fallback={<PageLoadingFallback />}>
           <Routes>
             <Route path="/" element={<Home />} />
 
@@ -126,6 +153,7 @@ function AppRoutes({ isMobile }) {
             <Route path="/sitemap" element={<Sitemap />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
+          </Suspense>
         </div>
         <Footer />
       </main>
