@@ -105,28 +105,28 @@
       "items": [
         {
           "title": "Public Safety",
-          "desc": "Smart shelters, senior centers, welfare facility AI monitoring",
+          "desc": "Protecting public spaces with AI-powered safety systems.",
           "href": "/solutions/overview"
         },
         {
           "title": "Construction Safety",
-          "desc": "High-altitude work, heavy equipment proximity, missing PPE detection",
-          "href": "/solutions/overview"
+          "desc": "AI safety management to prevent serious accidents.",
+          "href": "/solutions/chemical"
         },
         {
           "title": "Industrial Safety",
-          "desc": "Fall detection, restricted zone intrusion, hazardous environment monitoring",
+          "desc": "Real-time risk detection for manufacturing and logistics.",
+          "href": "/products/safety"
+        },
+        {
+          "title": "Disability Workplace",
+          "desc": "Customized AI safety protection for vulnerable workers.",
           "href": "/solutions/overview"
         },
         {
-          "title": "Disability Workshops",
-          "desc": "Non-contact AI monitoring, abnormal behavior detection, personalized care",
-          "href": "/solutions/elderly-disability"
-        },
-        {
-          "title": "Smart Stores",
-          "desc": "Store safety management, anomaly detection, remote monitoring",
-          "href": "/solutions/overview"
+          "title": "Smart Store",
+          "desc": "AI-powered safety and operational efficiency for retail.",
+          "href": "/products/monitoring"
         }
       ]
     },

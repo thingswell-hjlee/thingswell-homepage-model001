@@ -105,28 +105,28 @@
       "items": [
         {
           "title": "공공안전",
-          "desc": "스마트쉼터, 경로당, 복지시설 AI 모니터링",
+          "desc": "시민이 오가는 모든 공간을 AI로 지킵니다.",
           "href": "/solutions/overview"
         },
         {
           "title": "건설안전",
-          "desc": "고소작업, 중장비 접근, 보호구 미착용 감지",
-          "href": "/solutions/overview"
+          "desc": "중대재해를 예방하는 AI 안전관리 체계를 구축합니다.",
+          "href": "/solutions/chemical"
         },
         {
           "title": "산업안전",
-          "desc": "낙상, 위험구역 침입, 유해환경 실시간 관제",
-          "href": "/solutions/overview"
+          "desc": "제조·물류 현장의 위험을 실시간으로 감지하고 대응합니다.",
+          "href": "/products/safety"
         },
         {
           "title": "장애인 작업장",
-          "desc": "비접촉 AI 모니터링, 이상행동 감지, 맞춤 케어",
-          "href": "/solutions/elderly-disability"
+          "desc": "취약 작업자를 위한 맞춤형 AI 안전 보호 체계입니다.",
+          "href": "/solutions/overview"
         },
         {
           "title": "스마트 상점",
-          "desc": "매장 안전관리, 이상 상황 감지, 원격 관제",
-          "href": "/solutions/overview"
+          "desc": "소상공인 매장의 안전과 운영 효율을 AI로 지원합니다.",
+          "href": "/products/monitoring"
         }
       ]
     },
