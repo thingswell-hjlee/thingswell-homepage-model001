@@ -1,6 +1,5 @@
 import { useMemo } from "react";
 import { Link } from "react-router-dom";
-import Footer from "../../components/Footer";
 import useTranslation from "../../hooks/useTranslation";
 import "./Home.css";
 
@@ -213,7 +212,6 @@ export default function Home() {
         </div>
       </section>
 
-      <Footer />
     </div>
   );
 }

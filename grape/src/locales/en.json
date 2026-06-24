@@ -111,7 +111,7 @@
         {
           "title": "Construction Safety",
           "desc": "AI safety management to prevent serious accidents.",
-          "href": "/solutions/chemical"
+          "href": "/products/safety"
         },
         {
           "title": "Industrial Safety",
@@ -121,7 +121,7 @@
         {
           "title": "Disability Workplace",
           "desc": "Customized AI safety protection for vulnerable workers.",
-          "href": "/solutions/overview"
+          "href": "/solutions/chemical"
         },
         {
           "title": "Smart Store",
@@ -845,5 +845,23 @@
       "Sitemap"
     ],
     "title": "Sitemap"
+  },
+  "board": {
+    "all": "All",
+    "notice": "Notices",
+    "download": "Downloads",
+    "searchPlaceholder": "Enter search term",
+    "searchPlaceholderMobile": "Search",
+    "prev": "Previous",
+    "next": "Next",
+    "noData": "No data available.",
+    "number": "No.",
+    "title": "Title",
+    "actions": "Actions",
+    "date": "Date",
+    "edit": "Edit",
+    "delete": "Delete",
+    "loadError": "Failed to load posts. Please try again later.",
+    "loading": "Loading..."
   }
 }
