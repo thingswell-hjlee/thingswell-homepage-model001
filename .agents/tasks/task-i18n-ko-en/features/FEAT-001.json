@@ -2,7 +2,7 @@
   "id": "FEAT-001",
   "type": "feat",
   "description": "Create the i18n infrastructure: LanguageContext, locale JSON files (ko.json, en.json), useTranslation hook, SEO head manager component, language-prefixed routing (/ko/, /en/), and KOR/ENG toggle in desktop menu and mobile hamburger menu. This feature establishes all foundational pieces so subsequent features can simply use the translation hook.",
-  "status": "in_progress",
+  "status": "completed",
   "steps": [
     "1. Create grape/src/locales/ko.json with all Korean text organized by section keys (nav, footer, home, solutions, rnd, products, cases, about, login, common, seo). Extract ALL text from: Menu items (defaultMenuItems in Menu/index.jsx), Footer text (Footer/index.jsx sitemapData + bottom info), Home page (Home.jsx cards data, hero section), breadcrumbs, page titles, subtitles, button labels, form labels, error messages. The JSON should be deeply nested by page/component.",
     "2. Create grape/src/locales/en.json with professional business English translations for the AI safety management domain. Menu: Company, Business Areas, R&D, Products, Client Cases, Government Programs, Shopping Mall, Admin. Use domain-appropriate terms: 'Smart Safety Platform', 'On-Device AI', 'Multimodal Situational Awareness', 'Integrated Control System', 'RAG-based LLM', 'Early Risk Detection', 'Cognitive Disability Assistance', 'AI Air Quality Management', etc.",
@@ -32,5 +32,5 @@
     "Run: cd /projects/sandbox/thingswell-homepage-model001/grape && npx vite build"
   ],
   "blocked_reason": null,
-  "findings": ""
+  "findings": "Build succeeds without errors. The i18n routing uses /ko/* and /en/* Route paths in App.jsx with a LanguageRedirect fallback for bare paths. LanguageContext is only rendered inside language-prefixed routes, so it always sees the correct lang from URL. Menu, HamburgerMenu, and Footer all use t() for labels. Internal Link components in page content still use absolute paths without language prefix - they will trigger LanguageRedirect (works but not optimal), and should be updated in FEAT-002 when page content is translated. The main.jsx file was unchanged (BrowserRouter stays as-is). The desktop menu CSS uses 'menu-lang-toggle' class and hamburger menu uses 'hamburger-lang-toggle' class for the KOR/ENG buttons."
 }
