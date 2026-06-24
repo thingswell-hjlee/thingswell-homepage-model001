@@ -2,7 +2,7 @@
   "id": "FEAT-001",
   "type": "feat",
   "description": "Add Password Change page and Forgot Password / Reset flow for Cognito users. The auth.js already has a changePassword function. Need to add: (1) a password change page for logged-in users, (2) a forgot-password flow using Cognito ForgotPassword and ConfirmForgotPassword APIs, (3) link from login page to forgot password.",
-  "status": "in_progress",
+  "status": "completed",
   "steps": [
     "Create grape/src/pages/Admin/ChangePassword.jsx - a protected page that lets a logged-in user change their password using the existing changePassword function from src/lib/auth.js. Use BaseLayout with breadcrumbs. Include current password, new password, confirm password fields with validation (min 8 chars, match check). Show success/error messages.",
     "Create grape/src/pages/Admin/ChangePassword.css - style the form following the patterns in Login.css (form-group, error-message, success-message classes).",
@@ -23,5 +23,5 @@
     "Run `cd /projects/sandbox/thingswell-homepage-model001/grape && npm run build` and confirm it succeeds with exit code 0"
   ],
   "blocked_reason": null,
-  "findings": ""
+  "findings": "Build succeeds. Used existing patterns from Login.jsx and OGSettings.jsx. ProtectedRoute imported from ./components/ProtectedRoute (default export). BaseLayout imported from ./components/Layout/BaseLayout (default export) or from ./components/Layout (named export). Both work."
 }
