@@ -87,6 +87,43 @@ body.modal-open .hamburger-menu-wrapper {
   margin-left: auto;
 }
 
+/* 언어 토글 버튼 */
+.menu-lang-toggle {
+  display: flex;
+  align-items: center;
+  height: var(--menu-height);
+  margin-left: 12px;
+  gap: 4px;
+}
+
+.lang-toggle-btn {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.6);
+  border: none;
+  padding: 6px 8px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.2s ease, opacity 0.2s ease;
+  white-space: nowrap;
+  letter-spacing: 0.5px;
+}
+
+.lang-toggle-btn:hover {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.lang-toggle-btn.active {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.lang-toggle-divider {
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 12px;
+  user-select: none;
+}
+
 .logout-button {
   background-color: #dc3545;
   color: white;

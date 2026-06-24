@@ -1,0 +1,145 @@
+{
+  "nav": {
+    "company": "Company",
+    "companyIntro": "About Us",
+    "organization": "Organization",
+    "history": "History",
+    "licenses": "Certifications & Patents",
+    "directions": "Directions",
+    "board": "Notice Board",
+    "solutions": "Solutions",
+    "solutionIndustrial": "Industrial Safety Solutions",
+    "solutionElderly": "Elderly & Disability Safety Solutions",
+    "solutionIntegrated": "Integrated Control Solutions",
+    "rnd": "R&D",
+    "rndMultimodal": "Multimodal Situational Awareness",
+    "rndOnDevice": "On-Device AI",
+    "rndRAGLLM": "RAG-based LLM",
+    "rndEarlyDetection": "Early Risk Detection",
+    "rndAssistive": "Cognitive Disability Assistance",
+    "rndAirQuality": "AI Air Quality Management",
+    "products": "Products",
+    "productSafety": "Smart Safety",
+    "productMonitoring": "Control System",
+    "productControl": "Integrated Control",
+    "cases": "Client Cases",
+    "caseSmartSafety": "Industrial Safety Automation",
+    "caseIntegratedControl": "Smart Integrated Control",
+    "caseInfoComm": "Information & Communications",
+    "governmentSupport": "Government Programs",
+    "governmentSupportSmart": "Smart Safety Equipment Support Program",
+    "shop": "Shop",
+    "admin": "Admin"
+  },
+  "footer": {
+    "company": "Company",
+    "companyIntro": "About Us",
+    "history": "History",
+    "licenses": "Certifications & Patents",
+    "directions": "Directions",
+    "board": "Notice Board",
+    "solutions": "Solutions",
+    "solutionIndustrial": "Industrial Safety Solutions",
+    "solutionElderly": "Elderly & Disability Safety Solutions",
+    "solutionIntegrated": "Integrated Control Solutions",
+    "rnd": "R&D",
+    "rndMultimodal": "Multimodal Situational Awareness",
+    "rndOnDevice": "On-Device AI",
+    "rndRAGLLM": "RAG-based LLM",
+    "rndEarlyDetection": "Early Risk Detection",
+    "rndAssistive": "Cognitive Disability Assistance",
+    "rndAirQuality": "AI Air Quality Management",
+    "products": "Products",
+    "productSafety": "Smart Safety",
+    "productMonitoring": "Control System",
+    "productControl": "Integrated Control",
+    "cases": "Client Cases",
+    "caseSmartSafety": "Industrial Safety Automation",
+    "caseIntegratedControl": "Smart Integrated Control",
+    "caseInfoComm": "Information & Communications",
+    "address": "13th Floor, A-1302, Kumkang Pentarium IT Tower, 282 Hagui-ro, Dongan-gu, Anyang-si, Gyeonggi-do, South Korea",
+    "phone": "1833-7758",
+    "email": "contact@thingswell.co.kr",
+    "copyright": "ThingsWell. All content on this site is protected by copyright. Unauthorized reproduction, distribution, or use is prohibited.",
+    "logoAlt": "Logo"
+  },
+  "home": {
+    "cards": [
+      {
+        "eyebrow": "Safety Secured with AI, a Future Opened with Technology",
+        "title": "AI-Powered Safety, Technology-Driven Future",
+        "description": "We predict risks with AI-based solutions and build a safer future through innovative technology.",
+        "ctaText": "Learn More",
+        "caption": "AI Safety Solutions"
+      },
+      {
+        "eyebrow": "On-Device AI: Safety in Severe Environments",
+        "title": "On-Device AI: Safety in Any Environment",
+        "description": "Detect and respond to hazards directly on-device without network connectivity, ensuring safety in the most demanding environments.",
+        "ctaText": "Learn More",
+        "caption": "On-Device AI"
+      },
+      {
+        "eyebrow": "Innovation for People, Technology for Safety",
+        "title": "Innovation for People, Technology for Safety",
+        "description": "We pursue innovation that enriches human lives, with all technology placing the highest priority on personal safety.",
+        "ctaText": "Learn More",
+        "caption": "Human-Centered Innovation"
+      },
+      {
+        "eyebrow": "Your Safety, Everywhere. With ThingsWell",
+        "title": "From Industrial to Daily Life Safety, ThingsWell Is With You",
+        "description": "From hazardous industrial environments to everyday incidents, ThingsWell's technology safeguards you everywhere.",
+        "ctaText": "Learn More",
+        "caption": "Comprehensive Safety"
+      }
+    ],
+    "heroProductTitle": "Smart AI Camera",
+    "heroProductAriaLabel": "View HIKVISION Network PTZ Camera Products",
+    "heroAnnouncementAriaLabel": "View Latest Announcements",
+    "heroAnnouncementEmpty": "No announcements available.",
+    "heroCaseTitle": "Seoul Bus Smart Shelter AI Situational Awareness System",
+    "heroCaseAriaLabel": "View Seoul Bus Smart Shelter AI Situational Awareness System Case Study"
+  },
+  "common": {
+    "learnMore": "Learn More",
+    "logout": "Logout",
+    "login": "Login",
+    "home": "Home",
+    "menuOpen": "Open Menu",
+    "menuClose": "Close Menu",
+    "logoAlt": "Logo",
+    "languageKor": "KOR",
+    "languageEng": "ENG"
+  },
+  "seo": {
+    "home": {
+      "title": "ThingsWell - AI Safety Management Solutions",
+      "description": "ThingsWell provides AI-powered industrial safety, smart safety management, and integrated control solutions."
+    },
+    "about": {
+      "title": "About Us - ThingsWell",
+      "description": "Learn about ThingsWell's vision, history, organization, and certifications."
+    },
+    "solutions": {
+      "title": "Solutions - ThingsWell",
+      "description": "Industrial safety, elderly and disability safety, and integrated control solutions."
+    },
+    "rnd": {
+      "title": "R&D - ThingsWell",
+      "description": "Core technologies including multimodal situational awareness, on-device AI, and RAG-based LLM."
+    },
+    "products": {
+      "title": "Products - ThingsWell",
+      "description": "Explore our smart safety, control system, and integrated control products."
+    },
+    "cases": {
+      "title": "Client Cases - ThingsWell",
+      "description": "Case studies in industrial safety automation, smart integrated control, and information communications."
+    },
+    "governmentSupport": {
+      "title": "Government Programs - ThingsWell",
+      "description": "Information on government support programs including smart safety equipment subsidies."
+    }
+  }
+}

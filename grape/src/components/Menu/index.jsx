@@ -25,93 +25,82 @@ import './Menu.css';
 import logo from '../../assets/logo.png';
 import HamburgerMenu from '../HamburgerMenu';
 import { useAuth } from '../../contexts/AuthContext';
+import useTranslation from '../../hooks/useTranslation';
+import { stripLangPrefix, addLangPrefix } from '../../contexts/LanguageContext';
 
-// 메뉴 아이템 데이터
-const defaultMenuItems = [
-  { 
-    label: '회사', 
-    path: '/about',
-    submenu: [ 
-      { label: '회사소개', path: '/about/company' },
-      { label: '조직도', path: '/about/organization' },
-      { label: '연혁', path: '/about/history' },
-      { label: '면허인증특허', path: '/about/licenses' },
-      { label: '오시는 길', path: '/about/directions' },
-      { label: '게시판', path: '/customer-service/announcement' },
-      // { label: '문의하기', path: '/contact' },
-
-    ] 
-  },
- 
-  { 
-    label: '사업분야', 
-    path: '/solutions',
-    submenu: [ 
-      { label: '산업안전 솔루션', path: '/solutions/overview' }, 
-      { label: '노인장애인안전 솔루션', path: '/solutions/chemical' },
-      { label: '통합제어 솔루션', path: '/solutions/manufacturing' },
-    ] 
-  },
-
-  { 
-    label: '연구개발', 
-    path: '/rnd',
-    submenu: [ 
-      { label: '멀티모달 상황인지', path: '/rnd/multimodal-awareness' },
-      { label: '온디바이스 AI', path: '/rnd/on-device-ai' },
-      { label: 'RAG 기반 LLM', path: '/rnd/rag-llm' },
-      { label: '위험상황 조기감지', path: '/rnd/embedded-system' },
-      { label: '인지장애 보조', path: '/rnd/smart-assistive-technology' },
-      { label: 'AI 공기질 관리', path: '/rnd/air-quality-management' }, 
-    ] 
-  },
-      { 
-        label: '제품', 
-        path: '/products',
-        submenu: [
-          { label: '스마트안전', path: '/products/safety' }, 
-          { label: '관제시스템', path: '/products/monitoring' },
-          { label: '통합제어', path: '/products/control/list' }, 
-      
-    ] 
-  },
-  {   
-    label: '고객사례', 
-    path: '/cases',
-    submenu: [ 
-      { label: '산업안전자동화', path: '/cases/smart-safety' }, 
-      { label: '스마트통합제어', path: '/cases/integrated-control' }, 
-      { label: '정보통신', path: '/cases/information-communication' } 
-    ] 
-  },
-  { 
-    label: '정부지원사업', 
-    path: '/government-support',
-    submenu: [ 
-      { label: '스마트안전장비 지원사업', path: '/government-support' }, 
-      // { label: '건강일터 조성지원사업', path: '/government-support-detail' }, 
-      // { label: '소공인 클린제조환경조성', path: '/government-support-detail' }, 
-    ] 
-  },
-
-  { 
-    label: '쇼핑몰', 
-    path: 'https://thingswell.cafe24.com/',
-    external: true,
-  },
-
-  {
-    label: '관리자',
-    path: '/admin/dashboard',
-    requireAuth: true,
-  },
-
-  // {
-  //   label: '사이트맵',
-  //   path: '/sitemap',
-  // }
-
-];
+// Generate menu items using translation function
+function getMenuItems(t) {
+  return [
+    { 
+      label: t('nav.company'), 
+      path: '/about',
+      submenu: [ 
+        { label: t('nav.companyIntro'), path: '/about/company' },
+        { label: t('nav.organization'), path: '/about/organization' },
+        { label: t('nav.history'), path: '/about/history' },
+        { label: t('nav.licenses'), path: '/about/licenses' },
+        { label: t('nav.directions'), path: '/about/directions' },
+        { label: t('nav.board'), path: '/customer-service/announcement' },
+      ] 
+    },
+    { 
+      label: t('nav.solutions'), 
+      path: '/solutions',
+      submenu: [ 
+        { label: t('nav.solutionIndustrial'), path: '/solutions/overview' }, 
+        { label: t('nav.solutionElderly'), path: '/solutions/chemical' },
+        { label: t('nav.solutionIntegrated'), path: '/solutions/manufacturing' },
+      ] 
+    },
+    { 
+      label: t('nav.rnd'), 
+      path: '/rnd',
+      submenu: [ 
+        { label: t('nav.rndMultimodal'), path: '/rnd/multimodal-awareness' },
+        { label: t('nav.rndOnDevice'), path: '/rnd/on-device-ai' },
+        { label: t('nav.rndRAGLLM'), path: '/rnd/rag-llm' },
+        { label: t('nav.rndEarlyDetection'), path: '/rnd/embedded-system' },
+        { label: t('nav.rndAssistive'), path: '/rnd/smart-assistive-technology' },
+        { label: t('nav.rndAirQuality'), path: '/rnd/air-quality-management' }, 
+      ] 
+    },
+    { 
+      label: t('nav.products'), 
+      path: '/products',
+      submenu: [
+        { label: t('nav.productSafety'), path: '/products/safety' }, 
+        { label: t('nav.productMonitoring'), path: '/products/monitoring' },
+        { label: t('nav.productControl'), path: '/products/control/list' }, 
+      ] 
+    },
+    {   
+      label: t('nav.cases'), 
+      path: '/cases',
+      submenu: [ 
+        { label: t('nav.caseSmartSafety'), path: '/cases/smart-safety' }, 
+        { label: t('nav.caseIntegratedControl'), path: '/cases/integrated-control' }, 
+        { label: t('nav.caseInfoComm'), path: '/cases/information-communication' } 
+      ] 
+    },
+    { 
+      label: t('nav.governmentSupport'), 
+      path: '/government-support',
+      submenu: [ 
+        { label: t('nav.governmentSupportSmart'), path: '/government-support' }, 
+      ] 
+    },
+    { 
+      label: t('nav.shop'), 
+      path: 'https://thingswell.cafe24.com/',
+      external: true,
+    },
+    {
+      label: t('nav.admin'),
+      path: '/admin/dashboard',
+      requireAuth: true,
+    },
+  ];
+}
 
 // 브레이크포인트 상수
 const MOBILE_BREAKPOINT = 768;
@@ -122,7 +111,11 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
   const menuRef = useRef(null);
   const hoverCloseTimerRef = useRef(null);
   const { isAdmin, isAuthenticated, signOut } = useAuth();
+  const { t, currentLang, setLanguage } = useTranslation();
   
+  // Generate translated menu items
+  const defaultMenuItems = useMemo(() => getMenuItems(t), [t]);
+
   // 상태 관리
   const [openSubmenu, setOpenSubmenu] = useState(null);
   const [activeMenuIndex, setActiveMenuIndex] = useState(null);
@@ -186,9 +179,15 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
     };
   }, [lastScrollY]);
 
+  // Helper: prefix a path with the current language
+  const langPath = useCallback((path) => {
+    if (!path || path.startsWith('http')) return path;
+    return `/${currentLang}${path.startsWith('/') ? path : '/' + path}`;
+  }, [currentLang]);
+
   // 현재 페이지에 따른 활성화된 메뉴 설정
   useEffect(() => {
-    const currentPath = location.pathname;
+    const currentPath = stripLangPrefix(location.pathname);
     const currentHash = location.hash;
     let foundActiveMenu = false;
     let foundActiveSubmenu = false;
@@ -249,7 +248,7 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
       setActiveSubmenuIndex(null);
       // 서브메뉴는 수동으로 닫을 때까지 유지
     }
-  }, [location.pathname, location.hash, isMobile]);
+  }, [location.pathname, location.hash, isMobile, defaultMenuItems]);
 
   // 외부 클릭 감지
   useEffect(() => {
@@ -277,16 +276,17 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
 
   // 메뉴 활성화 상태 확인 함수
   const isMenuActive = useCallback((menuIndex) => {
+    const currentPath = stripLangPrefix(location.pathname);
     // 현재 페이지가 해당 메뉴의 서브메뉴 중 하나와 일치하는 경우
     if (defaultMenuItems[menuIndex] && defaultMenuItems[menuIndex].submenu) {
       const hasActiveSubmenu = defaultMenuItems[menuIndex].submenu.some(subItem => {
         // 해시가 포함된 경로인 경우 해시까지 비교
         if (subItem.path.includes('#')) {
           const [basePath, hash] = subItem.path.split('#');
-          return basePath === location.pathname && `#${hash}` === location.hash;
+          return basePath === currentPath && `#${hash}` === location.hash;
         }
         // 정확한 경로 일치 또는 경로가 포함되는 경우 (예: /product-list/1이 /product-list를 포함)
-        return subItem.path === location.pathname || location.pathname.startsWith(subItem.path + '/');
+        return subItem.path === currentPath || currentPath.startsWith(subItem.path + '/');
       });
       
       if (hasActiveSubmenu) {
@@ -296,20 +296,21 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
     
     // 현재 페이지가 해당 메뉴의 메인 페이지와 일치하는 경우
     const menuItem = defaultMenuItems[menuIndex];
-    if (menuItem && menuItem.path === location.pathname) {
+    if (menuItem && menuItem.path === currentPath) {
       return true;
     }
     
     // 메인 페이지 경로가 현재 경로에 포함되는 경우 (예: /products가 /product-list/1에 포함)
-    if (menuItem && menuItem.path && location.pathname.startsWith(menuItem.path + '/')) {
+    if (menuItem && menuItem.path && currentPath.startsWith(menuItem.path + '/')) {
       return true;
     }
     
     return false;
-  }, [location.pathname, location.hash]);
+  }, [location.pathname, location.hash, defaultMenuItems]);
 
   // 서브메뉴 활성화 상태 확인 함수
   const isSubmenuActive = useCallback((parentIndex, subIndex) => {
+    const currentPath = stripLangPrefix(location.pathname);
     // 현재 페이지가 해당 서브메뉴의 경로와 일치하는 경우
     if (defaultMenuItems[parentIndex] && defaultMenuItems[parentIndex].submenu) {
       const subItem = defaultMenuItems[parentIndex].submenu[subIndex];
@@ -317,12 +318,12 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
         // 해시가 포함된 경로인 경우 해시까지 비교
         if (subItem.path.includes('#')) {
           const [basePath, hash] = subItem.path.split('#');
-          if (basePath === location.pathname && `#${hash}` === location.hash) {
+          if (basePath === currentPath && `#${hash}` === location.hash) {
             return true;
           }
-        } else if (subItem.path === location.pathname) {
+        } else if (subItem.path === currentPath) {
           return true;
-        } else if (location.pathname.startsWith(subItem.path + '/')) {
+        } else if (currentPath.startsWith(subItem.path + '/')) {
           // 경로가 포함되는 경우 (예: /product-list/1이 /product-list를 포함)
           return true;
         }
@@ -330,7 +331,7 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
     }
     
     return false;
-  }, [location.pathname, location.hash]);
+  }, [location.pathname, location.hash, defaultMenuItems]);
 
   // 메뉴 클릭 핸들러
   const handleItemClick = useCallback((item, index) => {
@@ -341,7 +342,7 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
         if (firstSubmenu.path.includes('#')) {
           // 해시가 포함된 경로인 경우
           const [basePath, hash] = firstSubmenu.path.split('#');
-          navigate(basePath);
+          navigate(langPath(basePath));
           
           // 해시가 있는 경우 약간의 지연 후 스크롤 처리
           setTimeout(() => {
@@ -361,7 +362,7 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
             }
           }, 300);
         } else {
-          navigate(firstSubmenu.path);
+          navigate(langPath(firstSubmenu.path));
         }
       }
       
@@ -379,7 +380,7 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
         if (item.external) {
           window.open(item.path, '_blank');
         } else {
-          navigate(item.path);
+          navigate(langPath(item.path));
         }
       }
       setActiveMenuIndex(index);
@@ -390,18 +391,19 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
         setIsMobileMenuOpen(false);
       }
     }
-  }, [isMobile, openSubmenu, navigate]);
+  }, [isMobile, openSubmenu, navigate, langPath]);
 
   // 서브메뉴 클릭 핸들러
   const handleSubmenuClick = useCallback((submenuItem, subIndex, parentIndex) => {
     if (submenuItem.path) {
+      const currentPath = stripLangPrefix(location.pathname);
       // 회사소개 하단 메뉴의 경우 해시가 포함된 경로 처리
       if (submenuItem.path.includes('#')) {
         const [basePath, hash] = submenuItem.path.split('#');
         
         // 현재 경로와 다른 경우에만 navigate 호출
-        if (location.pathname !== basePath) {
-          navigate(basePath);
+        if (currentPath !== basePath) {
+          navigate(langPath(basePath));
         }
         
         // 해시가 있는 경우 약간의 지연 후 스크롤 처리
@@ -423,7 +425,7 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
           }
         }, 300);
       } else {
-        navigate(submenuItem.path);
+        navigate(langPath(submenuItem.path));
       }
       
       // 서브메뉴 클릭 시 부모 메뉴와 해당 서브메뉴 모두 활성화
@@ -436,7 +438,7 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
         setIsMobileMenuOpen(false);
       }
     }
-  }, [navigate, location.pathname, isMobile]);
+  }, [navigate, location.pathname, isMobile, langPath]);
 
   // 데스크톱에서 호버 시 서브메뉴 표시
   const handleMouseEnter = useCallback((index) => {
@@ -450,7 +452,7 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
     
     const hasSubmenu = !!(defaultMenuItems[index] && defaultMenuItems[index].submenu && defaultMenuItems[index].submenu.length > 0);
     setOpenSubmenu(hasSubmenu ? index : null);
-  }, [isMobile, activeMenuIndex]);
+  }, [isMobile, activeMenuIndex, defaultMenuItems]);
 
   // 메뉴 영역으로 다시 진입 시 닫힘 타이머 취소
   const cancelHoverCloseTimer = useCallback(() => {
@@ -506,7 +508,7 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
 
   // 로고 클릭 핸들러
   const handleLogoClick = useCallback(() => {
-    navigate('/');
+    navigate(langPath('/'));
     // active 상태 해제
     setActiveMenuIndex(null);
     setActiveSubmenuIndex(null);
@@ -515,13 +517,13 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
     if (isMobile) {
       setIsMobileMenuOpen(false);
     }
-  }, [navigate, isMobile]);
+  }, [navigate, isMobile, langPath]);
 
   // 로그아웃 핸들러
   const handleLogout = useCallback(async () => {
     try {
       await signOut();
-      navigate('/');
+      navigate(langPath('/'));
       // 모바일 메뉴 닫기
       if (isMobile) {
         setIsMobileMenuOpen(false);
@@ -529,7 +531,7 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
     } catch (error) {
       console.error('로그아웃 오류:', error);
     }
-  }, [signOut, navigate, isMobile]);
+  }, [signOut, navigate, isMobile, langPath]);
 
   // 로그인 상태에 따라 메뉴 아이템 필터링
   const filteredMenuItems = useMemo(() => {
@@ -540,13 +542,13 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
       }
       // 로그인하지 않은 경우 정부지원사업 메뉴 숨김
       if (!isAuthenticated()) {
-        if (item.label === '정부지원사업') {
+        if (item.path === '/government-support') {
           return false;
         }
       }
       return true;
     });
-  }, [isAuthenticated]);
+  }, [isAuthenticated, defaultMenuItems]);
 
   // 현재 열린 서브메뉴 데이터
   const currentSubmenu = useMemo(() => {
@@ -570,7 +572,7 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
             <div className="menu-logo">
               <img 
                 src={logo} 
-                alt="로고" 
+                alt={t('common.logoAlt')} 
                 className="logo-image" 
                 onClick={handleLogoClick}
               />
@@ -582,12 +584,31 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
                 <button
                   className="logout-button"
                   onClick={handleLogout}
-                  aria-label="로그아웃"
+                  aria-label={t('common.logout')}
                 >
-                  로그아웃
+                  {t('common.logout')}
                 </button>
               </div>
             )}
+
+            {/* KOR/ENG 언어 토글 */}
+            <div className="menu-lang-toggle">
+              <button
+                className={`lang-toggle-btn${currentLang === 'ko' ? ' active' : ''}`}
+                onClick={() => setLanguage('ko')}
+                aria-label="한국어"
+              >
+                KOR
+              </button>
+              <span className="lang-toggle-divider">|</span>
+              <button
+                className={`lang-toggle-btn${currentLang === 'en' ? ' active' : ''}`}
+                onClick={() => setLanguage('en')}
+                aria-label="English"
+              >
+                ENG
+              </button>
+            </div>
             
             <nav className={`menu menu-${orientation} menu-${theme}`}>
               <ul className="menu-list">
@@ -653,6 +674,9 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
           onLogoClick={handleLogoClick}
           isAuthenticated={isAuthenticated}
           onLogout={handleLogout}
+          currentLang={currentLang}
+          setLanguage={setLanguage}
+          t={t}
         />
       )}
     </>

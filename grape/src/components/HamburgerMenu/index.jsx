@@ -38,7 +38,10 @@ const HamburgerMenu = ({
   isMenuActive,
   onLogoClick,
   isAuthenticated,
-  onLogout
+  onLogout,
+  currentLang,
+  setLanguage,
+  t
 }) => {
   // 메뉴가 열렸을 때 root 스크롤 방지
   useEffect(() => {
@@ -119,6 +122,24 @@ const HamburgerMenu = ({
                     <a href="/" onClick={(e) => { e.preventDefault(); onLogoClick(); }}>
                       <img src={logo} alt="logo" />
                     </a>
+                    {/* KOR/ENG 언어 토글 */}
+                    <div className="hamburger-lang-toggle">
+                      <button
+                        className={`hamburger-lang-btn${currentLang === 'ko' ? ' active' : ''}`}
+                        onClick={() => setLanguage('ko')}
+                        aria-label="한국어"
+                      >
+                        KOR
+                      </button>
+                      <span className="hamburger-lang-divider">|</span>
+                      <button
+                        className={`hamburger-lang-btn${currentLang === 'en' ? ' active' : ''}`}
+                        onClick={() => setLanguage('en')}
+                        aria-label="English"
+                      >
+                        ENG
+                      </button>
+                    </div>
                   </li>
                 {displayMenuItems.map((item, index) => (
                   <li key={`main-${index}`} className="hamburger-menu-item main-item">

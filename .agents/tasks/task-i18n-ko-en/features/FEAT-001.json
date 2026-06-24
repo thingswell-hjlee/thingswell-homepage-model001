@@ -1,0 +1,36 @@
+{
+  "id": "FEAT-001",
+  "type": "feat",
+  "description": "Create the i18n infrastructure: LanguageContext, locale JSON files (ko.json, en.json), useTranslation hook, SEO head manager component, language-prefixed routing (/ko/, /en/), and KOR/ENG toggle in desktop menu and mobile hamburger menu. This feature establishes all foundational pieces so subsequent features can simply use the translation hook.",
+  "status": "in_progress",
+  "steps": [
+    "1. Create grape/src/locales/ko.json with all Korean text organized by section keys (nav, footer, home, solutions, rnd, products, cases, about, login, common, seo). Extract ALL text from: Menu items (defaultMenuItems in Menu/index.jsx), Footer text (Footer/index.jsx sitemapData + bottom info), Home page (Home.jsx cards data, hero section), breadcrumbs, page titles, subtitles, button labels, form labels, error messages. The JSON should be deeply nested by page/component.",
+    "2. Create grape/src/locales/en.json with professional business English translations for the AI safety management domain. Menu: Company, Business Areas, R&D, Products, Client Cases, Government Programs, Shopping Mall, Admin. Use domain-appropriate terms: 'Smart Safety Platform', 'On-Device AI', 'Multimodal Situational Awareness', 'Integrated Control System', 'RAG-based LLM', 'Early Risk Detection', 'Cognitive Disability Assistance', 'AI Air Quality Management', etc.",
+    "3. Create grape/src/contexts/LanguageContext.jsx - a React context that: (a) reads initial language from URL path prefix (/ko/ or /en/), falling back to localStorage 'lang' key, defaulting to 'ko'; (b) provides currentLang, setLanguage(lang), t(key) function for translations; (c) persists selection to localStorage; (d) the t() function should support nested dot-notation keys (e.g., t('nav.company')) and return the key itself as fallback if not found.",
+    "4. Create grape/src/hooks/useTranslation.js - a convenience hook that wraps useContext(LanguageContext) and returns { t, currentLang, setLanguage }.",
+    "5. Create grape/src/components/SEOHead/index.jsx - a component using document.title and meta tag manipulation (or react-helmet-like approach with useEffect) to set: document title, meta description, og:title, og:description, og:locale (ko_KR or en_US), og:url, hreflang alternate links, canonical URL based on current language and path.",
+    "6. Modify grape/src/main.jsx - wrap BrowserRouter with a basename approach OR modify App.jsx routing to support /ko/* and /en/* prefixes. The recommended approach: keep BrowserRouter as-is, add a LanguageProvider that wraps AuthProvider in App.jsx, and handle language from URL path prefix inside LanguageContext using useLocation.",
+    "7. Modify grape/src/App.jsx - (a) wrap everything in LanguageProvider; (b) add route structure that supports both /ko/... and /en/... prefixes plus bare paths (which redirect to /ko/...); (c) include SEOHead component at the top level; (d) create a LanguageRouter wrapper component that extracts lang from URL prefix path and sets it in context.",
+    "8. Modify grape/src/components/Menu/index.jsx - (a) import useTranslation; (b) replace hardcoded Korean menu labels with t('nav.xxx') calls; (c) add a KOR/ENG language toggle button/switch in the menu bar (positioned after the logout button area or before menu items); (d) clicking the toggle should call setLanguage and navigate to the equivalent path with the new language prefix.",
+    "9. Modify grape/src/components/HamburgerMenu/index.jsx - add KOR/ENG toggle in the mobile menu (at the top near the logo, or as a prominent toggle). Style it for mobile touch targets.",
+    "10. Modify grape/src/components/Footer/index.jsx - replace all hardcoded Korean text with t() calls for sitemap labels, address, copyright text.",
+    "11. Ensure the language prefix approach works: visiting /en/about/company shows English, /ko/about/company shows Korean, bare /about/company redirects to /ko/about/company. The language toggle on any page navigates to the same path but with the other language prefix.",
+    "12. Run vite build to confirm no compilation errors."
+  ],
+  "acceptance_criteria": [
+    "grape/src/locales/ko.json exists with comprehensive Korean text for all menu items, footer, home page, page titles, breadcrumbs, and common UI text",
+    "grape/src/locales/en.json exists with professional English translations",
+    "LanguageContext provides t(), currentLang, setLanguage and persists to localStorage",
+    "Routes work with /ko/ and /en/ prefixes",
+    "Desktop menu shows KOR/ENG toggle and all labels come from translation files",
+    "Mobile hamburger menu shows KOR/ENG toggle",
+    "Footer text comes from translation files",
+    "SEOHead component updates document title, meta description, og tags, and hreflang based on language",
+    "vite build completes without errors"
+  ],
+  "verification": [
+    "Run: cd /projects/sandbox/thingswell-homepage-model001/grape && npx vite build"
+  ],
+  "blocked_reason": null,
+  "findings": ""
+}

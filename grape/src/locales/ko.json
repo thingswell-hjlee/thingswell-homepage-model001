@@ -1,0 +1,145 @@
+{
+  "nav": {
+    "company": "회사",
+    "companyIntro": "회사소개",
+    "organization": "조직도",
+    "history": "연혁",
+    "licenses": "면허인증특허",
+    "directions": "오시는 길",
+    "board": "게시판",
+    "solutions": "사업분야",
+    "solutionIndustrial": "산업안전 솔루션",
+    "solutionElderly": "노인장애인안전 솔루션",
+    "solutionIntegrated": "통합제어 솔루션",
+    "rnd": "연구개발",
+    "rndMultimodal": "멀티모달 상황인지",
+    "rndOnDevice": "온디바이스 AI",
+    "rndRAGLLM": "RAG 기반 LLM",
+    "rndEarlyDetection": "위험상황 조기감지",
+    "rndAssistive": "인지장애 보조",
+    "rndAirQuality": "AI 공기질 관리",
+    "products": "제품",
+    "productSafety": "스마트안전",
+    "productMonitoring": "관제시스템",
+    "productControl": "통합제어",
+    "cases": "고객사례",
+    "caseSmartSafety": "산업안전자동화",
+    "caseIntegratedControl": "스마트통합제어",
+    "caseInfoComm": "정보통신",
+    "governmentSupport": "정부지원사업",
+    "governmentSupportSmart": "스마트안전장비 지원사업",
+    "shop": "쇼핑몰",
+    "admin": "관리자"
+  },
+  "footer": {
+    "company": "회사",
+    "companyIntro": "회사소개",
+    "history": "연혁",
+    "licenses": "면허인증특허",
+    "directions": "오시는 길",
+    "board": "게시판",
+    "solutions": "사업분야",
+    "solutionIndustrial": "산업안전 솔루션",
+    "solutionElderly": "노인장애인안전 솔루션",
+    "solutionIntegrated": "통합제어 솔루션",
+    "rnd": "연구개발",
+    "rndMultimodal": "멀티모달 상황인지",
+    "rndOnDevice": "온디바이스 AI",
+    "rndRAGLLM": "RAG 기반 LLM",
+    "rndEarlyDetection": "위험상황 조기감지",
+    "rndAssistive": "인지장애 보조",
+    "rndAirQuality": "AI 공기질 관리",
+    "products": "제품",
+    "productSafety": "스마트안전",
+    "productMonitoring": "관제시스템",
+    "productControl": "통합제어",
+    "cases": "고객사례",
+    "caseSmartSafety": "산업안전자동화",
+    "caseIntegratedControl": "스마트통합제어",
+    "caseInfoComm": "정보통신",
+    "address": "경기 안양시 동안구 학의로 282 금강펜타리움 IT타워 A동 1302호",
+    "phone": "1833-7758",
+    "email": "contact@thingswell.co.kr",
+    "copyright": "ThingsWell 본 사이트의 모든 컨텐츠는 저작권의 보호를 받으며, 무단 복제, 배포, 사용을 금합니다.",
+    "logoAlt": "로고"
+  },
+  "home": {
+    "cards": [
+      {
+        "eyebrow": "Safety Secured with AI, a Future Opened with Technology",
+        "title": "AI로 지키는 안전, 기술로 여는 미래",
+        "description": "AI 기반의 솔루션으로 위험을 예측하고, 혁신적인 기술로 더 안전한 미래를 만들어갑니다.",
+        "ctaText": "더 알아보기",
+        "caption": "AI Safety Solutions"
+      },
+      {
+        "eyebrow": "On-Device AI: Safety in Severe Environments",
+        "title": "온디바이스 AI, 극한 환경에서도 안전을",
+        "description": "외부 네트워크 연결 없이도 기기 자체적으로 위험을 감지하고 대응하여, 어떤 환경에서도 안전을 보장합니다.",
+        "ctaText": "더 알아보기",
+        "caption": "On-Device AI"
+      },
+      {
+        "eyebrow": "Innovation for People, Technology for Safety",
+        "title": "사람을 위한 혁신, 안전을 위한 기술",
+        "description": "인간의 삶을 더 풍요롭게 하는 혁신을 추구하며, 모든 기술은 오직 사람의 안전을 최우선으로 합니다.",
+        "ctaText": "더 알아보기",
+        "caption": "Human-Centered Innovation"
+      },
+      {
+        "eyebrow": "Your Safety, Everywhere. With ThingsWell",
+        "title": "산업안전에서 생활안전까지, 싱스웰이 함께합니다",
+        "description": "공장의 위험 작업 환경부터 일상생활의 작은 사고까지, 싱스웰의 기술은 모든 곳에서 당신을 지켜줍니다.",
+        "ctaText": "더 알아보기",
+        "caption": "Comprehensive Safety"
+      }
+    ],
+    "heroProductTitle": "스마트 AI 카메라",
+    "heroProductAriaLabel": "HIKVISION 네트워크 PTZ 카메라 제품 보기",
+    "heroAnnouncementAriaLabel": "최신 공지사항 보기",
+    "heroAnnouncementEmpty": "등록된 공지사항이 없습니다.",
+    "heroCaseTitle": "서울 버스 스마트쉼터 AI 상황인지 시스템",
+    "heroCaseAriaLabel": "서울 버스 스마트쉼터 AI 상황인지 시스템 사례 보기"
+  },
+  "common": {
+    "learnMore": "더 알아보기",
+    "logout": "로그아웃",
+    "login": "로그인",
+    "home": "홈",
+    "menuOpen": "메뉴 열기",
+    "menuClose": "메뉴 닫기",
+    "logoAlt": "로고",
+    "languageKor": "KOR",
+    "languageEng": "ENG"
+  },
+  "seo": {
+    "home": {
+      "title": "싱스웰 - AI 안전관리 솔루션",
+      "description": "AI 기반 산업안전, 스마트 안전관리, 통합관제 솔루션을 제공하는 싱스웰입니다."
+    },
+    "about": {
+      "title": "회사소개 - 싱스웰",
+      "description": "싱스웰의 회사소개, 비전, 연혁, 조직도, 면허 및 인증 정보를 확인하세요."
+    },
+    "solutions": {
+      "title": "사업분야 - 싱스웰",
+      "description": "산업안전, 노인장애인안전, 통합제어 솔루션을 제공합니다."
+    },
+    "rnd": {
+      "title": "연구개발 - 싱스웰",
+      "description": "멀티모달 상황인지, 온디바이스 AI, RAG 기반 LLM 등 핵심 기술을 연구합니다."
+    },
+    "products": {
+      "title": "제품 - 싱스웰",
+      "description": "스마트안전, 관제시스템, 통합제어 제품을 확인하세요."
+    },
+    "cases": {
+      "title": "고객사례 - 싱스웰",
+      "description": "산업안전자동화, 스마트통합제어, 정보통신 분야의 고객사례를 확인하세요."
+    },
+    "governmentSupport": {
+      "title": "정부지원사업 - 싱스웰",
+      "description": "스마트안전장비 지원사업 등 정부지원사업 정보를 확인하세요."
+    }
+  }
+}

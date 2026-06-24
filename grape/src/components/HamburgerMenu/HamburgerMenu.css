@@ -299,6 +299,7 @@
     align-items: center;
     padding: var(--spacing-md) 0;
     margin-bottom: var(--spacing-lg);
+    gap: 16px;
   }
 
   .logo-list-item img {
@@ -306,6 +307,46 @@
     height: auto;
     max-width: 100%;
     object-fit: contain;
+  }
+
+  /* 햄버거 메뉴 언어 토글 */
+  .hamburger-lang-toggle {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-left: auto;
+  }
+
+  .hamburger-lang-btn {
+    background: transparent;
+    color: rgba(255, 255, 255, 0.5);
+    border: none;
+    padding: 8px 10px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    letter-spacing: 0.5px;
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hamburger-lang-btn:hover {
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .hamburger-lang-btn.active {
+    color: #ffffff;
+    font-weight: 700;
+  }
+
+  .hamburger-lang-divider {
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 12px;
+    user-select: none;
   }
 
   /* 햄버거 메뉴 버튼 */
