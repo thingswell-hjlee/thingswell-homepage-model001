@@ -4,6 +4,7 @@ import { getBoards } from "../../lib/api";
 import { useAuth } from "../../contexts/AuthContext";
 import SearchComponent from "../SearchComponent";
 import ProductFilter from "../ProductFilter";
+import useTranslation from "../../hooks/useTranslation";
 
 const BoardList = ({
   post,
@@ -22,8 +23,9 @@ const BoardList = ({
   const [isMobile, setIsMobile] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("전체");
-  const { user } = useAuth(); // 로그인 상태 가져오기
+  const { user, isAdmin } = useAuth(); // 로그인 상태 가져오기
   const [selectedBoardType, setSelectedBoardType] = useState('전체');
+  const { t } = useTranslation();
 
   // 페이징 관련 상태 추가
   const [currentPage, setCurrentPage] = useState(1);
@@ -57,10 +59,6 @@ const BoardList = ({
 
   // 게시판 종류 옵션 계산
   const boardTypeOptions = useMemo(() => {
-    const labelMap = {
-      Board_Announcement: '공지사항',
-      Board_Download: '자료실',
-    };
     const unique = new Set(
       (tableNames && Array.isArray(tableNames) && tableNames.length > 0
         ? tableNames
@@ -75,9 +73,9 @@ const BoardList = ({
     const term = searchTerm.trim().toLowerCase();
 
     const filtered = instruments.filter((item) => {
-      // 검색 매칭
+      // 검색 매칭 (제목, 내용, 카테고리)
       const title = (item.title || "").toLowerCase();
-      const matchesSearch = !term || title.includes(term);
+      const matchesSearch = !term || title.includes(term) || (item.content || '').toLowerCase().includes(term) || (item.category || '').toLowerCase().includes(term);
 
       // 게시판 종류 매칭
       if (selectedBoardType !== '전체') {
@@ -109,7 +107,6 @@ const BoardList = ({
 
       // 단일/다중 테이블 지원
       if (tableNames && Array.isArray(tableNames) && tableNames.length > 0) {
-        console.log('다중 테이블에서 데이터를 가져오는 중...', tableNames);
         const results = await Promise.all(
           tableNames.map((t) => getBoards(t))
         );
@@ -117,44 +114,37 @@ const BoardList = ({
         const errors = results.filter((r) => r.error).map((r) => r.error);
         if (errors.length > 0) {
           console.error('API 오류(다중):', errors[0]);
-          setError(`데이터베이스 오류: ${errors[0].message}`);
+          setError('게시글을 불러오지 못했습니다. 잠시 후 다시 시도해주세요.');
           setInstruments([]);
         } else {
           const merged = results.flatMap((r, idx) =>
             (r.data || []).map((row) => ({ ...row, tableName: tableNames[idx] }))
           );
-          console.log('병합 데이터:', merged);
           setInstruments(merged);
         }
       } else {
         // 단일 테이블
         if (!tableName) {
           console.error('테이블명이 전달되지 않았습니다.');
-          setError('테이블명이 지정되지 않았습니다.');
+          setError('게시글을 불러오지 못했습니다. 잠시 후 다시 시도해주세요.');
           setInstruments([]);
           return;
         }
 
-        console.log(`테이블 "${tableName}"에서 데이터를 가져오는 중...`);
         const result = await getBoards(tableName);
-        console.log(`${tableName} 쿼리 결과:`, result);
 
         if (result.error) {
           console.error(`${tableName} API 오류:`, result.error);
-          setError(`데이터베이스 오류: ${result.error.message}`);
+          setError('게시글을 불러오지 못했습니다. 잠시 후 다시 시도해주세요.');
           setInstruments([]);
         } else {
           const data = (result.data || []).map((row) => ({ ...row, tableName }));
-          console.log('받아온 데이터:', data);
           setInstruments(data);
-          if (data.length === 0) {
-            console.log('테이블에 데이터가 없습니다. (정상적인 상태)');
-          }
         }
       }
     } catch (err) {
       console.error("데이터 가져오기 오류:", err);
-      setError("데이터를 가져오는 중 오류가 발생했습니다: " + err.message);
+      setError('게시글을 불러오지 못했습니다. 잠시 후 다시 시도해주세요.');
       setInstruments([]);
     } finally {
       setLoading(false);
@@ -165,9 +155,6 @@ const BoardList = ({
   const handlePostClick = (instrument) => {
     if (onPostClick) {
       onPostClick(instrument);
-    } else {
-      console.log("게시물 클릭:", instrument);
-      // 기본 동작: 콘솔에 로그 출력
     }
   };
 
@@ -244,7 +231,7 @@ const BoardList = ({
   if (loading) {
     return (
       <div className="board-list">
-        <div className="loading">로딩 중...</div>
+        <div className="loading">{t('board.loading')}</div>
       </div>
     );
   }
@@ -252,7 +239,7 @@ const BoardList = ({
   if (error) {
     return (
       <div className="board-list">
-        <div className="error">오류: {error}</div>
+        <div className="error">{t('board.loadError')}</div>
       </div>
     );
   }
@@ -276,13 +263,13 @@ const BoardList = ({
         </div>
         <div className="board-search-container">
           <SearchComponent
-            placeholder={isMobile ? "검색" : "검색어를 입력하세요"}
+            placeholder={isMobile ? t('board.searchPlaceholderMobile') : t('board.searchPlaceholder')}
             onSearch={handleSearch}
             backgroundColor="var(--color-background-light)"
             noPadding={true}
             searchTerm={searchTerm}
             setSearchTerm={setSearchTerm}
-            showWriteButton={user}
+            showWriteButton={isAdmin()}
             onWriteClick={onWriteClick}
           />
         </div>
@@ -293,10 +280,10 @@ const BoardList = ({
         <table>
           <thead>
             <tr>
-              <th id="board-number">번호</th>
-              <th id="board-title">제목</th>
-              {user && <th id="board-actions">관리</th>}
-              <th id="board-date">작성일</th>
+              <th id="board-number">{t('board.number')}</th>
+              <th id="board-title">{t('board.title')}</th>
+              {isAdmin() && <th id="board-actions">{t('board.actions')}</th>}
+              <th id="board-date">{t('board.date')}</th>
             </tr>
           </thead>
           <tbody>
@@ -320,7 +307,7 @@ const BoardList = ({
                     >
                       {truncateTitle(title)}
                     </td>
-                    {user && (
+                    {isAdmin() && (
                       <td id="board-actions">
                         <button
                           className="edit-btn"
@@ -330,9 +317,9 @@ const BoardList = ({
                               onEdit(instrument);
                             }
                           }}
-                          aria-label="수정"
+                          aria-label={t('board.edit')}
                         >
-                          {isMobile ? "수정" : "수정"}
+                          {t('board.edit')}
                         </button>
                         <button
                           className="delete-btn"
@@ -342,9 +329,9 @@ const BoardList = ({
                               onDelete(instrument);
                             }
                           }}
-                          aria-label="삭제"
+                          aria-label={t('board.delete')}
                         >
-                          {isMobile ? "삭제" : "삭제"}
+                          {t('board.delete')}
                         </button>
                       </td>
                     )}
@@ -359,8 +346,8 @@ const BoardList = ({
               })
             ) : (
               <tr>
-                <td colSpan={user ? 4 : 3} className="no-data">
-                  데이터가 없습니다.
+                <td colSpan={isAdmin() ? 4 : 3} className="no-data">
+                  {t('board.noData')}
                 </td>
               </tr>
             )}
@@ -376,7 +363,7 @@ const BoardList = ({
             disabled={currentPage === 1}
             className="pagination-btn"
           >
-            이전
+            {t('board.prev')}
           </button>
           
           <div className="page-numbers">
@@ -396,7 +383,7 @@ const BoardList = ({
             disabled={currentPage === totalPages}
             className="pagination-btn"
           >
-            다음
+            {t('board.next')}
           </button>
         </div>
       )}

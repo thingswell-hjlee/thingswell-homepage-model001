@@ -26,7 +26,7 @@ import ManufacturingSolution from "./pages/Solutions/ManufacturingSolution.jsx";
 import MultimodalAwareness from "./pages/rnd/MultimodalAwareness.jsx";
 import RAGLLMTech from "./pages/rnd/RAGLLMTech.jsx";
 import OnDeviceAI from "./pages/rnd/OnDeviceAI.jsx";
-import Embeddedsystem from "./pages/rnd/Embeddedsystem .jsx";
+import Embeddedsystem from "./pages/rnd/Embeddedsystem.jsx";
 import SmartAssistiveTechnology from "./pages/rnd/SmartAssistiveTechnology.jsx";
 import AirQualityManagement from "./pages/rnd/AirQualityManagement.jsx";
 import Product_list_control from "./pages/Products/Product_list_control.jsx";
@@ -119,10 +119,10 @@ function AppRoutes({ isMobile }) {
             <Route path="/about/directions" element={<Directions />} />
             <Route path="/login" element={<Login />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
-            <Route path="/admin/og-settings" element={<ProtectedRoute><OGSettings /></ProtectedRoute>} />
-            <Route path="/admin/change-password" element={<ProtectedRoute><ChangePassword /></ProtectedRoute>} />
-            <Route path="/admin/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-            <Route path="/admin/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+            <Route path="/admin/og-settings" element={<ProtectedRoute requireAdmin><OGSettings /></ProtectedRoute>} />
+            <Route path="/admin/change-password" element={<ProtectedRoute requireAdmin><ChangePassword /></ProtectedRoute>} />
+            <Route path="/admin/dashboard" element={<ProtectedRoute requireAdmin><Dashboard /></ProtectedRoute>} />
+            <Route path="/admin/profile" element={<ProtectedRoute requireAdmin><Profile /></ProtectedRoute>} />
             <Route path="/sitemap" element={<Sitemap />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState, useRef, useCallback } from 'react';
-import { getSession, onAuthStateChange, signOut as authSignOut, getSessionSync } from '../lib/auth.js';
+import { getSession, onAuthStateChange, signOut as authSignOut, getSessionSync, decodeToken } from '../lib/auth.js';
 
 const AuthContext = createContext({});
 
@@ -107,7 +107,9 @@ export const AuthProvider = ({ children }) => {
     // 인증 상태 변경 리스너
     const { data: { subscription } } = onAuthStateChange(
       (event, session) => {
-        console.log('Auth state changed:', event, session?.user?.email);
+        if (import.meta.env.DEV) {
+          console.log('Auth state changed:', event, session?.user?.email);
+        }
         setSession(session);
         setUser(session?.user ?? null);
         setLoading(false);
@@ -124,6 +126,40 @@ export const AuthProvider = ({ children }) => {
   // 권한 체크 함수들
   const isAuthenticated = () => !!user;
   
+  // TODO: API Gateway/Lambda에서도 관리자 권한 검증 필요
+  const isAdmin = () => {
+    if (!isAuthenticated()) return false;
+    try {
+      const idToken = localStorage.getItem('thingswell_id_token');
+      if (!idToken) return false;
+      const decoded = decodeToken(idToken);
+      if (!decoded) return false;
+
+      // 1차 판단: Cognito groups claim에 'admin' 포함 여부
+      const groups = decoded['cognito:groups'];
+      if (Array.isArray(groups) && groups.length > 0) {
+        return groups.includes('admin');
+      }
+
+      // 2차 판단: 환경변수 VITE_ADMIN_EMAILS에 등록된 이메일 allowlist 확인
+      // Cognito groups가 아직 설정되지 않은 운영 전환 기간에 임시로 사용합니다.
+      // Cognito 그룹 설정 완료 후에는 이 fallback을 제거하세요.
+      const adminEmailsRaw = import.meta.env.VITE_ADMIN_EMAILS || '';
+      if (adminEmailsRaw) {
+        const adminEmails = adminEmailsRaw.split(',').map(e => e.trim().toLowerCase()).filter(Boolean);
+        const userEmail = (decoded.email || user?.email || '').toLowerCase();
+        if (userEmail && adminEmails.includes(userEmail)) {
+          return true;
+        }
+      }
+
+      // groups claim 없고 allowlist에도 없으면 관리자 아님
+      return false;
+    } catch {
+      // token decode 실패 시 관리자 권한 없음
+      return false;
+    }
+  };
 
   const canEditContent = () => {
     // 로그인된 사용자이거나 관리자인 경우 편집 가능
@@ -136,6 +172,7 @@ export const AuthProvider = ({ children }) => {
     loading,
     signOut,
     isAuthenticated,
+    isAdmin,
     canEditContent,
     sessionExpiringSoon,
   };

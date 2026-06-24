@@ -1,9 +1,10 @@
 import React from 'react';
+import DOMPurify from 'dompurify';
 import './BoardDetail.css';
 import { useAuth } from '../../contexts/AuthContext';
 
 const BoardDetail = ({ post, onBack, onEdit, onDelete }) => {
-  const { isAuthenticated } = useAuth();
+  const { isAdmin } = useAuth();
   
   if (!post) {
     return (
@@ -20,8 +21,6 @@ const BoardDetail = ({ post, onBack, onEdit, onDelete }) => {
   const content = post.content ||  '';
   const author = post.author || '작성자';
   
-  console.log('로드된 게시글 콘텐츠:', content);
-  console.log('전체 post 객체:', post);
   let createdAt = post.created_at || '날짜 없음';
 
   // 날짜 형식을 날짜까지만 표시하도록 변환
@@ -51,7 +50,7 @@ const BoardDetail = ({ post, onBack, onEdit, onDelete }) => {
         <div className="post-body">
           <div 
             className="content-html"
-            dangerouslySetInnerHTML={{ __html: content }}
+            dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(content) }}
           />
         </div>
         
@@ -59,13 +58,16 @@ const BoardDetail = ({ post, onBack, onEdit, onDelete }) => {
           <div className="post-meta">
             <span className="date">작성일: {createdAt}</span>
           </div>
-          {isAuthenticated() && (
-            <div className="post-actions">
+          <div className="post-actions">
+            <button onClick={onBack} className="btn-back">
+              목록으로
+            </button>
+            {isAdmin() && (
               <button onClick={() => onEdit(post)} className="btn-edit">
                 수정
               </button>
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </div>
     </div>
