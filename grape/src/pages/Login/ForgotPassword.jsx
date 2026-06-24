@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { forgotPassword, confirmForgotPassword } from '../../lib/auth.js';
+import useTranslation from '../../hooks/useTranslation';
 import rndHeader from '../../assets/header_image/rnd.jpg';
 import ProductHeader from '../../components/ProductPage/ProductHeader';
 import { BaseLayout } from '../../components/Layout';
 import './ForgotPassword.css';
 
 const ForgotPassword = () => {
+  const { t, currentLang } = useTranslation();
   const [step, setStep] = useState(1);
   const [email, setEmail] = useState('');
   const [code, setCode] = useState('');
@@ -122,8 +124,8 @@ const ForgotPassword = () => {
   return (
     <BaseLayout
       header={() => <ProductHeader image={rndHeader} />}
-      breadcrumbs={["Home", "비밀번호 찾기"]}
-      title="비밀번호 찾기"
+      breadcrumbs={[t('forgotPassword.breadcrumbs.0'), t('forgotPassword.breadcrumbs.1')]}
+      title={t('forgotPassword.title')}
     >
       <div className="page-container">
         <div className="page-content">

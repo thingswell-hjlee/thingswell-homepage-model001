@@ -4,6 +4,7 @@ import rndHeader from '../../assets/header_image/rnd.jpg';
 import './Rnd.css';
 import multimodal from '../../assets/rnd_main/multimodal.png';
 import { BaseLayout } from '../../components/Layout';
+import useTranslation from '../../hooks/useTranslation';
 // Breadcrumbs는 BaseLayout이 렌더링하므로 여기서는 배열만 전달합니다.
 
 const MULTIMODAL_CARDS = [
@@ -20,12 +21,13 @@ const MULTIMODAL_CARDS = [
 ];
 
 const MultimodalAwareness = () => {
+  const { t } = useTranslation();
   return (
     <BaseLayout
       header={() => <ProductHeader image={rndHeader} />}
-      breadcrumbs={["Home", "연구개발", "멀티모달 상황인지"]}
-      title="멀티모달 상황인지"
-      subtitle="RGB 카메라, ToF 센서, UWB 레이더를 융합한 산업 현장 안전 관리 시스템"
+      breadcrumbs={[t('rnd.breadcrumbs.0'), t('rnd.breadcrumbs.1'), t('rnd.multimodal.breadcrumb')]}
+      title={t('rnd.multimodal.title')}
+      subtitle={t('rnd.multimodal.subtitle')}
     >
       <div className="product-page-content">
         {/* RND 전용 FeatureDescription 카드 섹션 */}

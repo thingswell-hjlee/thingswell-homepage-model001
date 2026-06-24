@@ -14,6 +14,7 @@ import TrackRecordGrid from '../../components/TrackRecordGrid';
 import ProductHeader from '../../components/ProductPage/ProductHeader';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 import { BaseLayout } from '../../components/Layout';
+import useTranslation from '../../hooks/useTranslation';
 import SearchComponent from '../../components/SearchComponent';
 import ProductFilter from '../../components/ProductFilter';
 import '../Products/ProductsCommon.css';

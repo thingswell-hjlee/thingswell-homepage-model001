@@ -4,6 +4,7 @@ import rndHeader from '../../assets/header_image/rnd.jpg';
 import './Rnd.css';
 import old from '../../assets/rnd_main/old.png';
 import { BaseLayout } from '../../components/Layout';
+import useTranslation from '../../hooks/useTranslation';
 // Breadcrumbs는 BaseLayout이 렌더링하므로 여기서는 배열만 전달합니다.
 
 const WORKER_SAFETY_CARDS = [
@@ -17,12 +18,13 @@ const WORKER_SAFETY_CARDS = [
 ];
 
 const SmartAssistiveTechnology = () => {
+  const { t } = useTranslation();
   return (
     <BaseLayout
       header={() => <ProductHeader image={rndHeader} />}
-      breadcrumbs={["Home", "연구개발", "인지장애 노인 및 장애인을 위한 스마트 보조 기술"]}
-      title="인지장애 노인 및 장애인을 위한 스마트 보조 기술"
-      subtitle="AI 기반 멀티모달 센싱을 통한 프라이버시 보호와 안전 관리의 조화"
+      breadcrumbs={[t('rnd.breadcrumbs.0'), t('rnd.breadcrumbs.1'), t('rnd.assistive.breadcrumb')]}
+      title={t('rnd.assistive.title')}
+      subtitle={t('rnd.assistive.subtitle')}
     >
       <div className="product-page-content">
         {/* RND 전용 FeatureDescription 카드 섹션 */}

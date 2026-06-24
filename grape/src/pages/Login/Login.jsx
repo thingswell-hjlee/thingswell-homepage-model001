@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams, Link } from 'react-router-dom';
 import { signIn } from '../../lib/auth.js';
 import { useAuth } from '../../contexts/AuthContext.jsx';
+import useTranslation from '../../hooks/useTranslation';
 import rndHeader from '../../assets/header_image/rnd.jpg';
 import ProductHeader from '../../components/ProductPage/ProductHeader';
 import { BaseLayout } from '../../components/Layout';
 import './Login.css';
 
 const Login = () => {
+  const { t, currentLang } = useTranslation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -45,7 +47,7 @@ const Login = () => {
         navigate(redirectPath);
       }
     } catch (error) {
-      setError('로그인 중 오류가 발생했습니다.');
+      setError(t('login.loginError'));
     } finally {
       setLoading(false);
     }
@@ -54,8 +56,8 @@ const Login = () => {
   return (
     <BaseLayout
     header={() => <ProductHeader image={rndHeader} />}
-    breadcrumbs={["Home", "로그인"]}
-    title="로그인"
+    breadcrumbs={[t('login.breadcrumbs.0'), t('login.breadcrumbs.1')]}
+    title={t('login.title')}
     >
     <div className="page-container">
       <div className="page-content">
@@ -65,7 +67,7 @@ const Login = () => {
               <div className="login-form">
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">
-                        <label htmlFor="email">이메일</label>
+                        <label htmlFor="email">{t('login.email')}</label>
                         <input 
                           type="email" 
                           id="email" 
@@ -76,7 +78,7 @@ const Login = () => {
                         />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="password">비밀번호</label>
+                        <label htmlFor="password">{t('login.password')}</label>
                         <input 
                           type="password" 
                           id="password" 
@@ -88,10 +90,10 @@ const Login = () => {
                     </div>
                     {error && <div className="error-message">{error}</div>}
                     <button type="submit" disabled={loading}>
-                      {loading ? '로그인 중...' : '로그인'}
+                      {loading ? t('login.loading') : t('login.submit')}
                     </button>
                     <div className="login-link">
-                      <Link to="/forgot-password">비밀번호를 잊으셨나요?</Link>
+                      <Link to={`/${currentLang}/forgot-password`}>{t('login.forgotPassword')}</Link>
                     </div>
                 </form>
               </div>

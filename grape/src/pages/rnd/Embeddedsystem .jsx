@@ -4,6 +4,7 @@ import rndHeader from '../../assets/header_image/rnd.jpg';
 import './Rnd.css';
 import danger from '../../assets/rnd_main/danger.png';
 import { BaseLayout } from '../../components/Layout';
+import useTranslation from '../../hooks/useTranslation';
 // Breadcrumbs는 BaseLayout이 렌더링하므로 여기서는 배열만 전달합니다.
 
 const EMBEDDED_SYSTEM_CARDS = [
@@ -20,12 +21,13 @@ const EMBEDDED_SYSTEM_CARDS = [
 ];
 
 const Embeddedsystem = () => {
+  const { t } = useTranslation();
   return (
     <BaseLayout
       header={() => <ProductHeader image={rndHeader} />}
-      breadcrumbs={["Home", "연구개발", "위험상황 조기감지"]}
-      title="위험상황 조기감지"
-      subtitle="레이더 및 카메라를 활용한 환자 안전 보장 임베디드 시스템"
+      breadcrumbs={[t('rnd.breadcrumbs.0'), t('rnd.breadcrumbs.1'), t('rnd.embedded.breadcrumb')]}
+      title={t('rnd.embedded.title')}
+      subtitle={t('rnd.embedded.subtitle')}
     >
       <div className="product-page-content">
         {/* RND 전용 FeatureDescription 카드 섹션 */}

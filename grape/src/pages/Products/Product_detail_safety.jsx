@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import ProductPage from '../../components/ProductPage/ProductPage';
+import useTranslation from '../../hooks/useTranslation';
 import { getProductById } from '../../lib/api';
 
 export default function Product_detail_safety() {
+  const { t } = useTranslation();
   const { id } = useParams();
   const navigate = useNavigate();
   const [product, setProduct] = useState(null);

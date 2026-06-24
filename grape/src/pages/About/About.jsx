@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import useTranslation from "../../hooks/useTranslation";
 import "./About.css";
 import manufacturing from "../../assets/manufacturing.jpg";
 import construction from "../../assets/construction.jpg";
@@ -12,6 +13,7 @@ import CertificateSection from "../../components/CertificateSection";
 import BaseLayout from "../../components/Layout/BaseLayout";
 
 const About = () => {
+  const { t } = useTranslation();
   const location = useLocation();
 
   // URL 해시에 따라 해당 섹션으로 스크롤
@@ -67,8 +69,8 @@ const About = () => {
             <ProductHeader image={company} alt="company" />
 
             <BaseLayout 
-              breadcrumbs={["Home", "About"]}
-              title="회사소개"
+              breadcrumbs={[t('about.breadcrumbs.0'), "About"]}
+              title={t('about.title')}
             >
               <div className="solutions-section">
                 <div id="greeting" className="about-section-responsive">

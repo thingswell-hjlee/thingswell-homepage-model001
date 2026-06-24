@@ -1,16 +1,18 @@
 import React from 'react';
 import ProductHeader from '../../components/ProductPage/ProductHeader';
 import BaseLayout from '../../components/Layout/BaseLayout';
+import useTranslation from '../../hooks/useTranslation';
 import company from '../../assets/header_image/company.jpg';
 import './About.css';
 import manufacturing from '../../assets/manufacturing.jpg';
 import construction from '../../assets/construction.jpg';
 
 const History = () => {
+  const { t } = useTranslation();
   return (
     <div className="page-container about-page">
       <ProductHeader image={company} alt="history" />
-      <BaseLayout breadcrumbs={["Home", "연혁"]} title="연혁">
+      <BaseLayout breadcrumbs={[t('about.breadcrumbs.0'), t('about.historyBreadcrumb')]} title={t('about.historyTitle')}>
         <div id="history" className="about-section">
           <div className="about-section-title-image-container">
             <div className="about-section-title">

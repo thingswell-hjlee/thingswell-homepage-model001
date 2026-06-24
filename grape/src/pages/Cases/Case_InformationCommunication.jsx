@@ -1,11 +1,12 @@
 import React from 'react';
 import BaseLayout from '../../components/Layout/BaseLayout';
 import ProductHeader from '../../components/ProductPage/ProductHeader';
+import useTranslation from '../../hooks/useTranslation';
 import headerImage from '../../assets/header_image/performance.jpg';
 import '../Solutions/SolutionPage.css';
 import './CaseSmartSafety.css';
 
-const BREADCRUMBS = ["Home", "고객사례", "정보통신"];
+
 
 // 주요 납품 실적 (실제 데이터)
 const CASES = [
@@ -174,11 +175,12 @@ const CaseCard = ({ caseItem }) => {
 };
 
 export default function CaseInformationCommunicationPage() {
+  const { t } = useTranslation();
   return (
     <BaseLayout
       header={() => <ProductHeader image={headerImage} alt="information communication cases" />}
-      breadcrumbs={BREADCRUMBS}
-      title="정보통신"
+      breadcrumbs={[t('cases.breadcrumbs.0'), t('cases.breadcrumbs.1'), t('cases.infoComm')]}
+      title={t('cases.infoComm')}
     >
       <div className="solution-page">
         {/* 히어로 섹션 */}

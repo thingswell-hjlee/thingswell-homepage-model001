@@ -4,6 +4,7 @@ import rndHeader from '../../assets/header_image/rnd.jpg';
 import './Rnd.css';
 import ai from '../../assets/rnd_main/AI.png';
 import { BaseLayout } from '../../components/Layout';
+import useTranslation from '../../hooks/useTranslation';
 // Breadcrumbs는 BaseLayout이 렌더링하므로 여기서는 배열만 전달합니다.
 
 const ON_DEVICE_AI_CARDS = [
@@ -20,12 +21,13 @@ const ON_DEVICE_AI_CARDS = [
 ];
 
 const OnDeviceAI = () => {
+  const { t } = useTranslation();
   return (
     <BaseLayout
       header={() => <ProductHeader image={rndHeader} />}
-      breadcrumbs={["Home", "연구개발", "온디바이스 AI"]}
-      title="온디바이스 AI"
-      subtitle="통신 제약 없는 실시간 위험 감지 및 즉각 대응 시스템"
+      breadcrumbs={[t('rnd.breadcrumbs.0'), t('rnd.breadcrumbs.1'), t('rnd.onDevice.breadcrumb')]}
+      title={t('rnd.onDevice.title')}
+      subtitle={t('rnd.onDevice.subtitle')}
     >
       <div className="product-page-content">
         {/* RND 전용 FeatureDescription 카드 섹션 */}

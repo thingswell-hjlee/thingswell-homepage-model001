@@ -1,11 +1,12 @@
 import React from 'react';
 import BaseLayout from '../../components/Layout/BaseLayout';
 import ProductHeader from '../../components/ProductPage/ProductHeader';
+import useTranslation from '../../hooks/useTranslation';
 import headerImage from '../../assets/header_image/performance.jpg';
 import '../Solutions/SolutionPage.css';
 import './CaseSmartSafety.css';
 
-const BREADCRUMBS = ["Home", "고객사례", "스마트통합제어"];
+
 
 // 하이라이트 프로젝트 (이미지 있는 주요 납품)
 const HIGHLIGHT_CASES = [
@@ -284,11 +285,12 @@ const CaseCard = ({ caseItem }) => {
 };
 
 export default function CaseIntegratedControlPage() {
+  const { t } = useTranslation();
   return (
     <BaseLayout
       header={() => <ProductHeader image={headerImage} alt="integrated control cases" />}
-      breadcrumbs={BREADCRUMBS}
-      title="스마트통합제어"
+      breadcrumbs={[t('cases.breadcrumbs.0'), t('cases.breadcrumbs.1'), t('cases.integratedControl')]}
+      title={t('cases.integratedControl')}
     >
       <div className="solution-page">
         {/* 히어로 섹션 */}

@@ -1,20 +1,22 @@
 import React from 'react';
 import ProductHeader from '../../components/ProductPage/ProductHeader';
 import BaseLayout from '../../components/Layout/BaseLayout';
+import useTranslation from '../../hooks/useTranslation';
 import company from '../../assets/header_image/company.jpg';
 import './About.css';
 import ContactInfo from '../../components/ContactInfo';
 
 const Directions = () => {
+  const { t } = useTranslation();
   return (
     <div className="page-container about-page">
       <ProductHeader image={company} alt="directions" />
-      <BaseLayout breadcrumbs={["Home", "오시는 길"]} title="오시는 길">
+      <BaseLayout breadcrumbs={[t('about.breadcrumbs.0'), t('about.directionsBreadcrumb')]} title={t('about.directionsTitle')}>
         <div className="about-section">
           <div className="about-section-title-image-container">
             <div className="about-section-title">
-              <p className="about-section-title-subtitle">Location & Contact</p>
-              <h1 className="about-section-content-title">오시는 길</h1>
+              <p className="about-section-title-subtitle">{t('about.locationLabel')}</p>
+              <h1 className="about-section-content-title">{t('about.locationTitle')}</h1>
             </div>
             <div className="location-container">
               <div className="map-container">

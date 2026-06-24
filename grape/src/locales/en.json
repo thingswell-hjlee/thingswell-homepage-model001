@@ -110,7 +110,12 @@
     "menuClose": "Close Menu",
     "logoAlt": "Logo",
     "languageKor": "KOR",
-    "languageEng": "ENG"
+    "languageEng": "ENG",
+    "loading": "Loading...",
+    "error": "Error",
+    "noData": "No data available.",
+    "contact": "Contact Us",
+    "back": "Go Back"
   },
   "seo": {
     "home": {
@@ -141,5 +146,608 @@
       "title": "Government Programs - ThingsWell",
       "description": "Information on government support programs including smart safety equipment subsidies."
     }
+  },
+  "solutions": {
+    "breadcrumbs": [
+      "Home",
+      "Solutions"
+    ],
+    "industrial": {
+      "breadcrumb": "Smart Safety Platform",
+      "title": "SafeGAI Smart Safety Platform",
+      "badge": "NVIDIA + AWS Powered",
+      "heroTitle": "AI-Powered Safety,\nTechnology-Driven Future",
+      "heroDesc": "SafeGAI is a next-generation smart safety platform that revolutionizes industrial safety based on NVIDIA Jetson RTX edge AI and Amazon AWS cloud infrastructure. By integrating multimodal AI video analytics, IoT sensor fusion, and digital twin technology, it delivers real-time hazard detection, predictive accident prevention, and automated monitoring across industrial, construction, and public safety domains.",
+      "coreTechLabel": "Core Technology",
+      "coreTechTitle": "Core Technology Stack",
+      "applicationLabel": "Application Areas",
+      "applicationTitle": "Application Areas",
+      "pipelineLabel": "Safety Pipeline",
+      "pipelineTitle": "Safety Pipeline",
+      "architectureLabel": "Platform Architecture",
+      "architectureTitle": "Platform Architecture",
+      "archEdge": "Real-time video analytics on NVIDIA Jetson RTX with DeepStream + TensorRT, sensor fusion, and immediate alarm processing",
+      "archComm": "Event metadata transmission via MQTT/AWS IoT Core, local buffering and automatic retransmission during network failures",
+      "archCloud": "AWS SageMaker AI retraining, DynamoDB event storage, API Gateway + Lambda serverless monitoring API",
+      "archControl": "Web/mobile dashboard, digital twin 3D visualization, multi-facility integrated monitoring",
+      "techStack": [
+        {
+          "title": "NVIDIA Jetson RTX Edge AI",
+          "subtitle": "Edge AI Computing",
+          "desc": "High-performance edge computing based on NVIDIA Jetson Orin for real-time AI inference on-site. DeepStream SDK multi-channel video analysis with TensorRT-optimized millisecond-level hazard detection."
+        },
+        {
+          "title": "Amazon AWS Cloud",
+          "subtitle": "Cloud Infrastructure",
+          "desc": "Infinitely scalable serverless architecture based on AWS IoT Core, SageMaker, Lambda, and DynamoDB. Edge event data cloud analysis and continuous AI model retraining."
+        },
+        {
+          "title": "Multimodal Sensor Fusion",
+          "subtitle": "Multimodal Sensor Fusion",
+          "desc": "Time-synchronized integrated analysis of IP cameras, smart bands, environmental sensors, fire detectors, and radar. Complex situational awareness and precise risk assessment."
+        },
+        {
+          "title": "Digital Twin Monitoring",
+          "subtitle": "Digital Twin Control",
+          "desc": "Physical spaces rendered as 3D digital twins with real-time sensor data and AI analysis results intuitively visualized. Multi-facility integrated monitoring support."
+        }
+      ],
+      "domains": [
+        {
+          "title": "Industrial Safety",
+          "subtitle": "Manufacturing Safety",
+          "items": [
+            "Real-time detection of falls, collapses, and prolonged immobility",
+            "Automatic restricted zone intrusion alerts with equipment interlocking",
+            "Hazardous gas, high temperature, and noise environmental monitoring",
+            "Per-worker smart band health anomaly detection",
+            "AI-based hazardous behavior pattern analysis and predictive alerts"
+          ]
+        },
+        {
+          "title": "Construction Safety",
+          "subtitle": "Construction Safety",
+          "items": [
+            "Real-time detection of high-altitude and heavy equipment proximity risks",
+            "Automatic detection of missing safety helmets and vests",
+            "Automatic alerts for personnel within crane and excavator operating radius",
+            "Vibration sensor-linked collapse risk monitoring",
+            "Automated daily safety reports and manager notifications"
+          ]
+        },
+        {
+          "title": "Public Safety",
+          "subtitle": "Public Safety",
+          "items": [
+            "Real-time health anomaly detection for elderly in community centers",
+            "Abnormal behavior detection at bus shelters and public parks",
+            "Early warning for fires, smoke, and flooding disasters",
+            "Crowd density analysis and safety management for public facilities",
+            "Smart CCTV-linked crime prevention and emergency response"
+          ]
+        }
+      ],
+      "pipeline": [
+        {
+          "step": "01",
+          "title": "Field Data Collection",
+          "subtitle": "Data Acquisition",
+          "items": [
+            "DeepStream multi-channel RTSP video capture",
+            "Smart band BLE biometric data real-time reception",
+            "Environmental sensor (temperature, humidity, gas, dust) collection",
+            "Fire detection contact signal integration",
+            "Time synchronization and adaptive rolling buffer storage"
+          ]
+        },
+        {
+          "step": "02",
+          "title": "Edge AI Real-time Inference",
+          "subtitle": "Edge AI Inference",
+          "items": [
+            "TensorRT-optimized real-time object detection",
+            "Multimodal sensor fusion complex situation assessment",
+            "Activity index-based storage level auto-adjustment",
+            "Automatic pre/post-event data preservation",
+            "Local independent operation during network failures"
+          ]
+        },
+        {
+          "step": "03",
+          "title": "AWS Cloud Integration",
+          "subtitle": "Cloud Integration",
+          "items": [
+            "IoT Core real-time event metadata transmission",
+            "SageMaker continuous AI model training and deployment",
+            "DynamoDB event history storage and analysis",
+            "Lambda-based automatic alert escalation",
+            "Multi-facility integrated dashboard remote monitoring"
+          ]
+        },
+        {
+          "step": "04",
+          "title": "Integrated Monitoring & Response",
+          "subtitle": "Command & Response",
+          "items": [
+            "Risk-level automatic alarms (visual, audible, vibration)",
+            "Contact-linked warning lights and siren auto-control",
+            "Manager mobile app instant push notifications",
+            "Event action history and feedback management",
+            "Monthly safety reports and risk trend analysis"
+          ]
+        }
+      ]
+    },
+    "elderly": {
+      "breadcrumb": "Elderly & Disability Smart Safety Platform",
+      "title": "Elderly & Disability Smart Safety Platform",
+      "badge": "NVIDIA + AWS Powered",
+      "heroTitle": "AI-Based Non-Contact Monitoring,\nPersonalized Smart Care",
+      "heroDesc": "A non-contact AI monitoring system that protects the safety of elderly and disabled individuals 24/7 through fall detection, abnormal behavior recognition, smart band integration, and environmental sensor fusion. This next-generation smart safety platform detects hazardous situations early without privacy intrusion and enhances quality of life through personalized care.",
+      "coreTechLabel": "Core Technology",
+      "coreTechTitle": "Core Technology",
+      "applicationLabel": "Application Areas",
+      "applicationTitle": "Application Areas",
+      "pipelineLabel": "Service Pipeline",
+      "pipelineTitle": "Service Pipeline",
+      "techStack": [
+        {
+          "title": "Non-Contact Radar/AI Detection",
+          "subtitle": "Non-contact Radar & AI",
+          "desc": "Utilizing AI radar and video analysis technology without CCTV to detect falls, abnormal behavior, and wandering in real-time without privacy intrusion. Safe monitoring even in private spaces such as bedrooms and bathrooms."
+        },
+        {
+          "title": "Smart Band Integration",
+          "subtitle": "Smart Band Integration",
+          "desc": "Real-time collection of biometric data including heart rate, temperature, activity levels, and sleep patterns through smart bands. Early detection of health anomalies and wandering detection through location tracking."
+        },
+        {
+          "title": "Environmental Sensor Fusion",
+          "subtitle": "Environment Sensor Fusion",
+          "desc": "Comprehensive analysis of indoor environmental data including temperature/humidity, air quality, illumination, and noise. Automatic maintenance of comfortable living environments with immediate detection of fire and gas leaks."
+        },
+        {
+          "title": "3-Step Alert System",
+          "subtitle": "3-Step Alert System",
+          "desc": "Automatic 3-step escalation upon hazard detection: voice guidance, strong warning sounds, and guardian/authority notifications. Customized response based on situation severity to secure the golden time."
+        }
+      ],
+      "domains": [
+        {
+          "title": "Senior Community Centers",
+          "subtitle": "Senior Community Center",
+          "items": [
+            "Real-time health monitoring of elderly in senior centers",
+            "Immediate fall and consciousness loss detection alerts",
+            "Early detection of abnormal behavior during programs",
+            "Automatic access management and headcount tracking",
+            "Integrated monitoring dashboard for administrators"
+          ]
+        },
+        {
+          "title": "Elderly Living Alone",
+          "subtitle": "Elderly Living Alone",
+          "items": [
+            "Non-contact radar-based lifestyle pattern monitoring",
+            "Automatic detection of prolonged inactivity with welfare checks",
+            "Medication schedule reminders and health management",
+            "Smart band-linked immediate health anomaly alerts",
+            "Guardian mobile app real-time status sharing"
+          ]
+        },
+        {
+          "title": "Vocational Rehabilitation Facilities",
+          "subtitle": "Vocational Rehabilitation",
+          "items": [
+            "Real-time detection of hazardous behavior during work",
+            "Early detection and intervention for agitation and self-harm",
+            "Personalized environment (lighting, sound) auto-adjustment",
+            "Daily pattern analysis and behavior change reports",
+            "Immediate administrator alerts and history management"
+          ]
+        }
+      ],
+      "pipeline": [
+        {
+          "step": "01",
+          "title": "Risk Detection",
+          "subtitle": "Risk Detection",
+          "items": [
+            "AI radar-based real-time fall/collapse detection",
+            "Abnormal behavior (wandering, self-harm, assault) video analysis",
+            "Smart band biometric data anomaly detection",
+            "Environmental sensor hazard (fire, gas) detection",
+            "Multimodal data fusion precision assessment"
+          ]
+        },
+        {
+          "step": "02",
+          "title": "Status Analysis",
+          "subtitle": "Status Analysis",
+          "items": [
+            "Lifestyle pattern learning-based anomaly assessment",
+            "Comprehensive activity, sleep, and meal pattern analysis",
+            "Health status trend and change tracking",
+            "Automatic risk level calculation",
+            "Continuous per-individual baseline updates"
+          ]
+        },
+        {
+          "step": "03",
+          "title": "Automatic Alerts",
+          "subtitle": "Auto Alert",
+          "items": [
+            "Step 1: Personal voice guidance and confirmation request",
+            "Step 2: Strong warning sounds with environmental control linkage",
+            "Step 3: Simultaneous guardian/119/manager notification",
+            "Automatic situation-based escalation",
+            "Alert history and response result auto-recording"
+          ]
+        },
+        {
+          "step": "04",
+          "title": "Personalized Care",
+          "subtitle": "Personalized Care",
+          "items": [
+            "Automatic personal health schedule management (medication, exercise)",
+            "Auto-delivery of emotional stability therapy content",
+            "Personalized environment (lighting, sound, temperature) auto-control",
+            "Weekly/monthly health report auto-generation",
+            "Continuous AI model learning for care quality improvement"
+          ]
+        }
+      ]
+    },
+    "integrated": {
+      "breadcrumb": "Smart Integrated Control Platform",
+      "title": "Smart Integrated Control Platform",
+      "badge": "Smart Control Platform",
+      "heroTitle": "One Interface,\nAll Spaces Controlled",
+      "heroDesc": "A next-generation integrated control platform that remotely manages video, audio, lighting, HVAC, and ventilation through a single smart interface. Maximizing space efficiency and reducing operational costs through multimodal sensor-based context-aware automation and remote management.",
+      "coreTechLabel": "Core Technology",
+      "coreTechTitle": "Core Technology",
+      "applicationLabel": "Application Areas",
+      "applicationTitle": "Application Areas",
+      "pipelineLabel": "Service Pipeline",
+      "pipelineTitle": "Service Pipeline",
+      "techStack": [
+        {
+          "title": "Integrated Controller (XCN-3000)",
+          "subtitle": "Integrated Controller",
+          "desc": "The Advanced Integrated Controller XCN-3000 supports multiple protocols including RS232/485, TCP/IP, IR, and relay to provide unified control of video, audio, lighting, and environmental equipment through a single interface."
+        },
+        {
+          "title": "Remote Management (ThingsEye)",
+          "subtitle": "Remote Management",
+          "desc": "ThingsEye solution enables remote monitoring and control of multi-space facility status. Supports automated operations through real-time data collection, analysis, and scheduling."
+        },
+        {
+          "title": "Context-Aware Automation",
+          "subtitle": "Context-Aware Automation",
+          "desc": "Leveraging multimodal sensor data from air quality, motion, and cameras to recognize spatial contexts and automatically optimize equipment control. Maximizes energy savings and space efficiency."
+        },
+        {
+          "title": "Video Conference Integration",
+          "subtitle": "Video Conference Integration",
+          "desc": "Automatically configures optimal meeting and presentation environments through speaker tracking systems, video conferencing integration, echo cancellation, and camera preset-based position tracking."
+        }
+      ],
+      "domains": [
+        {
+          "title": "Conference Halls/Auditoriums",
+          "subtitle": "Conference Hall",
+          "items": [
+            "Integrated video wall and matrix system control",
+            "Wireless microphone and audio mixer auto-configuration",
+            "DMX512-based ambient and spot lighting control",
+            "Speaker tracking camera and video conferencing integration",
+            "One-touch meeting environment switching via presets"
+          ]
+        },
+        {
+          "title": "Classrooms/Education Facilities",
+          "subtitle": "Education Facility",
+          "items": [
+            "Mode-based automatic lighting, audio, and video switching",
+            "Speaker tracking-based auto zoom/pan camera control",
+            "Recording system integration and remote class support",
+            "Schedule-based automatic operation",
+            "Energy-saving automatic power management system"
+          ]
+        },
+        {
+          "title": "Exhibition/Convention Centers",
+          "subtitle": "Exhibition & Convention",
+          "items": [
+            "Multi-zone independent control for large spaces",
+            "Event scenario-based batch equipment switching",
+            "Immersive audio system and spatial sound optimization",
+            "Real-time environmental monitoring with HVAC auto-control",
+            "Multi-facility integrated operation via remote monitoring"
+          ]
+        }
+      ],
+      "pipeline": [
+        {
+          "step": "01",
+          "title": "Sensor Collection",
+          "subtitle": "Sensor Collection",
+          "items": [
+            "Air quality, temperature/humidity, illumination sensor data collection",
+            "Motion and camera-based occupancy detection",
+            "Equipment status and energy usage monitoring",
+            "Network device communication status real-time check",
+            "Time-synchronized data integration management"
+          ]
+        },
+        {
+          "step": "02",
+          "title": "Integrated Analysis",
+          "subtitle": "Integrated Analysis",
+          "items": [
+            "Multimodal sensor data fusion analysis",
+            "Space usage pattern learning and prediction",
+            "Energy efficiency optimization algorithm application",
+            "Automatic anomaly detection and classification",
+            "Operational data-based insight generation"
+          ]
+        },
+        {
+          "step": "03",
+          "title": "Auto Control",
+          "subtitle": "Auto Control",
+          "items": [
+            "Context-aware optimal equipment auto-control",
+            "Preset/macro-based one-touch environment switching",
+            "Schedule-based time-zone automatic operation",
+            "Energy-saving automatic power management",
+            "Emergency safety mode auto-switching"
+          ]
+        },
+        {
+          "step": "04",
+          "title": "Remote Management",
+          "subtitle": "Remote Management",
+          "items": [
+            "PC, tablet, and mobile multi-access support",
+            "Multi-facility integrated dashboard remote monitoring",
+            "Equipment anomaly auto-alerts and maintenance requests",
+            "Operational report auto-generation and analysis",
+            "Cloud-based data backup and history management"
+          ]
+        }
+      ]
+    }
+  },
+  "rnd": {
+    "breadcrumbs": [
+      "Home",
+      "R&D"
+    ],
+    "multimodal": {
+      "breadcrumb": "Multimodal Situational Awareness",
+      "title": "Multimodal Situational Awareness",
+      "subtitle": "Industrial Safety Management System Integrating RGB Camera, ToF Sensor, and UWB Radar"
+    },
+    "onDevice": {
+      "breadcrumb": "On-Device AI",
+      "title": "On-Device AI",
+      "subtitle": "Real-time Hazard Detection and Immediate Response System Without Network Constraints"
+    },
+    "ragLlm": {
+      "breadcrumb": "RAG-based LLM",
+      "title": "RAG-based LLM",
+      "subtitle": "Conversational Safety Awareness System Combining Situational Cognition and Knowledge Retrieval"
+    },
+    "embedded": {
+      "breadcrumb": "Early Risk Detection",
+      "title": "Early Risk Detection",
+      "subtitle": "Embedded System for Patient Safety Using Radar and Camera Technology"
+    },
+    "assistive": {
+      "breadcrumb": "Smart Assistive Technology for Elderly and Disabled",
+      "title": "Smart Assistive Technology for Elderly and Disabled",
+      "subtitle": "Harmonizing Privacy Protection and Safety Management Through AI-Based Multimodal Sensing"
+    },
+    "airQuality": {
+      "breadcrumb": "AI Air Quality Management",
+      "title": "AI Air Quality Management",
+      "subtitle": "Indoor/Outdoor Air Quality Data Enhancement and Active Comfort Control System Using Machine Learning"
+    }
+  },
+  "products": {
+    "breadcrumbs": [
+      "Home",
+      "Products"
+    ],
+    "safety": {
+      "breadcrumb": "Smart Safety",
+      "title": "Smart Safety",
+      "badge": "Smart Safety Products",
+      "heroTitle": "AI-Protected Safety,\nTransforming the Field",
+      "heroDesc": "A next-generation industrial safety solution integrating AI cameras, smart bands, environmental sensors, and fire detection systems. Protecting workers' lives and safety through Edge AI-based real-time hazard detection and automatic alarms. Operating independently on-site even during network failures to ensure safety in any situation.",
+      "productLabel": "Product Lineup",
+      "productTitle": "Core Products",
+      "applicationLabel": "Application Areas",
+      "applicationTitle": "Application Areas",
+      "pipelineLabel": "Technology Pipeline",
+      "pipelineTitle": "Operation Flow",
+      "archLabel": "System Architecture",
+      "archTitle": "System Architecture"
+    },
+    "monitoring": {
+      "breadcrumb": "Control System",
+      "title": "Control System",
+      "badge": "Monitoring & Control System",
+      "heroTitle": "Detecting Invisible Risks\nThrough Data",
+      "heroDesc": "An integrated monitoring system that tracks temperature, humidity, gas concentration, dust, and noise in real-time through multi-environmental sensors and IoT gateways. Preemptively blocking risks through AI-based anomaly detection and predictive analysis, maximizing operational efficiency through data-driven decision making.",
+      "productLabel": "Product Lineup",
+      "productTitle": "Core Products",
+      "applicationLabel": "Application Areas",
+      "applicationTitle": "Application Areas",
+      "pipelineLabel": "Service Pipeline",
+      "pipelineTitle": "Service Flow",
+      "archLabel": "System Architecture",
+      "archTitle": "System Architecture"
+    },
+    "control": {
+      "breadcrumb": "Integrated Control",
+      "title": "Integrated Control",
+      "badge": "Integrated Control Products",
+      "heroTitle": "One Interface,\nAll Spaces Controlled",
+      "heroDesc": "A next-generation integrated control system managing video, audio, lighting, HVAC, and ventilation through the XCN-3000 integrated controller and ThingsEye remote management platform. Maximizing space efficiency and reducing operational costs through multimodal sensor-based context-aware automation and cloud remote management.",
+      "productLabel": "Product Lineup",
+      "productTitle": "Core Products",
+      "applicationLabel": "Application Areas",
+      "applicationTitle": "Application Areas",
+      "pipelineLabel": "Service Pipeline",
+      "pipelineTitle": "Implementation Process",
+      "archLabel": "System Architecture",
+      "archTitle": "System Architecture"
+    }
+  },
+  "cases": {
+    "breadcrumbs": [
+      "Home",
+      "Client Cases"
+    ],
+    "title": "Track Record",
+    "smartSafety": "Industrial Safety Automation",
+    "integratedControl": "Smart Integrated Control",
+    "infoComm": "Information & Communications",
+    "noResults": "No records match the selected criteria.",
+    "tryOther": "Please try a different category or search term.",
+    "addRecord": "+ Add Record",
+    "deleteBtn": "Delete",
+    "editBtn": "Edit",
+    "active": "Active",
+    "inactive": "Inactive",
+    "searchPlaceholder": "Enter search term",
+    "all": "All",
+    "detail": "Detail"
+  },
+  "about": {
+    "breadcrumbs": [
+      "Home",
+      "About"
+    ],
+    "title": "About Us",
+    "ceoGreeting": "\"AI-Powered Safety, Technology-Driven Future\"",
+    "ceoIntro": "ThingsWell is growing as an on-device AI spatial computing company leading innovation in industrial and daily-life safety, backed by extensive R&D achievements and product commercialization experience. What we pursue is not just technology, but safety solutions that protect lives and build trust even in the most extreme environments. We will continue to realize valuable innovations that our customers and society need through relentless research and challenge.",
+    "thankYou": "Thank you.",
+    "ceoName": "Hakjoon Lee",
+    "ceoPosition": "CEO",
+    "missionLabel": "Mission",
+    "missionTitle": "Mission",
+    "missionDesc": "Providing innovative solutions using AI technology so that everyone can live in a safe and convenient environment.",
+    "visionLabel": "Vision",
+    "visionTitle": "Vision",
+    "visionDesc": "As a leader in multimodal situational awareness technology, we aim to become a global leader in safety and automation.",
+    "coreValueLabel": "Core Value",
+    "coreValueTitle": "Core Values",
+    "coreValues": [
+      {
+        "title": "Challenge (Innovation)",
+        "desc": "Securing competitiveness through future-oriented R&D investment and core technology internalization"
+      },
+      {
+        "title": "Expertise",
+        "desc": "Providing one-stop solutions based on AI, embedded SW, and ICT construction capabilities"
+      },
+      {
+        "title": "Social Responsibility (Social Impact)",
+        "desc": "Contributing to public interest by improving safety and welfare for the elderly, disabled, and industrial workers"
+      }
+    ],
+    "historyLabel": "Company History",
+    "historyTitle": "History",
+    "locationLabel": "Location & Contact",
+    "locationTitle": "Directions",
+    "orgBadge": "AI Agent-Driven Organization",
+    "orgHeroTitle": "Efficient Organization\nPowered by AI Agents",
+    "orgHeroDesc": "ThingsWell operates an efficient organizational structure with AI agent-based smart workflows, enabling large-scale project execution even with a small team. Each team maximizes productivity across development, sales, manufacturing, and research by leveraging AI tools.",
+    "orgChartLabel": "Organization Chart",
+    "orgChartTitle": "Organization Structure",
+    "orgCeo": "CEO",
+    "orgCeoEn": "CEO",
+    "orgAiLabel": "AI-Powered Workflow",
+    "orgAiTitle": "AI Agent Application Areas",
+    "licensesTitle": "Certifications & Patents",
+    "directionsTitle": "Directions",
+    "orgBreadcrumb": "Organization",
+    "historyBreadcrumb": "History",
+    "licensesBreadcrumb": "Certifications & Patents",
+    "directionsBreadcrumb": "Directions",
+    "companyIntroBreadcrumb": "About Us"
+  },
+  "login": {
+    "breadcrumbs": [
+      "Home",
+      "Login"
+    ],
+    "title": "Login",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Login",
+    "loading": "Logging in...",
+    "forgotPassword": "Forgot your password?",
+    "loginError": "An error occurred during login."
+  },
+  "forgotPassword": {
+    "breadcrumbs": [
+      "Home",
+      "Forgot Password"
+    ],
+    "title": "Forgot Password",
+    "description": "Enter your registered email address and we will send you a verification code to reset your password.",
+    "email": "Email",
+    "sendCode": "Send Verification Code",
+    "sending": "Sending...",
+    "codeSent": "Verification code has been sent to your email.",
+    "codeResent": "Verification code has been resent to your email.",
+    "codeLabel": "Verification Code",
+    "newPassword": "New Password",
+    "confirmPassword": "Confirm New Password",
+    "passwordHint": "Minimum 8 characters",
+    "resetPassword": "Reset Password",
+    "resetting": "Resetting...",
+    "resendCode": "Resend Code",
+    "resendCooldown": "Resend Code ({seconds}s)",
+    "backToLogin": "Back to Login",
+    "goToLogin": "Go to Login Page",
+    "resetComplete": "Your password has been successfully reset.",
+    "minLength": "New password must be at least 8 characters.",
+    "mismatch": "New password and confirmation do not match.",
+    "requestError": "An error occurred while requesting the verification code.",
+    "resetError": "An error occurred while resetting the password."
+  },
+  "announcement": {
+    "breadcrumbs": [
+      "Home",
+      "Announcements"
+    ],
+    "title": "Announcements"
+  },
+  "governmentSupport": {
+    "breadcrumbs": [
+      "Home",
+      "Government Programs",
+      "Smart Safety Equipment Support"
+    ],
+    "title": "Smart Safety Equipment Support Program (KOSHA)",
+    "contact": "Contact Us"
+  },
+  "notFound": {
+    "code": "404",
+    "title": "Page Not Found",
+    "description": "The page you requested does not exist or may have been moved.\nPlease check the URL or use the button below to go to the homepage.",
+    "goHome": "Go to Homepage"
+  },
+  "sitemap": {
+    "breadcrumbs": [
+      "Home",
+      "Sitemap"
+    ],
+    "title": "Sitemap"
   }
 }

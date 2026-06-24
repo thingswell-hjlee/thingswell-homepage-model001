@@ -3,9 +3,11 @@ import './sitemap.css';
 import Card from '../../components/Common/Card';
 import ProductHeader from '../../components/ProductPage/ProductHeader';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
+import useTranslation from '../../hooks/useTranslation';
 import company from "../../assets/header_image/company.jpg";
 
 export default function Sitemap() {
+  const { t, currentLang } = useTranslation();
   const groups = [
     {
       title: '회사',
@@ -61,8 +63,8 @@ export default function Sitemap() {
 
       <div className="sitemap-columns">
       <div className="sitemap-header">
-      <Breadcrumbs breadcrumbs={['Home', '사이트맵']} />
-        <h1>사이트맵</h1>
+      <Breadcrumbs breadcrumbs={[t('sitemap.breadcrumbs.0'), t('sitemap.breadcrumbs.1')]} />
+        <h1>{t('sitemap.title')}</h1>
       </div>
         {groups.map((group, colIdx) => (
           <div className="sitemap-column" key={colIdx}>

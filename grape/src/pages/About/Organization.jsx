@@ -1,6 +1,7 @@
 import React from 'react';
 import { BaseLayout } from '../../components/Layout';
 import ProductHeader from '../../components/ProductPage/ProductHeader';
+import useTranslation from '../../hooks/useTranslation';
 import company from '../../assets/header_image/company.jpg';
 import './OrganizationNew.css';
 
@@ -16,10 +17,11 @@ import outsource from '../../assets/solutions/org/outsource.jpg';
 import telecom from '../../assets/solutions/org/telecom.jpg';
 
 export default function Organization() {
+  const { t } = useTranslation();
   return (
     <div className="page-container about-page">
       <ProductHeader image={company} alt="organization" />
-      <BaseLayout breadcrumbs={["Home", "조직도"]} title="조직도">
+      <BaseLayout breadcrumbs={[t('about.breadcrumbs.0'), t('about.orgBreadcrumb')]} title={t('about.orgBreadcrumb')}>
         <div className="org-page">
           {/* 히어로 */}
           <section className="org-hero">

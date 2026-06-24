@@ -1,6 +1,7 @@
 import React from 'react';
 import BaseLayout from '../../components/Layout/BaseLayout';
 import ProductHeader from '../../components/ProductPage/ProductHeader';
+import useTranslation from '../../hooks/useTranslation';
 import headerImage from '../../assets/header_image/product.jpg';
 import '../Solutions/SolutionPage.css';
 
@@ -141,11 +142,12 @@ const PIPELINE = [
 ];
 
 export default function ProductListMonitoringPage() {
+  const { t } = useTranslation();
   return (
     <BaseLayout
       header={() => <ProductHeader image={headerImage} alt="monitoring products" />}
-      breadcrumbs={BREADCRUMBS}
-      title="관제시스템"
+      breadcrumbs={[t('products.breadcrumbs.0'), t('products.breadcrumbs.1'), t('products.monitoring.breadcrumb')]}
+      title={t('products.monitoring.title')}
     >
       <div className="solution-page">
         {/* 히어로 섹션 */}

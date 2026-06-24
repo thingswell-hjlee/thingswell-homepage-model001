@@ -1,6 +1,7 @@
 import React from 'react';
 import ProductHeader from '../../components/ProductPage/ProductHeader';
 import BaseLayout from '../../components/Layout/BaseLayout';
+import useTranslation from '../../hooks/useTranslation';
 import company from '../../assets/header_image/company.jpg';
 import manufacturing from '../../assets/manufacturing.jpg';
 import construction from '../../assets/construction.jpg';
@@ -9,10 +10,11 @@ import ceo from '../../assets/about/ceo.png';
 import './About.css';
 
 const CompanyIntro = () => {
+  const { t } = useTranslation();
   return (
     <div className="page-container about-page">
       <ProductHeader image={company} alt="company" />
-      <BaseLayout breadcrumbs={["Home", "회사소개"]} title="회사소개">
+      <BaseLayout breadcrumbs={[t('about.breadcrumbs.0'), t('about.companyIntroBreadcrumb')]} title={t('about.title')}>
         <div className="solutions-section">
           <div id="greeting" className="about-section-responsive">
             <div className="about-section-value-container-responsive">

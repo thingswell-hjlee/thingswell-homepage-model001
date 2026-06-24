@@ -1,11 +1,12 @@
 import React from 'react';
 import BaseLayout from '../../components/Layout/BaseLayout';
 import ProductHeader from '../../components/ProductPage/ProductHeader';
+import useTranslation from '../../hooks/useTranslation';
 import headerImage from '../../assets/header_image/performance.jpg';
 import '../Solutions/SolutionPage.css';
 import './CaseSmartSafety.css';
 
-const BREADCRUMBS = ["Home", "고객사례", "산업안전자동화"];
+const BREADCRUMBS_KEY = 'cases';
 
 // 실제 납품 실적 데이터 (thingswell.co.kr 동일 데이터)
 const CASES = [
@@ -219,11 +220,12 @@ const CaseCard = ({ caseItem }) => {
 };
 
 export default function CaseSmartSafetyPage() {
+  const { t } = useTranslation();
   return (
     <BaseLayout
       header={() => <ProductHeader image={headerImage} alt="smart safety cases" />}
-      breadcrumbs={BREADCRUMBS}
-      title="산업안전자동화"
+      breadcrumbs={[t('cases.breadcrumbs.0'), t('cases.breadcrumbs.1'), t('cases.smartSafety')]}
+      title={t('cases.smartSafety')}
     >
       <div className="solution-page">
         {/* 히어로 섹션 */}
