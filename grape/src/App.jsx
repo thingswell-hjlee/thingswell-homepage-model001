@@ -85,6 +85,7 @@ import Organization from "./pages/About/Organization.jsx";
 import Licenses from "./pages/About/Licenses.jsx";
 import Directions from "./pages/About/Directions.jsx";
 import Login from "./pages/Login/Login.jsx";
+import OGSettings from "./pages/Admin/OGSettings.jsx";
 import Case_detail from "./pages/Cases/Case_detail.jsx";
 import Sitemap from "./pages/Sitemap/sitemap.jsx";
 import NotFound from "./pages/NotFound/NotFound.jsx";
@@ -155,6 +156,7 @@ function App() {
                     <Route path="/about/licenses" element={<Licenses />} />
                     <Route path="/about/directions" element={<Directions />} />
                     <Route path="/login" element={<Login />} />
+                    <Route path="/admin/og-settings" element={<OGSettings />} />
                     <Route path="/sitemap" element={<Sitemap />} />
                     <Route path="*" element={<NotFound />} />
                   </Routes>
