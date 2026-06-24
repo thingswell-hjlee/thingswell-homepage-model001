@@ -8,7 +8,7 @@ import useTranslation from '../../hooks/useTranslation';
 
 const BoardDetail = ({ post, onBack, onEdit, onDelete }) => {
   const { isAdmin } = useAuth();
-  const { t } = useTranslation();
+  const { t, currentLang } = useTranslation();
   
   if (!post) {
     return (
@@ -21,27 +21,33 @@ const BoardDetail = ({ post, onBack, onEdit, onDelete }) => {
   }
 
   // Supabase 데이터 구조에 맞게 필드 매핑
-  const title = post.title ||'제목 없음';
+  const title = post.title || t('board.noTitle');
   const content = post.content ||  '';
-  const author = post.author || '작성자';
+  const author = post.author || t('board.author');
   
-  let createdAt = post.created_at || '날짜 없음';
+  let createdAt = post.created_at || null;
 
   // 날짜 형식을 날짜까지만 표시하도록 변환
 
-  if (createdAt !== '날짜 없음' && createdAt) {
+  if (createdAt) {
     try {
       const date = new Date(createdAt);
       if (!isNaN(date.getTime())) {
-        createdAt = date.toLocaleDateString('ko-KR', {
+        const dateLocale = currentLang === 'en' ? 'en-US' : 'ko-KR';
+        createdAt = date.toLocaleDateString(dateLocale, {
           year: 'numeric',
           month: '2-digit',
           day: '2-digit'
         });
+      } else {
+        createdAt = t('board.noDate');
       }
     } catch (error) {
       console.error('날짜 변환 오류:', error);
+      createdAt = t('board.noDate');
     }
+  } else {
+    createdAt = t('board.noDate');
   } 
 
   return (

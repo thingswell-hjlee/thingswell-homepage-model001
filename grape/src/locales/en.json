@@ -874,6 +874,9 @@
     "write": "Write",
     "dateLabel": "Date:",
     "postNotFound": "Post not found.",
+    "noTitle": "Untitled",
+    "author": "Author",
+    "noDate": "No date",
     "deleteConfirm": "Are you sure you want to delete this?\n\n⚠️ Warning: All related images and files will also be deleted.",
     "deleteSuccess": "Post and all related files have been deleted.",
     "deleteFail": "An error occurred while deleting."
@@ -898,7 +901,7 @@
     "smartSafety": "Smart Safety",
     "noTitle": "Untitled",
     "noOverview": "No overview",
-    "noContent2": "No content"
+    "emptyOverview": "No content"
   },
   "casePage": {
     "loadError": "An error occurred while loading the case.",

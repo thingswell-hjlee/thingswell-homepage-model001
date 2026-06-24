@@ -82,7 +82,7 @@ export default function Product_detail_safety() {
     name: product.title || t('productPage.noTitle'),
     title: product.overview_title || product.desc || t('productPage.noOverview'),
     overview_title: product.overview_title || product.desc || t('productPage.noOverview'),
-    overview: product.overview || product.desc || t('productPage.noContent2'),
+    overview: product.overview || product.desc || t('productPage.emptyOverview'),
     images,
     keyFeatures,
     keyFeaturesImages,
