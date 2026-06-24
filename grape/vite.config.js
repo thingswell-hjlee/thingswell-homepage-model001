@@ -22,4 +22,10 @@ export default defineConfig({
     https: false,
     host: true,
   },
+  build: {
+    // 이미지 인라인 크기 제한 (4KB 이하만 base64 인라인)
+    assetsInlineLimit: 4096,
+    // 대형 번들 경고 임계값 (현재 1MB+ 번들이 있으므로 임시 상향)
+    chunkSizeWarningLimit: 1200,
+  },
 })
