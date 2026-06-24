@@ -64,10 +64,8 @@ export default function OGSettings() {
     loadOGSettings();
   }, []);
 
-  const loadOGSettings = async () => {
+  const loadOGSettings = () => {
     try {
-      const response = await fetch(`${API_BASE_URL}/boards/announcement?limit=1`);
-      // OG 설정은 별도 저장소가 없으므로 localStorage 사용 (추후 API 확장 가능)
       const saved = localStorage.getItem('og_settings');
       if (saved) {
         const parsed = JSON.parse(saved);
