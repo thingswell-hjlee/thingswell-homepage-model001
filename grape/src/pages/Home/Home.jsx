@@ -186,8 +186,10 @@ export default function Home() {
         <div className="safegai-cta-content">
           <h2 className="safegai-cta-title">{t('home.cta.title')}</h2>
           <p className="safegai-cta-desc">{t('home.cta.desc')}</p>
-          <Link
-            to={`/${currentLang}/products/monitoring`}
+          <a
+            href="https://safegai.com"
+            target="_blank"
+            rel="noopener noreferrer"
             className="safegai-cta-domain"
           >
             <span className="safegai-cta-domain-url">
@@ -195,14 +197,16 @@ export default function Home() {
                 <span className="safe">Safe</span><span className="gai">GAI</span>
               </span>{' '}Platform
             </span>
-          </Link>
+          </a>
           <div className="safegai-hero-cta-row">
-            <Link
-              to={`/${currentLang}/products/monitoring`}
+            <a
+              href="https://safegai.com"
+              target="_blank"
+              rel="noopener noreferrer"
               className="safegai-hero-cta safegai-hero-cta-primary"
             >
               {t('home.cta.ctaButton')}
-            </Link>
+            </a>
             <Link
               to={`/${currentLang}/about/company`}
               className="safegai-hero-cta safegai-hero-cta-secondary"
