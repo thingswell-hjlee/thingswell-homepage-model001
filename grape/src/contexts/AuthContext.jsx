@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState, useRef, useCallback } from 'react';
-import { getSession, onAuthStateChange, signOut as authSignOut, getSessionSync } from '../lib/auth.js';
+import { getSession, onAuthStateChange, signOut as authSignOut, getSessionSync, decodeToken } from '../lib/auth.js';
 
 const AuthContext = createContext({});
 
@@ -107,7 +107,9 @@ export const AuthProvider = ({ children }) => {
     // 인증 상태 변경 리스너
     const { data: { subscription } } = onAuthStateChange(
       (event, session) => {
-        console.log('Auth state changed:', event, session?.user?.email);
+        if (import.meta.env.DEV) {
+          console.log('Auth state changed:', event, session?.user?.email);
+        }
         setSession(session);
         setUser(session?.user ?? null);
         setLoading(false);
@@ -124,6 +126,24 @@ export const AuthProvider = ({ children }) => {
   // 권한 체크 함수들
   const isAuthenticated = () => !!user;
   
+  // TODO: API Gateway/Lambda에서도 관리자 권한 검증 필요
+  const isAdmin = () => {
+    if (!isAuthenticated()) return false;
+    try {
+      const idToken = localStorage.getItem('thingswell_id_token');
+      if (!idToken) return isAuthenticated();
+      const decoded = decodeToken(idToken);
+      if (!decoded) return isAuthenticated();
+      const groups = decoded['cognito:groups'];
+      if (Array.isArray(groups) && groups.length > 0) {
+        return groups.includes('admin');
+      }
+      // Fallback: if no groups claim, treat authenticated user as admin
+      return isAuthenticated();
+    } catch {
+      return isAuthenticated();
+    }
+  };
 
   const canEditContent = () => {
     // 로그인된 사용자이거나 관리자인 경우 편집 가능
@@ -136,6 +156,7 @@ export const AuthProvider = ({ children }) => {
     loading,
     signOut,
     isAuthenticated,
+    isAdmin,
     canEditContent,
     sessionExpiringSoon,
   };

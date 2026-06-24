@@ -4,7 +4,6 @@ import BoardList from '../BoardList';
 import BoardDetail from '../BoardDetail';
 import BoardEditor from '../BoardEditor';
 import { getBoardById, deleteBoard } from '../../lib/api';
-import { useAuth } from '../../contexts/AuthContext';
 import { deleteAllPostFiles } from '../../utils/imageUpload';
 import './Board.css';
 
@@ -80,8 +79,6 @@ const Board = ({ tableName, tableNames }) => {
   }, [location.search, resolvedTableName]);
 
   const handlePostClick = (post) => {
-    console.log('게시물 클릭:', post);
-    
     // URL에 detail 파라미터 추가
     const currentSearch = new URLSearchParams(location.search);
     currentSearch.set('detail', post.id);
@@ -89,7 +86,6 @@ const Board = ({ tableName, tableNames }) => {
     
     // 동일한 위치로의 중복 네비게이션 방지
     if (location.pathname + location.search === target) {
-      console.log('[Board] handlePostClick - target equals current, skipping navigate');
       return;
     }
     navigate(target, { replace: false });
@@ -111,7 +107,6 @@ const Board = ({ tableName, tableNames }) => {
   };
 
   const handleEditClick = (post) => {
-    console.log('편집할 게시글:', post);
     setEditingPost(post);
     setCurrentView('edit');
     
@@ -124,8 +119,6 @@ const Board = ({ tableName, tableNames }) => {
     if (location.pathname + location.search !== target) {
       navigate(target, { replace: false });
     }
-    
-    console.log('편집 모드로 전환됨, editingPost:', post);
   };
 
   const handleBackToList = () => {
@@ -184,10 +177,13 @@ const Board = ({ tableName, tableNames }) => {
           console.error('삭제 오류:', error);
           alert('삭제 중 오류가 발생했습니다: ' + error.message);
         } else {
-          console.log('게시물과 관련된 모든 파일이 성공적으로 삭제되었습니다.');
           alert('게시물과 관련된 모든 파일이 삭제되었습니다.');
-          // 목록 새로고침을 위해 페이지를 다시 로드하거나 상태를 업데이트
-          window.location.reload();
+          // 목록으로 돌아가기
+          const currentSearch = new URLSearchParams(location.search);
+          currentSearch.delete('detail');
+          currentSearch.delete('edit');
+          currentSearch.delete('write');
+          navigate(`${location.pathname}?${currentSearch.toString()}`, { replace: false });
         }
       } catch (error) {
         console.error('삭제 중 예외 발생:', error);
@@ -227,7 +223,6 @@ const Board = ({ tableName, tableNames }) => {
           />
         );
       case 'edit':
-        console.log('편집 모드 렌더링 - editingPost:', editingPost);
         return (
           <BoardEditor
             initialContent={editingPost?.content || ''}

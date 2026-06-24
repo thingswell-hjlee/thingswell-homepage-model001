@@ -378,7 +378,7 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
       // 서브메뉴가 없는 메뉴 클릭 시
       if (item.path) {
         if (item.external) {
-          window.open(item.path, '_blank');
+          window.open(item.path, '_blank', 'noopener,noreferrer');
         } else {
           navigate(langPath(item.path));
         }

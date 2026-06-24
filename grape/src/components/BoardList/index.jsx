@@ -22,7 +22,7 @@ const BoardList = ({
   const [isMobile, setIsMobile] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("전체");
-  const { user } = useAuth(); // 로그인 상태 가져오기
+  const { user, isAdmin } = useAuth(); // 로그인 상태 가져오기
   const [selectedBoardType, setSelectedBoardType] = useState('전체');
 
   // 페이징 관련 상태 추가
@@ -75,9 +75,9 @@ const BoardList = ({
     const term = searchTerm.trim().toLowerCase();
 
     const filtered = instruments.filter((item) => {
-      // 검색 매칭
+      // 검색 매칭 (제목, 내용, 카테고리)
       const title = (item.title || "").toLowerCase();
-      const matchesSearch = !term || title.includes(term);
+      const matchesSearch = !term || title.includes(term) || (item.content || '').toLowerCase().includes(term) || (item.category || '').toLowerCase().includes(term);
 
       // 게시판 종류 매칭
       if (selectedBoardType !== '전체') {
@@ -109,7 +109,6 @@ const BoardList = ({
 
       // 단일/다중 테이블 지원
       if (tableNames && Array.isArray(tableNames) && tableNames.length > 0) {
-        console.log('다중 테이블에서 데이터를 가져오는 중...', tableNames);
         const results = await Promise.all(
           tableNames.map((t) => getBoards(t))
         );
@@ -117,44 +116,37 @@ const BoardList = ({
         const errors = results.filter((r) => r.error).map((r) => r.error);
         if (errors.length > 0) {
           console.error('API 오류(다중):', errors[0]);
-          setError(`데이터베이스 오류: ${errors[0].message}`);
+          setError('게시글을 불러오지 못했습니다. 잠시 후 다시 시도해주세요.');
           setInstruments([]);
         } else {
           const merged = results.flatMap((r, idx) =>
             (r.data || []).map((row) => ({ ...row, tableName: tableNames[idx] }))
           );
-          console.log('병합 데이터:', merged);
           setInstruments(merged);
         }
       } else {
         // 단일 테이블
         if (!tableName) {
           console.error('테이블명이 전달되지 않았습니다.');
-          setError('테이블명이 지정되지 않았습니다.');
+          setError('게시글을 불러오지 못했습니다. 잠시 후 다시 시도해주세요.');
           setInstruments([]);
           return;
         }
 
-        console.log(`테이블 "${tableName}"에서 데이터를 가져오는 중...`);
         const result = await getBoards(tableName);
-        console.log(`${tableName} 쿼리 결과:`, result);
 
         if (result.error) {
           console.error(`${tableName} API 오류:`, result.error);
-          setError(`데이터베이스 오류: ${result.error.message}`);
+          setError('게시글을 불러오지 못했습니다. 잠시 후 다시 시도해주세요.');
           setInstruments([]);
         } else {
           const data = (result.data || []).map((row) => ({ ...row, tableName }));
-          console.log('받아온 데이터:', data);
           setInstruments(data);
-          if (data.length === 0) {
-            console.log('테이블에 데이터가 없습니다. (정상적인 상태)');
-          }
         }
       }
     } catch (err) {
       console.error("데이터 가져오기 오류:", err);
-      setError("데이터를 가져오는 중 오류가 발생했습니다: " + err.message);
+      setError('게시글을 불러오지 못했습니다. 잠시 후 다시 시도해주세요.');
       setInstruments([]);
     } finally {
       setLoading(false);
@@ -165,9 +157,6 @@ const BoardList = ({
   const handlePostClick = (instrument) => {
     if (onPostClick) {
       onPostClick(instrument);
-    } else {
-      console.log("게시물 클릭:", instrument);
-      // 기본 동작: 콘솔에 로그 출력
     }
   };
 
@@ -252,7 +241,7 @@ const BoardList = ({
   if (error) {
     return (
       <div className="board-list">
-        <div className="error">오류: {error}</div>
+        <div className="error">게시글을 불러오지 못했습니다. 잠시 후 다시 시도해주세요.</div>
       </div>
     );
   }
@@ -282,7 +271,7 @@ const BoardList = ({
             noPadding={true}
             searchTerm={searchTerm}
             setSearchTerm={setSearchTerm}
-            showWriteButton={user}
+            showWriteButton={isAdmin()}
             onWriteClick={onWriteClick}
           />
         </div>
@@ -295,7 +284,7 @@ const BoardList = ({
             <tr>
               <th id="board-number">번호</th>
               <th id="board-title">제목</th>
-              {user && <th id="board-actions">관리</th>}
+              {isAdmin() && <th id="board-actions">관리</th>}
               <th id="board-date">작성일</th>
             </tr>
           </thead>
@@ -320,7 +309,7 @@ const BoardList = ({
                     >
                       {truncateTitle(title)}
                     </td>
-                    {user && (
+                    {isAdmin() && (
                       <td id="board-actions">
                         <button
                           className="edit-btn"
@@ -359,7 +348,7 @@ const BoardList = ({
               })
             ) : (
               <tr>
-                <td colSpan={user ? 4 : 3} className="no-data">
+                <td colSpan={isAdmin() ? 4 : 3} className="no-data">
                   데이터가 없습니다.
                 </td>
               </tr>

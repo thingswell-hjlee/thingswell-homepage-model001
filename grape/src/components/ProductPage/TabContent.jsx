@@ -3,6 +3,7 @@ import './TabContent.css';
 import ThreeColumnGrid from '../ThreeColumnGrid';
 import ImageWithCaption from '../Common/ImageWithCaption';
 import { marked } from 'marked';
+import DOMPurify from 'dompurify';
 import featureImg1 from '../../assets/server.jpg';
 import featureImg2 from '../../assets/manufacturing.jpg';
 import featureImg3 from '../../assets/construction.jpg';
@@ -23,7 +24,7 @@ const TabContent = ({ tabId, productData, featureClickToOpen = false, onFeatureI
                 </div>
                 <div 
                   dangerouslySetInnerHTML={{ 
-                    __html: productData?.overview ? marked(productData.overview) : "제품에 대한 전반적인 개요를 제공합니다." 
+                    __html: productData?.overview ? DOMPurify.sanitize(marked(productData.overview)) : "제품에 대한 전반적인 개요를 제공합니다." 
                   }}
                   style={{
                     lineHeight: '1.6',
