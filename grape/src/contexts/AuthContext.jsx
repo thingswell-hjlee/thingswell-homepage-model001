@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState, useRef, useCallback } from 'react';
-import { getSession, onAuthStateChange, signOut as authSignOut } from '../lib/auth.js';
+import { getSession, onAuthStateChange, signOut as authSignOut, getSessionSync } from '../lib/auth.js';
 
 const AuthContext = createContext({});
 
@@ -11,7 +11,7 @@ export { useAuth };
 
 // Session timeout constants
 const CHECK_INTERVAL_MS = 60 * 1000; // Check every 60 seconds
-const EXPIRY_WARNING_MS = 5 * 60 * 1000; // Warn 5 minutes before expiry
+const EXPIRY_WARNING_MS = 10 * 60 * 1000; // Warn 10 minutes before expiry (before getSession's 5-min auto-refresh)
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -27,26 +27,43 @@ export const AuthProvider = ({ children }) => {
       return;
     }
 
-    // Call getSession() which handles token refresh automatically
-    const { data } = await getSession();
-    const currentSession = data?.session;
-
-    if (!currentSession) {
-      // Session could not be refreshed - sign out
+    // First, check raw session (pre-refresh) to decide whether to show warning
+    const rawSession = getSessionSync();
+    if (!rawSession || !rawSession.expires_at) {
+      // No session at all - sign out
       setSessionExpiringSoon(false);
       await authSignOut();
       return;
     }
 
-    const expiresAt = currentSession.expires_at;
-    if (!expiresAt) return;
-
     const now = Date.now();
-    const timeRemaining = expiresAt - now;
+    const timeRemaining = rawSession.expires_at - now;
+
+    if (timeRemaining <= 0) {
+      // Token already expired - attempt refresh via getSession, then sign out if failed
+      const { data } = await getSession();
+      if (!data?.session) {
+        setSessionExpiringSoon(false);
+        await authSignOut();
+      } else {
+        // Refresh succeeded - clear warning
+        setSessionExpiringSoon(false);
+      }
+      return;
+    }
 
     if (timeRemaining <= EXPIRY_WARNING_MS) {
-      // Token expires within 5 minutes - show warning
+      // Token expires within 10 minutes - show warning
       setSessionExpiringSoon(true);
+
+      // If within 5 minutes, getSession() will auto-refresh
+      // Call it to trigger the refresh attempt
+      const { data } = await getSession();
+      if (!data?.session) {
+        // Refresh failed - sign out
+        setSessionExpiringSoon(false);
+        await authSignOut();
+      }
     } else {
       setSessionExpiringSoon(false);
     }

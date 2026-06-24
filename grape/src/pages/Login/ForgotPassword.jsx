@@ -15,6 +15,31 @@ const ForgotPassword = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const [cooldown, setCooldown] = useState(0);
+  const cooldownRef = React.useRef(null);
+
+  const startCooldown = () => {
+    setCooldown(60);
+    cooldownRef.current = setInterval(() => {
+      setCooldown((prev) => {
+        if (prev <= 1) {
+          clearInterval(cooldownRef.current);
+          cooldownRef.current = null;
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+  };
+
+  // Cleanup cooldown timer on unmount
+  React.useEffect(() => {
+    return () => {
+      if (cooldownRef.current) {
+        clearInterval(cooldownRef.current);
+      }
+    };
+  }, []);
 
   const handleRequestCode = async (e) => {
     e.preventDefault();
@@ -30,6 +55,29 @@ const ForgotPassword = () => {
       } else {
         setStep(2);
         setSuccess('인증 코드가 이메일로 전송되었습니다.');
+        startCooldown();
+      }
+    } catch (err) {
+      setError('인증 코드 요청 중 오류가 발생했습니다.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleResendCode = async () => {
+    if (cooldown > 0) return;
+    setError('');
+    setSuccess('');
+    setLoading(true);
+
+    try {
+      const { data, error: forgotError } = await forgotPassword(email);
+
+      if (forgotError) {
+        setError(forgotError.message);
+      } else {
+        setSuccess('인증 코드가 이메일로 재전송되었습니다.');
+        startCooldown();
       }
     } catch (err) {
       setError('인증 코드 요청 중 오류가 발생했습니다.');
@@ -155,6 +203,14 @@ const ForgotPassword = () => {
                       {success && <div className="success-message">{success}</div>}
                       <button type="submit" disabled={loading}>
                         {loading ? '재설정 중...' : '비밀번호 재설정'}
+                      </button>
+                      <button
+                        type="button"
+                        className="resend-code-btn"
+                        disabled={cooldown > 0}
+                        onClick={handleResendCode}
+                      >
+                        {cooldown > 0 ? `코드 재전송 (${cooldown}초)` : '코드 재전송'}
                       </button>
                       <div className="login-link">
                         <Link to="/login">로그인으로 돌아가기</Link>

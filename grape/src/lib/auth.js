@@ -190,7 +190,7 @@ export const signOut = async () => {
 /**
  * 현재 세션 정보를 동기적으로 가져오기 (localStorage 기반)
  */
-const getSessionSync = () => {
+export const getSessionSync = () => {
   const accessToken = localStorage.getItem(STORAGE_KEYS.ACCESS_TOKEN);
   const idToken = localStorage.getItem(STORAGE_KEYS.ID_TOKEN);
   const refreshToken = localStorage.getItem(STORAGE_KEYS.REFRESH_TOKEN);
