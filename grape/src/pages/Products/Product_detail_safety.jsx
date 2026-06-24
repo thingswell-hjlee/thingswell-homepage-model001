@@ -40,8 +40,30 @@ export default function Product_detail_safety() {
     if (id) fetchProduct();
   }, [id]);
 
-  if (loading) return <div>로딩중...</div>;
-  if (error) return <div>오류: {error}</div>;
+  if (loading) return (
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '40vh', padding: '2rem' }}>
+      <div style={{ textAlign: 'center', color: '#666' }}>
+        <div style={{ fontSize: '1.1rem' }}>{t('common.loading')}</div>
+      </div>
+    </div>
+  );
+
+  if (error) {
+    const currentLang = t('common.home') === '홈' ? 'ko' : 'en';
+    return (
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '40vh', padding: '2rem' }}>
+        <div style={{ textAlign: 'center', maxWidth: '480px' }}>
+          <div style={{ fontSize: '1.1rem', color: '#d32f2f', marginBottom: '1rem' }}>{t('common.error')}: {error}</div>
+          <button
+            onClick={() => navigate(`/${currentLang}/products/safety`)}
+            style={{ padding: '0.6rem 1.5rem', fontSize: '0.95rem', backgroundColor: '#1976d2', color: '#fff', border: 'none', borderRadius: '6px', cursor: 'pointer' }}
+          >
+            {t('common.back')}
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   // 안전하게 JSON 파싱
   const images = product.images ? (() => { try { return JSON.parse(product.images); } catch { return []; } })() : [];

@@ -111,7 +111,7 @@
         {
           "title": "건설안전",
           "desc": "중대재해를 예방하는 AI 안전관리 체계를 구축합니다.",
-          "href": "/solutions/chemical"
+          "href": "/products/safety"
         },
         {
           "title": "산업안전",
@@ -121,7 +121,7 @@
         {
           "title": "장애인 작업장",
           "desc": "취약 작업자를 위한 맞춤형 AI 안전 보호 체계입니다.",
-          "href": "/solutions/overview"
+          "href": "/solutions/chemical"
         },
         {
           "title": "스마트 상점",
@@ -845,5 +845,23 @@
       "사이트맵"
     ],
     "title": "사이트맵"
+  },
+  "board": {
+    "all": "전체",
+    "notice": "공지사항",
+    "download": "자료실",
+    "searchPlaceholder": "검색어를 입력하세요",
+    "searchPlaceholderMobile": "검색",
+    "prev": "이전",
+    "next": "다음",
+    "noData": "데이터가 없습니다.",
+    "number": "번호",
+    "title": "제목",
+    "actions": "관리",
+    "date": "작성일",
+    "edit": "수정",
+    "delete": "삭제",
+    "loadError": "게시글을 불러오지 못했습니다. 잠시 후 다시 시도해주세요.",
+    "loading": "로딩 중..."
   }
 }

@@ -1,5 +1,6 @@
 import React from "react";
 import "./ProductFilter.css";
+import useTranslation from "../../hooks/useTranslation";
 
 const ProductFilter = ({ 
   selectedCategory, 
@@ -12,6 +13,7 @@ const ProductFilter = ({
   selectedBoardType,
   setSelectedBoardType
 }) => {
+  const { t } = useTranslation();
   // 선택된 카테고리들을 배열로 관리
   const selectedCategories = selectedCategory === "전체" ? ["전체"] : selectedCategory.split(',').filter(cat => cat.trim());
 
@@ -57,13 +59,13 @@ const ProductFilter = ({
                 className={`filter-button ${selectedBoardType === '전체' ? 'active' : ''}`}
                 onClick={() => setSelectedBoardType && setSelectedBoardType('전체')}
               >
-                전체 게시판
+                {t('board.all')}
               </button>
               {boardTypeOptions
                 .filter((opt) => opt !== '전체')
                 .map((opt) => {
                 const isActive = selectedBoardType === opt;
-                const label = (opt === 'Board_Announcement' ? '공지사항' : (opt === 'Board_Download' ? '자료실' : opt));
+                const label = (opt === 'Board_Announcement' ? t('board.notice') : (opt === 'Board_Download' ? t('board.download') : opt));
                 return (
                   <button
                     key={`board-type-${opt}`}
@@ -82,7 +84,7 @@ const ProductFilter = ({
                 className={`filter-button ${selectedCategory === "전체" ? "active" : ""}`}
                 onClick={() => handleCategoryClick("전체")}
               >
-                전체
+                {t('board.all')}
               </button>
               {categories.map(category => (
                 <button
