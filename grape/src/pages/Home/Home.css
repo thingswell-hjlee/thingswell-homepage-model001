@@ -504,30 +504,6 @@
   margin: 0;
 }
 
-.safegai-cta-domain {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 1rem 2rem;
-  background: linear-gradient(135deg, rgba(0, 180, 216, 0.15), rgba(0, 180, 216, 0.05));
-  border: 1px solid rgba(0, 180, 216, 0.4);
-  border-radius: 12px;
-  text-decoration: none;
-  transition: all 0.3s ease;
-}
-
-.safegai-cta-domain:hover {
-  background: linear-gradient(135deg, rgba(0, 180, 216, 0.2), rgba(0, 180, 216, 0.1));
-  transform: translateY(-2px);
-  box-shadow: 0 8px 32px rgba(0, 180, 216, 0.2);
-}
-
-.safegai-cta-domain-url {
-  font-size: 1.5rem;
-  font-weight: 800;
-  color: #00b4d8;
-}
-
 /* ===== Footer Domain Banner ===== */
 .safegai-footer-banner {
   text-align: center;
@@ -581,7 +557,6 @@
   .safegai-stats { gap: 2rem; }
   .safegai-stat-number { font-size: 2.2rem; }
   .safegai-cta-title { font-size: 1.5rem; }
-  .safegai-cta-domain-url { font-size: 1.2rem; }
   .safegai-hero-cta-row { flex-direction: column; align-items: center; }
 }
 
