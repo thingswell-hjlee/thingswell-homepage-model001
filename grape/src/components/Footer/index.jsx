@@ -2,50 +2,41 @@
  * Footer 컴포넌트
  *
  * 웹사이트의 하단 푸터를 렌더링하는 컴포넌트입니다.
- * 회사 정보, 링크, 저작권 정보, 소셜 미디어 링크를 포함합니다.
- * 현재 연도를 자동으로 표시합니다.
- *
- * 사용법:
- * <Footer />
- *
- * 포함된 정보:
- * - 회사 주소, 연락처, 이메일
- * - 저작권 정보 (현재 연도 자동 업데이트)
- * - 소셜 미디어 링크
- * - 주요 페이지 링크 (솔루션, 제품, 납품사례, 고객지원, 회사소개)
+ * 회사 정보, 링크, 저작권 정보를 포함합니다.
+ * React Router Link를 사용하여 SPA 내부 네비게이션을 처리합니다.
  */
 import React from "react";
+import { Link } from "react-router-dom";
 import "./Footer.css";
 import logo from "../../assets/logo_white.png";
 
 function Footer() {
   const currentYear = new Date().getFullYear();
 
-  // 사이트맵 메뉴 구조 (Menu 컴포넌트 참고)
   const sitemapData = [
     {
       label: '회사',
       path: '/about',
       submenu: [
-        { label: '회사소개', path: '/about#greeting' },
-        { label: '연혁', path: '/about#history' },
-        { label: '면허인증특허', path: '/about#certificate' },
-        { label: '오시는 길', path: '/about#location' },
+        { label: '회사소개', path: '/about/company' },
+        { label: '연혁', path: '/about/history' },
+        { label: '면허인증특허', path: '/about/licenses' },
+        { label: '오시는 길', path: '/about/directions' },
         { label: '게시판', path: '/customer-service/announcement' },
       ]
     },
     {
       label: '사업분야',
-      path: '/solutions',
+      path: '/solutions/overview',
       submenu: [
-        { label: '산업안전 솔루션', path: '/solutions/overview' },
-        { label: '노인장애인안전 솔루션', path: '/solutions/chemical' },
+        { label: '산업안전 솔루션', path: '/solutions/chemical' },
+        { label: '노인장애인안전 솔루션', path: '/solutions/overview' },
         { label: '통합제어 솔루션', path: '/solutions/manufacturing' },
       ]
     },
     {
       label: '연구개발',
-      path: '/rnd',
+      path: '/rnd/multimodal-awareness',
       submenu: [
         { label: '멀티모달 상황인지', path: '/rnd/multimodal-awareness' },
         { label: '온디바이스 AI', path: '/rnd/on-device-ai' },
@@ -57,7 +48,7 @@ function Footer() {
     },
     {
       label: '제품',
-      path: '/products',
+      path: '/products/safety',
       submenu: [
         { label: '스마트안전', path: '/products/safety' },
         { label: '관제시스템', path: '/products/monitoring' },
@@ -66,11 +57,11 @@ function Footer() {
     },
     {
       label: '고객사례',
-      path: '/cases',
+      path: '/cases/smart-safety',
       submenu: [
         { label: '산업안전자동화', path: '/cases/smart-safety' },
         { label: '스마트통합제어', path: '/cases/integrated-control' },
-        { label: '정보통신', path: '/cases/information-communication' }
+        { label: '정보통신', path: '/cases/information-communication' },
       ]
     }
   ];
@@ -85,12 +76,12 @@ function Footer() {
               {sitemapData.map((category, index) => (
                 <div key={index} className="sitemap-category">
                   <h4 className="category-title">
-                    <a href={category.path}>{category.label}</a>
+                    <Link to={category.path}>{category.label}</Link>
                   </h4>
                   <ul className="category-list">
                     {category.submenu.map((item, subIndex) => (
                       <li key={subIndex} className="category-item">
-                        <a href={item.path}>{item.label}</a>
+                        <Link to={item.path}>{item.label}</Link>
                       </li>
                     ))}
                   </ul>
@@ -113,7 +104,7 @@ function Footer() {
                   <p>contact@thingswell.co.kr</p>
                 </div>
                 <p>
-                  © {currentYear} ThingsWell 본 사이트의 모든 컨텐츠는 저작권의
+                  &copy; {currentYear} ThingsWell 본 사이트의 모든 컨텐츠는 저작권의
                   보호를 받으며, 무단 복제, 배포, 사용을 금합니다.
                 </p>
               </div>
