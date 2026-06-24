@@ -3,142 +3,220 @@ import BaseLayout from '../../components/Layout/BaseLayout';
 import ProductHeader from '../../components/ProductPage/ProductHeader';
 import headerImage from '../../assets/header_image/performance.jpg';
 import '../Solutions/SolutionPage.css';
-
-// 이미지 import
-import factorySite from '../../assets/cases/smart-safety/factory-site.jpg';
-import constructionSite from '../../assets/cases/smart-safety/construction-site.jpg';
-import abstractTech from '../../assets/cases/smart-safety/abstract-tech.jpg';
-import teamMeeting from '../../assets/cases/smart-safety/team-meeting.jpg';
-import warehouse from '../../assets/cases/smart-safety/warehouse.jpg';
-import industrialRobot from '../../assets/cases/smart-safety/industrial-robot.jpg';
-import manufacturing from '../../assets/cases/smart-safety/manufacturing.jpg';
-import cityNight from '../../assets/cases/smart-safety/city-night.jpg';
+import './CaseSmartSafety.css';
 
 const BREADCRUMBS = ["Home", "고객사례", "산업안전자동화"];
 
-// 주요 납품 실적
+// 실제 납품 실적 데이터 (thingswell.co.kr 동일 데이터)
 const CASES = [
   {
-    image: factorySite,
-    title: "장애인직업재활시설 스마트안전시스템",
-    subtitle: "AI Smart Safety System",
-    desc: "AI 카메라 8대, 스마트밴드 8개, 환경센서 2개를 연동한 통합 안전 시스템을 구축했습니다. 낙상·쓰러짐·장시간 미움직임을 실시간 감지하여 장애인 작업자의 안전을 보호합니다.",
+    id: 571,
+    title: "서울 버스 스마트쉼터 AI 상황인지 시스템",
+    orderer: "서울시 중구, 강남구",
+    date: "2025",
+    type: "AI 상황인지 시스템",
+    overviewTitle: "AI 상황인지 시스템",
+    desc: [
+      "서울시 중구형 버스 그린스마트쉼터 20개소",
+      "서울시 강남구형 버스 스마트쉼터 20개소",
+      "원격관리 시스템 구축",
+      "AI 상황인지 시스템 (피플카운터, 쓰러짐 감지, 폭력행위 감지)",
+    ],
+    images: [
+      "https://ybahnhnvdnelyxzzgdgn.supabase.co/storage/v1/object/public/track_record/track_record/1756962984188-bo8dyvalx5d.webp",
+      "https://ybahnhnvdnelyxzzgdgn.supabase.co/storage/v1/object/public/track_record/track_record/1756962984319-wkhefmuuhj.webp",
+      "https://ybahnhnvdnelyxzzgdgn.supabase.co/storage/v1/object/public/track_record/track_record/1756962984162-1rsy4o4oo8c.webp",
+      "https://ybahnhnvdnelyxzzgdgn.supabase.co/storage/v1/object/public/track_record/track_record/1756962984163-w5a0wab2qmn.webp",
+      "https://ybahnhnvdnelyxzzgdgn.supabase.co/storage/v1/object/public/track_record/track_record/1756962984163-v3dlgu21ect.webp",
+      "https://ybahnhnvdnelyxzzgdgn.supabase.co/storage/v1/object/public/track_record/track_record/1756962984213-0fkg88ddxo0l.webp",
+      "https://ybahnhnvdnelyxzzgdgn.supabase.co/storage/v1/object/public/track_record/track_record/1756962984164-1sbro4ciz92.webp",
+      "https://ybahnhnvdnelyxzzgdgn.supabase.co/storage/v1/object/public/track_record/track_record/1756962984273-0ke3m8kaf8g.webp",
+      "https://ybahnhnvdnelyxzzgdgn.supabase.co/storage/v1/object/public/track_record/track_record/1756962984255-1hec4hdqb0a.webp",
+    ],
   },
   {
-    image: constructionSite,
-    title: "건설현장 AI 안전관리 시스템",
-    subtitle: "Construction Site Safety",
-    desc: "고소작업 추락 감지, 중장비 접근 경고, 안전모 미착용 탐지 등 건설현장 맞춤형 AI 안전 시스템을 구축했습니다. Edge AI 기반 실시간 분석으로 사고를 사전에 예방합니다.",
+    id: 402,
+    title: "서울 중구 40개소 IP 카메라 AI 시스템",
+    orderer: "서울 중구청",
+    date: "2024",
+    type: "온디바이스AI",
+    overviewTitle: "AI 피플카운팅 및 쓰러짐 감지 시스템",
+    desc: [
+      "AI 피플카운팅 및 쓰러짐 감지 시스템 공급",
+      "온디바이스 AI 기술 접목으로 상황별 안전·편의 기능 강화",
+      "조명, 온열벤치, LED 디스플레이, 자동문, 공기질 측정, 냉난방 자동제어",
+      "CCTV 등 원격 제어 및 모니터링 시스템 개발 및 구축, 관제센터 구축/연동",
+    ],
+    images: [
+      "https://ybahnhnvdnelyxzzgdgn.supabase.co/storage/v1/object/public/track_record/track_record/1756963158807-0da27zdb2okq.webp",
+    ],
   },
   {
-    image: manufacturing,
-    title: "제조공장 유해환경 모니터링",
-    subtitle: "Factory Environment Monitoring",
-    desc: "유해가스, 분진, 소음, 온습도를 실시간으로 모니터링하고 법정 기준 초과 시 자동 경보를 발생시킵니다. 작업환경 측정 데이터 자동 리포트로 규제 대응을 지원합니다.",
+    id: 392,
+    title: "서울 강남구 버스쉼터 관제센터",
+    orderer: "서울 강남구청",
+    date: "2024",
+    type: "AI 관제센터",
+    overviewTitle: "그린스마트쉼터 관제센터",
+    desc: [
+      "그린스마트쉼터 관제센터 구축",
+      "쓰러짐감지 기능 AI 적용 20채널",
+      "실시간 영상 모니터링 및 이벤트 관리",
+      "원격 설비 제어 및 상태 모니터링",
+    ],
+    images: [
+      "https://ybahnhnvdnelyxzzgdgn.supabase.co/storage/v1/object/public/track_record/track_record/1756963036929-usuzyeeeqq.webp",
+    ],
   },
   {
-    image: industrialRobot,
-    title: "스마트공장 자동화 안전 솔루션",
-    subtitle: "Smart Factory Safety",
-    desc: "로봇·자동화 설비 주변 작업자 침입 감지 및 비상정지 연동 시스템을 구축했습니다. AI 기반 동선 분석으로 위험구역 접근을 사전에 차단합니다.",
+    id: 401,
+    title: "AI SoC 기반 인지장애 홈케어 개발",
+    orderer: "보건복지부",
+    date: "2024",
+    type: "AI",
+    overviewTitle: "AI SoC 기반 헬스케어 시스템",
+    desc: [
+      "AI SoC 기반 인지장애 홈케어 시스템 개발",
+      "경량화 AI 모델 탑재 전용 하드웨어",
+      "실시간 생체신호 모니터링 및 이상 감지",
+      "보호자 알림 및 원격 모니터링 플랫폼",
+    ],
+    images: [
+      "https://ybahnhnvdnelyxzzgdgn.supabase.co/storage/v1/object/public/track_record/track_record/1756977319427-m6lrnan4qas.webp",
+    ],
+  },
+  {
+    id: 390,
+    title: "서울 중구 버스쉼터 원격관리",
+    orderer: "서울 중구청",
+    date: "2024",
+    type: "원격관리시스템",
+    overviewTitle: "그린스마트쉼터 원격관리시스템",
+    desc: [
+      "그린스마트쉼터 20개소 원격관리시스템 구축",
+      "조명, 냉난방, 공기질 원격 모니터링",
+      "자동제어 스케줄링 및 이상 알림",
+      "통합 대시보드를 통한 실시간 관제",
+    ],
+    images: [
+      "https://ybahnhnvdnelyxzzgdgn.supabase.co/storage/v1/object/public/track_record/track_record/1756963144664-1mm3siiy4k1.webp",
+      "https://ybahnhnvdnelyxzzgdgn.supabase.co/storage/v1/object/public/track_record/track_record/1756963144672-ihg9rx7gfdi.webp",
+      "https://ybahnhnvdnelyxzzgdgn.supabase.co/storage/v1/object/public/track_record/track_record/1756963144673-jqh8qbb7bmb.webp",
+    ],
+  },
+  {
+    id: 424,
+    title: "숭실대학교 mmWave Radar",
+    orderer: "숭실대학교",
+    date: "2022",
+    type: "레이더 센서",
+    overviewTitle: "생체정보 수집 레이더",
+    desc: [
+      "생체정보 수집 레이더 반도체 응용 시제품 제작",
+      "mmWave 레이더 기반 비접촉 바이탈 센싱",
+      "호흡, 심박수 실시간 비접촉 측정",
+      "산학협력 R&D 프로젝트 수행",
+    ],
+    images: [
+      "https://ybahnhnvdnelyxzzgdgn.supabase.co/storage/v1/object/public/track_record/track_record/1756977395233-7gstbuluw8c.webp",
+      "https://ybahnhnvdnelyxzzgdgn.supabase.co/storage/v1/object/public/track_record/track_record/1756977186493-qc8mzcjm0fl.webp",
+    ],
+  },
+  {
+    id: 418,
+    title: "비접촉식 레이더 기반 안전힐링 시스템",
+    orderer: "R&D",
+    date: "2022",
+    type: "안전힐링",
+    overviewTitle: "바이탈사인 기반 안전힐링 시스템",
+    desc: [
+      "바이탈사인+공기질 기반 안전힐링 시스템 개발",
+      "비접촉 레이더로 생체신호 실시간 모니터링",
+      "공기질 센서 연동 환경 분석",
+      "이상징후 자동 감지 및 알림",
+    ],
+    images: [],
+  },
+  {
+    id: 429,
+    title: "국민건강보험공단 실증센터",
+    orderer: "국민건강보험공단",
+    date: "2022",
+    type: "AI인체감지",
+    overviewTitle: "AI 인체감지 실증 프로젝트",
+    desc: [
+      "AI 인체감지 시스템 실증 테스트",
+      "국민건강보험공단 실증센터 구축",
+      "낙상 감지 및 이상행동 모니터링",
+      "실증 데이터 기반 알고리즘 고도화",
+    ],
+    images: [
+      "https://ybahnhnvdnelyxzzgdgn.supabase.co/storage/v1/object/public/track_record/track_record/1756963234472-0y97423syoqq.webp",
+      "https://ybahnhnvdnelyxzzgdgn.supabase.co/storage/v1/object/public/track_record/track_record/1756963234504-rvbq6hoomga.webp",
+      "https://ybahnhnvdnelyxzzgdgn.supabase.co/storage/v1/object/public/track_record/track_record/1756963234486-ntppzh9sh9j.webp",
+      "https://ybahnhnvdnelyxzzgdgn.supabase.co/storage/v1/object/public/track_record/track_record/1756963234477-m18s6tq5xu8.webp",
+      "https://ybahnhnvdnelyxzzgdgn.supabase.co/storage/v1/object/public/track_record/track_record/1756963234448-rudu9qtwp5.webp",
+      "https://ybahnhnvdnelyxzzgdgn.supabase.co/storage/v1/object/public/track_record/track_record/1756963234448-y6nwc87fm8f.webp",
+    ],
   },
 ];
 
-// 시스템 구성 요소
-const COMPONENTS = [
-  {
-    image: abstractTech,
-    title: "Edge AI 서버",
-    subtitle: "Edge AI Server",
-    items: [
-      "NVIDIA DeepStream 기반 실시간 영상 분석",
-      "TensorRT 고속 추론 엔진 탑재",
-      "8채널 카메라 동시 분석 처리",
-      "네트워크 장애 시 독립 동작 보장",
-      "적응형 롤링버퍼 이벤트 데이터 보존",
-    ],
-  },
-  {
-    image: teamMeeting,
-    title: "통합 관제 대시보드",
-    subtitle: "Control Dashboard",
-    items: [
-      "실시간 이벤트 현황 모니터링",
-      "카메라·센서·밴드 통합 상태 표시",
-      "위험 등급별 알림 이력 관리",
-      "영상 클립 자동 저장 및 재생",
-      "운영 리포트 및 통계 분석",
-    ],
-  },
-  {
-    image: cityNight,
-    title: "클라우드 플랫폼",
-    subtitle: "Cloud Platform",
-    items: [
-      "AWS 기반 이벤트 메타데이터 저장",
-      "AI 모델 버전 관리 및 원격 배포",
-      "다중 시설 통합 원격 관제",
-      "데이터 기반 안전 개선 분석",
-      "SaaS형 플랫폼 확장 지원",
-    ],
-  },
-];
+// 개별 케이스 카드 컴포넌트
+const CaseCard = ({ caseItem }) => {
+  const mainImage = caseItem.images && caseItem.images.length > 0 ? caseItem.images[0] : null;
+  const hasMultipleImages = caseItem.images && caseItem.images.length > 1;
 
-// 납품 프로세스
-const PROCESS = [
-  {
-    image: teamMeeting,
-    step: "01",
-    title: "현장 분석",
-    subtitle: "Site Survey",
-    items: [
-      "현장 환경 및 위험 요소 조사",
-      "기존 안전 시스템 현황 파악",
-      "작업자 동선 및 위험구역 분석",
-      "법규 요건 및 규제 확인",
-      "맞춤형 솔루션 설계 제안",
-    ],
-  },
-  {
-    image: warehouse,
-    step: "02",
-    title: "시스템 구축",
-    subtitle: "System Build",
-    items: [
-      "AI 카메라 및 센서 최적 위치 설치",
-      "Edge AI 서버 구성 및 모델 배포",
-      "네트워크 인프라 구축 및 검증",
-      "알람장치 및 접점 연동 설정",
-      "NVR 영상 저장 시스템 구성",
-    ],
-  },
-  {
-    image: abstractTech,
-    step: "03",
-    title: "AI 최적화",
-    subtitle: "AI Optimization",
-    items: [
-      "현장 데이터 기반 AI 모델 학습",
-      "오탐·미탐 피드백 반영 튜닝",
-      "환경 변화 적응형 모델 업데이트",
-      "성능 검증 및 정확도 리포트",
-      "최적화 모델 Edge 서버 배포",
-    ],
-  },
-  {
-    image: factorySite,
-    step: "04",
-    title: "운영 지원",
-    subtitle: "Operation Support",
-    items: [
-      "24/7 원격 모니터링 및 장애 대응",
-      "정기 AI 모델 업데이트 및 개선",
-      "운영 데이터 분석 리포트 제공",
-      "관리자 교육 및 매뉴얼 지원",
-      "SLA 기반 유지보수 체계 운영",
-    ],
-  },
-];
+  return (
+    <div className="case-card">
+      {/* 메인 이미지 영역 */}
+      <div className="case-card-image-area">
+        {mainImage ? (
+          <img src={mainImage} alt={caseItem.title} className="case-card-main-image" />
+        ) : (
+          <div className="case-card-no-image">
+            <span>No Image</span>
+          </div>
+        )}
+        <div className="case-card-image-overlay" />
+        {/* 배지 */}
+        <div className="case-card-badges">
+          <span className="case-card-year">{caseItem.date}</span>
+          {caseItem.type && <span className="case-card-type">{caseItem.type}</span>}
+        </div>
+      </div>
+
+      {/* 정보 영역 */}
+      <div className="case-card-content">
+        <div className="case-card-header">
+          <h3 className="case-card-title">{caseItem.title}</h3>
+          <span className="case-card-orderer">{caseItem.orderer}</span>
+        </div>
+
+        <ul className="case-card-desc-list">
+          {caseItem.desc.map((item, idx) => (
+            <li key={idx}>{item}</li>
+          ))}
+        </ul>
+
+        {/* 썸네일 이미지 그리드 (여러 이미지가 있을 때) */}
+        {hasMultipleImages && (
+          <div className="case-card-thumbnails">
+            {caseItem.images.slice(1, 5).map((img, idx) => (
+              <div key={idx} className="case-card-thumb">
+                <img src={img} alt={`${caseItem.title} ${idx + 2}`} />
+              </div>
+            ))}
+            {caseItem.images.length > 5 && (
+              <div className="case-card-thumb case-card-thumb-more">
+                <span>+{caseItem.images.length - 5}</span>
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
 
 export default function CaseSmartSafetyPage() {
   return (
@@ -150,117 +228,73 @@ export default function CaseSmartSafetyPage() {
       <div className="solution-page">
         {/* 히어로 섹션 */}
         <section className="sol-hero">
-          <div className="sol-hero-badge">Smart Safety Delivery Cases</div>
+          <div className="sol-hero-badge">Industrial Safety Automation</div>
           <h1 className="sol-hero-title">
             AI 안전 시스템,<br />현장에서 검증하다
           </h1>
           <p className="sol-hero-desc">
-            제조, 건설, 복지시설 등 다양한 산업 현장에 AI 기반 스마트안전 시스템을
-            성공적으로 구축한 실적입니다. Edge AI 실시간 분석, 멀티모달 센서 융합,
-            클라우드 원격관리를 통해 작업자 안전을 혁신적으로 개선하고
-            산업재해를 예방하는 차세대 안전 솔루션을 제공합니다.
+            서울시 버스쉼터 AI 상황인지 시스템, 온디바이스 AI 카메라, 관제센터 구축,
+            비접촉 레이더 바이탈 센싱, AI 인체감지 등 다양한 산업안전 프로젝트를
+            성공적으로 수행한 실적입니다.
           </p>
         </section>
 
-        {/* 주요 납품 실적 */}
+        {/* 주요 수치 */}
+        <section className="case-stats">
+          <div className="case-stat-item">
+            <span className="case-stat-number">8+</span>
+            <span className="case-stat-label">납품 프로젝트</span>
+          </div>
+          <div className="case-stat-item">
+            <span className="case-stat-number">60+</span>
+            <span className="case-stat-label">설치 거점</span>
+          </div>
+          <div className="case-stat-item">
+            <span className="case-stat-number">AI</span>
+            <span className="case-stat-label">핵심 기술</span>
+          </div>
+          <div className="case-stat-item">
+            <span className="case-stat-number">24/7</span>
+            <span className="case-stat-label">실시간 관제</span>
+          </div>
+        </section>
+
+        {/* 납품 실적 목록 */}
         <section className="sol-section">
           <div className="sol-section-header">
-            <span className="sol-section-label">Key Projects</span>
-            <h2 className="sol-section-title">주요 납품 실적</h2>
+            <span className="sol-section-label">Delivery Cases</span>
+            <h2 className="sol-section-title">납품 실적</h2>
           </div>
-          <div className="sol-tech-grid">
-            {CASES.map((caseItem, i) => (
-              <div key={i} className="sol-tech-card">
-                <div className="sol-tech-card-img">
-                  <img src={caseItem.image} alt={caseItem.title} />
-                  <div className="sol-tech-card-overlay" />
-                </div>
-                <div className="sol-tech-card-body">
-                  <span className="sol-tech-card-subtitle">{caseItem.subtitle}</span>
-                  <h3 className="sol-tech-card-title">{caseItem.title}</h3>
-                  <p className="sol-tech-card-desc">{caseItem.desc}</p>
-                </div>
-              </div>
+          <div className="case-grid">
+            {CASES.map((caseItem) => (
+              <CaseCard key={caseItem.id} caseItem={caseItem} />
             ))}
           </div>
         </section>
 
-        {/* 시스템 구성 요소 */}
+        {/* 기술 역량 */}
         <section className="sol-section">
           <div className="sol-section-header">
-            <span className="sol-section-label">System Components</span>
-            <h2 className="sol-section-title">핵심 구성 요소</h2>
-          </div>
-          <div className="sol-domain-grid">
-            {COMPONENTS.map((comp, i) => (
-              <div key={i} className="sol-domain-card">
-                <div className="sol-domain-card-img">
-                  <img src={comp.image} alt={comp.title} />
-                  <div className="sol-domain-card-overlay">
-                    <span className="sol-domain-card-subtitle">{comp.subtitle}</span>
-                    <h3 className="sol-domain-card-title">{comp.title}</h3>
-                  </div>
-                </div>
-                <ul className="sol-domain-card-list">
-                  {comp.items.map((item, j) => (
-                    <li key={j}>{item}</li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* 납품 프로세스 */}
-        <section className="sol-section">
-          <div className="sol-section-header">
-            <span className="sol-section-label">Delivery Process</span>
-            <h2 className="sol-section-title">납품 프로세스</h2>
-          </div>
-          <div className="sol-pipeline-grid">
-            {PROCESS.map((step, i) => (
-              <div key={i} className="sol-pipeline-card">
-                <div className="sol-pipeline-card-img">
-                  <img src={step.image} alt={step.title} />
-                  <div className="sol-pipeline-card-step">{step.step}</div>
-                </div>
-                <div className="sol-pipeline-card-body">
-                  <span className="sol-pipeline-card-subtitle">{step.subtitle}</span>
-                  <h3 className="sol-pipeline-card-title">{step.title}</h3>
-                  <ul className="sol-pipeline-card-list">
-                    {step.items.map((item, j) => (
-                      <li key={j}>{item}</li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* 성과 및 효과 */}
-        <section className="sol-section">
-          <div className="sol-section-header">
-            <span className="sol-section-label">Results & Impact</span>
-            <h2 className="sol-section-title">도입 효과</h2>
+            <span className="sol-section-label">Core Capabilities</span>
+            <h2 className="sol-section-title">핵심 기술 역량</h2>
           </div>
           <div className="sol-architecture">
             <div className="sol-architecture-layers">
               <div className="sol-architecture-layer">
-                <span className="sol-layer-badge edge">안전성</span>
-                <p>AI 실시간 감지로 위험 상황 즉각 대응, 산업재해 발생률 감소, 작업자 안전 의식 향상</p>
+                <span className="sol-layer-badge edge">AI 영상분석</span>
+                <p>온디바이스 AI 기반 피플카운팅, 쓰러짐 감지, 폭력행위 감지, 인체감지 등 실시간 영상 분석 기술</p>
               </div>
               <div className="sol-architecture-layer">
-                <span className="sol-layer-badge comm">효율성</span>
-                <p>자동 모니터링으로 안전관리 인력 부담 감소, 24/7 무중단 감시, 데이터 기반 의사결정</p>
+                <span className="sol-layer-badge comm">비접촉 센싱</span>
+                <p>mmWave Radar 기반 비접촉 바이탈사인 측정, 호흡·심박수 모니터링, 재실 감지 기술</p>
               </div>
               <div className="sol-architecture-layer">
-                <span className="sol-layer-badge cloud">규제대응</span>
-                <p>중대재해처벌법 대응, 자동 리포트 생성, 안전조치 이력 관리, 감사 대비 증빙 확보</p>
+                <span className="sol-layer-badge cloud">원격 관제</span>
+                <p>다중 거점 통합 관제센터, 원격 설비 제어, 실시간 모니터링, 이벤트 기반 자동 알림 시스템</p>
               </div>
               <div className="sol-architecture-layer">
-                <span className="sol-layer-badge ctrl">비용절감</span>
-                <p>산재보험료 절감, 생산성 향상, 설비 고장 예방, 유지보수 비용 최적화</p>
+                <span className="sol-layer-badge ctrl">IoT 통합제어</span>
+                <p>조명, 냉난방, 공기질, 자동문, LED 등 설비 통합 제어 및 환경 자동화 시스템</p>
               </div>
             </div>
           </div>
