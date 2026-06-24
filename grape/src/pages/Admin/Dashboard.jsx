@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import BaseLayout from '../../components/Layout/BaseLayout';
+import AdminLayout from '../../components/AdminLayout';
 import { getProducts, getTrackRecords, getBoards } from '../../lib/api';
 import './Dashboard.css';
 
@@ -65,6 +66,7 @@ const Dashboard = () => {
       title="관리자 대시보드"
       subtitle="사이트 관리 현황을 한눈에 확인하세요"
     >
+      <AdminLayout>
       <div className="admin-dashboard">
         {/* Welcome Section */}
         <div className="dashboard-welcome">
@@ -153,6 +155,7 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
+      </AdminLayout>
     </BaseLayout>
   );
 };

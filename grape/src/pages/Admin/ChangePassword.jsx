@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { changePassword } from '../../lib/auth.js';
 import BaseLayout from '../../components/Layout/BaseLayout';
-import rndHeader from '../../assets/header_image/rnd.jpg';
-import ProductHeader from '../../components/ProductPage/ProductHeader';
+import AdminLayout from '../../components/AdminLayout';
 import './ChangePassword.css';
 
 const ChangePassword = () => {
@@ -51,18 +50,21 @@ const ChangePassword = () => {
     }
   };
 
+  const breadcrumbs = [
+    { label: '홈', path: '/' },
+    { label: '관리자', path: '/admin/dashboard' },
+    { label: '비밀번호 변경', path: '/admin/change-password' },
+  ];
+
   return (
     <BaseLayout
-      header={() => <ProductHeader image={rndHeader} />}
-      breadcrumbs={["Home", "관리자", "비밀번호 변경"]}
+      breadcrumbs={breadcrumbs}
       title="비밀번호 변경"
+      subtitle="계정 비밀번호를 변경합니다"
     >
-      <div className="page-container">
-        <div className="page-content">
-          <div className="page-layout">
-            <div className="main-content">
-              <div className="change-password-container">
-                <div className="change-password-form">
+      <AdminLayout>
+        <div className="change-password-container">
+          <div className="change-password-form">
                   <form onSubmit={handleSubmit}>
                     <div className="form-group">
                       <label htmlFor="currentPassword">현재 비밀번호</label>
@@ -106,12 +108,9 @@ const ChangePassword = () => {
                       {loading ? '변경 중...' : '비밀번호 변경'}
                     </button>
                   </form>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
-      </div>
+      </AdminLayout>
     </BaseLayout>
   );
 };

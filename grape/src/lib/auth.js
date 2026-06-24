@@ -53,7 +53,7 @@ const cognitoRequest = async (action, payload) => {
 /**
  * JWT 토큰에서 페이로드 디코딩
  */
-const decodeToken = (token) => {
+export const decodeToken = (token) => {
   try {
     const base64Url = token.split('.')[1];
     const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
+import { decodeToken } from '../../lib/auth.js';
 import BaseLayout from '../../components/Layout/BaseLayout';
 import AdminLayout from '../../components/AdminLayout';
 import './Profile.css';
@@ -9,23 +10,15 @@ const Profile = () => {
   const { user, session } = useAuth();
   const navigate = useNavigate();
 
-  // Extract last login time from token expiry (token issued time = expiry - 3600s for 1h tokens)
+  // Extract last login time from token payload
   const getLastLoginTime = () => {
     try {
       if (session?.id_token) {
-        const base64Url = session.id_token.split('.')[1];
-        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-        const jsonPayload = decodeURIComponent(
-          atob(base64)
-            .split('')
-            .map((c) => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
-            .join('')
-        );
-        const payload = JSON.parse(jsonPayload);
-        if (payload.auth_time) {
+        const payload = decodeToken(session.id_token);
+        if (payload?.auth_time) {
           return new Date(payload.auth_time * 1000).toLocaleString('ko-KR');
         }
-        if (payload.iat) {
+        if (payload?.iat) {
           return new Date(payload.iat * 1000).toLocaleString('ko-KR');
         }
       }

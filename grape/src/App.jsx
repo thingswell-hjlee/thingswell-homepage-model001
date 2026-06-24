@@ -162,7 +162,7 @@ function App() {
                     <Route path="/about/directions" element={<Directions />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/forgot-password" element={<ForgotPassword />} />
-                    <Route path="/admin/og-settings" element={<OGSettings />} />
+                    <Route path="/admin/og-settings" element={<ProtectedRoute><OGSettings /></ProtectedRoute>} />
                     <Route path="/admin/change-password" element={<ProtectedRoute><ChangePassword /></ProtectedRoute>} />
                     <Route path="/admin/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
                     <Route path="/admin/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />

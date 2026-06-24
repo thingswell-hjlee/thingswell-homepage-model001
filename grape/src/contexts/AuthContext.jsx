@@ -27,18 +27,24 @@ export const AuthProvider = ({ children }) => {
       return;
     }
 
-    const expiryStr = localStorage.getItem('thingswell_token_expiry');
-    if (!expiryStr) return;
+    // Call getSession() which handles token refresh automatically
+    const { data } = await getSession();
+    const currentSession = data?.session;
 
-    const expiresAt = parseInt(expiryStr, 10);
+    if (!currentSession) {
+      // Session could not be refreshed - sign out
+      setSessionExpiringSoon(false);
+      await authSignOut();
+      return;
+    }
+
+    const expiresAt = currentSession.expires_at;
+    if (!expiresAt) return;
+
     const now = Date.now();
     const timeRemaining = expiresAt - now;
 
-    if (timeRemaining <= 0) {
-      // Token has expired - sign out
-      setSessionExpiringSoon(false);
-      await authSignOut();
-    } else if (timeRemaining <= EXPIRY_WARNING_MS) {
+    if (timeRemaining <= EXPIRY_WARNING_MS) {
       // Token expires within 5 minutes - show warning
       setSessionExpiringSoon(true);
     } else {
