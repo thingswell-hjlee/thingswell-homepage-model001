@@ -1,204 +1,225 @@
-import { useState, useEffect, useMemo, useRef } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import CardRotator from "../../components/CardRotator";
+import { useMemo } from "react";
+import { Link } from "react-router-dom";
 import Footer from "../../components/Footer";
-import HomePopup from "../../components/HomePopup";
-import { getBoards } from "../../lib/api";
 import useTranslation from "../../hooks/useTranslation";
-import aiImage from "../../assets/main/AI.webp";
-import humanImage from "../../assets/main/human.webp";
-import ondeviceImage from "../../assets/main/ondevice.webp";
-import familyImage from "../../assets/main/family.webp";
-import noticeBg from "../../assets/1.png";
-import cameraImage from "../../assets/main/camera_2.png";
+import "./Home.css";
 
 export default function Home() {
   const { t, currentLang } = useTranslation();
-  const [currentCardIndex, setCurrentCardIndex] = useState(0);
-  const [latestAnnouncement, setLatestAnnouncement] = useState(null);
-  const navigate = useNavigate();
-  const [visibleBackgroundIndex, setVisibleBackgroundIndex] = useState(0);
-  const [previousBackgroundIndex, setPreviousBackgroundIndex] = useState(null);
-  const backgroundFadeTimeoutRef = useRef(null);
 
-  const getAnnouncementBackgroundImage = () => {
-    return noticeBg;
-  };
+  const platformLayers = useMemo(() => {
+    const layers = t('home.platform.layers');
+    return Array.isArray(layers) ? layers : [];
+  }, [t]);
 
-  const backgroundImages = [aiImage, ondeviceImage, humanImage, familyImage];
+  const solutions = useMemo(() => {
+    const sols = t('home.solutions.items');
+    return Array.isArray(sols) ? sols : [];
+  }, [t]);
 
-  const cards = useMemo(() => {
-    const translatedCards = t('home.cards');
-    const ctaHrefs = [
-      `/${currentLang}/solutions/overview`,
-      `/${currentLang}/solutions/overview`,
-      `/${currentLang}/solutions/overview`,
-      `/${currentLang}/solutions/overview`,
-    ];
-    if (Array.isArray(translatedCards)) {
-      return translatedCards.map((card, i) => ({
-        ...card,
-        ctaHref: ctaHrefs[i],
-        backgroundImage: backgroundImages[i],
-      }));
-    }
-    return [];
-  }, [t, currentLang]);
+  const technologies = useMemo(() => {
+    const techs = t('home.technology.items');
+    return Array.isArray(techs) ? techs : [];
+  }, [t]);
 
-  const handleCardChange = (index) => {
-    if (index !== currentCardIndex) {
-      setTimeout(() => {
-        setCurrentCardIndex(index);
-      }, 525);
-    }
-  };
+  const stats = useMemo(() => {
+    const s = t('home.trackRecord.stats');
+    return Array.isArray(s) ? s : [];
+  }, [t]);
 
-  useEffect(() => {
-    const fetchLatestAnnouncement = async () => {
-      try {
-        const { data, error } = await getBoards('Board_Announcement', {
-          order: 'id',
-          ascending: false,
-          limit: 1
-        });
+  const partners = useMemo(() => {
+    const p = t('home.trust.partners');
+    return Array.isArray(p) ? p : [];
+  }, [t]);
 
-        if (error) {
-          console.error("Error fetching announcement:", error);
-          return;
-        }
-        if (data && data.length > 0) {
-          setLatestAnnouncement(data[0]);
-        }
-      } catch (err) {
-        console.error("Exception fetching announcement:", err);
-      }
-    };
-    fetchLatestAnnouncement();
-  }, []);
-
-  useEffect(() => {
-    backgroundImages.forEach((src) => {
-      const img = new Image();
-      img.src = src;
-    });
-  }, []);
-
-  useEffect(() => {
-    if (currentCardIndex === visibleBackgroundIndex) return;
-
-    if (backgroundFadeTimeoutRef.current) {
-      clearTimeout(backgroundFadeTimeoutRef.current);
-      backgroundFadeTimeoutRef.current = null;
-    }
-
-    const leavingIndex = visibleBackgroundIndex;
-
-    setPreviousBackgroundIndex(leavingIndex);
-    setVisibleBackgroundIndex(currentCardIndex);
-
-    backgroundFadeTimeoutRef.current = setTimeout(() => {
-      setPreviousBackgroundIndex(null);
-      backgroundFadeTimeoutRef.current = null;
-    }, 525);
-  }, [currentCardIndex, visibleBackgroundIndex]);
-
-  useEffect(() => {
-    return () => {
-      if (backgroundFadeTimeoutRef.current) {
-        clearTimeout(backgroundFadeTimeoutRef.current);
-      }
-    };
-  }, []);
-
-  const handleAnnouncementClick = () => {
-    if (latestAnnouncement && latestAnnouncement.id) {
-      navigate(`/${currentLang}/customer-service/announcement?id=${encodeURIComponent(latestAnnouncement.id)}&t=Board_Announcement`);
-    } else {
-      navigate(`/${currentLang}/customer-service/announcement`);
-    }
-  };
+  const layerClasses = ['edge', 'ai', 'cloud', 'control'];
+  const layerIcons = ['\u2B22', '\u2B21', '\u2601', '\u2318'];
+  const solutionIcons = ['\uD83C\uDFD9\uFE0F', '\uD83D\uDEA7', '\uD83C\uDFED', '\u267F', '\uD83C\uDFEA'];
+  const techIcons = ['\u26A1', '\uD83E\uDDBE', '\uD83E\uDDE0', '\uD83D\uDFE2', '\u2601\uFE0F'];
 
   return (
-    <div className="home-layout">
-      <div className="home-background-stack" aria-hidden="true">
-        {previousBackgroundIndex !== null && (
-          <div
-            className="home-background-layer is-leaving"
-            style={{
-              backgroundImage: `url(${cards[previousBackgroundIndex]?.backgroundImage || backgroundImages[previousBackgroundIndex]})`,
-            }}
-          />
-        )}
-        <div
-          className={`home-background-layer is-visible${previousBackgroundIndex !== null ? " is-entering" : ""}`}
-          style={{
-            backgroundImage: `url(${cards[visibleBackgroundIndex]?.backgroundImage || backgroundImages[visibleBackgroundIndex]})`,
-          }}
-        />
-      </div>
-      <div className="home-content-container">
-        <CardRotator
-          cards={cards}
-          onCardChange={handleCardChange}
-          currentIndex={currentCardIndex}
-        />
+    <div className="safegai-home">
+      {/* Hero Section */}
+      <section className="safegai-hero">
+        <div className="safegai-hero-content">
+          <span className="safegai-hero-badge">
+            {t('home.hero.badge')}
+          </span>
 
-        <section className="hero-content-section">
-          <Link
-            to={`/${currentLang}/products/safety?detail=1`}
-            className="hero-content-card hero-content-card_1"
-            aria-label={t('home.heroProductAriaLabel')}
-            style={{
-              backgroundImage: `linear-gradient(rgba(0,0,0,0.20), rgba(0,0,0,0.10)), url(${cameraImage})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              backgroundRepeat: 'no-repeat'
-            }}
-          >
-            <div className="hero-content-card-content">
-              <h1 className="hero-content-card-title">
-                {t('home.heroProductTitle')}
-              </h1>
-            </div>
-          </Link>
+          <h1 className="safegai-hero-title">
+            <span className="safegai-brand safegai-brand-lg">
+              <span className="safe">Safe</span><span className="gai">GAI</span>
+            </span>
+            {' '}Platform
+          </h1>
 
-          <div
-            className="hero-content-card announcement-card"
-            style={{
-              backgroundImage: `linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.35)), url(${getAnnouncementBackgroundImage()})`,
-              cursor: "pointer"
-            }}
-            role="button"
-            tabIndex={0}
-            aria-label={t('home.heroAnnouncementAriaLabel')}
-            onClick={handleAnnouncementClick}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                handleAnnouncementClick();
-              }
-            }}
+          <p className="safegai-hero-subtitle">
+            {t('home.hero.subtitle')}
+          </p>
+
+          <p className="safegai-hero-desc">
+            {t('home.hero.description')}
+          </p>
+
+          <a
+            href="https://safegai.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="safegai-hero-domain"
           >
-            <div className="hero-content-card-content">
-              <h1 className="hero-content-card-title">
-                {latestAnnouncement?.title || t('home.heroAnnouncementEmpty')}
-              </h1>
-            </div>
+            <span className="safegai-hero-domain-url">safegai.com</span>
+            <span className="safegai-hero-domain-label">{t('home.hero.domainLabel')}</span>
+          </a>
+
+          <div className="safegai-hero-cta-row">
+            <Link
+              to={`/${currentLang}/solutions/overview`}
+              className="safegai-hero-cta safegai-hero-cta-primary"
+            >
+              {t('home.hero.ctaPrimary')}
+            </Link>
+            <Link
+              to={`/${currentLang}/cases/smart-safety`}
+              className="safegai-hero-cta safegai-hero-cta-secondary"
+            >
+              {t('home.hero.ctaSecondary')}
+            </Link>
           </div>
+        </div>
+      </section>
 
-          <Link
-            to={`/${currentLang}/cases/smart-safety`}
-            className="hero-content-card hero-content-card_2"
-            aria-label={t('home.heroCaseAriaLabel')}
-          >
-            <div className="hero-content-card-content">
-              <h1 className="hero-content-card-title">
-                {t('home.heroCaseTitle')}
-              </h1>
+      {/* Platform Overview */}
+      <section className="safegai-section">
+        <div className="safegai-section-header">
+          <p className="safegai-section-label">{t('home.platform.label')}</p>
+          <h2 className="safegai-section-title">{t('home.platform.title')}</h2>
+          <p className="safegai-section-desc">{t('home.platform.desc')}</p>
+        </div>
+        <div className="safegai-platform-grid">
+          {platformLayers.map((layer, i) => (
+            <div key={i} className={`safegai-platform-card ${layerClasses[i] || ''}`}>
+              <div className="safegai-platform-card-icon">
+                {layerIcons[i] || '\u25CF'}
+              </div>
+              <p className="safegai-platform-card-label">{layer.label}</p>
+              <h3 className="safegai-platform-card-title">{layer.title}</h3>
+              <p className="safegai-platform-card-desc">{layer.desc}</p>
             </div>
-          </Link>
-        </section>
-      </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Solutions Grid */}
+      <section className="safegai-section">
+        <div className="safegai-section-header">
+          <p className="safegai-section-label">{t('home.solutions.label')}</p>
+          <h2 className="safegai-section-title">{t('home.solutions.title')}</h2>
+        </div>
+        <div className="safegai-solutions-grid">
+          {solutions.slice(0, 3).map((sol, i) => (
+            <Link
+              key={i}
+              to={sol.href ? `/${currentLang}${sol.href}` : `/${currentLang}/solutions/overview`}
+              className="safegai-solution-card"
+            >
+              <span className="safegai-solution-card-icon">{solutionIcons[i] || '\u25CF'}</span>
+              <h3 className="safegai-solution-card-title">{sol.title}</h3>
+              <p className="safegai-solution-card-desc">{sol.desc}</p>
+            </Link>
+          ))}
+        </div>
+        {solutions.length > 3 && (
+          <div className="safegai-solutions-extra">
+            {solutions.slice(3).map((sol, i) => (
+              <Link
+                key={i + 3}
+                to={sol.href ? `/${currentLang}${sol.href}` : `/${currentLang}/solutions/overview`}
+                className="safegai-solution-card"
+              >
+                <span className="safegai-solution-card-icon">{solutionIcons[i + 3] || '\u25CF'}</span>
+                <h3 className="safegai-solution-card-title">{sol.title}</h3>
+                <p className="safegai-solution-card-desc">{sol.desc}</p>
+              </Link>
+            ))}
+          </div>
+        )}
+      </section>
+
+      {/* Technology */}
+      <section className="safegai-section">
+        <div className="safegai-section-header">
+          <p className="safegai-section-label">{t('home.technology.label')}</p>
+          <h2 className="safegai-section-title">{t('home.technology.title')}</h2>
+        </div>
+        <div className="safegai-tech-grid">
+          {technologies.map((tech, i) => (
+            <div key={i} className="safegai-tech-card">
+              <span className="safegai-tech-card-icon">{techIcons[i] || '\u25CF'}</span>
+              <h3 className="safegai-tech-card-title">{tech.title}</h3>
+              <p className="safegai-tech-card-desc">{tech.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Track Record */}
+      <section className="safegai-section">
+        <div className="safegai-section-header">
+          <p className="safegai-section-label">{t('home.trackRecord.label')}</p>
+          <h2 className="safegai-section-title">{t('home.trackRecord.title')}</h2>
+        </div>
+        <div className="safegai-stats">
+          {stats.map((stat, i) => (
+            <div key={i} className="safegai-stat">
+              <div className="safegai-stat-number">{stat.number}</div>
+              <div className="safegai-stat-label">{stat.label}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Trust / Partners */}
+      <section className="safegai-section safegai-trust">
+        <div className="safegai-section-header">
+          <p className="safegai-section-label">{t('home.trust.label')}</p>
+          <h2 className="safegai-section-title">{t('home.trust.title')}</h2>
+        </div>
+        <div className="safegai-trust-logos">
+          {partners.map((partner, i) => (
+            <span key={i} className="safegai-trust-logo">{partner}</span>
+          ))}
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="safegai-cta-section">
+        <div className="safegai-cta-content">
+          <h2 className="safegai-cta-title">{t('home.cta.title')}</h2>
+          <p className="safegai-cta-desc">{t('home.cta.desc')}</p>
+          <a
+            href="https://safegai.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="safegai-cta-domain"
+          >
+            <span className="safegai-cta-domain-url">
+              <span className="safegai-brand safegai-brand-sm">
+                <span className="safe">safe</span><span className="gai">gai</span>
+              </span>.com
+            </span>
+          </a>
+          <div className="safegai-hero-cta-row">
+            <Link
+              to={`/${currentLang}/about/company`}
+              className="safegai-hero-cta safegai-hero-cta-primary"
+            >
+              {t('home.cta.ctaButton')}
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <Footer />
     </div>
   );
 }

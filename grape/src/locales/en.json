@@ -64,42 +64,118 @@
     "logoAlt": "Logo"
   },
   "home": {
-    "cards": [
-      {
-        "eyebrow": "Safety Secured with AI, a Future Opened with Technology",
-        "title": "AI-Powered Safety, Technology-Driven Future",
-        "description": "We predict risks with AI-based solutions and build a safer future through innovative technology.",
-        "ctaText": "Learn More",
-        "caption": "AI Safety Solutions"
-      },
-      {
-        "eyebrow": "On-Device AI: Safety in Severe Environments",
-        "title": "On-Device AI: Safety in Any Environment",
-        "description": "Detect and respond to hazards directly on-device without network connectivity, ensuring safety in the most demanding environments.",
-        "ctaText": "Learn More",
-        "caption": "On-Device AI"
-      },
-      {
-        "eyebrow": "Innovation for People, Technology for Safety",
-        "title": "Innovation for People, Technology for Safety",
-        "description": "We pursue innovation that enriches human lives, with all technology placing the highest priority on personal safety.",
-        "ctaText": "Learn More",
-        "caption": "Human-Centered Innovation"
-      },
-      {
-        "eyebrow": "Your Safety, Everywhere. With ThingsWell",
-        "title": "From Industrial to Daily Life Safety, ThingsWell Is With You",
-        "description": "From hazardous industrial environments to everyday incidents, ThingsWell's technology safeguards you everywhere.",
-        "ctaText": "Learn More",
-        "caption": "Comprehensive Safety"
-      }
-    ],
-    "heroProductTitle": "Smart AI Camera",
-    "heroProductAriaLabel": "View HIKVISION Network PTZ Camera Products",
-    "heroAnnouncementAriaLabel": "View Latest Announcements",
-    "heroAnnouncementEmpty": "No announcements available.",
-    "heroCaseTitle": "Seoul Bus Smart Shelter AI Situational Awareness System",
-    "heroCaseAriaLabel": "View Seoul Bus Smart Shelter AI Situational Awareness System Case Study"
+    "hero": {
+      "badge": "Physical AI Smart Safety Platform",
+      "subtitle": "Physical AI Smart Safety Platform",
+      "description": "We connect field hazards through data, detect and analyze them with AI, and support rapid response.",
+      "domainLabel": "Official Platform",
+      "ctaPrimary": "View Solutions",
+      "ctaSecondary": "Case Studies"
+    },
+    "platform": {
+      "label": "Platform Architecture",
+      "title": "4-Layer Platform Architecture",
+      "desc": "A complete safety pipeline from on-site edge devices to cloud and integrated control.",
+      "layers": [
+        {
+          "label": "Edge Layer",
+          "title": "Edge Devices",
+          "desc": "Real-time video analytics on NVIDIA Jetson, sensor fusion, and immediate alarm processing"
+        },
+        {
+          "label": "AI Engine",
+          "title": "AI Engine",
+          "desc": "Multimodal inference, anomaly detection, object tracking, Physical AI situational awareness"
+        },
+        {
+          "label": "Cloud Layer",
+          "title": "Cloud",
+          "desc": "AWS-based data analytics, AI model retraining, event history storage, and API services"
+        },
+        {
+          "label": "Control Layer",
+          "title": "Integrated Control",
+          "desc": "Web/mobile dashboard, digital twin visualization, multi-facility integrated monitoring"
+        }
+      ]
+    },
+    "solutions": {
+      "label": "Solutions",
+      "title": "Domain-Specific Safety Solutions",
+      "items": [
+        {
+          "title": "Public Safety",
+          "desc": "Smart shelters, senior centers, welfare facility AI monitoring",
+          "href": "/solutions/overview"
+        },
+        {
+          "title": "Construction Safety",
+          "desc": "High-altitude work, heavy equipment proximity, missing PPE detection",
+          "href": "/solutions/overview"
+        },
+        {
+          "title": "Industrial Safety",
+          "desc": "Fall detection, restricted zone intrusion, hazardous environment monitoring",
+          "href": "/solutions/overview"
+        },
+        {
+          "title": "Disability Workshops",
+          "desc": "Non-contact AI monitoring, abnormal behavior detection, personalized care",
+          "href": "/solutions/elderly-disability"
+        },
+        {
+          "title": "Smart Stores",
+          "desc": "Store safety management, anomaly detection, remote monitoring",
+          "href": "/solutions/overview"
+        }
+      ]
+    },
+    "technology": {
+      "label": "Core Technology",
+      "title": "Core Technologies",
+      "items": [
+        {
+          "title": "Edge AI",
+          "desc": "NVIDIA Jetson on-device real-time inference"
+        },
+        {
+          "title": "Physical AI",
+          "desc": "Spatial awareness-based physical situational judgment"
+        },
+        {
+          "title": "Generative AI",
+          "desc": "RAG-based conversational safety awareness LLM"
+        },
+        {
+          "title": "NVIDIA",
+          "desc": "DeepStream, TensorRT optimization"
+        },
+        {
+          "title": "AWS",
+          "desc": "IoT Core, SageMaker, Lambda"
+        }
+      ]
+    },
+    "trackRecord": {
+      "label": "Track Record",
+      "title": "Proven Deployment Record",
+      "stats": [
+        { "number": "165+", "label": "Projects Delivered" },
+        { "number": "60+", "label": "Deployment Sites" },
+        { "number": "24/7", "label": "Real-time Operation" },
+        { "number": "99.9%", "label": "System Uptime" }
+      ]
+    },
+    "trust": {
+      "label": "Partners & Clients",
+      "title": "Trusted Partners",
+      "partners": ["Seoul Metropolitan", "Korea Expressway Corp", "KOSHA", "LH", "SK", "Samsung C&T"]
+    },
+    "cta": {
+      "title": "Build Safer Sites with SafeGAI",
+      "desc": "Experience the AI safety platform optimized for public institutions, construction sites, and industrial facilities.",
+      "ctaButton": "Contact Us"
+    }
   },
   "common": {
     "learnMore": "Learn More",
@@ -119,8 +195,8 @@
   },
   "seo": {
     "home": {
-      "title": "ThingsWell - AI Safety Management Solutions",
-      "description": "ThingsWell provides AI-powered industrial safety, smart safety management, and integrated control solutions."
+      "title": "SafeGAI - Physical AI Smart Safety Platform | safegai.com",
+      "description": "SafeGAI connects field hazards through data, detects and analyzes them with AI, and supports rapid response. The Physical AI Smart Safety Platform."
     },
     "about": {
       "title": "About Us - ThingsWell",

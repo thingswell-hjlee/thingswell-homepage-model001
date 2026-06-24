@@ -64,42 +64,118 @@
     "logoAlt": "로고"
   },
   "home": {
-    "cards": [
-      {
-        "eyebrow": "Safety Secured with AI, a Future Opened with Technology",
-        "title": "AI로 지키는 안전, 기술로 여는 미래",
-        "description": "AI 기반의 솔루션으로 위험을 예측하고, 혁신적인 기술로 더 안전한 미래를 만들어갑니다.",
-        "ctaText": "더 알아보기",
-        "caption": "AI Safety Solutions"
-      },
-      {
-        "eyebrow": "On-Device AI: Safety in Severe Environments",
-        "title": "온디바이스 AI, 극한 환경에서도 안전을",
-        "description": "외부 네트워크 연결 없이도 기기 자체적으로 위험을 감지하고 대응하여, 어떤 환경에서도 안전을 보장합니다.",
-        "ctaText": "더 알아보기",
-        "caption": "On-Device AI"
-      },
-      {
-        "eyebrow": "Innovation for People, Technology for Safety",
-        "title": "사람을 위한 혁신, 안전을 위한 기술",
-        "description": "인간의 삶을 더 풍요롭게 하는 혁신을 추구하며, 모든 기술은 오직 사람의 안전을 최우선으로 합니다.",
-        "ctaText": "더 알아보기",
-        "caption": "Human-Centered Innovation"
-      },
-      {
-        "eyebrow": "Your Safety, Everywhere. With ThingsWell",
-        "title": "산업안전에서 생활안전까지, 싱스웰이 함께합니다",
-        "description": "공장의 위험 작업 환경부터 일상생활의 작은 사고까지, 싱스웰의 기술은 모든 곳에서 당신을 지켜줍니다.",
-        "ctaText": "더 알아보기",
-        "caption": "Comprehensive Safety"
-      }
-    ],
-    "heroProductTitle": "스마트 AI 카메라",
-    "heroProductAriaLabel": "HIKVISION 네트워크 PTZ 카메라 제품 보기",
-    "heroAnnouncementAriaLabel": "최신 공지사항 보기",
-    "heroAnnouncementEmpty": "등록된 공지사항이 없습니다.",
-    "heroCaseTitle": "서울 버스 스마트쉼터 AI 상황인지 시스템",
-    "heroCaseAriaLabel": "서울 버스 스마트쉼터 AI 상황인지 시스템 사례 보기"
+    "hero": {
+      "badge": "Physical AI Smart Safety Platform",
+      "subtitle": "Physical AI 스마트 안전 플랫폼",
+      "description": "현장의 위험을 데이터로 연결하고, AI가 감지하고, 분석하며, 대응을 지원합니다.",
+      "domainLabel": "공식 플랫폼",
+      "ctaPrimary": "솔루션 보기",
+      "ctaSecondary": "구축 사례"
+    },
+    "platform": {
+      "label": "Platform Architecture",
+      "title": "4-Layer 플랫폼 아키텍처",
+      "desc": "현장 엣지부터 클라우드, 통합관제까지 완전한 안전 파이프라인을 제공합니다.",
+      "layers": [
+        {
+          "label": "Edge Layer",
+          "title": "엣지 디바이스",
+          "desc": "NVIDIA Jetson 기반 실시간 영상분석, 센서 융합, 즉시 알람 처리"
+        },
+        {
+          "label": "AI Engine",
+          "title": "AI 엔진",
+          "desc": "멀티모달 추론, 이상행동 감지, 객체 추적, Physical AI 상황 판단"
+        },
+        {
+          "label": "Cloud Layer",
+          "title": "클라우드",
+          "desc": "AWS 기반 데이터 분석, AI 모델 재학습, 이벤트 이력 저장 및 API"
+        },
+        {
+          "label": "Control Layer",
+          "title": "통합 관제",
+          "desc": "웹/모바일 대시보드, 디지털 트윈 시각화, 다중 시설 통합 모니터링"
+        }
+      ]
+    },
+    "solutions": {
+      "label": "Solutions",
+      "title": "도메인별 안전 솔루션",
+      "items": [
+        {
+          "title": "공공안전",
+          "desc": "스마트쉼터, 경로당, 복지시설 AI 모니터링",
+          "href": "/solutions/overview"
+        },
+        {
+          "title": "건설안전",
+          "desc": "고소작업, 중장비 접근, 보호구 미착용 감지",
+          "href": "/solutions/overview"
+        },
+        {
+          "title": "산업안전",
+          "desc": "낙상, 위험구역 침입, 유해환경 실시간 관제",
+          "href": "/solutions/overview"
+        },
+        {
+          "title": "장애인 작업장",
+          "desc": "비접촉 AI 모니터링, 이상행동 감지, 맞춤 케어",
+          "href": "/solutions/elderly-disability"
+        },
+        {
+          "title": "스마트 상점",
+          "desc": "매장 안전관리, 이상 상황 감지, 원격 관제",
+          "href": "/solutions/overview"
+        }
+      ]
+    },
+    "technology": {
+      "label": "Core Technology",
+      "title": "핵심 기술",
+      "items": [
+        {
+          "title": "Edge AI",
+          "desc": "NVIDIA Jetson 온디바이스 실시간 추론"
+        },
+        {
+          "title": "Physical AI",
+          "desc": "공간 인지 기반 물리적 상황 판단"
+        },
+        {
+          "title": "Generative AI",
+          "desc": "RAG 기반 대화형 안전 인지 LLM"
+        },
+        {
+          "title": "NVIDIA",
+          "desc": "DeepStream, TensorRT 최적화"
+        },
+        {
+          "title": "AWS",
+          "desc": "IoT Core, SageMaker, Lambda"
+        }
+      ]
+    },
+    "trackRecord": {
+      "label": "Track Record",
+      "title": "검증된 구축 실적",
+      "stats": [
+        { "number": "165+", "label": "프로젝트 수행" },
+        { "number": "60+", "label": "구축 현장" },
+        { "number": "24/7", "label": "실시간 운영" },
+        { "number": "99.9%", "label": "시스템 가동률" }
+      ]
+    },
+    "trust": {
+      "label": "Partners & Clients",
+      "title": "신뢰하는 파트너",
+      "partners": ["서울시", "한국도로공사", "산업안전보건공단", "LH", "SK", "삼성물산"]
+    },
+    "cta": {
+      "title": "SafeGAI와 함께 안전한 현장을 만드세요",
+      "desc": "공공기관, 건설현장, 산업시설에 최적화된 AI 안전 플랫폼을 경험하세요.",
+      "ctaButton": "문의하기"
+    }
   },
   "common": {
     "learnMore": "더 알아보기",
@@ -119,8 +195,8 @@
   },
   "seo": {
     "home": {
-      "title": "싱스웰 - AI 안전관리 솔루션",
-      "description": "AI 기반 산업안전, 스마트 안전관리, 통합관제 솔루션을 제공하는 싱스웰입니다."
+      "title": "SafeGAI - Physical AI 스마트 안전 플랫폼 | safegai.com",
+      "description": "SafeGAI는 현장의 위험을 데이터로 연결하고, AI가 감지하고, 분석하며, 대응을 지원하는 Physical AI 스마트 안전 플랫폼입니다."
     },
     "about": {
       "title": "회사소개 - 싱스웰",
