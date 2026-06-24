@@ -84,47 +84,49 @@ export default function OGSettings() {
     setMessage('');
 
     try {
-      // 이미지 파일이 있으면 S3에 업로드
       let finalImageUrl = ogData.imageUrl;
 
+      // 이미지 파일이 있으면 S3에 업로드 시도
       if (imageFile) {
-        // Presigned URL을 통한 S3 업로드
-        const { getAccessToken } = await import('../../lib/auth');
-        const token = await getAccessToken();
-        
-        const presignResponse = await fetch(`${API_BASE_URL}/upload/presigned-url`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
-          },
-          body: JSON.stringify({
-            fileName: `og-images/${Date.now()}-${imageFile.name}`,
-            fileType: imageFile.type,
-          }),
-        });
-
-        if (presignResponse.ok) {
-          const { uploadUrl, fileUrl } = await presignResponse.json();
+        try {
+          const { getAccessToken } = await import('../../lib/auth');
+          const token = await getAccessToken();
           
-          // S3에 직접 업로드
-          await fetch(uploadUrl, {
-            method: 'PUT',
-            headers: { 'Content-Type': imageFile.type },
-            body: imageFile,
+          const presignResponse = await fetch(`${API_BASE_URL}/upload/presigned-url`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+              fileName: `og-images/${Date.now()}-${imageFile.name}`,
+              fileType: imageFile.type,
+            }),
           });
 
-          finalImageUrl = fileUrl;
+          if (presignResponse.ok) {
+            const { uploadUrl, fileUrl } = await presignResponse.json();
+            await fetch(uploadUrl, {
+              method: 'PUT',
+              headers: { 'Content-Type': imageFile.type },
+              body: imageFile,
+            });
+            finalImageUrl = fileUrl;
+          } else {
+            console.warn('이미지 업로드 실패, 기존 URL 유지');
+          }
+        } catch (uploadError) {
+          console.warn('이미지 업로드 오류, 기존 URL 유지:', uploadError);
         }
       }
 
       const newOgData = { ...ogData, imageUrl: finalImageUrl };
       
-      // localStorage에 저장 (추후 DynamoDB 연동 가능)
+      // localStorage에 저장
       localStorage.setItem('og_settings', JSON.stringify(newOgData));
       setOgData(newOgData);
       setSavedOgData(newOgData);
-      setMessage('저장되었습니다. index.html의 OG 태그를 업데이트하고 재배포해야 적용됩니다.');
+      setMessage('저장되었습니다! 실제 반영하려면 index.html 재배포가 필요합니다.');
       setImageFile(null);
       setImagePreview(null);
     } catch (error) {
