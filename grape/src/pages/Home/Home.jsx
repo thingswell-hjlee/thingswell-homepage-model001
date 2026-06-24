@@ -161,7 +161,7 @@ export default function Home() {
           }}
         />
       </div>
-      <HomePopup />
+      {/* <HomePopup /> */}
       <div className="home-content-container">
         {/* 카드 로테이터 섹션 */}
         <CardRotator
