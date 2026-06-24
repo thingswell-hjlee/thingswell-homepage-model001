@@ -160,21 +160,41 @@
       "label": "Track Record",
       "title": "검증된 구축 실적",
       "stats": [
-        { "number": "165+", "label": "프로젝트 수행" },
-        { "number": "60+", "label": "구축 현장" },
-        { "number": "24/7", "label": "실시간 운영" },
-        { "number": "99.9%", "label": "시스템 가동률" }
+        {
+          "number": "165+",
+          "label": "프로젝트 수행"
+        },
+        {
+          "number": "60+",
+          "label": "구축 현장"
+        },
+        {
+          "number": "24/7",
+          "label": "실시간 운영"
+        },
+        {
+          "number": "99.9%",
+          "label": "시스템 가동률"
+        }
       ]
     },
     "trust": {
       "label": "Partners & Clients",
       "title": "신뢰하는 파트너",
-      "partners": ["서울시", "한국도로공사", "산업안전보건공단", "LH", "SK", "삼성물산"]
+      "partners": [
+        "서울시",
+        "한국도로공사",
+        "산업안전보건공단",
+        "LH",
+        "SK",
+        "삼성물산"
+      ]
     },
     "cta": {
-      "title": "SafeGAI와 함께 안전한 현장을 만드세요",
-      "desc": "공공기관, 건설현장, 산업시설에 최적화된 AI 안전 플랫폼을 경험하세요.",
-      "ctaButton": "문의하기"
+      "title": "현장을 이해하는 AI, 사고를 줄이는 안전 플랫폼",
+      "desc": "SafeGAI Platform으로 공공안전, 건설안전, 산업안전 현장의 위험을 실시간으로 감지하고 관제합니다.",
+      "ctaButton": "관제시스템 바로가기",
+      "ctaCompany": "회사소개"
     }
   },
   "common": {

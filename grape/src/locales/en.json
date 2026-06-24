@@ -160,21 +160,41 @@
       "label": "Track Record",
       "title": "Proven Deployment Record",
       "stats": [
-        { "number": "165+", "label": "Projects Delivered" },
-        { "number": "60+", "label": "Deployment Sites" },
-        { "number": "24/7", "label": "Real-time Operation" },
-        { "number": "99.9%", "label": "System Uptime" }
+        {
+          "number": "165+",
+          "label": "Projects Delivered"
+        },
+        {
+          "number": "60+",
+          "label": "Deployment Sites"
+        },
+        {
+          "number": "24/7",
+          "label": "Real-time Operation"
+        },
+        {
+          "number": "99.9%",
+          "label": "System Uptime"
+        }
       ]
     },
     "trust": {
       "label": "Partners & Clients",
       "title": "Trusted Partners",
-      "partners": ["Seoul Metropolitan", "Korea Expressway Corp", "KOSHA", "LH", "SK", "Samsung C&T"]
+      "partners": [
+        "Seoul Metropolitan",
+        "Korea Expressway Corp",
+        "KOSHA",
+        "LH",
+        "SK",
+        "Samsung C&T"
+      ]
     },
     "cta": {
-      "title": "Build Safer Sites with SafeGAI",
-      "desc": "Experience the AI safety platform optimized for public institutions, construction sites, and industrial facilities.",
-      "ctaButton": "Contact Us"
+      "title": "AI That Understands the Field, A Platform That Prevents Accidents",
+      "desc": "SafeGAI Platform detects and monitors risks in real-time across public safety, construction, and industrial sites.",
+      "ctaButton": "Control System",
+      "ctaCompany": "About Us"
     }
   },
   "common": {

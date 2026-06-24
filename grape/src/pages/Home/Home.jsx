@@ -61,16 +61,6 @@ export default function Home() {
             {t('home.hero.description')}
           </p>
 
-          <a
-            href="https://safegai.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="safegai-hero-domain"
-          >
-            <span className="safegai-hero-domain-url">safegai.com</span>
-            <span className="safegai-hero-domain-label">{t('home.hero.domainLabel')}</span>
-          </a>
-
           <div className="safegai-hero-cta-row">
             <Link
               to={`/${currentLang}/solutions/overview`}
@@ -191,29 +181,33 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* CTA Section - SafeGAI 관제시스템 */}
       <section className="safegai-cta-section">
         <div className="safegai-cta-content">
           <h2 className="safegai-cta-title">{t('home.cta.title')}</h2>
           <p className="safegai-cta-desc">{t('home.cta.desc')}</p>
-          <a
-            href="https://safegai.com"
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            to={`/${currentLang}/products/monitoring`}
             className="safegai-cta-domain"
           >
             <span className="safegai-cta-domain-url">
               <span className="safegai-brand safegai-brand-sm">
-                <span className="safe">safe</span><span className="gai">gai</span>
-              </span>.com
+                <span className="safe">Safe</span><span className="gai">GAI</span>
+              </span>{' '}Platform
             </span>
-          </a>
+          </Link>
           <div className="safegai-hero-cta-row">
             <Link
-              to={`/${currentLang}/about/company`}
+              to={`/${currentLang}/products/monitoring`}
               className="safegai-hero-cta safegai-hero-cta-primary"
             >
               {t('home.cta.ctaButton')}
+            </Link>
+            <Link
+              to={`/${currentLang}/about/company`}
+              className="safegai-hero-cta safegai-hero-cta-secondary"
+            >
+              {t('home.cta.ctaCompany')}
             </Link>
           </div>
         </div>
