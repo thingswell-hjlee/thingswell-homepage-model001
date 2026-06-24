@@ -45,7 +45,7 @@ const PLATFORM_SPECS = [
 const DEFAULT_OG = {
   title: '싱스웰 - AI 기반 스마트 안전 솔루션',
   description: 'AI 카메라, 스마트밴드, 환경센서, 통합제어 시스템으로 산업안전을 혁신합니다.',
-  imageUrl: 'https://www.safegai.co.kr/og-image.png',
+  imageUrl: 'https://www.safegai.co.kr/og-image.jpg',
   siteName: '싱스웰 (ThingsWell)',
   url: 'https://www.safegai.co.kr',
 };
