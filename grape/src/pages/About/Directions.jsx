@@ -6,6 +6,9 @@ import company from '../../assets/header_image/company.jpg';
 import './About.css';
 import ContactInfo from '../../components/ContactInfo';
 
+// TODO: ContactInfo component has hardcoded Korean strings (문의하기, 대표번호, 이메일, 오시는 길, address).
+// i18n for ContactInfo should be implemented as a follow-up task.
+
 const Directions = () => {
   const { t } = useTranslation();
   return (
