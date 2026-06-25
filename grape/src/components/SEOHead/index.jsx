@@ -3,18 +3,51 @@ import { useLocation } from 'react-router-dom';
 import useTranslation from '../../hooks/useTranslation';
 import { stripLangPrefix } from '../../contexts/LanguageContext';
 
-const BASE_URL = 'https://www.safegai.co.kr';
+/**
+ * 현재 접속 도메인을 기반으로 baseUrl을 결정합니다.
+ * 지원 도메인: thingswell.co.kr, www.thingswell.co.kr, safegai.co.kr, www.safegai.co.kr
+ * fallback: https://www.thingswell.co.kr
+ */
+function getBaseUrl() {
+  if (typeof window === 'undefined') return 'https://www.thingswell.co.kr';
+  const hostname = window.location.hostname;
+  const allowedHosts = [
+    'www.thingswell.co.kr',
+    'thingswell.co.kr',
+    'www.safegai.co.kr',
+    'safegai.co.kr',
+  ];
+  if (allowedHosts.includes(hostname)) {
+    return `https://${hostname}`;
+  }
+  // 로컬 개발 등 기타 환경에서는 기본값 사용
+  return 'https://www.thingswell.co.kr';
+}
+
+/**
+ * 도메인에 따라 사이트명 결정
+ */
+function getSiteName(hostname) {
+  if (hostname && hostname.includes('safegai')) {
+    return 'SafeGAI';
+  }
+  return 'ThingsWell';
+}
 
 /**
  * SEOHead component
  * Manages document title, meta description, Open Graph tags,
- * hreflang alternate links, and canonical URL based on current language and path.
+ * hreflang alternate links, canonical URL, og:image, and twitter:image
+ * based on current language, path, and domain.
  */
 function SEOHead() {
   const { t, currentLang } = useTranslation();
   const location = useLocation();
 
   useEffect(() => {
+    const baseUrl = getBaseUrl();
+    const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
+    const siteName = getSiteName(hostname);
     const pathWithoutLang = stripLangPrefix(location.pathname);
 
     // Determine which SEO section to use based on path
@@ -29,9 +62,11 @@ function SEOHead() {
     const title = t(`seo.${seoSection}.title`);
     const description = t(`seo.${seoSection}.description`);
     const ogLocale = currentLang === 'ko' ? 'ko_KR' : 'en_US';
-    const canonicalUrl = `${BASE_URL}/${currentLang}${pathWithoutLang === '/' ? '' : pathWithoutLang}`;
-    const koUrl = `${BASE_URL}/ko${pathWithoutLang === '/' ? '' : pathWithoutLang}`;
-    const enUrl = `${BASE_URL}/en${pathWithoutLang === '/' ? '' : pathWithoutLang}`;
+    const pagePath = pathWithoutLang === '/' ? '' : pathWithoutLang;
+    const canonicalUrl = `${baseUrl}/${currentLang}${pagePath}`;
+    const koUrl = `${baseUrl}/ko${pagePath}`;
+    const enUrl = `${baseUrl}/en${pagePath}`;
+    const ogImageUrl = `${baseUrl}/og-image.jpg`;
 
     // Set document title
     document.title = title;
@@ -56,7 +91,16 @@ function SEOHead() {
     setMeta('property', 'og:locale', ogLocale);
     setMeta('property', 'og:url', canonicalUrl);
     setMeta('property', 'og:type', 'website');
-    setMeta('property', 'og:site_name', 'ThingsWell');
+    setMeta('property', 'og:site_name', siteName);
+    setMeta('property', 'og:image', ogImageUrl);
+    setMeta('property', 'og:image:width', '1200');
+    setMeta('property', 'og:image:height', '630');
+
+    // Twitter Card tags
+    setMeta('name', 'twitter:card', 'summary_large_image');
+    setMeta('name', 'twitter:title', title);
+    setMeta('name', 'twitter:description', description);
+    setMeta('name', 'twitter:image', ogImageUrl);
 
     // Canonical link
     let canonicalEl = document.querySelector('link[rel="canonical"]');
