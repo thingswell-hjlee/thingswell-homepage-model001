@@ -43,11 +43,11 @@ const PLATFORM_SPECS = [
 
 // 기본 OG 설정값
 const DEFAULT_OG = {
-  title: '싱스웰 - AI 기반 스마트 안전 솔루션',
-  description: 'AI 카메라, 스마트밴드, 환경센서, 통합제어 시스템으로 산업안전을 혁신합니다.',
+  title: '싱스웰',
+  description: '싱스웰은 AI 기반 산업안전, 스마트 디바이스, 통합제어, 현장 안전관리 솔루션을 제공하는 IT 전문기업입니다.',
   imageUrl: '/og-image.jpg',
-  siteName: '싱스웰 (ThingsWell)',
-  url: 'https://www.safegai.co.kr',
+  siteName: '싱스웰',
+  url: 'https://www.thingswell.co.kr',
 };
 
 export default function OGSettings() {
@@ -321,7 +321,7 @@ export default function OGSettings() {
                 type="text"
                 value={ogData.imageUrl}
                 onChange={(e) => setOgData({ ...ogData, imageUrl: e.target.value })}
-                placeholder="https://www.safegai.co.kr/og-image.png"
+                placeholder="https://www.thingswell.co.kr/og-image.jpg"
               />
               <div className="og-image-upload">
                 <label className="og-upload-btn">
@@ -348,7 +348,7 @@ export default function OGSettings() {
                 type="text"
                 value={ogData.url}
                 onChange={(e) => setOgData({ ...ogData, url: e.target.value })}
-                placeholder="https://www.safegai.co.kr"
+                placeholder="https://www.thingswell.co.kr"
               />
             </div>
 
