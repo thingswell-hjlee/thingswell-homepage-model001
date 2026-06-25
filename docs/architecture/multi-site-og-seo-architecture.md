@@ -37,7 +37,6 @@ Facebook 크롤러 → www.thingswell.co.kr/og-image.jpg
               → 웹 배포 버킷에서 직접 읽음 (관리자 업로드와 무관)
 ```
 
-
 ---
 
 ## 2. thingswell.co.kr / safegai.com 역할 분리
@@ -72,7 +71,6 @@ safegai.com 계열:
 | `thingswell-main` | 싱스웰 | 싱스웰 | https://www.thingswell.co.kr/ |
 | `safegai-main` | SafeGAI - 스마트 안전 AI 플랫폼 | SafeGAI | https://www.safegai.com/ |
 | `safegai-platform` | SafeGAI 안전 관제 플랫폼 | SafeGAI Platform | https://platform.safegai.com/ |
-
 
 ---
 
@@ -138,7 +136,6 @@ Facebook/카카오 크롤러 → www.thingswell.co.kr/og-image.jpg
 │              │ │  - config    │ │              │
 └──────────────┘ └──────────────┘ └──────────────┘
 ```
-
 
 ---
 
@@ -221,7 +218,6 @@ tenantId (향후 SafegAI 멀티테넌트)
 
 > SPA 구조에서 `/ko`, `/en` 경로에 따라 SEOHead 컴포넌트가 동적으로 적용하되,
 > `index.html` 정적 태그는 기본 locale(ko)을 사용한다.
-
 
 ---
 
@@ -318,7 +314,6 @@ safegai-config/
     └── sites.json                           # 전체 사이트 목록/메타 정보
 ```
 
-
 ---
 
 ## 6. 설정 저장소 설계
@@ -414,7 +409,6 @@ safegai-config/
   }
 }
 ```
-
 
 ---
 
@@ -555,7 +549,6 @@ safegai-config/
   }
 }
 ```
-
 
 ---
 
@@ -720,7 +713,6 @@ async function publishOgImage({ siteId, sourceImageKey, seoData, publishedBy }) 
 | `CONFIG_SAVE_FAILED` | DynamoDB 저장 실패 | 500 |
 | `UNAUTHORIZED` | 권한 없음 | 403 |
 
-
 ---
 
 ## 9. CloudFront Invalidation 로직
@@ -758,7 +750,6 @@ function getInvalidationPaths(siteId) {
 | `/` | 루트 접속 시 301 리다이렉트 응답 캐시 |
 | `/ko` | Facebook 크롤러가 리다이렉트 후 최종 도착 경로 |
 | `/ko/` | 트레일링 슬래시 변형 |
-
 
 ---
 
@@ -849,7 +840,6 @@ PolicyDocument:
 | Upload Lambda | 업로드 버킷 쓰기만 | 웹 버킷 접근 불가 |
 | SEO Publish Lambda | 업로드 버킷 읽기 + 웹 버킷 쓰기 + CF 무효화 | og-image 경로만 |
 | 관리자 (Cognito) | API Gateway를 통한 간접 접근만 | S3 직접 접근 불가 |
-
 
 ---
 
@@ -942,7 +932,6 @@ router.post('/admin/sites/:siteId/seo/publish', authMiddleware, async (req, res)
 });
 ```
 
-
 ---
 
 ## 12. SafegAI 스마트 안전 AI 플랫폼 확장 고려사항
@@ -1022,7 +1011,6 @@ Phase 3 (Platform 3.0 SaaS):
   - 대시보드/보고서 공유 링크 동적 OG
   - Multi-region CDN 분산
 ```
-
 
 ---
 
@@ -1122,7 +1110,6 @@ Phase 3 (Platform 3.0 SaaS):
 1. ECS/EC2 API 서버에 서비스 레이어 이식
 2. 동적 OG 생성 (이벤트 알림 공유 링크)
 3. tenantId 기반 멀티테넌트 OG
-
 
 ---
 
