@@ -47,7 +47,7 @@ const DEFAULT_OG = {
   description: 'AI 카메라, 스마트밴드, 환경센서, 통합제어 시스템으로 산업안전을 혁신합니다.',
   imageUrl: '/og-image.jpg',
   siteName: '싱스웰 (ThingsWell)',
-  url: 'https://www.safegai.co.kr',
+  url: 'https://www.thingswell.co.kr',
 };
 
 export default function OGSettings() {
@@ -124,7 +124,7 @@ export default function OGSettings() {
       localStorage.setItem('og_settings', JSON.stringify(newOgData));
       setOgData(newOgData);
       setSavedOgData(newOgData);
-      setMessage('저장되었습니다! 실제 반영하려면 index.html 재배포가 필요합니다.');
+      setMessage('브라우저 미리보기 설정이 저장되었습니다. 실제 카카오/네이버/페이스북 OG 반영은 index.html 수정 및 재배포가 필요합니다.');
       setImageFile(null);
       setImagePreview(null);
     } catch (error) {
@@ -240,6 +240,21 @@ export default function OGSettings() {
   return (
     <BaseLayout title="공유 미리보기 관리">
       <div className="og-settings-page">
+        {/* OG 경고 안내 */}
+        <div style={{
+          background: '#fff3cd',
+          border: '1px solid #ffc107',
+          borderRadius: '8px',
+          padding: '16px 20px',
+          marginBottom: '24px',
+          color: '#664d03',
+          fontSize: '14px',
+          lineHeight: '1.6',
+        }}>
+          <strong>⚠️ 주의:</strong> 이 화면의 설정은 브라우저 미리보기 및 메타태그 복사용입니다.
+          카카오톡, 네이버, 페이스북 OG에 실제 반영하려면 <code>grape/index.html</code>을 수정한 뒤
+          다시 빌드/배포해야 합니다. 배포 후 카카오 공유 디버거에서 캐시 초기화도 필요합니다.
+        </div>
         {/* 설명 */}
         <section className="og-intro">
           <h2>SNS 공유 미리보기 설정</h2>
@@ -321,7 +336,7 @@ export default function OGSettings() {
                 type="text"
                 value={ogData.imageUrl}
                 onChange={(e) => setOgData({ ...ogData, imageUrl: e.target.value })}
-                placeholder="https://www.safegai.co.kr/og-image.png"
+                placeholder="https://www.thingswell.co.kr/og-image.jpg"
               />
               <div className="og-image-upload">
                 <label className="og-upload-btn">
@@ -348,7 +363,7 @@ export default function OGSettings() {
                 type="text"
                 value={ogData.url}
                 onChange={(e) => setOgData({ ...ogData, url: e.target.value })}
-                placeholder="https://www.safegai.co.kr"
+                placeholder="https://www.thingswell.co.kr"
               />
             </div>
 
