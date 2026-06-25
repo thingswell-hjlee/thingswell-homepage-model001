@@ -6,6 +6,9 @@ import company from '../../assets/header_image/company.jpg';
 import CertificateSection from '../../components/CertificateSection/CertificateSection';
 import './About.css';
 
+// TODO: CertificateSection has hardcoded Korean strings (면허인증특허, category names, certificate titles).
+// i18n for CertificateSection should be implemented as a follow-up task.
+
 const Licenses = () => {
   const { t } = useTranslation();
   return (
