@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import './ProductCardGroup.css';
+import useTranslation from '../../hooks/useTranslation';
 
-const ProductCardGroup = ({ 
+const ProductCardGroup = ({
   products = [],
-  title = "제품 라인업",
-  subtitle = "다양한 제품을 확인해보세요"
+  title,
+  subtitle
 }) => {
+  const { t } = useTranslation();
+  title = title ?? t('ui2.defaults.cardGroupTitle');
+  subtitle = subtitle ?? t('ui2.defaults.cardGroupSubtitle');
   const [activeProductIndex, setActiveProductIndex] = useState(0);
 
   if (!products || products.length === 0) {
@@ -16,7 +20,7 @@ const ProductCardGroup = ({
           <p>{subtitle}</p>
         </div>
         <div className="no-products">
-          <p>표시할 제품이 없습니다.</p>
+          <p>{t('ui2.cardGroup.noProducts')}</p>
         </div>
       </div>
     );
@@ -84,7 +88,7 @@ const ProductCardGroup = ({
                 
                 {activeProduct.features && (
                   <div className="product-features">
-                    <h4>주요 특징</h4>
+                    <h4>{t('ui2.cardGroup.keyFeatures')}</h4>
                     <ul>
                       {activeProduct.features.map((feature, index) => (
                         <li key={index}>{feature}</li>
@@ -95,7 +99,7 @@ const ProductCardGroup = ({
                 
                 {activeProduct.specs && (
                   <div className="product-specs">
-                    <h4>주요 사양</h4>
+                    <h4>{t('ui2.cardGroup.keySpecs')}</h4>
                     <div className="specs-grid">
                       {activeProduct.specs.map((spec, index) => (
                         <div key={index} className="spec-item">

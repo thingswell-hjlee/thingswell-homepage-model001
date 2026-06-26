@@ -86,12 +86,12 @@ const TabContent = ({ tabId, productData, featureClickToOpen = false, onFeatureI
                         className="feature-media"
                         imgClassName="feature-image"
                         src={imageObj.url}
-                        alt={`주요 기능 ${index + 1}`}
+                        alt={`${t('ui2.tabContent.featureImageAlt')} ${index + 1}`}
                         caption={imageObj.caption}
                         position="top-left"
                         onClick={() => {
                           if (onFeatureImageClick) {
-                            onFeatureImageClick(imageObj.url, imageObj.caption, `주요 기능 ${index + 1}`);
+                            onFeatureImageClick(imageObj.url, imageObj.caption, `${t('ui2.tabContent.featureImageAlt')} ${index + 1}`);
                           }
                         }}
                       />
@@ -179,12 +179,12 @@ const TabContent = ({ tabId, productData, featureClickToOpen = false, onFeatureI
                         className="spec-media"
                         imgClassName="spec-image"
                         src={imageObj.url}
-                        alt={`사양 ${index + 1}`}
+                        alt={`${t('ui2.tabContent.specImageAlt')} ${index + 1}`}
                         caption={imageObj.caption}
                         position="top-left"
                         onClick={() => {
                           if (onFeatureImageClick) {
-                            onFeatureImageClick(imageObj.url, imageObj.caption, `사양 ${index + 1}`);
+                            onFeatureImageClick(imageObj.url, imageObj.caption, `${t('ui2.tabContent.specImageAlt')} ${index + 1}`);
                           }
                         }}
                       />
@@ -302,12 +302,12 @@ const TabContent = ({ tabId, productData, featureClickToOpen = false, onFeatureI
                         className="cert-media"
                         imgClassName="cert-image"
                         src={imageObj.url}
-                        alt={`인증 ${index + 1}`}
+                        alt={`${t('ui2.tabContent.certImageAlt')} ${index + 1}`}
                         caption={imageObj.caption}
                         position="top-left"
                         onClick={() => {
                           if (onFeatureImageClick) {
-                            onFeatureImageClick(imageObj.url, imageObj.caption, `인증 ${index + 1}`);
+                            onFeatureImageClick(imageObj.url, imageObj.caption, `${t('ui2.tabContent.certImageAlt')} ${index + 1}`);
                           }
                         }}
                       />
@@ -453,7 +453,7 @@ const TabContent = ({ tabId, productData, featureClickToOpen = false, onFeatureI
                       <div className="video-embed" style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden' }}>
                         <iframe
                           src={embedUrl}
-                          title={`동영상 ${index + 1}`}
+                          title={`${t('ui2.tabContent.videoTitle')} ${index + 1}`}
                           frameBorder="0"
                           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                           referrerPolicy="strict-origin-when-cross-origin"

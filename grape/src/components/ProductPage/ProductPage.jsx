@@ -143,27 +143,28 @@ const MarkdownRenderer = ({ content }) => {
   }
 };
 
-const ProductPage = ({ 
-  productData = {
-    name: "XCN-3000",
-    title: "어드밴스드 통합제어기",
-    description: "카트 이동식 태양광 80w 30배 줌 5백만 화소 초 고화질 PTZ 카메라 세트는 비 포장 공사 현장에서도 이동이 용이하며, LTE 라우터를 설치하여 PC 또는 모바일로 원격 관제 합니다.",
-    breadcrumbs: ["Home", "Products", "Control system"],
-    images: [],
-    overview: "XCN-3000은 산업용 통합 제어 시스템으로, 다양한 센서와 장비를 연결하여 실시간 모니터링 및 제어를 제공합니다.",
-    keyFeatures: [],
-    features: [],
-    specifications: [],
-    certifications: [],
-    downloads: [],
-    videos: []
-  },
+const ProductPage = ({
+  productData,
   isEditMode = false,
   onDataChange = null,
   hideHeader = false,
   isRecordPage = false
 }) => {
   const { t } = useTranslation();
+  productData = productData ?? {
+    name: "XCN-3000",
+    title: t('ui2.defaults.sampleTitle'),
+    description: t('ui2.defaults.sampleDescription'),
+    breadcrumbs: ["Home", "Products", "Control system"],
+    images: [],
+    overview: t('ui2.defaults.sampleOverview'),
+    keyFeatures: [],
+    features: [],
+    specifications: [],
+    certifications: [],
+    downloads: [],
+    videos: []
+  };
   const [activeTab, setActiveTab] = useState('overview');
   const [tabsCollapsed, setTabsCollapsed] = useState(false);
   const [lightbox, setLightbox] = useState({ open: false, src: '', caption: '', alt: '' });
@@ -299,24 +300,24 @@ const ProductPage = ({
                       <div style={{ padding: '20px', background: '#fff', borderRadius: '8px', marginBottom: '20px' }}>
                         <div style={{ marginBottom: '20px' }}>
                           <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold', color: '#6c757d' }}>
-                            {isRecordPage ? '실적명' : '제품명'}
+                            {isRecordPage ? t('ui2.page.recordNameLabel') : t('ui2.page.productNameLabel')}
                           </label>
                           <EditableText
                             field="overview_title"
                             value={productData.overview_title}
-                            placeholder={isRecordPage ? "실적명을 입력하세요" : "제품명을 입력하세요"}
+                            placeholder={isRecordPage ? t('ui2.page.recordNamePlaceholder') : t('ui2.page.productNamePlaceholder')}
                             style={{ fontSize: '18px', fontWeight: 'bold' }}
                             onSave={handleDataChange}
                           />
                         </div>
                         <div>
                           <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold', color: '#6c757d' }}>
-                            {isRecordPage ? '실적 설명' : '제품 설명'}
+                            {isRecordPage ? t('ui2.page.recordDescLabel') : t('ui2.page.productDescLabel')}
                           </label>
                           <EditableText
                             field="overview"
                             value={productData.overview}
-                            placeholder={isRecordPage ? "실적 설명을 입력하세요" : "제품 설명을 입력하세요"}
+                            placeholder={isRecordPage ? t('ui2.page.recordDescPlaceholder') : t('ui2.page.productDescPlaceholder')}
                             multiline={true}
                             style={{ fontSize: '14px', lineHeight: '1.6' }}
                             onSave={handleDataChange}

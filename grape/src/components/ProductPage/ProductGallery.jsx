@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './ProductGallery.css';
 import ImageWithCaption from '../Common/ImageWithCaption';
+import useTranslation from '../../hooks/useTranslation';
 
 const ProductGallery = ({ 
   images = [],
@@ -8,6 +9,7 @@ const ProductGallery = ({
   captions = [],
   onImageClick,
 }) => {
+  const { t } = useTranslation();
   const [selectedImage, setSelectedImage] = useState(0);
 
   if (!images || images.length === 0) {
@@ -88,10 +90,10 @@ const ProductGallery = ({
         className="main-image-container"
         imgClassName="gallery-main-image"
         src={images[selectedImage]}
-        alt={`${productName} - 이미지 ${selectedImage + 1}`}
+        alt={`${productName} - ${t('ui2.gallery.image')} ${selectedImage + 1}`}
         caption={Array.isArray(captions) ? captions[selectedImage] : undefined}
         position="top-left"
-        onClick={() => onImageClick && onImageClick(images[selectedImage], Array.isArray(captions) ? captions[selectedImage] : undefined, `${productName} - 이미지 ${selectedImage + 1}`)}
+        onClick={() => onImageClick && onImageClick(images[selectedImage], Array.isArray(captions) ? captions[selectedImage] : undefined, `${productName} - ${t('ui2.gallery.image')} ${selectedImage + 1}`)}
       />
       
       <div className="thumbnail-container">
@@ -103,7 +105,7 @@ const ProductGallery = ({
           >
             <ImageWithCaption
               src={image}
-              alt={`${productName} 썸네일 ${index + 1}`}
+              alt={`${productName} ${t('ui2.gallery.thumbnail')} ${index + 1}`}
               className="thumbnail__inner"
               imgClassName="thumbnail-image"
               caption={Array.isArray(captions) ? captions[index] : undefined}

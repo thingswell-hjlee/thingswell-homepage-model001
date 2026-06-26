@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './ProductTabs.css';
+import useTranslation from '../../hooks/useTranslation';
 
 const ProductTabs = ({ 
   productName = "XCN-3000",
@@ -12,6 +13,7 @@ const ProductTabs = ({
   maxVisibleTabs,
   isRecordPage = false
 }) => {
+  const { t } = useTranslation();
   const [currentTab, setCurrentTab] = useState(null);
   const [isCollapsed, setIsCollapsed] = useState(collapsed);
   const normalizedAllowed = Array.isArray(allowedTabIds) && allowedTabIds.length > 0 ? allowedTabIds : null;
@@ -72,9 +74,9 @@ const ProductTabs = ({
             className="tab-button"
             disabled
             aria-disabled
-            title="탭이 제공되지 않았습니다"
+            title={t('ui2.tabs.noTabsTitle')}
           >
-            탭 없음
+            {t('ui2.tabs.noTabs')}
           </button>
         )}
         {/* 제품 페이지에서만 +/- 아이콘 표시 (개요 탭이 활성화되어 있고, 다른 탭들이 있을 때) */}
@@ -84,8 +86,8 @@ const ProductTabs = ({
           className={`tab-toggle-button${isCollapsed ? ' collapsed' : ''}`}
           onClick={handleToggle}
           aria-pressed={!isCollapsed}
-          aria-label={isCollapsed ? '탭 콘텐츠 열기' : '탭 콘텐츠 닫기'}
-          title={isCollapsed ? '열기' : '닫기'}
+          aria-label={isCollapsed ? t('ui2.tabs.openLabel') : t('ui2.tabs.closeLabel')}
+          title={isCollapsed ? t('ui2.tabs.openTitle') : t('ui2.tabs.closeTitle')}
         >
           {isCollapsed ? '+' : '−'}
         </button>

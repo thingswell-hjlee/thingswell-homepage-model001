@@ -911,5 +911,2763 @@
     "noTitle": "Untitled",
     "noOverview": "No overview",
     "noContent": "No content"
+  },
+  "casesPage": {
+    "integrated": {
+      "hero": {
+        "title1": "Over 165 Integrated Control",
+        "title2": "Projects Delivered",
+        "desc": "From universities, enterprises, hotels, hospitals, and public institutions to defense and overseas projects — built on the XCN-3000 integrated controller and the ThingsEye remote management platform, we have successfully delivered smart integrated control systems that unify video, audio, lighting, and environmental equipment under a single interface."
+      },
+      "stats": [
+        {
+          "number": "165+",
+          "label": "Delivered Projects"
+        },
+        {
+          "number": "8yrs+",
+          "label": "Consecutive Operations"
+        },
+        {
+          "number": "Overseas",
+          "label": "Expansion to UAE & Vietnam"
+        },
+        {
+          "number": "200+",
+          "label": "Controlled Spaces"
+        }
+      ],
+      "sections": {
+        "featured": "Key Delivery Records",
+        "yearly": "Delivery History by Year",
+        "capabilities": "Core Capabilities"
+      },
+      "capabilities": [
+        {
+          "title": "Integrated Control",
+          "desc": "XCN-3000-based multi-protocol control over RS232/485/TCP/IP/IR/relay, touch-panel GUI, and preset scenarios"
+        },
+        {
+          "title": "Speaker Tracking",
+          "desc": "PTZ camera-linked automatic speaker tracking, video conferencing integration, howling cancellation, and automatic microphone mixing"
+        },
+        {
+          "title": "Remote Management",
+          "desc": "ThingsEye cloud platform, remote monitoring of multiple facilities, scheduling automation, and fault alerts"
+        },
+        {
+          "title": "Overseas Projects",
+          "desc": "Proven capability to deliver overseas projects such as UAE Barakah Nuclear Plant and DRB Vietnam, with compliance to global standards"
+        }
+      ],
+      "highlightCases": [
+        {
+          "id": 385,
+          "title": "Yuhan University Auditorium Integrated Control System",
+          "orderer": "Yuhan University",
+          "date": "2025",
+          "type": "Auditorium",
+          "desc": [
+            "Integrated control system for the main auditorium",
+            "Unified automation of video, audio, and lighting",
+            "One-touch environment switching via touch panel"
+          ],
+          "images": [
+            "https://ybahnhnvdnelyxzzgdgn.supabase.co/storage/v1/object/public/track_record/track_record/1756963275470-b07s6jaf4xr.webp"
+          ]
+        },
+        {
+          "id": 484,
+          "title": "UAE BNPP Barakah Nuclear Plant",
+          "orderer": "UAE Nuclear Plant",
+          "date": "2020",
+          "type": "Overseas Project",
+          "desc": [
+            "Simulation center for the Barakah Nuclear Power Plant in the UAE",
+            "Integrated control of Simulator, CCTV, VMS, and Audio System",
+            "Successful overseas project delivery"
+          ],
+          "images": [
+            "https://ybahnhnvdnelyxzzgdgn.supabase.co/storage/v1/object/public/track_record/track_record/1756963414645-s53namryiv.webp"
+          ]
+        },
+        {
+          "id": 422,
+          "title": "Pangyo DoubleTree by Hilton Hotel Banquet Hall",
+          "orderer": "DoubleTree by Hilton",
+          "date": "2022",
+          "type": "Hotel",
+          "desc": [
+            "Integrated control system for 12 banquet halls and meeting rooms",
+            "Independent multi-zone control and scenario operation",
+            "Batch equipment switching via touch panel"
+          ],
+          "images": [
+            "https://ybahnhnvdnelyxzzgdgn.supabase.co/storage/v1/object/public/track_record/track_record/1756963390516-hshovsb7mau.webp"
+          ]
+        },
+        {
+          "id": 545,
+          "title": "Yongin Hanwha Life Training Center",
+          "orderer": "Hanwha Life",
+          "date": "2018",
+          "type": "Training Center",
+          "desc": [
+            "Smart integrated control for the 2nd training center",
+            "Unified operation of multipurpose lecture and meeting rooms",
+            "Integration with the remote management system"
+          ],
+          "images": [
+            "https://ybahnhnvdnelyxzzgdgn.supabase.co/storage/v1/object/public/track_record/track_record/1756963499409-uh1d844pcki.webp"
+          ]
+        },
+        {
+          "id": 539,
+          "title": "DRB Vietnam Branch",
+          "orderer": "DRB",
+          "date": "2018",
+          "type": "Overseas Project",
+          "desc": [
+            "Integrated control of the video conference room at the Vietnam branch",
+            "Integration with an overseas remote video conferencing system",
+            "Multinational communication environment"
+          ],
+          "images": [
+            "https://ybahnhnvdnelyxzzgdgn.supabase.co/storage/v1/object/public/track_record/track_record/1756963464479-gfylwscxwnc.webp"
+          ]
+        },
+        {
+          "id": 547,
+          "title": "Hongcheon Mirae Asset Training Center",
+          "orderer": "Mirae Asset Training Center",
+          "date": "2018",
+          "type": "Training Center",
+          "desc": [
+            "Smart integrated control system",
+            "Multipurpose space control for a large training facility",
+            "Unified operation of video, audio, and lighting"
+          ],
+          "images": [
+            "https://ybahnhnvdnelyxzzgdgn.supabase.co/storage/v1/object/public/track_record/track_record/1756963518188-u0nm03zhkro.webp"
+          ]
+        },
+        {
+          "id": 508,
+          "title": "Korea University SK Future Hall, Choi Jong-hyun Hall",
+          "orderer": "Korea University",
+          "date": "2019",
+          "type": "University",
+          "desc": [
+            "Smart integrated control for the multipurpose hall",
+            "Automatic scenario switching for large lectures and events",
+            "Speaker-tracking camera integration"
+          ],
+          "images": [
+            "https://ybahnhnvdnelyxzzgdgn.supabase.co/storage/v1/object/public/track_record/track_record/1756963434526-g28xgkul1fb.webp"
+          ]
+        },
+        {
+          "id": 518,
+          "title": "Chonnam National University Yeosu Fisheries & Marine Training Ship",
+          "orderer": "Chonnam National University",
+          "date": "2019",
+          "type": "Training Ship",
+          "desc": [
+            "Smart integrated control for the Saedongbaek training ship",
+            "Design tailored to the special conditions of a maritime environment",
+            "Integrated control system for lecture and practice rooms"
+          ],
+          "images": [
+            "https://ybahnhnvdnelyxzzgdgn.supabase.co/storage/v1/object/public/track_record/track_record/1756963444142-q6ht9rtdr8j.webp"
+          ]
+        }
+      ],
+      "yearlyCases": [
+        {
+          "year": "2025",
+          "cases": [
+            {
+              "title": "Yuhan University Auditorium Integrated Control System",
+              "orderer": "Yuhan University"
+            }
+          ]
+        },
+        {
+          "year": "2024",
+          "cases": [
+            {
+              "title": "Gyeongsang National University 4,200t Training Ship Classroom",
+              "orderer": "Gyeongsang National University"
+            },
+            {
+              "title": "Eternis Gwacheon Office Large Training Hall",
+              "orderer": "Eternis"
+            },
+            {
+              "title": "Korea Univ. College of Life Sciences West Bldg. PBL Classroom",
+              "orderer": "Korea University"
+            },
+            {
+              "title": "Gachon University Faculty Meeting Room",
+              "orderer": "Gachon University"
+            },
+            {
+              "title": "LX Pantos Large Conference Room",
+              "orderer": "LX Pantos"
+            },
+            {
+              "title": "Samsung Electronics Logitech Large & Medium Conference Room Integrated Control",
+              "orderer": "Samsung Electronics Logitech"
+            },
+            {
+              "title": "Kassia Hotel Sokcho Banquet Hall Integrated Control",
+              "orderer": "Kassia Hotel"
+            },
+            {
+              "title": "Korea Univ. College of Life Sciences PBL Computer Lab Speaker Tracking",
+              "orderer": "Korea University"
+            },
+            {
+              "title": "New Office Multipurpose Large Lecture Hall",
+              "orderer": "Eternis"
+            }
+          ]
+        },
+        {
+          "year": "2023",
+          "cases": [
+            {
+              "title": "Smart Farm Automation System",
+              "orderer": "Hoseo University"
+            },
+            {
+              "title": "National Information Resources Service Gongju Center Speaker Tracking",
+              "orderer": "National Information Resources Service"
+            },
+            {
+              "title": "Andong Citizens' Hall Nakdong Hall",
+              "orderer": "Andong City Hall"
+            },
+            {
+              "title": "National Information Resources Service Gongju & Daegu Center Meeting Rooms",
+              "orderer": "National Information Resources Service"
+            },
+            {
+              "title": "Busan Songdo Wyndham Grand Banquet Hall",
+              "orderer": "Wyndham Grand Hotel"
+            },
+            {
+              "title": "Army OO Division Situation Room",
+              "orderer": "Ministry of National Defense"
+            },
+            {
+              "title": "Pangyo Government Agency Classroom",
+              "orderer": "Government Agency"
+            },
+            {
+              "title": "Sunchang-gun Sunjeong Livestock Co-op Premium Hanwoo Hall",
+              "orderer": "Sunchang-gun Sunjeong Livestock Co-op"
+            },
+            {
+              "title": "Jaun-dae ROK Armed Forces Medical Training Center",
+              "orderer": "Ministry of National Defense"
+            },
+            {
+              "title": "Smart Farm Monitoring Integrated Control",
+              "orderer": "Hoseo University"
+            },
+            {
+              "title": "Yongin City Hall Meeting Room Lift Control",
+              "orderer": "Yongin City Hall"
+            },
+            {
+              "title": "Digital VR Room Integrated Control",
+              "orderer": "Domestic Enterprise"
+            },
+            {
+              "title": "TI Fluid System VR Room",
+              "orderer": "TI Fluid System"
+            }
+          ]
+        },
+        {
+          "year": "2022",
+          "cases": [
+            {
+              "title": "Pangyo DoubleTree by Hilton Hotel Banquet Hall (12 rooms)",
+              "orderer": "DoubleTree by Hilton"
+            },
+            {
+              "title": "National Research Foundation Meeting Rooms (Seoul & Daejeon)",
+              "orderer": "National Research Foundation of Korea"
+            },
+            {
+              "title": "Yonsei Medical Center Sinchon Severance Faculty Meeting Room",
+              "orderer": "Yonsei Medical Center"
+            },
+            {
+              "title": "Korea Express Office Meeting Room",
+              "orderer": "Korea Express"
+            },
+            {
+              "title": "Army Air Defense School Auditorium",
+              "orderer": "Army Air Defense School"
+            },
+            {
+              "title": "Daegu National Information Resources Service Medium Conference Room",
+              "orderer": "National Information Resources Service"
+            },
+            {
+              "title": "LIG Nex1 Large Conference & Lecture Rooms",
+              "orderer": "LIG Nex1"
+            },
+            {
+              "title": "Busan High School Soundproof Studio",
+              "orderer": "Busan Office of Education"
+            },
+            {
+              "title": "Raemian Yongsan Hi-Fi AV System",
+              "orderer": "Samsung C&T"
+            },
+            {
+              "title": "Ansan Office of Education Meeting Room",
+              "orderer": "Ansan Office of Education"
+            }
+          ]
+        },
+        {
+          "year": "2021",
+          "cases": [
+            {
+              "title": "Hanyang University AI Smart Booth",
+              "orderer": "Hanyang University"
+            },
+            {
+              "title": "Busan Dong-A University Classroom",
+              "orderer": "Dong-A University"
+            },
+            {
+              "title": "Hanbat National University Intensive Discussion Video Conference Room",
+              "orderer": "Hanbat National University"
+            },
+            {
+              "title": "Boryeong City Hall Culture Center Lighting Control",
+              "orderer": "Boryeong City Hall"
+            },
+            {
+              "title": "Korea University Earth Science Hall PBL Classroom",
+              "orderer": "Korea University"
+            },
+            {
+              "title": "Intellian Technologies Pyeongtaek Auditorium",
+              "orderer": "Intellian Technologies"
+            },
+            {
+              "title": "Hyosung TNS Video Conference Room",
+              "orderer": "Hyosung TNS"
+            },
+            {
+              "title": "Korea Railroad Corporation Seoul Headquarters",
+              "orderer": "Korea Railroad Corporation"
+            },
+            {
+              "title": "Incheon City Council Speaker Tracking System",
+              "orderer": "Incheon City Council"
+            },
+            {
+              "title": "Korea Univ. Business School & Sudang Learning Info Center PBL Room",
+              "orderer": "Korea University"
+            }
+          ]
+        },
+        {
+          "year": "2020",
+          "cases": [
+            {
+              "title": "UAE BNPP Barakah Nuclear Plant Simulation Center",
+              "orderer": "UAE Nuclear Plant"
+            },
+            {
+              "title": "Osstem Implant Magok Office (9 rooms)",
+              "orderer": "Osstem Implant"
+            },
+            {
+              "title": "Gangnam Daesung Boarding Academy Medical Bldg. (20 classrooms)",
+              "orderer": "Gangnam Daesung Academy"
+            },
+            {
+              "title": "Nexon Korea Meeting Room G1",
+              "orderer": "Nexon Korea"
+            },
+            {
+              "title": "Chungnam Office of Education Situation Room",
+              "orderer": "Chungnam Office of Education"
+            },
+            {
+              "title": "Asia Culture Center Media Facade",
+              "orderer": "Asia Culture Center"
+            },
+            {
+              "title": "Hanwha Defense Changwon Management Meeting Room",
+              "orderer": "Hanwha Defense"
+            },
+            {
+              "title": "Hoban Construction Seocho Office",
+              "orderer": "Hoban Construction"
+            },
+            {
+              "title": "Hyundai Motor Ulsan Plant Main Bldg. Large Conference Room",
+              "orderer": "Hyundai Motor"
+            },
+            {
+              "title": "Seoul Nowon-gu Light Garden Media Facade",
+              "orderer": "Nowon-gu Office"
+            }
+          ]
+        },
+        {
+          "year": "2019",
+          "cases": [
+            {
+              "title": "National Water Industry Cluster (6 rooms)",
+              "orderer": "Ministry of Environment"
+            },
+            {
+              "title": "Korea University SK Future Hall, Choi Jong-hyun Hall",
+              "orderer": "Korea University"
+            },
+            {
+              "title": "Chonnam Nat'l Univ. Yeosu Training Ship Saedongbaek",
+              "orderer": "Chonnam National University"
+            },
+            {
+              "title": "Korea Energy Agency Ulsan",
+              "orderer": "Korea Energy Agency"
+            },
+            {
+              "title": "Busan Port International Passenger Terminal Convention Center",
+              "orderer": "Busan Port Authority"
+            },
+            {
+              "title": "Daejeon Disaster & Safety Countermeasures HQ Integrated Situation Room",
+              "orderer": "Daejeon Metropolitan City"
+            },
+            {
+              "title": "Korea Maritime University Hannara Training Ship",
+              "orderer": "Korea Maritime & Ocean University"
+            },
+            {
+              "title": "Mokpo Maritime University Saeyudal Training Ship",
+              "orderer": "Mokpo National Maritime University"
+            },
+            {
+              "title": "Incheon City Council Video Conference + Speaker Tracking",
+              "orderer": "Incheon City Council"
+            },
+            {
+              "title": "Jeonnam Office of Education Suncheon Eco Edu Center",
+              "orderer": "Jeonnam Office of Education"
+            }
+          ]
+        },
+        {
+          "year": "2018",
+          "cases": [
+            {
+              "title": "DRB Vietnam Branch Video Conference Room",
+              "orderer": "DRB"
+            },
+            {
+              "title": "Hongcheon Mirae Asset Training Center",
+              "orderer": "Mirae Asset"
+            },
+            {
+              "title": "Yongin Hanwha Life 2nd Training Center",
+              "orderer": "Hanwha Life"
+            },
+            {
+              "title": "CJ Namsan HQ (Fitness Hall, Executive & Large Meeting Rooms)",
+              "orderer": "CJ"
+            },
+            {
+              "title": "Songdo Convensia (14 meeting rooms)",
+              "orderer": "Incheon Songdo Convensia"
+            },
+            {
+              "title": "Kakao Friends Hongdae Flagship Exhibition Hall",
+              "orderer": "Kakao Friends"
+            },
+            {
+              "title": "Hanwha Group Janggyo-dong Office",
+              "orderer": "Hanwha Group"
+            },
+            {
+              "title": "Mercedes-Benz V-Class Vehicle Control",
+              "orderer": "Mercedes-Benz"
+            },
+            {
+              "title": "SKT Nationwide Store Remote Broadcasting",
+              "orderer": "SK Telecom"
+            },
+            {
+              "title": "5 National University Training Ships (8000t x2, 2000t x3)",
+              "orderer": "National Universities"
+            }
+          ]
+        }
+      ]
+    },
+    "smartSafety": {
+      "hero": {
+        "title1": "AI Safety Systems,",
+        "title2": "Proven in the Field",
+        "desc": "A track record of successfully delivering diverse industrial safety projects, including the Seoul bus shelter AI situational awareness system, on-device AI cameras, control center construction, contactless radar vital sensing, and AI human detection."
+      },
+      "stats": [
+        {
+          "number": "8+",
+          "label": "Delivered Projects"
+        },
+        {
+          "number": "60+",
+          "label": "Installation Sites"
+        },
+        {
+          "number": "AI",
+          "label": "Core Technology"
+        },
+        {
+          "number": "24/7",
+          "label": "Real-time Monitoring"
+        }
+      ],
+      "sections": {
+        "cases": "Delivery Records",
+        "capabilities": "Core Technical Capabilities"
+      },
+      "capabilities": [
+        {
+          "title": "AI Video Analytics",
+          "desc": "On-device AI-based real-time video analytics including people counting, fall detection, violence detection, and human detection"
+        },
+        {
+          "title": "Contactless Sensing",
+          "desc": "mmWave Radar-based contactless vital sign measurement, respiration and heart rate monitoring, and occupancy detection"
+        },
+        {
+          "title": "Remote Monitoring",
+          "desc": "Multi-site integrated control center, remote equipment control, real-time monitoring, and event-based automatic alert system"
+        },
+        {
+          "title": "IoT Integrated Control",
+          "desc": "Integrated control of equipment such as lighting, HVAC, air quality, automatic doors, and LED, plus environmental automation"
+        }
+      ],
+      "cases": [
+        {
+          "id": 571,
+          "title": "Seoul Bus Smart Shelter AI Situational Awareness System",
+          "orderer": "Jung-gu & Gangnam-gu, Seoul",
+          "date": "2025",
+          "type": "AI Situational Awareness System",
+          "overviewTitle": "AI Situational Awareness System",
+          "desc": [
+            "20 Jung-gu-type green smart bus shelters in Seoul",
+            "20 Gangnam-gu-type smart bus shelters in Seoul",
+            "Remote management system",
+            "AI situational awareness system (people counter, fall detection, violence detection)"
+          ],
+          "images": [
+            "https://ybahnhnvdnelyxzzgdgn.supabase.co/storage/v1/object/public/track_record/track_record/1756962984188-bo8dyvalx5d.webp",
+            "https://ybahnhnvdnelyxzzgdgn.supabase.co/storage/v1/object/public/track_record/track_record/1756962984319-wkhefmuuhj.webp",
+            "https://ybahnhnvdnelyxzzgdgn.supabase.co/storage/v1/object/public/track_record/track_record/1756962984162-1rsy4o4oo8c.webp",
+            "https://ybahnhnvdnelyxzzgdgn.supabase.co/storage/v1/object/public/track_record/track_record/1756962984163-w5a0wab2qmn.webp",
+            "https://ybahnhnvdnelyxzzgdgn.supabase.co/storage/v1/object/public/track_record/track_record/1756962984163-v3dlgu21ect.webp",
+            "https://ybahnhnvdnelyxzzgdgn.supabase.co/storage/v1/object/public/track_record/track_record/1756962984213-0fkg88ddxo0l.webp",
+            "https://ybahnhnvdnelyxzzgdgn.supabase.co/storage/v1/object/public/track_record/track_record/1756962984164-1sbro4ciz92.webp",
+            "https://ybahnhnvdnelyxzzgdgn.supabase.co/storage/v1/object/public/track_record/track_record/1756962984273-0ke3m8kaf8g.webp",
+            "https://ybahnhnvdnelyxzzgdgn.supabase.co/storage/v1/object/public/track_record/track_record/1756962984255-1hec4hdqb0a.webp"
+          ]
+        },
+        {
+          "id": 402,
+          "title": "Seoul Jung-gu 40-Site IP Camera AI System",
+          "orderer": "Seoul Jung-gu Office",
+          "date": "2024",
+          "type": "On-device AI",
+          "overviewTitle": "AI People Counting & Fall Detection System",
+          "desc": [
+            "Supply of AI people counting and fall detection system",
+            "Enhanced situational safety and convenience functions through on-device AI technology",
+            "Automatic control of lighting, heated benches, LED displays, automatic doors, air quality measurement, and HVAC",
+            "Development and construction of remote control and monitoring systems such as CCTV, plus control center construction/integration"
+          ],
+          "images": [
+            "https://ybahnhnvdnelyxzzgdgn.supabase.co/storage/v1/object/public/track_record/track_record/1756963158807-0da27zdb2okq.webp"
+          ]
+        },
+        {
+          "id": 392,
+          "title": "Seoul Gangnam-gu Bus Shelter Control Center",
+          "orderer": "Seoul Gangnam-gu Office",
+          "date": "2024",
+          "type": "AI Control Center",
+          "overviewTitle": "Green Smart Shelter Control Center",
+          "desc": [
+            "Green smart shelter control center",
+            "20 channels with AI-based fall detection",
+            "Real-time video monitoring and event management",
+            "Remote equipment control and status monitoring"
+          ],
+          "images": [
+            "https://ybahnhnvdnelyxzzgdgn.supabase.co/storage/v1/object/public/track_record/track_record/1756963036929-usuzyeeeqq.webp"
+          ]
+        },
+        {
+          "id": 401,
+          "title": "AI SoC-based Cognitive Impairment Home Care Development",
+          "orderer": "Ministry of Health and Welfare",
+          "date": "2024",
+          "type": "AI",
+          "overviewTitle": "AI SoC-based Healthcare System",
+          "desc": [
+            "Development of an AI SoC-based cognitive impairment home care system",
+            "Dedicated hardware with a lightweight AI model",
+            "Real-time biosignal monitoring and anomaly detection",
+            "Caregiver alerts and remote monitoring platform"
+          ],
+          "images": [
+            "https://ybahnhnvdnelyxzzgdgn.supabase.co/storage/v1/object/public/track_record/track_record/1756977319427-m6lrnan4qas.webp"
+          ]
+        },
+        {
+          "id": 390,
+          "title": "Seoul Jung-gu Bus Shelter Remote Management",
+          "orderer": "Seoul Jung-gu Office",
+          "date": "2024",
+          "type": "Remote Management System",
+          "overviewTitle": "Green Smart Shelter Remote Management System",
+          "desc": [
+            "Remote management system for 20 green smart shelters",
+            "Remote monitoring of lighting, HVAC, and air quality",
+            "Automatic control scheduling and anomaly alerts",
+            "Real-time monitoring through an integrated dashboard"
+          ],
+          "images": [
+            "https://ybahnhnvdnelyxzzgdgn.supabase.co/storage/v1/object/public/track_record/track_record/1756963144664-1mm3siiy4k1.webp",
+            "https://ybahnhnvdnelyxzzgdgn.supabase.co/storage/v1/object/public/track_record/track_record/1756963144672-ihg9rx7gfdi.webp",
+            "https://ybahnhnvdnelyxzzgdgn.supabase.co/storage/v1/object/public/track_record/track_record/1756963144673-jqh8qbb7bmb.webp"
+          ]
+        },
+        {
+          "id": 424,
+          "title": "Soongsil University mmWave Radar",
+          "orderer": "Soongsil University",
+          "date": "2022",
+          "type": "Radar Sensor",
+          "overviewTitle": "Biometric Data Collection Radar",
+          "desc": [
+            "Prototype of a semiconductor application for biometric data collection radar",
+            "mmWave radar-based contactless vital sensing",
+            "Real-time contactless measurement of respiration and heart rate",
+            "Industry-academia collaborative R&D project"
+          ],
+          "images": [
+            "https://ybahnhnvdnelyxzzgdgn.supabase.co/storage/v1/object/public/track_record/track_record/1756977395233-7gstbuluw8c.webp",
+            "https://ybahnhnvdnelyxzzgdgn.supabase.co/storage/v1/object/public/track_record/track_record/1756977186493-qc8mzcjm0fl.webp"
+          ]
+        },
+        {
+          "id": 418,
+          "title": "Contactless Radar-based Safety Healing System",
+          "orderer": "R&D",
+          "date": "2022",
+          "type": "Safety Healing",
+          "overviewTitle": "Vital Sign-based Safety Healing System",
+          "desc": [
+            "Development of a safety healing system based on vital signs and air quality",
+            "Real-time biosignal monitoring via contactless radar",
+            "Environmental analysis linked with air quality sensors",
+            "Automatic detection and alerts for anomalies"
+          ],
+          "images": []
+        },
+        {
+          "id": 429,
+          "title": "National Health Insurance Service Proof-of-Concept Center",
+          "orderer": "National Health Insurance Service",
+          "date": "2022",
+          "type": "AI Human Detection",
+          "overviewTitle": "AI Human Detection PoC Project",
+          "desc": [
+            "Proof-of-concept testing of an AI human detection system",
+            "Construction of the National Health Insurance Service PoC center",
+            "Fall detection and abnormal behavior monitoring",
+            "Algorithm enhancement based on PoC data"
+          ],
+          "images": [
+            "https://ybahnhnvdnelyxzzgdgn.supabase.co/storage/v1/object/public/track_record/track_record/1756963234472-0y97423syoqq.webp",
+            "https://ybahnhnvdnelyxzzgdgn.supabase.co/storage/v1/object/public/track_record/track_record/1756963234504-rvbq6hoomga.webp",
+            "https://ybahnhnvdnelyxzzgdgn.supabase.co/storage/v1/object/public/track_record/track_record/1756963234486-ntppzh9sh9j.webp",
+            "https://ybahnhnvdnelyxzzgdgn.supabase.co/storage/v1/object/public/track_record/track_record/1756963234477-m18s6tq5xu8.webp",
+            "https://ybahnhnvdnelyxzzgdgn.supabase.co/storage/v1/object/public/track_record/track_record/1756963234448-rudu9qtwp5.webp",
+            "https://ybahnhnvdnelyxzzgdgn.supabase.co/storage/v1/object/public/track_record/track_record/1756963234448-y6nwc87fm8f.webp"
+          ]
+        }
+      ]
+    },
+    "infoComm": {
+      "hero": {
+        "title1": "Building ICT Infrastructure",
+        "title2": "for Safer Cities",
+        "desc": "We carry out information and communication projects that strengthen citizen safety and public infrastructure, including CCTV crime-prevention infrastructure, IoT safety emergency bells, defense communication works, and video collection systems. Responsible for the entire ICT construction process from design and installation to maintenance, we provide a safe and reliable communication environment."
+      },
+      "stats": [
+        {
+          "number": "8+",
+          "label": "Delivered Projects"
+        },
+        {
+          "number": "Public",
+          "label": "Public & Defense Projects"
+        },
+        {
+          "number": "IoT",
+          "label": "Smart Infrastructure"
+        },
+        {
+          "number": "CCTV",
+          "label": "Crime Prevention & Monitoring System"
+        }
+      ],
+      "sections": {
+        "cases": "Delivery Records",
+        "businessAreas": "Business Areas"
+      },
+      "capabilities": [
+        {
+          "title": "CCTV & Security",
+          "desc": "CCTV installation for public parking lots, safe return paths, and public facilities; real-time video monitoring system; AI video analytics integration"
+        },
+        {
+          "title": "IoT Safety",
+          "desc": "Public restroom IoT safety emergency bells, emergency call systems, location-based dispatch integration, and smart safety infrastructure"
+        },
+        {
+          "title": "Defense & Public",
+          "desc": "Military ICT works, situation analysis centers, secure networks, and construction and maintenance of communication infrastructure for public institutions"
+        },
+        {
+          "title": "Video & Integration",
+          "desc": "Mobile video collection, cultural facility remodeling, welfare facility integrated control, and enterprise meeting systems"
+        }
+      ],
+      "cases": [
+        {
+          "id": 573,
+          "title": "Anyang City Public Restroom IoT Safety Emergency Bell",
+          "orderer": "Anyang City",
+          "date": "2025",
+          "type": "Communication Works",
+          "desc": [
+            "Construction of a public restroom IoT safety emergency bell system",
+            "Immediate control center integration upon emergency",
+            "Real-time monitoring and location-based dispatch system",
+            "Smart infrastructure to enhance citizen safety"
+          ],
+          "images": [
+            "https://ybahnhnvdnelyxzzgdgn.supabase.co/storage/v1/object/public/track_record/track_record/1756963544438-1yte44adnz7.webp"
+          ]
+        },
+        {
+          "id": 384,
+          "title": "107 ICT Battalion ICT Works",
+          "orderer": "107 ICT Battalion",
+          "date": "2025",
+          "type": "ICT",
+          "desc": [
+            "Awarded ICT works contract",
+            "Construction and maintenance of military communication infrastructure",
+            "Installation and integration of network equipment",
+            "Construction of a secure communication system"
+          ],
+          "images": []
+        },
+        {
+          "id": 386,
+          "title": "Dongan-gu Public Parking Lot & Safe Return Path CCTV Installation",
+          "orderer": "Dongan-gu Office",
+          "date": "2024",
+          "type": "CCTV",
+          "desc": [
+            "CCTV installation at Dongan-gu public parking lots",
+            "Construction of safe-return-path crime-prevention CCTV infrastructure",
+            "Integration with a real-time video monitoring system",
+            "Strengthening crime-prevention infrastructure for citizen safety"
+          ],
+          "images": [
+            "https://ybahnhnvdnelyxzzgdgn.supabase.co/storage/v1/object/public/track_record/track_record/1756963577955-dl403jvmqh6.webp",
+            "https://ybahnhnvdnelyxzzgdgn.supabase.co/storage/v1/object/public/track_record/track_record/1756963577955-dl403jvmqh6.webp"
+          ]
+        },
+        {
+          "id": 394,
+          "title": "HD Hyundai Heavy Industries Ulsan Culture Center Remodeling",
+          "orderer": "HD Hyundai Heavy Industries",
+          "date": "2024",
+          "type": "Remodeling",
+          "desc": [
+            "Remodeling of the integrated control system for the 1st operation hall on the 2nd floor of the culture center",
+            "Replacement and upgrade of video, audio, and lighting equipment",
+            "Application of the latest integrated control interface",
+            "Securing compatibility with existing equipment"
+          ],
+          "images": []
+        },
+        {
+          "id": 417,
+          "title": "Defense Investigation Headquarters Situation Analysis Center",
+          "orderer": "Defense Investigation Headquarters",
+          "date": "2023",
+          "type": "Defense",
+          "desc": [
+            "Construction of a situation analysis integrated control system",
+            "Integrated monitoring system for multiple video sources",
+            "Communication infrastructure based on a secure network",
+            "Real-time situation analysis and reporting system"
+          ],
+          "images": []
+        },
+        {
+          "id": 432,
+          "title": "Gwangju Eunhye School Snoezelen Room",
+          "orderer": "Gwangju Eunhye School",
+          "date": "2022",
+          "type": "Welfare Facility",
+          "desc": [
+            "Integrated control system for the middle/high school Goyojari 2",
+            "Customized equipment control for a sensory integration therapy space",
+            "Emotional environment automation of lighting, audio, and video",
+            "Interface design tailored to students with disabilities"
+          ],
+          "images": []
+        },
+        {
+          "id": 423,
+          "title": "National Health Insurance Service Mobile Video Collection System",
+          "orderer": "National Health Insurance Service",
+          "date": "2022",
+          "type": "Video System",
+          "desc": [
+            "Construction of a mobile video collection system",
+            "Real-time on-site data collection and transmission",
+            "Design optimized for mobile environments",
+            "Integration with a remote monitoring platform"
+          ],
+          "images": []
+        },
+        {
+          "id": 489,
+          "title": "Hyundai Motor Ulsan Plant Main Building",
+          "orderer": "Hyundai Motor",
+          "date": "2020",
+          "type": "Enterprise",
+          "desc": [
+            "Smart integrated control for the large conference room",
+            "Unified automation system for video, audio, and lighting",
+            "Preset-based one-touch environment switching",
+            "Video conferencing system integration"
+          ],
+          "images": []
+        }
+      ]
+    },
+    "list": {
+      "loading": "Loading data...",
+      "errorPrefix": "An error occurred: ",
+      "breadcrumbCases": "Customer Cases",
+      "pageTitles": {
+        "infoComm": "Information & Communication",
+        "integratedControl": "Smart Integrated Control",
+        "safety": "Industrial Safety Automation",
+        "default": "Track Records"
+      },
+      "pageSubtitleDefault": "Explore our track records",
+      "searchPlaceholder": "Enter a search term",
+      "orgFallback": "Organization",
+      "dateFallback": "Date",
+      "titleFallback": "No title",
+      "overviewTitleFallback": "No overview",
+      "contentFallback": "No content",
+      "detailFallback": "Details",
+      "noProductsTitle": "No records match the selected criteria.",
+      "noProductsDesc": "Try a different category or search term.",
+      "addRecord": "+ Add Record",
+      "deleteBtn": "Delete",
+      "editBtn": "Edit",
+      "activeBtn": "Active",
+      "inactiveBtn": "Inactive",
+      "activateTooltip": "Activate",
+      "deactivateTooltip": "Deactivate"
+    }
+  },
+  "aboutPage": {
+    "main": {
+      "greeting": {
+        "title": "\"Safety Protected by AI, a Future Opened by Technology\"",
+        "intro": "Building on a wealth of R&D achievements and product commercialization experience, Thingswell is growing into an on-device AI spatial computing company that leads innovation in industrial and everyday safety. What we pursue is not technology for its own sake, but safety solutions that protect human life and earn trust even in extreme environments. Through relentless research and challenges, we will continue to realize valuable innovations that our customers and society need.",
+        "thankYou": "Thank you."
+      },
+      "ceo": {
+        "name": "Lee Hak-jun",
+        "position": "CEO",
+        "info1": [
+          "M.S. in Electronic Engineering, Kyungpook National University",
+          "Former Senior Researcher, LG Electronics Central Research Institute",
+          "Completed the KVM Program, KAIST College of Business"
+        ],
+        "info2": [
+          "GOOD Design Award from the Administrator of the Public Procurement Service",
+          "Touchscreen Integrated Controller (in-house brand, exported to France)",
+          "Development of high-performance GPU-based video print mainboard (LG Electronics)",
+          "Graphics card development (LG Electronics)",
+          "Development of DSP-based machine vision equipment (Hyundai Electronics)"
+        ],
+        "info3": [
+          "Development of ARM-based web video phone mainboard (Samsung Electronics)",
+          "ARM digital album (Samsung Electronics)",
+          "Wall pad (Hyundai Telecommunication)",
+          "Wall pad, mobile pad (Seoul Telecommunication)",
+          "Network computer (LG Electronics, Hansol, Hyundai)"
+        ]
+      },
+      "mission": {
+        "label": "Mission",
+        "desc": "Leveraging AI technology, we provide innovative solutions so that everyone can live in a safe and convenient environment."
+      },
+      "vision": {
+        "label": "Vision",
+        "desc": "As a pioneer in multimodal situational awareness technology, we will become a global leader in the fields of safety and automation."
+      },
+      "coreValue": {
+        "label": "Core Value",
+        "items": [
+          {
+            "title": "Challenge (Innovation)",
+            "desc": "Securing competitiveness through forward-looking R&D investment and internalization of core technologies"
+          },
+          {
+            "title": "Expertise",
+            "desc": "Delivering one-stop solutions based on capabilities in AI, embedded SW, and information & communication construction"
+          },
+          {
+            "title": "Social Impact",
+            "desc": "Creating public benefit by contributing to improved safety and welfare for the elderly, people with disabilities, and industrial sites"
+          }
+        ]
+      },
+      "history": {
+        "title": "History",
+        "items": [
+          {
+            "date": "2025",
+            "title": "Launch of Industrial Safety Solutions",
+            "items": [
+              "2025. Supplied a remote management system for 20 bus shelters in Jung-gu, Seoul",
+              "2025. Supplied a remote management system for 20 bus shelters in Gangnam-gu, Seoul"
+            ]
+          },
+          {
+            "date": "2024",
+            "title": "Launch of AI-Based Solutions and Platforms",
+            "items": [
+              "2024. 2 Supplied a remote management system for 20 bus shelters in Jung-gu, Seoul",
+              "2024. 3 Supplied a remote management system for 20 bus shelters in Gangnam-gu, Seoul",
+              "2024. 5 Supplied integrated dimming-light control and AV equipment automation solutions for a multipurpose large lecture hall in a new headquarters - Etners",
+              "2024. 6 Developed AI SoC-based multimodal home care products and services for cognitively impaired elderly people and people with disabilities - agreement with the Ministry of Health and Welfare",
+              "2024. 7 Supplied an AI safety people-counting and fall-detection system for 40 IP cameras in Jung-gu, Seoul",
+              "2024. 8 Built an integrated control system for two PBL lecture rooms in the West Building of the College of Life Sciences, Korea University",
+              "2024. 11 Built an integrated control system for the faculty conference room on the 12th floor of Gachon Hall, Gachon University",
+              {
+                "text": "2024. 11 Launched HumanSense AI Platform, an AI-based integrated space management system providing safety, well-being, and automation",
+                "note": "(A solution applicable to various fields, delivering core values such as improved safety, healing, and productivity for the elderly, people with disabilities, and workers)"
+              },
+              "2024. 12 R&D corporate credit rating B+ (Korea Rating & Data)",
+              "2024. 12 Completed the R&D project for a contactless emergency monitoring alarm and mental health therapy system (rated excellent)",
+              "2024. 12 Completed installation of CCTV for public parking lots and safe return-home routes in Dongan-gu"
+            ]
+          },
+          {
+            "date": "2023",
+            "title": "Building Digital/Smart Systems and Business Expansion",
+            "items": [
+              "2023. 1 Signed a supply contract for a digital VR virtual reality / digital twin room system",
+              "2023. 1 Built a TI Fluid System digital VR room - a global UK automotive parts supplier",
+              "2023. 2 Built a 2nd-floor banquet hall at Wyndham Grand Busan, Hillstate Ijin Bay City, Songdo, Busan",
+              "2023. 3 Speaker-tracking system at the Gongju Center of the National Information Resources Service",
+              "2023. 4 Built an integrated control system for the lecture room of the Saebada, a 4,200-ton LNG fisheries training ship of Gyeongsang National University",
+              "2023. 7 Acquired an information & communication construction license",
+              "2023. 8 Built a lift (monitor/microphone) remote control system for a 4th-floor meeting room at Yongin City Hall",
+              "2023. 10 Built integrated control systems for two rooms at the Armed Forces Comprehensive Medical Training Center, OO School, Jaun-dae",
+              "2023. 11 Built an integrated control system for Nakdong Hall, Daedong Building, Andong Citizens' Hall",
+              "2023. 12 Built an integrated control system for a situation analysis system at the OO Center of the Defense Investigation Headquarters"
+            ]
+          },
+          {
+            "date": "2022",
+            "title": "Patent Registrations and Development of Various Systems",
+            "items": [
+              "2022. 6 Registered 2 patents for machine learning and emotion-recognition emotional space",
+              "2022. 6 Developed a contactless emergency monitoring alarm and mental health therapy system - Ministry of SMEs and Startups",
+              "2022. 8 Built an integrated control system for an assistive device usability evaluation room for the elderly and people with disabilities - National Health Insurance Service",
+              "2022. 9 Developed and supplied a video transmission and storage device system using a mobile video camera - National Health Insurance Service",
+              "2022. 10 Developed a safety healing system using vital signs and air quality information based on a contactless radar SoC semiconductor",
+              "2022. 12 Supplied and built integrated control systems for 12 banquet halls and conference rooms at a 5-star Hilton Hotel"
+            ]
+          },
+          {
+            "date": "2021",
+            "title": "Establishment of the Solutions Division and Product Launches",
+            "items": [
+              "2021. 1 Established the Solutions Division",
+              "2021. 6 Supplied and provided training for an mmWave Radar Vital signs data processing module - Soongsil University",
+              "2021. 10 Released prototypes of smart shelter products for work and rest",
+              "2021. 11 Launched an AI emotion-recognition smart space solution"
+            ]
+          },
+          {
+            "date": "2020",
+            "title": "Venture Company Registration and Commercialization",
+            "items": [
+              "2020. 7 Registered as a venture company",
+              "2020. 8 Commercialized a smart air quality and situation detection schedule management solution"
+            ]
+          },
+          {
+            "date": "2019",
+            "title": "Business Expansion and Establishment of Research Institute",
+            "items": [
+              "2019. 4 Factory registration",
+              "2019. 6 Developed an automation solution based on an integrated control system for broadcast and audio equipment",
+              "2019. 8 Established a corporate research institute"
+            ]
+          },
+          {
+            "date": "2018",
+            "title": "Company Founding",
+            "items": [
+              "2018. 1 Founded Thingswell Co., Ltd."
+            ]
+          }
+        ]
+      },
+      "location": {
+        "title": "Directions"
+      }
+    },
+    "history": {
+      "title": "History",
+      "items": [
+        {
+          "date": "2026",
+          "title": "Expansion of the AI Safety Platform and Patent Registration",
+          "items": [
+            "2026. Delivered smart senior center health management systems to 70 sites",
+            "2026. Developed an AI integrated management system for smart store safety and operations",
+            "2026. Developed the SafeGAI AIBOX system",
+            "2026. Built a smart safety platform pipeline based on NVIDIA and AWS",
+            "2026. Registered a safety AI patent"
+          ]
+        },
+        {
+          "date": "2025",
+          "title": "Launch of Industrial Safety Solutions",
+          "items": [
+            "2025. Supplied a remote management system for 20 bus shelters in Jung-gu, Seoul",
+            "2025. Supplied a remote management system for 20 bus shelters in Gangnam-gu, Seoul",
+            "2025. Won a project for multimodal situational awareness and a RAG-based LLM device",
+            "2025. Carried out IoT construction for 40 multi-use facilities in Anyang City",
+            "2025. Developed a mobile CCTV system and AI control system"
+          ]
+        },
+        {
+          "date": "2024",
+          "title": "Launch of AI-Based Solutions and Platforms",
+          "items": [
+            "2024. 2 Supplied a remote management system for 20 bus shelters in Jung-gu, Seoul",
+            "2024. 3 Supplied a remote management system for 20 bus shelters in Gangnam-gu, Seoul",
+            "2024. 5 Supplied integrated dimming-light control and AV equipment automation solutions for a multipurpose large lecture hall in a new headquarters - Etners",
+            "2024. 6 Developed AI SoC-based multimodal home care products and services for cognitively impaired elderly people and people with disabilities - agreement with the Ministry of Health and Welfare",
+            "2024. 7 Supplied an AI safety people-counting and fall-detection system for 40 IP cameras in Jung-gu, Seoul",
+            "2024. 8 Built an integrated control system for two PBL lecture rooms in the West Building of the College of Life Sciences, Korea University",
+            "2024. 11 Built an integrated control system for the faculty conference room on the 12th floor of Gachon Hall, Gachon University",
+            {
+              "text": "2024. 11 Launched HumanSense AI Platform, an AI-based integrated space management system providing safety, well-being, and automation",
+              "note": "(A solution applicable to various fields, delivering core values such as improved safety, healing, and productivity for the elderly, people with disabilities, and workers)"
+            },
+            "2024. 12 R&D corporate credit rating B+ (Korea Rating & Data)",
+            "2024. 12 Completed the R&D project for a contactless emergency monitoring alarm and mental health therapy system (rated excellent)",
+            "2024. 12 Completed installation of CCTV for public parking lots and safe return-home routes in Dongan-gu"
+          ]
+        },
+        {
+          "date": "2023",
+          "title": "Building Digital/Smart Systems and Business Expansion",
+          "items": [
+            "2023. 1 Signed a supply contract for a digital VR virtual reality / digital twin room system",
+            "2023. 1 Built a TI Fluid System digital VR room - a global UK automotive parts supplier",
+            "2023. 2 Built a 2nd-floor banquet hall at Wyndham Grand Busan, Hillstate Ijin Bay City, Songdo, Busan",
+            "2023. 3 Speaker-tracking system at the Gongju Center of the National Information Resources Service",
+            "2023. 4 Built an integrated control system for the lecture room of the Saebada, a 4,200-ton LNG fisheries training ship of Gyeongsang National University",
+            "2023. 7 Acquired an information & communication construction license",
+            "2023. 8 Built a lift (monitor/microphone) remote control system for a 4th-floor meeting room at Yongin City Hall",
+            "2023. 10 Built integrated control systems for two rooms at the Armed Forces Comprehensive Medical Training Center, OO School, Jaun-dae",
+            "2023. 11 Built an integrated control system for Nakdong Hall, Daedong Building, Andong Citizens' Hall",
+            "2023. 12 Built an integrated control system for a situation analysis system at the OO Center of the Defense Investigation Headquarters"
+          ]
+        },
+        {
+          "date": "2022",
+          "title": "Patent Registrations and Development of Various Systems",
+          "items": [
+            "2022. 6 Registered 2 patents for machine learning and emotion-recognition emotional space",
+            "2022. 6 Developed a contactless emergency monitoring alarm and mental health therapy system - Ministry of SMEs and Startups",
+            "2022. 8 Built an integrated control system for an assistive device usability evaluation room for the elderly and people with disabilities - National Health Insurance Service",
+            "2022. 9 Developed and supplied a video transmission and storage device system using a mobile video camera - National Health Insurance Service",
+            "2022. 10 Developed a safety healing system using vital signs and air quality information based on a contactless radar SoC semiconductor",
+            "2022. 12 Supplied and built integrated control systems for 12 banquet halls and conference rooms at a 5-star Hilton Hotel"
+          ]
+        },
+        {
+          "date": "2021",
+          "title": "Establishment of the Solutions Division and Product Launches",
+          "items": [
+            "2021. 1 Established the Solutions Division",
+            "2021. 6 Supplied and provided training for an mmWave Radar Vital signs data processing module - Soongsil University",
+            "2021. 10 Released prototypes of smart shelter products for work and rest",
+            "2021. 11 Launched an AI emotion-recognition smart space solution"
+          ]
+        },
+        {
+          "date": "2020",
+          "title": "Venture Company Registration and Commercialization",
+          "items": [
+            "2020. 7 Registered as a venture company",
+            "2020. 8 Commercialized a smart air quality and situation detection schedule management solution"
+          ]
+        },
+        {
+          "date": "2019",
+          "title": "Business Expansion and Establishment of Research Institute",
+          "items": [
+            "2019. 4 Factory registration",
+            "2019. 6 Developed an automation solution based on an integrated control system for broadcast and audio equipment",
+            "2019. 8 Established a corporate research institute"
+          ]
+        },
+        {
+          "date": "2018",
+          "title": "Company Founding",
+          "items": [
+            "2018. 1 Founded Thingswell Co., Ltd."
+          ]
+        }
+      ]
+    },
+    "org": {
+      "hero": {
+        "titleLine1": "Efficient Organizational Operations",
+        "titleLine2": "Powered by AI Agents",
+        "desc": "With AI agent-based smart workflows, Thingswell operates an efficient organizational structure that allows a small team to carry out large-scale projects. Each team leverages AI tools to maximize productivity across all areas of development, sales, manufacturing, and research."
+      },
+      "chartTitle": "Organization Chart",
+      "ceoTitle": "CEO",
+      "departments": [
+        {
+          "title": "Technical Sales Team",
+          "items": [
+            "Customer requirement analysis",
+            "Technical proposal writing",
+            "Project order management",
+            "Partnership building"
+          ]
+        },
+        {
+          "title": "Engineering Team",
+          "items": [
+            "AI software development",
+            "System design and implementation",
+            "Hardware firmware development",
+            "QA testing and verification"
+          ]
+        },
+        {
+          "title": "Manufacturing Team",
+          "items": [
+            "PCB/SMT product production",
+            "Quality control and inspection",
+            "Material supply management",
+            "Production process optimization"
+          ]
+        },
+        {
+          "title": "Outsourcing Management Team",
+          "items": [
+            "Partner management and evaluation",
+            "Outsourced development quality control",
+            "Delivery schedule coordination",
+            "Cost efficiency"
+          ]
+        },
+        {
+          "title": "Corporate Research Institute",
+          "items": [
+            "Core AI/ML algorithm research",
+            "Patent and paper applications",
+            "New technology PoC development",
+            "Government project execution"
+          ]
+        },
+        {
+          "title": "Expert Advisory Group",
+          "items": [
+            "Technical advisory and consulting",
+            "Business strategy support",
+            "Quality certification advisory",
+            "Legal/patent advisory"
+          ]
+        },
+        {
+          "title": "ICT Construction Team",
+          "items": [
+            "CCTV/network installation",
+            "Communication infrastructure deployment",
+            "System integration construction",
+            "Maintenance and operation"
+          ]
+        }
+      ],
+      "ai": {
+        "title": "AI Agent Application Areas",
+        "cards": [
+          {
+            "title": "Code Generation and Review",
+            "desc": "Securing quality through rapid development with AI coding assistants and automated code reviews"
+          },
+          {
+            "title": "Project Management Automation",
+            "desc": "AI analyzes schedules, resources, and risks to support optimal project operations"
+          },
+          {
+            "title": "Data Analysis and Reporting",
+            "desc": "AI analyzes sales, production, and quality data to derive insights and automatically generate reports"
+          },
+          {
+            "title": "Customer Response Automation",
+            "desc": "AI chatbots and automated response systems handle customer inquiries instantly and provide technical support"
+          }
+        ]
+      }
+    },
+    "intro": {
+      "title": "\"Safety Protected by AI, a Future Opened by Technology\"",
+      "intro": "Building on a wealth of R&D achievements and product commercialization experience, Thingswell is growing into an on-device AI spatial computing company that leads innovation in industrial and everyday safety. What we pursue is not technology for its own sake, but safety solutions that protect human life and earn trust even in extreme environments. Through relentless research and challenges, we will continue to realize valuable innovations that our customers and society need.",
+      "thankYou": "Thank you.",
+      "ceoName": "Lee Hak-jun",
+      "ceoPosition": "CEO",
+      "missionLabel": "Mission",
+      "missionDesc": "Leveraging AI technology, we provide innovative solutions so that everyone can live in a safe and convenient environment.",
+      "visionLabel": "Vision",
+      "visionDesc": "As a pioneer in multimodal situational awareness technology, we will become a global leader in the fields of safety and automation.",
+      "coreValueLabel": "Core Value",
+      "coreValueItems": [
+        {
+          "title": "Challenge (Innovation)",
+          "desc": "Securing competitiveness through forward-looking R&D investment and internalization of core technologies"
+        },
+        {
+          "title": "Expertise",
+          "desc": "Delivering one-stop solutions based on capabilities in AI, embedded SW, and information & communication construction"
+        },
+        {
+          "title": "Social Impact",
+          "desc": "Creating public benefit by contributing to improved safety and welfare for the elderly, people with disabilities, and industrial sites"
+        }
+      ]
+    },
+    "certificate": {
+      "sectionTitle": "Licenses, Certifications & Patents",
+      "listTitle": "Certifications and Patents",
+      "listSubtitle": "Certifications and patents held by the company",
+      "items": [
+        {
+          "title": "Business Registration Certificate",
+          "imageAlt": "SW Business Operator General Status Management Confirmation",
+          "category": "License Registration",
+          "organization": "National Tax Service",
+          "date": "2025-04-28"
+        },
+        {
+          "title": "Information & Communication Construction Business Registration",
+          "imageAlt": "Information & Communication Construction Business Registration",
+          "category": "License Registration",
+          "organization": "Gyeonggi Province",
+          "date": "2023-09-14"
+        },
+        {
+          "title": "SW Business Operator General Status Management Confirmation",
+          "imageAlt": "SW Business Operator General Status Management Confirmation",
+          "category": "License Registration",
+          "organization": "Korea Software Industry Association",
+          "date": "2024-05-30"
+        },
+        {
+          "title": "Factory Registration Certificate",
+          "imageAlt": "Factory Registration Certificate",
+          "category": "License Registration",
+          "organization": "Korea Industrial Complex Corporation",
+          "date": "2025-06-23"
+        },
+        {
+          "title": "Venture Company Confirmation",
+          "imageAlt": "Venture Company Confirmation",
+          "category": "Certification",
+          "organization": "Venture Company Certification Agency",
+          "date": "2025-08-13"
+        },
+        {
+          "title": "Corporate Research Institute Certificate",
+          "imageAlt": "Corporate Research Institute Certificate",
+          "category": "Certification",
+          "organization": "Korea Industrial Technology Association",
+          "date": "2025-08-20"
+        },
+        {
+          "title": "Air Quality Management Method and Device Using Indoor/Outdoor Sensor Modules",
+          "imageAlt": "Patent Certificate - Air Quality Management Method and Device Using Indoor/Outdoor Sensor Modules",
+          "category": "Patent",
+          "organization": "Korean Intellectual Property Office",
+          "date": "2022-05-27"
+        },
+        {
+          "title": "AI-Based Capsule-Type Smart Shelter",
+          "imageAlt": "Patent Certificate - AI-Based Capsule-Type Smart Shelter",
+          "category": "Patent",
+          "organization": "Korean Intellectual Property Office",
+          "date": "2022-07-19"
+        },
+        {
+          "title": "Capsule-Type Smart Shelter Providing User-Customized Services",
+          "imageAlt": "Patent Certificate - Capsule-Type Smart Shelter Providing User-Customized Services",
+          "category": "Patent",
+          "organization": "Korean Intellectual Property Office",
+          "date": "2023-04-28"
+        },
+        {
+          "title": "Emergency Situation Alarm Device Using Radar and Camera",
+          "imageAlt": "Patent Certificate - Emergency Situation Alarm Device Using Radar and Camera",
+          "category": "Patent",
+          "organization": "Korean Intellectual Property Office",
+          "date": "2025-06-20"
+        },
+        {
+          "title": "Trademark Registration Certificate",
+          "imageAlt": "Trademark Registration Certificate",
+          "category": "Patent",
+          "organization": "Korean Intellectual Property Office",
+          "date": "2020-03-27"
+        },
+        {
+          "title": "Design Registration Certificate",
+          "imageAlt": "Design Registration Certificate",
+          "category": "Patent",
+          "organization": "Korean Intellectual Property Office",
+          "date": "2024-07-16"
+        },
+        {
+          "title": "Thingswell Gateway Server",
+          "imageAlt": "Copyright Registration Certificate - Thingswell Gateway Server",
+          "category": "Copyright",
+          "organization": "Korea Copyright Commission",
+          "date": "2023-06-14"
+        },
+        {
+          "title": "Thingswell TOS Server",
+          "imageAlt": "Copyright Registration Certificate - Thingswell TOS Server",
+          "category": "Copyright",
+          "organization": "Korea Copyright Commission",
+          "date": "2023-06-14"
+        },
+        {
+          "title": "Multi-Video Remote Control Software",
+          "imageAlt": "Copyright Registration Certificate - Multi-Video Remote Control Software",
+          "category": "Copyright",
+          "organization": "Korea Copyright Commission",
+          "date": "2024-09-24"
+        },
+        {
+          "title": "AnySpace Manager Program",
+          "imageAlt": "Copyright Registration Certificate - AnySpace Manager Program",
+          "category": "Copyright",
+          "organization": "Korea Copyright Commission",
+          "date": "2024-01-30"
+        },
+        {
+          "title": "Radar-Based Safety Detection System",
+          "imageAlt": "Copyright Registration Certificate - Radar-Based Safety Detection System",
+          "category": "Copyright",
+          "organization": "Korea Copyright Commission",
+          "date": "2024-07-31"
+        },
+        {
+          "title": "AI Conversation Program for Home Care",
+          "imageAlt": "Copyright Registration Certificate - AI Conversation Program for Home Care",
+          "category": "Copyright",
+          "organization": "Korea Copyright Commission",
+          "date": "2024-11-20"
+        },
+        {
+          "title": "QnA Query Management System Program for Home Care",
+          "imageAlt": "Copyright Registration Certificate - QnA Query Management System Program for Home Care",
+          "category": "Copyright",
+          "organization": "Korea Copyright Commission",
+          "date": "2024-11-20"
+        },
+        {
+          "title": "Program for Responding to Industrial Site Safety Accidents Through Voice Recognition",
+          "imageAlt": "Copyright Registration Certificate - Program for Responding to Industrial Site Safety Accidents Through Voice Recognition",
+          "category": "Copyright",
+          "organization": "Korea Copyright Commission",
+          "date": "2025-05-27"
+        },
+        {
+          "title": "Sensor Test Program",
+          "imageAlt": "Copyright Registration Certificate - Sensor Test Program",
+          "category": "Copyright",
+          "organization": "Korea Copyright Commission",
+          "date": "2025-05-27"
+        }
+      ]
+    }
+  },
+  "productsPage": {
+    "safety": {
+      "hero": {
+        "title1": "Safety guarded by AI,",
+        "title2": "transforming the field",
+        "desc": "A next-generation industrial safety solution that integrates AI cameras, smart bands, environmental sensors, and fire detection systems. Edge AI-based real-time hazard detection and automatic alarms protect workers' lives and safety. It operates independently on-site even during network outages, ensuring safety in any situation."
+      },
+      "sectionProductsTitle": "Core Products",
+      "sectionDomainsTitle": "Application Areas",
+      "sectionPipelineTitle": "Operation Flow",
+      "sectionArchTitle": "System Architecture",
+      "products": [
+        {
+          "title": "AI Safety Camera",
+          "desc": "Detects worker falls, collapses, and prolonged immobility in real time using deep learning-based video analytics. NVIDIA DeepStream-based multi-channel concurrent analysis processes 8 cameras on a single server."
+        },
+        {
+          "title": "Smart Safety Band",
+          "desc": "Monitors workers' vital signs (heart rate, body temperature) and location in real time. Provides a fall-detection accelerometer, SOS emergency calls, and danger-zone proximity alerts."
+        },
+        {
+          "title": "Environmental Safety Sensor",
+          "desc": "Measures temperature, humidity, gas concentration, and dust levels in real time to assess workplace risk. LoRa/WiFi wireless communication allows installation without wiring."
+        },
+        {
+          "title": "Fire Detection System",
+          "desc": "Applies multiple detection methods-heat, smoke, and flame-to detect fires early. Dry-contact integration instantly links with existing firefighting equipment and triggers automatic alarms."
+        }
+      ],
+      "domains": [
+        {
+          "title": "Manufacturing Site",
+          "items": [
+            "Detects approach to hazardous machines such as presses and CNC equipment",
+            "AI detection of whether workers are wearing protective gear",
+            "Early warning system for hazardous gas leaks",
+            "Real-time monitoring of crushing and entrapment hazard zones",
+            "Enhanced safety surveillance during night and shift work"
+          ]
+        },
+        {
+          "title": "Construction Site",
+          "items": [
+            "Real-time monitoring to prevent falls during work at height",
+            "Heavy-equipment proximity warnings and collision prevention",
+            "Automatic AI detection of hard hat and safety harness use",
+            "Real-time gas concentration monitoring in confined spaces",
+            "Worker location tracking and headcount management"
+          ]
+        },
+        {
+          "title": "Welfare Facility",
+          "items": [
+            "Fall and collapse detection in workplaces for people with disabilities",
+            "Real-time health monitoring for each worker",
+            "Automatic detection and notification of emergencies",
+            "Accessible multi-modal alarms (visual, audible, vibration)",
+            "Instant mobile alerts to guardians and administrators"
+          ]
+        }
+      ],
+      "pipeline": [
+        {
+          "title": "Data Collection",
+          "items": [
+            "8-channel IP camera RTSP real-time streams",
+            "Vital and location data from 8 smart bands",
+            "Temperature, humidity, and gas readings from environmental sensors",
+            "Dry-contact status signals from fire detection",
+            "Time-synchronized integrated collection"
+          ]
+        },
+        {
+          "title": "Edge AI Analysis",
+          "items": [
+            "High-speed inference based on NVIDIA TensorRT",
+            "Real-time identification of falls, collapses, and immobility",
+            "Multi-modal sensor fusion for situational analysis",
+            "Adaptive rolling buffer preserves footage before and after events",
+            "Guaranteed offline operation (resilient to network failures)"
+          ]
+        },
+        {
+          "title": "Alert & Response",
+          "items": [
+            "Tiered alarms by risk level",
+            "Automatic control of warning lights and sirens via dry contacts",
+            "Instant notifications to administrator mobile and dashboard",
+            "Automatic event video recording and NVR integration",
+            "Automatic guidance through response manuals"
+          ]
+        },
+        {
+          "title": "Cloud Integration",
+          "items": [
+            "Transmits event metadata to the AWS cloud",
+            "AI model version management and remote deployment",
+            "Automatic generation of operational reports",
+            "Integrated remote monitoring of multiple facilities",
+            "Data-driven safety improvement analysis"
+          ]
+        }
+      ],
+      "architecture": {
+        "edge": "8 AI cameras, 8 smart bands, 2 environmental sensors, fire-detection dry contacts, 2TB NVR storage, and real-time inference on an Edge AI server",
+        "network": "Combined LoRa/WiFi/Ethernet communication, independent offline operation, and automatic retransmission upon network recovery",
+        "cloud": "AWS event storage, AI model version management, remote deployment, and automated operational reports",
+        "control": "Dry-contact alarm devices, automatic warning light and siren control, an administrator dashboard, and mobile notifications"
+      }
+    },
+    "monitoring": {
+      "hero": {
+        "title1": "Detecting invisible risks,",
+        "title2": "through data",
+        "desc": "An integrated monitoring system that tracks on-site temperature, humidity, gas concentration, dust, noise, and more in real time through multi-environment sensors and IoT gateways. AI-based anomaly detection and predictive analytics prevent risks in advance, while data-driven decision-making maximizes operational efficiency."
+      },
+      "sectionProductsTitle": "Core Products",
+      "sectionDomainsTitle": "Application Areas",
+      "sectionPipelineTitle": "Service Flow",
+      "sectionArchTitle": "System Architecture",
+      "products": [
+        {
+          "title": "Multi-Environment Sensor",
+          "desc": "Simultaneously measures temperature, humidity, CO2, PM2.5, VOC, and noise in a single device. It supports dual LoRa/WiFi communication and, with an IP67 waterproof rating, can be installed both indoors and outdoors."
+        },
+        {
+          "title": "Integrated Monitoring Platform",
+          "desc": "Monitors environmental, safety, and equipment data from multiple facilities in real time on a single dashboard. When anomalies are detected, it provides automatic alerts and response manuals."
+        },
+        {
+          "title": "IoT Gateway",
+          "desc": "Collects sensor data over various protocols (LoRa, Zigbee, BLE, RS485) and transmits it to the cloud. With edge computing, it handles local decisions and alarms on its own."
+        },
+        {
+          "title": "Data Analytics Engine",
+          "desc": "Analyzes collected sensor data with AI to detect abnormal patterns early. It provides predictive maintenance alerts and energy optimization insights."
+        }
+      ],
+      "domains": [
+        {
+          "title": "Data Center / Server Room",
+          "items": [
+            "Precise temperature and humidity monitoring with HVAC integration",
+            "Real-time power consumption metering and PUE analysis",
+            "Early fire detection with automatic fire-suppression integration",
+            "Access security monitoring and audit-trail management",
+            "Remote equipment diagnostics and failure prediction"
+          ]
+        },
+        {
+          "title": "Smart Building",
+          "items": [
+            "Real-time indoor air quality (IAQ) monitoring",
+            "Energy usage pattern analysis and savings control",
+            "Occupancy-based automatic lighting and HVAC control",
+            "CO concentration monitoring for parking ventilation systems",
+            "Integration with emergency evacuation guidance systems"
+          ]
+        },
+        {
+          "title": "Industrial Site",
+          "items": [
+            "Detection of hazardous gas (CO, H2S, CH4) leaks",
+            "Real-time dust concentration measurement and alerts",
+            "Noise and vibration level monitoring",
+            "Automatic reporting of workplace measurement data",
+            "Instant alerts when legal limits are exceeded"
+          ]
+        }
+      ],
+      "pipeline": [
+        {
+          "title": "Sensor Deployment",
+          "items": [
+            "On-site environment analysis and optimal placement design",
+            "Wireless installation of multi-environment sensors",
+            "IoT gateway network configuration",
+            "Integration setup with existing facility sensors",
+            "Communication verification and optimization"
+          ]
+        },
+        {
+          "title": "Data Collection",
+          "items": [
+            "Real-time time-series storage of sensor data",
+            "Flexible collection intervals from 1 second to 5 minutes",
+            "Local buffering during network outages",
+            "Data integrity verification and correction",
+            "Event-triggered high-speed collection"
+          ]
+        },
+        {
+          "title": "Analysis & Decision",
+          "items": [
+            "Threshold-based automatic anomaly detection",
+            "Prediction of warning signs through AI pattern analysis",
+            "Risk scoring based on combined conditions",
+            "Time-series trend analysis and forecasting",
+            "Multi-stage verification logic to prevent false alarms"
+          ]
+        },
+        {
+          "title": "Monitoring & Response",
+          "items": [
+            "Real-time web and mobile dashboards",
+            "Notification policies applied by risk level",
+            "Management of event history and action records",
+            "Automatic generation of operational reports",
+            "Remote facility control and integration"
+          ]
+        }
+      ],
+      "architecture": {
+        "sensor": "A variety of IoT devices including multi-environment sensors, gas detectors, dust meters, noise meters, temperature/humidity sensors, and power meters",
+        "gateway": "Combined LoRa/WiFi/BLE/RS485 protocol collection, edge computing for local decisions, and data buffering",
+        "platform": "Time-series database, AI analytics engine, event processing, notification service, and API gateway",
+        "dashboard": "Real-time web and mobile monitoring, automated reporting, remote control, and integrated multi-facility monitoring"
+      }
+    },
+    "control": {
+      "hero": {
+        "title1": "With a single interface,",
+        "title2": "control every space",
+        "desc": "A next-generation integrated control system that manages a wide range of equipment-video, audio, lighting, HVAC, and ventilation-through the XCN-3000 integrated controller and the ThingsEye remote management platform. Multi-modal sensor-based context-aware automation and cloud remote management maximize space efficiency and reduce operating costs."
+      },
+      "sectionProductsTitle": "Core Products",
+      "sectionDomainsTitle": "Application Areas",
+      "sectionPipelineTitle": "Implementation Process",
+      "sectionArchTitle": "System Architecture",
+      "products": [
+        {
+          "title": "Integrated Controller XCN-3000",
+          "desc": "A next-generation integrated controller supporting various protocols such as RS232/485, TCP/IP, IR, and relays. It controls video, audio, lighting, and environmental equipment through a single interface."
+        },
+        {
+          "title": "ThingsEye Remote Management",
+          "desc": "A cloud platform that remotely monitors and controls equipment status across multiple spaces. It supports automated operation through real-time data collection, analysis, and scheduling."
+        },
+        {
+          "title": "Touch Panel Controller",
+          "desc": "Intuitive GUI-based 10-inch and 7-inch touch panels let you control equipment easily on-site. Saved presets enable one-touch environment switching."
+        },
+        {
+          "title": "Context-Aware Automation",
+          "desc": "Uses multi-modal sensor data such as air quality, motion, and cameras to recognize a space's conditions and optimally control equipment. It maximizes energy savings and space efficiency."
+        }
+      ],
+      "domains": [
+        {
+          "title": "Large Conference Hall / Auditorium",
+          "items": [
+            "Integrated control of video walls and matrix video systems",
+            "Automatic audio setup for wireless microphones and audio mixers",
+            "DMX512-based ambient and spot lighting control",
+            "Integration with speaker-tracking cameras and video conferencing systems",
+            "One-touch meeting environment switching via saved presets"
+          ]
+        },
+        {
+          "title": "Classroom / Education Facility",
+          "items": [
+            "Automatic switching of lighting, audio, and video by lecture mode",
+            "Speaker-tracking automatic camera zoom and pan control",
+            "Recording system integration and remote-class support",
+            "Automated scheduling based on timetables",
+            "Energy-saving automatic power management system"
+          ]
+        },
+        {
+          "title": "Exhibition Hall / Convention",
+          "items": [
+            "Independent control of multiple zones in large spaces",
+            "Batch equipment switching based on event scenarios",
+            "Surround sound systems and spatial audio optimization",
+            "Real-time environmental monitoring and automatic HVAC control",
+            "Integrated operation of multiple facilities through remote monitoring"
+          ]
+        }
+      ],
+      "pipeline": [
+        {
+          "title": "Site Analysis",
+          "items": [
+            "Survey of space layout and existing equipment",
+            "Compatibility analysis of existing control systems",
+            "Definition of user requirements and scenarios",
+            "Design of the optimal control architecture",
+            "Verification of protocol and interface specifications"
+          ]
+        },
+        {
+          "title": "System Integration",
+          "items": [
+            "Installation and wiring of the XCN-3000 integrated controller",
+            "Integration of video, audio, lighting, and environmental equipment",
+            "Custom development of the touch panel GUI",
+            "Programming of preset and macro scenarios",
+            "ThingsEye cloud integration setup"
+          ]
+        },
+        {
+          "title": "Automation Setup",
+          "items": [
+            "Configuration of sensor-based context-aware automatic control",
+            "Time-based operation programs driven by scheduling",
+            "Application of energy-saving automation policies",
+            "Configuration of emergency safe mode",
+            "Setup of per-user permissions and control scope"
+          ]
+        },
+        {
+          "title": "Remote Operation",
+          "items": [
+            "Multi-device access support for PC, tablet, and mobile",
+            "Remote monitoring via an integrated multi-facility dashboard",
+            "Automatic equipment fault alerts and maintenance requests",
+            "Automatic generation and analysis of operational reports",
+            "Cloud-based data backup management"
+          ]
+        }
+      ],
+      "architecture": {
+        "device": "Video (projectors, displays), audio (amplifiers, microphones), lighting (DMX512), and environmental (HVAC, motorized curtains) equipment",
+        "controller": "XCN-3000 integrated controller, RS232/485/TCP/IP/IR/relay multi-protocol support, and a touch panel interface",
+        "cloud": "ThingsEye remote management platform, data collection and analysis, scheduling automation, and model version management",
+        "interface": "Web and mobile dashboards, touch panel GUI, wall-mounted switches, voice control, and timer/schedule-based automated operation"
+      }
+    },
+    "controlDetail": {
+      "overview": "A multi-purpose interface control module for industrial automation and smart system integration, providing reliable connectivity and precise control across diverse environments and enabling efficient management and operation",
+      "keyFeatures": [
+        "Up to 4K @ 60 fps input resolution",
+        "8 channels (16-channel expansion mode supported)",
+        "RTSP, RTSP over HTTP/S, and Onvif support",
+        "H.265 / H.264 codec support"
+      ],
+      "features": [
+        {
+          "title": "High-Resolution Video Processing",
+          "description": "Supports up to 4K @ 60 fps (2M @ 240 fps) input resolution, enabling high-quality video analytics"
+        },
+        {
+          "title": "Support for Various Protocols",
+          "description": "Supports a variety of video input protocols including RTSP, RTSP over HTTP/S, and Onvif"
+        },
+        {
+          "title": "High-Efficiency Codec",
+          "description": "Supports H.265 / H.264 codecs for bandwidth-efficient video transmission"
+        },
+        {
+          "title": "Audio Support",
+          "description": "Provides audio input/output ports to support voice analytics and notification features"
+        }
+      ],
+      "specifications": [
+        {
+          "label": "Maximum Input Resolution"
+        },
+        {
+          "label": "Video Input Protocol"
+        },
+        {
+          "label": "Video Codec Support"
+        },
+        {
+          "label": "Video Output Method"
+        },
+        {
+          "label": "Audio Input"
+        },
+        {
+          "label": "Audio Output"
+        }
+      ],
+      "certifications": [
+        {
+          "name": "CE Certification",
+          "description": "European safety standard certification"
+        },
+        {
+          "name": "FCC Certification",
+          "description": "U.S. Federal Communications Commission certification"
+        },
+        {
+          "description": "Quality management system certification"
+        }
+      ],
+      "downloads": [
+        {
+          "title": "Catalog",
+          "description": "AIB-TS2-08 product catalog"
+        },
+        {
+          "title": "Datasheet",
+          "description": "Detailed technical specifications and datasheet"
+        },
+        {
+          "title": "User Manual",
+          "description": "Installation and usage guide"
+        }
+      ],
+      "videos": [
+        {
+          "title": "Product Introduction Video",
+          "description": "Introduces the key functions and features of the AIB-TS2-08"
+        }
+      ]
+    },
+    "list": {
+      "prev": "Previous",
+      "next": "Next",
+      "cardView": "Card View",
+      "listView": "List View",
+      "searchPlaceholder": "Enter a search term",
+      "organizationFallback": "Organization",
+      "dateFallback": "Date",
+      "delete": "Delete",
+      "edit": "Edit",
+      "active": "Active",
+      "inactive": "Inactive",
+      "deactivateTooltip": "Deactivate",
+      "activateTooltip": "Activate",
+      "noProductsTitle": "No products match the selected criteria.",
+      "noProductsDesc": "Try a different category or search term.",
+      "closeAria": "Close",
+      "previewAlt": "Enlarged view"
+    }
+  },
+  "rndPage": {
+    "onDevice": {
+      "cards": [
+        {
+          "subtitle": "A Rapid Bodyguard for On-Site Accident Prevention",
+          "description": [
+            "In an era where advanced technology takes responsibility for safety, 'On-Device AI' has emerged to transform the paradigm of industrial sites. Like a reliable bodyguard for on-site workers, this technology instantly detects hazards and prevents accidents before they occur.",
+            "The greatest appeal of On-Device AI is its 'speed.' Conventional cloud-based AI inevitably suffers delays because it must send data to a server for analysis, but On-Device AI processes everything on the device itself. At sites where instantaneous accidents such as falls or collisions occur, decisions made within milliseconds (ms) make a critical difference in saving lives.",
+            "In addition, this technology adapts perfectly to diverse environments. By fusing visual information from RGB cameras with ToF (distance measurement) and radar (motion detection) sensor data, it detects hazards without gaps even in dark environments or in underground spaces and tunnels where communication is cut off. The moment a worker collapses or enters a restricted area, it immediately delivers audible or visual warnings to alert of the danger.",
+            "On-Device AI goes beyond mere technology, presenting a new standard for industrial sites that put safety first. Now, the power of technology makes it possible to build safer and more efficient work environments."
+          ]
+        }
+      ],
+      "s1": {
+        "heading": "Overview",
+        "text": "We develop On-Device Artificial Intelligence technology specialized for the industrial safety field, providing solutions that can detect hazards in real time and respond immediately even in unstable or limited communication environments. By processing sensor data and AI algorithms directly on site, we simultaneously achieve delay-free decision-making, privacy protection, and low-power operation."
+      },
+      "s2": {
+        "heading": "Technology Composition and Features",
+        "headers": [
+          "Component",
+          "Description",
+          "Key Functions"
+        ],
+        "rows": [
+          [
+            "On-Device AI Inference",
+            "High-performance edge hardware based on NVIDIA Jetson Orin Nano, Rockchip, and ARM",
+            "Real-time AI model processing of sensor data such as camera/radar/ToF"
+          ],
+          [
+            "Multimodal Sensor Integration",
+            "RGB cameras, ToF (Time of Flight), radar, IMU, gas sensors, and more",
+            "Accurate and highly reliable hazard assessment through composite sensor fusion"
+          ],
+          [
+            "Local Alerts and Control",
+            "Voice guidance, high-brightness LED warnings, wireless transmitter/relay control",
+            "Immediate delivery of warning and control signals on site without an external communication network"
+          ],
+          [
+            "Modular Design",
+            "Various module form factors such as mobile cams, mount cams, and smart sensors",
+            "Flexible installation and functional expansion tailored to site conditions"
+          ]
+        ]
+      },
+      "s3": {
+        "heading": "Key Functions and Application Scenarios",
+        "items": [
+          {
+            "term": "Real-Time Object and Behavior Recognition",
+            "desc": "— Detects various behaviors such as collapses, restricted-area entry, and rescue signals (waving hands) in real time. Operates efficiently in an on-device environment with lightweight models (YOLOv11, MediaPipe, Pose Estimation, etc.)."
+          },
+          {
+            "term": "Abnormal Situation Detection and Alerts",
+            "desc": "— Recognizes movement in non-visible areas using radar and ToF to detect abnormal situations, and immediately alerts with audible/visual warnings."
+          },
+          {
+            "term": "Smart PPE Integration and Data Logging",
+            "desc": "— Links mobile sensors (temperature/humidity, gas, location, etc.) via BLE/MQTT, and automatically reports/alerts and accumulates logs when anomalies are detected."
+          },
+          {
+            "term": "Response in Network-Unavailable Environments",
+            "desc": "— Operates fully independently even at sites with weak communication infrastructure, ensuring stable operation."
+          }
+        ]
+      },
+      "s4": {
+        "heading": "Technological Differentiation",
+        "headers": [
+          "Item",
+          "Our On-Device AI",
+          "Conventional Cloud AI"
+        ],
+        "rows": [
+          [
+            "Processing Location",
+            "Real-time computation within the device",
+            "Dependent on external cloud servers"
+          ],
+          [
+            "Communication Dependency",
+            "Low (offline operation possible)",
+            "High (real-time communication required)"
+          ],
+          [
+            "Privacy Protection",
+            "Minimizes external transmission of video/audio data",
+            "Possibility of personal data leakage during transmission"
+          ],
+          [
+            "Latency",
+            "Immediate response within a few ms",
+            "Delays of several seconds or more depending on network conditions"
+          ],
+          [
+            "Installation Flexibility",
+            "Easy installation with power-free/low-power design",
+            "Requires building power and communication infrastructure"
+          ]
+        ]
+      },
+      "s5": {
+        "heading": "Applicable Industrial Environments",
+        "items": [
+          "Construction sites: Detection of risky behavior in elevated work, monitoring of approach to non-visible areas",
+          "Manufacturing plants: Detection of approach to hazardous zones of equipment/heavy machinery and monitoring of abnormal behavior",
+          "Tunnels/underground worksites: Independent hazard detection and warning in communication-blocked zones",
+          "Logistics centers/warehouses: Detection of forklift-worker collision risks, monitoring of restricted-access areas",
+          "Local governments/public facilities: Detection of emergencies such as fire and flooding"
+        ]
+      },
+      "s6": {
+        "heading": "Service Offerings",
+        "items": [
+          "Development of On-Device AI-based POC products and systems",
+          "Design and optimization of site-tailored sensor combinations",
+          "AI model optimization services based on Jetson Orin and Rockchip",
+          "Industrial safety AI performance testing and KOLAS compliance support",
+          "Edge-to-Cloud integration and administrator dashboard development"
+        ]
+      }
+    },
+    "airQuality": {
+      "cards": [
+        {
+          "subtitle": "Creating a Healthy and Comfortable Living Environment",
+          "description": [
+            "'AI-Based Air Quality Management Technology' is an innovative system that leverages machine learning to enhance indoor and outdoor air quality data and proactively control a comfortable environment. This technology autonomously resolves sensor errors and aging issues to secure data 'reliability,' providing a foundation that can be utilized for public projects and precise environmental analysis.",
+            "In particular, machine learning-based 'anomaly detection' technology automatically corrects errors caused by sensor contamination or aging, always maintaining accurate information. In addition, 'predictive maintenance technology' predicts the possibility of device failure in advance, reducing unnecessary site visits and management costs. 'Smart environmental control technology' provides proactive services by linking with air purifiers, air conditioners, and more—automatically activating when fine dust surges or optimally controlling ventilation systems according to carbon dioxide levels. This technology is applied to a wide range of spaces, from environmentally sensitive facilities such as daycare centers, hospitals, and schools to smart apartments and shopping complexes, contributing to creating user-tailored, safe, and healthy living environments."
+          ]
+        }
+      ],
+      "s1": {
+        "heading": "Technology Concept and Acquisition Status",
+        "p1a": "This technology is an innovative unit technology that combines ",
+        "p1strong": "machine learning-based Anomaly Detection",
+        "p1b": " and Predictive Maintenance technology to enhance indoor and outdoor air quality data and proactively control a comfortable environment. Through the 2019 Leading-Type Startup Project of the Startup Growth Technology Development Program, we secured core technological competitiveness for developing a highly reliable indoor/outdoor air quality management system and a comfortable environment control service.",
+        "p2": "This core technology autonomously resolves sensor errors and aging issues to maximize data reliability and predicts the possibility of device failure in advance. It also aims to be applied to solutions that create safe and healthy living spaces through customized environmental control for environmentally sensitive groups."
+      },
+      "s2": {
+        "heading": "Features and Strengths of the Core Technology",
+        "sub1": {
+          "heading": "Securing Data Reliability: Machine Learning-Based Anomaly Detection Technology",
+          "text": "Machine learning models automatically identify and correct data errors that occur as sensors become contaminated or age. This provides always-accurate and reliable air quality data, which can be utilized for public projects and precise environmental analysis."
+        },
+        "sub2": {
+          "heading": "Maximizing Maintenance Efficiency: Predictive Maintenance Technology",
+          "text": "By analyzing air quality data together with device operating information, it predicts sensor performance degradation and failure timing in advance. This is applied to solutions that reduce unnecessary site visits and management costs by notifying users in advance of issues such as device fan abnormalities or filter replacement timing."
+        },
+        "sub3": {
+          "heading": "User-Tailored Environmental Control: Smart Environmental Control Technology",
+          "text": "By considering accumulated data and the characteristics of environmentally sensitive groups, it contributes to deriving optimal comfort conditions by group and by building. It is a core component of solutions that provide proactive environmental control services, such as linking with air purifiers and air conditioners to automatically activate when fine dust surges, or optimally controlling ventilation systems according to carbon dioxide levels."
+        }
+      },
+      "s3": {
+        "heading": "Core Technology Development Details and System Logic Structure",
+        "text": "This core technology was completed through the following development process and implemented advanced functions through a logical data processing structure.",
+        "sub1": {
+          "heading": "Detailed Development Process",
+          "items": [
+            {
+              "term": "Development of Fine Dust Data Correction Technology:",
+              "desc": "Collected and analyzed normal and abnormal fine dust sensor datasets to develop a machine learning model."
+            },
+            {
+              "term": "Development of Predictive Maintenance Technology:",
+              "desc": "Developed a model that predicts abnormal signs of sensors and devices using machine learning-based Anomaly Detection technology."
+            },
+            {
+              "term": "Development of a Universal Legacy Adapter:",
+              "desc": "Developed a universal adapter to link various previously installed environmental equipment (air purifiers, air conditioners, etc.) with this system, securing compatibility."
+            }
+          ]
+        },
+        "sub2": {
+          "heading": "AI-Based Air Quality Management System Process",
+          "items": [
+            {
+              "term": "Data Collection:",
+              "desc": "Collects real-time data such as fine dust, carbon dioxide, and temperature/humidity from indoor and outdoor air quality measurement devices."
+            },
+            {
+              "term": "Data Processing and Correction:",
+              "desc": "The collected data is identified and corrected for abnormal data through a machine learning-based Anomaly Detection algorithm."
+            },
+            {
+              "term": "Data Analysis:",
+              "desc": "Based on the corrected data, derives optimal comfort conditions suited to environmentally sensitive groups and analyzes device status with a predictive maintenance model."
+            },
+            {
+              "term": "Automatic Control and Alerts:",
+              "desc": "Based on the analysis results, automatically controls environmental equipment linked with air purifiers, air conditioners, and more, and explains the solution's operation process of notifying users when maintenance is needed."
+            }
+          ]
+        }
+      },
+      "s4": {
+        "heading": "Application Targets and Expected Effects",
+        "text": "This technology is the core technology of solutions successfully applied to a variety of spaces where air quality management is essential.",
+        "sub1": {
+          "heading": "Main Application Targets",
+          "text": "Environmentally sensitive facilities such as daycare centers, nursing facilities, hospitals, and schools; smart apartments; factory office buildings; urban buildings with heavy traffic; shopping complexes; and local government air-environment precision management projects, among others"
+        },
+        "sub2": {
+          "heading": "Key Effects",
+          "items": [
+            {
+              "term": "Space-Specific Tailored Control:",
+              "desc": "Contributes to automatically maintaining the best air quality by considering user characteristics and the spatial environment."
+            },
+            {
+              "term": "Proactive Management:",
+              "desc": "Enables solutions that improve management efficiency by predicting device failures and notifying maintenance timing."
+            },
+            {
+              "term": "Stable Environment Creation:",
+              "desc": "Plays a key role in implementing solutions that enable proactive responses to the inflow of external pollutants by analyzing outdoor air quality as well."
+            }
+          ]
+        },
+        "textEnd": "Based on these strengths, this technology has secured competitiveness in the smart air quality management and care solution market."
+      }
+    },
+    "ragLlm": {
+      "cards": [
+        {
+          "subtitle": "An Intelligent Safety Partner for the Field",
+          "description": [
+            "Today, safety at industrial sites requires not just simple monitoring but 'intelligence that understands and judges situations.'",
+            "Conventional safety systems only provided warnings according to fixed rules, but now a 'conversational safety awareness system' is needed—one that understands workers' questions and presents solutions for complex situations.",
+            "At the heart of this innovation is RAG (Retrieve-Augment-Generate)-based LLM (Large Language Model) technology. By combining vast manuals, guidelines, and real-time sensor data, this technology can even answer the question 'Why.'",
+            "For example, in response to a worker's question 'The machine is making a strange noise,' it can respond quickly and accurately, such as 'There is a possibility of motor overheating, so cut off the power immediately.'",
+            "In particular, with on-device inference that operates independently even in underground worksites or tunnels where communication is cut off, it eliminates safety blind spots.",
+            "RAG-based LLM is not a mere observer but an 'intelligent safety partner' that predicts hazards, communicates, and provides field knowledge in real time, presenting a new paradigm for industrial safety."
+          ]
+        }
+      ],
+      "s1": {
+        "heading": "Overview",
+        "text": "We provide a conversational safety awareness system that utilizes RAG (Retrieve-Augment-Generate)-based LLM (Large Language Model) technology so that complex hazardous situations at industrial sites can be understood and responded to in real time. By combining situational awareness, context analysis, and knowledge retrieval, this solution is a next-generation industrial safety solution that enables intelligent warnings, reporting, and response guidance."
+      },
+      "s2": {
+        "heading": "Core Technology Composition",
+        "headers": [
+          "Component",
+          "Description",
+          "Key Functions"
+        ],
+        "rows": [
+          [
+            "",
+            "In-house optimized models of the GPT, phi, and Llama families",
+            "Worker Q&A and natural-language explanations of hazardous situations"
+          ],
+          [
+            "",
+            "Response generation based on an on-device vector database and document retrieval technology",
+            "Automated explanation based on field guidelines and provision of accurate information"
+          ],
+          [
+            "On-Device Inference",
+            "Operates on low-power edge devices such as NVIDIA Jetson Orin",
+            "Performs LLM inference independently even in environments where communication is difficult"
+          ]
+        ]
+      },
+      "s3": {
+        "heading": "Key Functions and Service Scenarios",
+        "items": [
+          {
+            "term": "Real-Time Interpretation and Guidance of Hazardous Situations",
+            "desc": "— e.g., When 'The machine is making a strange noise' is entered, provides guidance through context analysis such as 'There is a possibility of motor overheating. Cut off the power immediately and call the manager.'"
+          },
+          {
+            "term": "Site-Tailored Voice Guidance System",
+            "desc": "— Generates situation-tailored voice warnings in real time, such as 'You are approaching a hazardous zone. Move to the left,' by linking with radar/ToF detection events."
+          },
+          {
+            "term": "Manual-Based First-Aid Guidance",
+            "desc": "— In emergencies such as 'A person has collapsed,' searches the guideline manual to provide step-by-step first-aid guidance."
+          },
+          {
+            "term": "Situation Report Automation",
+            "desc": "— Based on a report such as 'Hazardous material leak occurred,' automatically generates a hazard report according to a predefined template to simplify procedures."
+          }
+        ]
+      },
+      "s4": {
+        "heading": "Technological Differentiation",
+        "headers": [
+          "Item",
+          "Our Technology (RAG + LLM)",
+          "Conventional Technology"
+        ],
+        "rows": [
+          [
+            "Query Response",
+            "Understands context and provides knowledge-based explanations",
+            "Centered on fixed responses, lacking flexibility"
+          ],
+          [
+            "Reflection of Field Knowledge",
+            "Utilizes built-in guidelines/work manuals via RAG",
+            "Dependent on knowledge external to the system"
+          ],
+          [
+            "Communication Dependency",
+            "Local inference possible → overcomes communication constraints",
+            "Cloud-based, requiring communication"
+          ],
+          [
+            "User Interface",
+            "Conversational interaction based on voice/text",
+            "Limited interface centered on buttons"
+          ]
+        ]
+      },
+      "s5": {
+        "heading": "Application Fields",
+        "items": [
+          "Construction sites: Risk behavior Q&A, safety education support for subcontracted workers",
+          "Manufacturing plants: Explanation of equipment anomaly signs, response to work manual queries",
+          "Nighttime unmanned worksites: Situation interpretation and response guidance after hazard detection",
+          "Public facilities/underground spaces: Voice-conversation-based response guidance in emergencies"
+        ]
+      },
+      "s6": {
+        "heading": "Available Services",
+        "items": [
+          "Customization of an integrated RAG + LLM conversational system",
+          "Construction of a vector database based on field safety manuals",
+          "Provision of models optimized for on-device platforms such as Jetson Orin",
+          "Development of voice input/output UI and multilingual support systems",
+          "Production of real-world demonstration scenarios and POC (Proof of Concept) testing support"
+        ]
+      }
+    },
+    "multimodal": {
+      "cards": [
+        {
+          "subtitle": "A Reliable Safety Guardian for Industrial Sites",
+          "description": [
+            "'Multimodal Situational Awareness Technology' is an innovative system that elevates industrial site safety to a new level. Like the human eyes and ears, this technology comprehensively perceives and fuses diverse information from RGB cameras, ToF (distance measurement) sensors, UWB (ultra-wideband) radar sensors, and more.",
+            "Even in environments that were difficult to handle with cameras alone—such as changes in illumination, dust, and occlusion—it can detect accurately without being affected by light, boasting powerful adaptability.",
+            "The core of this technology lies in 'On-Device AI.' On site, it immediately detects abnormal behaviors such as a worker collapsing or falling in real time, and precisely identifies the hazardous approach of heavy machinery to prevent collision accidents. In particular, by utilizing radar to detect even invisible blind spots, it plays a major role in minimizing safety blind spots.",
+            "When a hazardous situation occurs, it immediately delivers warning alerts to workers via voice, display, mobile app, and more, and by linking with smart PPE (personal protective equipment), it monitors even hazardous gases and temperature changes to protect workers more safely. Multimodal fusion technology that goes beyond the limits of a single sensor is expected to raise industrial site safety to a new level."
+          ]
+        }
+      ],
+      "s1": {
+        "heading": "Overview",
+        "text": "To secure industrial site safety in real time, we are developing and commercializing multimodal situational awareness technology that fuses RGB cameras, Time-of-Flight (ToF) sensors, and UWB Radar sensors. This technology overcomes the limitations of conventional single-sensor-based detection, enabling accurate hazard recognition and response even in diverse environments such as changes in illumination, occlusion, and dust."
+      },
+      "s2": {
+        "heading": "Core Technology Composition",
+        "headers": [
+          "Technology Component",
+          "Key Functions",
+          "Purpose of Use"
+        ],
+        "rows": [
+          [
+            "RGB Camera",
+            "Object detection (YOLOv11), behavior recognition (MediaPipe, etc.)",
+            "Worker recognition, behavior monitoring"
+          ],
+          [
+            "ToF (Time-of-Flight) Sensor",
+            "Distance/depth measurement, in-zone approach detection",
+            "Distance-based approach detection, hazardous distance detection"
+          ],
+          [
+            "UWB Radar (Ultra-Wideband)",
+            "Motion detection, direction/speed estimation",
+            "Detection of non-visible areas in occluded environments"
+          ]
+        ]
+      },
+      "s3": {
+        "heading": "Key Applicable Services",
+        "items": [
+          {
+            "term": "Worker Behavior Detection and Hazard Warning System",
+            "desc": "— Automatically detects collapses/falls/excessive movement/abnormal behavior to prevent accidents, and provides warning alerts through various channels such as voice, display, and mobile app immediately upon detection."
+          },
+          {
+            "term": "Vehicle and Heavy Machinery Approach Hazard Detection",
+            "desc": "— Accurately detects direction and approach speed using radar, and immediately issues warnings when a worker approaches a blind spot to prevent collision accidents."
+          },
+          {
+            "term": "Enhanced Monitoring of Dark Environments and Occluded Zones",
+            "desc": "— Overcomes camera limitations through ToF/Radar fusion, performing accurate hazard detection even in low-illumination environments such as enclosed spaces, nighttime, and tunnels."
+          },
+          {
+            "term": "Smart PPE Integration",
+            "desc": "— Links with BLE-based smart PPE to monitor individual environmental changes, and immediately sends alerts when anomalies such as hazardous gases or temperature changes are detected."
+          }
+        ]
+      },
+      "s4": {
+        "heading": "Technological Differentiation",
+        "headers": [
+          "Item",
+          "Our Technology (Multimodal Fusion)",
+          "Conventional Technology (Single Sensor)"
+        ],
+        "rows": [
+          [
+            "Illumination Impact",
+            "Low (independent of light through combined use of Radar/ToF)",
+            "High (when using RGB alone)"
+          ],
+          [
+            "Detection Accuracy",
+            "Optimized per situation through fusion of three sensors",
+            "Limited by the performance of a single sensor"
+          ],
+          [
+            "Real-Time Performance",
+            "Based on On-Device AI (Jetson Orin, etc.)",
+            "Higher cloud dependency, possible delays"
+          ],
+          [
+            "Response in Communication-Unavailable Areas",
+            "Independent operation based on edge computing",
+            "Limited functionality during communication failures"
+          ]
+        ]
+      }
+    },
+    "assistive": {
+      "cards": [
+        {
+          "subtitle": "The Future of Dignified and Safe Care",
+          "description": [
+            "'Smart Assistive Technology for the Elderly with Cognitive Impairment and People with Disabilities' is an innovative solution that overcomes the limitations of modern care systems. This technology improves safety by detecting hazardous situations such as falls and wandering—which people with cognitive impairment may experience—at an early stage. In particular, even in privacy-sensitive spaces such as bedrooms and bathrooms where CCTV is difficult to install, it is designed to enable thorough monitoring while protecting individual dignity by utilizing contactless multimodal sensing technology.\n\nThis system does not stop at merely detecting hazards. By precisely learning the user's behavior patterns, it predicts abnormal behavior that differs from the usual and immediately delivers alerts to care staff. This greatly reduces the workload of care staff, who find it difficult to be on standby around the clock, and enables rapid responses to unexpected situations. Ultimately, this technology will provide a safe and dignified life for people with cognitive impairment and an efficient and systematic care environment for guardians and administrators, contributing to raising the level of welfare in our society by one step."
+          ]
+        }
+      ],
+      "s1": {
+        "heading": "Technology Overview",
+        "text": "We have developed situational/behavioral awareness home care assistive devices and service technology for the daily-life convenience and safety of the elderly and people with disabilities who have cognitive impairment. Through AI-based multimodal sensing, this technology enables thorough safety management while protecting individual privacy. In particular, it is designed to effectively detect and respond to hazardous situations in blind spots such as bedrooms and bathrooms where CCTV is difficult to install."
+      },
+      "s2": {
+        "heading": "Necessity and Importance of the Technology",
+        "text": "Recently, the number of patients with mild cognitive impairment has been rapidly increasing, yet the existing care methods for them have several limitations. Representative examples include a shortage of three-shift staff, difficulty in responding immediately to unexpected situations, and privacy infringement caused by CCTV. Our technology resolves these problems, contributing to enabling users with cognitive impairment to live safely and relieving the burden on guardians and administrators."
+      },
+      "s3": {
+        "heading": "Main Technology Composition",
+        "p1a": "Our AI multimodal home care solution is built around an ",
+        "p1strong": "AI Multimodal Home Care Station (Edge Server)",
+        "p1b": ".",
+        "sub1": {
+          "heading": "Home Care Station PoC",
+          "items": [
+            {
+              "term": "PoC Type A:",
+              "desc": "A concept prototype that improves space utilization with a wall-mounted or stand type."
+            },
+            {
+              "term": "PoC Type B:",
+              "desc": "A concept prototype of the stand type that can be flexibly placed in various spaces."
+            }
+          ],
+          "text": "This station serves as an edge server that collects and analyzes the behavioral and situational data of users with cognitive impairment, and is driven by the following technologies."
+        },
+        "sub2": {
+          "heading": "Core Technology Elements",
+          "items": [
+            {
+              "term": "Situational/Behavioral Awareness AI:",
+              "desc": "Integrates and analyzes multimodal data to accurately recognize the user's behavior and situation, and detects hazardous situations such as falls and wandering in real time."
+            },
+            {
+              "term": "Personalized Pattern Learning:",
+              "desc": "Learns the user's daily patterns to detect abnormal behavior that differs from the usual and predicts problems caused by disease characteristics."
+            }
+          ]
+        }
+      },
+      "s4": {
+        "heading": "Expected Effects",
+        "items": [
+          {
+            "term": "Enhanced Safety:",
+            "desc": "Provides 24-hour safety management even in CCTV blind spots, preventing falls and other hazardous situations at an early stage."
+          },
+          {
+            "term": "Privacy Protection:",
+            "desc": "Enables effective monitoring without infringing on individual privacy by utilizing contactless technology."
+          },
+          {
+            "term": "Increased Operational Efficiency:",
+            "desc": "Reduces the workload of management staff and improves efficiency through immediate alerts and automatic recording functions for unexpected situations."
+          },
+          {
+            "term": "Tailored Care Provision:",
+            "desc": "Analyzes the user's behavior patterns and health status to provide baseline data for establishing a tailored care plan."
+          }
+        ]
+      }
+    },
+    "embedded": {
+      "cards": [
+        {
+          "subtitle": "Strengthening Patient Safety in Medical Settings",
+          "description": [
+            "Optimized for hospitals and nursing facilities, this solution precisely analyzes patient conditions in real time through a 'composite sensor module that fuses radar and cameras.' Going beyond simple motion detection, an 'AI-based inference engine' autonomously detects and classifies falls, abnormal behavior, and even changes in vital signs, immediately delivering alerts to medical staff.",
+            "The most important value is that safety management is possible while 'protecting patient privacy.' Contactless radar technology detects hazards without exposing the patient's body, so it can be used with confidence even in spaces where CCTV installation is inappropriate.",
+            "In addition, the 'SW-SoC-based embedded system,' designed to be ultra-compact and low-power, performs immediate analysis and warning on site without relying on a communication network, enabling rapid responses to emergencies. This technology reduces the workload of medical staff while presenting a new standard for patient safety management and contributing to improving the quality of the medical environment."
+          ]
+        }
+      ],
+      "s1": {
+        "heading": "Introduction",
+        "text": "One of our core technologies is an embedded system for early detection of hazardous situations using radar and cameras. To ensure patient safety, this system provides a customized solution optimized for the hospital room environment and supports an efficient working environment for medical staff."
+      },
+      "s2": {
+        "heading": "Key Technologies",
+        "sub1": {
+          "heading": "AI-Based Early Hazard Detection Inference Engine",
+          "items": [
+            {
+              "term": "Sensor Fusion Data Processing:",
+              "desc": "Links data collected from radar and cameras to precisely analyze patient conditions."
+            },
+            {
+              "term": "Artificial Intelligence Algorithm:",
+              "desc": "We have developed and possess an artificial intelligence algorithm that autonomously detects and classifies patient falls, abnormal behavior, changes in vital signs, and more."
+            }
+          ]
+        },
+        "sub2": {
+          "heading": "Radar and Camera Composite Sensor Module",
+          "items": [
+            {
+              "term": "3D Data Collection:",
+              "desc": "We possess composite sensor module technology consisting of a 3D millimeter-wave radar chipset with multi-array antennas and a high-sensitivity, high-resolution camera."
+            }
+          ]
+        },
+        "sub3": {
+          "heading": "SW-SoC-Based Embedded System",
+          "items": [
+            {
+              "term": "Low-Power/Ultra-Compact Design:",
+              "desc": "We have independently designed an embedded board that integrates a low-power, ultra-compact FPGA-equipped multiprocessor and signal processing functions."
+            },
+            {
+              "term": "AI Model Implementation:",
+              "desc": "We possess technology that efficiently implements AI models on SW-SoC-based FPGAs and utilizes AI quantization and compilers."
+            }
+          ]
+        }
+      },
+      "s3": {
+        "heading": "Value of the Technology",
+        "items": [
+          {
+            "term": "Safety Accident Prevention:",
+            "desc": "Provides effective technology that detects and prevents serious safety accidents such as falls at an early stage."
+          },
+          {
+            "term": "Privacy Protection:",
+            "desc": "Through contactless radar technology, it protects patient privacy while detecting hazardous situations without blind spots."
+          },
+          {
+            "term": "Improved Operational Efficiency:",
+            "desc": "Reduces the workload of medical staff and enables rapid responses to emergencies through automatic monitoring and alarm functions."
+          }
+        ]
+      }
+    }
+  },
+  "ui1": {
+    "government": {
+      "overviewTitle": "Overview",
+      "overviewText": "This program provides subsidies to help small and medium-sized workplaces with limited financial and technical resources adopt smart safety equipment, in order to prevent the various industrial accidents that arise from industrial change and technological advancement. By leveraging digital technologies such as AI, IoT, and video analytics, it detects on-site hazards in real time and prevents safety accidents in advance.",
+      "targetTitle": "Eligibility",
+      "target1": "Business owners of workplaces with fewer than 50 full-time employees (for the construction industry, work sites are excluded, but the head office may apply)",
+      "target2": "Business owners of companies at or below the small enterprise size criteria under the Framework Act on Small and Medium Enterprises (SME confirmation certificate required)",
+      "target3": "Workplaces that own equipment specified in Appendix 21 of the Enforcement Decree of the Occupational Safety and Health Act, or that operate a related leasing business",
+      "conditionTitle": "Support Conditions",
+      "condition1": "Subsidies are paid after the selection, contract, installation, and inspection procedures are completed.",
+      "condition2": "Duplicate subsidies from other programs for the same equipment are restricted.",
+      "condition3": "Detailed support ratios and limits follow the criteria announced by the agency.",
+      "itemsTitle": "Supported Items · Support Limit · Support Scope",
+      "colType": "Category",
+      "colItem": "Covered Items",
+      "safetyType": "Safety (30 types)",
+      "safetyItems": "Forklift and heavy-equipment human detection systems, moving-object proximity alarms, collision prevention solutions, hazard zone access control, fall and entrapment prevention devices, video-based worker protection (PPE compliance checks), safety railings/safety gates, conveyor safety devices, temporary facilities and pedestrian protection equipment, and more",
+      "healthType": "Health (7 types)",
+      "healthItems": "Smart noise, dust, and hazardous gas meters, reinforcement of ventilation and dust collection systems, assistive devices for musculoskeletal-burden tasks, improvement of local exhaust ventilation systems, and more",
+      "etcType": "Other",
+      "etcItems": "Detailed items, support limits, and self-payment ratios follow the agency's annual announcement criteria, and may be adjusted based on prior diagnosis and on-site conditions.",
+      "processTitle": "Program Process",
+      "step1Title": "Subsidy Application",
+      "step1Desc": "Check program announcement · Online submission",
+      "step2Title": "Eligibility Review",
+      "step2Desc": "Document review · On-site diagnosis",
+      "step3Title": "Recipient Selection",
+      "step3Desc": "Evaluation · Result notification",
+      "step4Title": "Contract/Installation",
+      "step4Desc": "Equipment contract · Installation/setup",
+      "step5Title": "Inspection/Settlement",
+      "step5Desc": "Installation verification · Document submission",
+      "step6Title": "Subsidy Payment",
+      "step6Desc": "Payment after final review"
+    },
+    "sitemap": {
+      "groups": [
+        {
+          "title": "Company",
+          "items": [
+            {
+              "label": "About Us",
+              "path": "/about#greeting"
+            },
+            {
+              "label": "History",
+              "path": "/about#history"
+            },
+            {
+              "label": "Licenses & Certifications & Patents",
+              "path": "/about#certificate"
+            },
+            {
+              "label": "Directions",
+              "path": "/about#location"
+            },
+            {
+              "label": "Board",
+              "path": "/customer-service/announcement"
+            }
+          ]
+        },
+        {
+          "title": "Business Areas",
+          "items": [
+            {
+              "label": "Industrial Safety Solutions",
+              "path": "/solutions/overview"
+            },
+            {
+              "label": "Elderly & Disabled Safety Solutions",
+              "path": "/solutions/chemical"
+            },
+            {
+              "label": "Integrated Control Solutions",
+              "path": "/solutions/manufacturing"
+            }
+          ]
+        },
+        {
+          "title": "R&D",
+          "items": [
+            {
+              "label": "Multimodal Situational Awareness",
+              "path": "/rnd/multimodal-awareness"
+            },
+            {
+              "label": "On-Device AI",
+              "path": "/rnd/on-device-ai"
+            },
+            {
+              "label": "RAG-Based LLM",
+              "path": "/rnd/rag-llm"
+            },
+            {
+              "label": "Early Hazard Detection",
+              "path": "/rnd/embedded-system"
+            },
+            {
+              "label": "Cognitive Impairment Assistance",
+              "path": "/rnd/smart-assistive-technology"
+            },
+            {
+              "label": "AI Air Quality Management",
+              "path": "/rnd/air-quality-management"
+            }
+          ]
+        },
+        {
+          "title": "Products",
+          "items": [
+            {
+              "label": "Smart Safety",
+              "path": "/products/safety"
+            },
+            {
+              "label": "Monitoring System",
+              "path": "/products/monitoring"
+            },
+            {
+              "label": "Integrated Control",
+              "path": "/products/control/list"
+            }
+          ]
+        },
+        {
+          "title": "Customer Cases",
+          "items": [
+            {
+              "label": "Industrial Safety Automation",
+              "path": "/cases/smart-safety"
+            },
+            {
+              "label": "Smart Integrated Control",
+              "path": "/cases/integrated-control"
+            },
+            {
+              "label": "Information & Communication",
+              "path": "/cases/information-communication"
+            }
+          ]
+        }
+      ]
+    },
+    "form": {
+      "title": "Contact Us",
+      "intro1": "Thank you for contacting Thingswell.",
+      "intro2": "Our team will review your inquiry promptly and accurately, and respond to you as soon as possible.",
+      "labelName": "Name",
+      "placeholderName": "John Doe",
+      "labelEmail": "Email",
+      "labelCompany": "Company Name",
+      "placeholderCompany": "Thingswell Inc.",
+      "labelPhone": "Phone",
+      "labelMessage": "Inquiry Details",
+      "privacyTitle": "Consent to Collection and Use of Personal Information",
+      "privacyItem1Title": "1. Personal Information Items Collected",
+      "privacyItem2Title": "2. Purpose of Collection and Use of Personal Information",
+      "privacyItem2Desc": "Prompt and accurate review of customer inquiries and provision of responses",
+      "privacyItem3Title": "3. Retention and Use Period of Personal Information",
+      "privacyItem3Desc1": "Retained for one year from the date of collection, then destroyed",
+      "privacyItem3Desc2": "(However, if retention is required under applicable laws, it will be retained for the relevant period)",
+      "privacyItem4Title": "4. Right to Refuse Consent and Notice of Disadvantages",
+      "privacyItem4Desc1": "You have the right to refuse consent to the collection and use of your personal information.",
+      "privacyItem4Desc2": "However, if you do not consent, the provision of responses to your inquiry may be limited.",
+      "privacyAgree": "I agree to the collection and use of personal information",
+      "privacyDisagree": "I do not agree to the collection and use of personal information"
+    },
+    "board": {
+      "noDate": "No date",
+      "noTitle": "No title"
+    },
+    "popup": {
+      "logoAlt": "Thingswell Inc.",
+      "year": "2026",
+      "badge1": "Small Business Owners",
+      "badge2": "Smart Store Support Program",
+      "highlight": "Up to 80% Government Support",
+      "desc": "Manage Your Store at a Glance",
+      "smartStore": "Smart Store",
+      "feature1": "Store Safety Management",
+      "feature2": "Unmanned Store Management",
+      "feature3": "Store Status Analysis",
+      "cta": "View Details",
+      "dontShowToday": "Don't show today",
+      "close": "Close"
+    },
+    "menu": {
+      "koreanLabel": "Korean"
+    }
+  },
+  "ui2": {
+    "tabContent": {
+      "featureImageAlt": "Key Feature",
+      "specImageAlt": "Specification",
+      "certImageAlt": "Certification",
+      "videoTitle": "Video"
+    },
+    "page": {
+      "recordNameLabel": "Project Name",
+      "productNameLabel": "Product Name",
+      "recordNamePlaceholder": "Enter the project name",
+      "productNamePlaceholder": "Enter the product name",
+      "recordDescLabel": "Project Description",
+      "productDescLabel": "Product Description",
+      "recordDescPlaceholder": "Enter the project description",
+      "productDescPlaceholder": "Enter the product description"
+    },
+    "bottomBox": {
+      "titleLabel": "Bottom Box Title",
+      "titlePlaceholder": "Enter the bottom box title",
+      "caption1Label": "Photo Caption 1",
+      "caption1Placeholder": "Enter photo caption 1",
+      "caption2Label": "Photo Caption 2",
+      "caption2Placeholder": "Enter photo caption 2",
+      "captionLabel": "Photo Caption",
+      "captionPlaceholder": "Enter the photo caption"
+    },
+    "tabs": {
+      "noTabsTitle": "No tabs are available",
+      "noTabs": "No tabs",
+      "openLabel": "Open tab content",
+      "closeLabel": "Close tab content",
+      "openTitle": "Open",
+      "closeTitle": "Close"
+    },
+    "cardGroup": {
+      "noProducts": "There are no products to display.",
+      "keyFeatures": "Key Features",
+      "keySpecs": "Key Specifications"
+    },
+    "info": {
+      "recordNameLabel": "Project Name",
+      "modelNameLabel": "Model Name",
+      "recordNamePlaceholder": "Enter the project name",
+      "productNamePlaceholder": "Enter the product name"
+    },
+    "gallery": {
+      "image": "Image",
+      "thumbnail": "Thumbnail"
+    },
+    "defaults": {
+      "cardGroupTitle": "Product Lineup",
+      "cardGroupSubtitle": "Explore our range of products",
+      "infoTitle": "Advanced Integrated Controller",
+      "infoDescription": "A versatile interface control module for industrial automation and smart system integration, providing reliable connectivity and precise control across diverse environments, enabling efficient management and operation.",
+      "sampleTitle": "Advanced Integrated Controller",
+      "sampleDescription": "The cart-mounted solar-powered 80W 30x-zoom 5-megapixel ultra-high-definition PTZ camera set is easy to move even on unpaved construction sites, and with an installed LTE router it enables remote monitoring via PC or mobile.",
+      "sampleOverview": "The XCN-3000 is an industrial integrated control system that connects various sensors and devices to provide real-time monitoring and control."
+    }
+  },
+  "ui3": {
+    "contactInfo": {
+      "title": "Contact Us",
+      "phoneLabel": "Phone",
+      "emailLabel": "Email",
+      "locationLabel": "Directions",
+      "address": "A-1302, Kumkang Penterium IT Tower, 282 Hagui-ro, Dongan-gu, Anyang-si, Gyeonggi-do"
+    },
+    "kategorie": {
+      "defaultTitle": "Products",
+      "defaultImageAlt": "Product image",
+      "defaultLabel": "Product category",
+      "defaultItemTitle": "Product name"
+    },
+    "search": {
+      "placeholder": "Enter a search term",
+      "button": "Search",
+      "writeButton": "Write"
+    },
+    "loginRequired": {
+      "title": "Login required",
+      "message": "You need to log in to use this feature",
+      "buttonText": "Log in"
+    },
+    "supportInfo": {
+      "limitLabel": "Support Limit",
+      "qualificationLabel": "Eligibility"
+    },
+    "restriction": {
+      "reasonLabel": "Participation Restrictions"
+    },
+    "rndSolution": {
+      "headerAlt": "R&D"
+    },
+    "lightbox": {
+      "closeLabel": "Close"
+    },
+    "hamburger": {
+      "langKoreanLabel": "Korean"
+    },
+    "forgotPassword": {
+      "codeSent": "A verification code has been sent to your email.",
+      "codeResent": "A verification code has been resent to your email.",
+      "codeRequestError": "An error occurred while requesting the verification code.",
+      "passwordMinLength": "The new password must be at least 8 characters long.",
+      "passwordMismatch": "The new password and confirmation password do not match.",
+      "resetSuccess": "Your password has been reset successfully.",
+      "resetError": "An error occurred while resetting your password.",
+      "step1Description": "Enter your registered email address and we will send you a verification code to reset your password.",
+      "step2Description": "Please enter the verification code sent to your email and your new password.",
+      "emailLabel": "Email",
+      "codeLabel": "Verification code",
+      "newPasswordLabel": "New password",
+      "confirmPasswordLabel": "Confirm new password",
+      "minLengthHint": "At least 8 characters",
+      "sending": "Sending...",
+      "requestCode": "Send verification code",
+      "resetting": "Resetting...",
+      "resetPassword": "Reset password",
+      "resendCode": "Resend code",
+      "secondsSuffix": "s",
+      "backToLogin": "Back to login",
+      "goToLogin": "Go to login page"
+    }
   }
 }

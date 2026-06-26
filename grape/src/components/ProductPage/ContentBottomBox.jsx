@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './ContentBottomBox.css';
 import ImageWithCaption from '../Common/ImageWithCaption';
 import { marked } from 'marked';
+import useTranslation from '../../hooks/useTranslation';
 
 const ContentBottomBox = ({
   title,
@@ -15,6 +16,7 @@ const ContentBottomBox = ({
   onDataChange = null,
   isRecordPage = false
 }) => {
+  const { t } = useTranslation();
   const [editingField, setEditingField] = useState(null);
   const [tempValue, setTempValue] = useState("");
 
@@ -141,11 +143,11 @@ const ContentBottomBox = ({
         {title && !isRecordPage ? (
           isEditMode ? (
             <div style={{ marginBottom: '10px' }}>
-              <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold', color: '#6c757d', fontSize: '12px' }}>하단 박스 제목</label>
+              <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold', color: '#6c757d', fontSize: '12px' }}>{t('ui2.bottomBox.titleLabel')}</label>
               <EditableText
                 field="bottom_box_title"
                 value={title}
-                placeholder="하단 박스 제목을 입력하세요"
+                placeholder={t('ui2.bottomBox.titlePlaceholder')}
                 style={{ fontSize: '16px', fontWeight: 'bold' }}
               />
             </div>
@@ -175,11 +177,11 @@ const ContentBottomBox = ({
               />
               {isEditMode && (
                 <div style={{ marginTop: '10px' }}>
-                  <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold', color: '#6c757d', fontSize: '12px' }}>사진 캡션 1</label>
+                  <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold', color: '#6c757d', fontSize: '12px' }}>{t('ui2.bottomBox.caption1Label')}</label>
                   <EditableText
                     field="photo_caption_0"
                     value={captionsList[0]}
-                    placeholder="사진 캡션 1을 입력하세요"
+                    placeholder={t('ui2.bottomBox.caption1Placeholder')}
                     style={{ fontSize: '14px' }}
                   />
                 </div>
@@ -195,11 +197,11 @@ const ContentBottomBox = ({
               />
               {isEditMode && (
                 <div style={{ marginTop: '10px' }}>
-                  <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold', color: '#6c757d', fontSize: '12px' }}>사진 캡션 2</label>
+                  <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold', color: '#6c757d', fontSize: '12px' }}>{t('ui2.bottomBox.caption2Label')}</label>
                   <EditableText
                     field="photo_caption_1"
                     value={captionsList[1]}
-                    placeholder="사진 캡션 2를 입력하세요"
+                    placeholder={t('ui2.bottomBox.caption2Placeholder')}
                     style={{ fontSize: '14px' }}
                   />
                 </div>
@@ -217,11 +219,11 @@ const ContentBottomBox = ({
             />
             {isEditMode && (
               <div style={{ marginTop: '10px' }}>
-                <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold', color: '#6c757d', fontSize: '12px' }}>사진 캡션</label>
+                <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold', color: '#6c757d', fontSize: '12px' }}>{t('ui2.bottomBox.captionLabel')}</label>
                 <EditableText
                   field="bottom_box_photo_caption"
                   value={photoCaption}
-                  placeholder="사진 캡션을 입력하세요"
+                  placeholder={t('ui2.bottomBox.captionPlaceholder')}
                   style={{ fontSize: '14px' }}
                 />
               </div>

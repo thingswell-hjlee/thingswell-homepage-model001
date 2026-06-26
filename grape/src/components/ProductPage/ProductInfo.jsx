@@ -1,16 +1,20 @@
 import React, { useState } from 'react';
 import Breadcrumbs from '../Breadcrumbs';
 import './ProductInfo.css';
+import useTranslation from '../../hooks/useTranslation';
 
-const ProductInfo = ({ 
+const ProductInfo = ({
   productName = "XCN-3000",
-  productTitle = "어드밴스드 통합제어기",
-  description = "산업 자동화 및 스마트 시스템 통합을 위한 다목적 인터페이스 제어 모듈로, 다양한 환경에서 안정적인 연결성과 정밀한 제어를 제공하며, 효율적인 관리와 운영을 가능하게 합니다.",
+  productTitle,
+  description,
   breadcrumbs = ["Home", "Products", "Control system"],
   isEditMode = false,
   onDataChange = null,
   isRecordPage = false
 }) => {
+  const { t } = useTranslation();
+  productTitle = productTitle ?? t('ui2.defaults.infoTitle');
+  description = description ?? t('ui2.defaults.infoDescription');
   const [editingField, setEditingField] = useState(null);
   const [tempValue, setTempValue] = useState("");
 
@@ -132,12 +136,12 @@ const ProductInfo = ({
       {isEditMode ? (
         <div style={{ marginBottom: '20px' }}>
           <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold', color: '#6c757d' }}>
-            {isRecordPage ? '실적명' : '모델명'}
+            {isRecordPage ? t('ui2.info.recordNameLabel') : t('ui2.info.modelNameLabel')}
           </label>
           <EditableText
             field="name"
             value={productName}
-            placeholder={isRecordPage ? "실적명을 입력하세요" : "제품명을 입력하세요"}
+            placeholder={isRecordPage ? t('ui2.info.recordNamePlaceholder') : t('ui2.info.productNamePlaceholder')}
             style={{ fontSize: '24px', fontWeight: 'bold' }}
           />
         </div>
