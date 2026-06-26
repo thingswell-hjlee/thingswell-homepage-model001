@@ -19,6 +19,7 @@ import Footer from "./components/Footer";
 import SEOHead from "./components/SEOHead";
 
 import Home from "./pages/Home/Home.jsx";
+import SafegaiPlatform from "./pages/SafegaiPlatform/SafegaiPlatform.jsx";
 import Government_support from "./pages/Government_support/Government_support.jsx";
 import Soulution from "./pages/Solutions/Soulution.jsx";
 import ChemicalSolution from "./pages/Solutions/ChemicalSolution.jsx";
@@ -84,6 +85,8 @@ function AppRoutes({ isMobile }) {
         <div className="page-content">
           <Routes>
             <Route path="/" element={<Home />} />
+
+            <Route path="/safegai-platform" element={<SafegaiPlatform />} />
 
             <Route path="/government-support" element={<Government_support />} />
             <Route path="/solutions/overview" element={<Soulution />} />

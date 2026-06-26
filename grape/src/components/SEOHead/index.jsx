@@ -19,7 +19,8 @@ function SEOHead() {
 
     // Determine which SEO section to use based on path
     let seoSection = 'home';
-    if (pathWithoutLang.startsWith('/about')) seoSection = 'about';
+    if (pathWithoutLang.startsWith('/safegai-platform')) seoSection = 'safegaiPlatform';
+    else if (pathWithoutLang.startsWith('/about')) seoSection = 'about';
     else if (pathWithoutLang.startsWith('/solutions')) seoSection = 'solutions';
     else if (pathWithoutLang.startsWith('/rnd')) seoSection = 'rnd';
     else if (pathWithoutLang.startsWith('/products')) seoSection = 'products';

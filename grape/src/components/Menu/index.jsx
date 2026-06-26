@@ -31,8 +31,12 @@ import { stripLangPrefix, addLangPrefix } from '../../contexts/LanguageContext';
 // Generate menu items using translation function
 function getMenuItems(t) {
   return [
-    { 
-      label: t('nav.company'), 
+    {
+      label: t('nav.safegaiPlatform'),
+      path: '/safegai-platform',
+    },
+    {
+      label: t('nav.company'),
       path: '/about',
       submenu: [ 
         { label: t('nav.companyIntro'), path: '/about/company' },
