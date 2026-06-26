@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import "./HomePopup.css";
 import logoSmallKorean from "../../assets/logos/logo_small_korean.png";
+import useTranslation from "../../hooks/useTranslation";
 
 const STORAGE_KEY = "homePopupHiddenDate";
 const POPUP_TARGET_URL = "https://thingswell.co.kr/customer-service/announcement?detail=3";
@@ -21,6 +22,7 @@ function shouldShowPopup() {
 }
 
 export default function HomePopup() {
+  const { t } = useTranslation();
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -69,24 +71,24 @@ export default function HomePopup() {
         >
           <img
             src={logoSmallKorean}
-            alt="㈜ 싱스웰"
+            alt={t('ui1.popup.logoAlt')}
             className="home-popup-logo"
           />
 
-          <h2 id="home-popup-title" className="home-popup-year">2026년</h2>
+          <h2 id="home-popup-title" className="home-popup-year">{t('ui1.popup.year')}</h2>
           <div className="home-popup-badges">
-            <span className="home-popup-badge home-popup-badge-light">소상공인</span>
-            <span className="home-popup-badge home-popup-badge-dark">스마트상점 지원사업</span>
+            <span className="home-popup-badge home-popup-badge-light">{t('ui1.popup.badge1')}</span>
+            <span className="home-popup-badge home-popup-badge-dark">{t('ui1.popup.badge2')}</span>
           </div>
-          <p className="home-popup-highlight">정부지원 최대 80%</p>
-          <p className="home-popup-desc">사업장 관리를 한눈에</p>
+          <p className="home-popup-highlight">{t('ui1.popup.highlight')}</p>
+          <p className="home-popup-desc">{t('ui1.popup.desc')}</p>
           <p className="home-popup-tagline">
             <strong className="home-popup-ai">AI</strong>{" "}
-            <strong className="home-popup-smart">스마트 상점</strong>
+            <strong className="home-popup-smart">{t('ui1.popup.smartStore')}</strong>
           </p>
           <p className="home-popup-features">
-            매장 안전 관리 <span className="home-popup-divider">|</span> 무인 매장관리{" "}
-            <span className="home-popup-divider">|</span> 매장 현황 분석
+            {t('ui1.popup.feature1')} <span className="home-popup-divider">|</span> {t('ui1.popup.feature2')}{" "}
+            <span className="home-popup-divider">|</span> {t('ui1.popup.feature3')}
           </p>
 
           <button
@@ -97,7 +99,7 @@ export default function HomePopup() {
               handlePopupNavigate();
             }}
           >
-            상세내용 확인하기
+            {t('ui1.popup.cta')}
           </button>
         </div>
 
@@ -107,14 +109,14 @@ export default function HomePopup() {
             className="home-popup-btn home-popup-btn-dont-show"
             onClick={handleDontShowToday}
           >
-            오늘 하루 보지않기
+            {t('ui1.popup.dontShowToday')}
           </button>
           <button
             type="button"
             className="home-popup-btn home-popup-btn-close"
             onClick={handleClose}
           >
-            닫기
+            {t('ui1.popup.close')}
           </button>
         </div>
       </div>

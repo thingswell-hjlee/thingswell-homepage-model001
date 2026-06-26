@@ -596,7 +596,7 @@ const Menu = ({ orientation = 'horizontal', theme = 'primary' }) => {
               <button
                 className={`lang-toggle-btn${currentLang === 'ko' ? ' active' : ''}`}
                 onClick={() => setLanguage('ko')}
-                aria-label="한국어"
+                aria-label={t('ui1.menu.koreanLabel')}
               >
                 KOR
               </button>

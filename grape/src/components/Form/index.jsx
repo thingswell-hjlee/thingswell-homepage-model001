@@ -29,8 +29,10 @@
  */
 import React, { useState, forwardRef } from 'react';
 import './Form.css';
+import useTranslation from '../../hooks/useTranslation';
 
 const Form = forwardRef((props, ref) => {
+  const { t } = useTranslation();
   const { title, subtitle, onSubmit } = props;
   const [formData, setFormData] = useState({
     name: '',
@@ -58,26 +60,26 @@ const Form = forwardRef((props, ref) => {
       <div className="form-card-inner">
         <div>
           <div className="form-title">
-            <h1>문의하기 </h1>
-            <p>싱스웰에 문의해 주셔서 감사합니다. <br />고객님의 문의 내용을 담당자가 신속하고 정확하게 확인한 후, 빠른 시일 내에 답변드리겠습니다.</p>
+            <h1>{t('ui1.form.title')} </h1>
+            <p>{t('ui1.form.intro1')} <br />{t('ui1.form.intro2')}</p>
           </div>
           <form onSubmit={handleSubmit} className="support-form">
             <div className="form-container">
               <div className="form-group-container">
                 <div className="form-group">
-                  <label htmlFor="name">이름</label>
-                  <input 
-                    type="text" 
-                    id="name" 
-                    name="name" 
-                    value={formData.name} 
-                    onChange={handleChange} 
-                    placeholder="홍길동"
+                  <label htmlFor="name">{t('ui1.form.labelName')}</label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    placeholder={t('ui1.form.placeholderName')}
                     required 
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="email">이메일</label>
+                  <label htmlFor="email">{t('ui1.form.labelEmail')}</label>
                   <input 
                     type="email" 
                     id="email" 
@@ -91,19 +93,19 @@ const Form = forwardRef((props, ref) => {
               </div>  
               <div className="form-group-container">
                 <div className="form-group">
-                  <label htmlFor="company">소속 회사명</label>
-                  <input 
-                    type="text" 
-                    id="company" 
-                    name="company" 
-                    value={formData.company} 
-                    onChange={handleChange} 
-                    placeholder="(주)싱스웰"
+                  <label htmlFor="company">{t('ui1.form.labelCompany')}</label>
+                  <input
+                    type="text"
+                    id="company"
+                    name="company"
+                    value={formData.company}
+                    onChange={handleChange}
+                    placeholder={t('ui1.form.placeholderCompany')}
                     required 
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="phone">연락처</label>
+                  <label htmlFor="phone">{t('ui1.form.labelPhone')}</label>
                   <input 
                     type="text" 
                     id="phone" 
@@ -116,7 +118,7 @@ const Form = forwardRef((props, ref) => {
                 </div>
               </div>
               <div className="form-group">
-                <label htmlFor="message">문의 내용</label>
+                <label htmlFor="message">{t('ui1.form.labelMessage')}</label>
                 <textarea 
                   id="message" 
                   name="message" 
@@ -126,34 +128,34 @@ const Form = forwardRef((props, ref) => {
                 />
               </div>    
               <div className="privacy-info">
-                <strong>개인정보 수집 및 이용 동의서</strong>
+                <strong>{t('ui1.form.privacyTitle')}</strong>
                 <ul>
                   <li>
-                    <strong>1. 수집하는 개인정보 항목</strong>
+                    <strong>{t('ui1.form.privacyItem1Title')}</strong>
                     <ul>
-                      <li>이름</li>
-                      <li>이메일</li>
-                      <li>소속 회사명</li>
-                      <li>연락처</li>
-                      <li>문의 내용</li>
+                      <li>{t('ui1.form.labelName')}</li>
+                      <li>{t('ui1.form.labelEmail')}</li>
+                      <li>{t('ui1.form.labelCompany')}</li>
+                      <li>{t('ui1.form.labelPhone')}</li>
+                      <li>{t('ui1.form.labelMessage')}</li>
                     </ul>
                   </li>
                   <li>
-                    <strong>2. 개인정보 수집 및 이용 목적</strong>
-                    <div>고객 문의에 대한 신속하고 정확한 확인 및 답변 제공</div>
+                    <strong>{t('ui1.form.privacyItem2Title')}</strong>
+                    <div>{t('ui1.form.privacyItem2Desc')}</div>
                   </li>
                   <li>
-                    <strong>3. 개인정보 보유 및 이용 기간</strong>
+                    <strong>{t('ui1.form.privacyItem3Title')}</strong>
                     <div>
-                      수집일로부터 1년간 보관 후 파기<br />
-                      (단, 관계 법령에 따라 보존이 필요한 경우 해당 기간 동안 보관)
+                      {t('ui1.form.privacyItem3Desc1')}<br />
+                      {t('ui1.form.privacyItem3Desc2')}
                     </div>
                   </li>
                   <li>
-                    <strong>4. 동의 거부 권리 및 불이익 안내</strong>
+                    <strong>{t('ui1.form.privacyItem4Title')}</strong>
                     <div>
-                      귀하는 개인정보 수집 및 이용에 동의하지 않을 권리가 있습니다.<br />
-                      다만, 동의하지 않을 경우 문의에 대한 답변 제공이 제한될 수 있습니다.
+                      {t('ui1.form.privacyItem4Desc1')}<br />
+                      {t('ui1.form.privacyItem4Desc2')}
                     </div>
                   </li>
                 </ul>
@@ -169,7 +171,7 @@ const Form = forwardRef((props, ref) => {
                   onChange={handleChange}
                   required
                 />
-                <label htmlFor="privacy-agree">개인정보 수집 및 이용 동의</label>
+                <label htmlFor="privacy-agree">{t('ui1.form.privacyAgree')}</label>
               </div>
               <div className="checkbox-container">
                 <input
@@ -181,11 +183,11 @@ const Form = forwardRef((props, ref) => {
                   onChange={handleChange}
                   required
                 />
-                <label htmlFor="privacy-disagree">개인정보 수집 및 이용 거부</label>
+                <label htmlFor="privacy-disagree">{t('ui1.form.privacyDisagree')}</label>
               </div>
             </div>
             </div>
-            <button type="submit" className="submit-btn">문의하기</button>
+            <button type="submit" className="submit-btn">{t('ui1.form.title')}</button>
           </form>
         </div>
       </div>

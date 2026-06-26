@@ -216,11 +216,11 @@ const BoardList = ({
 
   // 날짜 포맷팅 함수
   const formatDate = (dateString) => {
-    if (!dateString || dateString === "날짜 없음") return "날짜 없음";
+    if (!dateString || dateString === "날짜 없음") return t('ui1.board.noDate');
 
     try {
       const date = new Date(dateString);
-      if (isNaN(date.getTime())) return "날짜 없음";
+      if (isNaN(date.getTime())) return t('ui1.board.noDate');
 
       if (isMobile) {
         // 모바일에서는 간단한 형식
@@ -238,7 +238,7 @@ const BoardList = ({
       }
     } catch (error) {
       console.error("날짜 변환 오류:", error);
-      return "날짜 없음";
+      return t('ui1.board.noDate');
     }
   };
 
@@ -304,7 +304,7 @@ const BoardList = ({
             {currentItems && currentItems.length > 0 ? (
               currentItems.map((instrument, index) => {
                 // 데이터베이스 컬럼명에 맞춰서 필드 매핑
-                const title = instrument.title || "제목 없음";
+                const title = instrument.title || t('ui1.board.noTitle');
                 const formattedDate = formatDate(instrument.created_at);
 
                 return (
