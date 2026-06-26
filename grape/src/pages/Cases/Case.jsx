@@ -58,27 +58,28 @@ export default function TrackRecordPage({ kindFilter = null }) {
   const [submitting, setSubmitting] = useState(false);
   
   const { user, isAuthenticated, canEditContent } = useAuth();
+  const { t } = useTranslation();
 
   // kindFilter에 따른 제목과 설명 매핑
   const getPageInfo = (kind) => {
     const pageInfoMap = {
       '정보통신': {
-        title: '정보통신',
+        title: t('casesPage.list.pageTitles.infoComm'),
         // subtitle: '정보통신 시스템 구축 실적들을 확인하세요'
       },
       '스마트통합제어': {
-        title: '스마트통합제어',
+        title: t('casesPage.list.pageTitles.integratedControl'),
         // subtitle: '통합제어 시스템 구축 실적들을 확인하세요'
       },
       '산업안전자동화': {
-        title: '산업안전자동화',
+        title: t('casesPage.list.pageTitles.safety'),
         // subtitle: '스마트안전 솔루션 실적들을 확인하세요'
       },
     };
-    
+
     return pageInfoMap[kind] || {
-      title: '실적',
-      subtitle: '실적들을 확인하세요'
+      title: t('casesPage.list.pageTitles.default'),
+      subtitle: t('casesPage.list.pageSubtitleDefault')
     };
   };
 
@@ -380,11 +381,11 @@ export default function TrackRecordPage({ kindFilter = null }) {
   };
 
   if (loading) {
-    return <div>데이터를 불러오는 중...</div>;
+    return <div>{t('casesPage.list.loading')}</div>;
   }
 
   if (error) {
-    return <div>오류가 발생했습니다: {error}</div>;
+    return <div>{t('casesPage.list.errorPrefix')}{error}</div>;
   }
 
   if (viewMode === 'detail' && selectedRecord) {
@@ -423,12 +424,12 @@ export default function TrackRecordPage({ kindFilter = null }) {
         <div>
           <ProductPage
             productData={{
-              name: selectedRecord.title || '제목 없음',
-              title: selectedRecord.overview_title || selectedRecord.desc || '개요 없음',
-              overview_title: selectedRecord.overview_title || selectedRecord.desc || '개요 없음',
-              overview: selectedRecord.overview || selectedRecord.desc || '내용 없음',
+              name: selectedRecord.title || t('casesPage.list.titleFallback'),
+              title: selectedRecord.overview_title || selectedRecord.desc || t('casesPage.list.overviewTitleFallback'),
+              overview_title: selectedRecord.overview_title || selectedRecord.desc || t('casesPage.list.overviewTitleFallback'),
+              overview: selectedRecord.overview || selectedRecord.desc || t('casesPage.list.contentFallback'),
               images: selectedRecord.images ? JSON.parse(selectedRecord.images) : [],
-              breadcrumbs: ["Home", "고객사례", selectedRecord.kind, selectedRecord.title || "상세"],
+              breadcrumbs: ["Home", t('casesPage.list.breadcrumbCases'), selectedRecord.kind, selectedRecord.title || t('casesPage.list.detailFallback')],
               // 제품 전용 필드들
               keyFeatures: keyFeatures,
               keyFeaturesImages: keyFeaturesImages,
@@ -448,7 +449,7 @@ export default function TrackRecordPage({ kindFilter = null }) {
   return (
     <BaseLayout
       header={() => <ProductHeader image={headerImage} />}
-      breadcrumbs={<Breadcrumbs breadcrumbs={kindFilter ? ["Home", "고객사례", kindFilter] : ["Home", "고객사례"]} />}
+      breadcrumbs={<Breadcrumbs breadcrumbs={kindFilter ? ["Home", t('casesPage.list.breadcrumbCases'), kindFilter] : ["Home", t('casesPage.list.breadcrumbCases')]} />}
       title={getPageInfo(kindFilter).title}
       subtitle={getPageInfo(kindFilter).subtitle}
     >
@@ -490,6 +491,7 @@ const TrackRecordList = ({ products, onEditRecord, canEdit, onAddRecord, canDele
   const [searchTerm, setSearchTerm] = useState('');
   const [viewMode, setViewMode] = useState('card');
   const { isAuthenticated } = useAuth();
+  const { t } = useTranslation();
   
   // 디버깅용: 인증 상태 확인
   console.log('TrackRecordList - isAuthenticated:', isAuthenticated());
@@ -582,7 +584,7 @@ const TrackRecordList = ({ products, onEditRecord, canEdit, onAddRecord, canDele
           {isAuthenticated === true && user && (
             <div className="product-list-search">
               <SearchComponent
-                placeholder="검색어를 입력하세요"
+                placeholder={t('casesPage.list.searchPlaceholder')}
                 onSearch={(value) => setSearchTerm(value)}
                 noPadding={false}
                 searchTerm={searchTerm}
@@ -611,10 +613,10 @@ const TrackRecordList = ({ products, onEditRecord, canEdit, onAddRecord, canDele
                       </div>
                       <div className="product-list-info">
                         <div className="product-list-organization">
-                          <span>{product.organization || '기관명'}</span>
+                          <span>{product.organization || t('casesPage.list.orgFallback')}</span>
                         </div>
                         <div className="product-list-date">
-                          <span>{product.date ? product.date.toString().slice(0, 4) : '날짜'}</span>
+                          <span>{product.date ? product.date.toString().slice(0, 4) : t('casesPage.list.dateFallback')}</span>
                         </div>
                       </div>
                     </>
@@ -673,7 +675,7 @@ const TrackRecordList = ({ products, onEditRecord, canEdit, onAddRecord, canDele
                             onMouseEnter={(e) => { e.target.style.background = 'rgba(255, 0, 0, 1)'; }}
                             onMouseLeave={(e) => { e.target.style.background = 'rgba(255, 0, 0, 0.9)'; }}
                           >
-                            삭제
+                            {t('casesPage.list.deleteBtn')}
                           </button>
                         )}
                       </div>
@@ -699,7 +701,7 @@ const TrackRecordList = ({ products, onEditRecord, canEdit, onAddRecord, canDele
                             onMouseEnter={(e) => { e.target.style.background = 'rgba(0, 123, 255, 1)'; }}
                             onMouseLeave={(e) => { e.target.style.background = 'rgba(0, 123, 255, 0.9)'; }}
                           >
-                            편집
+                            {t('casesPage.list.editBtn')}
                           </button>
                         )}
 
@@ -726,9 +728,9 @@ const TrackRecordList = ({ products, onEditRecord, canEdit, onAddRecord, canDele
                             onMouseLeave={(e) => { 
                               e.target.style.background = product.rawData.is_active ? 'rgba(40, 167, 69, 0.9)' : 'rgba(108, 117, 125, 0.9)'; 
                             }}
-                            title={product.rawData.is_active ? '비활성화' : '활성화'}
+                            title={product.rawData.is_active ? t('casesPage.list.deactivateTooltip') : t('casesPage.list.activateTooltip')}
                           >
-                            {product.rawData.is_active ? '활성' : '비활성'}
+                            {product.rawData.is_active ? t('casesPage.list.activeBtn') : t('casesPage.list.inactiveBtn')}
                           </button>
                         )}
                       </div>
@@ -764,8 +766,8 @@ const TrackRecordList = ({ products, onEditRecord, canEdit, onAddRecord, canDele
           })()
         ) : (
           <div className="no-products-message">
-            <p>선택한 조건에 맞는 실적이 없습니다.</p>
-            <p>다른 카테고리나 검색어를 시도해보세요.</p>
+            <p>{t('casesPage.list.noProductsTitle')}</p>
+            <p>{t('casesPage.list.noProductsDesc')}</p>
           </div>
         )}
       </div>
@@ -801,7 +803,7 @@ const TrackRecordList = ({ products, onEditRecord, canEdit, onAddRecord, canDele
               e.target.style.backgroundColor = 'var(--color-primary)';
             }}
           >
-            + 실적 추가
+            {t('casesPage.list.addRecord')}
           </button>
         </div>
       )}
