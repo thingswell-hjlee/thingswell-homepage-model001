@@ -251,7 +251,9 @@
     },
     "safegaiPlatform": {
       "title": "SafeGAI Platform - Physical AI Smart Safety Platform | Thingswell",
-      "description": "Thingswell is a smart safety platform specialist for public safety, construction safety, and industrial safety. SafeGAI Platform is a next-generation Physical AI safety platform combining registered-patent (10-2025-0168517) on-device Generative AI and adaptive rolling-buffer technology."
+      "description": "Thingswell is a smart safety platform specialist for public safety, construction safety, and industrial safety. SafeGAI Platform is a next-generation Physical AI safety platform combining registered-patent (10-2025-0168517) on-device Generative AI and adaptive rolling-buffer technology.",
+      "ogImage": "https://www.safegai.co.kr/og-safegai-platform.jpg",
+      "ogImageAlt": "SafeGAI Platform - Physical AI Smart Safety Platform"
     }
   },
   "solutions": {
