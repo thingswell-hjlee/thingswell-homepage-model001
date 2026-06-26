@@ -39,9 +39,11 @@
  * />
  */
 import React, { forwardRef } from 'react';
+import useTranslation from '../../hooks/useTranslation';
 import './SupportInfoCard.css';
 
 const SupportInfoCard = forwardRef((props, ref) => {
+  const { t } = useTranslation();
   const { title, subtitle, supportLimit, qualifications } = props;
   return (
     <div ref={ref} className="support-info-card">
@@ -53,7 +55,7 @@ const SupportInfoCard = forwardRef((props, ref) => {
         <div className="support-info-card-row">
           <div className="support-info-card-limit">
             <div className="support-info-card-row-header">
-              <h2>지원한도</h2>
+              <h2>{t('ui3.supportInfo.limitLabel')}</h2>
             </div>
             <div className="support-info-card-limit-card">
               <div className="support-info-card-limit-year">{supportLimit.year}</div>
@@ -80,7 +82,7 @@ const SupportInfoCard = forwardRef((props, ref) => {
             </div>
           </div>
           <div className="support-info-card-qualification">
-            <h2>신청자격</h2>
+            <h2>{t('ui3.supportInfo.qualificationLabel')}</h2>
             <p className="support-info-card-qualification-desc">
               {qualifications.description}
             </p>

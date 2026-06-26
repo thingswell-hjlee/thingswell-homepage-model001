@@ -56,11 +56,11 @@ const ForgotPassword = () => {
         setError(forgotError.message);
       } else {
         setStep(2);
-        setSuccess('인증 코드가 이메일로 전송되었습니다.');
+        setSuccess(t('ui3.forgotPassword.codeSent'));
         startCooldown();
       }
     } catch (err) {
-      setError('인증 코드 요청 중 오류가 발생했습니다.');
+      setError(t('ui3.forgotPassword.codeRequestError'));
     } finally {
       setLoading(false);
     }
@@ -78,11 +78,11 @@ const ForgotPassword = () => {
       if (forgotError) {
         setError(forgotError.message);
       } else {
-        setSuccess('인증 코드가 이메일로 재전송되었습니다.');
+        setSuccess(t('ui3.forgotPassword.codeResent'));
         startCooldown();
       }
     } catch (err) {
-      setError('인증 코드 요청 중 오류가 발생했습니다.');
+      setError(t('ui3.forgotPassword.codeRequestError'));
     } finally {
       setLoading(false);
     }
@@ -94,12 +94,12 @@ const ForgotPassword = () => {
     setSuccess('');
 
     if (newPassword.length < 8) {
-      setError('새 비밀번호는 최소 8자 이상이어야 합니다.');
+      setError(t('ui3.forgotPassword.passwordMinLength'));
       return;
     }
 
     if (newPassword !== confirmPassword) {
-      setError('새 비밀번호와 확인 비밀번호가 일치하지 않습니다.');
+      setError(t('ui3.forgotPassword.passwordMismatch'));
       return;
     }
 
@@ -111,11 +111,11 @@ const ForgotPassword = () => {
       if (resetError) {
         setError(resetError.message);
       } else {
-        setSuccess('비밀번호가 성공적으로 재설정되었습니다.');
+        setSuccess(t('ui3.forgotPassword.resetSuccess'));
         setStep(3);
       }
     } catch (err) {
-      setError('비밀번호 재설정 중 오류가 발생했습니다.');
+      setError(t('ui3.forgotPassword.resetError'));
     } finally {
       setLoading(false);
     }
@@ -136,10 +136,10 @@ const ForgotPassword = () => {
                   {step === 1 && (
                     <form onSubmit={handleRequestCode}>
                       <p className="forgot-password-description">
-                        가입한 이메일 주소를 입력하시면 비밀번호 재설정을 위한 인증 코드를 보내드립니다.
+                        {t('ui3.forgotPassword.step1Description')}
                       </p>
                       <div className="form-group">
-                        <label htmlFor="email">이메일</label>
+                        <label htmlFor="email">{t('ui3.forgotPassword.emailLabel')}</label>
                         <input
                           type="email"
                           id="email"
@@ -152,10 +152,10 @@ const ForgotPassword = () => {
                       {error && <div className="error-message">{error}</div>}
                       {success && <div className="success-message">{success}</div>}
                       <button type="submit" disabled={loading}>
-                        {loading ? '전송 중...' : '인증 코드 전송'}
+                        {loading ? t('ui3.forgotPassword.sending') : t('ui3.forgotPassword.requestCode')}
                       </button>
                       <div className="login-link">
-                        <Link to="/login">로그인으로 돌아가기</Link>
+                        <Link to="/login">{t('ui3.forgotPassword.backToLogin')}</Link>
                       </div>
                     </form>
                   )}
@@ -163,10 +163,10 @@ const ForgotPassword = () => {
                   {step === 2 && (
                     <form onSubmit={handleResetPassword}>
                       <p className="forgot-password-description">
-                        이메일로 전송된 인증 코드와 새 비밀번호를 입력해주세요.
+                        {t('ui3.forgotPassword.step2Description')}
                       </p>
                       <div className="form-group">
-                        <label htmlFor="code">인증 코드</label>
+                        <label htmlFor="code">{t('ui3.forgotPassword.codeLabel')}</label>
                         <input
                           type="text"
                           id="code"
@@ -177,7 +177,7 @@ const ForgotPassword = () => {
                         />
                       </div>
                       <div className="form-group">
-                        <label htmlFor="newPassword">새 비밀번호</label>
+                        <label htmlFor="newPassword">{t('ui3.forgotPassword.newPasswordLabel')}</label>
                         <input
                           type="password"
                           id="newPassword"
@@ -187,10 +187,10 @@ const ForgotPassword = () => {
                           required
                           minLength={8}
                         />
-                        <span className="form-hint">최소 8자 이상</span>
+                        <span className="form-hint">{t('ui3.forgotPassword.minLengthHint')}</span>
                       </div>
                       <div className="form-group">
-                        <label htmlFor="confirmPassword">새 비밀번호 확인</label>
+                        <label htmlFor="confirmPassword">{t('ui3.forgotPassword.confirmPasswordLabel')}</label>
                         <input
                           type="password"
                           id="confirmPassword"
@@ -204,7 +204,7 @@ const ForgotPassword = () => {
                       {error && <div className="error-message">{error}</div>}
                       {success && <div className="success-message">{success}</div>}
                       <button type="submit" disabled={loading}>
-                        {loading ? '재설정 중...' : '비밀번호 재설정'}
+                        {loading ? t('ui3.forgotPassword.resetting') : t('ui3.forgotPassword.resetPassword')}
                       </button>
                       <button
                         type="button"
@@ -212,10 +212,10 @@ const ForgotPassword = () => {
                         disabled={cooldown > 0}
                         onClick={handleResendCode}
                       >
-                        {cooldown > 0 ? `코드 재전송 (${cooldown}초)` : '코드 재전송'}
+                        {cooldown > 0 ? `${t('ui3.forgotPassword.resendCode')} (${cooldown}${t('ui3.forgotPassword.secondsSuffix')})` : t('ui3.forgotPassword.resendCode')}
                       </button>
                       <div className="login-link">
-                        <Link to="/login">로그인으로 돌아가기</Link>
+                        <Link to="/login">{t('ui3.forgotPassword.backToLogin')}</Link>
                       </div>
                     </form>
                   )}
@@ -223,10 +223,10 @@ const ForgotPassword = () => {
                   {step === 3 && (
                     <div className="reset-complete">
                       <div className="success-message">
-                        비밀번호가 성공적으로 재설정되었습니다.
+                        {t('ui3.forgotPassword.resetSuccess')}
                       </div>
                       <div className="login-link">
-                        <Link to="/login">로그인 페이지로 이동</Link>
+                        <Link to="/login">{t('ui3.forgotPassword.goToLogin')}</Link>
                       </div>
                     </div>
                   )}

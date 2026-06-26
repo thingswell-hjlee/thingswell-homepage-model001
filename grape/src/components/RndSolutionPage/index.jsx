@@ -2,16 +2,18 @@ import React from 'react';
 import SolutionDetailPage from '../../pages/rnd/SolutionDetailPage';
 import ProductHeader from '../ProductPage/ProductHeader';
 import ProductInfo from '../ProductPage/ProductInfo';
+import useTranslation from '../../hooks/useTranslation';
 import rnd from '../../assets/header_image/rnd.jpg';
 
-const RndSolutionPage = ({ 
-  breadcrumbs, 
-  solutionData, 
-  blocks 
+const RndSolutionPage = ({
+  breadcrumbs,
+  solutionData,
+  blocks
 }) => {
+  const { t } = useTranslation();
   return (
     <>
-      <ProductHeader image={rnd} alt="연구개발" />
+      <ProductHeader image={rnd} alt={t('ui3.rndSolution.headerAlt')} />
       <div className="product-page-content">
         <div className="container">
           <ProductInfo

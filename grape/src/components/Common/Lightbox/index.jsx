@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
+import useTranslation from '../../../hooks/useTranslation';
 import './Lightbox.css';
 
 const Lightbox = ({ isOpen, src, alt = '', caption, onClose }) => {
+  const { t } = useTranslation();
   useEffect(() => {
     if (!isOpen) return;
     const handleKeyDown = (e) => {
@@ -18,7 +20,7 @@ const Lightbox = ({ isOpen, src, alt = '', caption, onClose }) => {
   return (
     <div className="lightbox-overlay" onClick={onClose} role="dialog" aria-modal="true">
       <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
-        <button className="lightbox-close" onClick={onClose} aria-label="닫기">×</button>
+        <button className="lightbox-close" onClick={onClose} aria-label={t('ui3.lightbox.closeLabel')}>×</button>
         {src ? (
           <img className="lightbox-image" src={src} alt={alt} />
         ) : null}

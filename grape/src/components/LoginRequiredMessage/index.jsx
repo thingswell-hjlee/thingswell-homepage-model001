@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import useTranslation from '../../hooks/useTranslation';
 import './LoginRequiredMessage.css';
 
 /**
@@ -18,11 +19,13 @@ import './LoginRequiredMessage.css';
  *   message="고객사례 상세 페이지를 보려면 로그인이 필요합니다."
  * />
  */
-const LoginRequiredMessage = ({ 
-  title = "로그인이 필요합니다", 
-  message = "이 기능을 사용하려면 로그인이 필요합니다",
-  buttonText = "로그인하기"
-}) => {
+const LoginRequiredMessage = (props) => {
+  const { t } = useTranslation();
+  const {
+    title = t('ui3.loginRequired.title'),
+    message = t('ui3.loginRequired.message'),
+    buttonText = t('ui3.loginRequired.buttonText')
+  } = props;
   const navigate = useNavigate();
 
   const handleLoginClick = () => {

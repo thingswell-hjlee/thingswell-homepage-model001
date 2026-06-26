@@ -1,4 +1,5 @@
 import React, { forwardRef } from 'react';
+import useTranslation from '../../hooks/useTranslation';
 import './Kategorie.css';
 import ApplicationCard from '../ApplicationCard';
 /**
@@ -15,15 +16,16 @@ import ApplicationCard from '../ApplicationCard';
  * <Kategorie title="제품" items={[...]} />
  */
 const Kategorie = forwardRef((props, ref) => {
-  const { title = "제품", items = [] } = props;
-  
+  const { t } = useTranslation();
+  const { title = t('ui3.kategorie.defaultTitle'), items = [] } = props;
+
   // 기본 아이템 데이터
   const defaultItems = [
     {
       image: "https://via.placeholder.com/300x200",
-      imageAlt: "제품 이미지",
-      label: "제품 카테고리",
-      title: "제품명",
+      imageAlt: t('ui3.kategorie.defaultImageAlt'),
+      label: t('ui3.kategorie.defaultLabel'),
+      title: t('ui3.kategorie.defaultItemTitle'),
       link: "/product/1"
     }
   ];

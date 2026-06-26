@@ -127,7 +127,7 @@ const HamburgerMenu = ({
                       <button
                         className={`hamburger-lang-btn${currentLang === 'ko' ? ' active' : ''}`}
                         onClick={() => setLanguage('ko')}
-                        aria-label="한국어"
+                        aria-label={t('ui3.hamburger.langKoreanLabel')}
                       >
                         KOR
                       </button>

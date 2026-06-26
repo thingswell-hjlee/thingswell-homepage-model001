@@ -1,16 +1,19 @@
 import React from "react";
+import useTranslation from "../../hooks/useTranslation";
 import "./SearchComponent.css";
 
-const SearchComponent = ({ 
-  placeholder = "검색어를 입력하세요", 
-  onSearch, 
-  backgroundColor = "var(--color-surface)",
-  noPadding = false,
-  searchTerm = "",
-  setSearchTerm,
-  showWriteButton = false,
-  onWriteClick
-}) => {
+const SearchComponent = (props) => {
+  const { t } = useTranslation();
+  const {
+    placeholder = t('ui3.search.placeholder'),
+    onSearch,
+    backgroundColor = "var(--color-surface)",
+    noPadding = false,
+    searchTerm = "",
+    setSearchTerm,
+    showWriteButton = false,
+    onWriteClick
+  } = props;
   const handleSearch = () => {
     if (onSearch) {
       onSearch(searchTerm);
@@ -35,10 +38,10 @@ const SearchComponent = ({
         onChange={(e) => setSearchTerm(e.target.value)}
         onKeyPress={handleKeyPress}
       />
-      <button onClick={handleSearch}>검색</button>
+      <button onClick={handleSearch}>{t('ui3.search.button')}</button>
       {showWriteButton && onWriteClick && (
         <button onClick={onWriteClick} className="btn-write">
-          글쓰기
+          {t('ui3.search.writeButton')}
         </button>
       )}
     </div>

@@ -25,9 +25,11 @@
  * />
  */
 import React, { forwardRef } from 'react';
+import useTranslation from '../../hooks/useTranslation';
 import './RestrictionCard.css';
 
 const RestrictionCard = forwardRef((props, ref) => {
+  const { t } = useTranslation();
   const { title, subtitle, restrictions } = props;
   return (
     <div ref={ref} className="restriction-card">
@@ -40,7 +42,7 @@ const RestrictionCard = forwardRef((props, ref) => {
         <div className="restriction-info-row">
           <div className="restriction-qualification">
             <div className="restriction-info-row-header">
-              <h2>참여제한 사유</h2>
+              <h2>{t('ui3.restriction.reasonLabel')}</h2>
             </div>
             <ul className="restriction-limit-list">
               {restrictions.map((restriction, index) => (
