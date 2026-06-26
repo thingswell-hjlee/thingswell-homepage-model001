@@ -7,6 +7,7 @@ import { BaseLayout } from '../../components/Layout';
 import ThreeColumnGrid from '../../components/ThreeColumnGrid';
 import ProductGrid from '../../components/ProductGrid';
 import { Link } from 'react-router-dom';
+import useTranslation from '../../hooks/useTranslation';
 import './ProductsCommon.css';
 
 /**
@@ -54,6 +55,7 @@ const MarqueeTitle = ({ text }) => {
 
 // 페이징 컴포넌트
 const Pagination = ({ currentPage, totalPages, onPageChange }) => {
+  const { t } = useTranslation();
   const getPageNumbers = () => {
     const pages = [];
     const maxVisiblePages = 5;
@@ -97,7 +99,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
           onClick={() => onPageChange(currentPage - 1)}
           disabled={currentPage === 1}
         >
-          이전
+          {t('productsPage.list.prev')}
         </button>
         
         {getPageNumbers().map((page, index) => (
@@ -116,7 +118,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
           onClick={() => onPageChange(currentPage + 1)}
           disabled={currentPage === totalPages}
         >
-          다음
+          {t('productsPage.list.next')}
         </button>
       </div>
     </div>
@@ -147,6 +149,7 @@ const ProductList = ({
   disableScrollOnPageChange = false,
   cols = 4,
 }) => {
+  const { t } = useTranslation();
   const [selectedCategory, setSelectedCategory] = useState('전체');
   const [searchTerm, setSearchTerm] = useState('');
   const [viewMode, setViewMode] = useState('card');
@@ -235,7 +238,7 @@ const ProductList = ({
               {!hideSearch && (
                 <div className="product-list-search">
                   <SearchComponent
-                    placeholder="검색어를 입력하세요"
+                    placeholder={t('productsPage.list.searchPlaceholder')}
                     onSearch={(value) => setSearchTerm(value)}
                     noPadding={false}
                     searchTerm={searchTerm}
@@ -255,7 +258,7 @@ const ProductList = ({
                       <rect x="14" y="14" width="7" height="7"></rect>
                       <rect x="3" y="14" width="7" height="7"></rect>
                     </svg>
-                    카드 보기
+                    {t('productsPage.list.cardView')}
                   </button>
                   <button
                     className={`view-mode-btn ${viewMode === 'list' ? 'active' : ''}`}
@@ -269,7 +272,7 @@ const ProductList = ({
                       <line x1="3" y1="12" x2="3.01" y2="12"></line>
                       <line x1="3" y1="18" x2="3.01" y2="18"></line>
                     </svg>
-                    리스트 보기
+                    {t('productsPage.list.listView')}
                   </button>
                 </div>
               )}
@@ -299,10 +302,10 @@ const ProductList = ({
                       </div>
                       <div className="product-list-info">
                         <div className="product-list-organization">
-                          <span>{product.organization || '기관명'}</span>
+                          <span>{product.organization || t('productsPage.list.organizationFallback')}</span>
                         </div>
                         <div className="product-list-date">
-                          <span>{product.date || '날짜'}</span>
+                          <span>{product.date || t('productsPage.list.dateFallback')}</span>
                         </div>
                       </div>
                     </>
@@ -365,7 +368,7 @@ const ProductList = ({
                             onMouseEnter={(e) => { e.target.style.background = 'rgba(255, 0, 0, 1)'; }}
                             onMouseLeave={(e) => { e.target.style.background = 'rgba(255, 0, 0, 0.9)'; }}
                           >
-                            삭제
+                            {t('productsPage.list.delete')}
                           </button>
                         )}
                       </div>
@@ -391,7 +394,7 @@ const ProductList = ({
                             onMouseEnter={(e) => { e.target.style.background = 'rgba(0, 123, 255, 1)'; }}
                             onMouseLeave={(e) => { e.target.style.background = 'rgba(0, 123, 255, 0.9)'; }}
                           >
-                            편집
+                            {t('productsPage.list.edit')}
                           </button>
                         )}
 
@@ -418,9 +421,9 @@ const ProductList = ({
                             onMouseLeave={(e) => { 
                               e.target.style.background = product.rawData.is_active ? 'rgba(40, 167, 69, 0.9)' : 'rgba(108, 117, 125, 0.9)'; 
                             }}
-                            title={product.rawData.is_active ? '비활성화' : '활성화'}
+                            title={product.rawData.is_active ? t('productsPage.list.deactivateTooltip') : t('productsPage.list.activateTooltip')}
                           >
-                            {product.rawData.is_active ? '활성' : '비활성'}
+                            {product.rawData.is_active ? t('productsPage.list.active') : t('productsPage.list.inactive')}
                           </button>
                         )}
                       </div>
@@ -461,8 +464,8 @@ const ProductList = ({
           })()
           ) : (
             <div className="no-products-message">
-              <p>선택한 조건에 맞는 제품이 없습니다.</p>
-              <p>다른 카테고리나 검색어를 시도해보세요.</p>
+              <p>{t('productsPage.list.noProductsTitle')}</p>
+              <p>{t('productsPage.list.noProductsDesc')}</p>
             </div>
           )}
       </div>
@@ -495,11 +498,11 @@ const ProductList = ({
               <button
                 className="image-modal-close"
                 onClick={() => setPreviewImage(null)}
-                aria-label="닫기"
+                aria-label={t('productsPage.list.closeAria')}
               >
                 ×
               </button>
-              <img src={previewImage} alt="확대 보기" />
+              <img src={previewImage} alt={t('productsPage.list.previewAlt')} />
             </div>
           </div>
         )}
