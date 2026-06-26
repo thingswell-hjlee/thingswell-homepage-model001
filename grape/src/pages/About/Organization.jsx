@@ -27,13 +27,10 @@ export default function Organization() {
           <section className="org-hero">
             <div className="org-hero-badge">AI Agent-Driven Organization</div>
             <h1 className="org-hero-title">
-              AI 에이전트를 활용한<br />효율적인 조직 운영
+              {t('aboutPage.org.hero.titleLine1')}<br />{t('aboutPage.org.hero.titleLine2')}
             </h1>
             <p className="org-hero-desc">
-              싱스웰은 AI 에이전트 기반의 스마트 워크플로우로 소규모 인력으로도
-              대규모 프로젝트를 수행할 수 있는 효율적 조직 구조를 운영합니다.
-              각 팀은 AI 도구를 활용하여 개발, 영업, 제조, 연구 전 영역에서
-              생산성을 극대화합니다.
+              {t('aboutPage.org.hero.desc')}
             </p>
           </section>
 
@@ -41,7 +38,7 @@ export default function Organization() {
           <section className="org-section">
             <div className="org-section-header">
               <span className="org-section-label">Organization Chart</span>
-              <h2 className="org-section-title">조직 구조</h2>
+              <h2 className="org-section-title">{t('aboutPage.org.chartTitle')}</h2>
             </div>
 
             {/* CEO */}
@@ -54,7 +51,7 @@ export default function Organization() {
                       <path d="M8 42c0-8.8 7.2-16 16-16s16 7.2 16 16" stroke="currentColor" strokeWidth="2"/>
                     </svg>
                   </div>
-                  <h3>대표이사</h3>
+                  <h3>{t('aboutPage.org.ceoTitle')}</h3>
                   <p>CEO</p>
                 </div>
               </div>
@@ -66,45 +63,45 @@ export default function Organization() {
               <div className="org-chart-departments">
                 <DeptCard
                   image={sales}
-                  title="기술영업팀"
+                  title={t('aboutPage.org.departments.0.title')}
                   subtitle="Technical Sales"
-                  items={["고객 요구사항 분석", "기술 제안서 작성", "프로젝트 수주 관리", "파트너십 구축"]}
+                  items={t('aboutPage.org.departments.0.items')}
                 />
                 <DeptCard
                   image={techTeam}
-                  title="기술팀"
+                  title={t('aboutPage.org.departments.1.title')}
                   subtitle="Engineering"
-                  items={["AI 소프트웨어 개발", "시스템 설계 및 구현", "하드웨어 펌웨어 개발", "QA 테스트 및 검증"]}
+                  items={t('aboutPage.org.departments.1.items')}
                 />
                 <DeptCard
                   image={factory}
-                  title="제조팀"
+                  title={t('aboutPage.org.departments.2.title')}
                   subtitle="Manufacturing"
-                  items={["PCB/SMT 제품 생산", "품질 관리 및 검수", "자재 수급 관리", "생산 공정 최적화"]}
+                  items={t('aboutPage.org.departments.2.items')}
                 />
                 <DeptCard
                   image={outsource}
-                  title="외주관리팀"
+                  title={t('aboutPage.org.departments.3.title')}
                   subtitle="Outsourcing Mgmt"
-                  items={["협력사 관리 및 평가", "외주 개발 품질 관리", "납기 일정 조율", "비용 효율화"]}
+                  items={t('aboutPage.org.departments.3.items')}
                 />
                 <DeptCard
                   image={research}
-                  title="기업부설연구소"
+                  title={t('aboutPage.org.departments.4.title')}
                   subtitle="R&D Center"
-                  items={["AI/ML 핵심 알고리즘 연구", "특허 및 논문 출원", "신기술 PoC 개발", "정부과제 수행"]}
+                  items={t('aboutPage.org.departments.4.items')}
                 />
                 <DeptCard
                   image={consulting}
-                  title="전문위원 그룹"
+                  title={t('aboutPage.org.departments.5.title')}
                   subtitle="Expert Advisory"
-                  items={["기술 자문 및 컨설팅", "사업 전략 수립 지원", "품질 인증 자문", "법률/특허 자문"]}
+                  items={t('aboutPage.org.departments.5.items')}
                 />
                 <DeptCard
                   image={telecom}
-                  title="정보통신공사팀"
+                  title={t('aboutPage.org.departments.6.title')}
                   subtitle="ICT Construction"
-                  items={["CCTV/네트워크 설치", "통신 인프라 구축", "시스템 통합 시공", "유지보수 운영"]}
+                  items={t('aboutPage.org.departments.6.items')}
                 />
               </div>
             </div>
@@ -114,7 +111,7 @@ export default function Organization() {
           <section className="org-section">
             <div className="org-section-header">
               <span className="org-section-label">AI-Powered Workflow</span>
-              <h2 className="org-section-title">AI 에이전트 활용 영역</h2>
+              <h2 className="org-section-title">{t('aboutPage.org.ai.title')}</h2>
             </div>
             <div className="org-ai-grid">
               <div className="org-ai-card">
@@ -124,8 +121,8 @@ export default function Organization() {
                     <path d="M16 24l4 4 8-8" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"/>
                   </svg>
                 </div>
-                <h4>코드 생성 및 리뷰</h4>
-                <p>AI 코딩 어시스턴트를 활용한 빠른 개발과 자동 코드 리뷰로 품질 확보</p>
+                <h4>{t('aboutPage.org.ai.cards.0.title')}</h4>
+                <p>{t('aboutPage.org.ai.cards.0.desc')}</p>
               </div>
               <div className="org-ai-card">
                 <div className="org-ai-card-icon">
@@ -134,8 +131,8 @@ export default function Organization() {
                     <path d="M24 12v12l8 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
                   </svg>
                 </div>
-                <h4>프로젝트 관리 자동화</h4>
-                <p>일정, 리소스, 리스크를 AI가 분석하여 최적의 프로젝트 운영 지원</p>
+                <h4>{t('aboutPage.org.ai.cards.1.title')}</h4>
+                <p>{t('aboutPage.org.ai.cards.1.desc')}</p>
               </div>
               <div className="org-ai-card">
                 <div className="org-ai-card-icon">
@@ -144,8 +141,8 @@ export default function Organization() {
                     <rect x="6" y="6" width="36" height="36" rx="2" stroke="currentColor" strokeWidth="2"/>
                   </svg>
                 </div>
-                <h4>데이터 분석 및 리포트</h4>
-                <p>영업, 생산, 품질 데이터를 AI가 분석하여 인사이트 도출 및 자동 보고서 생성</p>
+                <h4>{t('aboutPage.org.ai.cards.2.title')}</h4>
+                <p>{t('aboutPage.org.ai.cards.2.desc')}</p>
               </div>
               <div className="org-ai-card">
                 <div className="org-ai-card-icon">
@@ -153,8 +150,8 @@ export default function Organization() {
                     <path d="M12 36V24h6v12M20 36V18h6v18M28 36V12h6v24M36 36V6" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
                   </svg>
                 </div>
-                <h4>고객 대응 자동화</h4>
-                <p>AI 챗봇과 자동 응대 시스템으로 고객 문의 즉시 처리 및 기술 지원</p>
+                <h4>{t('aboutPage.org.ai.cards.3.title')}</h4>
+                <p>{t('aboutPage.org.ai.cards.3.desc')}</p>
               </div>
             </div>
           </section>

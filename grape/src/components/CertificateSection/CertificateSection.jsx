@@ -1,5 +1,6 @@
 import React from "react";
 import ProductList from '../../pages/Products/ProductList';
+import useTranslation from "../../hooks/useTranslation";
 import "./CertificateSection.css";
 
 // Certificate imports
@@ -27,196 +28,48 @@ import copyright11 from "../../assets/about/11.png";
 import copyright12 from "../../assets/about/copyright12.png";
 
 const CertificateSection = () => {
-  const certificateData = [
-    // 사업등록
-    {
-      title: "사업자등록증",
-      image: copyright12,
-      imageAlt: "SW사업자 일반현황관리확인서",
-      category: "면허등록증",
-      organization: "국세청",
-      date: "2025-04-28"
-    },
-    {
-      title: "정보통신공사업등록증",
-      image: informationCommunicationBusinessCertificate,
-      imageAlt: "정보통신공사업등록증",
-      category: "면허등록증",
-      organization: "경기도",
-      date: "2023-09-14"
-    },
-    {
-      title: "SW사업자 일반현황관리확인서",
-      image: softwareBusinessOperatorCertificate,
-      imageAlt: "SW사업자 일반현황관리확인서",
-      category: "면허등록증",
-      organization: "한국소프트웨어산업협회",
-      date: "2024-05-30"
-    },
-    {
-      title: "공장등록증명서",
-      image: factoryRegistrationCertificate,
-      imageAlt: "공장등록증명서",
-      category: "면허등록증",
-      organization: "한국산업단지공단",
-      date: "2025-06-23"
-    },
-    
-    // 기업인증
-    {
-      title: "벤처기업 확인서",
-      image: ventureEnterpriseCertificate,
-      imageAlt: "벤처기업 확인서",
-      category: "인정서",
-      organization: "벤처기업확인기관",
-      date: "2025-08-13"
-    },
-    {
-      title: "기업부설연구소 인증서",
-      image: corporateResearchInstituteCertificate,
-      imageAlt: "기업부설연구소 인증서",
-      category: "인정서",
-      organization: "한국산업기술진흥협회",
-      date: "2025-08-20"
-    },
-    
-    // 특허
-    {
-      title: "실내외 센서 모듈을 이용한 공기질 관리 방법 및 장치",
-      image: patentCertificate1,
-      imageAlt: "특허증 - 실내외 센서 모듈을 이용한 공기질 관리 방법 및 장치",
-      category: "특허",
-      organization: "특허청",
-      date: "2022-05-27"
-    },      
-    {
-      title: "AI 기반의 캡슐형 스마트 쉘터",
-      image: patentCertificate2,
-      imageAlt: "특허증 - AI 기반의 캡슐형 스마트 쉘터",
-      category: "특허",
-      organization: "특허청",
-      date: "2022-07-19"
-    },
-    {
-      title: "사용자 맞춤형 서비스를 제공하는 캡슐형 스마트 쉘터",
-      image: patentCertificate3,
-      imageAlt: "특허증 - 사용자 맞춤형 서비스를 제공하는 캡슐형 스마트 쉘터",
-      category: "특허",
-      organization: "특허청",
-      date: "2023-04-28"
-    },
-    {
-      title: "레이더와 카메라를 이용한 위급 상황 알람 장치",
-      image: patentCertificate4,
-      imageAlt: "특허증 - 레이더와 카메라를 이용한 위급 상황 알람 장치",
-      category: "특허",
-      organization: "특허청",
-      date: "2025-06-20"
-    },
-    {
-      title: "상표등록증",
-      image: copyright10,
-      imageAlt: "상표등록증",
-      category: "특허",
-      organization: "특허청",
-      date: "2020-03-27"
-    },
-    {
-      title: "디자인등록증",
-      image: copyright11,
-      imageAlt: "디자인등록증",
-      category: "특허",
-      organization: "특허청",
-      date: "2024-07-16"
-    },
-    
-    // 저작권
-    {
-      title: "티웨스웰 게이트웨이 서버",
-      image: copyright9,
-      imageAlt: "저작권 등록증 - 티웨스웰 게이트웨이 서버",
-      category: "저작권",
-      organization: "한국저작권위원회",
-      date: "2023-06-14"
-    },
-    {
-      title: "티웨스웰 토스 서버",
-      image: copyright8,
-      imageAlt: "저작권 등록증 - 티웨스웰 토스 서버",
-      category: "저작권",
-      organization: "한국저작권위원회",
-      date: "2023-06-14"
-    },
-    {
-      title: "다중 동영상 원격제어 소프트웨어",
-      image: copyright1,
-      imageAlt: "저작권 등록증 - 다중 동영상 원격제어 소프트웨어",
-      category: "저작권",
-      organization: "한국저작권위원회",
-      date: "2024-09-24"
-    },
-    {
-      title: "애니스페이스매니저프로그램",
-      image: copyright4,
-      imageAlt: "저작권 등록증 - 애니스페이스매니저프로그램",
-      category: "저작권",
-      organization: "한국저작권위원회",
-      date: "2024-01-30"
-    },
-    {
-      title: "레이더 기반 안전 감지 시스템",
-      image: copyright2,
-      imageAlt: "저작권 등록증 - 레이더 기반 안전 감지 시스템",
-      category: "저작권",
-      organization: "한국저작권위원회",
-      date: "2024-07-31"
-    },
-    {
-      title: "홈케어를 위한 AI 대화 프로그램",
-      image: copyright6,
-      imageAlt: "저작권 등록증 - 홈케어를 위한 AI 대화 프로그램",
-      category: "저작권",
-      organization: "한국저작권위원회",
-      date: "2024-11-20"
-    },
-    {
-      title: "홈케어용 QnA 쿼리 관리 시스템 프로그램",
-      image: copyright7,
-      imageAlt: "저작권 등록증 - 홈케어용 QnA 쿼리 관리 시스템 프로그램",
-      category: "저작권",
-      organization: "한국저작권위원회",
-      date: "2024-11-20"
-    },
-    {
-      title: "음성인식을 통한 산업현장 안전사고 대처 프로그램",
-      image: copyright5,
-      imageAlt: "저작권 등록증 - 음성인식을 통한 산업현장 안전사고 대처 프로그램",
-      category: "저작권",
-      organization: "한국저작권위원회",
-      date: "2025-05-27"
-    },
-    {
-      title: "센서 시험 프로그램",
-      image: copyright3,
-      imageAlt: "저작권 등록증 - 센서 시험 프로그램",
-      category: "저작권",
-      organization: "한국저작권위원회",
-      date: "2025-05-27"
-    }
+  const { t } = useTranslation();
+  // 인증서 이미지(import 바인딩)는 JSON에 담을 수 없으므로 순서대로 별도 배열 유지
+  const certificateImages = [
+    copyright12,
+    informationCommunicationBusinessCertificate,
+    softwareBusinessOperatorCertificate,
+    factoryRegistrationCertificate,
+    ventureEnterpriseCertificate,
+    corporateResearchInstituteCertificate,
+    patentCertificate1,
+    patentCertificate2,
+    patentCertificate3,
+    patentCertificate4,
+    copyright10,
+    copyright11,
+    copyright9,
+    copyright8,
+    copyright1,
+    copyright4,
+    copyright2,
+    copyright6,
+    copyright7,
+    copyright5,
+    copyright3
   ];
+  const certificateData = t('aboutPage.certificate.items').map((c, i) => ({
+    ...c,
+    image: certificateImages[i]
+  }));
 
   return (
     <div id="certificate" className="certificate-section">
       <div className="certificate-container">
         <div className="certificate-section-title-container">
           <div className="certificate-subtitle">Certificate</div>
-          <div className="certificate-title">면허인증특허</div>
+          <div className="certificate-title">{t('aboutPage.certificate.sectionTitle')}</div>
         </div>
         <div className="certificate-cards">
           <ProductList
             embedded
-            title="인증 및 특허"
-            subtitle="회사 보유 인증서와 특허"
+            title={t('aboutPage.certificate.listTitle')}
+            subtitle={t('aboutPage.certificate.listSubtitle')}
             breadcrumbs={["Home", "About", "Certificates"]}
             hideSearch={true}
             disableScrollOnPageChange={true}
