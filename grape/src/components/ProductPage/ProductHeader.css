@@ -12,8 +12,10 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  /* 짧은 뷰포트에서도 배너가 고정 메뉴(헤더 높이+상단 여백)보다
+     작아지지 않게 하여 아래 page-title이 가려지지 않도록 함 */
+  min-height: max(15vh, calc(var(--menu-height) + var(--spacing-2xl)));
   max-height: 15vh;
-  min-height: 15vh;
 }
 
 .product-header > * {

@@ -3,7 +3,12 @@ import { useLocation } from 'react-router-dom';
 import useTranslation from '../../hooks/useTranslation';
 import { stripLangPrefix } from '../../contexts/LanguageContext';
 
-const BASE_URL = 'https://www.safegai.co.kr';
+// 빌드 모드별 도메인 분리: .env.production / .env.staging 의 VITE_SITE_URL.
+// 값이 없으면(dev 등) 운영 도메인으로 폴백.
+const BASE_URL = import.meta.env.VITE_SITE_URL || 'https://www.safegai.co.kr';
+// Fallback OG image (matches the static default in index.html) used when a
+// SEO section has no dedicated `ogImage` key.
+const DEFAULT_OG_IMAGE = `${BASE_URL}/og-image.jpg`;
 
 /**
  * SEOHead component
@@ -19,7 +24,8 @@ function SEOHead() {
 
     // Determine which SEO section to use based on path
     let seoSection = 'home';
-    if (pathWithoutLang.startsWith('/about')) seoSection = 'about';
+    if (pathWithoutLang.startsWith('/safegai-platform')) seoSection = 'safegaiPlatform';
+    else if (pathWithoutLang.startsWith('/about')) seoSection = 'about';
     else if (pathWithoutLang.startsWith('/solutions')) seoSection = 'solutions';
     else if (pathWithoutLang.startsWith('/rnd')) seoSection = 'rnd';
     else if (pathWithoutLang.startsWith('/products')) seoSection = 'products';
@@ -28,6 +34,12 @@ function SEOHead() {
 
     const title = t(`seo.${seoSection}.title`);
     const description = t(`seo.${seoSection}.description`);
+    // t() returns the key string itself when a key is missing, so fall back
+    // to the default image / the page title when the section omits these keys.
+    const ogImageRaw = t(`seo.${seoSection}.ogImage`);
+    const ogImage = ogImageRaw.startsWith('http') ? ogImageRaw : DEFAULT_OG_IMAGE;
+    const ogImageAltRaw = t(`seo.${seoSection}.ogImageAlt`);
+    const ogImageAlt = ogImageAltRaw.startsWith('seo.') ? title : ogImageAltRaw;
     const ogLocale = currentLang === 'ko' ? 'ko_KR' : 'en_US';
     const canonicalUrl = `${BASE_URL}/${currentLang}${pathWithoutLang === '/' ? '' : pathWithoutLang}`;
     const koUrl = `${BASE_URL}/ko${pathWithoutLang === '/' ? '' : pathWithoutLang}`;
@@ -53,10 +65,18 @@ function SEOHead() {
     // Open Graph tags
     setMeta('property', 'og:title', title);
     setMeta('property', 'og:description', description);
+    setMeta('property', 'og:image', ogImage);
+    setMeta('property', 'og:image:alt', ogImageAlt);
     setMeta('property', 'og:locale', ogLocale);
     setMeta('property', 'og:url', canonicalUrl);
     setMeta('property', 'og:type', 'website');
     setMeta('property', 'og:site_name', 'ThingsWell');
+
+    // Twitter Card tags (override the static homepage values in index.html per route)
+    setMeta('name', 'twitter:card', 'summary_large_image');
+    setMeta('name', 'twitter:title', title);
+    setMeta('name', 'twitter:description', description);
+    setMeta('name', 'twitter:image', ogImage);
 
     // Canonical link
     let canonicalEl = document.querySelector('link[rel="canonical"]');

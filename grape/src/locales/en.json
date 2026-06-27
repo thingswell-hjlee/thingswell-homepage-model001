@@ -29,7 +29,8 @@
     "governmentSupport": "Government Programs",
     "governmentSupportSmart": "Smart Safety Equipment Support Program",
     "shop": "Shop",
-    "admin": "Admin"
+    "admin": "Admin",
+    "safegaiPlatform": "SafeGAI"
   },
   "footer": {
     "company": "Company",
@@ -57,6 +58,7 @@
     "caseSmartSafety": "Industrial Safety Automation",
     "caseIntegratedControl": "Smart Integrated Control",
     "caseInfoComm": "Information & Communications",
+    "companyName": "ThingsWell Inc.",
     "address": "13th Floor, A-1302, Kumkang Pentarium IT Tower, 282 Hagui-ro, Dongan-gu, Anyang-si, Gyeonggi-do, South Korea",
     "phone": "1833-7758",
     "email": "contact@thingswell.co.kr",
@@ -247,6 +249,11 @@
     "governmentSupport": {
       "title": "Government Programs - ThingsWell",
       "description": "Information on government support programs including smart safety equipment subsidies."
+    },
+    "safegaiPlatform": {
+      "title": "SafeGAI Platform - Physical AI Smart Safety Platform | Thingswell",
+      "description": "Thingswell is a smart safety platform specialist for public safety, construction safety, and industrial safety. SafeGAI Platform is a next-generation Physical AI safety platform combining registered-patent (10-2025-0168517) on-device Generative AI and adaptive rolling-buffer technology.",
+      "ogImageAlt": "SafeGAI Platform - Physical AI Smart Safety Platform"
     }
   },
   "solutions": {
@@ -3668,6 +3675,332 @@
       "secondsSuffix": "s",
       "backToLogin": "Back to login",
       "goToLogin": "Go to login page"
+    }
+  },
+  "safegaiPage": {
+    "hero": {
+      "mainCopy": "SafeGAI Platform",
+      "mainCopyEn": "Physical AI Smart Safety Platform",
+      "subCopy": "We connect field hazards through data and elevate safety decision-making with Edge AI and Generative AI.",
+      "body": "Thingswell is a smart safety platform specialist for public safety, construction safety, and industrial safety. Built on registered patent (10-2025-0168517) on-device Generative AI and adaptive rolling-buffer multisensor fusion technology, SafeGAI Platform detects, analyzes, and responds to on-site risk events through NVIDIA Jetson Edge AI and AWS cloud integration, delivering a next-generation safety management framework.",
+      "ctaUser": "View User Screen",
+      "ctaAdmin": "View Admin Screen",
+      "ctaContact": "Platform Consultation",
+      "dashboardCards": [
+        "AI CCTV Event Detected",
+        "Edge Gateway Processing",
+        "Safety Risk Level: High",
+        "AWS Cloud Sync",
+        "Operator Alert Sent"
+      ]
+    },
+    "overview": {
+      "label": "Platform Overview",
+      "title": "Platform Overview",
+      "cards": [
+        {
+          "title": "Field Data Connectivity",
+          "desc": "Integrates AI CCTV, IoT sensors, access control, environment sensors, and facility data."
+        },
+        {
+          "title": "Role-Based Safety Screens",
+          "desc": "Delivers the right information separately to field users and administrators."
+        },
+        {
+          "title": "Edge & Cloud Scalability",
+          "desc": "Provides field scalability through NVIDIA Jetson edge gateways and AWS cloud integration."
+        }
+      ]
+    },
+    "features": {
+      "label": "Core Features",
+      "title": "Core Features",
+      "cards": [
+        {
+          "title": "Risk Event Detection",
+          "desc": "Detects danger-zone intrusion, falls, loitering, and prolonged presence with AI CCTV and sensors.",
+          "patent": "Patent ① Applied"
+        },
+        {
+          "title": "Role-Based Screens",
+          "desc": "Provides distinct functions for field users and administrators.",
+          "patent": ""
+        },
+        {
+          "title": "Edge AI Processing",
+          "desc": "Processes data rapidly on NVIDIA Jetson-based field gateways.",
+          "patent": "Patent ② Applied"
+        },
+        {
+          "title": "Rule Engine Response",
+          "desc": "Automates alerts, warnings, equipment control, and control-center integration per site-specific safety criteria.",
+          "patent": ""
+        },
+        {
+          "title": "AWS Cloud Integration",
+          "desc": "Supports data storage, remote monitoring, service scaling, and operations history management.",
+          "patent": ""
+        },
+        {
+          "title": "Reporting & Analytics",
+          "desc": "Analyzes risk events, response history, recurring risky behavior, and site-level risk levels.",
+          "patent": "Patent ② Applied"
+        }
+      ]
+    },
+    "architecture": {
+      "label": "Platform Architecture",
+      "title": "Platform Architecture",
+      "layers": [
+        {
+          "title": "Field Data Layer",
+          "items": "AI CCTV / IoT Sensor / Access Control / Environment Sensor / Facility Data",
+          "patent": ""
+        },
+        {
+          "title": "Edge AI Layer",
+          "items": "SafeGAI Edge Gateway / NVIDIA Jetson / Adaptive Rolling Buffer / On-Device Generative AI / Rule Engine",
+          "patent": "Patent 10-2025-0168517 Applied"
+        },
+        {
+          "title": "Cloud & Intelligence Layer",
+          "items": "AWS Cloud / Event History / Analytics / RAG LLM",
+          "patent": ""
+        },
+        {
+          "title": "Role-Based Interface",
+          "items": "User Interface / Admin Control Center / Safety Dashboard / Report",
+          "patent": ""
+        }
+      ]
+    },
+    "patents": {
+      "title": "Core Technology Based on Registered Patents",
+      "subtitle": "SafeGAI Platform is not merely a concept but a proven platform implemented on registered, granted patent technology.",
+      "patent1": {
+        "badge": "Registered Patent 10-2022-0130446",
+        "title": "Radar × Camera Fusion Emergency Alarm Apparatus",
+        "titleEn": "Radar-Camera Fusion Emergency Detection",
+        "keywords": [
+          "Non-contact vital sign measurement (rPPG + 60GHz radar)",
+          "Real-time abnormal behavior detection (ST-GCN based)",
+          "Edge AI processing (NVIDIA Jetson + ZYNQ SoC)",
+          "Barrier-free accessibility (senior/disability friendly)"
+        ],
+        "body": "Through the fusion of an AI camera and a radar module, the system automatically switches to vital sign measurement mode when a person is nearby and operates in object-motion recognition mode at a distance, enabling early detection of emergencies in multi-use facilities."
+      },
+      "patent2": {
+        "badge": "Registered Patent 10-2025-0168517",
+        "highlight": "SafeGAI Platform Core Technology",
+        "title": "On-Device Generative AI for Real-time Situation Awareness & Context Analysis",
+        "titleEn": "On-Device Generative AI Real-time Situation Awareness",
+        "keywords": [
+          "On-device Generative AI (RAG-based lightweight LLM)",
+          "Adaptive rolling buffer (L0–L3 dynamic storage quality)",
+          "Multisensor fusion (camera/microphone/IMU/gas/air quality/GNSS)",
+          "Pre/post event context analysis (combining before/after data)",
+          "Accessibility output control (visual/auditory/high-noise/low-light)",
+          "Privacy protection (edge encryption, only feature values sent to server)"
+        ],
+        "metrics": [
+          "Alert Recognition: 95%↑",
+          "Detection→Alert: 1000ms↓",
+          "False Alarm: 5%↓",
+          "Power: ~8W"
+        ],
+        "body": "We connect field hazards through data and elevate safety decision-making with Edge AI and Generative AI. With this patented technology at its core, SafeGAI Platform protects everyone—including seniors, people with disabilities, and workers in harsh environments."
+      },
+      "footer": "SafeGAI Platform is built on registered-patent technology, and we continue to secure additional patents through ongoing R&D."
+    },
+    "userPreview": {
+      "label": "User Mode Preview",
+      "title": "User Screen Preview",
+      "cards": [
+        {
+          "title": "Today's Safety Status",
+          "level": "Caution",
+          "levelColor": "yellow",
+          "items": [
+            "Current status: Caution",
+            "Events occurred: 7",
+            "Unhandled alerts: 2",
+            "Equipment connection: Normal"
+          ]
+        },
+        {
+          "title": "Real-time Risk Alert",
+          "level": "Danger",
+          "levelColor": "red",
+          "items": [
+            "Danger-zone intrusion detected",
+            "Location: Worksite Zone A",
+            "Risk level: High"
+          ],
+          "buttons": [
+            "Acknowledge",
+            "Mark Resolved"
+          ]
+        },
+        {
+          "title": "Safety Guide",
+          "level": "Normal",
+          "levelColor": "green",
+          "items": [
+            "Working-at-height safety checklist",
+            "Ladder work safety rules",
+            "Emergency response procedures"
+          ]
+        }
+      ]
+    },
+    "adminPreview": {
+      "label": "Admin Mode Preview",
+      "title": "Admin Screen Preview",
+      "summary": [
+        {
+          "label": "Total Sites",
+          "value": "12"
+        },
+        {
+          "label": "Normal",
+          "value": "8"
+        },
+        {
+          "label": "Caution",
+          "value": "3"
+        },
+        {
+          "label": "Danger",
+          "value": "1"
+        }
+      ],
+      "tableHeaders": [
+        "Time",
+        "Site",
+        "Event Type",
+        "Risk Level",
+        "Status",
+        "Assignee"
+      ],
+      "tableRows": [
+        {
+          "time": "14:23",
+          "site": "Factory A",
+          "event": "Danger-zone intrusion",
+          "level": "High",
+          "status": "Unhandled",
+          "manager": "Kim"
+        },
+        {
+          "time": "14:18",
+          "site": "Site B",
+          "event": "Fall detected",
+          "level": "Critical",
+          "status": "In progress",
+          "manager": "Lee"
+        },
+        {
+          "time": "14:05",
+          "site": "Hotel C",
+          "event": "Gas level exceeded",
+          "level": "Medium",
+          "status": "Completed",
+          "manager": "Park"
+        }
+      ],
+      "sidePanel": {
+        "title": "Site Zone A",
+        "items": [
+          "Edge Gateway: Online",
+          "AI CCTV: 4/4 Online",
+          "IoT Sensor: 12/13 Online",
+          "AWS Sync: Connected",
+          "Latest risk event: Danger-zone intrusion"
+        ]
+      }
+    },
+    "portfolio": {
+      "title": "SafeGAI Platform Portfolio",
+      "subtitle": "An integrated solution for smart safety — every project and research effort is a component of SafeGAI Platform.",
+      "group1": {
+        "title": "Case Studies",
+        "cards": [
+          {
+            "title": "AI Smart Safety System",
+            "subtitle": "AI camera + sensor-based risk detection solution",
+            "href": "/cases/smart-safety"
+          },
+          {
+            "title": "Smart Safety Integrated Control System",
+            "subtitle": "165+ integrated control projects (hotels/public facilities/factories)",
+            "href": "/cases/integrated-control"
+          },
+          {
+            "title": "Smart Safety Information & Communications Infrastructure",
+            "subtitle": "Network infrastructure that underpins safety control",
+            "href": "/cases/information-communication"
+          }
+        ]
+      },
+      "group2": {
+        "title": "Core Research & Technology R&D",
+        "cards": [
+          {
+            "title": "Multimodal Situational Awareness",
+            "href": "/rnd/multimodal-awareness"
+          },
+          {
+            "title": "On-Device AI",
+            "href": "/rnd/on-device-ai"
+          },
+          {
+            "title": "RAG LLM Safety Awareness",
+            "href": "/rnd/rag-llm"
+          },
+          {
+            "title": "Embedded System",
+            "href": "/rnd/embedded-system"
+          },
+          {
+            "title": "Smart Assistive Technology",
+            "href": "/rnd/smart-assistive-technology"
+          },
+          {
+            "title": "Air Quality Management AI",
+            "href": "/rnd/air-quality-management"
+          }
+        ]
+      },
+      "group3": {
+        "title": "Product Lineup",
+        "cards": [
+          {
+            "title": "AI Smart Safety Products",
+            "href": "/products/safety"
+          },
+          {
+            "title": "Smart Safety Integrated Control Products",
+            "href": "/products/control"
+          },
+          {
+            "title": "Safety Control System Products",
+            "href": "/products/monitoring"
+          }
+        ]
+      },
+      "footer": "All of these solutions converge into a single SafeGAI Platform core."
+    },
+    "contact": {
+      "title": "SafeGAI Platform Consultation",
+      "body": "SafeGAI Platform applies to public safety, construction safety, industrial safety, safety at workplaces for people with disabilities, and smart-store safety management. Through a consultation, we propose a configuration tailored to your site.",
+      "phone": "1833-7758",
+      "email": "contact@thingswell.co.kr",
+      "formName": "Name",
+      "formCompany": "Company",
+      "formEmail": "Email",
+      "formMessage": "Message",
+      "submitButton": "Request Consultation",
+      "submitMessage": "This is a front-end screen that simulates an inquiry being submitted. Actual submission can be integrated with a backend or email system later."
     }
   }
 }

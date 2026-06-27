@@ -29,7 +29,8 @@
     "governmentSupport": "정부지원사업",
     "governmentSupportSmart": "스마트안전장비 지원사업",
     "shop": "쇼핑몰",
-    "admin": "관리자"
+    "admin": "관리자",
+    "safegaiPlatform": "세이프가이"
   },
   "footer": {
     "company": "회사",
@@ -57,6 +58,7 @@
     "caseSmartSafety": "산업안전자동화",
     "caseIntegratedControl": "스마트통합제어",
     "caseInfoComm": "정보통신",
+    "companyName": "ThingsWell (주)싱스웰",
     "address": "경기 안양시 동안구 학의로 282 금강펜타리움 IT타워 A동 1302호",
     "phone": "1833-7758",
     "email": "contact@thingswell.co.kr",
@@ -247,6 +249,11 @@
     "governmentSupport": {
       "title": "정부지원사업 - 싱스웰",
       "description": "스마트안전장비 지원사업 등 정부지원사업 정보를 확인하세요."
+    },
+    "safegaiPlatform": {
+      "title": "SafeGAI Platform - 피지컬 AI 스마트 안전 플랫폼 | 싱스웰",
+      "description": "(주)싱스웰은 공공안전, 건설안전, 산업안전 분야의 스마트 안전 플랫폼 전문기업입니다. SafeGAI Platform은 등록특허(10-2025-0168517) 기반 온디바이스 Generative AI와 적응형 롤링버퍼 기술을 결합한 피지컬 AI 차세대 안전관리 플랫폼입니다.",
+      "ogImageAlt": "SafeGAI Platform - 피지컬 AI 스마트 안전 플랫폼"
     }
   },
   "solutions": {
@@ -3668,6 +3675,332 @@
       "secondsSuffix": "초",
       "backToLogin": "로그인으로 돌아가기",
       "goToLogin": "로그인 페이지로 이동"
+    }
+  },
+  "safegaiPage": {
+    "hero": {
+      "mainCopy": "SafeGAI Platform",
+      "mainCopyEn": "Physical AI Smart Safety Platform",
+      "subCopy": "현장의 위험을 데이터로 연결하고, 엣지 AI와 생성형 AI로 안전 의사결정을 고도화합니다.",
+      "body": "(주)싱스웰은 공공안전, 건설안전, 산업안전 분야의 스마트 안전 플랫폼 전문기업입니다. SafeGAI Platform은 등록특허(10-2025-0168517) 기반의 온디바이스 Generative AI와 적응형 롤링버퍼 멀티센서 융합 기술을 결합하여, NVIDIA Jetson 엣지 AI와 AWS 클라우드 연동을 통해 현장의 위험 이벤트를 감지·분석·대응하는 차세대 안전관리 체계를 제공합니다.",
+      "ctaUser": "사용자 화면 보기",
+      "ctaAdmin": "관리자 화면 보기",
+      "ctaContact": "플랫폼 상담 문의",
+      "dashboardCards": [
+        "AI CCTV Event Detected",
+        "Edge Gateway Processing",
+        "Safety Risk Level: High",
+        "AWS Cloud Sync",
+        "Operator Alert Sent"
+      ]
+    },
+    "overview": {
+      "label": "Platform Overview",
+      "title": "플랫폼 개요",
+      "cards": [
+        {
+          "title": "현장 데이터 연결",
+          "desc": "AI CCTV, IoT 센서, 출입정보, 환경센서, 설비 데이터를 통합합니다."
+        },
+        {
+          "title": "역할별 안전 화면 제공",
+          "desc": "현장 사용자와 관리자에게 필요한 정보를 구분하여 제공합니다."
+        },
+        {
+          "title": "엣지·클라우드 기반 확장",
+          "desc": "NVIDIA Jetson 엣지 게이트웨이와 AWS 클라우드 연동으로 현장 확장성을 제공합니다."
+        }
+      ]
+    },
+    "features": {
+      "label": "Core Features",
+      "title": "핵심 기능",
+      "cards": [
+        {
+          "title": "위험 이벤트 감지",
+          "desc": "AI CCTV와 센서로 위험구역 진입, 쓰러짐, 배회, 장시간 체류 등을 감지합니다.",
+          "patent": "특허① 적용"
+        },
+        {
+          "title": "역할별 화면 제공",
+          "desc": "현장 사용자와 관리자에게 필요한 기능을 구분하여 제공합니다.",
+          "patent": ""
+        },
+        {
+          "title": "엣지 AI 처리",
+          "desc": "NVIDIA Jetson 기반 현장 게이트웨이에서 데이터를 빠르게 처리합니다.",
+          "patent": "특허② 적용"
+        },
+        {
+          "title": "룰 엔진 기반 대응",
+          "desc": "현장별 안전 기준에 따라 알림, 경고, 장비 제어, 관제 연동을 자동화합니다.",
+          "patent": ""
+        },
+        {
+          "title": "AWS 클라우드 연동",
+          "desc": "데이터 저장, 원격 모니터링, 서비스 확장, 운영 이력 관리를 지원합니다.",
+          "patent": ""
+        },
+        {
+          "title": "리포트/분석 지원",
+          "desc": "위험 이벤트, 조치 이력, 반복 위험행동, 현장별 위험도를 분석합니다.",
+          "patent": "특허② 적용"
+        }
+      ]
+    },
+    "architecture": {
+      "label": "Platform Architecture",
+      "title": "플랫폼 아키텍처",
+      "layers": [
+        {
+          "title": "Field Data Layer",
+          "items": "AI CCTV / IoT Sensor / Access Control / Environment Sensor / Facility Data",
+          "patent": ""
+        },
+        {
+          "title": "Edge AI Layer",
+          "items": "SafeGAI Edge Gateway / NVIDIA Jetson / Adaptive Rolling Buffer / On-Device Generative AI / Rule Engine",
+          "patent": "특허 10-2025-0168517 적용"
+        },
+        {
+          "title": "Cloud & Intelligence Layer",
+          "items": "AWS Cloud / Event History / Analytics / RAG LLM",
+          "patent": ""
+        },
+        {
+          "title": "Role-Based Interface",
+          "items": "User Interface / Admin Control Center / Safety Dashboard / Report",
+          "patent": ""
+        }
+      ]
+    },
+    "patents": {
+      "title": "등록 특허 기반 핵심 기술",
+      "subtitle": "SafeGAI Platform은 단순 아이디어가 아닌 등록 완료된 특허 기술 기반으로 구현된 실증된 플랫폼입니다",
+      "patent1": {
+        "badge": "등록특허 10-2022-0130446",
+        "title": "레이더 × 카메라 융합 위급 상황 알람 장치",
+        "titleEn": "Radar-Camera Fusion Emergency Detection",
+        "keywords": [
+          "비접촉 생체신호 측정 (rPPG + 60GHz 레이더)",
+          "실시간 이상 행동 감지 (ST-GCN 기반)",
+          "엣지 AI 처리 (NVIDIA Jetson + ZYNQ SoC)",
+          "배리어프리 접근성 (고령/장애인 친화)"
+        ],
+        "body": "AI 카메라와 레이더 모듈의 융합으로 사람이 근접 시 자동으로 생체신호 측정 모드로 전환되고, 원거리에서는 객체 모션 인식 모드로 동작하여 다중이용시설의 위급 상황을 조기 감지합니다."
+      },
+      "patent2": {
+        "badge": "등록특허 10-2025-0168517",
+        "highlight": "SafeGAI Platform 핵심 기술",
+        "title": "온디바이스 Generative AI 기반 실시간 상황인지·맥락분석",
+        "titleEn": "On-Device Generative AI Real-time Situation Awareness",
+        "keywords": [
+          "온디바이스 Generative AI (RAG 기반 경량 LLM)",
+          "적응형 롤링버퍼 (L0~L3 동적 저장 품질)",
+          "멀티센서 융합 (카메라/마이크/IMU/가스/공기질/GNSS)",
+          "이벤트 전후 맥락 분석 (사전/사후 데이터 결합)",
+          "접근성 출력 제어 (시각/청각/고소음/저조도)",
+          "프라이버시 보호 (엣지 암호화, 특징값만 서버 전송)"
+        ],
+        "metrics": [
+          "경고 인지율: 95%↑",
+          "탐지~알림: 1000ms↓",
+          "오경보율: 5%↓",
+          "전력 소비: ~8W"
+        ],
+        "body": "현장의 위험을 데이터로 연결하고, 엣지 AI와 생성형 AI로 안전 의사결정을 고도화합니다. SafeGAI Platform은 본 특허 기술을 핵심 코어로 하여 노인, 장애인, 열악 환경 작업자까지 모두 보호합니다."
+      },
+      "footer": "SafeGAI Platform은 등록 특허 기반의 기술이며, 지속적인 R&D를 통해 추가 특허를 확보하고 있습니다."
+    },
+    "userPreview": {
+      "label": "User Mode Preview",
+      "title": "사용자 화면 미리보기",
+      "cards": [
+        {
+          "title": "오늘의 안전 상태",
+          "level": "주의",
+          "levelColor": "yellow",
+          "items": [
+            "현재 상태: 주의",
+            "발생 이벤트: 7건",
+            "미조치 알림: 2건",
+            "장비 연결: 정상"
+          ]
+        },
+        {
+          "title": "실시간 위험 알림",
+          "level": "위험",
+          "levelColor": "red",
+          "items": [
+            "위험구역 진입 감지",
+            "위치: 작업장 A구역",
+            "위험도: 높음"
+          ],
+          "buttons": [
+            "확인",
+            "조치 완료"
+          ]
+        },
+        {
+          "title": "안전 가이드",
+          "level": "정상",
+          "levelColor": "green",
+          "items": [
+            "고소작업 안전 체크리스트",
+            "사다리 작업 안전수칙",
+            "비상상황 대응 절차"
+          ]
+        }
+      ]
+    },
+    "adminPreview": {
+      "label": "Admin Mode Preview",
+      "title": "관리자 화면 미리보기",
+      "summary": [
+        {
+          "label": "전체 현장",
+          "value": "12"
+        },
+        {
+          "label": "정상",
+          "value": "8"
+        },
+        {
+          "label": "주의",
+          "value": "3"
+        },
+        {
+          "label": "위험",
+          "value": "1"
+        }
+      ],
+      "tableHeaders": [
+        "시간",
+        "현장명",
+        "이벤트 유형",
+        "위험도",
+        "처리 상태",
+        "담당자"
+      ],
+      "tableRows": [
+        {
+          "time": "14:23",
+          "site": "A공장",
+          "event": "위험구역 진입",
+          "level": "높음",
+          "status": "미조치",
+          "manager": "김안전"
+        },
+        {
+          "time": "14:18",
+          "site": "B현장",
+          "event": "쓰러짐 감지",
+          "level": "매우높음",
+          "status": "처리중",
+          "manager": "이감독"
+        },
+        {
+          "time": "14:05",
+          "site": "C호텔",
+          "event": "가스농도 초과",
+          "level": "중간",
+          "status": "완료",
+          "manager": "박관제"
+        }
+      ],
+      "sidePanel": {
+        "title": "현장 A구역",
+        "items": [
+          "Edge Gateway: Online",
+          "AI CCTV: 4/4 Online",
+          "IoT Sensor: 12/13 Online",
+          "AWS Sync: Connected",
+          "최근 위험 이벤트: 위험구역 진입"
+        ]
+      }
+    },
+    "portfolio": {
+      "title": "SafeGAI Platform Portfolio",
+      "subtitle": "스마트 안전을 위한 통합 솔루션 — 모든 실적과 연구는 SafeGAI Platform의 구성요소입니다",
+      "group1": {
+        "title": "구축 사례",
+        "cards": [
+          {
+            "title": "AI 스마트 안전 시스템",
+            "subtitle": "AI 카메라 + 센서 기반 위험 감지 솔루션",
+            "href": "/cases/smart-safety"
+          },
+          {
+            "title": "스마트 안전 통합제어 시스템",
+            "subtitle": "165건+ 통합제어 프로젝트 실적 (호텔/공공시설/공장)",
+            "href": "/cases/integrated-control"
+          },
+          {
+            "title": "스마트 안전 정보통신 인프라",
+            "subtitle": "안전 관제를 지탱하는 네트워크 인프라 구축",
+            "href": "/cases/information-communication"
+          }
+        ]
+      },
+      "group2": {
+        "title": "핵심 연구·기술 R&D",
+        "cards": [
+          {
+            "title": "멀티모달 상황인지",
+            "href": "/rnd/multimodal-awareness"
+          },
+          {
+            "title": "온디바이스 AI",
+            "href": "/rnd/on-device-ai"
+          },
+          {
+            "title": "RAG LLM 안전 인지",
+            "href": "/rnd/rag-llm"
+          },
+          {
+            "title": "임베디드 시스템",
+            "href": "/rnd/embedded-system"
+          },
+          {
+            "title": "스마트 보조 기술",
+            "href": "/rnd/smart-assistive-technology"
+          },
+          {
+            "title": "공기질 관리 AI",
+            "href": "/rnd/air-quality-management"
+          }
+        ]
+      },
+      "group3": {
+        "title": "제품군",
+        "cards": [
+          {
+            "title": "AI 스마트 안전 제품",
+            "href": "/products/safety"
+          },
+          {
+            "title": "스마트 안전 통합제어 제품",
+            "href": "/products/control"
+          },
+          {
+            "title": "안전 관제 시스템 제품",
+            "href": "/products/monitoring"
+          }
+        ]
+      },
+      "footer": "이 모든 솔루션은 SafeGAI Platform 단일 코어에 통합됩니다"
+    },
+    "contact": {
+      "title": "SafeGAI Platform 도입 상담",
+      "body": "SafeGAI Platform은 공공안전, 건설안전, 산업안전, 장애인 작업장 안전, 스마트상점 안전관리에 적용 가능합니다. 도입 상담을 통해 귀하의 현장에 맞는 맞춤 구성을 제안해 드립니다.",
+      "phone": "1833-7758",
+      "email": "contact@thingswell.co.kr",
+      "formName": "이름",
+      "formCompany": "회사명",
+      "formEmail": "이메일",
+      "formMessage": "문의 내용",
+      "submitButton": "상담 신청",
+      "submitMessage": "문의가 접수된 것처럼 표시되는 프론트엔드 화면입니다. 실제 전송 기능은 추후 백엔드 또는 이메일 시스템과 연동할 수 있습니다."
     }
   }
 }

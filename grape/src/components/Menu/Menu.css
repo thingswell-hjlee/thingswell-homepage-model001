@@ -142,7 +142,7 @@ body.modal-open .hamburger-menu-wrapper {
 }
 
 .logo-image {
-  height: 40%;
+  height: 28%;
   width: auto;
   object-fit: contain;
   cursor: pointer;
@@ -336,7 +336,7 @@ body.modal-open .hamburger-menu-wrapper {
   margin: 0;
   flex: 1;
   min-width: 80px;
-  max-width: 150px;
+  max-width: 170px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -367,7 +367,7 @@ body.modal-open .hamburger-menu-wrapper {
   text-overflow: ellipsis;
   user-select: text;
   position: relative;
-  padding: var(--spacing-xs) 0;
+  padding: var(--spacing-sm) var(--spacing-md);
   background-color: rgba(30, 41, 59, 0.5);
 }
 
