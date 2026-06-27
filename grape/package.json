@@ -8,6 +8,8 @@
     "dev:https": "vite --https",
     "build": "vite build",
     "build:https": "vite build --mode production",
+    "build:staging": "vite build --mode staging",
+    "build:production": "vite build --mode production",
     "lint": "eslint .",
     "preview": "vite preview",
     "preview:https": "vite preview --https",
