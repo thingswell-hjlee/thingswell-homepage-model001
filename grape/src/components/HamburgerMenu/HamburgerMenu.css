@@ -315,6 +315,9 @@
     align-items: center;
     gap: 4px;
     margin-left: auto;
+    /* 카카오톡 등 인앱 브라우저의 우상단 닫기(X) 버튼과 겹치지 않도록
+       오른쪽 여백을 줘 왼쪽으로 이동 (모바일 햄버거 전용) */
+    margin-right: 56px;
   }
 
   .hamburger-lang-btn {

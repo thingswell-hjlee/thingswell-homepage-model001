@@ -60,6 +60,7 @@ import { LanguageProvider } from "./contexts/LanguageContext.jsx";
 import ProtectedRoute from "./components/ProtectedRoute";
 import HTTPSRedirect from "./components/HTTPSRedirect";
 import ScrollToTop from "./components/ScrollToTop";
+import MobileFloatingNav from "./components/MobileFloatingNav";
 
 /**
  * LanguageRedirect component
@@ -132,6 +133,7 @@ function AppRoutes({ isMobile }) {
         </div>
         <Footer />
       </main>
+      <MobileFloatingNav />
     </div>
   );
 }
