@@ -98,6 +98,7 @@ function Footer() {
               <img src={logo} alt={t('footer.logoAlt')} className="logo" />
               <div className="footer-copyright">
                 <div className="footer-info">
+                  <p className="footer-company-name">{t('footer.companyName')}</p>
                   <p>{t('footer.address')}</p>
                   <p>{t('footer.phone')}</p>
                   <p>{t('footer.email')}</p>
