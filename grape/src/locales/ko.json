@@ -4000,7 +4000,11 @@
       "formEmail": "이메일",
       "formMessage": "문의 내용",
       "submitButton": "상담 신청",
-      "submitMessage": "문의가 접수된 것처럼 표시되는 프론트엔드 화면입니다. 실제 전송 기능은 추후 백엔드 또는 이메일 시스템과 연동할 수 있습니다."
+      "submitting": "전송 중...",
+      "submitMessage": "상담 신청이 정상적으로 접수되었습니다. 담당자가 입력하신 이메일로 빠르게 연락드리겠습니다.",
+      "errorRequired": "이름, 이메일, 문의 내용은 필수 입력 항목입니다.",
+      "errorEmail": "이메일 형식이 올바르지 않습니다.",
+      "errorGeneric": "전송에 실패했습니다. 잠시 후 다시 시도하시거나 contact@thingswell.co.kr로 문의해 주세요."
     }
   }
 }

@@ -4000,7 +4000,11 @@
       "formEmail": "Email",
       "formMessage": "Message",
       "submitButton": "Request Consultation",
-      "submitMessage": "This is a front-end screen that simulates an inquiry being submitted. Actual submission can be integrated with a backend or email system later."
+      "submitting": "Sending...",
+      "submitMessage": "Your consultation request has been received. Our team will contact you at the email you provided shortly.",
+      "errorRequired": "Name, email, and message are required.",
+      "errorEmail": "Please enter a valid email address.",
+      "errorGeneric": "Failed to send. Please try again later or contact us at contact@thingswell.co.kr."
     }
   }
 }

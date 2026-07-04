@@ -42,13 +42,46 @@ const SafegaiPlatform = () => {
   // 폼 로컬 상태 (백엔드 연동 없음 — 프론트 전용)
   const [form, setForm] = useState({ name: '', company: '', email: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState('');
+  const [honeypot, setHoneypot] = useState('');   // 봇 차단용
 
   const handleFormChange = (field) => (e) =>
     setForm((prev) => ({ ...prev, [field]: e.target.value }));
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
+    setError('');
+
+    // 프론트 유효성 검증
+    if (!form.name.trim() || !form.email.trim() || !form.message.trim()) {
+      setError(t('safegaiPage.contact.errorRequired'));
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) {
+      setError(t('safegaiPage.contact.errorEmail'));
+      return;
+    }
+
+    setSubmitting(true);
+    try {
+      const res = await fetch(import.meta.env.VITE_CONTACT_API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...form, website: honeypot }),
+      });
+      const data = await res.json();
+      if (data.ok) {
+        setSubmitted(true);
+        setForm({ name: '', company: '', email: '', message: '' });  // 성공 후 초기화
+      } else {
+        setError(data.error || t('safegaiPage.contact.errorGeneric'));
+      }
+    } catch {
+      setError(t('safegaiPage.contact.errorGeneric'));
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   // CTA: 해당 섹션으로 스무스 스크롤
@@ -356,9 +389,22 @@ const SafegaiPlatform = () => {
               onChange={handleFormChange('message')}
               rows={4}
             />
-            <button type="submit" className="sgp-cta sgp-cta-primary sgp-submit">
-              {t('safegaiPage.contact.submitButton')}
+            {/* 허니팟: 화면에 안 보이는 필드. 봇이 채우면 백엔드가 조용히 폐기 */}
+            <input
+              type="text"
+              value={honeypot}
+              onChange={(e) => setHoneypot(e.target.value)}
+              tabIndex={-1}
+              autoComplete="off"
+              style={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px', opacity: 0 }}
+              aria-hidden="true"
+            />
+            <button type="submit" className="sgp-cta sgp-cta-primary sgp-submit" disabled={submitting}>
+              {submitting ? t('safegaiPage.contact.submitting') : t('safegaiPage.contact.submitButton')}
             </button>
+            {error ? (
+              <p className="sgp-submit-error" style={{ color: '#ff6b6b' }}>{error}</p>
+            ) : null}
             {submitted ? (
               <p className="sgp-submit-message">{t('safegaiPage.contact.submitMessage')}</p>
             ) : null}
