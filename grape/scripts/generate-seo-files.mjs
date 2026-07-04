@@ -1,9 +1,10 @@
-// 공개 라우트를 ko/en × 각 경로로, hreflang(ko/en/x-default) 포함해 sitemap.xml 생성.
-// 사용: node grape/scripts/generate-sitemap.mjs [BASE_URL]
+// robots.txt + sitemap.xml 을 한 번에 생성 (통합 SEO 파일 생성기).
+// 사용: node scripts/generate-seo-files.mjs [BASE_URL]
+//   예: node scripts/generate-seo-files.mjs https://www.safegai.co.kr
 import { writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
-const BASE_URL = (process.argv[2] || process.env.VITE_SITE_URL || 'https://www.thingswell.co.kr').replace(/\/+$/, '');
+const BASE_URL = (process.argv[2] || process.env.SITE_URL || process.env.VITE_SITE_URL || 'https://www.thingswell.co.kr').replace(/\/+$/, '');
 const LANGS = ['ko', 'en'];
 
 // 공개 라우트(lang prefix 없음). /admin·/login·/forgot-password·동적 :id·와일드카드(*) 제외.
@@ -18,10 +19,22 @@ const ROUTES = [
   '/safegai-platform',
   '/government-support',
   '/customer-service/announcement',
-  '/contact',            // ⚠️ 현재 미등록 라우트 (병합 전까지 404 — 제거하려면 이 줄 삭제)
-  '/sitemap',
 ];
 
+const outPath = (name) => fileURLToPath(new URL(`../public/${name}`, import.meta.url));
+
+// ---------- robots.txt ----------
+const robots = `User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /login
+Disallow: /forgot-password
+
+Sitemap: ${BASE_URL}/sitemap.xml
+`;
+writeFileSync(outPath('robots.txt'), robots, 'utf8');
+
+// ---------- sitemap.xml ----------
 const loc = (lang, path) => `${BASE_URL}/${lang}${path === '/' ? '' : path}`;
 const lastmod = new Date().toISOString().slice(0, 10);
 
@@ -47,8 +60,9 @@ const xml = `<?xml version="1.0" encoding="UTF-8"?>
 ${entries.join('\n')}
 </urlset>
 `;
+writeFileSync(outPath('sitemap.xml'), xml, 'utf8');
 
-const outPath = fileURLToPath(new URL('../public/sitemap.xml', import.meta.url));
-writeFileSync(outPath, xml, 'utf8');
-console.log(`✅ sitemap.xml 생성: ${outPath}`);
-console.log(`   BASE_URL=${BASE_URL} · ${ROUTES.length} routes × ${LANGS.length} langs = ${ROUTES.length * LANGS.length} URLs`);
+console.log('✅ SEO 파일 생성 완료');
+console.log(`   robots.txt   → public/robots.txt`);
+console.log(`   sitemap.xml  → public/sitemap.xml (${ROUTES.length} routes × ${LANGS.length} langs = ${ROUTES.length * LANGS.length} URLs)`);
+console.log(`   BASE_URL=${BASE_URL}`);
