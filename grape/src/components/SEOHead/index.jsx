@@ -5,7 +5,7 @@ import { stripLangPrefix } from '../../contexts/LanguageContext';
 
 // 빌드 모드별 도메인 분리: .env.production / .env.staging 의 VITE_SITE_URL.
 // 값이 없으면(dev 등) 운영 도메인으로 폴백.
-const BASE_URL = import.meta.env.VITE_SITE_URL || 'https://www.safegai.co.kr';
+const BASE_URL = import.meta.env.VITE_SITE_URL || 'https://www.thingswell.co.kr';
 // Fallback OG image (matches the static default in index.html) used when a
 // SEO section has no dedicated `ogImage` key.
 const DEFAULT_OG_IMAGE = `${BASE_URL}/og-image.jpg`;

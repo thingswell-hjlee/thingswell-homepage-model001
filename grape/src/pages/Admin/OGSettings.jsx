@@ -47,7 +47,7 @@ const DEFAULT_OG = {
   description: 'AI 카메라, 스마트밴드, 환경센서, 통합제어 시스템으로 산업안전을 혁신합니다.',
   imageUrl: '/og-image.jpg',
   siteName: '싱스웰 (ThingsWell)',
-  url: 'https://www.safegai.co.kr',
+  url: 'https://www.thingswell.co.kr',
 };
 
 export default function OGSettings() {
@@ -321,7 +321,7 @@ export default function OGSettings() {
                 type="text"
                 value={ogData.imageUrl}
                 onChange={(e) => setOgData({ ...ogData, imageUrl: e.target.value })}
-                placeholder="https://www.safegai.co.kr/og-image.png"
+                placeholder="https://www.thingswell.co.kr/og-image.png"
               />
               <div className="og-image-upload">
                 <label className="og-upload-btn">
@@ -348,7 +348,7 @@ export default function OGSettings() {
                 type="text"
                 value={ogData.url}
                 onChange={(e) => setOgData({ ...ogData, url: e.target.value })}
-                placeholder="https://www.safegai.co.kr"
+                placeholder="https://www.thingswell.co.kr"
               />
             </div>
 
