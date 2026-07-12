@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import useTranslation from '../../hooks/useTranslation';
 import { stripLangPrefix } from '../../contexts/LanguageContext';
 
-const BASE_URL = 'https://www.safegai.co.kr';
+const BASE_URL = 'https://www.thingswell.co.kr';
 
 /**
  * SEOHead component
@@ -56,7 +56,17 @@ function SEOHead() {
     setMeta('property', 'og:locale', ogLocale);
     setMeta('property', 'og:url', canonicalUrl);
     setMeta('property', 'og:type', 'website');
-    setMeta('property', 'og:site_name', 'ThingsWell');
+    setMeta('property', 'og:site_name', '싱스웰');
+    setMeta('property', 'og:image', 'https://www.thingswell.co.kr/og-image.jpg');
+    setMeta('property', 'og:image:width', '1200');
+    setMeta('property', 'og:image:height', '630');
+    setMeta('property', 'og:image:type', 'image/jpeg');
+
+    // Twitter Card tags
+    setMeta('name', 'twitter:card', 'summary_large_image');
+    setMeta('name', 'twitter:title', title);
+    setMeta('name', 'twitter:description', description);
+    setMeta('name', 'twitter:image', 'https://www.thingswell.co.kr/og-image.jpg');
 
     // Canonical link
     let canonicalEl = document.querySelector('link[rel="canonical"]');
