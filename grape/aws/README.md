@@ -76,14 +76,14 @@ VITE_AWS_REGION=ap-northeast-2
 # Cognito에 관리자 계정 생성
 aws cognito-idp admin-create-user \
   --user-pool-id <USER_POOL_ID> \
-  --username admin@safegai.co.kr \
-  --user-attributes Name=email,Value=admin@safegai.co.kr \
+  --username admin@thingswell.co.kr \
+  --user-attributes Name=email,Value=admin@thingswell.co.kr \
   --temporary-password "TempPass123!"
 
 # 비밀번호 확정 (첫 로그인 시 변경 필요)
 aws cognito-idp admin-set-user-password \
   --user-pool-id <USER_POOL_ID> \
-  --username admin@safegai.co.kr \
+  --username admin@thingswell.co.kr \
   --password "YourSecurePassword!" \
   --permanent
 ```
