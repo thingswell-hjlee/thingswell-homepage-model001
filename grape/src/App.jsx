@@ -62,8 +62,12 @@ import HTTPSRedirect from "./components/HTTPSRedirect";
 import ScrollToTop from "./components/ScrollToTop";
 import MobileFloatingNav from "./components/MobileFloatingNav";
 
-// v2 미리보기 (트랙 B) — lazy 로딩이라 기존 번들에 영향 없음. B-3 전환 전까지 /home-v2 로만 접근.
+// v2 홈 (트랙 B) — lazy 로딩이라 기존 번들에 영향 없음.
 const HomeV2 = lazy(() => import("./pagesV2/HomeV2.jsx"));
+
+// B-3 라우트 전환 플래그. 문제 발생 시 false로 되돌리면 즉시 기존 홈으로 롤백된다.
+// (기존 Home 컴포넌트·코드는 삭제하지 않는다 — 전환 완료 후 별도 PR로만 정리)
+const HOME_V2_ENABLED = true;
 
 /**
  * LanguageRedirect component
@@ -88,8 +92,8 @@ function AppRoutes({ isMobile }) {
       <main className="main-content">
         <div className="page-content">
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/home-v2" element={<Suspense fallback={null}><HomeV2 /></Suspense>} />
+            <Route path="/" element={HOME_V2_ENABLED ? <Suspense fallback={null}><HomeV2 /></Suspense> : <Home />} />
+            <Route path="/home-v2" element={<Suspense fallback={null}><HomeV2 preview /></Suspense>} />
 
             <Route path="/safegai-platform" element={<SafegaiPlatform />} />
 

@@ -7,7 +7,7 @@ import { getPublishableItems, axes, pick, patentBadgeKey } from '../content';
 import DiagnosisWidget from '../components/v2/DiagnosisWidget';
 import '../styles/v2/home-v2.css';
 
-function HomeV2() {
+function HomeV2({ preview = false }) {
   const { t, currentLang } = useTranslation();
   const patents = getPublishableItems('patents');
   const rnd = getPublishableItems('rnd');
@@ -17,7 +17,7 @@ function HomeV2() {
 
   return (
     <div className="tw2-home">
-      <p className="tw2-preview-notice">{t('v2.previewNotice')}</p>
+      {preview && <p className="tw2-preview-notice">{t('v2.previewNotice')}</p>}
 
       {/* 블록 1 — hero */}
       <section className="tw2-hero">

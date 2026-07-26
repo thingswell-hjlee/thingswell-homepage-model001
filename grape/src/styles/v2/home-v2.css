@@ -76,6 +76,13 @@
   line-height: 1.25;
   margin: 0 auto 16px;
   max-width: 22ch;
+  word-break: keep-all; /* 한국어 단어 중간 줄바꿈 방지 */
+}
+
+.tw2-home h1,
+.tw2-home h2,
+.tw2-home h3 {
+  word-break: keep-all;
 }
 
 .tw2-hero-sub {
