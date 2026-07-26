@@ -1,0 +1,21 @@
+{
+  "slotType": "products",
+  "status": "draft",
+  "updatedAt": "2026-07-27",
+  "_todo": [
+    "TODO(확인필요): 기존 3축(safety/monitoring/control) 데이터는 locales productsPage.*에 존재. 기술사양(센서·처리 채널 수 등 수치)은 원문 대조 후 이관. 아래는 구조 예시용 1건.",
+    "TODO(확인필요): sensors 필드는 sensor-whitelist.json 확정 후 채운다."
+  ],
+  "items": [
+    {
+      "id": "product-ai-safety-camera",
+      "axis": "safety",
+      "localeKey": "productsPage.safety.products[0]",
+      "name": { "ko": "AI 안전 카메라", "en": null },
+      "sensors": [],
+      "specs": null,
+      "_evidence": "locales ko.json productsPage.safety.products[0]",
+      "_todo": ["en 파리티", "specs(수치는 원문에서만)", "sensors(화이트리스트 확정 후)"]
+    }
+  ]
+}

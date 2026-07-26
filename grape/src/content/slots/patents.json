@@ -1,0 +1,51 @@
+{
+  "slotType": "patents",
+  "status": "draft",
+  "updatedAt": "2026-07-27",
+  "_todo": [
+    "TODO(확인필요): 로드맵상 특허는 8건. 현재 저장소 자산(src/assets/patent_certificate_10-*.png)에서 확인되는 것은 4건뿐. 나머지 4건은 S3 원본 확정 후 추가.",
+    "TODO(확인필요): 각 건의 legalStatus(출원/등록 여부)·발명 명칭·등록일은 특허증 원문에서만 채운다. 파일명으로 추정하지 않는다."
+  ],
+  "items": [
+    {
+      "id": "patent-10-2404374",
+      "regNumber": "10-2404374",
+      "legalStatus": null,
+      "title": { "ko": null, "en": null },
+      "date": null,
+      "image": "patent_certificate_10-2404374.png",
+      "_evidence": "src/assets/patent_certificate_10-2404374.png (특허증 이미지 존재. 번호는 파일명 기준)",
+      "_todo": ["legalStatus", "title.ko", "title.en", "date"]
+    },
+    {
+      "id": "patent-10-2424407",
+      "regNumber": "10-2424407",
+      "legalStatus": null,
+      "title": { "ko": null, "en": null },
+      "date": null,
+      "image": "patent_certificate_10-2424407.png",
+      "_evidence": "src/assets/patent_certificate_10-2424407.png (특허증 이미지 존재. 번호는 파일명 기준)",
+      "_todo": ["legalStatus", "title.ko", "title.en", "date"]
+    },
+    {
+      "id": "patent-10-2529240",
+      "regNumber": "10-2529240",
+      "legalStatus": null,
+      "title": { "ko": null, "en": null },
+      "date": null,
+      "image": "patent_certificate_10-2529240.png",
+      "_evidence": "src/assets/patent_certificate_10-2529240.png (특허증 이미지 존재. 번호는 파일명 기준)",
+      "_todo": ["legalStatus", "title.ko", "title.en", "date"]
+    },
+    {
+      "id": "patent-10-2825255",
+      "regNumber": "10-2825255",
+      "legalStatus": null,
+      "title": { "ko": null, "en": null },
+      "date": null,
+      "image": "patent_certificate_10-2825255.png",
+      "_evidence": "src/assets/patent_certificate_10-2825255.png (특허증 이미지 존재. 번호는 파일명 기준)",
+      "_todo": ["legalStatus", "title.ko", "title.en", "date"]
+    }
+  ]
+}

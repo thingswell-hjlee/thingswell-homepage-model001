@@ -1,0 +1,10 @@
+{
+  "slotType": "cases",
+  "status": "draft",
+  "updatedAt": "2026-07-27",
+  "_todo": [
+    "TODO(확인필요): 실적(cases)은 수치·발주처가 들어가는 민감 슬롯. locales casesPage.*(integrated/smartSafety/infoComm)의 stats·cases 배열이 원본과 일치하는지 사업실적 원문과 대조 후 이관한다. 원문 대조 전에는 항목을 만들지 않는다.",
+    "주의: 사업실적서 원문 문서 자체는 이 public 저장소에 커밋 금지 — 대조는 로컬에서만 하고 결과 데이터만 슬롯에 기록."
+  ],
+  "items": []
+}

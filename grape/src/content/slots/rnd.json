@@ -1,0 +1,71 @@
+{
+  "slotType": "rnd",
+  "status": "draft",
+  "updatedAt": "2026-07-27",
+  "_todo": [
+    "TODO(확인필요): 로드맵상 R&D는 7건. 현재 사이트(locales rndPage)에는 6개 주제만 존재 — 7번째 항목은 S3 원본 확정 후 추가.",
+    "TODO(확인필요): 각 항목의 기간·주관기관·수행실적 수치는 원문에서만 채운다. 기존 locales의 마케팅 문구는 근거 문서가 아니다."
+  ],
+  "items": [
+    {
+      "id": "rnd-multimodal-awareness",
+      "localeKey": "rndPage.multimodal",
+      "route": "/rnd/multimodal-awareness",
+      "title": { "ko": null, "en": null },
+      "period": null,
+      "agency": null,
+      "_evidence": "기존 라우트/locale 섹션 존재 (src/App.jsx, locales rndPage.multimodal)",
+      "_todo": ["title(원문 확정)", "period", "agency"]
+    },
+    {
+      "id": "rnd-on-device-ai",
+      "localeKey": "rndPage.onDevice",
+      "route": "/rnd/on-device-ai",
+      "title": { "ko": null, "en": null },
+      "period": null,
+      "agency": null,
+      "_evidence": "기존 라우트/locale 섹션 존재 (src/App.jsx, locales rndPage.onDevice)",
+      "_todo": ["title(원문 확정)", "period", "agency"]
+    },
+    {
+      "id": "rnd-rag-llm",
+      "localeKey": "rndPage.ragLlm",
+      "route": "/rnd/rag-llm",
+      "title": { "ko": null, "en": null },
+      "period": null,
+      "agency": null,
+      "_evidence": "기존 라우트/locale 섹션 존재 (src/App.jsx, locales rndPage.ragLlm)",
+      "_todo": ["title(원문 확정)", "period", "agency"]
+    },
+    {
+      "id": "rnd-embedded-system",
+      "localeKey": "rndPage.embedded",
+      "route": "/rnd/embedded-system",
+      "title": { "ko": null, "en": null },
+      "period": null,
+      "agency": null,
+      "_evidence": "기존 라우트/locale 섹션 존재 (src/App.jsx, locales rndPage.embedded)",
+      "_todo": ["title(원문 확정)", "period", "agency"]
+    },
+    {
+      "id": "rnd-smart-assistive-technology",
+      "localeKey": "rndPage.assistive",
+      "route": "/rnd/smart-assistive-technology",
+      "title": { "ko": null, "en": null },
+      "period": null,
+      "agency": null,
+      "_evidence": "기존 라우트/locale 섹션 존재 (src/App.jsx, locales rndPage.assistive)",
+      "_todo": ["title(원문 확정)", "period", "agency"]
+    },
+    {
+      "id": "rnd-air-quality-management",
+      "localeKey": "rndPage.airQuality",
+      "route": "/rnd/air-quality-management",
+      "title": { "ko": null, "en": null },
+      "period": null,
+      "agency": null,
+      "_evidence": "기존 라우트/locale 섹션 존재 (src/App.jsx, locales rndPage.airQuality)",
+      "_todo": ["title(원문 확정)", "period", "agency"]
+    }
+  ]
+}
