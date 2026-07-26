@@ -11,7 +11,7 @@
  * - 모든 페이지에서 공통 메뉴와 푸터 표시
  * - 다국어 지원 (/ko, /en URL 구조)
  */
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import "./App.css";
 import Menu from "./components/Menu";
@@ -62,6 +62,9 @@ import HTTPSRedirect from "./components/HTTPSRedirect";
 import ScrollToTop from "./components/ScrollToTop";
 import MobileFloatingNav from "./components/MobileFloatingNav";
 
+// v2 미리보기 (트랙 B) — lazy 로딩이라 기존 번들에 영향 없음. B-3 전환 전까지 /home-v2 로만 접근.
+const HomeV2 = lazy(() => import("./pagesV2/HomeV2.jsx"));
+
 /**
  * LanguageRedirect component
  * Redirects bare paths (without /ko or /en prefix) to the stored language preference.
@@ -86,6 +89,7 @@ function AppRoutes({ isMobile }) {
         <div className="page-content">
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/home-v2" element={<Suspense fallback={null}><HomeV2 /></Suspense>} />
 
             <Route path="/safegai-platform" element={<SafegaiPlatform />} />
 

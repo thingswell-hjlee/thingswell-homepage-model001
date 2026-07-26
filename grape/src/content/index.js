@@ -45,8 +45,8 @@ export function pick(field, lang) {
 // 특허 표기 헬퍼 — CLAUDE.md §2 특허 표기 규칙의 코드화.
 // registered만 '등록특허', pending은 반드시 '출원 중' 병기. (표기 문구 자체는 i18n v2.* 키로)
 export function patentBadgeKey(item) {
-  if (item.legalStatus === 'registered') return 'v2.patents.badgeRegistered';
-  if (item.legalStatus === 'pending') return 'v2.patents.badgePending';
+  if (item.legalStatus === 'registered') return 'v2.home.proof.badgeRegistered';
+  if (item.legalStatus === 'pending') return 'v2.home.proof.badgePending';
   return null;
 }
 

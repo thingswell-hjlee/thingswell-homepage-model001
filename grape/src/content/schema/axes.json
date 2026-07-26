@@ -8,12 +8,12 @@
     { "code": "platform", "ko": "플랫폼", "en": "Platform" }
   ],
   "siteConditions": [
-    { "code": "dark", "ko": "어두움" },
-    { "code": "dust", "ko": "분진" },
-    { "code": "noise", "ko": "소음" },
-    { "code": "privacy", "ko": "프라이버시 민감" },
-    { "code": "underground", "ko": "지하" },
-    { "code": "unmanned", "ko": "무인 시간대" },
-    { "code": "outdoor", "ko": "옥외" }
+    { "code": "dark", "ko": "어두움", "en": "Low light" },
+    { "code": "dust", "ko": "분진", "en": "Dust" },
+    { "code": "noise", "ko": "소음", "en": "Noise" },
+    { "code": "privacy", "ko": "프라이버시 민감", "en": "Privacy-sensitive" },
+    { "code": "underground", "ko": "지하", "en": "Underground" },
+    { "code": "unmanned", "ko": "무인 시간대", "en": "Unmanned hours" },
+    { "code": "outdoor", "ko": "옥외", "en": "Outdoor" }
   ]
 }
