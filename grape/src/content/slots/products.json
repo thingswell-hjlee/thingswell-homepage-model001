@@ -1,21 +1,34 @@
 {
   "slotType": "products",
-  "status": "draft",
+  "status": "ready",
   "updatedAt": "2026-07-27",
   "_todo": [
-    "TODO(확인필요): 기존 3축(safety/monitoring/control) 데이터는 locales productsPage.*에 존재. 기술사양(센서·처리 채널 수 등 수치)은 원문 대조 후 이관. 아래는 구조 예시용 1건.",
-    "TODO(확인필요): sensors 필드는 sensor-whitelist.json 확정 후 채운다."
+    "TODO(확인필요): 제품별 공식 영문 명칭 — 확정 전까지 en은 null (화면은 ko 폴백)",
+    "TODO(확인필요): 제품별 상세 기술사양·채용 센서 매핑은 DATA-SOURCE에 없음 — sensors는 비워 둠. 원장 갱신 후 채운다",
+    "TODO(확인필요): 수치(S2 슬롯)는 확정된 값 없음(DATA-SOURCE §7) — 이 슬롯에 수치 필드를 추가하지 말 것"
   ],
   "items": [
-    {
-      "id": "product-ai-safety-camera",
-      "axis": "safety",
-      "localeKey": "productsPage.safety.products[0]",
-      "name": { "ko": "AI 안전 카메라", "en": null },
-      "sensors": [],
-      "specs": null,
-      "_evidence": "locales ko.json productsPage.safety.products[0]",
-      "_todo": ["en 파리티", "specs(수치는 원문에서만)", "sensors(화이트리스트 확정 후)"]
-    }
+    { "id": "prod-ind-ai-cctv", "axis": "industrial", "name": { "ko": "AI CCTV", "en": null }, "sensors": [], "_evidence": "docs/DATA-SOURCE.md §6 industrial" },
+    { "id": "prod-ind-mobile-cam", "axis": "industrial", "name": { "ko": "모바일캠", "en": null }, "sensors": [], "_evidence": "docs/DATA-SOURCE.md §6 industrial" },
+    { "id": "prod-ind-mount-cam", "axis": "industrial", "name": { "ko": "마운트캠", "en": null }, "sensors": [], "_evidence": "docs/DATA-SOURCE.md §6 industrial" },
+    { "id": "prod-ind-radar-multisensor", "axis": "industrial", "name": { "ko": "레이더 복합센서", "en": null }, "sensors": [], "_evidence": "docs/DATA-SOURCE.md §6 industrial" },
+    { "id": "prod-ind-safegai-ai-box", "axis": "industrial", "name": { "ko": "SafeGAI AI Box", "en": null }, "sensors": [], "_evidence": "docs/DATA-SOURCE.md §6 industrial" },
+    { "id": "prod-ind-voice-alert", "axis": "industrial", "name": { "ko": "현장 음성경고 장치", "en": null }, "sensors": [], "_evidence": "docs/DATA-SOURCE.md §6 industrial" },
+    { "id": "prod-care-fall-prevention", "axis": "care", "name": { "ko": "낙상 사전예방", "en": null }, "sensors": [], "_evidence": "docs/DATA-SOURCE.md §6 care" },
+    { "id": "prod-care-bed-exit", "axis": "care", "name": { "ko": "침대 이탈 감지", "en": null }, "sensors": [], "_evidence": "docs/DATA-SOURCE.md §6 care" },
+    { "id": "prod-care-no-motion", "axis": "care", "name": { "ko": "장시간 미동 감지", "en": null }, "sensors": [], "_evidence": "docs/DATA-SOURCE.md §6 care" },
+    { "id": "prod-care-conversational-check", "axis": "care", "name": { "ko": "대화형 안전확인", "en": null }, "sensors": [], "_evidence": "docs/DATA-SOURCE.md §6 care" },
+    { "id": "prod-care-guardian-alert", "axis": "care", "name": { "ko": "보호자 알림", "en": null }, "sensors": [], "_evidence": "docs/DATA-SOURCE.md §6 care" },
+    { "id": "prod-env-air-quality", "axis": "environment", "name": { "ko": "실내외 공기질 관리", "en": null }, "sensors": [], "_evidence": "docs/DATA-SOURCE.md §6 environment" },
+    { "id": "prod-env-hvac-control", "axis": "environment", "name": { "ko": "냉난방·환기 제어", "en": null }, "sensors": [], "_evidence": "docs/DATA-SOURCE.md §6 environment" },
+    { "id": "prod-env-occupancy", "axis": "environment", "name": { "ko": "회의실 재실관리", "en": null }, "sensors": [], "_evidence": "docs/DATA-SOURCE.md §6 environment" },
+    { "id": "prod-env-smart-shelter", "axis": "environment", "name": { "ko": "스마트쉘터", "en": null }, "sensors": [], "_evidence": "docs/DATA-SOURCE.md §6 environment" },
+    { "id": "prod-env-smart-store", "axis": "environment", "name": { "ko": "스마트상점", "en": null }, "sensors": [], "_evidence": "docs/DATA-SOURCE.md §6 environment" },
+    { "id": "prod-plat-multimodal-ingest", "axis": "platform", "name": { "ko": "멀티모달 수집", "en": null }, "sensors": [], "_evidence": "docs/DATA-SOURCE.md §6 platform" },
+    { "id": "prod-plat-risk-decision", "axis": "platform", "name": { "ko": "실시간 위험판단", "en": null }, "sensors": [], "_evidence": "docs/DATA-SOURCE.md §6 platform" },
+    { "id": "prod-plat-rag-llm-explain", "axis": "platform", "name": { "ko": "RAG·LLM 설명", "en": null }, "sensors": [], "_evidence": "docs/DATA-SOURCE.md §6 platform" },
+    { "id": "prod-plat-lam-control", "axis": "platform", "name": { "ko": "LAM 장치제어", "en": null }, "sensors": [], "_evidence": "docs/DATA-SOURCE.md §6 platform" },
+    { "id": "prod-plat-model-mcp", "axis": "platform", "name": { "ko": "Model MCP", "en": null }, "sensors": [], "_evidence": "docs/DATA-SOURCE.md §6 platform" },
+    { "id": "prod-plat-remote-mgmt", "axis": "platform", "name": { "ko": "원격관리", "en": null }, "sensors": [], "_evidence": "docs/DATA-SOURCE.md §6 platform" }
   ]
 }

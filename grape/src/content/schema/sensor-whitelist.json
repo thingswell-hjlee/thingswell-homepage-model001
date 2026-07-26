@@ -1,7 +1,15 @@
 {
-  "description": "근거 있는 센서명 화이트리스트. products/rnd 슬롯의 센서 주장은 이 목록에 있어야 status=ready 승격 가능. 근거 없는 센서 주장 방지용.",
-  "_todo": [
-    "TODO(확인필요): 실제 채용 센서 목록을 제공된 원문(기술사양)에서 확정해 allowed 배열을 채운다. 원문 확정 전까지는 비워 둔다 — 빈 목록이면 검증기는 센서 검사를 건너뛴다(차단하지 않음)."
-  ],
-  "allowed": []
+  "description": "허용 센서 화이트리스트 — docs/DATA-SOURCE.md §3이 원본. 이 목록 밖의 센서 주장은 validate-content.mjs가 빌드 실패 처리한다. 이 파일을 고칠 때는 반드시 DATA-SOURCE.md를 먼저 갱신한다.",
+  "source": "docs/DATA-SOURCE.md §3 (검색일 2026-07-26)",
+  "forbidden": ["pir", "flood", "vibration"],
+  "allowed": [
+    { "code": "radar", "ko": "레이더", "en": "Radar" },
+    { "code": "camera", "ko": "카메라", "en": "Camera" },
+    { "code": "audio", "ko": "음향", "en": "Audio" },
+    { "code": "air-quality", "ko": "공기질", "en": "Air quality" },
+    { "code": "temperature", "ko": "온습도", "en": "Temperature" },
+    { "code": "imu", "ko": "관성센서", "en": "IMU" },
+    { "code": "illuminance", "ko": "조도", "en": "Illuminance" },
+    { "code": "gnss", "ko": "위치", "en": "GNSS" }
+  ]
 }

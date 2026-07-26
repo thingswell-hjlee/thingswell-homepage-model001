@@ -23,13 +23,15 @@ content/
 ## 사용 규칙
 
 1. **기존 `pages/`·`components/`는 이 레이어를 import하지 않는다.** 트랙 B의
-   `components/v2/`·`pagesV2/`만 소비자다. (현재 import 0 — 기존 번들 영향 0)
+   `components/v2/`·`pagesV2/`만 소비자이며, 화면은 반드시 `getPublishableItems()`로만
+   슬롯을 읽는다 (rejected 특허·비고객용 항목 자동 필터).
 2. **모든 슬롯은 `draft`로 시작**한다. `ready` 승격 조건:
    - 항목마다 `_evidence`(근거 원문/자산 경로) 존재
    - `_todo` 배열 비어 있음 (`TODO(확인필요)` 전부 해소)
    - `npm run validate:content` 오류 0건
-3. **특허/인증/기술사양/실적 수치는 제공된 원문에서만 채운다.** 근거가 없으면 값은
-   `null`로 두고 `_todo`에 남긴다. 파일명·기존 마케팅 문구로 추정하지 않는다.
+3. **특허/인증/기술사양/실적 수치는 `docs/DATA-SOURCE.md`(검증된 사실 원장)에 있는 값만
+   사용한다.** 원장에 없으면 값은 `null`로 두고 `_todo`에 남긴 뒤 질문한다. 파일명·기존
+   마케팅 문구로 추정하지 않는다. `_evidence`는 원장의 섹션 참조(예: `docs/DATA-SOURCE.md §1 #2`).
 4. **ko/en 파리티**: bilingual 필드(`{ko, en}`)는 `ready` 승격 시 둘 다 non-null.
 5. `updatedAt`(YYYY-MM-DD)은 슬롯 내용 변경 시 갱신 — sitemap `lastmod` 자동 반영의 근거.
 6. 사업실적서·제안서 등 **기밀 원문은 이 저장소에 커밋 금지.** 대조는 로컬에서만.
