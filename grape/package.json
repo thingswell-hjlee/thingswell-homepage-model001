@@ -16,7 +16,8 @@
     "start": "node server.js",
     "start:prod": "NODE_ENV=production node server.js",
     "convert:assets": "node ./scripts/convert-assets-to-webp.js",
-    "seo": "node scripts/generate-seo-files.mjs"
+    "seo": "node scripts/generate-seo-files.mjs",
+    "validate:content": "node scripts/validate-content.mjs"
   },
   "dependencies": {
     "amazon-cognito-identity-js": "^6.3.12",

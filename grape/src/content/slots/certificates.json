@@ -1,0 +1,21 @@
+{
+  "slotType": "certificates",
+  "status": "draft",
+  "updatedAt": "2026-07-27",
+  "_todo": [
+    "TODO(확인필요): 기존 데이터는 locales aboutPage.certificate.items(21건)에 있고, 이미지는 CertificateSection.jsx의 별도 배열과 '인덱스 순서'로 결합된다(순서 어긋나면 잘못된 인증서 표시 — A-0 진단에서 확인된 취약점). 이관 시 각 항목에 image 파일명을 명시적으로 붙여 이 결합을 끊는다.",
+    "TODO(확인필요): 21건 전체 이관은 이미지-항목 대응을 원문/기존 화면과 대조 확인한 뒤 진행. 아래는 대응이 자명한 1건만 샘플로 둔다."
+  ],
+  "items": [
+    {
+      "id": "cert-software-business-operator",
+      "title": { "ko": "SW사업자 일반현황관리확인서", "en": null },
+      "category": { "ko": "면허등록증", "en": null },
+      "organization": { "ko": null, "en": null },
+      "date": null,
+      "image": "software_business_operator_certificate.png",
+      "_evidence": "locales ko.json aboutPage.certificate.items + src/assets/software_business_operator_certificate.png (파일명-항목 대응 자명)",
+      "_todo": ["en 파리티", "organization·date 원문 대조", "인덱스 결합 화면과 최종 대조"]
+    }
+  ]
+}
