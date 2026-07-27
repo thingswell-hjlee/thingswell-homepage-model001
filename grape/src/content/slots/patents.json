@@ -3,8 +3,7 @@
   "status": "ready",
   "updatedAt": "2026-07-27",
   "_todo": [
-    "TODO(확인필요): 발명 명칭 공식 영문 표기 — 확정 전까지 en은 null (화면은 ko 폴백)",
-    "TODO(확인필요): 확인 대기 2건은 items에 넣지 않음 — ① 병실 안전 모니터링(10-2023-0157000, 등록 여부 확인 후 명칭 조정하여 게재) ② 미세먼지 저감형 디스플레이(10-2022-0139046, 등록 여부·권리 지분 확인)"
+    "TODO(확인필요): 등록 확인·번호 대기 2건 — ① 레이다를 이용한 병실 안전 모니터링 시스템(출원 10-2023-0157000, registered, 게재 명칭 조정) ② 미세먼지 저감형 디스플레이 장치(출원 10-2022-0139046, registered). 등록번호 확보 즉시 items에 추가 (DATA-SOURCE §1 등록 확인 표)"
   ],
   "items": [
     {
@@ -13,7 +12,10 @@
       "appNumber": "10-2025-0168517",
       "regNumber": "10-2964325",
       "legalStatus": "registered",
-      "title": { "ko": "온디바이스 Generative AI 및 적응형 롤링버퍼 기반 다중센서 상황인지", "en": null },
+      "title": {
+        "ko": "온디바이스 Generative AI 및 적응형 롤링버퍼 기반 다중센서 상황인지",
+        "en": "On-device generative AI and adaptive rolling-buffer based multi-sensor situational awareness"
+      },
       "date": null,
       "image": null,
       "_evidence": "docs/DATA-SOURCE.md §1 #1 (대표 특허, SafeGAI 플랫폼 기반)"
@@ -23,7 +25,10 @@
       "appNumber": "10-2022-0130446",
       "regNumber": "10-2825255",
       "legalStatus": "registered",
-      "title": { "ko": "레이더와 카메라를 이용한 위급상황 알람장치", "en": null },
+      "title": {
+        "ko": "레이더와 카메라를 이용한 위급상황 알람장치",
+        "en": "Emergency alarm device using radar and camera"
+      },
       "date": null,
       "image": "patent_certificate_10-2825255.png",
       "_evidence": "docs/DATA-SOURCE.md §1 #2 + src/assets/patent_certificate_10-2825255.png"
@@ -33,7 +38,10 @@
       "appNumber": "10-2020-0151151",
       "regNumber": "10-2404374",
       "legalStatus": "registered",
-      "title": { "ko": "실내외 센서 모듈을 이용한 공기질 관리", "en": null },
+      "title": {
+        "ko": "실내외 센서 모듈을 이용한 공기질 관리",
+        "en": "Air quality management using indoor and outdoor sensor modules"
+      },
       "date": null,
       "image": "patent_certificate_10-2404374.png",
       "_evidence": "docs/DATA-SOURCE.md §1 #3 + src/assets/patent_certificate_10-2404374.png"
@@ -43,7 +51,10 @@
       "appNumber": "10-2020-0159182",
       "regNumber": "10-2424407",
       "legalStatus": "registered",
-      "title": { "ko": "AI 기반 캡슐형 스마트 쉘터", "en": null },
+      "title": {
+        "ko": "AI 기반 캡슐형 스마트 쉘터",
+        "en": "AI-based capsule smart shelter"
+      },
       "date": null,
       "image": "patent_certificate_10-2424407.png",
       "_evidence": "docs/DATA-SOURCE.md §1 #4 + src/assets/patent_certificate_10-2424407.png"
@@ -53,7 +64,10 @@
       "appNumber": "10-2020-0159183",
       "regNumber": "10-2529240",
       "legalStatus": "registered",
-      "title": { "ko": "사용자 맞춤형 서비스를 제공하는 캡슐형 스마트 쉘터", "en": null },
+      "title": {
+        "ko": "사용자 맞춤형 서비스를 제공하는 캡슐형 스마트 쉘터",
+        "en": "Capsule smart shelter providing personalized services"
+      },
       "date": null,
       "image": "patent_certificate_10-2529240.png",
       "_evidence": "docs/DATA-SOURCE.md §1 #5 + src/assets/patent_certificate_10-2529240.png"
@@ -63,7 +77,10 @@
       "appNumber": "10-2024-0150475",
       "pubNumber": "10-2026-0064882",
       "legalStatus": "pending",
-      "title": { "ko": "인지장애 노인과 장애인을 위한 대화형 홈케어 시스템", "en": null },
+      "title": {
+        "ko": "인지장애 노인과 장애인을 위한 대화형 홈케어 시스템",
+        "en": "Conversational homecare system for seniors and people with cognitive impairments"
+      },
       "date": null,
       "image": null,
       "_evidence": "docs/DATA-SOURCE.md §1 #6 (출원 중 병기 필수)"
@@ -73,7 +90,10 @@
       "appNumber": "10-2023-0156999",
       "pubNumber": "10-2025-0070772",
       "legalStatus": "pending",
-      "title": { "ko": "레이다를 이용한 낙상 징후 모니터링 시스템", "en": null },
+      "title": {
+        "ko": "레이다를 이용한 낙상 징후 모니터링 시스템",
+        "en": "Radar-based fall-risk monitoring system"
+      },
       "date": null,
       "image": null,
       "_evidence": "docs/DATA-SOURCE.md §1 #7 (출원 중 병기 필수)"
@@ -83,7 +103,10 @@
       "appNumber": "10-2023-0152948",
       "pubNumber": "10-2025-0066879",
       "legalStatus": "rejected",
-      "title": { "ko": "레이다를 이용한 수면상태 모니터링 및 수면무호흡 판단 시스템", "en": null },
+      "title": {
+        "ko": "레이다를 이용한 수면상태 모니터링 및 수면무호흡 판단 시스템",
+        "en": "Radar-based sleep-state monitoring and sleep-apnea detection system"
+      },
       "date": null,
       "image": null,
       "_evidence": "docs/DATA-SOURCE.md §1 #8 — 게재 금지. 로더(getPublishableItems)가 필터하며 어떤 화면에도 노출 금지"
