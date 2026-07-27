@@ -3,7 +3,7 @@
   "status": "ready",
   "updatedAt": "2026-07-27",
   "_todo": [
-    "TODO(확인필요): 등록 확인·번호 대기 2건 — ① 레이다를 이용한 병실 안전 모니터링 시스템(출원 10-2023-0157000, registered, 게재 명칭 조정) ② 미세먼지 저감형 디스플레이 장치(출원 10-2022-0139046, registered). 등록번호 확보 즉시 items에 추가 (DATA-SOURCE §1 등록 확인 표)"
+    "확정(2026-07-27 KIPRIS 대조): ① 병실 안전(10-2023-0157000) 등록 거절 — items에 rejected로 보존, 게재 금지 ② 미세먼지 저감형 디스플레이(10-2022-0139046) KIPRIS 등록건은 타사 권리 — 자사 특허 아니므로 이 슬롯에 넣지 않는다 (DATA-SOURCE §1 확인 종결)"
   ],
   "items": [
     {
@@ -110,6 +110,18 @@
       "date": null,
       "image": null,
       "_evidence": "docs/DATA-SOURCE.md §1 #8 — 게재 금지. 로더(getPublishableItems)가 필터하며 어떤 화면에도 노출 금지"
+    },
+    {
+      "id": "patent-app-10-2023-0157000",
+      "appNumber": "10-2023-0157000",
+      "legalStatus": "rejected",
+      "title": {
+        "ko": "레이다를 이용한 병실 안전 및 자살 징후 모니터링 시스템",
+        "en": "A system for monitoring suicide signs using radar"
+      },
+      "date": null,
+      "image": null,
+      "_evidence": "docs/DATA-SOURCE.md §1 확인 종결 — 등록 거절(KIPRIS 2026-07-27). 게재 금지, 로더(getPublishableItems) 필터 대상. 재추가 실수 방지용 데이터 보존"
     }
   ]
 }
