@@ -61,4 +61,7 @@ aws cloudfront create-invalidation \
 echo ""
 echo "=========================================="
 echo "✅ STAGING 배포 완료: https://$EXPECTED_DOMAIN"
+echo ""
+echo "⚠️  프로덕션(www.thingswell.co.kr)에는 아직 반영되지 않았습니다."
+echo "   staging 검증 후 반드시 실행:  bash deploy-production.sh"
 echo "=========================================="
