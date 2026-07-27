@@ -6,6 +6,8 @@ import useTranslation from '../hooks/useTranslation';
 import { getPublishableItems, axes, pick, patentBadgeKey } from '../content';
 import DiagnosisWidget from '../components/v2/DiagnosisWidget';
 import HeroVisual from '../components/v2/HeroVisual';
+import PipelineGraphic from '../components/v2/PipelineGraphic';
+import { AxisIcon, IconPatent, IconRnd } from '../components/v2/icons';
 import '../styles/v2/home-v2.css';
 
 function HomeV2({ preview = false }) {
@@ -47,6 +49,7 @@ function HomeV2({ preview = false }) {
         <div className="tw2-axes-grid">
           {axes.map((axis) => (
             <div key={axis.code} className="tw2-axis-card">
+              <AxisIcon code={axis.code} className="tw2-axis-icon" />
               <p className="tw2-axis-code">{axis.code}</p>
               <h3 className="tw2-axis-name">{pick(axis, currentLang)}</h3>
               <ul className="tw2-axis-products">
@@ -65,6 +68,7 @@ function HomeV2({ preview = false }) {
       <section className="tw2-section">
         <h2 className="tw2-h2">{t('v2.home.how.heading')}</h2>
         <p className="tw2-sub">{t('v2.home.how.sub')}</p>
+        <PipelineGraphic />
         <div className="tw2-how-flow">
           {platformSteps.map((p) => (
             <div key={p.id} className="tw2-how-step">
@@ -79,7 +83,7 @@ function HomeV2({ preview = false }) {
         <h2 className="tw2-h2">{t('v2.home.proof.heading')}</h2>
         <div className="tw2-proof-cols">
           <div>
-            <h3 className="tw2-proof-col-title">{t('v2.home.proof.patentsTitle')}</h3>
+            <h3 className="tw2-proof-col-title"><IconPatent className="tw2-title-icon" />{t('v2.home.proof.patentsTitle')}</h3>
             <ul className="tw2-proof-list">
               {patents.map((p) => (
                 <li key={p.id} className="tw2-proof-item">
@@ -114,7 +118,7 @@ function HomeV2({ preview = false }) {
             </ul>
           </div>
           <div>
-            <h3 className="tw2-proof-col-title">{t('v2.home.proof.rndTitle')}</h3>
+            <h3 className="tw2-proof-col-title"><IconRnd className="tw2-title-icon" />{t('v2.home.proof.rndTitle')}</h3>
             <ul className="tw2-proof-list">
               {rnd.map((r) => (
                 <li key={r.id} className="tw2-proof-item">
