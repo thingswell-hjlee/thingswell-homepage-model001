@@ -11,7 +11,9 @@ BUILD_CMD="npm run build:production"
 S3_BUCKET="thingswell-homepage"
 CLOUDFRONT_DISTRIBUTION_ID="EEWV39QWFGBHW"
 REGION="ap-northeast-2"
-EXPECTED_DOMAIN="www.safegai.co.kr"
+# 2026-07-05 OG 도메인 통합(fbbffd9) 이후 .env.production의 VITE_SITE_URL은 www.thingswell.co.kr —
+# 검증 문자열이 이와 일치해야 한다 (불일치 시 [2/4]에서 중단되어 업로드가 되지 않음)
+EXPECTED_DOMAIN="www.thingswell.co.kr"
 # ========================================
 
 # 스크립트 위치(grape) 기준으로 실행
