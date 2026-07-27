@@ -55,7 +55,8 @@ function Footer() {
         { label: t('footer.productSafety'), path: `/${currentLang}/products/safety` },
         { label: t('footer.productMonitoring'), path: `/${currentLang}/products/monitoring` },
         { label: t('footer.productControl'), path: `/${currentLang}/products/control/list` },
-        { label: t('footer.shop'), path: 'https://shop.thingswell.co.kr/', external: true },
+        // TODO(확인필요): shop.thingswell.co.kr 인프라 연결(docs/SHOP-DOMAIN.md) 완료 후 URL 교체
+        { label: t('footer.shop'), path: 'https://thingswell.cafe24.com/', external: true },
       ]
     },
     {

@@ -5,10 +5,12 @@
 > 결정(2026-07-27): 도메인 통일 방향에 따라 쇼핑몰(`thingswell.cafe24.com`)을
 > `shop.thingswell.co.kr`로 연결하고, 상단 메뉴의 쇼핑몰은 Footer로 이동 (B2B 포지셔닝 정리).
 
-## 실행 순서 — ⚠️ 인프라(1~2) 완료 후에 홈페이지 배포
+## 실행 순서 (2026-07-27 조정: 메뉴 정리 선배포)
 
-Footer의 쇼핑몰 링크가 `https://shop.thingswell.co.kr/`를 가리키므로,
-**DNS·cafe24 연결이 끝나기 전에 배포하면 죽은 링크**가 된다.
+메뉴 정리(상단 → Footer)를 먼저 배포하기 위해 Footer 링크는 **임시로
+`thingswell.cafe24.com`을 가리킨다.** 인프라(1~2) 완료 후 아래를 마저 한다:
+- Footer/index.jsx의 쇼핑몰 URL을 `https://shop.thingswell.co.kr/`로 교체 (TODO 주석 위치)
+- 재배포
 
 ## 1. cafe24 관리자에서 도메인 추가 (웹 UI)
 
