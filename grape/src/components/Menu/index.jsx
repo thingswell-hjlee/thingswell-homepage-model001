@@ -89,11 +89,7 @@ function getMenuItems(t) {
         { label: t('nav.governmentSupportSmart'), path: '/government-support' }, 
       ] 
     },
-    { 
-      label: t('nav.shop'), 
-      path: 'https://thingswell.cafe24.com/',
-      external: true,
-    },
+    // 쇼핑몰은 B2B 포지셔닝 정리에 따라 상단 메뉴에서 제외, Footer로 이동 (2026-07-27 결정)
     {
       label: t('nav.admin'),
       path: '/admin/dashboard',

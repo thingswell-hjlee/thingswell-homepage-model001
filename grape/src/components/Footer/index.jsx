@@ -55,6 +55,7 @@ function Footer() {
         { label: t('footer.productSafety'), path: `/${currentLang}/products/safety` },
         { label: t('footer.productMonitoring'), path: `/${currentLang}/products/monitoring` },
         { label: t('footer.productControl'), path: `/${currentLang}/products/control/list` },
+        { label: t('footer.shop'), path: 'https://shop.thingswell.co.kr/', external: true },
       ]
     },
     {
@@ -83,7 +84,11 @@ function Footer() {
                   <ul className="category-list">
                     {category.submenu.map((item, subIndex) => (
                       <li key={subIndex} className="category-item">
-                        <Link to={item.path}>{item.label}</Link>
+                        {item.external ? (
+                          <a href={item.path} target="_blank" rel="noopener noreferrer">{item.label}</a>
+                        ) : (
+                          <Link to={item.path}>{item.label}</Link>
+                        )}
                       </li>
                     ))}
                   </ul>
