@@ -7,6 +7,7 @@
 import { Link } from 'react-router-dom';
 import useTranslation from '../hooks/useTranslation';
 import { getPublishableItems, getSlot, axes, pick, patentBadgeKey } from '../content';
+import { AxisIcon } from '../components/v2/icons';
 import '../styles/v2/home-v2.css';
 import '../styles/v2/about-v2.css';
 
@@ -89,6 +90,7 @@ function AboutV2() {
             const count = products.filter((p) => p.axis === axis.code).length;
             return (
               <div key={axis.code} className="tw2-axis-card">
+                <AxisIcon code={axis.code} className="tw2-axis-icon" />
                 <p className="tw2-axis-code">{axis.code}</p>
                 <h3 className="tw2-axis-name">{pick(axis, currentLang)}</h3>
                 <p className="tw2-about-desc">

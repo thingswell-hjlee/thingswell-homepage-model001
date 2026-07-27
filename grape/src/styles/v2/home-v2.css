@@ -224,6 +224,55 @@
 
 .tw2-axis-products li { padding: 3px 0; }
 
+/* ---------- 공용 아이콘 (v2 시각 언어) ---------- */
+.tw2-axis-icon {
+  width: 26px;
+  height: 26px;
+  color: var(--tw2-accent);
+  display: block;
+  margin-bottom: 10px;
+}
+
+.tw2-title-icon {
+  width: 20px;
+  height: 20px;
+  color: var(--tw2-accent);
+  vertical-align: -4px;
+  margin-right: 8px;
+}
+
+/* ---------- 파이프라인 그래픽 (how it works) ---------- */
+.tw2-pipeline {
+  max-width: 720px;
+  margin: 0 auto 26px;
+}
+
+.tw2-pipeline svg { width: 100%; height: auto; display: block; }
+
+.tw2-pl-line {
+  fill: none;
+  stroke: rgba(56, 189, 248, 0.25);
+  stroke-width: 1.5;
+}
+
+.tw2-pl-pulse { fill: var(--tw2-accent); }
+
+.tw2-pl-node {
+  fill: var(--tw2-card);
+  stroke: var(--tw2-accent);
+  stroke-width: 1.3;
+}
+
+.tw2-pl-node-out { fill: rgba(14, 165, 233, 0.12); }
+
+.tw2-pl-icon {
+  stroke: #cfe9f8;
+  fill: none;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
 /* ---------- 블록 3: how it works ---------- */
 .tw2-how-flow {
   display: grid;

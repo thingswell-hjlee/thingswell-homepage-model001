@@ -5,6 +5,7 @@
 import { Link } from 'react-router-dom';
 import useTranslation from '../hooks/useTranslation';
 import architectureDiagram from '../assets/v2-safegai-platform-architecture.webp';
+import { IconPlatform, IconShield, IconEdge } from '../components/v2/icons';
 import '../styles/v2/home-v2.css';
 import '../styles/v2/solutions-v2.css';
 
@@ -27,12 +28,20 @@ function SolutionsOverviewV2() {
         <h2 className="tw2-h2">{t('v2.solutions.whyHeading')}</h2>
         <p className="tw2-sub">{t('v2.solutions.whySub')}</p>
         <div className="tw2-axes-grid">
-          {[1, 2, 3].map((n) => (
-            <div key={n} className="tw2-axis-card">
-              <h3 className="tw2-axis-name">{t(`v2.solutions.why${n}Title`)}</h3>
-              <p className="tw2-about-desc">{t(`v2.solutions.why${n}Desc`)}</p>
-            </div>
-          ))}
+          {[1, 2, 3].map((n) => {
+            const whyIcons = {
+              1: <IconPlatform className="tw2-axis-icon" />,
+              2: <IconShield className="tw2-axis-icon" />,
+              3: <IconEdge className="tw2-axis-icon" />,
+            };
+            return (
+              <div key={n} className="tw2-axis-card">
+                {whyIcons[n]}
+                <h3 className="tw2-axis-name">{t(`v2.solutions.why${n}Title`)}</h3>
+                <p className="tw2-about-desc">{t(`v2.solutions.why${n}Desc`)}</p>
+              </div>
+            );
+          })}
         </div>
       </section>
 
