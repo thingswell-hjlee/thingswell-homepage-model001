@@ -139,14 +139,34 @@ SITE_URL=https://staging.thingswell.co.kr npm run seo   # staging sitemap 도메
 bash deploy-staging.sh    # 도메인 검증이 staging.thingswell.co.kr 기준으로 동작
 ```
 
+## 6.5 문의 API CORS 허용 목록 갱신 (⚠️ 필수 — 누락 시 상담 폼 전송 실패)
+
+도메인을 추가/변경하면 문의 API(`safegai-contact-api`, HTTP API `crqdypsmnl`)의
+CORS AllowOrigins에도 새 도메인을 넣어야 한다. 누락 시 브라우저가 CORS로 차단해
+상담 폼이 "전송에 실패했습니다"로 실패한다 (2026-07-27 staging 전환 때 실제 발생 → 반영 완료).
+
+```bash
+# 현재 설정 확인 (--region 필수)
+aws apigatewayv2 get-api --api-id crqdypsmnl --region ap-northeast-2 --query "CorsConfiguration"
+
+# 새 도메인 추가 — 기존 AllowOrigins 전체 + 새 도메인으로 교체 실행 (부분 추가 아님)
+aws apigatewayv2 update-api --api-id crqdypsmnl --region ap-northeast-2 --cors-configuration \
+  '{"AllowOrigins":["https://www.thingswell.co.kr","https://thingswell.co.kr","https://staging.thingswell.co.kr"],"AllowMethods":["OPTIONS","POST"],"AllowHeaders":["content-type"],"MaxAge":300}'
+```
+
 ## 7. 검증
 
-- [ ] `https://staging.thingswell.co.kr/ko` → v2 홈, 인증서 오류 없음
-- [ ] `https://staging.thingswell.co.kr/ko/about` → v2 회사소개 + 혁신 히스토리
-- [ ] 구 주소 `staging.safegai.co.kr` → 접속 불가(alias 제거됨) — 의도된 동작
-- [ ] OG canonical/og:url이 `staging.thingswell.co.kr` 기준
+- [x] `https://staging.thingswell.co.kr/ko` → v2 홈, 인증서 오류 없음
+- [x] `https://staging.thingswell.co.kr/ko/about` → v2 회사소개 + 혁신 히스토리
+- [x] 구 주소 `staging.safegai.co.kr` → 접속 불가(alias 제거됨) — 의도된 동작
+- [x] OG canonical/og:url이 `staging.thingswell.co.kr` 기준
+- [x] **상담 폼 전송 성공** (`/ko/safegai-platform` — §6.5 CORS 갱신 후 확인)
 
-## 8. 후속 정리 (별도 승인)
+(2026-07-27 전 항목 검증 완료)
 
-- `staging.safegai.co.kr` Route53 레코드 삭제 (safegai.co.kr 존)
-- safegai.co.kr 존/프로덕션 alias 처리 방침 — 별도 논의
+## 8. 후속 정리
+
+- [x] `staging.safegai.co.kr` Route53 레코드 삭제 (safegai.co.kr 존 `Z08000211JCJIEO6G95CH`) — 2026-07-27 완료
+- [x] `thingswell.co.kr` 중복(비위임) 존 `Z0807994G7YK27AWM6BH` 삭제 — 2026-07-27 완료.
+      진짜 존은 `Z08908689G7JYXWCUK20` (NS ns-110.awsdns-13.com 계열)
+- [ ] safegai.co.kr 존/프로덕션 alias(`www.safegai.co.kr`) 처리 방침 — 별도 논의
