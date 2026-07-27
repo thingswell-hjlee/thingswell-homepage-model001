@@ -49,6 +49,7 @@
 }
 
 .editor-content {
+  cursor: text; /* 편집 영역임을 시각적으로 표시 */
   min-height: 300px !important;
   padding: 20px !important;
   font-family: 'Noto Sans KR', sans-serif !important;
