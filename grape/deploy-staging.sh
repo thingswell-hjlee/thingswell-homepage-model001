@@ -11,7 +11,8 @@ BUILD_CMD="npm run build:staging"
 S3_BUCKET="thingswell-homepage-staging"
 CLOUDFRONT_DISTRIBUTION_ID="E39F1U1NGGUK2D"
 REGION="ap-northeast-2"
-EXPECTED_DOMAIN="staging.safegai.co.kr"
+# staging 도메인은 thingswell.co.kr 계열로 통일 (safegai.co.kr 정리 방향, docs/STAGING-DOMAIN-SWITCH.md 참조)
+EXPECTED_DOMAIN="staging.thingswell.co.kr"
 # ========================================
 
 # 스크립트 위치(grape) 기준으로 실행
