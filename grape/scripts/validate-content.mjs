@@ -32,8 +32,9 @@ const PERIOD_RE = /^\d{4}-\d{2} ~ \d{4}-\d{2}$/;
 // 연구비·임의 수치 유입 방지: 슬롯 항목에 등장하면 차단하는 필드명
 const FORBIDDEN_FIELDS = ['budget', 'funding', 'amount', '연구비', '금액'];
 
-// 필드 글자수 상한(초과 시 위반). 슬롯 화면 설계 확정 시 조정.
-const MAX_LEN = { title: 90, name: 60, category: 30, organization: 60, ministry: 30 };
+// 필드 글자수 상한(초과 시 위반). 영문 번역 대체 정책(DATA-SOURCE §1)에 따라
+// 공식 명칭 번역이 한글보다 길어지는 것을 감안한 값.
+const MAX_LEN = { title: 200, name: 80, category: 40, organization: 80, ministry: 60 };
 
 const whitelist = JSON.parse(readFileSync(path.join(contentDir, 'schema', 'sensor-whitelist.json'), 'utf8'));
 const ALLOWED_SENSORS = (whitelist.allowed ?? []).map((s) => s.code);

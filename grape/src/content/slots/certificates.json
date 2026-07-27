@@ -1,21 +1,389 @@
 {
   "slotType": "certificates",
-  "status": "draft",
+  "status": "ready",
   "updatedAt": "2026-07-27",
   "_todo": [
-    "TODO(확인필요): 기존 데이터는 locales aboutPage.certificate.items(21건)에 있고, 이미지는 CertificateSection.jsx의 별도 배열과 '인덱스 순서'로 결합된다(순서 어긋나면 잘못된 인증서 표시 — A-0 진단에서 확인된 취약점). 이관 시 각 항목에 image 파일명을 명시적으로 붙여 이 결합을 끊는다.",
-    "TODO(확인필요): 21건 전체 이관은 이미지-항목 대응을 원문/기존 화면과 대조 확인한 뒤 진행. 아래는 대응이 자명한 1건만 샘플로 둔다."
+    "출처: 기존 홈페이지 게재분(locales aboutPage.certificate.items) 이관 — 인증 유형은 지명원 2026-03 p.3·p.10과 부합 확인 (DATA-SOURCE §9)",
+    "주의: 이미지-항목 대응은 CertificateSection.jsx 배열 순서를 명시 매핑으로 고정한 것 — 항목 추가/삭제 시 반드시 image 필드를 함께 갱신"
   ],
   "items": [
     {
-      "id": "cert-software-business-operator",
-      "title": { "ko": "SW사업자 일반현황관리확인서", "en": null },
-      "category": { "ko": "면허등록증", "en": null },
-      "organization": { "ko": null, "en": null },
-      "date": null,
+      "id": "cert-01",
+      "title": {
+        "ko": "사업자등록증",
+        "en": "Business Registration Certificate"
+      },
+      "category": {
+        "ko": "면허등록증",
+        "en": "License Registration"
+      },
+      "organization": {
+        "ko": "국세청",
+        "en": "National Tax Service"
+      },
+      "date": "2025-04-28",
+      "image": "about/copyright12.png",
+      "_evidence": "docs/DATA-SOURCE.md §9 — locales aboutPage.certificate.items[0] + CertificateSection.jsx 이미지 순서"
+    },
+    {
+      "id": "cert-02",
+      "title": {
+        "ko": "정보통신공사업등록증",
+        "en": "Information & Communication Construction Business Registration"
+      },
+      "category": {
+        "ko": "면허등록증",
+        "en": "License Registration"
+      },
+      "organization": {
+        "ko": "경기도",
+        "en": "Gyeonggi Province"
+      },
+      "date": "2023-09-14",
+      "image": "information_communication_business_certificate.png",
+      "_evidence": "docs/DATA-SOURCE.md §9 — locales aboutPage.certificate.items[1] + CertificateSection.jsx 이미지 순서"
+    },
+    {
+      "id": "cert-03",
+      "title": {
+        "ko": "SW사업자 일반현황관리확인서",
+        "en": "SW Business Operator General Status Management Confirmation"
+      },
+      "category": {
+        "ko": "면허등록증",
+        "en": "License Registration"
+      },
+      "organization": {
+        "ko": "한국소프트웨어산업협회",
+        "en": "Korea Software Industry Association"
+      },
+      "date": "2024-05-30",
       "image": "software_business_operator_certificate.png",
-      "_evidence": "locales ko.json aboutPage.certificate.items + src/assets/software_business_operator_certificate.png (파일명-항목 대응 자명)",
-      "_todo": ["en 파리티", "organization·date 원문 대조", "인덱스 결합 화면과 최종 대조"]
+      "_evidence": "docs/DATA-SOURCE.md §9 — locales aboutPage.certificate.items[2] + CertificateSection.jsx 이미지 순서"
+    },
+    {
+      "id": "cert-04",
+      "title": {
+        "ko": "공장등록증명서",
+        "en": "Factory Registration Certificate"
+      },
+      "category": {
+        "ko": "면허등록증",
+        "en": "License Registration"
+      },
+      "organization": {
+        "ko": "한국산업단지공단",
+        "en": "Korea Industrial Complex Corporation"
+      },
+      "date": "2025-06-23",
+      "image": "factory_registration_certificate.png",
+      "_evidence": "docs/DATA-SOURCE.md §9 — locales aboutPage.certificate.items[3] + CertificateSection.jsx 이미지 순서"
+    },
+    {
+      "id": "cert-05",
+      "title": {
+        "ko": "벤처기업 확인서",
+        "en": "Venture Company Confirmation"
+      },
+      "category": {
+        "ko": "인정서",
+        "en": "Certification"
+      },
+      "organization": {
+        "ko": "벤처기업확인기관",
+        "en": "Venture Company Certification Agency"
+      },
+      "date": "2025-08-13",
+      "image": "venture_enterprise_certificate.png",
+      "_evidence": "docs/DATA-SOURCE.md §9 — locales aboutPage.certificate.items[4] + CertificateSection.jsx 이미지 순서"
+    },
+    {
+      "id": "cert-06",
+      "title": {
+        "ko": "기업부설연구소 인증서",
+        "en": "Corporate Research Institute Certificate"
+      },
+      "category": {
+        "ko": "인정서",
+        "en": "Certification"
+      },
+      "organization": {
+        "ko": "한국산업기술진흥협회",
+        "en": "Korea Industrial Technology Association"
+      },
+      "date": "2025-08-20",
+      "image": "corporate_research_institute_certificate.png",
+      "_evidence": "docs/DATA-SOURCE.md §9 — locales aboutPage.certificate.items[5] + CertificateSection.jsx 이미지 순서"
+    },
+    {
+      "id": "cert-07",
+      "title": {
+        "ko": "실내외 센서 모듈을 이용한 공기질 관리 방법 및 장치",
+        "en": "Air Quality Management Method and Device Using Indoor/Outdoor Sensor Modules"
+      },
+      "category": {
+        "ko": "특허",
+        "en": "Patent"
+      },
+      "organization": {
+        "ko": "특허청",
+        "en": "Korean Intellectual Property Office"
+      },
+      "date": "2022-05-27",
+      "image": "patent_certificate_10-2404374.png",
+      "_evidence": "docs/DATA-SOURCE.md §9 — locales aboutPage.certificate.items[6] + CertificateSection.jsx 이미지 순서"
+    },
+    {
+      "id": "cert-08",
+      "title": {
+        "ko": "AI 기반의 캡슐형 스마트 쉘터",
+        "en": "AI-Based Capsule-Type Smart Shelter"
+      },
+      "category": {
+        "ko": "특허",
+        "en": "Patent"
+      },
+      "organization": {
+        "ko": "특허청",
+        "en": "Korean Intellectual Property Office"
+      },
+      "date": "2022-07-19",
+      "image": "patent_certificate_10-2424407.png",
+      "_evidence": "docs/DATA-SOURCE.md §9 — locales aboutPage.certificate.items[7] + CertificateSection.jsx 이미지 순서"
+    },
+    {
+      "id": "cert-09",
+      "title": {
+        "ko": "사용자 맞춤형 서비스를 제공하는 캡슐형 스마트 쉘터",
+        "en": "Capsule-Type Smart Shelter Providing User-Customized Services"
+      },
+      "category": {
+        "ko": "특허",
+        "en": "Patent"
+      },
+      "organization": {
+        "ko": "특허청",
+        "en": "Korean Intellectual Property Office"
+      },
+      "date": "2023-04-28",
+      "image": "patent_certificate_10-2529240.png",
+      "_evidence": "docs/DATA-SOURCE.md §9 — locales aboutPage.certificate.items[8] + CertificateSection.jsx 이미지 순서"
+    },
+    {
+      "id": "cert-10",
+      "title": {
+        "ko": "레이더와 카메라를 이용한 위급 상황 알람 장치",
+        "en": "Emergency Situation Alarm Device Using Radar and Camera"
+      },
+      "category": {
+        "ko": "특허",
+        "en": "Patent"
+      },
+      "organization": {
+        "ko": "특허청",
+        "en": "Korean Intellectual Property Office"
+      },
+      "date": "2025-06-20",
+      "image": "patent_certificate_10-2825255.png",
+      "_evidence": "docs/DATA-SOURCE.md §9 — locales aboutPage.certificate.items[9] + CertificateSection.jsx 이미지 순서"
+    },
+    {
+      "id": "cert-11",
+      "title": {
+        "ko": "상표등록증",
+        "en": "Trademark Registration Certificate"
+      },
+      "category": {
+        "ko": "특허",
+        "en": "Patent"
+      },
+      "organization": {
+        "ko": "특허청",
+        "en": "Korean Intellectual Property Office"
+      },
+      "date": "2020-03-27",
+      "image": "about/10.png",
+      "_evidence": "docs/DATA-SOURCE.md §9 — locales aboutPage.certificate.items[10] + CertificateSection.jsx 이미지 순서"
+    },
+    {
+      "id": "cert-12",
+      "title": {
+        "ko": "디자인등록증",
+        "en": "Design Registration Certificate"
+      },
+      "category": {
+        "ko": "특허",
+        "en": "Patent"
+      },
+      "organization": {
+        "ko": "특허청",
+        "en": "Korean Intellectual Property Office"
+      },
+      "date": "2024-07-16",
+      "image": "about/11.png",
+      "_evidence": "docs/DATA-SOURCE.md §9 — locales aboutPage.certificate.items[11] + CertificateSection.jsx 이미지 순서"
+    },
+    {
+      "id": "cert-13",
+      "title": {
+        "ko": "티웨스웰 게이트웨이 서버",
+        "en": "Thingswell Gateway Server"
+      },
+      "category": {
+        "ko": "저작권",
+        "en": "Copyright"
+      },
+      "organization": {
+        "ko": "한국저작권위원회",
+        "en": "Korea Copyright Commission"
+      },
+      "date": "2023-06-14",
+      "image": "about/copyright9.png",
+      "_evidence": "docs/DATA-SOURCE.md §9 — locales aboutPage.certificate.items[12] + CertificateSection.jsx 이미지 순서"
+    },
+    {
+      "id": "cert-14",
+      "title": {
+        "ko": "티웨스웰 토스 서버",
+        "en": "Thingswell TOS Server"
+      },
+      "category": {
+        "ko": "저작권",
+        "en": "Copyright"
+      },
+      "organization": {
+        "ko": "한국저작권위원회",
+        "en": "Korea Copyright Commission"
+      },
+      "date": "2023-06-14",
+      "image": "about/copyright8.png",
+      "_evidence": "docs/DATA-SOURCE.md §9 — locales aboutPage.certificate.items[13] + CertificateSection.jsx 이미지 순서"
+    },
+    {
+      "id": "cert-15",
+      "title": {
+        "ko": "다중 동영상 원격제어 소프트웨어",
+        "en": "Multi-Video Remote Control Software"
+      },
+      "category": {
+        "ko": "저작권",
+        "en": "Copyright"
+      },
+      "organization": {
+        "ko": "한국저작권위원회",
+        "en": "Korea Copyright Commission"
+      },
+      "date": "2024-09-24",
+      "image": "about/copyright1.png",
+      "_evidence": "docs/DATA-SOURCE.md §9 — locales aboutPage.certificate.items[14] + CertificateSection.jsx 이미지 순서"
+    },
+    {
+      "id": "cert-16",
+      "title": {
+        "ko": "애니스페이스매니저프로그램",
+        "en": "AnySpace Manager Program"
+      },
+      "category": {
+        "ko": "저작권",
+        "en": "Copyright"
+      },
+      "organization": {
+        "ko": "한국저작권위원회",
+        "en": "Korea Copyright Commission"
+      },
+      "date": "2024-01-30",
+      "image": "about/copyright4.png",
+      "_evidence": "docs/DATA-SOURCE.md §9 — locales aboutPage.certificate.items[15] + CertificateSection.jsx 이미지 순서"
+    },
+    {
+      "id": "cert-17",
+      "title": {
+        "ko": "레이더 기반 안전 감지 시스템",
+        "en": "Radar-Based Safety Detection System"
+      },
+      "category": {
+        "ko": "저작권",
+        "en": "Copyright"
+      },
+      "organization": {
+        "ko": "한국저작권위원회",
+        "en": "Korea Copyright Commission"
+      },
+      "date": "2024-07-31",
+      "image": "about/copyright2.png",
+      "_evidence": "docs/DATA-SOURCE.md §9 — locales aboutPage.certificate.items[16] + CertificateSection.jsx 이미지 순서"
+    },
+    {
+      "id": "cert-18",
+      "title": {
+        "ko": "홈케어를 위한 AI 대화 프로그램",
+        "en": "AI Conversation Program for Home Care"
+      },
+      "category": {
+        "ko": "저작권",
+        "en": "Copyright"
+      },
+      "organization": {
+        "ko": "한국저작권위원회",
+        "en": "Korea Copyright Commission"
+      },
+      "date": "2024-11-20",
+      "image": "about/copyright6.png",
+      "_evidence": "docs/DATA-SOURCE.md §9 — locales aboutPage.certificate.items[17] + CertificateSection.jsx 이미지 순서"
+    },
+    {
+      "id": "cert-19",
+      "title": {
+        "ko": "홈케어용 QnA 쿼리 관리 시스템 프로그램",
+        "en": "QnA Query Management System Program for Home Care"
+      },
+      "category": {
+        "ko": "저작권",
+        "en": "Copyright"
+      },
+      "organization": {
+        "ko": "한국저작권위원회",
+        "en": "Korea Copyright Commission"
+      },
+      "date": "2024-11-20",
+      "image": "about/copyright7.png",
+      "_evidence": "docs/DATA-SOURCE.md §9 — locales aboutPage.certificate.items[18] + CertificateSection.jsx 이미지 순서"
+    },
+    {
+      "id": "cert-20",
+      "title": {
+        "ko": "음성인식을 통한 산업현장 안전사고 대처 프로그램",
+        "en": "Program for Responding to Industrial Site Safety Accidents Through Voice Recognition"
+      },
+      "category": {
+        "ko": "저작권",
+        "en": "Copyright"
+      },
+      "organization": {
+        "ko": "한국저작권위원회",
+        "en": "Korea Copyright Commission"
+      },
+      "date": "2025-05-27",
+      "image": "about/copyright5.png",
+      "_evidence": "docs/DATA-SOURCE.md §9 — locales aboutPage.certificate.items[19] + CertificateSection.jsx 이미지 순서"
+    },
+    {
+      "id": "cert-21",
+      "title": {
+        "ko": "센서 시험 프로그램",
+        "en": "Sensor Test Program"
+      },
+      "category": {
+        "ko": "저작권",
+        "en": "Copyright"
+      },
+      "organization": {
+        "ko": "한국저작권위원회",
+        "en": "Korea Copyright Commission"
+      },
+      "date": "2025-05-27",
+      "image": "about/copyright3.png",
+      "_evidence": "docs/DATA-SOURCE.md §9 — locales aboutPage.certificate.items[20] + CertificateSection.jsx 이미지 순서"
     }
   ]
 }

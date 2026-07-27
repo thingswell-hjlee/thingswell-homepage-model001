@@ -1,10 +1,32 @@
 {
   "slotType": "cases",
-  "status": "draft",
+  "status": "ready",
   "updatedAt": "2026-07-27",
   "_todo": [
-    "TODO(확인필요): 실적(cases)은 수치·발주처가 들어가는 민감 슬롯. locales casesPage.*(integrated/smartSafety/infoComm)의 stats·cases 배열이 원본과 일치하는지 사업실적 원문과 대조 후 이관한다. 원문 대조 전에는 항목을 만들지 않는다.",
-    "주의: 사업실적서 원문 문서 자체는 이 public 저장소에 커밋 금지 — 대조는 로컬에서만 하고 결과 데이터만 슬롯에 기록."
+    "주의: 지명원 표기가 '등'으로 끝남 — 목록 외 실적 임의 추가 금지 (DATA-SOURCE §8)",
+    "주의: 고객사별 구축 내용·시기는 원장에 없음 — 명칭만 게재, 상세 서술 금지",
+    "주의: locales casesPage.*의 상세 stats·cases 배열은 여전히 원문 대조 대기 — 이 슬롯과 별개이며 사업실적서 원문은 public 저장소 커밋 금지"
   ],
-  "items": []
+  "items": [
+    {
+      "id": "case-seoul-smart-shelter",
+      "name": { "ko": "서울시 스마트 버스쉼터 40개소", "en": "Seoul smart bus shelters (40 sites)" },
+      "_evidence": "docs/DATA-SOURCE.md §8 #1 (지명원 2026-03 p.10)"
+    },
+    {
+      "id": "case-lig-nex1",
+      "name": { "ko": "LIG넥스원", "en": "LIG Nex1" },
+      "_evidence": "docs/DATA-SOURCE.md §8 #2 (지명원 2026-03 p.10)"
+    },
+    {
+      "id": "case-hanwha-aerospace",
+      "name": { "ko": "한화에어로스페이스", "en": "Hanwha Aerospace" },
+      "_evidence": "docs/DATA-SOURCE.md §8 #3 (지명원 2026-03 p.10)"
+    },
+    {
+      "id": "case-samsung-logitek",
+      "name": { "ko": "삼성전자로지텍", "en": "Samsung Electronics Logitek" },
+      "_evidence": "docs/DATA-SOURCE.md §8 #4 (지명원 2026-03 p.10)"
+    }
+  ]
 }
