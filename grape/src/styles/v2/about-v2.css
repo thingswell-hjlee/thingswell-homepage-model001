@@ -38,3 +38,51 @@
   justify-content: flex-start;
   margin-top: 18px;
 }
+
+/* 혁신 히스토리 타임라인 */
+.tw2-history {
+  display: grid;
+  gap: 28px;
+  border-left: 2px solid var(--tw2-line);
+  padding-left: 24px;
+}
+
+.tw2-history-era {
+  position: relative;
+}
+
+.tw2-history-era::before {
+  content: '';
+  position: absolute;
+  left: -30px;
+  top: 8px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--tw2-accent);
+}
+
+.tw2-history-head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 6px;
+}
+
+.tw2-history-period {
+  color: var(--tw2-accent);
+  font-weight: 800;
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+}
+
+.tw2-history-title {
+  font-size: 1.1rem;
+  font-weight: 800;
+  margin: 0;
+}
+
+.tw2-history-items {
+  margin-top: 12px;
+}

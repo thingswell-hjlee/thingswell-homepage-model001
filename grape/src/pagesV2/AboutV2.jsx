@@ -6,9 +6,34 @@
 // 기존 pages/·components/ import 금지. 스타일은 tw2- 스코프만.
 import { Link } from 'react-router-dom';
 import useTranslation from '../hooks/useTranslation';
-import { getPublishableItems, getSlot, axes, pick } from '../content';
+import { getPublishableItems, getSlot, axes, pick, patentBadgeKey } from '../content';
 import '../styles/v2/home-v2.css';
 import '../styles/v2/about-v2.css';
+
+// 혁신 히스토리 시대 구분 — 항목은 슬롯 id 참조만 하고, 실데이터(제목·번호·기간)는
+// 슬롯에서 읽는다. 시대 서사 문구는 v2.about.history.* i18n 키.
+// 사이버폭력 R&D(rnd-1711190922)는 안전 도메인과 결이 달라 히스토리 서사에서 제외
+// (실적 총계 7건에는 포함). rejected 특허는 getPublishableItems가 원천 차단.
+const HISTORY_ERAS = [
+  {
+    key: 'era1',
+    rndIds: ['rnd-1425136593', 'rnd-1415165556'],
+    patentIds: ['patent-10-2404374', 'patent-10-2424407', 'patent-10-2529240'],
+  },
+  {
+    key: 'era2',
+    rndIds: ['rnd-2420003749', 'rnd-1425178930'],
+    patentIds: ['patent-10-2825255', 'patent-app-10-2023-0156999'],
+  },
+  {
+    key: 'era3',
+    rndIds: ['rnd-2460000306', 'rnd-2420029970'],
+    patentIds: ['patent-app-10-2024-0150475', 'patent-10-2964325'],
+  },
+];
+
+// 출원 연도는 공식 출원번호(10-YYYY-XXXXXXX)에서 도출 — 원장 밖 날짜 생성 금지.
+const appYear = (patent) => patent.appNumber?.split('-')[1] ?? '';
 
 function AboutV2() {
   const { t, currentLang } = useTranslation();
@@ -69,6 +94,58 @@ function AboutV2() {
                 <p className="tw2-about-desc">
                   {count}{t('v2.about.axesProductsSuffix')}
                 </p>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* 블록 3.5 — 혁신 히스토리 (R&D 과제 + 특허를 하나의 궤적으로) */}
+      <section className="tw2-section">
+        <h2 className="tw2-h2">{t('v2.about.history.heading')}</h2>
+        <p className="tw2-sub">{t('v2.about.history.sub')}</p>
+        <div className="tw2-history">
+          {HISTORY_ERAS.map(({ key, rndIds, patentIds }) => {
+            const eraRnd = rndIds.map((id) => rnd.find((r) => r.id === id)).filter(Boolean);
+            const eraPatents = patentIds.map((id) => patents.find((p) => p.id === id)).filter(Boolean);
+            return (
+              <div key={key} className="tw2-history-era">
+                <div className="tw2-history-head">
+                  <span className="tw2-history-period">{t(`v2.about.history.${key}Period`)}</span>
+                  <h3 className="tw2-history-title">{t(`v2.about.history.${key}Title`)}</h3>
+                </div>
+                <p className="tw2-about-desc">{t(`v2.about.history.${key}Desc`)}</p>
+                <ul className="tw2-proof-list tw2-history-items">
+                  {eraRnd.map((r) => (
+                    <li key={r.id} className="tw2-proof-item">
+                      <p className="tw2-proof-item-title">
+                        <span className="tw2-badge tw2-badge-flagship">{t('v2.about.history.labelRnd')}</span>
+                        {pick(r.title, currentLang)}
+                      </p>
+                      <p className="tw2-proof-meta">
+                        <span>{pick(r.ministry, currentLang)}</span>
+                        <span>{r.period}</span>
+                        <span>{r.role}</span>
+                      </p>
+                    </li>
+                  ))}
+                  {eraPatents.map((p) => (
+                    <li key={p.id} className="tw2-proof-item">
+                      <p className="tw2-proof-item-title">
+                        {patentBadgeKey(p) && (
+                          <span className={`tw2-badge ${p.legalStatus === 'registered' ? 'tw2-badge-registered' : 'tw2-badge-pending'}`}>
+                            {t(patentBadgeKey(p))}
+                          </span>
+                        )}
+                        {pick(p.title, currentLang)}
+                      </p>
+                      <p className="tw2-proof-meta">
+                        <span>{t('v2.about.history.appliedPrefix')}{appYear(p)}</span>
+                        {p.legalStatus === 'registered' && <span>{t('v2.home.proof.regNoLabel')} {p.regNumber}</span>}
+                      </p>
+                    </li>
+                  ))}
+                </ul>
               </div>
             );
           })}
