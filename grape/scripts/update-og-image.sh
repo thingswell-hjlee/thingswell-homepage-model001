@@ -16,7 +16,7 @@ CF_PROD="EQTMTY6FNARD8 EEWV39QWFGBHW"
 DOMAINS_PROD="https://www.thingswell.co.kr https://www.safegai.co.kr"
 BUCKET_STAGING="thingswell-homepage-staging"
 CF_STAGING="E39F1U1NGGUK2D"
-DOMAINS_STAGING="https://staging.safegai.co.kr"
+DOMAINS_STAGING="https://staging.thingswell.co.kr"
 # ---------------------------------
 
 usage() {

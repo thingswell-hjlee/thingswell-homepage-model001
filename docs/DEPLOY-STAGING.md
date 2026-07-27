@@ -13,10 +13,10 @@
 | S3 버킷 | `thingswell-homepage-staging` |
 | CloudFront Distribution | `E39F1U1NGGUK2D` |
 | 리전 | `ap-northeast-2` |
-| 도메인 | `staging.safegai.co.kr` |
+| 도메인 | `staging.thingswell.co.kr` |
 
 ⚠️ **주의**: 저장소 내 스크립트별 CloudFront ID가 상이함 (staging `E39F1U1NGGUK2D` / prod `EEWV39QWFGBHW` / root-to-ko 함수 주석 `EQTMTY6FNARD8`).
-invalidation 전에 CloudFront 콘솔에서 `E39F1U1NGGUK2D`가 실제로 `staging.safegai.co.kr`를 서빙하는지 1회 확인 권장.
+invalidation 전에 CloudFront 콘솔에서 `E39F1U1NGGUK2D`가 실제로 `staging.thingswell.co.kr`를 서빙하는지 1회 확인 권장.
 
 ## 1. 사전조건
 
@@ -53,7 +53,7 @@ npm run seo                # 2) robots.txt + sitemap.xml → public/
 bash deploy-staging.sh
 ```
 
-스크립트가 순서대로 수행: `npm run build:staging` → `dist/index.html`에 `staging.safegai.co.kr` 존재 검증 → S3 sync(정적 자산 장기 캐시, `index.html`·json은 no-cache) → CloudFront invalidation `/*`.
+스크립트가 순서대로 수행: `npm run build:staging` → `dist/index.html`에 `staging.thingswell.co.kr` 존재 검증 → S3 sync(정적 자산 장기 캐시, `index.html`·json은 no-cache) → CloudFront invalidation `/*`.
 
 <details>
 <summary>스크립트 실패 시 수동 명령 (동일 동작)</summary>
@@ -81,7 +81,7 @@ aws cloudfront create-invalidation --distribution-id E39F1U1NGGUK2D --paths "/*"
 
 기준 경로는 `/ko` (루트 `/`는 301 리다이렉트).
 
-- [ ] `https://staging.safegai.co.kr/ko` → **v2 홈** 표시 (hero "현장의 위험을 먼저 인지하는 멀티모달 안전 AI", 미리보기 배너 **없어야** 함)
+- [ ] `https://staging.thingswell.co.kr/ko` → **v2 홈** 표시 (hero "현장의 위험을 먼저 인지하는 멀티모달 안전 AI", 미리보기 배너 **없어야** 함)
 - [ ] `/ko/about` → **v2 회사소개** (미션·비전 카드, **혁신 히스토리 3시대**, 실적 수치 5·2·7)
 - [ ] `/ko/home-v2` → v2 홈 + 상단 미리보기 배너 **있음**
 - [ ] 진단 위젯: 축 선택 → 조건 → 결과(제품·R&D) 동작
@@ -101,5 +101,5 @@ aws cloudfront create-invalidation --distribution-id E39F1U1NGGUK2D --paths "/*"
 staging 체크리스트 전부 통과 후에만. 동일 절차에서 스크립트만 교체:
 
 ```bash
-bash deploy-production.sh   # 버킷 thingswell-homepage, CloudFront EEWV39QWFGBHW, 도메인 www.safegai.co.kr 검증
+bash deploy-production.sh   # 버킷 thingswell-homepage, CloudFront EEWV39QWFGBHW, 도메인 www.thingswell.co.kr 검증
 ```
