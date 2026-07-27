@@ -8,6 +8,7 @@ import DiagnosisWidget from '../components/v2/DiagnosisWidget';
 import HeroVisual from '../components/v2/HeroVisual';
 import PipelineGraphic from '../components/v2/PipelineGraphic';
 import { AxisIcon, IconPatent, IconRnd } from '../components/v2/icons';
+import Reveal from '../components/v2/Reveal';
 import '../styles/v2/home-v2.css';
 
 function HomeV2({ preview = false }) {
@@ -43,7 +44,7 @@ function HomeV2({ preview = false }) {
       </section>
 
       {/* 블록 2 — axes (적용 축 4종 + 축별 제품군) */}
-      <section className="tw2-section">
+      <Reveal className="tw2-section">
         <h2 className="tw2-h2">{t('v2.home.axes.heading')}</h2>
         <p className="tw2-sub">{t('v2.home.axes.sub')}</p>
         <div className="tw2-axes-grid">
@@ -62,10 +63,10 @@ function HomeV2({ preview = false }) {
             </div>
           ))}
         </div>
-      </section>
+      </Reveal>
 
       {/* 블록 3 — how it works (platform 제품군 순서 = 처리 흐름) */}
-      <section className="tw2-section">
+      <Reveal className="tw2-section">
         <h2 className="tw2-h2">{t('v2.home.how.heading')}</h2>
         <p className="tw2-sub">{t('v2.home.how.sub')}</p>
         <PipelineGraphic />
@@ -76,10 +77,10 @@ function HomeV2({ preview = false }) {
             </div>
           ))}
         </div>
-      </section>
+      </Reveal>
 
       {/* 블록 4 — proof (특허·R&D — 슬롯 데이터만, rejected는 로더가 이미 필터) */}
-      <section className="tw2-section">
+      <Reveal className="tw2-section">
         <h2 className="tw2-h2">{t('v2.home.proof.heading')}</h2>
         <div className="tw2-proof-cols">
           <div>
@@ -133,21 +134,21 @@ function HomeV2({ preview = false }) {
             </ul>
           </div>
         </div>
-      </section>
+      </Reveal>
 
       {/* 블록 5 — ai-diagnosis */}
-      <section className="tw2-section">
+      <Reveal className="tw2-section">
         <DiagnosisWidget />
-      </section>
+      </Reveal>
 
       {/* 블록 6 — finalcta */}
-      <section className="tw2-section tw2-final">
+      <Reveal className="tw2-section tw2-final">
         <h2 className="tw2-h2">{t('v2.home.finalCta.title')}</h2>
         <p className="tw2-sub">{t('v2.home.finalCta.body')}</p>
         <Link className="tw2-btn tw2-btn-primary" to={contactPath}>
           {t('v2.home.finalCta.button')}
         </Link>
-      </section>
+      </Reveal>
     </div>
   );
 }

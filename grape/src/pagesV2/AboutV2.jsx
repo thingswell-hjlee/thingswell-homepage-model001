@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import useTranslation from '../hooks/useTranslation';
 import { getPublishableItems, getSlot, axes, pick, patentBadgeKey } from '../content';
 import { AxisIcon } from '../components/v2/icons';
+import Reveal from '../components/v2/Reveal';
 import '../styles/v2/home-v2.css';
 import '../styles/v2/about-v2.css';
 
@@ -57,7 +58,7 @@ function AboutV2() {
       </section>
 
       {/* 블록 2 — 미션·비전·핵심가치 (기존 검증 콘텐츠 재사용) */}
-      <section className="tw2-section">
+      <Reveal className="tw2-section">
         <h2 className="tw2-h2">{t('v2.about.identityHeading')}</h2>
         <div className="tw2-axes-grid">
           <div className="tw2-axis-card">
@@ -79,10 +80,10 @@ function AboutV2() {
             </ul>
           </div>
         </div>
-      </section>
+      </Reveal>
 
       {/* 블록 3 — 사업 영역 (4축 + 축별 제품 수) */}
-      <section className="tw2-section">
+      <Reveal className="tw2-section">
         <h2 className="tw2-h2">{t('v2.about.axesHeading')}</h2>
         <p className="tw2-sub">{t('v2.about.axesSub')}</p>
         <div className="tw2-axes-grid">
@@ -100,10 +101,10 @@ function AboutV2() {
             );
           })}
         </div>
-      </section>
+      </Reveal>
 
       {/* 블록 3.5 — 혁신 히스토리 (R&D 과제 + 특허를 하나의 궤적으로) */}
-      <section className="tw2-section">
+      <Reveal className="tw2-section">
         <h2 className="tw2-h2">{t('v2.about.history.heading')}</h2>
         <p className="tw2-sub">{t('v2.about.history.sub')}</p>
         <div className="tw2-history">
@@ -152,10 +153,10 @@ function AboutV2() {
             );
           })}
         </div>
-      </section>
+      </Reveal>
 
       {/* 블록 4 — 숫자로 보는 실적 (슬롯에서 계산 — 하드코딩 0) */}
-      <section className="tw2-section">
+      <Reveal className="tw2-section">
         <h2 className="tw2-h2">{t('v2.about.proofHeading')}</h2>
         <div className="tw2-about-stats">
           <div className="tw2-about-stat">
@@ -177,10 +178,10 @@ function AboutV2() {
             {t('v2.about.proofCta')}
           </Link>
         </div>
-      </section>
+      </Reveal>
 
       {/* 블록 5 — 공동연구·산학협력 (슬롯 partners) */}
-      <section className="tw2-section">
+      <Reveal className="tw2-section">
         <h2 className="tw2-h2">{t('v2.about.partnersHeading')}</h2>
         <div className="tw2-proof-cols">
           {[
@@ -196,10 +197,10 @@ function AboutV2() {
             </div>
           ))}
         </div>
-      </section>
+      </Reveal>
 
       {/* 블록 6 — CTA */}
-      <section className="tw2-section tw2-final">
+      <Reveal className="tw2-section tw2-final">
         <h2 className="tw2-h2">{t('v2.about.ctaHeading')}</h2>
         <p className="tw2-sub">{t('v2.about.ctaBody')}</p>
         <div className="tw2-cta-row">
@@ -210,7 +211,7 @@ function AboutV2() {
             {t('v2.about.ctaDirections')}
           </Link>
         </div>
-      </section>
+      </Reveal>
     </div>
   );
 }
