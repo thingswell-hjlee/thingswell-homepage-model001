@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import useTranslation from '../hooks/useTranslation';
 import { getPublishableItems, axes, pick, patentBadgeKey } from '../content';
 import DiagnosisWidget from '../components/v2/DiagnosisWidget';
+import HeroVisual from '../components/v2/HeroVisual';
 import '../styles/v2/home-v2.css';
 
 function HomeV2({ preview = false }) {
@@ -19,18 +20,23 @@ function HomeV2({ preview = false }) {
     <div className="tw2-home">
       {preview && <p className="tw2-preview-notice">{t('v2.previewNotice')}</p>}
 
-      {/* 블록 1 — hero */}
+      {/* 블록 1 — hero (좌: 카피 / 우: 인트로 비주얼) */}
       <section className="tw2-hero">
-        <p className="tw2-eyebrow">{t('v2.home.hero.eyebrow')}</p>
-        <h1 className="tw2-hero-title">{t('v2.home.hero.title')}</h1>
-        <p className="tw2-hero-sub">{t('v2.home.hero.subtitle')}</p>
-        <div className="tw2-cta-row">
-          <Link className="tw2-btn tw2-btn-primary" to={contactPath}>
-            {t('v2.home.hero.ctaPrimary')}
-          </Link>
-          <a className="tw2-btn tw2-btn-ghost" href="#tw2-diagnosis">
-            {t('v2.home.hero.ctaSecondary')}
-          </a>
+        <div className="tw2-hero-split">
+          <div>
+            <p className="tw2-eyebrow">{t('v2.home.hero.eyebrow')}</p>
+            <h1 className="tw2-hero-title">{t('v2.home.hero.title')}</h1>
+            <p className="tw2-hero-sub">{t('v2.home.hero.subtitle')}</p>
+            <div className="tw2-cta-row">
+              <Link className="tw2-btn tw2-btn-primary" to={contactPath}>
+                {t('v2.home.hero.ctaPrimary')}
+              </Link>
+              <a className="tw2-btn tw2-btn-ghost" href="#tw2-diagnosis">
+                {t('v2.home.hero.ctaSecondary')}
+              </a>
+            </div>
+          </div>
+          <HeroVisual />
         </div>
       </section>
 
