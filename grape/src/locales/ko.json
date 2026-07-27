@@ -4006,5 +4006,59 @@
       "errorEmail": "이메일 형식이 올바르지 않습니다.",
       "errorGeneric": "전송에 실패했습니다. 잠시 후 다시 시도하시거나 contact@thingswell.co.kr로 문의해 주세요."
     }
+  },
+  "v2": {
+    "previewNotice": "미리보기 — 내부 검토용 v2 화면입니다",
+    "home": {
+      "hero": {
+        "eyebrow": "SafeGAI Platform",
+        "title": "현장의 위험을 먼저 인지하는 멀티모달 안전 AI",
+        "subtitle": "레이더·카메라·음향 등 다중센서 상황인지 기술로 산업 현장과 케어 시설, 공간·환경의 안전을 지킵니다.",
+        "ctaPrimary": "문의하기",
+        "ctaSecondary": "1분 적합도 진단"
+      },
+      "axes": {
+        "heading": "적용 분야",
+        "sub": "네 가지 축으로 현장에 맞는 안전 구성을 제공합니다."
+      },
+      "how": {
+        "heading": "How it works",
+        "sub": "SafeGAI 플랫폼의 처리 흐름"
+      },
+      "proof": {
+        "heading": "기술 실적",
+        "patentsTitle": "지식재산권",
+        "rndTitle": "국가 R&D 과제",
+        "badgeRegistered": "등록특허",
+        "badgePending": "출원 중",
+        "flagship": "대표 특허",
+        "regNoLabel": "등록번호",
+        "appNoLabel": "출원번호"
+      },
+      "finalCta": {
+        "title": "현장에 맞는 안전 구성을 제안해 드립니다",
+        "body": "등록특허 기반 기술과 국가 R&D 수행 경험을 바탕으로, 현장 조건에 맞는 구성을 함께 설계합니다.",
+        "button": "문의하기"
+      }
+    },
+    "diagnosis": {
+      "heading": "우리 현장에 맞을까요?",
+      "sub": "1분 적합도 진단 — 두 번의 선택으로 추천 구성을 확인하세요.",
+      "step1Label": "STEP 1 · 어떤 현장인가요?",
+      "step2Label": "STEP 2 · 현장 조건을 선택하세요 (복수 선택 가능)",
+      "resultLabel": "STEP 3 · 추천 결과",
+      "next": "다음",
+      "back": "이전",
+      "showResult": "결과 보기",
+      "restart": "다시 진단하기",
+      "resultProducts": "추천 제품 구성",
+      "resultRnd": "관련 국가 R&D 수행 실적",
+      "conditionsNote": "선택한 현장 조건은 문의 시 상담 내용에 함께 전달됩니다.",
+      "ctaContact": "이 구성으로 문의하기",
+      "disclaimer": "본 진단은 규칙 기반 참고용이며, 정확한 구성은 상담을 통해 확정됩니다.",
+      "noSelection": "현장을 선택해 주세요.",
+      "rndRoleLabel": "역할",
+      "rndPeriodLabel": "기간"
+    }
   }
 }

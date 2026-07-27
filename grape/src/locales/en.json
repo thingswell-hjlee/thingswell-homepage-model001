@@ -4006,5 +4006,59 @@
       "errorEmail": "Please enter a valid email address.",
       "errorGeneric": "Failed to send. Please try again later or contact us at contact@thingswell.co.kr."
     }
+  },
+  "v2": {
+    "previewNotice": "Preview — internal review build (v2)",
+    "home": {
+      "hero": {
+        "eyebrow": "SafeGAI Platform",
+        "title": "Multimodal safety AI that senses risk first",
+        "subtitle": "Multi-sensor situational awareness — radar, camera, audio and more — protecting industrial sites, care facilities, and everyday spaces.",
+        "ctaPrimary": "Contact us",
+        "ctaSecondary": "1-minute fit check"
+      },
+      "axes": {
+        "heading": "Where it applies",
+        "sub": "Four domains, one safety platform tailored to your site."
+      },
+      "how": {
+        "heading": "How it works",
+        "sub": "The SafeGAI platform pipeline"
+      },
+      "proof": {
+        "heading": "Technology track record",
+        "patentsTitle": "Intellectual property",
+        "rndTitle": "National R&D projects",
+        "badgeRegistered": "Registered patent",
+        "badgePending": "Application pending",
+        "flagship": "Flagship patent",
+        "regNoLabel": "Registration No.",
+        "appNoLabel": "Application No."
+      },
+      "finalCta": {
+        "title": "A safety setup designed for your site",
+        "body": "Built on registered patents and national R&D experience — we design the right configuration for your site conditions together.",
+        "button": "Contact us"
+      }
+    },
+    "diagnosis": {
+      "heading": "Will it fit your site?",
+      "sub": "A 1-minute fit check — two quick choices to see a recommended setup.",
+      "step1Label": "STEP 1 · What kind of site is it?",
+      "step2Label": "STEP 2 · Select site conditions (multiple allowed)",
+      "resultLabel": "STEP 3 · Recommendation",
+      "next": "Next",
+      "back": "Back",
+      "showResult": "See result",
+      "restart": "Start over",
+      "resultProducts": "Recommended products",
+      "resultRnd": "Related national R&D projects",
+      "conditionsNote": "Selected site conditions are shared with our team when you inquire.",
+      "ctaContact": "Inquire with this setup",
+      "disclaimer": "This is a rule-based guide for reference; the final configuration is confirmed through consultation.",
+      "noSelection": "Please select a site type.",
+      "rndRoleLabel": "Role",
+      "rndPeriodLabel": "Period"
+    }
   }
 }
