@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import useTranslation from '../hooks/useTranslation';
 import architectureDiagram from '../assets/v2-safegai-platform-architecture.webp';
 import { IconPlatform, IconShield, IconEdge } from '../components/v2/icons';
+import Reveal from '../components/v2/Reveal';
 import '../styles/v2/home-v2.css';
 import '../styles/v2/solutions-v2.css';
 
@@ -24,7 +25,7 @@ function SolutionsOverviewV2() {
       </section>
 
       {/* 블록 2 — 필요성 (Why Now) */}
-      <section className="tw2-section">
+      <Reveal className="tw2-section">
         <h2 className="tw2-h2">{t('v2.solutions.whyHeading')}</h2>
         <p className="tw2-sub">{t('v2.solutions.whySub')}</p>
         <div className="tw2-axes-grid">
@@ -43,10 +44,10 @@ function SolutionsOverviewV2() {
             );
           })}
         </div>
-      </section>
+      </Reveal>
 
       {/* 블록 3 — 구조 (다이어그램 + 파이프라인) */}
-      <section className="tw2-section">
+      <Reveal className="tw2-section">
         <h2 className="tw2-h2">{t('v2.solutions.archHeading')}</h2>
         <p className="tw2-sub">{t('v2.solutions.archSub')}</p>
         <img
@@ -68,10 +69,10 @@ function SolutionsOverviewV2() {
           {Array.isArray(coreItems) &&
             coreItems.map((item) => <span key={item} className="tw2-tag">{item}</span>)}
         </div>
-      </section>
+      </Reveal>
 
       {/* 블록 4 — 사업화 방향 (3단계) */}
-      <section className="tw2-section">
+      <Reveal className="tw2-section">
         <h2 className="tw2-h2">{t('v2.solutions.roadmapHeading')}</h2>
         <p className="tw2-sub">{t('v2.solutions.roadmapSub')}</p>
         <div className="tw2-how-flow">
@@ -82,10 +83,10 @@ function SolutionsOverviewV2() {
             </div>
           ))}
         </div>
-      </section>
+      </Reveal>
 
       {/* 블록 5 — 도입 효과 (정성 — 임의 수치 금지) */}
-      <section className="tw2-section">
+      <Reveal className="tw2-section">
         <h2 className="tw2-h2">{t('v2.solutions.effectHeading')}</h2>
         <ul className="tw2-proof-list">
           {[1, 2, 3, 4].map((n) => (
@@ -97,16 +98,16 @@ function SolutionsOverviewV2() {
             </li>
           ))}
         </ul>
-      </section>
+      </Reveal>
 
       {/* 블록 6 — CTA */}
-      <section className="tw2-section tw2-final">
+      <Reveal className="tw2-section tw2-final">
         <h2 className="tw2-h2">{t('v2.solutions.ctaTitle')}</h2>
         <p className="tw2-sub">{t('v2.solutions.ctaBody')}</p>
         <Link className="tw2-btn tw2-btn-primary" to={contactPath}>
           {t('v2.solutions.ctaButton')}
         </Link>
-      </section>
+      </Reveal>
     </div>
   );
 }
