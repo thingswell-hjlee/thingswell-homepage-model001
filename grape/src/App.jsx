@@ -65,11 +65,13 @@ import MobileFloatingNav from "./components/MobileFloatingNav";
 // v2 홈 (트랙 B) — lazy 로딩이라 기존 번들에 영향 없음.
 const HomeV2 = lazy(() => import("./pagesV2/HomeV2.jsx"));
 const AboutV2 = lazy(() => import("./pagesV2/AboutV2.jsx"));
+const SolutionsOverviewV2 = lazy(() => import("./pagesV2/SolutionsOverviewV2.jsx"));
 
 // B-3 라우트 전환 플래그. 문제 발생 시 false로 되돌리면 즉시 기존 화면으로 롤백된다.
-// (기존 Home·About 컴포넌트·코드는 삭제하지 않는다 — 전환 완료 후 별도 PR로만 정리)
+// (기존 Home·About·Soulution 컴포넌트·코드는 삭제하지 않는다 — 전환 완료 후 별도 PR로만 정리)
 const HOME_V2_ENABLED = true;
 const ABOUT_V2_ENABLED = true;
+const SOLUTIONS_V2_ENABLED = true;
 
 /**
  * LanguageRedirect component
@@ -100,7 +102,8 @@ function AppRoutes({ isMobile }) {
             <Route path="/safegai-platform" element={<SafegaiPlatform />} />
 
             <Route path="/government-support" element={<Government_support />} />
-            <Route path="/solutions/overview" element={<Soulution />} />
+            <Route path="/solutions/overview" element={SOLUTIONS_V2_ENABLED ? <Suspense fallback={null}><SolutionsOverviewV2 /></Suspense> : <Soulution />} />
+            <Route path="/solutions-overview-v2" element={<Suspense fallback={null}><SolutionsOverviewV2 /></Suspense>} />
             <Route path="/solutions/chemical" element={<ChemicalSolution />} />
             <Route path="/solutions/manufacturing" element={<ManufacturingSolution />} />
 
