@@ -4041,6 +4041,29 @@
         "button": "문의하기"
       }
     },
+    "about": {
+      "heroEyebrow": "About ThingsWell",
+      "heroSub": "멀티모달 상황인지와 온디바이스 AI로 산업 현장과 케어 시설, 공간·환경의 안전을 지키는 안전 AI 전문기업입니다.",
+      "identityHeading": "미션 · 비전 · 핵심가치",
+      "axesHeading": "사업 영역",
+      "axesSub": "SafeGAI 플랫폼을 중심으로 네 가지 축에서 안전 솔루션을 제공합니다.",
+      "axesProductsSuffix": "개 제품·서비스",
+      "proofHeading": "숫자로 보는 기술 실적",
+      "proofRegistered": "등록특허",
+      "proofPending": "출원 중 특허",
+      "proofRnd": "국가 R&D 과제",
+      "proofUnit": "건",
+      "proofNote": "모든 실적은 검증된 원장(NTIS·특허 포트폴리오) 기준이며, 상세 목록은 홈 화면과 면허·인증·특허 페이지에서 확인할 수 있습니다.",
+      "proofCta": "면허·인증·특허 보기",
+      "partnersHeading": "공동연구 · 산학협력",
+      "partnersCompanies": "기업",
+      "partnersUniversities": "대학",
+      "partnersPublic": "공공기관",
+      "ctaHeading": "함께 안전한 현장을 만들어 갑니다",
+      "ctaBody": "제품 도입, 공동연구, 파트너십 등 무엇이든 편하게 문의해 주세요.",
+      "ctaContact": "문의하기",
+      "ctaDirections": "오시는 길"
+    },
     "diagnosis": {
       "heading": "우리 현장에 맞을까요?",
       "sub": "1분 적합도 진단 — 두 번의 선택으로 추천 구성을 확인하세요.",
