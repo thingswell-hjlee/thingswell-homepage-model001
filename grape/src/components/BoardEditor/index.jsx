@@ -226,6 +226,16 @@ const BoardEditor = ({
     setEditorState(newEditorState);
   };
 
+  // 편집 영역(흰 배경) 아무 곳이나 클릭해도 에디터에 포커스가 가도록 위임.
+  // react-draft-wysiwyg의 자체 클릭→포커스 처리가 React 18에서 동작하지 않아
+  // 빈 에디터에서 첫 줄(21px)을 정확히 클릭해야만 입력되는 문제 수정 (2026-07-28)
+  const handleEditorAreaClick = (e) => {
+    const ce = e.currentTarget.querySelector('[contenteditable="true"]');
+    if (ce && !ce.contains(document.activeElement)) {
+      ce.focus();
+    }
+  };
+
   return (
     <div className="board-editor">
       <div className="editor-header">
@@ -241,7 +251,7 @@ const BoardEditor = ({
         />
       </div>
       
-      <div className="editor-container">
+      <div className="editor-container" onClick={handleEditorAreaClick}>
         <Editor
           editorState={editorState}
           onEditorStateChange={onEditorStateChange}
