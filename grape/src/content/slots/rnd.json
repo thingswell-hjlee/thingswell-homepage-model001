@@ -1,0 +1,145 @@
+{
+  "slotType": "rnd",
+  "status": "ready",
+  "updatedAt": "2026-07-27",
+  "_todo": [
+    "주의: 연구비 금액은 화면에 표시하지 않는다 (NTIS 연차별 기록, 단순 합산 오류) — 이 슬롯에 금액 필드를 추가하지 말 것",
+    "영문 명칭은 번역 대체 (DATA-SOURCE §1 영문 표기 정책, 2026-07-27)"
+  ],
+  "items": [
+    {
+      "id": "rnd-2420029970",
+      "ntisId": "2420029970",
+      "title": {
+        "ko": "작업자 안전을 위한 멀티모달 상황 인식 및 RAG 기반 대화형 LLM 디바이스 개발",
+        "en": "Development of a multimodal situational-awareness and RAG-based conversational LLM device for worker safety"
+      },
+      "ministry": {
+        "ko": "중소벤처기업부",
+        "en": "Ministry of SMEs and Startups"
+      },
+      "period": "2024-10 ~ 2028-06",
+      "role": "주관",
+      "axis": "industrial",
+      "customerFacing": true,
+      "_evidence": "docs/DATA-SOURCE.md §2 #1 (NTIS 검색일 2026-07-26)"
+    },
+    {
+      "id": "rnd-2460000306",
+      "ntisId": "2460000306",
+      "title": {
+        "ko": "인지장애가 있는 장애인·노인의 일상생활의 편익과 안전을 위한 상황/행동인지 홈케어 보조기기 및 서비스 개발",
+        "en": "Development of context- and behavior-aware homecare assistive devices and services for the daily convenience and safety of seniors and people with cognitive impairments"
+      },
+      "ministry": {
+        "ko": "보건복지부",
+        "en": "Ministry of Health and Welfare"
+      },
+      "period": "2024-04 ~ 2024-12",
+      "role": "주관",
+      "axis": "care",
+      "customerFacing": true,
+      "_evidence": "docs/DATA-SOURCE.md §2 #2"
+    },
+    {
+      "id": "rnd-1425178930",
+      "ntisId": "1425178930",
+      "title": {
+        "ko": "레이더 및 카메라를 이용한 위험상황 조기감지용 임베디드 시스템 개발",
+        "en": "Development of an embedded system for early detection of hazardous situations using radar and cameras"
+      },
+      "ministry": {
+        "ko": "중소벤처기업부",
+        "en": "Ministry of SMEs and Startups"
+      },
+      "period": "2023-05 ~ 2023-12",
+      "role": "주관",
+      "axis": "care",
+      "customerFacing": true,
+      "_evidence": "docs/DATA-SOURCE.md §2 #3"
+    },
+    {
+      "id": "rnd-2420003749",
+      "ntisId": "2420003749",
+      "title": {
+        "ko": "비접촉식 응급상황 모니터링 알람 및 정신건강 테라피 시스템 개발",
+        "en": "Development of a contactless emergency monitoring, alerting and mental-health therapy system"
+      },
+      "ministry": {
+        "ko": "중소벤처기업부",
+        "en": "Ministry of SMEs and Startups"
+      },
+      "period": "2022-07 ~ 2024-06",
+      "role": "주관",
+      "axis": "care",
+      "customerFacing": true,
+      "_evidence": "docs/DATA-SOURCE.md §2 #4"
+    },
+    {
+      "id": "rnd-1711190922",
+      "ntisId": "1711190922",
+      "title": {
+        "ko": "사이버 폭력에서 자유로운 이종 소셜네트워크를 위한 딥러닝 기반 사이버 폭력 포렌식 엔진 및 플러그인 연구",
+        "en": "Research on a deep-learning-based cyberbullying forensic engine and plug-ins for cyberbullying-free heterogeneous social networks"
+      },
+      "ministry": {
+        "ko": "과학기술정보통신부",
+        "en": "Ministry of Science and ICT"
+      },
+      "period": "2022-06 ~ 2025-02",
+      "role": "주관",
+      "axis": "platform",
+      "customerFacing": false,
+      "_evidence": "docs/DATA-SOURCE.md §2 #5 — 고객용 페이지 제외, 회사소개·IR에서만 노출"
+    },
+    {
+      "id": "rnd-1425136593",
+      "ntisId": "1425136593",
+      "title": {
+        "ko": "머신러닝 기반 비정상 감지를 이용한 공기질 데이터 보정 및 예측 유지보수 기술개발",
+        "en": "Air-quality data correction and predictive-maintenance technology using machine-learning-based anomaly detection"
+      },
+      "ministry": {
+        "ko": "중소벤처기업부",
+        "en": "Ministry of SMEs and Startups"
+      },
+      "period": "2019-12 ~ 2020-12",
+      "role": "주관",
+      "axis": "environment",
+      "customerFacing": true,
+      "_evidence": "docs/DATA-SOURCE.md §2 #6"
+    },
+    {
+      "id": "rnd-1415165556",
+      "ntisId": "1415165556",
+      "title": {
+        "ko": "AI 스테이션 기반의 캡슐형 스마트 쉘터 서비스 개발",
+        "en": "Development of AI-station-based capsule smart shelter services"
+      },
+      "ministry": {
+        "ko": "산업통상자원부",
+        "en": "Ministry of Trade, Industry and Energy"
+      },
+      "period": "2019-12 ~ 2021-12",
+      "role": "참여연구개발기관",
+      "axis": "environment",
+      "customerFacing": true,
+      "_evidence": "docs/DATA-SOURCE.md §2 #7 — 주관으로 표기 금지, 참여연구개발기관으로 정확히 표기"
+    }
+  ],
+  "partners": {
+    "_evidence": "docs/DATA-SOURCE.md §2 공동연구·산학협력 기관",
+    "companies": [
+      "(주)엠엔비젼",
+      "(주)하이디어솔루션즈",
+      "센서위드유"
+    ],
+    "universities": [
+      "한신대학교",
+      "경북대학교산학협력단"
+    ],
+    "public": [
+      "경기도재활공학서비스연구지원센터"
+    ]
+  }
+}

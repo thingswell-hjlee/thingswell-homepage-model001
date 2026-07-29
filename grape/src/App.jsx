@@ -11,7 +11,7 @@
  * - 모든 페이지에서 공통 메뉴와 푸터 표시
  * - 다국어 지원 (/ko, /en URL 구조)
  */
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import "./App.css";
 import Menu from "./components/Menu";
@@ -19,6 +19,7 @@ import Footer from "./components/Footer";
 import SEOHead from "./components/SEOHead";
 
 import Home from "./pages/Home/Home.jsx";
+import SafegaiPlatform from "./pages/SafegaiPlatform/SafegaiPlatform.jsx";
 import Government_support from "./pages/Government_support/Government_support.jsx";
 import Soulution from "./pages/Solutions/Soulution.jsx";
 import ChemicalSolution from "./pages/Solutions/ChemicalSolution.jsx";
@@ -59,6 +60,18 @@ import { LanguageProvider } from "./contexts/LanguageContext.jsx";
 import ProtectedRoute from "./components/ProtectedRoute";
 import HTTPSRedirect from "./components/HTTPSRedirect";
 import ScrollToTop from "./components/ScrollToTop";
+import MobileFloatingNav from "./components/MobileFloatingNav";
+
+// v2 홈 (트랙 B) — lazy 로딩이라 기존 번들에 영향 없음.
+const HomeV2 = lazy(() => import("./pagesV2/HomeV2.jsx"));
+const AboutV2 = lazy(() => import("./pagesV2/AboutV2.jsx"));
+const SolutionsOverviewV2 = lazy(() => import("./pagesV2/SolutionsOverviewV2.jsx"));
+
+// B-3 라우트 전환 플래그. 문제 발생 시 false로 되돌리면 즉시 기존 화면으로 롤백된다.
+// (기존 Home·About·Soulution 컴포넌트·코드는 삭제하지 않는다 — 전환 완료 후 별도 PR로만 정리)
+const HOME_V2_ENABLED = true;
+const ABOUT_V2_ENABLED = true;
+const SOLUTIONS_V2_ENABLED = true;
 
 /**
  * LanguageRedirect component
@@ -83,10 +96,14 @@ function AppRoutes({ isMobile }) {
       <main className="main-content">
         <div className="page-content">
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={HOME_V2_ENABLED ? <Suspense fallback={null}><HomeV2 /></Suspense> : <Home />} />
+            <Route path="/home-v2" element={<Suspense fallback={null}><HomeV2 preview /></Suspense>} />
+
+            <Route path="/safegai-platform" element={<SafegaiPlatform />} />
 
             <Route path="/government-support" element={<Government_support />} />
-            <Route path="/solutions/overview" element={<Soulution />} />
+            <Route path="/solutions/overview" element={SOLUTIONS_V2_ENABLED ? <Suspense fallback={null}><SolutionsOverviewV2 /></Suspense> : <Soulution />} />
+            <Route path="/solutions-overview-v2" element={<Suspense fallback={null}><SolutionsOverviewV2 /></Suspense>} />
             <Route path="/solutions/chemical" element={<ChemicalSolution />} />
             <Route path="/solutions/manufacturing" element={<ManufacturingSolution />} />
 
@@ -111,7 +128,8 @@ function AppRoutes({ isMobile }) {
             <Route path="/cases/information-communication" element={<CaseInformationCommunication />} />
             <Route path="/cases/detail/:id" element={<Case_detail />} />
 
-            <Route path="/about" element={<About />} />
+            <Route path="/about" element={ABOUT_V2_ENABLED ? <Suspense fallback={null}><AboutV2 /></Suspense> : <About />} />
+            <Route path="/about-v2" element={<Suspense fallback={null}><AboutV2 /></Suspense>} />
             <Route path="/about/organization" element={<Organization />} />
             <Route path="/about/company" element={<CompanyIntro />} />
             <Route path="/about/history" element={<History />} />
@@ -129,6 +147,7 @@ function AppRoutes({ isMobile }) {
         </div>
         <Footer />
       </main>
+      <MobileFloatingNav />
     </div>
   );
 }

@@ -1,0 +1,32 @@
+{
+  "slotType": "cases",
+  "status": "ready",
+  "updatedAt": "2026-07-27",
+  "_todo": [
+    "주의: 지명원 표기가 '등'으로 끝남 — 목록 외 실적 임의 추가 금지 (DATA-SOURCE §8)",
+    "주의: 고객사별 구축 내용·시기는 원장에 없음 — 명칭만 게재, 상세 서술 금지",
+    "주의: locales casesPage.*의 상세 stats·cases 배열은 여전히 원문 대조 대기 — 이 슬롯과 별개이며 사업실적서 원문은 public 저장소 커밋 금지"
+  ],
+  "items": [
+    {
+      "id": "case-seoul-smart-shelter",
+      "name": { "ko": "서울시 스마트 버스쉼터 40개소", "en": "Seoul smart bus shelters (40 sites)" },
+      "_evidence": "docs/DATA-SOURCE.md §8 #1 (지명원 2026-03 p.10)"
+    },
+    {
+      "id": "case-lig-nex1",
+      "name": { "ko": "LIG넥스원", "en": "LIG Nex1" },
+      "_evidence": "docs/DATA-SOURCE.md §8 #2 (지명원 2026-03 p.10)"
+    },
+    {
+      "id": "case-hanwha-aerospace",
+      "name": { "ko": "한화에어로스페이스", "en": "Hanwha Aerospace" },
+      "_evidence": "docs/DATA-SOURCE.md §8 #3 (지명원 2026-03 p.10)"
+    },
+    {
+      "id": "case-samsung-logitek",
+      "name": { "ko": "삼성전자로지텍", "en": "Samsung Electronics Logitek" },
+      "_evidence": "docs/DATA-SOURCE.md §8 #4 (지명원 2026-03 p.10)"
+    }
+  ]
+}

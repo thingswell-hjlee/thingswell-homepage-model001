@@ -1,0 +1,127 @@
+{
+  "slotType": "patents",
+  "status": "ready",
+  "updatedAt": "2026-07-27",
+  "_todo": [
+    "확정(2026-07-27 KIPRIS 대조): ① 병실 안전(10-2023-0157000) 등록 거절 — items에 rejected로 보존, 게재 금지 ② 미세먼지 저감형 디스플레이(10-2022-0139046) KIPRIS 등록건은 타사 권리 — 자사 특허 아니므로 이 슬롯에 넣지 않는다 (DATA-SOURCE §1 확인 종결)"
+  ],
+  "items": [
+    {
+      "id": "patent-10-2964325",
+      "isFlagship": true,
+      "appNumber": "10-2025-0168517",
+      "regNumber": "10-2964325",
+      "legalStatus": "registered",
+      "title": {
+        "ko": "온디바이스 Generative AI 및 적응형 롤링버퍼 기반 다중센서 상황인지",
+        "en": "On-device generative AI and adaptive rolling-buffer based multi-sensor situational awareness"
+      },
+      "date": null,
+      "image": null,
+      "_evidence": "docs/DATA-SOURCE.md §1 #1 (대표 특허, SafeGAI 플랫폼 기반)"
+    },
+    {
+      "id": "patent-10-2825255",
+      "appNumber": "10-2022-0130446",
+      "regNumber": "10-2825255",
+      "legalStatus": "registered",
+      "title": {
+        "ko": "레이더와 카메라를 이용한 위급상황 알람장치",
+        "en": "Emergency alarm device using radar and camera"
+      },
+      "date": null,
+      "image": "patent_certificate_10-2825255.png",
+      "_evidence": "docs/DATA-SOURCE.md §1 #2 + src/assets/patent_certificate_10-2825255.png"
+    },
+    {
+      "id": "patent-10-2404374",
+      "appNumber": "10-2020-0151151",
+      "regNumber": "10-2404374",
+      "legalStatus": "registered",
+      "title": {
+        "ko": "실내외 센서 모듈을 이용한 공기질 관리",
+        "en": "Air quality management using indoor and outdoor sensor modules"
+      },
+      "date": null,
+      "image": "patent_certificate_10-2404374.png",
+      "_evidence": "docs/DATA-SOURCE.md §1 #3 + src/assets/patent_certificate_10-2404374.png"
+    },
+    {
+      "id": "patent-10-2424407",
+      "appNumber": "10-2020-0159182",
+      "regNumber": "10-2424407",
+      "legalStatus": "registered",
+      "title": {
+        "ko": "AI 기반 캡슐형 스마트 쉘터",
+        "en": "AI-based capsule smart shelter"
+      },
+      "date": null,
+      "image": "patent_certificate_10-2424407.png",
+      "_evidence": "docs/DATA-SOURCE.md §1 #4 + src/assets/patent_certificate_10-2424407.png"
+    },
+    {
+      "id": "patent-10-2529240",
+      "appNumber": "10-2020-0159183",
+      "regNumber": "10-2529240",
+      "legalStatus": "registered",
+      "title": {
+        "ko": "사용자 맞춤형 서비스를 제공하는 캡슐형 스마트 쉘터",
+        "en": "Capsule smart shelter providing personalized services"
+      },
+      "date": null,
+      "image": "patent_certificate_10-2529240.png",
+      "_evidence": "docs/DATA-SOURCE.md §1 #5 + src/assets/patent_certificate_10-2529240.png"
+    },
+    {
+      "id": "patent-app-10-2024-0150475",
+      "appNumber": "10-2024-0150475",
+      "pubNumber": "10-2026-0064882",
+      "legalStatus": "pending",
+      "title": {
+        "ko": "인지장애 노인과 장애인을 위한 대화형 홈케어 시스템",
+        "en": "Conversational homecare system for seniors and people with cognitive impairments"
+      },
+      "date": null,
+      "image": null,
+      "_evidence": "docs/DATA-SOURCE.md §1 #6 (출원 중 병기 필수)"
+    },
+    {
+      "id": "patent-app-10-2023-0156999",
+      "appNumber": "10-2023-0156999",
+      "pubNumber": "10-2025-0070772",
+      "legalStatus": "pending",
+      "title": {
+        "ko": "레이다를 이용한 낙상 징후 모니터링 시스템",
+        "en": "Radar-based fall-risk monitoring system"
+      },
+      "date": null,
+      "image": null,
+      "_evidence": "docs/DATA-SOURCE.md §1 #7 (출원 중 병기 필수)"
+    },
+    {
+      "id": "patent-app-10-2023-0152948",
+      "appNumber": "10-2023-0152948",
+      "pubNumber": "10-2025-0066879",
+      "legalStatus": "rejected",
+      "title": {
+        "ko": "레이다를 이용한 수면상태 모니터링 및 수면무호흡 판단 시스템",
+        "en": "Radar-based sleep-state monitoring and sleep-apnea detection system"
+      },
+      "date": null,
+      "image": null,
+      "_evidence": "docs/DATA-SOURCE.md §1 #8 — 게재 금지. 로더(getPublishableItems)가 필터하며 어떤 화면에도 노출 금지"
+    },
+    {
+      "id": "patent-app-10-2023-0157000",
+      "appNumber": "10-2023-0157000",
+      "legalStatus": "rejected",
+      "title": {
+        "ko": "레이다를 이용한 병실 안전 및 자살 징후 모니터링 시스템",
+        "en": "A system for monitoring suicide signs using radar"
+      },
+      "date": null,
+      "image": null,
+      "_evidence": "docs/DATA-SOURCE.md §1 확인 종결 — 등록 거절(KIPRIS 2026-07-27). 게재 금지, 로더(getPublishableItems) 필터 대상. 재추가 실수 방지용 데이터 보존"
+    }
+  ]
+}

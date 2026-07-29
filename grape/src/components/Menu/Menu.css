@@ -142,7 +142,7 @@ body.modal-open .hamburger-menu-wrapper {
 }
 
 .logo-image {
-  height: 40%;
+  height: 28%;
   width: auto;
   object-fit: contain;
   cursor: pointer;
@@ -334,9 +334,9 @@ body.modal-open .hamburger-menu-wrapper {
 
 .submenu-item {
   margin: 0;
-  flex: 1;
-  min-width: 80px;
-  max-width: 150px;
+  flex: 0 1 auto; /* 균등 분할 대신 라벨 길이에 맞게 — 긴 라벨(노인장애인안전 솔루션 등) 잘림 방지 */
+  min-width: 110px;
+  max-width: 260px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -361,13 +361,11 @@ body.modal-open .hamburger-menu-wrapper {
   color: var(--color-text-primary);
   transition: all var(--transition-base);
   outline: none;
-  border-radius: var(--border-radius-lg);
+  border-radius: 999px; /* 필 형태 통일 (v2 시각 언어 정합) */
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
   user-select: text;
   position: relative;
-  padding: var(--spacing-xs) 0;
+  padding: var(--spacing-sm) var(--spacing-lg); /* 좌우 여유 확대 — 버튼 폭 협소 문제 수정 */
   background-color: rgba(30, 41, 59, 0.5);
 }
 

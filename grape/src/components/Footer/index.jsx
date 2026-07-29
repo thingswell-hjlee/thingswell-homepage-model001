@@ -55,6 +55,8 @@ function Footer() {
         { label: t('footer.productSafety'), path: `/${currentLang}/products/safety` },
         { label: t('footer.productMonitoring'), path: `/${currentLang}/products/monitoring` },
         { label: t('footer.productControl'), path: `/${currentLang}/products/control/list` },
+        // TODO(확인필요): shop.thingswell.co.kr 인프라 연결(docs/SHOP-DOMAIN.md) 완료 후 URL 교체
+        { label: t('footer.shop'), path: 'https://thingswell.cafe24.com/', external: true },
       ]
     },
     {
@@ -83,7 +85,11 @@ function Footer() {
                   <ul className="category-list">
                     {category.submenu.map((item, subIndex) => (
                       <li key={subIndex} className="category-item">
-                        <Link to={item.path}>{item.label}</Link>
+                        {item.external ? (
+                          <a href={item.path} target="_blank" rel="noopener noreferrer">{item.label}</a>
+                        ) : (
+                          <Link to={item.path}>{item.label}</Link>
+                        )}
                       </li>
                     ))}
                   </ul>
@@ -98,6 +104,7 @@ function Footer() {
               <img src={logo} alt={t('footer.logoAlt')} className="logo" />
               <div className="footer-copyright">
                 <div className="footer-info">
+                  <p className="footer-company-name">{t('footer.companyName')}</p>
                   <p>{t('footer.address')}</p>
                   <p>{t('footer.phone')}</p>
                   <p>{t('footer.email')}</p>

@@ -8,12 +8,16 @@
     "dev:https": "vite --https",
     "build": "vite build",
     "build:https": "vite build --mode production",
+    "build:staging": "vite build --mode staging",
+    "build:production": "vite build --mode production",
     "lint": "eslint .",
     "preview": "vite preview",
     "preview:https": "vite preview --https",
     "start": "node server.js",
     "start:prod": "NODE_ENV=production node server.js",
-    "convert:assets": "node ./scripts/convert-assets-to-webp.js"
+    "convert:assets": "node ./scripts/convert-assets-to-webp.js",
+    "seo": "node scripts/generate-seo-files.mjs",
+    "validate:content": "node scripts/validate-content.mjs"
   },
   "dependencies": {
     "amazon-cognito-identity-js": "^6.3.12",

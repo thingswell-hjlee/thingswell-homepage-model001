@@ -68,6 +68,12 @@ export default function Home() {
               {t('home.hero.ctaPrimary')}
             </Link>
             <Link
+              to={`/${currentLang}/safegai-platform`}
+              className="safegai-hero-cta safegai-hero-cta-primary"
+            >
+              {t('nav.safegaiPlatform')}
+            </Link>
+            <Link
               to={`/${currentLang}/cases/smart-safety`}
               className="safegai-hero-cta safegai-hero-cta-secondary"
             >

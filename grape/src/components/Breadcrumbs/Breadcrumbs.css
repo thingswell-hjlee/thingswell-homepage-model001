@@ -14,7 +14,7 @@
   transition: color 0.3s ease;
 }
 
-.breadcrumb-item:hover {
+.breadcrumb-home:hover {
   color: var(--color-text-primary);
   cursor: pointer;
 }

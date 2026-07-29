@@ -1,0 +1,19 @@
+{
+  "description": "적용 축 코드 — docs/DATA-SOURCE.md §4가 원본.",
+  "source": "docs/DATA-SOURCE.md §4",
+  "axes": [
+    { "code": "industrial", "ko": "산업안전", "en": "Industrial safety" },
+    { "code": "care", "ko": "케어안전", "en": "Care safety" },
+    { "code": "environment", "ko": "공간·환경", "en": "Space & environment" },
+    { "code": "platform", "ko": "플랫폼", "en": "Platform" }
+  ],
+  "siteConditions": [
+    { "code": "dark", "ko": "어두움", "en": "Low light" },
+    { "code": "dust", "ko": "분진", "en": "Dust" },
+    { "code": "noise", "ko": "소음", "en": "Noise" },
+    { "code": "privacy", "ko": "프라이버시 민감", "en": "Privacy-sensitive" },
+    { "code": "underground", "ko": "지하", "en": "Underground" },
+    { "code": "unmanned", "ko": "무인 시간대", "en": "Unmanned hours" },
+    { "code": "outdoor", "ko": "옥외", "en": "Outdoor" }
+  ]
+}
